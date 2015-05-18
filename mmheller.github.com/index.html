@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>GNLCC Project Tracking System Public Website</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="https://js.arcgis.com/3.13/dijit/themes/soria/soria.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.13/esri/css/esri.css"/>
+    <link rel="stylesheet" href="css/github.css" type="text/css" />
+    <link rel="stylesheet" href="css/demo.css" type="text/css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.13/dojox/grid/resources/Grid.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.13/dojox/grid/resources/soriaGrid.css">
+
+    <!--<link rel="stylesheet" href="https://js.arcgis.com/3.13/esri/css/claro.css"/>-->
+
+    <!-- /CSS -->
+
+<script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+<!--<script type="text/javascript" src="extras/jquery.min.js"></script>-->
+<script type="text/javascript" src="http://softwaremaniacs.org/media/soft/highlight/highlight.pack.js"></script>
+<script type="text/javascript" src="extras/jquery.cookie.js"></script>
+<script type="text/javascript" src="extras/jquery.collapsible.js"></script>
+<script type="text/javascript" src="https://js.arcgis.com/3.13/"></script>
+
+<style>
+
+.soria .dojoxGridRowOver .dojoxGridCell { color:#000000; }
+
+div.columns       { width: 650px;   margin: 0 auto;}
+div.columns div   { width: 325px; float: left; }
+div.grey          { background-color: #cccccc; }
+div.red           { background-color: #e14e32; }
+div.clear         { clear: both; }
+
+div.scroll {
+    height: 250px;
+    overflow-y: scroll;
+    background:#f0f0f0;
+    margin: 0;
+    padding:10px;
+    font-size:.8em;
+    line-height:1.5em;
+    font-family:"Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+html,body 
+{
+height:100%;      
+width:100%;      
+margin:0;      
+}
+body {
+background-color:#fff;
+font-family:arial,helvetica,sans-serif;
+}
+<!--#map {
+-moz-border-radius:4px;
+overflow:hidden;
+border:solid 2px #727B84;
+margin:5px;
+}-->
+#map {      padding:0;      margin:0;      height:500px;    }
+
+
+#rightPane {
+font-size:10pt;
+text-align:center;
+width:40%;
+overflow:none;
+}
+
+</style>
+
+<!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
+<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+
+<script type="text/javascript">
+    var app = {};
+    require([
+        "esri/map",
+        "extras/MH_UniqueSetup", "extras/MH_CreateQueryDef", "extras/MH_Query4Results", "extras/MH_Query4Summary", "extras/MH_MapSetup",
+        "esri/urlUtils", "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on",
+        "dijit/form/CheckBox",
+        "dojo/_base/Color",
+        "dojo/mouse", "dojo/query", 
+        "esri/arcgis/utils",
+        "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
+        "dijit/layout/AccordionContainer", "dojo/domReady!"
+        ],
+
+    function (Map,
+                MH_UniqueSetup, MH_CreateQueryDef, MH_Query4Results, MH_Query4Summary, MH_MapSetup,
+                urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on,
+                CheckBox,
+                Color, mouse, query) {
+
+
+//        if ($('#page_collapsible1').collapsible('collapsed')) {
+//            $('#page_collapsible1').collapsible('open');
+//        }
+
+        app.pMapSup = new MH_MapSetup({}); // instantiate the class
+        app.pMapSup.Phase1();
+
+        var strURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer"
+        app.gCQD = new MH_CreateQueryDef({}); // instantiate the class
+        app.gSup = new MH_UniqueSetup({}); // instantiate the class
+
+        on(dom.byId("btn_clear"), "click", btn_clear_click);
+
+        app.gQuery = new MH_Query4Results({ strURL: strURL, m_grid: grid }); // instantiate the class
+        app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class
+        var tokens = getTokens
+
+        parser.parse();
+        app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
+
+        document.getElementById("page_collapsibleMapDestination").appendChild(document.getElementById("map"));  //move the grid to the designated div, grids need to be built outside the collapsable panel otherwise risk not rendering properly
+//        document.getElementById("page_collapsibleMap").addEventListener("click", MapOpened);
+//        function MapOpened() {}
+
+        function getTokens() {
+            var tokens = [];
+            var query = location.search;
+            query = query.slice(1);
+            query = query.split('&');
+            $.each(query, function (i, value) {
+                var token = value.split('=');
+                var key = decodeURIComponent(token[0]);
+                var data = decodeURIComponent(token[1]);
+                tokens[key] = data;
+            });
+            return tokens;
+        }
+
+        function btn_clear_click() {
+            if ($('#page_collapsible1').collapsible('collapsed')) {
+                $('#page_collapsible1').collapsible('open');
+            }
+            app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
+        }
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        hljs.tabReplace = '    '; //        syntax highlighter
+        hljs.initHighlightingOnLoad();
+        $.fn.slideFadeToggle = function (speed, easing, callback) { return this.animate({ opacity: 'toggle', height: 'toggle' }, speed, easing, callback); };
+
+        $('.collapsible').collapsible({             //collapsible management
+            defaultOpen: 'page_collapsible1,body-section2,body-section3',
+            cookieName: 'nav',
+            speed: 'slow',
+            animateOpen: function (elem, opts) { //replace the standard slideUp with custom function
+                elem.next().slideFadeToggle(opts.speed);
+            },
+            animateClose: function (elem, opts) { //replace the standard slideDown with custom function
+                elem.next().slideFadeToggle(opts.speed);
+            },
+            loadOpen: function (elem) { //replace the standard open state with custom function
+                elem.next().show();
+            },
+            loadClose: function (elem, opts) { //replace the close state with custom function
+                elem.next().hide();
+            }
+        });
+        $('.page_collapsible').collapsible({
+            defaultOpen: '',
+            cookieName: 'body2',
+            speed: 'slow',
+            animateOpen: function (elem, opts) { //replace the standard slideUp with custom function
+                elem.next().slideFadeToggle(opts.speed);
+            },
+            animateClose: function (elem, opts) { //replace the standard slideDown with custom function
+                elem.next().slideFadeToggle(opts.speed);
+            },
+            loadOpen: function (elem) { //replace the standard open state with custom function
+                elem.next().show();
+            },
+            loadClose: function (elem, opts) { //replace the close state with custom function
+                elem.next().hide();
+            }
+        });
+
+        if ($('#page_collapsible1').collapsible('collapsed')) {
+            $('#page_collapsible1').collapsible('open');
+        }
+
+
+        function openAll() { $('.page_collapsible').collapsible('openAll'); } //assign open/close all to functions
+        function closeAll() { $('.page_collapsible').collapsible('closeAll'); }
+
+        //listen for close/open all
+        $('#closeAll').click(function (event) {
+            event.preventDefault();
+            closeAll();
+        });
+        $('#openAll').click(function (event) {
+            event.preventDefault();
+            openAll();
+        });
+
+    });
+</script>
+
+</head>
+<body class="soria">
+
+       <!--     <div data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline'" style="width:100%; height:100%;">
+                <div id="bot" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top', splitter:true" style="height:50%">
+                  <div id="ResultsTableNode"></div>
+                </div>
+              </div>-->
+       
+
+<!--<h1>DRAFT - GNLCC Projects and Deliverables Public Search and Report Tool - DRAFT</h1>-->
+<!-- left column collapsible -->
+
+<div id="navigation">
+    <form id="NavigationForm">
+        <div class="collapsible" id="section3">Year Funded<span></span></div>
+        <div class="container"><div class="content" id="section3content"></div></div>
+
+        <div class="collapsible" id="section5">Conservation Targets<span></span></div>
+        <div class="container"><div class="scroll" id="section5content"></div></div>
+
+        <div class="collapsible" id="section7">Strategic Framework Goal<span></span></div>
+        <div class="container"><div class="content" id="section7content"></div></div>
+
+        <div class="collapsible" id="section10">Stressor<span></span></div>
+        <div class="container"><div class="content" id="section10content"></div></div>
+
+        <div class="collapsible" id="section8">Deliverable Type<span></span></div>
+        <div class="container"><div class="scroll" id="section8content"></div></div>
+
+        <div class="collapsible" id="section1">Ecotypic Area<span></span></div>
+        <div class="container" ><div class="content" id="section1content"></div></div>
+
+        <div class="collapsible" id="section2">Lead Organization<span></span></div>
+        <div class="container"><div class="scroll" id="section2content"></div></div>
+
+
+        <div class="collapsible" id="section4">Funding Recipients<span></span></div>
+        <div class="container"><div class="scroll" id="section4content"></div></div>
+        
+        <div class="collapsible" id="section6">Funding Recipient Type<span></span></div>
+        <div class="container"><div class="content" id="section6content"></div></div>
+
+        <div class="collapsible" id="section9">In-Kind/Match Org's<span></span></div>
+        <div class="container"><div class="scroll" id="section9content"></div></div>
+
+        <div class="collapsible" id="section11">Project Contact<span></span></div>
+        <div class="container"><div class="scroll" id="section11content"></div></div>
+        
+        <div class="collapsible" id="section12">Project Status<span></span></div>
+        <div class="container"><div class="content" id="section12content"></div></div>
+
+        <div class="collapsible" id="Div1">Funding Amount (not yet enabled)<span></span></div>
+        <div class="container"><div class="content" id="Div2"></div></div>
+
+        <div class="collapsible" id="Div3">State (not yet enabled)<span></span></div>
+        <div class="container"><div class="content" id="Div4"></div></div>
+
+        <br />
+        <input id="btn_clear" type="button"  value="Clear">
+    </form>
+</div>
+
+
+<!-- /left column collapsible -->
+
+<div id="content">
+    <a href="#" id="closeAll" title="Close all" style="font-size:.65em;">Close All</a> | <a href="#" id="openAll" title="Open All" style="font-size:.65em;">Open All</a>
+    <!-- collapsible -->
+    <div class="page_collapsible" id="page_collapsible1">Results<span></span></div>
+        <div class="container"  id="container1" >
+            <table dojotype="dojox.grid.DataGrid" style="height:600px;"  jsid="grid" id="grid" selectionMode="none" style="font-size:.75em;">>
+             <thead>
+                <tr>
+                  <th field="Fiscal_Years_of_Allocation" width="40" height="60px">Fiscal<br/>Year</th>
+                  <th field="ProjectID" hidden="true">ProjectID</th>
+                  <th field="Project_Title" width="290px"  height="60px">Project Title</th>
+                  <th field="LeadName_LastFirst" width="145px">Project Lead</th>
+                  <th field="Project_Lead_Organization" width="200px">Affiliation</th>              
+                </tr>
+              </thead>
+            </table>
+            <div class="content" id="content1" >
+                
+            </div>
+        </div>
+    <!-- end collapsible -->
+
+    <!-- collapsible -->
+    <div class="page_collapsible" id="body-section2">Summary of Results (x number of projects)<span></span></div>
+    <div class="container">
+
+
+        <div class="content" id="summarycontent">
+            <div class="columns">
+                <div class="grey" >
+                    <img src="images/currency_dollar_green.png" alt="Funding" height="42" width="42">
+                    <div id="dTotalAllocatedbyLCC"></div>
+                    <hr>
+                    <div id="dTotalAllocatedbyLCCbyYear"></div>
+                    <hr>
+                    <div id="dNumberOfFundingRecipients"></div>  
+                    <hr>
+                    <div id="dFundRecipientTypes"></div>  
+                    <hr>
+                    <div id="dYearsFunded"></div>         
+                    <hr>
+                    <div id="dNumberOfProjectContacts"></div>                        
+                
+                </div>
+                <div class="grey">
+                    <img src="images/icons_humanitarian-assitance-270x207.png" alt="InKind Match Funding"  height="50">
+                    <div id="dTotalInKindMatch"></div>
+                    <hr>
+                    <div id="dNumberofInKindOrgs"></div>                
+                </div>
+            </div>
+            <div class="clear"></div>
+            <br />
+            <div class="columns">
+                <div class="red" >
+                    <img src="images/strat_plan1.jpg" alt="Strategic Framework"  height="60">
+                    <div id="dTotalNumberofConsvTargets"></div>
+                    <hr>
+                    <div id="dEcotypicAreas"></div>
+                    <hr>
+                    <div id="dStressors"></div>  
+                    <hr>
+                    <div id="dGoals"></div>                         
+                </div>
+                <div class="red">
+                    <img src="images/deliverables_icon.jpg" alt="InKind Match Funding"  height="60">
+                    <div id="dNumberofDeliverables"></div>  
+                    <hr>
+                    <div id="dDeliverabletype"></div>  
+                    <hr>
+                    <div id="dPrjStatus"></div>               
+                </div>
+            </div>
+            <div class="clear"></div>
+          
+        </div>
+    </div>
+    <!-- end collapsible -->
+    <!-- collapsible -->
+    <div class="page_collapsible" id="page_collapsibleMap">Map<span></span></div>
+    <div class="container">
+        <div id="page_collapsibleMapDestination" style="position:relative" >
+        </div>
+
+    </div>
+            <div id="map"
+                data-dojo-type="dijit/layout/ContentPane"
+                data-dojo-props="region:'center'"
+                style="overflow:hidden; background-color:rgb(255, 255, 255);">
+                    <img id="loadingImg" src="images/loading.gif" style="position:absolute; right:50%; top:50%; z-index:100;" />
+            </div>
+</div>
+</body>
+</html>
