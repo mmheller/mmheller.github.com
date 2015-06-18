@@ -56,12 +56,7 @@
     background-color:#fff;
     font-family:arial,helvetica,sans-serif;
     }
-    #map {
-    -moz-border-radius:4px;
-    overflow:hidden;
-    border:solid 2px #727B84;
-    margin:5px;
-    }
+    #map {      padding:0;      margin:0;      height:500px;    }
 
     #rightPane {
     font-size:10pt;
@@ -80,7 +75,8 @@
 <script type="text/javascript">
     var app = {};
     require([
-        "extras/MH_UniqueSetup", "extras/MH_CreateQueryDef", "extras/MH_Query4Results", "extras/MH_Query4Summary", "extras/MH_Query4PrjReportResults",
+        "esri/map",
+        "extras/MH_UniqueSetup", "extras/MH_CreateQueryDef", "extras/MH_Query4Results", "extras/MH_Query4Summary", "extras/MH_MapSetup_prjReport", "extras/MH_Query4PrjReportResults",
         "esri/urlUtils", "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on",
         "dijit/form/CheckBox",
         "dojo/_base/Color",
@@ -90,20 +86,21 @@
         "dijit/layout/AccordionContainer", "dojo/domReady!"
         ],
 
-    function (MH_UniqueSetup, MH_CreateQueryDef, MH_Query4Results, MH_Query4Summary, MH_Query4PrjReportResults,
+    function (Map,
+                MH_UniqueSetup, MH_CreateQueryDef, MH_Query4Results, MH_Query4Summary, MH_MapSetup_prjReport, MH_Query4PrjReportResults,
                 urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on,
                 CheckBox,
                 Color, mouse, query, DataGrid) {
 
-        //document.getElementById("page_collapsible1").className = "page_collapsible collapse-open";
-        //document.getElementById("container1").open();
-        //openAll();
         var strURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer"
 
         app.gPjrReportQuery = new MH_Query4PrjReportResults({ strURL: strURL }); // instantiate the class
 
         var tokens = getTokens
         var strPRJ_ID = getTokens()['PRJ_ID']; //?RButton=true
+
+
+
         if (strPRJ_ID) {
             var div = document.getElementById('querycontent');
             div.innerHTML += "\n<br>" + strPRJ_ID;
@@ -117,7 +114,8 @@
                                                                     gridConservationTargetsSPP, gridConservationTargetsOther,
                                                                     gridDeliverables, gridDeliverablesSupWebinarsPages]);  // this needs sync'ing with the grids below, the div's below, and the array in the MH_Query4PrjReportResults
         //app.gPjrReportQuery.RunReport("ProjectID = " + strPRJ_ID, [gridConservationTargets]);  // this needs sync'ing with the grids below, the div's below, and the array in the MH_Query4PrjReportResults
-
+        app.pMapSup_prjReport = new MH_MapSetup_prjReport({ strQuery: "ProjectID = " + strPRJ_ID, dblExpandNum: 0.8 }); // instantiate the class
+        app.pMapSup_prjReport.Phase1(); 
         function getTokens() {
             var tokens = [];
             var query = location.search;
@@ -131,12 +129,8 @@
             });
             return tokens;
         }
-
-
         function nameFormatter(value, rowIndex) {
             console.log(value);
-
-
             return value;
         }
 
@@ -272,19 +266,13 @@
     <div class="page_collapsible" id="body-section3">Map<span></span></div>
     <div class="container">
         <div class="content" id="querycontent">
-              
+             
             <p>
                 MapService URL: <a href="https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer" title="rest endpoing">https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer</a>
             </p>
-
-            <pre><code>&lt;div class=&quot;collapsible&quot; id=&quot;section1&quot;&gt;Heading&lt;span&gt;&lt;/span&gt;&lt;div&gt;
-                    &lt;div class=&quot;collapsible&quot; id=&quot;section3&quot;&gt;Heading&lt;span&gt;&lt;/span&gt;&lt;div&gt;
-                    &lt;/div&gt;
-            </code></pre>
-
         </div>
     </div>
-   
+  
             <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridContacts" id="gridContacts" selectionMode="none" style="font-size:.75em;">
              <thead>
                 <tr>
@@ -364,6 +352,13 @@
               </thead>
             </table>
 
+
+            <div id="mapPrjReport"
+                data-dojo-type="dijit/layout/ContentPane"
+                data-dojo-props="region:'center'"
+                style="overflow:hidden; background-color:rgb(255, 255, 255);">
+                    <img id="loadingImg" src="images/loading.gif" style="position:absolute; right:50%; top:50%; z-index:100;" />
+            </div>
 
 </div>
 

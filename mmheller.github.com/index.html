@@ -55,12 +55,8 @@ body {
 background-color:#fff;
 font-family:arial,helvetica,sans-serif;
 }
-<!--#map {
--moz-border-radius:4px;
-overflow:hidden;
-border:solid 2px #727B84;
-margin:5px;
-}-->
+
+
 #map {      padding:0;      margin:0;      height:500px;    }
 
 
@@ -84,7 +80,7 @@ overflow:none;
         "esri/urlUtils", "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on",
         "dijit/form/CheckBox",
         "dojo/_base/Color",
-        "dojo/mouse", "dojo/query", 
+        "dojo/mouse", "dojo/query",
         "esri/arcgis/utils",
         "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
         "dijit/layout/AccordionContainer", "dojo/domReady!"
@@ -97,9 +93,9 @@ overflow:none;
                 Color, mouse, query) {
 
 
-//        if ($('#page_collapsible1').collapsible('collapsed')) {
-//            $('#page_collapsible1').collapsible('open');
-//        }
+        //        if ($('#page_collapsible1').collapsible('collapsed')) {
+        //            $('#page_collapsible1').collapsible('open');
+        //        }
 
         app.pMapSup = new MH_MapSetup({}); // instantiate the class
         app.pMapSup.Phase1();
@@ -110,6 +106,8 @@ overflow:none;
 
         on(dom.byId("btn_clear"), "click", btn_clear_click);
         on(dom.byId("btn_clear2"), "click", btn_clear_click);
+        on(dom.byId("btn_Print_Friendly"), "click", btn_Print_Friendly_click);
+
 
         app.gQuery = new MH_Query4Results({ strURL: strURL, m_grid: grid }); // instantiate the class
         app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class
@@ -119,8 +117,8 @@ overflow:none;
         app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
 
         document.getElementById("page_collapsibleMapDestination").appendChild(document.getElementById("map"));  //move the grid to the designated div, grids need to be built outside the collapsable panel otherwise risk not rendering properly
-//        document.getElementById("page_collapsibleMap").addEventListener("click", MapOpened);
-//        function MapOpened() {}
+        //        document.getElementById("page_collapsibleMap").addEventListener("click", MapOpened);
+        //        function MapOpened() {}
 
         function getTokens() {
             var tokens = [];
@@ -142,6 +140,26 @@ overflow:none;
             }
             app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
         }
+
+        function btn_Print_Friendly_click() {
+            var strHTML = "indexPF.html"
+            
+            if (app.gQuery.strQuery !== null) {
+                strHTML += "?Prjs=" + app.gQuery.strQuery.replace("ProjectID in (","").replace(")","");
+             }
+
+            //strQuery = "ProjectID in " + arrayValues.join(",");
+
+            //            for (var colId in rowItem) {
+            //                var colVal = rowItem[colId];
+            //                if (!colVal || colVal == "") {
+            //                    //column is empty
+            //                }
+            //            }
+
+            window.open(strHTML);
+        }
+
     });
 </script>
 
@@ -227,10 +245,10 @@ overflow:none;
         <div class="collapsible" id="section3">Year Funded<span></span></div>
         <div class="container"><div class="content" id="section3content"></div></div>
 
-        <div class="collapsible" id="section5">Conservation Targets<span></span></div>
+        <div class="collapsible" id="section5">Conservation Target<span></span></div>
         <div class="container"><div class="scroll" id="section5content"></div></div>
 
-        <div class="collapsible" id="section7">Strategic Framework Goal<span></span></div>
+        <div class="collapsible" id="section7">Conservation Goal<span></span></div>
         <div class="container"><div class="content" id="section7content"></div></div>
 
         <div class="collapsible" id="section10">Stressor<span></span></div>
@@ -246,22 +264,22 @@ overflow:none;
         <div class="container"><div class="scroll" id="section2content"></div></div>
 
 
-        <div class="collapsible" id="section4">Funding Recipients<span></span></div>
+        <div class="collapsible" id="section4">Funding Recipient<span></span></div>
         <div class="container"><div class="scroll" id="section4content"></div></div>
         
         <div class="collapsible" id="section6">Funding Recipient Type<span></span></div>
         <div class="container"><div class="content" id="section6content"></div></div>
 
-        <div class="collapsible" id="section9">In-Kind/Match Org's<span></span></div>
+        <div class="collapsible" id="section9">Project In-Kind/Match<span></span></div>
         <div class="container"><div class="scroll" id="section9content"></div></div>
 
-        <div class="collapsible" id="section11">Project Contact<span></span></div>
+        <div class="collapsible" id="section11">Project Affiliate<span></span></div>
         <div class="container"><div class="scroll" id="section11content"></div></div>
         
         <div class="collapsible" id="section12">Project Status<span></span></div>
         <div class="container"><div class="content" id="section12content"></div></div>
 
-        <div class="collapsible" id="section13">State<span></span></div>
+        <div class="collapsible" id="section13">State/Province<span></span></div>
         <div class="container"><div class="content" id="section13content"></div></div>
 
         <div class="collapsible" id="Div1">Funding Amount (not yet enabled)<span></span></div>
@@ -270,6 +288,9 @@ overflow:none;
         <br />
         <input id="btn_clear2" type="button"  value="Reset" 
         style="border-style: none; padding: 5px; font-size: small;">
+
+        <input id="btn_Print_Friendly" type="button"  value="Print Freindly" 
+                style="border-style: none; padding: 5px; font-size: small;">
     </form>
 </div>
 
@@ -283,7 +304,7 @@ overflow:none;
     <!-- collapsible -->
     <div class="page_collapsible" id="page_collapsible1">Results<span></span></div>
         <div class="container"  id="container1" >
-            <table dojotype="dojox.grid.DataGrid" style="height:600px;"  jsid="grid" id="grid" selectionMode="none" style="font-size:.75em;">
+            <table dojotype="dojox.grid.DataGrid" style="height:600px;" jsid="grid" id="grid" selectionMode="none" style="font-size:.75em;">
              <thead>
                 <tr>
                   <th field="Fiscal_Years_of_Allocation" width="40" height="60px">Fiscal<br/>Year</th>

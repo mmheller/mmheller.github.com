@@ -35,6 +35,7 @@ define([
           m_arrayQuery: null,
           m_grid: null,
           m_EventAdded2Grid: false,
+          strQuery: null,
 
           constructor: function (options) {
               this.strURL = options.strURL || "www.cnn.com"; // default AGS REST URL
@@ -92,14 +93,14 @@ define([
                       this.app.gQuery.arrayProjectIDs = arrayValues;
                       this.app.gQuery.m_iarrayQueryIndex += 1; //increment the index value of the query array by 1
 
-                      strQuery = "ProjectID in (" + arrayValues.join(",") + ")";
+                      this.app.gQuery.strQuery = "ProjectID in (" + arrayValues.join(",") + ")";
 
                       if (this.app.gQuery.m_iarrayQueryIndex >= this.app.gQuery.m_arrayQuery.length) {
                           this.app.gQuery.ClearDivs();
-                          this.app.gQuery.SendQuery4ProjectResults(strQuery, this.app.gQuery.m_grid)
+                          this.app.gQuery.SendQuery4ProjectResults(this.app.gQuery.strQuery, this.app.gQuery.m_grid)
 
                           var div = document.getElementById('querycontent');
-                          div.innerHTML += "\n<br>" + strQuery;
+                          div.innerHTML += "\n<br>" + this.app.gQuery.strQuery;
 
                       } else {
                           this.app.gQuery.SendQuery(this.app.gQuery.m_arrayQuery, this.app.gQuery.m_iarrayQueryIndex)
@@ -155,10 +156,8 @@ define([
                   });
                   var data = { identifier: "OBJECTID", items: items };
                   store = new ItemFileReadStore({ data: data });
-
                   //pGrid.destroy();
                   pGrid.setStore(store);
-
                   gSup.Phase1(strURL, [], strQuery);
                   gQuerySummary.Summarize(strQuery);
                   
