@@ -1,5 +1,5 @@
 ﻿//Created By:  Matt Heller, Great Northern Landscape Conservation Cooperative / U.S. Fish and Wildlife Service
-//Date:        Oct 2014
+//Date:        July 2015
 
 function StartQuery(blnSelect) {
     //loop through the checkboxes and disable, so user interaction dosen't disrupt the queryies
@@ -249,6 +249,7 @@ define([
                                                                         "EcotypicAreaName", "EcotypicAreaName",
                                                             'section1content', this.app.gSup.iTableIndex.toString() + "-EcotypicAreaName");
                       break;
+
                   case "EcotypicAreaName":
                       this.app.gSup.iTableIndex = 0;
                       this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],

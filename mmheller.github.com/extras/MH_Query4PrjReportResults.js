@@ -64,6 +64,7 @@ define([
               //pgridtest = this.m_gridArray[0];
 
               //table/fc index, query string, field 4 aggregation, stat type (count, sum, avg), group by field, html ID, string function
+             
               arrayQuery = [];
               arrayQuery.push(["0", strQuery, "Prj_Title", "count", "Project_Title", "divTitle", 'Title: {0}', ""]);
               arrayQuery.push(["0", strQuery, "Description", "count", "Description", "divDescription", 'Description: {0}', ""]);
