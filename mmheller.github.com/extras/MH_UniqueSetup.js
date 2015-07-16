@@ -252,11 +252,11 @@ define([
                   case "EcotypicAreaName":
                       this.app.gSup.iTableIndex = 0;
                       this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
-                                                                        "Project_Lead_Organization", "Project_Lead_Organization",
-                                                            'section2content', this.app.gSup.iTableIndex.toString() + "-Project_Lead_Organization");
+                                                                        "PI_Org", "PI_Org",
+                                                            'section2content', this.app.gSup.iTableIndex.toString() + "-Prj_Org");
                       break;
 
-                  case "Project_Lead_Organization":
+                  case "PI_Org":
                       this.app.gSup.iTableIndex = 5;
                       this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
                                                                         "dest_orgname", "dest_orgname",
@@ -310,11 +310,11 @@ define([
                   case "PersonName":
                       this.app.gSup.iTableIndex = 0;
                       this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
-                                                                        "ProjectStatus", "ProjectStatus",
-                                                            'section12content', this.app.gSup.iTableIndex.toString() + "-ProjectStatus");
+                                                                        "PrjStatus", "PrjStatus",
+                                                            'section12content', this.app.gSup.iTableIndex.toString() + "-PrjStatus");
                       break;
 
-                  case "ProjectStatus":
+                  case "PrjStatus":
                       this.app.gSup.iTableIndex = 12;
                       this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
                                                                         "NAME", "NAME",

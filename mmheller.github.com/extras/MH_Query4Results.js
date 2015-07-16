@@ -136,7 +136,7 @@ define([
               var queryTask = new esri.tasks.QueryTask(this.strURL + "/0");
               var pQuery = new Query();
               pQuery.returnGeometry = false;
-              pQuery.outFields = ["ProjectID", "Project_Title", "Fiscal_Years_of_Allocation", "Project_Lead_Organization", "OBJECTID", "LeadName_LastFirst"];
+              pQuery.outFields = ["ProjectID", "Prj_Title", "Fiscal_Years_of_Allocation", "PI_Org", "OBJECTID", "LeadName_LastFirst"];
               pQuery.where = strQuery;
               var items = [];
 

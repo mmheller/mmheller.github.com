@@ -7,8 +7,13 @@
     width:730px;
 }
 
+#WideContent {
+    width:960px;
+}
+
 #navigation,
-#content {
+#content,
+#WideContent {
     float:left;
     margin:10px;
 }
@@ -63,6 +68,8 @@ div.content {
     line-height:1.5em;
     font-family:"Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
 }
+
+
 
 div.content ul, div.content p {
     margin:0;

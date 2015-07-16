@@ -209,7 +209,7 @@
 <body class="soria">
 
 
-<div id="content">
+<div id="WideContent">
     <a href="#" id="closeAll" title="Close all" style="font-size:.65em;">Close All</a> | <a href="#" id="openAll" title="Open All" style="font-size:.65em;">Open All</a>
     <!-- collapsible -->
     <div class="page_collapsible" id="page_collapsible1">Project Information<span></span></div>
@@ -225,7 +225,7 @@
                     <hr>
             <div id="divFundingDispersal"></div>
                     <hr>
-            <div class="content" id="content1" >
+            <div class="WideContent" id="content1" >
             </div>
         </div>
     <!-- end collapsible -->
@@ -276,20 +276,20 @@
             <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridContacts" id="gridContacts" selectionMode="none" style="font-size:.75em;">
              <thead>
                 <tr>
-                  <th field="PersonName" width="240px" height="60px">Name</th>
-                  <th field="Contact_Type" width="100" height="60px">Type</th>
-                  <th field="GroupName" width="280px"  height="60px">Affiliation</th>
+                  <th field="PersonName" width="400px" height="60px">Name</th>
+                  <th field="Contact_Type" width="150" height="60px">Type</th>
+                  <th field="GroupName" width="auto"  height="60px">Affiliation</th>
                   <!--<th field="prj_priority" width="80px">Priority</th>-->
                   <!--<th field="uri" width="auto">Email</th> -->             
                 </tr>
               </thead>
             </table>
 
-           <table dojotype="dojox.grid.DataGrid" style="height:300px;width:450px;" jsid="gridContactOrgsOnly" id="gridContactOrgsOnly" selectionMode="none" style="font-size:.75em;">
+           <table dojotype="dojox.grid.DataGrid" style="height:300px" jsid="gridContactOrgsOnly" id="gridContactOrgsOnly" selectionMode="none" style="font-size:.75em;">
              <thead>
                 <tr>
-                  <th field="GroupName" width="300" height="60px">Group Name (individuals not specified)</th>
-                  <th field="Contact_Type" width="100" height="60px">Type</th>
+                  <th field="GroupName" width="450" height="60px">Group Name (individuals not specified)</th>
+                  <th field="Contact_Type" width="200" height="60px">Type</th>
     
                 </tr>
               </thead>
@@ -330,9 +330,9 @@
             <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridDeliverables" id="Table2" selectionMode="none" style="font-size:.75em;">
              <thead>
                 <tr>
-                  <th field="deliverable_title" width="250px">Title</th>
+                  <th field="deliverable_title" width="550px">Title</th>
                   <th field="Fund_Year" width="90px" height="auto">Fund Year</th>
-                  <th field="duedate" width="auto">duedate</th>              
+                  <th field="duedate" width="auto">Due Date</th>              
                   <th field="DelivType" width="auto">Deliv Type</th>    
                   <th field="Deliverable_Received" width="auto">Received</th>    
                   <th field="deliverableid" hidden="true">deliverableid</th>
