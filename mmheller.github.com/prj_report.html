@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://js.arcgis.com/3.13/dijit/themes/soria/soria.css" type="text/css">
     <link rel="stylesheet" href="https://js.arcgis.com/3.13/esri/css/esri.css"/>
     <link rel="stylesheet" href="css/github.css" type="text/css" />
-    <link rel="stylesheet" href="css/demo.css" type="text/css" />
+    <link rel="stylesheet" href="css/collapse.css" type="text/css" />
     <!--<link rel="stylesheet" href="https://js.arcgis.com/3.13/dojox/grid/resources/Grid.css">-->
     <link rel="stylesheet" href="css/Grid.css" type="text/css">
     <!--<link rel="stylesheet" href="https://js.arcgis.com/3.13/dojox/grid/resources/soriaGrid.css" type="text/css">-->
@@ -81,6 +81,7 @@
         "dijit/form/CheckBox",
         "dojo/_base/Color",
         "dojo/mouse", "dojo/query", "dojox/grid/DataGrid",
+        "dojo/date/locale",
         "esri/arcgis/utils",
         "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
         "dijit/layout/AccordionContainer", "dojo/domReady!"
@@ -115,7 +116,7 @@
                                                                     gridDeliverables, gridDeliverablesSupWebinarsPages]);  // this needs sync'ing with the grids below, the div's below, and the array in the MH_Query4PrjReportResults
         //app.gPjrReportQuery.RunReport("ProjectID = " + strPRJ_ID, [gridConservationTargets]);  // this needs sync'ing with the grids below, the div's below, and the array in the MH_Query4PrjReportResults
         app.pMapSup_prjReport = new MH_MapSetup_prjReport({ strQuery: "ProjectID = " + strPRJ_ID, dblExpandNum: 0.8 }); // instantiate the class
-        app.pMapSup_prjReport.Phase1(); 
+        app.pMapSup_prjReport.Phase1();
         function getTokens() {
             var tokens = [];
             var query = location.search;
@@ -129,10 +130,41 @@
             });
             return tokens;
         }
-        function nameFormatter(value, rowIndex) {
-            console.log(value);
-            return value;
-        }
+//        function nameFormatter(value, rowIndex) {
+//            console.log(value);
+//            return value;
+//        }
+
+
+//        formatDate: function (value, index) {
+//            return "dddd";
+//        }
+
+//        var myFormatters = {
+//            formatDate: function (value, index) {
+//                return "dddd";
+//            }
+//        };
+
+
+//        var myFormatters = {
+//            formatDate: function (value, index) {
+//                alert("in");
+//                var inputDate = new Date(value);
+//                var textDate = dojo.date.locale.format(inputDate, {
+//                    selector: 'date',
+//                    datePattern: 'MM/dd/yyyy'
+//                });
+//                //                return dojo.date.locale.format(inputDate, {
+//                //                    selector: 'date',
+//                //                    datePattern: 'MM/dd/yyyy'
+//                //                   });
+//                return textDate;
+//            }
+//        };
+
+
+
 
     });
 </script>
@@ -273,7 +305,7 @@
         </div>
     </div>
   
-            <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridContacts" id="gridContacts" selectionMode="none" style="font-size:.75em;">
+            <table dojotype="dojox.grid.DataGrid" style="height:200px; font-size:.75em;" jsid="gridContacts" id="gridContacts" selectionMode="none">
              <thead>
                 <tr>
                   <th field="PersonName" width="400px" height="60px">Name</th>
@@ -295,7 +327,8 @@
               </thead>
             </table>
 
-          <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" style="height:450px;width:500px;" jsid="gridProposals" id="Table1" selectable="true" style="font-size:.75em;">
+          <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" style="height:450px;width:500px;" 
+                        jsid="gridProposals" id="Table1" selectable="true" style="font-size:.75em;">
              <thead>
                 <tr>
                   <th field="Fund_Year" width="120" height="60px">Fund Year</th>
@@ -327,20 +360,50 @@
               </thead>
             </table>
 
-            <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridDeliverables" id="Table2" selectionMode="none" style="font-size:.75em;">
+
+            <table id="gridDeliverables" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" 
+                        jsid="gridDeliverables"  style="height:200px;font-size:.75em;" >
+                <thead>
+                    <tr>
+                        <th field="deliverable_title" width="550px">Title</th>
+                        <th field="Fund_Year" width="90px" height="auto">Fund Year</th>
+                        <th field="duedate" width="auto">Due Date</th>           
+                        <th field="DelivType" width="auto">Deliv Type</th>    
+                        <th field="Deliverable_Received" width="auto">Received</th>    
+                        <th field="deliverableid" hidden="true">deliverableid</th>
+                    </tr>
+                </thead>
+            </table>
+
+<!--            <table dojotype="dojox.grid.DataGrid" escapeHTMLInData="false" style="height:200px;" jsid="gridDeliverables" id="Table2" selectionMode="none" 
+                        style="font-size:.75em;" >
              <thead>
                 <tr>
                   <th field="deliverable_title" width="550px">Title</th>
                   <th field="Fund_Year" width="90px" height="auto">Fund Year</th>
-                  <th field="duedate" width="auto">Due Date</th>              
+                  <th field="duedate" width="auto" >Due Date</th>              
                   <th field="DelivType" width="auto">Deliv Type</th>    
                   <th field="Deliverable_Received" width="auto">Received</th>    
                   <th field="deliverableid" hidden="true">deliverableid</th>
                 </tr>
               </thead>
-            </table>
+            </table>-->
 
-            <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridDeliverablesSupWebinarsPages" id="Table3" selectionMode="none" style="font-size:.75em;">
+
+<!--            <table id="gridDeliverablesSupWebinarsPages" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" 
+                        formatterScope="formatDate" jsid="gridDeliverablesSupWebinarsPages" style="height:200px;" style="font-size:.75em;">
+                <thead>
+                    <tr>
+                        <th field="deliverable_title" width="150px">Title</th>
+                        <th field="Fund_Year" width="90px" height="auto">Fund Year</th>
+                        <th formatter="formatDate" field="duedate" width="auto">name</th>                
+                        <th field="DelivType" width="auto">Deliv Type</th>    
+                        <th field="deliverableid" hidden="true">deliverableid</th>
+                    </tr>
+                </thead>
+            </table>-->
+
+            <table dojotype="dojox.grid.DataGrid" style="height:200px; font-size:.75em;" jsid="gridDeliverablesSupWebinarsPages" id="Table3" selectionMode="none" >
              <thead>
                 <tr>
                   <th field="deliverable_title" width="150px">Title</th>

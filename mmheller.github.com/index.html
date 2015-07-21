@@ -7,9 +7,10 @@
     <link rel="stylesheet" href="https://js.arcgis.com/3.13/dijit/themes/soria/soria.css">
     <link rel="stylesheet" href="https://js.arcgis.com/3.13/esri/css/esri.css"/>
     <link rel="stylesheet" href="css/github.css" type="text/css" />
-    <link rel="stylesheet" href="css/demo.css" type="text/css" />
-    <link rel="stylesheet" href="https://js.arcgis.com/3.13/dojox/grid/resources/Grid.css">
-    <link rel="stylesheet" href="https://js.arcgis.com/3.13/dojox/grid/resources/soriaGrid.css">
+    <link rel="stylesheet" href="css/collapse.css" type="text/css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.13/dojox/grid/resources/Grid.css"/>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.13/dojox/grid/resources/soriaGrid.css"/>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 
     <!--<link rel="stylesheet" href="https://js.arcgis.com/3.13/esri/css/claro.css"/>-->
 
@@ -28,6 +29,8 @@
 
 .soria .dojoxGridRowOver .dojoxGridCell {border: 0px solid; color:#000000; }
 .soria .dojoxGridCell {border: 0px solid; color:#000000; }
+.soria .dojoxGridHeader .dojoxGridCell {background-image: url("http://localhost:55493/GNLCC_PTS/images/title-bar.png");}
+.soria .dojoxGridHeader .dojoxGridCell {border: 0px solid;}
 
 div.columns       { width: 650px;   margin: 0 auto;}
 div.columns div   { width: 325px; float: left; }
@@ -59,6 +62,24 @@ font-family:arial,helvetica,sans-serif;
 
 
 #map {      padding:0;      margin:0;      height:500px;    }
+
+#btn_clear {
+     border: none;   
+    padding:5px;
+    color:white;
+    background-color:gray;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:2px;
+    box-shadow:0px 0px 2px #555;
+    font-weight:bold;
+    font-size:70%;
+    
+}
+
+#btn_clear:hover, #button2:hover {
+    box-shadow:0px 0px 3px #555;
+}
 
 
 #rightPane {
@@ -92,14 +113,13 @@ overflow:none;
                 urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on,
                 CheckBox,
                 Color, mouse, query) {
-
-
         //        if ($('#page_collapsible1').collapsible('collapsed')) {
         //            $('#page_collapsible1').collapsible('open');
         //        }
 
         app.pMapSup = new MH_MapSetup({}); // instantiate the class
         app.pMapSup.Phase1();
+        app.pMapSup.Phase3();
 
         var strURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer"
         app.gCQD = new MH_CreateQueryDef({}); // instantiate the class
@@ -240,8 +260,17 @@ overflow:none;
 <!--<h1>DRAFT - GNLCC Projects and Deliverables Public Search and Report Tool - DRAFT</h1>-->
 <!-- left column collapsible -->
 
+
 <div id="navigation">
     <form id="NavigationForm">
+        <input id="btn_clear" type="button"  value="Reset Search">
+        <br/><br/>
+
+        <font size="2%" color="#2E2E2E">Keyword Search</font>
+        <div id="autocompleteSearch">
+            <input id="loc" class="textbox" type="text"/><br />
+            &nbsp;
+        </div>
 
         <div class="collapsible" id="section3">Year Funded<span></span></div>
         <div class="container"><div class="content" id="section3content"></div></div>
@@ -299,9 +328,10 @@ overflow:none;
 <!-- /left column collapsible -->
 
 <div id="content">
-    <input id="btn_clear" type="button"  value="Reset" 
-        style="border-style: none; padding: 0.01px; font-size: x-small; font-weight: bold;"> | <a href="#" id="closeAll" title="Close all" style="font-size:.65em;">Close All</a> | <a href="#" id="openAll" title="Open All" style="font-size:.65em;">Open All</a>
+         <a href="#" id="closeAll" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
+          <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
     
+
     <!-- collapsible -->
     <div class="page_collapsible" id="page_collapsible1">Results<span></span></div>
         <div class="container"  id="container1" >
@@ -310,9 +340,9 @@ overflow:none;
                 <tr>
                   <th field="Fiscal_Years_of_Allocation" width="40" height="60px">Fiscal<br/>Year</th>
                   <th field="ProjectID" hidden="true">ProjectID</th>
-                  <th field="Prj_Title" width="290px"  height="60px">Project Title</th>
+                  <th field="Prj_Title" width="290px" style="color:Lime;" height="60px">Project Title</th>
                   <th field="LeadName_LastFirst" width="145px">Project Lead</th>
-                  <th field="PI_Org" width="200px">Affiliation</th>      
+                  <th field="PI_Org" width="auto">Affiliation</th>      
                           
                 </tr>
               </thead>

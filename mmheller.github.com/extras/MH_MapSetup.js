@@ -175,8 +175,8 @@ define([
 //              return arrayLayers;
           },
 
-//          Phase3: function (CED_PP_point, CED_PP_line, CED_PP_poly) {
-//              var scalebar = new Scalebar({ map: app.map, scalebarUnit: "dual" });
+          Phase3: function () {
+              var scalebar = new Scalebar({ map: app.map, scalebarUnit: "dual" });
 //              var pGeocoder = new Geocoder({ autoComplete: true, arcgisGeocoder: { placeholder: "Find a place" }, map: app.map }, dojo.byId('search'));
 //              pGeocoder.startup();
 
@@ -191,53 +191,54 @@ define([
 
 //              var panelBasemaps = dom.byId("panelBasemaps");
 //              on(panelBasemaps, mouse.leave, function () { domClass.remove("panelBasemaps", "panelBasemapsOn"); });
+//              pPTS_Projects = new FeatureLayer(app.strTheme1_URL + "0", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: 0, visible: true });
+              $('#loc').autocomplete({
+                  source: function (request, response) {
+                      $.ajax({
+                      // this is for use with a proxy page url: app.strPxURL  "?" + app.strTheme1_URL + "find"  "?searchFields=ProjectID,Prj_Title,PI_Org,Partner_Organizaitons,Subject_Keywords,Location_Keywords,LeadName_LastFirst&SearchText=" + request.term + "&layers=0&f=pjson&returnGeometry=true",
 
-//              $('#loc').autocomplete({
-//                  source: function (request, response) {
-//                      $.ajax({
-//                          url: app.strPxURL +
-//                                    "?" + app.strTheme1_URL + "/find" +
-//                                    "?searchFields=Project_Name,Project_ID&SearchText=" + request.term + "&layers=0&f=pjson&returnGeometry=true",
-//                          dataType: "jsonp",
-//                          data: {},                        //data: { where: strSearchField + " LIKE '%" + request.term.replace(/\'/g, '\'\'').toUpperCase() + "%'", outFields: strSearchField, returnGeometry: true, f: "pjson" },                        
-//                          success: function (data) {
-//                              if (data.results) {                           //                            if (data.features) {
-//                                  response($.map(data.results.slice(0, 19), function (item) {      //only display first 10
-//                                      return { label: item.attributes.Project_Name + " ID:" + item.attributes.Project_ID +
-//                                        " (Layer:" + item.attributes.SourceFeatureType.replace("poly", "area") + ",Type:" + item.attributes.TypeAct + ")",
-//                                          value2: item.geometry, value3: item.attributes.Project_ID, value4: item.layerName
-//                                      }
-//                                  }));
-//                              }
-//                          },
-//                          error: function (message) { response([]); }
-//                      });
-//                  },
-//                  minLength: 3,
-//                  select: function (event, ui) {
-//                      this.blur();
-//                      var strMatrix = "Project";
-//                      var strManagUnit = "All";
-//                      var strDataType = "0";
-//                      var pGeometryMultipoint = ui.item.value2.points;
-//                      var pSR = ui.item.value2.spatialReference;
-//                      var pGeometryPoint = pGeometryMultipoint[0];
+                          url: app.strTheme1_URL + "find" +
+                                    "?searchFields=ProjectID,Prj_Title,PI_Org,Partner_Organizaitons,Subject_Keywords,Location_Keywords,LeadName_LastFirst&SearchText=" + request.term + "&layers=0&f=pjson&returnGeometry=true",
+                          dataType: "jsonp",
+                          data: {},                        //data: { where: strSearchField + " LIKE '%" + request.term.replace(/\'/g, '\'\'').toUpperCase() + "%'", outFields: strSearchField, returnGeometry: true, f: "pjson" },                        
+                          success: function (data) {
+                              if (data.results) {                           //                            if (data.features) {
+                                  response($.map(data.results.slice(0, 19), function (item) {      //only display first 10
+                                      return { label: item.attributes.Prj_Title + " ID:" + item.attributes.ProjectID +
+                                        " (PI" + item.attributes.LeadName_LastFirst + ")",
+                                          value2: item.geometry, value3: item.attributes.ProjectID, value4: item.layerName
+                                      }
+                                  }));
+                              }
+                          },
+                          error: function (message) { response([]); }
+                      });
+                  },
+                  minLength: 3,
+                  select: function (event, ui) {
+                      this.blur();
+                      var strMatrix = "Project";
+                      var strManagUnit = "All";
+                      var strDataType = "0";
+                      var pGeometryMultipoint = ui.item.value2.points;
+                      var pSR = ui.item.value2.spatialReference;
+                      var pGeometryPoint = pGeometryMultipoint[0];
 
-//                      var dblX = pGeometryPoint[0];
-//                      var dblY = pGeometryPoint[1];
-//                      var strValue3 = ui.item.value3;
-//                      var psqs_strQueryString = "objectid  > 0";
-//                      app.map.infoWindow.hide();            //var strquery4id = "Contaminant LIKE '%Mercury%'";
-//                      app.map.graphics.clear();
-//                      app.pPS_Identify = new PS_Identify({ pLayer1: CED_PP_point, pLayer2: CED_PP_line, pLayer3: CED_PP_poly, pMap: app.map,
-//                          strQueryString4Measurements: "objectid  > 0", strURL: app.strTheme1_URL, pInfoWindow: app.infoWindow, mSR: pSR
-//                      }); // instantiate the ID Search class    
-//                      var pPS_Identify_Results = app.pPS_Identify.executeQueries(null, "", 0, pGeometryPoint[0], pGeometryPoint[1]);
-//                  }
-//              });
+                      var dblX = pGeometryPoint[0];
+                      var dblY = pGeometryPoint[1];
+                      var strValue3 = ui.item.value3;
+                      var psqs_strQueryString = "objectid  > 0";
+                      app.map.infoWindow.hide();            //var strquery4id = "Contaminant LIKE '%Mercury%'";
+                      app.map.graphics.clear();
+                      app.pPS_Identify = new PS_Identify({ pLayer1: CED_PP_point, pLayer2: CED_PP_line, pLayer3: CED_PP_poly, pMap: app.map,
+                          strQueryString4Measurements: "objectid  > 0", strURL: app.strTheme1_URL, pInfoWindow: app.infoWindow, mSR: pSR
+                      }); // instantiate the ID Search class    
+                      var pPS_Identify_Results = app.pPS_Identify.executeQueries(null, "", 0, pGeometryPoint[0], pGeometryPoint[1]);
+                  }
+              });
 
 
-//          },
+          },
 
 
 
