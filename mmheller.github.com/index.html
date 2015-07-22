@@ -27,10 +27,12 @@
 
 <style>
 
+ul.ui-autocomplete.ui-menu{width:600px;font-size:.7em;} /* this controls the style of the results in the autocomplete  */
+
+.soria .NavigationForm .content {font-size:.3em;}
 .soria .dojoxGridRowOver .dojoxGridCell {border: 0px solid; color:#000000; }
-.soria .dojoxGridCell {border: 0px solid; color:#000000; }
-.soria .dojoxGridHeader .dojoxGridCell {background-image: url("http://mmheller.github.io/mmheller.github.com/images/title-bar.png");}
-.soria .dojoxGridHeader .dojoxGridCell {border: 0px solid;}
+.soria .dojoxGridCell {border: 0px solid; color:#000000;}  /* this controls style of grid cells */
+.soria .dojoxGridHeader .dojoxGridCell {background-image: url("http://mmheller.github.io/mmheller.github.com/images/title-bar.png"); border: 0px solid;}
 
 div.columns       { width: 650px;   margin: 0 auto;}
 div.columns div   { width: 325px; float: left; }
@@ -44,9 +46,9 @@ div.scroll {
     background:#f0f0f0;
     margin: 0;
     padding:10px;
-    font-size:.8em;
+    font-size:.9em;
     line-height:1.5em;
-    font-family:"Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 html,body 
@@ -63,7 +65,7 @@ font-family:arial,helvetica,sans-serif;
 
 #map {      padding:0;      margin:0;      height:500px;    }
 
-#btn_clear {
+#btn_clear, #btn_Print_Friendly {
      border: none;   
     padding:5px;
     color:white;
@@ -83,7 +85,7 @@ font-family:arial,helvetica,sans-serif;
 
 
 #rightPane {
-font-size:10pt;
+font-size:30pt;
 text-align:center;
 width:40%;
 overflow:none;
@@ -113,9 +115,6 @@ overflow:none;
                 urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on,
                 CheckBox,
                 Color, mouse, query) {
-        //        if ($('#page_collapsible1').collapsible('collapsed')) {
-        //            $('#page_collapsible1').collapsible('open');
-        //        }
 
         app.pMapSup = new MH_MapSetup({}); // instantiate the class
         app.pMapSup.Phase1();
@@ -126,7 +125,7 @@ overflow:none;
         app.gSup = new MH_UniqueSetup({}); // instantiate the class
 
         on(dom.byId("btn_clear"), "click", btn_clear_click);
-        on(dom.byId("btn_clear2"), "click", btn_clear_click);
+        //        on(dom.byId("btn_clear2"), "click", btn_clear_click);
         on(dom.byId("btn_Print_Friendly"), "click", btn_Print_Friendly_click);
 
 
@@ -138,8 +137,6 @@ overflow:none;
         app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
 
         document.getElementById("page_collapsibleMapDestination").appendChild(document.getElementById("map"));  //move the grid to the designated div, grids need to be built outside the collapsable panel otherwise risk not rendering properly
-        //        document.getElementById("page_collapsibleMap").addEventListener("click", MapOpened);
-        //        function MapOpened() {}
 
         function getTokens() {
             var tokens = [];
@@ -156,18 +153,20 @@ overflow:none;
         }
 
         function btn_clear_click() {
+            document.getElementById("loc").value = "";
             if ($('#page_collapsible1').collapsible('collapsed')) {
                 $('#page_collapsible1').collapsible('open');
             }
+            app.gQuery.strQuery = null;
             app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
         }
 
         function btn_Print_Friendly_click() {
             var strHTML = "indexPF.html"
-            
+
             if (app.gQuery.strQuery !== null) {
-                strHTML += "?Prjs=" + app.gQuery.strQuery.replace("ProjectID in (","").replace(")","");
-             }
+                strHTML += "?Prjs=" + app.gQuery.strQuery.replace("ProjectID in (", "").replace(")", "");
+            }
 
             //strQuery = "ProjectID in " + arrayValues.join(",");
 
@@ -186,6 +185,7 @@ overflow:none;
 
 
 <script type="text/javascript">
+
     $(document).ready(function () {
         hljs.tabReplace = '    '; //        syntax highlighter
         hljs.initHighlightingOnLoad();
@@ -268,7 +268,10 @@ overflow:none;
 
         <font size="2%" color="#2E2E2E">Keyword Search</font>
         <div id="autocompleteSearch">
-            <input id="loc" class="textbox" type="text"/><br />
+            <input id="loc" class="textbox" type="text"  title="Enter portion of...
+            Project Title, Project Lead, Keywords, 
+            Partner Organizaitons
+        and wait a moment for a pick list"/><br />
             &nbsp;
         </div>
 
@@ -316,8 +319,8 @@ overflow:none;
         <div class="container"><div class="content" id="Div2"></div></div>
 
         <br />
-        <input id="btn_clear2" type="button"  value="Reset" 
-        style="border-style: none; padding: 5px; font-size: small;">
+       <!-- <input id="btn_clear2" type="button"  value="Reset" 
+                style="border-style: none; padding: 5px; font-size: small;">-->
 
         <input id="btn_Print_Friendly" type="button"  value="Print Freindly" 
                 style="border-style: none; padding: 5px; font-size: small;">
@@ -335,10 +338,10 @@ overflow:none;
     <!-- collapsible -->
     <div class="page_collapsible" id="page_collapsible1">Results<span></span></div>
         <div class="container"  id="container1" >
-            <table dojotype="dojox.grid.DataGrid" style="height:600px;" jsid="grid" id="grid" selectionMode="none" style="font-size:.75em;">
+            <table dojotype="dojox.grid.DataGrid" style="height:600px;" jsid="grid" id="grid" selectionMode="none"">
              <thead>
                 <tr>
-                  <th field="Fiscal_Years_of_Allocation" width="40" height="60px">Fiscal<br/>Year</th>
+                  <th field="Fiscal_Years_of_Allocation" width="60" height="60px">Fiscal<br/>Year</th>
                   <th field="ProjectID" hidden="true">ProjectID</th>
                   <th field="Prj_Title" width="290px" style="color:Lime;" height="60px">Project Title</th>
                   <th field="LeadName_LastFirst" width="145px">Project Lead</th>
@@ -354,7 +357,7 @@ overflow:none;
     <!-- end collapsible -->
 
     <!-- collapsible -->
-    <div class="page_collapsible" id="body-section2">Summary of Results (x number of projects)<span></span></div>
+    <div class="page_collapsible" id="body-section2">Summary of Results<span></span></div>
     <div class="container">
 
 

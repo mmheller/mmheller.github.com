@@ -8,18 +8,11 @@
     <link rel="stylesheet" href="https://js.arcgis.com/3.13/esri/css/esri.css"/>
     <link rel="stylesheet" href="css/github.css" type="text/css" />
     <link rel="stylesheet" href="css/collapse.css" type="text/css" />
-    <!--<link rel="stylesheet" href="https://js.arcgis.com/3.13/dojox/grid/resources/Grid.css">-->
     <link rel="stylesheet" href="css/Grid.css" type="text/css">
-    <!--<link rel="stylesheet" href="https://js.arcgis.com/3.13/dojox/grid/resources/soriaGrid.css" type="text/css">-->
-
-    <!--<link rel="stylesheet" href="https://js.arcgis.com/3.13/esri/css/claro.css"/>-->
-
-    <!-- /CSS -->
 
 <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
 <script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<!--<script type="text/javascript" src="extras/jquery.min.js"></script>-->
 <script type="text/javascript" src="http://softwaremaniacs.org/media/soft/highlight/highlight.pack.js"></script>
 <script type="text/javascript" src="extras/jquery.cookie.js"></script>
 <script type="text/javascript" src="extras/jquery.collapsible.js"></script>
@@ -53,9 +46,13 @@
     margin:0;      
     }
     body {
-    background-color:#fff;
-    font-family:arial,helvetica,sans-serif;
+        background-color:#fff;
+        font-family:arial,helvetica,sans-serif;
+        
     }
+    
+
+    
     #map {      padding:0;      margin:0;      height:500px;    }
 
     #rightPane {
@@ -96,11 +93,8 @@
         var strURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer"
 
         app.gPjrReportQuery = new MH_Query4PrjReportResults({ strURL: strURL }); // instantiate the class
-
         var tokens = getTokens
         var strPRJ_ID = getTokens()['PRJ_ID']; //?RButton=true
-
-
 
         if (strPRJ_ID) {
             var div = document.getElementById('querycontent');
@@ -115,8 +109,9 @@
                                                                     gridConservationTargetsSPP, gridConservationTargetsOther,
                                                                     gridDeliverables, gridDeliverablesSupWebinarsPages]);  // this needs sync'ing with the grids below, the div's below, and the array in the MH_Query4PrjReportResults
         //app.gPjrReportQuery.RunReport("ProjectID = " + strPRJ_ID, [gridConservationTargets]);  // this needs sync'ing with the grids below, the div's below, and the array in the MH_Query4PrjReportResults
-        app.pMapSup_prjReport = new MH_MapSetup_prjReport({ strQuery: "ProjectID = " + strPRJ_ID, dblExpandNum: 0.8 }); // instantiate the class
-        app.pMapSup_prjReport.Phase1();
+//        app.pMapSup_prjReport = new MH_MapSetup_prjReport({ strQuery: "ProjectID = " + strPRJ_ID, dblExpandNum: 0.8 }); // instantiate the class
+//        app.pMapSup_prjReport.Phase1();
+
         function getTokens() {
             var tokens = [];
             var query = location.search;
@@ -130,42 +125,6 @@
             });
             return tokens;
         }
-//        function nameFormatter(value, rowIndex) {
-//            console.log(value);
-//            return value;
-//        }
-
-
-//        formatDate: function (value, index) {
-//            return "dddd";
-//        }
-
-//        var myFormatters = {
-//            formatDate: function (value, index) {
-//                return "dddd";
-//            }
-//        };
-
-
-//        var myFormatters = {
-//            formatDate: function (value, index) {
-//                alert("in");
-//                var inputDate = new Date(value);
-//                var textDate = dojo.date.locale.format(inputDate, {
-//                    selector: 'date',
-//                    datePattern: 'MM/dd/yyyy'
-//                });
-//                //                return dojo.date.locale.format(inputDate, {
-//                //                    selector: 'date',
-//                //                    datePattern: 'MM/dd/yyyy'
-//                //                   });
-//                return textDate;
-//            }
-//        };
-
-
-
-
     });
 </script>
 
@@ -217,6 +176,11 @@
         if ($('#Div4').collapsible('collapsed')) {
             $('#Div4').collapsible('open');
         }
+        if ($('#body-section3').collapsible('collapsed')) {
+            $('#body-section3').collapsible('open');
+        }
+
+        
 
         function openAll() { $('.page_collapsible').collapsible('openAll'); } //assign open/close all to functions
         function closeAll() { $('.page_collapsible').collapsible('closeAll'); }
@@ -302,6 +266,13 @@
             <p>
                 MapService URL: <a href="https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer" title="rest endpoing">https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer</a>
             </p>
+            <div id="mapPrjReport"
+                data-dojo-type="dijit/layout/ContentPane"
+                data-dojo-props="region:'center'"
+                style="overflow:hidden; background-color:rgb(255, 255, 255);">
+                    <img id="loadingImg" src="images/loading.gif" style="position:absolute; right:50%; top:50%; z-index:100;" />
+            </div>
+
         </div>
     </div>
   
@@ -375,40 +346,11 @@
                 </thead>
             </table>
 
-<!--            <table dojotype="dojox.grid.DataGrid" escapeHTMLInData="false" style="height:200px;" jsid="gridDeliverables" id="Table2" selectionMode="none" 
-                        style="font-size:.75em;" >
-             <thead>
-                <tr>
-                  <th field="deliverable_title" width="550px">Title</th>
-                  <th field="Fund_Year" width="90px" height="auto">Fund Year</th>
-                  <th field="duedate" width="auto" >Due Date</th>              
-                  <th field="DelivType" width="auto">Deliv Type</th>    
-                  <th field="Deliverable_Received" width="auto">Received</th>    
-                  <th field="deliverableid" hidden="true">deliverableid</th>
-                </tr>
-              </thead>
-            </table>-->
-
-
-<!--            <table id="gridDeliverablesSupWebinarsPages" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" 
-                        formatterScope="formatDate" jsid="gridDeliverablesSupWebinarsPages" style="height:200px;" style="font-size:.75em;">
-                <thead>
-                    <tr>
-                        <th field="deliverable_title" width="150px">Title</th>
-                        <th field="Fund_Year" width="90px" height="auto">Fund Year</th>
-                        <th formatter="formatDate" field="duedate" width="auto">name</th>                
-                        <th field="DelivType" width="auto">Deliv Type</th>    
-                        <th field="deliverableid" hidden="true">deliverableid</th>
-                    </tr>
-                </thead>
-            </table>-->
-
             <table dojotype="dojox.grid.DataGrid" style="height:200px; font-size:.75em;" jsid="gridDeliverablesSupWebinarsPages" id="Table3" selectionMode="none" >
              <thead>
                 <tr>
                   <th field="deliverable_title" width="150px">Title</th>
                   <th field="Fund_Year" width="90px" height="auto">Fund Year</th>
-                  <th field="duedate" width="auto">duedate</th>              
                   <th field="DelivType" width="auto">Deliv Type</th>    
                   <th field="deliverableid" hidden="true">deliverableid</th>
                 </tr>
@@ -416,12 +358,7 @@
             </table>
 
 
-            <div id="mapPrjReport"
-                data-dojo-type="dijit/layout/ContentPane"
-                data-dojo-props="region:'center'"
-                style="overflow:hidden; background-color:rgb(255, 255, 255);">
-                    <img id="loadingImg" src="images/loading.gif" style="position:absolute; right:50%; top:50%; z-index:100;" />
-            </div>
+
 
 </div>
 

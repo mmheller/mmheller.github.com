@@ -42,7 +42,7 @@ define([
           Summarize: function (strQuery) {
               //table/fc index, query string, field 4 aggregation, stat type (count, sum, avg), group by field, html ID, string function
               arrayQuery = [];
-              arrayQuery.push(["0", strQuery, "ProjectID", "count", "", "body-section2", 'Summary of Results ({0} projects)', ""]);
+              arrayQuery.push(["0", strQuery, "ProjectID", "count", "", "page_collapsible1", 'Results ({0} projects)', ""]);
               arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "sum", "", "dTotalAllocatedbyLCC", 'Total Funds Allocated by GNLCC: {0} ', "currency"]);
               arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", 'Total Funds Allocated by GNLCC by Year: \n<br> {0} ', "show both"]);
               arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "sum", "", "dTotalInKindMatch", 'Total Partner In-Kind or Match Funding: {0} ', "currency"]);
@@ -118,25 +118,18 @@ define([
                       });
                   };
               }
-
               if (!Number.prototype.toCurrencyString) {
                   Number.prototype.toCurrencyString = function (prefix, suffix) {
                       if (typeof prefix === 'undefined') { prefix = '$'; }
                       if (typeof suffix === 'undefined') { suffix = ''; }
                       var _localeBug = new RegExp((1).toLocaleString().replace(/^1/, '').replace(/\./, '\\.') + "$");
-                      //return prefix + (~ ~this).toLocaleString().replace(_localeBug, '') + (this % 1).toFixed(2).toLocaleString().replace(/^[+-]?0+/, '') + suffix;
                       return prefix + (~ ~this).toLocaleString().replace(_localeBug, '') + suffix;
                   }
               }
-
               if (strVarType == "countOfGroupBy") {
                   strText = resultFeatures.length.toString();
               }
               else {
-
-                  //              itemp = pTblindexAndQuery[0];
-
-
                   if ((resultFeatures != null) || (resultFeatues != undefined)) {
                       if (resultFeatures.length > 0) {
                           var featAttrs = resultFeatures[0].attributes;
@@ -162,7 +155,7 @@ define([
                                   } else {
                                       var strText = feature.attributes[an].toString();
                                   }
-//                                  if ((strText == null) || (strText == undefined)) {
+                                  //                                  if ((strText == null) || (strText == undefined)) {
                                   if (strText == undefined) {
                                       strText = "null or undefined";
                                   }
@@ -183,15 +176,18 @@ define([
                   strText = values.join(" ");
               }
 
-
-
               if (strVarType == "currency") {
                   var iTempNumber = Number(strText);
                   strText = iTempNumber.toCurrencyString();
               }
 
-              div.innerHTML = strStringFormatting.format(strText);
-
+              if (strHTMLElementID == "page_collapsible1") {  // have to treat writing the collapsible content different becuase otherwise will loos 
+                  var str_divinnerHTML = div.innerHTML;
+                  str_divinnerHTML = "Results (" + strText + " projects) <span></span>";
+                  div.innerHTML = str_divinnerHTML;
+              } else {
+                  div.innerHTML = strStringFormatting.format(strText);
+              }
 
               //pTblindexAndQuery = this.app.gQuerySummary.m_arrayQuery[this.app.gQuerySummary.m_iarrayQueryIndex];
               this.app.gQuerySummary.m_iarrayQueryIndex += 1

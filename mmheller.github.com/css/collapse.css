@@ -9,6 +9,7 @@
 
 #WideContent {
     width:960px;
+
 }
 
 #navigation,
@@ -31,7 +32,7 @@
     font-weight: bold;
     text-decoration:none;
     color: #000;
-    font-size:75%;
+    font-size:.8em;  /*this controls the syle of the text in the collapsable banner */
 }
 
 .collapse-open {
@@ -56,16 +57,19 @@
     padding:10px;
 }
 
+.container {font-size:.9em;}/*this controls style inside collapsable panel, in the grey and white (but not the scorll bar in a container)*/
+
 div.container {
     padding:0;
     margin:0;
+    font-size:.3m;  /*not sure if this line does anything*/
 }
 
-div.content {
+div.content { /*this controls style inside collapsable panel, in the grey*/
     background:#f0f0f0;
     margin: 0;
     padding:10px;
-    font-size:75%;
+
     line-height:1.5em;
     font-family: Arial,Helvetica,sans-serif;
 }

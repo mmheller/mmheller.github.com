@@ -29,7 +29,6 @@ define([
         zoomToPoint: function (pointx, pointy, option, dblZoom) {
             require(["esri/graphic", "esri/geometry/Point", "esri/SpatialReference"
             ], function (Graphic, Point, SpatialReference) {
-                //                this.pMap.graphics.clear();
                 var ptempSR = new SpatialReference({ wkid: 3857 });
 
                 mapPoint1 = new Point(pointx, pointy, ptempSR);

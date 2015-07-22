@@ -3,14 +3,10 @@
 
 function onRowClickHandler(evt) {
     var strURL = evt.grid.getItem(evt.rowIndex).uri;
-    //var ideliverableid = evt.grid.getItem(evt.rowIndex).deliverableid;
-    //alert(strProjectID);
     if (strURL) {
         window.open(strURL);
     }
 }
-
-
 
 define([
   "dojo/_base/declare",
@@ -27,53 +23,49 @@ define([
       "dijit/registry",
       "esri/tasks/query",
       "dojox/grid/DataGrid",
-      "dojo/data/ItemFileReadStore",
+      "dojo/data/ItemFileReadStore", "extras/MH_MapSetup_prjReport",
       "dojo/date/locale"
 
   ], function (
       declare, lang, esriRequest, IdentityManager, FeatureLayer, FeatureTable,
       domConstruct, dom, parser, ready, on,
-      registry, Query, DataGrid, ItemFileReadStore
+      registry, Query, DataGrid, ItemFileReadStore, MH_MapSetup_prjReport
 ) {
 
 
-      //      function formatDate(value) {
-      //          var inputDate = new Date(value);
-      //          return dojo.date.locale.format(inputDate, {
-      //              selector: 'date',
-      //              datePattern: 'MM/dd/yyyy'
-      //          });
-      //      }
+      function formatDate(value) {
+          if (value) {
+              var inputDate = new Date(value);
+              return dojo.date.locale.format(inputDate, {
+                  selector: 'date',
+                  datePattern: 'MM/dd/yyyy'
+              });
+          } else {
+              return "";
+          }
+      }
 
 
       return declare([], {
+          m_prjQuery: null,
           strURL: null,
-          //          pGrid: null,
           m_gridArray: null,
           m_igridArrayIndex: null,
           m_iarrayQueryIndex: null,
           m_arrayQuery: null,
-
           m_arrayQuery4DataGrid: null,
           m_iarrayQueryIndex4Grid: null,
-
           m_gridContacts: null,
           m_gridContactOrgsOnly: null,
 
-
           constructor: function (options) {
               this.strURL = options.strURL || "www.cnn.com"; // default AGS REST URL
-
           },
 
           RunReport: function (strQuery, gridArray) {
-              //              this.m_gridContacts = gridContacts;
-              //              this.m_gridContactOrgsOnly = gridContactOrgsOnly;
-              this.m_gridArray = gridArray
-              //pgridtest = this.m_gridArray[0];
-
+              this.m_gridArray = gridArray;
+              this.m_prjQuery = strQuery;
               //table/fc index, query string, field 4 aggregation, stat type (count, sum, avg), group by field, html ID, string function
-
               arrayQuery = [];
               arrayQuery.push(["0", strQuery, "Prj_Title", "count", "Prj_Title", "divTitle", 'Title: {0}', ""]);
               arrayQuery.push(["0", strQuery, "Description", "count", "Description", "divDescription", 'Description: {0}', ""]);
@@ -98,7 +90,7 @@ define([
               arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID <> 3", ["OBJECTID", "CommonName", "ConsvTargetTypeName", "PrimaryLCCTargetType"], "gridDivConservationTargetsOther"]);
 
               arrayQuery4DataGrid.push(["2", strQuery + " and supplemental = 0 and not (DelivType in ('Statement of Work','Proposal'))", ["OBJECTID", "deliverable_title", "Fund_Year", "duedate", "DelivType", "Deliverable_Received", "deliverableid"], "gridDivDeliverables"]);
-              arrayQuery4DataGrid.push(["2", strQuery + " and supplemental <> 0", ["OBJECTID", "deliverable_title", "Fund_Year", "duedate", "DelivType", "deliverableid"], "gridDivDeliverablesSupWebinarsPages"]);
+              arrayQuery4DataGrid.push(["2", strQuery + " and supplemental <> 0", ["OBJECTID", "deliverable_title", "Fund_Year", "DelivType", "deliverableid"], "gridDivDeliverablesSupWebinarsPages"]);
 
               this.m_arrayQuery = arrayQuery;
               this.m_arrayQuery4DataGrid = arrayQuery4DataGrid;
@@ -162,9 +154,6 @@ define([
               pTblindexAndQuery = this.app.gPjrReportQuery.m_arrayQuery4DataGrid[this.app.gPjrReportQuery.m_igridArrayIndex];
               var strHTMLElementID = pTblindexAndQuery[3];
 
-              if (strHTMLElementID == "gridDivDeliverables") {
-                  var temp = "";
-              }
 
               var gridArray = this.app.gPjrReportQuery.m_gridArray;
               var iarrayQueryIndex4Grid = this.app.gPjrReportQuery.m_igridArrayIndex;
@@ -180,7 +169,38 @@ define([
                   var items = dojo.map(resultFeatures, function (feature) {                  //build an array of attributes
                       return feature.attributes;
                   });
+
                   var data = { identifier: "OBJECTID", items: items };
+
+                  if (strHTMLElementID == "gridDivDeliverables") {
+                      var pItems = data["items"]
+                      for (var key in pItems) {
+                          if (pItems.hasOwnProperty(key)) {
+                              var pItem = pItems[key];
+
+                              for (var keyField in pItem) {
+                                  if (pItem.hasOwnProperty(keyField)) {
+                                      if (keyField == "duedate") {
+                                          var pValue = formatDate(pItem[keyField]);
+                                          data["items"][key][keyField] = pValue;
+                                      }
+                                      if (keyField == "Deliverable_Received") {
+                                          var pValue = formatDate(pItem[keyField]);
+                                          if (pValue == 0) {
+                                              pValue = "Yes";
+                                          } else {
+                                              pValue = "No";
+                                          }
+                                          data["items"][key][keyField] = pValue;
+                                      }
+                                  }
+                              }
+                          }
+                      }
+
+                  }
+
+
                   store = new ItemFileReadStore({ data: data });
                   pGrid.on("rowclick", onRowClickHandler);
                   pGrid.setStore(store);
@@ -211,6 +231,8 @@ define([
                   this.app.gPjrReportQuery.SendQuery4DataGrid(this.app.gPjrReportQuery.m_arrayQuery4DataGrid, this.app.gPjrReportQuery.m_igridArrayIndex)
               }
               else {
+                  app.pMapSup_prjReport = new MH_MapSetup_prjReport({ strQuery: this.app.gPjrReportQuery.m_prjQuery, dblExpandNum: 0.8 }); // instantiate the class
+                  app.pMapSup_prjReport.Phase1();
 
               }
 
