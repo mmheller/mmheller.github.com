@@ -1,8 +1,7 @@
 ﻿//Created By:  Matt Heller, Great Northern Landscape Conservation Cooperative / U.S. Fish and Wildlife Service
 //Date:        July 2015
 
-function StartQuery(blnSelect) {
-    //loop through the checkboxes and disable, so user interaction dosen't disrupt the queryies
+function StartQuery(blnSelect) {    //loop through the checkboxes and disable, so user interaction dosen't disrupt the queryies
     arrayCheckedCheckboxes = [];
     var pform = document.getElementById("NavigationForm");
     for (var i = 0; i < pform.elements.length; i++) {  
@@ -16,17 +15,8 @@ function StartQuery(blnSelect) {
     var arrayQuery = this.app.gCQD.Return_InitialQueryDefs();
     var strQuery4Display = "";
     var strMapServiceURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer";
-    
-//    arrayQuery.forEach(function (iIndexandQuery) {//remove some of the strings to make wildcard functionality work
-//        var iIndex = iIndexandQuery[0];
-//        var strQuery = iIndexandQuery[1];
-//        strQuery4Display += "Table index= " + iIndex.toString() + ":" + strQuery + "\n<br>";
-//    });
 
     app.gQuery.SendQuery(arrayQuery, 0);
-
-//    var div = document.getElementById('querycontent');
-//    div.innerHTML = strQuery4Display;
 }
 
 function AddCheckbox(strContainerDivID, strNewID, strValueField, strLableText, blnChecked, blnDisabled) {
@@ -113,7 +103,7 @@ define([
           },
 
           qry_Query4UniquesAndCheckBoxes: function (strURL, strQuery, strFieldNameText, strFieldNameValue, strContainerDivID, strNewDivID) {
-              if (strFieldNameText == "EcotypicAreas") {
+              if (strFieldNameText == "PersonName") {
                   var strstop = "";
               }
 
@@ -177,6 +167,7 @@ define([
                           });
                           if (blnAdd2Dropdown) {
                               if (strText == "") { strText = iValue.toString(); }
+                                                          
                               texts.push(strText + " (" + feature.attributes["genericstat"].toString() + ")");
                               values.push(iValue);
                           } //values.push({ name: zone });
@@ -209,6 +200,12 @@ define([
                       for (var i = 0; i < values.length; i++) {
                           varValue = values[i];
                           var tt = texts[i];
+
+                          if (this.app.gSup.strFieldNameValue.toString() == "PersonName") {
+                              tt = tt.replace("Unknown", "").replace("unknown", "")
+                          }
+
+
                           //if checkboxDivID is in list of checked boxes, then make sure new creation is checked
                           var blnChecked = false;
                           var strDivSuffix;
@@ -218,6 +215,7 @@ define([
                           } else {
                               strDivSuffix = "-" + varValue;
                           }
+
                           var strNewDivID = this.app.gSup.strNewDivID + strDivSuffix;
 
                           if (this.app.gSup.m_arrayCheckedCheckboxes != undefined) {

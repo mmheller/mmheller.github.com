@@ -99,8 +99,8 @@ define([
                           this.app.gQuery.ClearDivs();
                           this.app.gQuery.SendQuery4ProjectResults(this.app.gQuery.strQuery, this.app.gQuery.m_grid)
 
-                          var div = document.getElementById('querycontent');
-                          div.innerHTML += "\n<br>" + this.app.gQuery.strQuery;
+//                          var div = document.getElementById('querycontent');
+//                          div.innerHTML += "\n<br>" + this.app.gQuery.strQuery;
 
                       } else {
                           this.app.gQuery.SendQuery(this.app.gQuery.m_arrayQuery, this.app.gQuery.m_iarrayQueryIndex)
