@@ -4,40 +4,42 @@
 <head>
     <title>GNLCC Project Tracking System Public Website</title>
     <!-- CSS -->
-    <link rel="stylesheet" href="https://js.arcgis.com/3.13/dijit/themes/soria/soria.css" type="text/css">
-    <link rel="stylesheet" href="https://js.arcgis.com/3.13/esri/css/esri.css"/>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/dijit/themes/soria/soria.css" type="text/css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/dojox/grid/resources/soriaGrid.css"/>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/dojox/grid/resources/Grid.css" type="text/css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/esri/css/esri.css"/>
     <link rel="stylesheet" href="css/github.css" type="text/css" />
     <link rel="stylesheet" href="css/collapse.css" type="text/css" />
-    <link rel="stylesheet" href="css/Grid.css" type="text/css">
+    
 
-<script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<script type="text/javascript" src="http://softwaremaniacs.org/media/soft/highlight/highlight.pack.js"></script>
-<script type="text/javascript" src="extras/jquery.cookie.js"></script>
-<script type="text/javascript" src="extras/jquery.collapsible.js"></script>
-<script type="text/javascript" src="https://js.arcgis.com/3.13/"></script>
+    <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript" src="http://softwaremaniacs.org/media/soft/highlight/highlight.pack.js"></script>
+    <script type="text/javascript" src="extras/jquery.cookie.js"></script>
+    <script type="text/javascript" src="extras/jquery.collapsible.js"></script>
+    <script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>
 
 <style>
 
-    .soria .dojoxGridRowOver .dojoxGridCell { color:#000000; }
+    .soria .NavigationForm .content {font-size:.3em;}
+    .soria .dojoxGridRowOver .dojoxGridCell {border: 0px solid; color:#000000; background-color: #B2B2B2}
+    .soria .dojoxGridCell {border: 0px solid; color:#000000; font-size:1.2em;}  /* this controls style of grid cells */
+    .soria .dojoxGridHeader .dojoxGridCell {background-image: url("http://mmheller.github.io/mmheller.github.com/images/title-bar.png"); border: 0px solid;}
+    .soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif;}
+    .dojoxGridView {left:0px;}
 
     div.columns       { width: 650px;   margin: 0 auto;}
     div.columns div   { width: 325px; float: left; }
     div.grey          { background-color: #cccccc; }
     div.red           { background-color: #e14e32; }
     div.clear         { clear: both; }
+    
+    
+    div.scroll {    /* this controls content style in the scroll bars   */
+    height: 250px; overflow-y: scroll; background:#FFFFFF; margin: 0; padding:10px; font-size:1em; line-height:1.5em; font-family: Arial, Helvetica, sans-serif;}
 
-    div.scroll {
-        height: 250px;
-        overflow-y: scroll;
-        background:#f0f0f0;
-        margin: 0;
-        padding:10px;
-        font-size:.8em;
-        line-height:1.5em;
-        font-family:"Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
-    }
+    
 
     html,body 
     {
@@ -206,7 +208,11 @@
 
 
 <div id="WideContent">
-    <a href="#" id="closeAll" title="Close all" style="font-size:.65em;">Close All</a> | <a href="#" id="openAll" title="Open All" style="font-size:.65em;">Open All</a>
+    <!--<a href="#" id="closeAll" title="Close all" style="font-size:.65em;">Close All</a> | <a href="#" id="openAll" title="Open All" style="font-size:.65em;">Open All</a>-->
+
+         <a href="#" id="A1" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
+          <a href="#" id="A2" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
+    
     <!-- collapsible -->
     <div class="page_collapsible" id="page_collapsible1">Project Information<span></span></div>
         <div class="container"  id="container1" >
@@ -276,7 +282,7 @@
         </div>
     </div>
   
-            <table dojotype="dojox.grid.DataGrid" style="height:200px; font-size:.75em;" jsid="gridContacts" id="gridContacts" selectionMode="none">
+            <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridContacts" id="gridContacts" selectionMode="none">
              <thead>
                 <tr>
                   <th field="PersonName" width="400px" height="60px">Name</th>
@@ -288,7 +294,7 @@
               </thead>
             </table>
 
-           <table dojotype="dojox.grid.DataGrid" style="height:300px" jsid="gridContactOrgsOnly" id="gridContactOrgsOnly" selectionMode="none" style="font-size:.75em;">
+           <table dojotype="dojox.grid.DataGrid" style="height:300px" jsid="gridContactOrgsOnly" id="gridContactOrgsOnly" selectionMode="none" style="">
              <thead>
                 <tr>
                   <th field="GroupName" width="450" height="60px">Group Name (individuals not specified)</th>
@@ -299,7 +305,7 @@
             </table>
 
           <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" style="height:450px;width:500px;" 
-                        jsid="gridProposals" id="Table1" selectable="true" style="font-size:.75em;">
+                        jsid="gridProposals" id="Table1" selectable="true" style="">
              <thead>
                 <tr>
                   <th field="Fund_Year" width="120" height="60px">Fund Year</th>
@@ -310,7 +316,7 @@
             </table>
 
 
-            <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridConservationTargetsSPP" id="gridConservationTargetsSPP" selectionMode="none" style="font-size:.75em;">
+            <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridConservationTargetsSPP" id="gridConservationTargetsSPP" selectionMode="none">
              <thead>
                 <tr>
                   <th field="CommonName" width="240px" height="auto">Species Conservation Targets</th>
@@ -321,7 +327,7 @@
               </thead>
             </table>
 
-            <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridConservationTargetsOther" id="gridConservationTargetsOther" selectionMode="none" style="font-size:.75em;">
+            <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridConservationTargetsOther" id="gridConservationTargetsOther" selectionMode="none">
              <thead>
                 <tr>
                   <th field="CommonName" width="400px" height="auto">Habitats, Ecosystems, & Processess Consv. Targets</th>
@@ -333,7 +339,7 @@
 
 
             <table id="gridDeliverables" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" 
-                        jsid="gridDeliverables"  style="height:200px;font-size:.75em;" >
+                        jsid="gridDeliverables"  style="height:200px;" >
                 <thead>
                     <tr>
                         <th field="deliverable_title" width="550px">Title</th>
@@ -346,7 +352,7 @@
                 </thead>
             </table>
 
-            <table dojotype="dojox.grid.DataGrid" style="height:200px; font-size:.75em;" jsid="gridDeliverablesSupWebinarsPages" id="Table3" selectionMode="none" >
+            <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridDeliverablesSupWebinarsPages" id="Table3" selectionMode="none" >
              <thead>
                 <tr>
                   <th field="deliverable_title" width="150px">Title</th>

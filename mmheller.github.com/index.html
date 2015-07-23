@@ -2,66 +2,53 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>GNLCC Project Tracking System Public Website</title>
-    <!-- CSS -->
-    <link rel="stylesheet" href="https://js.arcgis.com/3.13/dijit/themes/soria/soria.css">
-    <link rel="stylesheet" href="https://js.arcgis.com/3.13/esri/css/esri.css"/>
+    <title>Draft - GNLCC Project Tracking System Public Website</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/dijit/themes/soria/soria.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/esri/css/esri.css"/>
     <link rel="stylesheet" href="css/github.css" type="text/css" />
     <link rel="stylesheet" href="css/collapse.css" type="text/css" />
-    <link rel="stylesheet" href="https://js.arcgis.com/3.13/dojox/grid/resources/Grid.css"/>
-    <link rel="stylesheet" href="https://js.arcgis.com/3.13/dojox/grid/resources/soriaGrid.css"/>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/dojox/grid/resources/Grid.css"/>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/dojox/grid/resources/soriaGrid.css"/>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
 
-    <!--<link rel="stylesheet" href="https://js.arcgis.com/3.13/esri/css/claro.css"/>-->
-
-    <!-- /CSS -->
-
-<script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
-<script type="text/javascript" src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
-<script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
-<!--<script type="text/javascript" src="extras/jquery.min.js"></script>-->
-<script type="text/javascript" src="http://softwaremaniacs.org/media/soft/highlight/highlight.pack.js"></script>
-<script type="text/javascript" src="extras/jquery.cookie.js"></script>
-<script type="text/javascript" src="extras/jquery.collapsible.js"></script>
-<script type="text/javascript" src="https://js.arcgis.com/3.13/"></script>
+    <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+    <script type="text/javascript" src="http://softwaremaniacs.org/media/soft/highlight/highlight.pack.js"></script>
+    <script type="text/javascript" src="extras/jquery.cookie.js"></script>
+    <script type="text/javascript" src="extras/jquery.collapsible.js"></script>
+    <script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>
 
 <style>
 
 ul.ui-autocomplete.ui-menu{width:600px;font-size:.7em;} /* this controls the style of the results in the autocomplete  */
 
 .soria .NavigationForm .content {font-size:.3em;}
-.soria .dojoxGridRowOver .dojoxGridCell {border: 0px solid; color:#000000; }
-.soria .dojoxGridCell {border: 0px solid; color:#000000;}  /* this controls style of grid cells */
+.soria .dojoxGridRowOver .dojoxGridCell {border: 0px solid; color:#000000; background-color: #B2B2B2}
+.soria .dojoxGridCell {border: 0px solid; color:#000000; font-size:1.2em;}  /* this controls style of grid cells */
 .soria .dojoxGridHeader .dojoxGridCell {background-image: url("http://mmheller.github.io/mmheller.github.com/images/title-bar.png"); border: 0px solid;}
-
-div.columns       { width: 650px;   margin: 0 auto;}
-div.columns div   { width: 325px; float: left; }
-div.grey          { background-color: #cccccc; }
-div.red           { background-color: #e14e32; }
-div.clear         { clear: both; }
-
-div.scroll {
-    height: 250px;
-    overflow-y: scroll;
-    background:#f0f0f0;
-    margin: 0;
-    padding:10px;
-    font-size:.9em;
-    line-height:1.5em;
-    font-family: Arial, Helvetica, sans-serif;
+.soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif;}
+.dojoxGridView {left:0px;}
+table {
+  display: table;
+  border-collapse: separate;
+  border-spacing: 0px;
+  border-color: white;
 }
 
-html,body 
-{
-height:100%;      
-width:100%;      
-margin:0;      
-}
-body {
-background-color:#fff;
-font-family:arial,helvetica,sans-serif;
-}
 
+div.scroll {    /* this controls content style in the scroll bars   */
+    height: 250px; overflow-y: scroll; background:#FFFFFF; margin: 0; padding:10px; font-size:1em; line-height:1.5em; font-family: Arial, Helvetica, sans-serif;}
+
+html,body {height:100%;width:100%;margin:0;}
+body {background-color:#fff;font-family:arial,helvetica,sans-serif;}
+
+.HTMLTable_styleMiddle
+{    width: 13px;background-color: #FFFFFF}
+.HTMLTable_styleLeft
+{    width: 350px; border-bottom-style: solid; border-width: thick; border-color: #FFFFFF;}
+.HTMLTable_BannerRow
+{   width: 350px; background-color: #5B7E8A; color: #FFFFFF; font-weight: bold}
 
 #map {      padding:0;      margin:0;      height:500px;    }
 
@@ -79,17 +66,11 @@ font-family:arial,helvetica,sans-serif;
     
 }
 
-#btn_clear:hover, #button2:hover {
+#btn_clear:hover, #btn_Print_Friendly:hover {
     box-shadow:0px 0px 3px #555;
 }
 
-
-#rightPane {
-font-size:30pt;
-text-align:center;
-width:40%;
-overflow:none;
-}
+/*#rightPane {font-size:30pt;text-align:center;width:40%;overflow:none;}*/
 
 </style>
 
@@ -116,24 +97,23 @@ overflow:none;
                 CheckBox,
                 Color, mouse, query) {
 
-        app.pMapSup = new MH_MapSetup({}); // instantiate the class
-        app.pMapSup.Phase1();
-        app.pMapSup.Phase3();
-
         var strURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer"
         app.gCQD = new MH_CreateQueryDef({}); // instantiate the class
         app.gSup = new MH_UniqueSetup({}); // instantiate the class
 
         on(dom.byId("btn_clear"), "click", btn_clear_click);
-        //        on(dom.byId("btn_clear2"), "click", btn_clear_click);
         on(dom.byId("btn_Print_Friendly"), "click", btn_Print_Friendly_click);
-
 
         app.gQuery = new MH_Query4Results({ strURL: strURL, m_grid: grid }); // instantiate the class
         app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class
         var tokens = getTokens
 
         parser.parse();
+
+        app.pMapSup = new MH_MapSetup({}); // instantiate the class
+        app.pMapSup.Phase1();
+        app.pMapSup.Phase3();
+
         app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
 
         document.getElementById("page_collapsibleMapDestination").appendChild(document.getElementById("map"));  //move the grid to the designated div, grids need to be built outside the collapsable panel otherwise risk not rendering properly
@@ -264,6 +244,7 @@ overflow:none;
 <div id="navigation">
     <form id="NavigationForm">
         <input id="btn_clear" type="button"  value="Reset Search">
+        <input id="btn_Print_Friendly" type="button"  value="Print Freindly">
         <br/><br/>
 
         <font size="2%" color="#2E2E2E">Keyword Search</font>
@@ -315,6 +296,10 @@ overflow:none;
         <div class="collapsible" id="section13">State/Province<span></span></div>
         <div class="container"><div class="content" id="section13content"></div></div>
 
+
+        <div class="collapsible" id="section14">Project Fund Type<span></span></div>
+        <div class="container"><div class="content" id="section14content"></div></div>
+
         <div class="collapsible" id="Div1">Funding Amount (not yet enabled)<span></span></div>
         <div class="container"><div class="content" id="Div2"></div></div>
 
@@ -322,8 +307,7 @@ overflow:none;
        <!-- <input id="btn_clear2" type="button"  value="Reset" 
                 style="border-style: none; padding: 5px; font-size: small;">-->
 
-        <input id="btn_Print_Friendly" type="button"  value="Print Freindly" 
-                style="border-style: none; padding: 5px; font-size: small;">
+
     </form>
 </div>
 
@@ -341,10 +325,10 @@ overflow:none;
             <table dojotype="dojox.grid.DataGrid" style="height:600px;" jsid="grid" id="grid" selectionMode="none"">
              <thead>
                 <tr>
-                  <th field="Fiscal_Years_of_Allocation" width="60" height="60px">Fiscal<br/>Year</th>
+                  <th field="Fiscal_Years_of_Allocation" width="50" height="60px">Fiscal<br/>Year</th>
                   <th field="ProjectID" hidden="true">ProjectID</th>
-                  <th field="Prj_Title" width="290px" style="color:Lime;" height="60px">Project Title</th>
-                  <th field="LeadName_LastFirst" width="145px">Project Lead</th>
+                  <th field="Prj_Title" width="290px" height="60px">Project Title</th>
+                  <th field="LeadName_LastFirst" width="135px">Project Lead</th>
                   <th field="PI_Org" width="auto">Affiliation</th>      
                           
                 </tr>
@@ -357,63 +341,129 @@ overflow:none;
     <!-- end collapsible -->
 
     <!-- collapsible -->
-    <div class="page_collapsible" id="body-section2">Summary of Results<span></span></div>
+    <div class="page_collapsible" id="body-section2">Results Summary<span></span></div>
     <div class="container">
 
+<table style="width:100%; background-color: #F3F3F3;">
+        <tr>
+            <td class="HTMLTable_BannerRow">
+                <img src="images/currency_dollar_green.png" alt="Funding" height="30" width="30">
+                    
+                &nbsp;Funds Allocated&nbsp;</td>
+            <td class="HTMLTable_styleMiddle">
+                &nbsp;</td>
+            <td class="HTMLTable_BannerRow">
+                <img src="images/icons_humanitarian-assitance-270x207.png" alt="InKind Match Funding"  height="30">
+                Partner Contributions</td>
+        </tr>
+        <tr>
+            <td class="HTMLTable_styleLeft">
+                <div id="dTotalAllocatedbyLCC"></div>
+                </td>
+            <td class="HTMLTable_styleMiddle">
+                </td>
+            <td class="HTMLTable_styleLeft">
+                <div id="dTotalInKindMatch"></div>
+                </td>
+        </tr>
+        <tr>
+            <td class="HTMLTable_styleLeft">
+                <div id="dTotalAllocatedbyLCCbyYear">
+                </div>
+            </td>
+            <td class="HTMLTable_styleMiddle">
+                &nbsp;</td>
+            <td class="HTMLTable_styleLeft" rowspan="5">
+                <div id="dNumberofInKindOrgs"></div> </td>
+        </tr>
 
-        <div class="content" id="summarycontent">
-            <div class="columns">
-                <div class="grey" >
-                    <img src="images/currency_dollar_green.png" alt="Funding" height="42" width="42">
-                    <div id="dTotalAllocatedbyLCC"></div>
-                    <hr>
-                    <div id="dTotalAllocatedbyLCCbyYear"></div>
-                    <hr>
+        <tr>
+            <td class="HTMLTable_styleLeft">
                     <div id="dNumberOfFundingRecipients"></div>  
-                    <hr>
-                    <div id="dFundRecipientTypes"></div>  
-                    <hr>
-                    <div id="dYearsFunded"></div>         
-                    <hr>
-                    <div id="dNumberOfProjectContacts"></div>                        
-                
+               </td>
+            <td class="HTMLTable_styleMiddle">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="HTMLTable_styleLeft">
+                <div id="dFundRecipientTypes"></div></td>
+            <td class="HTMLTable_styleMiddle">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class=HTMLTable_styleLeft>
+                <div id="dYearsFunded">
                 </div>
-                <div class="grey">
-                    <img src="images/icons_humanitarian-assitance-270x207.png" alt="InKind Match Funding"  height="50">
-                    <div id="dTotalInKindMatch"></div>
-                    <hr>
-                    <div id="dNumberofInKindOrgs"></div>                
+            </td>
+            <td class="HTMLTable_styleMiddle">
+                &nbsp;</td>
+        </tr>
+        <tr>
+            <td class="HTMLTable_styleLeft">
+                <div id="dNumberOfProjectContacts"></div></td>
+            <td class="HTMLTable_styleMiddle">
+                &nbsp;</td>
+        </tr>
+
+<!--        <tr>
+            <td class="HTMLTable_styleLeft">
+                &nbsp;</td>
+            <td class="HTMLTable_styleMiddle">
+                &nbsp;</td>
+        </tr>-->
+        <tr>
+            <td class="HTMLTable_BannerRow">
+                <img src="images/strat_plan1.jpg" alt="Strategic Framework"  height="35"> Conservation Goals and Targets</td>
+            <td class="HTMLTable_styleMiddle">
+                </td>
+            <td class="HTMLTable_BannerRow">
+                <img src="images/deliverables_icon.jpg" alt="InKind Match Funding"  height="35"> Deliverables</td>
+        </tr>
+        <tr>
+            <td class=HTMLTable_styleLeft>
+                <div id="dTotalNumberofConsvTargets">
                 </div>
-            </div>
-            <div class="clear"></div>
-            <br />
-            <div class="columns">
-                <div class="red" >
-                    <img src="images/strat_plan1.jpg" alt="Strategic Framework"  height="60">
-                    <div id="dTotalNumberofConsvTargets"></div>
-                    <hr>
-                    <div id="dEcotypicAreas"></div>
-                    <hr>
-                    <div id="dStressors"></div>  
-                    <hr>
-                    <div id="dGoals"></div>                         
+            </td>
+            <td class="HTMLTable_styleMiddle">
+                </td>
+            <td class="HTMLTable_styleLeft">
+                <div id="dNumberofDeliverables">
                 </div>
-                <div class="red">
-                    <img src="images/deliverables_icon.jpg" alt="InKind Match Funding"  height="60">
-                    <div id="dNumberofDeliverables"></div>  
-                    <hr>
-                    <div id="dDeliverabletype"></div>  
-                    <hr>
-                    <div id="dPrjStatus"></div>               
-                </div>
-            </div>
-            <div class="clear"></div>
-          
-        </div>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="HTMLTable_styleLeft">
+                <div id="dEcotypicAreas"></div></td>
+            <td class="HTMLTable_styleMiddle">
+                </td>
+            <td class="HTMLTable_styleLeft">
+                <div id="dDeliverabletype">
+                </div></td>
+        </tr>
+        <tr>
+            <td class="HTMLTable_styleLeft">
+                <div id="dStressors"></div>  </td>
+            <td class="HTMLTable_styleMiddle">
+                &nbsp;</td>
+            <td class="HTMLTable_styleLeft">
+                <div id="dPrjStatus"></div>
+            </td>
+        </tr>
+        <tr>
+            <td class="HTMLTable_styleLeft">
+                <div id="dGoals"></div></td>
+            <td class="HTMLTable_styleMiddle">
+                </td>
+            <td class="HTMLTable_styleLeft">
+                </td>
+        </tr>
+    </table>
+
     </div>
     <!-- end collapsible -->
     <!-- collapsible -->
-    <div class="page_collapsible" id="page_collapsibleMap">Map<span></span></div>
+    <div class="page_collapsible" id="page_collapsibleMap">Map Summary<span></span></div>
     <div class="container">
         <div id="page_collapsibleMapDestination" style="position:relative" >
         </div>

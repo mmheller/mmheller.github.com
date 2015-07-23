@@ -24,10 +24,8 @@
     margin: 0;
     padding:10px;
     height:20px;
-
     border-top:#f0f0f0 1px solid;
     background: #cccccc;
-
     font-family: Arial, Helvetica, sans-serif;
     font-weight: bold;
     text-decoration:none;
@@ -57,7 +55,7 @@
     padding:10px;
 }
 
-.container {font-size:.9em;}/*this controls style inside collapsable panel, in the grey and white (but not the scorll bar in a container)*/
+.container {font-size:.8em;}/*this controls style inside collapsable panel, in the grey and white (but not the scorll bar in a container)*/
 
 div.container {
     padding:0;
@@ -66,7 +64,8 @@ div.container {
 }
 
 div.content { /*this controls style inside collapsable panel, in the grey*/
-    background:#f0f0f0;
+    /*background:#f0f0f0;*/
+    background:#FFFFFF;
     margin: 0;
     padding:10px;
 
