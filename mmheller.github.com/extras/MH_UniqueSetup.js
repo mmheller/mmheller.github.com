@@ -19,6 +19,35 @@ function StartQuery(blnSelect) {    //loop through the checkboxes and disable, s
     app.gQuery.SendQuery(arrayQuery, 0);
 }
 
+
+function ClearThenStartQuery(strContainterID) {    //loop through the checkboxes and disable, so user interaction dosen't disrupt the queryies
+    //clear out the checkboxes from the container that houses the clicked clear button
+    var pContainter = document.getElementById(strContainterID);
+    for (var i = 0; i < pContainter.childNodes.length; i++) {
+        if (pContainter.childNodes[i].type == 'checkbox') {
+            strID = pContainter.childNodes[i].id;
+            document.getElementById(strID).checked = false;
+        }
+    }
+
+    arrayCheckedCheckboxes = [];
+    var pform = document.getElementById("NavigationForm");
+    for (var i = 0; i < pform.elements.length; i++) {
+        if (pform.elements[i].type == 'checkbox') {
+            strID = pform.elements[i].id;
+            document.getElementById(strID).disabled = true
+        }
+    }
+
+    var strQuery = "";
+    var arrayQuery = this.app.gCQD.Return_InitialQueryDefs();
+    var strQuery4Display = "";
+    var strMapServiceURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer";
+
+    app.gQuery.SendQuery(arrayQuery, 0);
+}
+
+
 function AddCheckbox(strContainerDivID, strNewID, strValueField, strLableText, blnChecked, blnDisabled) {
     var cb = document.createElement("input");
     cb.type = "checkbox";
@@ -36,6 +65,24 @@ function AddCheckbox(strContainerDivID, strNewID, strValueField, strLableText, b
     var br = document.createElement("br");
     document.getElementById(strContainerDivID).appendChild(br);
 }
+
+function AddClearButton(strContainerDivID, strNewID, strValueField, strLableText, blnDisabled, strButtonVis) {
+    var btn = document.createElement("input");
+    btn.type = "button";
+    btn.id = strNewID;
+    btn.name = strLableText;
+    btn.value = strValueField;
+    btn.disabled = blnDisabled;
+    btn.onclick = function (evt) { ClearThenStartQuery(strLableText); }
+    btn.style.cssText = 'background-color:white;padding: 0; border: none; background: none; font-size:.85em; color:#2E2E2E; text-decoration:underline;';
+    btn.style.visibility = strButtonVis;
+
+    var text = document.createTextNode(strLableText);
+    document.getElementById(strContainerDivID).appendChild(btn);
+//    var br = document.createElement("br");
+//    document.getElementById(strContainerDivID).appendChild(br);
+}
+
 
 
 define([
@@ -167,7 +214,7 @@ define([
                           });
                           if (blnAdd2Dropdown) {
                               if (strText == "") { strText = iValue.toString(); }
-                                                          
+
                               texts.push(strText + " (" + feature.attributes["genericstat"].toString() + ")");
                               values.push(iValue);
                           } //values.push({ name: zone });
@@ -193,23 +240,20 @@ define([
                           }
                       }
                   }
-
+                  
                   document.getElementById(this.app.gSup.strContainerDivID).innerHTML = ''; // clear out existing items
-
+                  
                   if (values != undefined) {
+                      var blnCheckedAny = false;
+                      strFirstNewDiv = "";
                       for (var i = 0; i < values.length; i++) {
                           varValue = values[i];
                           var tt = texts[i];
-
                           if (this.app.gSup.strFieldNameValue.toString() == "PersonName") {
                               tt = tt.replace("Unknown", "").replace("unknown", "")
                           }
-
-
-                          //if checkboxDivID is in list of checked boxes, then make sure new creation is checked
-                          var blnChecked = false;
+                          var blnChecked = false; //if checkboxDivID is in list of checked boxes, then make sure new creation is checked
                           var strDivSuffix;
-
                           if (typeof stringValue == "string") {
                               strDivSuffix = "-" + varValue.replace(" ", "_").replace(",", "").replace(".", "");
                           } else {
@@ -218,23 +262,35 @@ define([
 
                           var strNewDivID = this.app.gSup.strNewDivID + strDivSuffix;
 
+                          if (strFirstNewDiv == ""){   //store the 1st new checkbox div so can later place the clear button ahead of it
+                            strFirstNewDiv =strNewDivID;
+                          }
+
                           if (this.app.gSup.m_arrayCheckedCheckboxes != undefined) {
                               if (this.app.gSup.m_arrayCheckedCheckboxes.length > 0) {
                                   var iExists = this.app.gSup.m_arrayCheckedCheckboxes.indexOf(strNewDivID);
                                   if (iExists >= 0) {
                                       blnChecked = true;
+                                      blnCheckedAny = true
                                   }
                               }
                           }
                           AddCheckbox(this.app.gSup.strContainerDivID, strNewDivID, varValue, tt, blnChecked, true)
                       }
+                      if (blnCheckedAny == true) {
+//                          document.getElementById(this.app.gSup.strContainerDivID).innerHTML = ''; // clear out existing items
+                          strNewDivIDClear = this.app.gSup.strNewDivID + "-clear";
+                          AddClearButton(this.app.gSup.strContainerDivID, strNewDivIDClear, "Clear", this.app.gSup.strContainerDivID, false, "visible")
+                          var br = document.createElement("br");
+                          var parentDiv = document.getElementById(strFirstNewDiv).parentNode;
+                          parentDiv.insertBefore(document.getElementById(strNewDivIDClear), document.getElementById(strFirstNewDiv))
+                          parentDiv.insertBefore(br, document.getElementById(strFirstNewDiv))
+                      } 
                   }
-
                   else if (this.strFieldNameText == "Project_ID") {
                       if (values == undefined) {
                           var strstop = "";
                       }
-
                       var strQuery2 = "Project_ID in (";
                       for (var i = 0; i < values.length; i++) { strQuery2 += values[i] + ","; }
                       this.strQuery1 = strQuery2.slice(0, -1) + ")";
