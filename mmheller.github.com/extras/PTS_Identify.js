@@ -6,6 +6,13 @@ function showFeaturePrep(feature, strURL, strTheme) {
     this.app.pPTS_Identify.showFeature(feature, strTheme);
     //    this.showFeature(feature);
 }
+
+
+function showReportPage(strProjectID) {
+    var strURL = "prj_report.html?PRJ_ID=" + strProjectID;
+    window.open(strURL);
+}
+
 define([
   "dojo/_base/declare", "dojo/_base/lang", "esri/request", "dojo/promise/all", "dojo/_base/array", "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol", "esri/symbols/SimpleFillSymbol",
   "dojo/_base/Color", "extras/CK_AutoCompleteSearchAndZoom", "dojo/date/locale", "dojox/charting/Chart2D",
@@ -53,8 +60,8 @@ define([
 
         constructor: function (options) {// specify class defaults
             this.pLayer1 = options.pLayer1 || null;
-//            this.pLayer2 = options.pLayer2 || null;
-//            this.pLayer3 = options.pLayer3 || null; // default to 50 results per page
+            //            this.pLayer2 = options.pLayer2 || null;
+            //            this.pLayer3 = options.pLayer3 || null; // default to 50 results per page
             this.strSingleLayerName = options.strSingleLayerName || null;
             this.iSingleObjectID = options.iSingleObjectID || null;
             this.pMap = options.pMap || null;
@@ -66,9 +73,9 @@ define([
         },
 
         executeQueries: function (pEvt, strSingleLayerName, iSingleObjectID, dblX, dblY) {
-//            esri.show(app.loading);
- //           app.map.disableMapNavigation();
-//            app.map.hideZoomSlider();
+            esri.show(app.loading);
+            //           app.map.disableMapNavigation();
+            //            app.map.hideZoomSlider();
 
             this.pEvt = pEvt;
             this.strMultipleContent = null;
@@ -95,7 +102,7 @@ define([
             q_Layer1.returnGeometry = true;
             q_Layer1.maxAllowableOffset = 200;
             q_Layer1.outSpatialReference = new esri.SpatialReference({ "wkid": 3857 })
-            q_Layer1.outFields = ["ProjectID,Prj_Title"];
+            q_Layer1.outFields = ["ProjectID, Prj_Title, PI_Org, Partner_Organizaitons, Total__Funding_by_Your_LCC, Fiscal_Years_of_Allocation, LeadName_LastFirst"];
 
             var strQuery = this.pLayer1.getDefinitionExpression();
             q_Layer1.where = this.pLayer1.getDefinitionExpression();
@@ -108,261 +115,53 @@ define([
         },
 
 
-        qry_Stats_Non_SpatialTable4Stats: function (strStatType, strOnStatisticField) {
-            this.strStatType = strStatType;
-            this.strOnStatisticField = strOnStatisticField;
-            var pQueryTask = new esri.tasks.QueryTask(this.strURL4Statquery);
-            var pQuery = new esri.tasks.Query();
-
-            if (strStatType != "nostat") {
-                var pstatDef = new esri.tasks.StatisticDefinition();
-                pstatDef.statisticType = strStatType;
-                pstatDef.onStatisticField = strOnStatisticField;
-                pstatDef.outStatisticFieldName = "genericstat";
-                pQuery.outFields = ["project_id"];
-                pQuery.outStatistics = [pstatDef];
-            }
-            else { pQuery.outFields = ["*"]; }
-
-            pQuery.returnGeometry = false;
-            var attr = this.pFeature.attributes;
-            var strQuery = "project_id = '" + attr.project_id + "'";
-
-            if ((this.strQueryString4ID != "") && (!!this.strQueryString4ID) && (this.strQueryString4ID != "undefined")) {
-                strQuery += " and " + this.strQueryString4ID;
-            }
-            pQuery.where = strQuery
-            return pQueryTask.execute(pQuery, this.qryStatResults, this.err);
-        },
-
-
-        qryStatResults: function (results) {
-            var strStat_Type = this.app.pPS_Identify.strStatType;
-            var strOnStatisticField = this.app.pPS_Identify.strOnStatisticField;
-            strConcat = strStat_Type + strOnStatisticField;
-            var resultFeatures = results.features;
-            var tab3Content = "";
-            if (resultFeatures.length > 0) {
-                if (dijit.byId('tabcontainer1')) { dijit.byId('tabcontainer1').destroy(); }
-                if (dijit.byId('cp1')) { dijit.byId('cp1').destroy(); }
-
-                if (strStat_Type == "nostat") {  // code handles features and displaying features in the identify window
-                    tab3Content = "<i>Total features returned: " + resultFeatures.length + "</i>";
-                    if (resultFeatures.length > 999) { tab3Content += "<i> (Note: Maximum Number of Records Returned is 1,000)</i>"; }
-                    var strFieldNamesStrings = "";
-
-                    strFieldNamesStrings = ["threats"];
-                    tab3Content += "<table border='1'><tr>"; //create table and first row in table with field names
-                    strFieldNamesStrings.forEach(function (strField) {
-                        tab3Content += "<th>" + strField + "</th>";
-                    });
-                    tab3Content += "</tr>";
-                    for (var ii = 0, iil = resultFeatures.length; ii < iil; ii++) {                    //add the record content
-                        tab3Content += "<tr>";
-                        strFieldNamesStrings.forEach(function (strField) {//remove some of the strings to make wildcard functionality work
-                            if (strField == "Date_") {
-                                if (resultFeatures[ii].attributes['Date_'] == null) {
-                                    tab3Content += "<td>null</td>";
-                                }
-                                else { tab3Content += "<td>" + formatDate(resultFeatures[ii].attributes['Date_']) + "</td>"; }
-                            }
-                            else { tab3Content += "<td>" + resultFeatures[ii].attributes[strField] + "</td>"; }
-                        });
-                        tab3Content += "</tr>";
-                    }
-                    tab3Content += "</table>";
-                }
-                else {
-                    var iStatValue = resultFeatures[0].attributes.genericstat;
-                    if (strOnStatisticField == "Date_") { iStatValue = formatDate(iStatValue); }
-                    if (strConcat == "countExceedance") { this.m_ExceedCount = iStatValue; }
-                    else if (strConcat == "sumExceedance") {
-                        this.m_ExceedSum = iStatValue;
-                        this.app.pPS_Identify.strFeatureContent += "<br />      exceeding count = " + iStatValue; //this.app.pPS_Identify.strFeatureContent += "<br />      " + strStat_Type + " = " + iStatValue + " " + strOnStatisticField;
-                    }
-                    else {
-                        //this.app.pPS_Identify.strFeatureContent += strStat_Type + " = " + iStatValue + "<br /><br />      "; //this.app.pPS_Identify.strFeatureContent += "<br />      " + strStat_Type + " = " + iStatValue + " " + strOnStatisticField;
-                    }
-                }
-
-                this.app.mTc = new dijit.layout.TabContainer({ id: "tabcontainer1", style: "width:100%;height:100%;", useMenu: false, useSlider: false, focused: false }, dojo.create('div'));
-                this.app.mCp1 = new dijit.layout.ContentPane({ id: "cp1", title: "Site and Summary", content: this.app.pPS_Identify.strFeatureContent });
-                this.app.mCp1.selected = true;
-
-                this.app.mTc.addChild(this.app.mCp1);
-                this.app.mTc.startup();   //*************************** don't know if this is necessary
-
-                if ((this.m_ExceedCount > -1) && (this.m_ExceedSum > -1)) {
-                    var c = dojo.create("div", { id: "ExceedChart" }, dojo.create('div')); //create the chart that will display in the second tab
-                    var chart = new dojox.charting.Chart2D(c, { title: "Note: values depend on user search/query filter",
-                        titlePos: "bottom", titleGap: 30, titleFont: "normal normal normal 8pt Arial", titleFontColor: "grey"
-                    });
-                    dojo.addClass(chart, 'chart');
-                    chart.setTheme(dojo.getObject("dojox.charting.themes.Julie")); //try other themes (Julie,CubanShirts, PrimaryColors, Charged, BlueDusk, Bahamation,Harmony,Shrooms,Wetland)   
-                    chart.addPlot("default", { type: "Pie", radius: 70, htmlLabels: true });
-                    dojo.connect(this.app.mTc, 'selectChild', function (tabItem) { if (tabItem.title === "Exceedance Pie Chart") { chart.resize(420, 260); } });
-                    var iTotal = this.m_ExceedCount; //get percent exceed
-
-                    var iPctExceed = null;
-                    var iPctNonExceed = null;
-
-                    if (this.m_ExceedSum == 0) {
-                        iPctExceed = 0;
-                        iPctNonExceed = 100;
-                    }
-                    else {
-                        iPctExceed = dojo.number.round(this.m_ExceedSum / iTotal * 100, 2);
-                        iPctNonExceed = dojo.number.round((iTotal - this.m_ExceedSum) / iTotal * 100, 2);
-                    }
-                    chart.addSeries("PopulationSplit", [{ y: iPctExceed, tooltip: iPctExceed, text: 'Exceed <br/>Count = ' + this.m_ExceedSum },
-                                                        { y: iPctNonExceed, tooltip: iPctNonExceed, text: 'Does Not Exceed <br/>   Count = ' + (this.m_ExceedCount - this.m_ExceedSum)}]);
-
-                    new dojox.charting.action2d.Highlight(chart, "default"); //highlight the chart and display tooltips when you mouse over a slice.   
-                    new dojox.charting.action2d.Tooltip(chart, "default");
-                    new dojox.charting.action2d.MoveSlice(chart, "default");
-                    //                    this.app.mCp2.set('content', chart.node);
-                }
-
-                this.app.map.infoWindow.setContent("");
-                this.app.map.infoWindow.setContent(this.app.mTc.domNode);
-                //this.app.mTc.resize({ w: 550, h: 300 });
-                this.app.mTc.resize({ w: 460, h: 235 });
-
-                switch (strConcat) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'
-                    case "countproject_id":
-                        this.app.pPS_Identify.qry_Stats_Non_SpatialTable4Stats("nostat", "*");
-                        break;                        //do nothing
-                }
-            }
-            else {                // do nothing
-            }
-            //            return results;
-        },
 
         showFeature: function (pFeature, strTheme) {
             this.pMap.graphics.clear();
-
-            pFeature.setSymbol(new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_NULL, new Color([255, 0, 0]), 2), new Color([0, 255, 255, 0.2])));
+            pFeature.setSymbol(new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([255, 0, 0]), 2), new Color([0, 255, 255, 0.2])));
             var attr = pFeature.attributes;
 
-            var strTotalAcres = "n/a";
-            if (attr.totalacres != undefined && attr.totalacres != null) { strTotalAcres = attr.totalacres.toString(); }
-            var strTotalMiles = "n/a";
-            if (attr.totalmiles != undefined && attr.totalmiles != null) { strTotalMiles = attr.totalmiles.toString(); }
-            var strTotalRemoved = "n/a";
-            if (attr.totalnumberremoved != undefined && attr.totalnumberremoved != null) { strTotalRemoved = attr.totalnumberremoved.toString(); }
-            var strOffice = "n/a";
-            if (attr.office != undefined && attr.office != null) { strOffice = attr.office.toString(); }
-            var strImplementing_party = "n/a";
-            if (attr.implementing_party != undefined && attr.implementing_party != null) { strImplementing_party = attr.implementing_party.toString(); }
+            var strTitle = attr.Prj_Title;
+            strTitle = strTitle.split(/((?:\w+ ){7})/g).filter(Boolean).join("<br>");
 
-            blnwobble_gis = false;
-            if (attr.wobbled_gis != undefined && attr.wobbled_gis != null) {
-                blnwobble_gis = attr.wobbled_gis;
-            }
-
-            var title = attr.typeact + " Effort Name:" + attr.Prj_Title + "<br /> Effort Identification Number: " + attr.projectid;
             var tempstrcontent = ""
-            if ((blnwobble_gis) | (strTheme == "Polygon")) { tempstrcontent += "<b><i>Note: Some locations may be buffered, generalized, or altered</i></b>" + "<br />" }
-            tempstrcontent += "<u>Implementing Party:</u>  " + attr.implementing_party + "<br />" +
-                                     "<u>Activity:</u> " + attr.activity + "<br />" +
-                                     "<u>Subactivity:</u> " + attr.subactivity +
-                                        "<br/><hr>" + "Summary" + "<br />" +
-                                        "<u>Total Acres:</u>  " + strTotalAcres + "<br />" +
-                                        "<u>Total Miles:</u>  " + strTotalMiles + "<br />" +
-                                        "<u>Total Number Removed</u> : " + strTotalRemoved + "<br />"
+            tempstrcontent += "<u>Project Lead:</u>  " + attr.LeadName_LastFirst + "<br />" +
+                                     "<u>Project Lead Org:</u>  " + attr.PI_Org + "<br />" +
+                                     "<u>Partner Organizations:</u> " + attr.Partner_Organizaitons + "<br />" +
+                                     "<u>Total Funding by GNLCC:</u> $" + attr.Total__Funding_by_Your_LCC + "<br />" +
+                                     "<u>Fiscal Years of Allocaiton:</u>  " + attr.Fiscal_Years_of_Allocation + "<br />"
             this.strFeatureContent = tempstrcontent;
-            this.strFeatureContent += "<br />For More information, contact...<br />    " + strOffice + ",<br />" + strImplementing_party + "<br/>Phone Number(s):";
+            this.strFeatureContent += "(<A href='#' onclick='showReportPage(" + attr.ProjectID + ");'>Show project detail</A>)<br/>";
 
-
-            if (dijit.byId('tabcontainer1')) { dijit.byId('tabcontainer1').destroy(); }
-            if (dijit.byId('cp1')) { dijit.byId('cp1').destroy(); }
-            this.mTc = new dijit.layout.TabContainer({ id: "tabcontainer1", style: "width:100%;height:100%;", useMenu: false, useSlider: false, focused: true }, dojo.create('div'));
-            this.mCp1 = new dijit.layout.ContentPane({ id: "cp1", title: "Site and Summary", content: this.strFeatureContent });
-            this.mCp1.selected = true;
-            this.mTc.addChild(this.mCp1);
-            this.mTc.startup();
-            this.pMap.infoWindow.setContent(this.mTc.domNode);
-            this.pMap.infoWindow.setTitle(title);
-            this.pMap.infoWindow.resize(475, 300);
+            this.pMap.infoWindow.setContent(this.strFeatureContent);
+            this.pMap.infoWindow.setTitle(strTitle);
+            this.pMap.infoWindow.resize(415, 300);
             this.pMap.infoWindow.show(this.pSP, this.pMap.getInfoWindowAnchor(this.pSP));
-
             this.pFeature = pFeature;
-            this.mTc.resize({ w: 460, h: 235 });
-
+//            this.mTc.resize({ w: 400, h: 235 });
             app.map.graphics.add(pFeature);
-            //this.qry_Non_SpatialTable("agency = '" + strImplementing_party + "' and field_office = '" + strOffice + "'", "6", "user_phone_number");
-
-        },
-
-        qry_Non_SpatialTable: function (strWhere, strTableIndex, strOutField) {
-            var pQueryTask = new esri.tasks.QueryTask(this.strURL + strTableIndex);
-            var pQuery = new esri.tasks.Query();
-            pQuery.outFields = [strOutField];
-            pQuery.returnGeometry = false;
-            pQuery.where = strWhere
-            return pQueryTask.execute(pQuery, this.qryNonSpatialResults, this.err);
-        },
-
-
-        qryNonSpatialResults: function (results) {
-            var resultFeatures = results.features;
-            if (resultFeatures.length > 0) {
-                var featAttrs = resultFeatures[0].attributes;
-                var attrNames = [];
-                var values = [];
-                var testVals = {};
-                for (var i in featAttrs) { attrNames.push(i); }
-
-                if (dijit.byId('tabcontainer1')) { dijit.byId('tabcontainer1').destroy(); }
-                if (dijit.byId('cp1')) { dijit.byId('cp1').destroy(); }
-
-                dojo.forEach(resultFeatures, function (pFeature) {//Loop through the QueryTask results and populate an array with the unique values
-                    dojo.forEach(attrNames, function (an) {
-                        var strTempValue = pFeature.attributes[an];
-                        if (!testVals[strTempValue]) {
-                            testVals[strTempValue] = true;
-                            var strValue = strTempValue;
-                            values.push(strValue);
-                        }
-                    });
-                });
-                values.sort();
-                strValues = values.join(",");
-                this.app.pPS_Identify.strFeatureContent += strValues;
-
-                this.app.mTc = new dijit.layout.TabContainer({ id: "tabcontainer1", style: "width:100%;height:100%;", useMenu: false, useSlider: false, focused: false }, dojo.create('div'));
-                this.app.mCp1 = new dijit.layout.ContentPane({ id: "cp1", title: "Site and Summary", content: this.app.pPS_Identify.strFeatureContent });
-                this.app.mCp1.selected = true;
-                this.app.mTc.addChild(this.app.mCp1);
-                this.app.mTc.startup();   //*************************** don't know if this is necessary
-
-                this.app.map.infoWindow.setContent("");
-                this.app.map.infoWindow.setContent(this.app.mTc.domNode);
-                this.app.mTc.resize({ w: 460, h: 235 });
-            }
-            else {                // do nothing
-            }
         },
 
         showFeatureSet: function (results) {
             pLayer1 = results.features; // results from deferred lists are returned in the order they were created  // so parcel results are first in the array and buildings results are second
-
-            var content = "<u>Number of point projects/plans:  " + pLayer1.length + "</u><br />";
+            var content = "<u>Number of projects:  " + pLayer1.length + "</u><br />";
             arrayUtils.forEach(pLayer1, function (feat) { feat.setSymbol(new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_NULL, new Color([255, 0, 0]), 2), new Color([0, 255, 255, 0.2]))); app.map.graphics.add(feat); }); // add the results to the map
             for (var iii = 0; iii < pLayer1.length; iii++) {
                 var graphic3 = pLayer1[iii];
                 strThemeT = "Polygon";
                 strURL4query3 = this.strURL + "0";
-                content += "  " + graphic3.attributes.ProjectID + ", " + graphic3.attributes.Prj_Title.substring(0, 35) + " (<A href='#' onclick='showFeaturePrep(pLayer1[" + iii + "],strURL4query3,strThemeT);'>show</A>)<br/>";
+                if (graphic3.attributes.Prj_Title != null) {
+                    var strTrimmedTitle = graphic3.attributes.Prj_Title.substring(0, 20) + "...";
+                } else {
+                    var strTrimmedTitle = "unknown title";
+                }
+                content += "  " + strTrimmedTitle + " (" + graphic3.attributes.LeadName_LastFirst + ") (<A href='#' onclick='showFeaturePrep(pLayer1[" + iii + "],strURL4query3,strThemeT);'>show</A>)<br/>";
             }
-
             this.strMultipleContent = content;
             this.pMap.infoWindow.setContent(content);
             this.pMap.infoWindow.setTitle("Identify Results");
-            this.pMap.infoWindow.resize(400, 300);
+            this.pMap.infoWindow.resize(300, 300);
             this.pMap.infoWindow.show(this.pSP, this.pMap.getInfoWindowAnchor(this.pSP));
-            
             //this.mTc.resize({ w: 460, h: 235 });
         },
 
@@ -370,8 +169,7 @@ define([
             console.log("queries finished: ", results);
             var pLayer1
 
-            if (results.features.length == 1)                        
-                {
+            if (results.features.length == 1) {
                 var pFeature = null;
                 var strURL4query = "";
                 if (results.features.length == 1) {
@@ -380,7 +178,7 @@ define([
                 }
                 else { //some issue
                 }
-                this.strURL4Statquery = strURL4query;
+//                this.strURL4Statquery = strURL4query;
                 this.showFeature(pFeature, strTheme);
             }
             else { this.showFeatureSet(results); }
@@ -392,10 +190,9 @@ define([
                 }); // instantiate the class
                 CK_ASZ.zoomToPoint(this.m_dblX, this.m_dblY, "", null);
             }
-
             esri.hide(app.loading);
-            app.map.enableMapNavigation();
-            app.map.showZoomSlider();
+            //            app.map.enableMapNavigation();
+            //            app.map.showZoomSlider();
         },
 
         err: function (err) {

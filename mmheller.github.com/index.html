@@ -29,6 +29,9 @@
     .soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif;}
     .dojoxGridView {left:0px;}
     
+    .esriPopup .titlePane {padding-left: 20;}
+    .esriPopup {right: 30;}
+    
     table { display: table; border-collapse: separate; border-spacing: 0px; border-color: white;}
     
     div.scroll {    /* this controls content style in the scroll bars   */
@@ -42,7 +45,7 @@
     .HTMLTable_styleLeft    {    width: 350px; border-bottom-style: solid; border-width: thick; border-color: #FFFFFF;}
     .HTMLTable_BannerRow    {   width: 350px; background-color: #5B7E8A; color: #FFFFFF; font-weight: bold}
 
-    #map {      padding:0;      margin:0;      height:500px;    }
+    #map {      padding:0;      margin:0;      height:800px;    }
 
     #btn_clear, #btn_Print_Friendly { border: none; padding:5px; color:white; background-color:gray; -webkit-border-radius:5px;
                                     -moz-border-radius:5px; border-radius:2px; box-shadow:0px 0px 2px #555; font-weight:bold; font-size:70%;    }
@@ -54,8 +57,8 @@
 <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
 
 <script type="text/javascript">
-    dojo.require("dijit.layout.TabContainer");
-    dojo.require("dijit.layout.ContentPane");
+//    dojo.require("dijit.layout.TabContainer");
+//    dojo.require("dijit.layout.ContentPane");
     var app = {};
     require([
         "esri/map",
@@ -116,6 +119,8 @@
             }
             app.gQuery.strQuery = null;
             app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
+            app.map.graphics.clear();
+            app.map.infoWindow.destroy();
         }
 
         function btn_Print_Friendly_click() {

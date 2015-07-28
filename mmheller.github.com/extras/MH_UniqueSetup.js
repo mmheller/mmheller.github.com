@@ -2,6 +2,10 @@
 //Date:        July 2015
 
 function StartQuery(blnSelect) {    //loop through the checkboxes and disable, so user interaction dosen't disrupt the queryies
+    app.map.graphics.clear();
+    app.map.infoWindow.hide();
+    //app.map.infoWindow.destroy();
+    
     arrayCheckedCheckboxes = [];
     var pform = document.getElementById("NavigationForm");
     for (var i = 0; i < pform.elements.length; i++) {  
@@ -21,6 +25,10 @@ function StartQuery(blnSelect) {    //loop through the checkboxes and disable, s
 
 
 function ClearThenStartQuery(strContainterID) {    //loop through the checkboxes and disable, so user interaction dosen't disrupt the queryies
+    app.map.graphics.clear();
+    app.map.infoWindow.hide();
+    //app.map.infoWindow.destroy();
+
     //clear out the checkboxes from the container that houses the clicked clear button
     var pContainter = document.getElementById(strContainterID);
     for (var i = 0; i < pContainter.childNodes.length; i++) {
