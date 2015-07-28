@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/esri/css/esri.css"/>
     <link rel="stylesheet" href="css/github.css" type="text/css" />
     <link rel="stylesheet" href="css/collapse.css" type="text/css" />
-    
+    <link rel="stylesheet" href="css/panel.css" type="text/css" />
 
     <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.10.1.min.js"></script>
@@ -21,6 +21,8 @@
     <script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>
 
 <style>
+    /*    #eniro{ position:relative; z-index:10; height:168px; overflow:hidden;}
+    #cover-up {position: absolute; z-index: 20; width: 98%; height: 168px; background: rgba(255, 255, 255, 0.01)}*/
 
     .soria .NavigationForm .content {font-size:.3em;}
     .soria .dojoxGridRowOver .dojoxGridCell {border: 0px solid; color:#000000; background-color: #B2B2B2}
@@ -29,43 +31,19 @@
     .soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif;}
     .dojoxGridView {left:0px;}
 
-    div.columns       { width: 650px;   margin: 0 auto;}
-    div.columns div   { width: 325px; float: left; }
-    div.grey          { background-color: #cccccc; }
-    div.red           { background-color: #e14e32; }
-    div.clear         { clear: both; }
-    
-    
+   
     div.scroll {    /* this controls content style in the scroll bars   */
-    height: 250px; overflow-y: scroll; background:#FFFFFF; margin: 0; padding:10px; font-size:1em; line-height:1.5em; font-family: Arial, Helvetica, sans-serif;}
+            height: 250px; overflow-y: scroll; background:#FFFFFF; margin: 0; padding:10px; font-size:1em; line-height:1.5em; font-family: Arial, Helvetica, sans-serif;}
 
+    html,body{height:100%; width:100%; margin:0;}
     
-
-    html,body 
-    {
-    height:100%;      
-    width:100%;      
-    margin:0;      
-    }
     body {
-        background-color:#fff;
-        font-family:arial,helvetica,sans-serif;
-        
+        background-color:#fff;font-family:arial,helvetica,sans-serif;
     }
     
+    #mapPrjReport {padding:0;      margin:0;      height:800px;    }
 
-    
-    #map {      padding:0;      margin:0;      height:500px;    }
-
-    #rightPane {
-    font-size:10pt;
-    text-align:center;
-    width:40%;
-    overflow:none;
-    }
-
-
-
+    #rightPane {font-size:10pt; text-align:center; width:40%; overflow:none;}
 </style>
 
 <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
@@ -79,7 +57,7 @@
         "esri/urlUtils", "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on",
         "dijit/form/CheckBox",
         "dojo/_base/Color",
-        "dojo/mouse", "dojo/query", "dojox/grid/DataGrid",
+        "dojo/mouse", "dojo/query", "dojox/grid/DataGrid", "esri/geometry/webMercatorUtils", "esri/dijit/BasemapGallery",
         "dojo/date/locale",
         "esri/arcgis/utils",
         "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
@@ -90,7 +68,7 @@
                 MH_UniqueSetup, MH_CreateQueryDef, MH_Query4Results, MH_Query4Summary, MH_MapSetup_prjReport, MH_Query4PrjReportResults,
                 urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on,
                 CheckBox,
-                Color, mouse, query, DataGrid) {
+                Color, mouse, query, DataGrid, webMercatorUtils, BasemapGallery) {
 
         var strURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer"
 
@@ -98,14 +76,15 @@
         var tokens = getTokens
         var strPRJ_ID = getTokens()['PRJ_ID']; //?RButton=true
 
-        if (strPRJ_ID) {
-            var div = document.getElementById('querycontent');
-            div.innerHTML += "\n<br>" + strPRJ_ID;
-        } else {
-            strPRJ_ID = 293;
-            var div = document.getElementById('querycontent');
-            div.innerHTML += "\n<br>" + strPRJ_ID;
-        }
+//        if (strPRJ_ID) {
+//            var div = document.getElementById('querycontent');
+//            div.innerHTML += "\n<br>" + strPRJ_ID;
+//        } else {
+//            strPRJ_ID = 293;
+//            var div = document.getElementById('querycontent');
+//            div.innerHTML += "\n<br>" + strPRJ_ID;
+//        }
+
         parser.parse();
         app.gPjrReportQuery.RunReport("ProjectID = " + strPRJ_ID, [gridContacts, gridContactOrgsOnly, gridProposals,
                                                                     gridConservationTargetsSPP, gridConservationTargetsOther,
@@ -113,6 +92,15 @@
         //app.gPjrReportQuery.RunReport("ProjectID = " + strPRJ_ID, [gridConservationTargets]);  // this needs sync'ing with the grids below, the div's below, and the array in the MH_Query4PrjReportResults
 //        app.pMapSup_prjReport = new MH_MapSetup_prjReport({ strQuery: "ProjectID = " + strPRJ_ID, dblExpandNum: 0.8 }); // instantiate the class
 //        app.pMapSup_prjReport.Phase1();
+
+        app.pMapSup_prjReport = new MH_MapSetup_prjReport({ strQuery: this.app.gPjrReportQuery.m_prjQuery, dblExpandNum: 0.8 }); // instantiate the class
+        app.pMapSup_prjReport.Phase1();
+        app.pMapSup_prjReport.Phase3();
+        document.getElementById("page_collapsibleMapDestination").appendChild(document.getElementById("mapPrjReport"));  //move the grid to the designated div, grids need to be built outside the collapsable panel otherwise risk not rendering properly
+
+//        $('#cover-up').click(function () {
+//            window.open("http://greatnorthernlcc.org/", "_self");
+//        });
 
         function getTokens() {
             var tokens = [];
@@ -127,6 +115,9 @@
             });
             return tokens;
         }
+
+
+
     });
 </script>
 
@@ -206,12 +197,14 @@
 
 <body class="soria">
 
-
 <div id="WideContent">
+<!--    <div id="cover-up"></div>
+    <div id="eniro"><iframe src="http://greatnorthernlcc.org/" style="border:none" scrolling="no" width="960" height="168"  id="iframe_a"></iframe></div>-->
+
     <!--<a href="#" id="closeAll" title="Close all" style="font-size:.65em;">Close All</a> | <a href="#" id="openAll" title="Open All" style="font-size:.65em;">Open All</a>-->
 
-         <a href="#" id="A1" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
-          <a href="#" id="A2" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
+         <a href="#" id="closeAll" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
+          <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
     
     <!-- collapsible -->
     <div class="page_collapsible" id="page_collapsible1">Project Information<span></span></div>
@@ -265,23 +258,36 @@
 
     <!-- end collapsible -->
     <!-- collapsible -->
-    <div class="page_collapsible" id="body-section3">Map<span></span></div>
+
+
+    <div class="page_collapsible" id="page_collapsibleMap">Map Summary<span></span></div>
     <div class="container">
-        <div class="content" id="querycontent">
-             
             <p>
                 MapService URL: <a href="https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer" title="rest endpoing">https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer</a>
             </p>
-            <div id="mapPrjReport"
-                data-dojo-type="dijit/layout/ContentPane"
-                data-dojo-props="region:'center'"
-                style="overflow:hidden; background-color:rgb(255, 255, 255);">
-                    <img id="loadingImg" src="images/loading.gif" style="position:absolute; right:50%; top:50%; z-index:100;" />
-            </div>
 
+        <div id="page_collapsibleMapDestination" style="position:relative" >
         </div>
-    </div>
+
+
+ <!--   <div class="page_collapsible" id="body-section3">Map<span></span></div>
+      <div class="container">
+        <div class="content" id="querycontent">
+        </div>
+    </div>-->
   
+    <div id="mapPrjReport"    data-dojo-type="dijit/layout/ContentPane"    data-dojo-props="region:'center'"    style="overflow:hidden; background-color:rgb(255, 255, 255);">
+        <img id="loadingImg" src="images/loading.gif" style="position:absolute; right:50%; top:50%; z-index:100;" />
+        <div id="panelBasemaps" class="panelBasemaps bg rounded shadow" >		    <!-- Panel Basemaps -->
+	        <div id="basemapTitle"><img src="images/basemaps.png" height="30" title="Switch Base Map" /></div>
+	        <div id="basemapContent">
+		        <div id="basemapGallery" ></div>
+	        </div>
+        </div>
+        <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
+    </div>
+
+
             <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridContacts" id="gridContacts" selectionMode="none">
              <thead>
                 <tr>

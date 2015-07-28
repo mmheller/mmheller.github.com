@@ -34,10 +34,13 @@ define([
   "esri/Color",
   "esri/renderers/SimpleRenderer",
   "esri/layers/LabelLayer",
-  "esri/symbols/TextSymbol"
+  "esri/symbols/TextSymbol",
+  "esri/geometry/webMercatorUtils",
+  "esri/dijit/BasemapGallery", 
+  "extras/PTS_Identify"
   ], function (
         declare, lang, esriRequest, all, urlUtils, FeatureLayer, ArcGISDynamicMapServiceLayer, CheckBox,
-        Legend, Scalebar, Geocoder, dom, domClass, mouse, on, BasemapGallery, Map, Color, SimpleRenderer, LabelLayer, TextSymbol
+        Legend, Scalebar, Geocoder, dom, domClass, mouse, on, BasemapGallery, Map, Color, SimpleRenderer, LabelLayer, TextSymbol, webMercatorUtils, BasemapGallery, PTS_Identify
 ) {
       return declare([], {
           pMap: null,
@@ -59,10 +62,7 @@ define([
               pPTS_Projects = new FeatureLayer(app.strTheme1_URL + "0", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: 0, visible: true });
               var strBase_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/546cfb04e4b0fc7976bf1d83/MapServer/"
               var strlabelField1 = "area_names";
-              //              var strlabelField2 = "ORGNAME";
-              //              var strlabelField3 = "RSL_TYPE";
               pBase_LCC = new FeatureLayer(strBase_URL + "11", { mode: FeatureLayer.MODE_ONDEMAND, id: "LCC", outFields: [strlabelField1], visible: true });
-              //              pBase_Refuges = new FeatureLayer(strBase_URL + "2", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: "Refuges", outFields: [strlabelField2, strlabelField3], visible: true });
               var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
               var pLabel1 = new TextSymbol().setColor(vGreyColor);
               pLabel1.font.setSize("10pt");
@@ -70,127 +70,69 @@ define([
               var pLabelRenderer1 = new SimpleRenderer(pLabel1);
               var plabels1 = new LabelLayer({ id: "labels1" });
               plabels1.addFeatureLayer(pBase_LCC, pLabelRenderer1, "{" + strlabelField1 + "}");
-              //              var pLabel2 = new TextSymbol().setColor(vGreyColor);
-              //              pLabel2.font.setSize("10pt");
-              //              pLabel2.font.setFamily("Arial Black");
-              //              var pLabelRenderer2 = new SimpleRenderer(pLabel2);
-              //              var plabels2 = new LabelLayer({ id: "labels2" });
-              //              plabels2.addFeatureLayer(pBase_Refuges, pLabelRenderer2, "{" + strlabelField2 + "} \n {" + strlabelField3 + "}");
               arrayLayers = [pPTS_Projects, plabels1, pBase_LCC];
-              //              arrayLayers = [pBase_Refuges, pBase_LCC, pPTS_Projects];
-              //              arrayLayers = [pPTS_Projects];
+
               app.map.addLayers(arrayLayers);
+              dojo.connect(app.map, "onClick", app.pMapSup.executeIdeintifyQueries);
           },
 
+
+          executeIdeintifyQueries: function (e) {
+            app.map.graphics.clear();
+            app.map.infoWindow.hide();
+            app.pPTS_Identify = new PTS_Identify({ pLayer1: pPTS_Projects, pMap: app.map, strQueryString4ID: app.gQuery.strQuery, strURL: app.strTheme1_URL,
+                pInfoWindow: app.infoWindow
+            }); // instantiate the ID Search class
+            app.pEvt = e;
+            var pPTS_Identify_Results = app.pPTS_Identify.executeQueries(e, "", 0, 0, 0);
+          },
+
+
+
           QueryZoom: function (strQuery) {
-              //var pPTS_ProjectsFeatureLayer = app.map.getLayer('layer0')
               pPTS_Projects.setDefinitionExpression(strQuery);
           },
 
+          mapLoaded: function() {        // map loaded//            // Map is ready
+            app.map.on("mouse-move", app.pMapSup.showCoordinates); //after map loads, connect to listen to mouse move & drag events
+            app.map.on("mouse-drag", app.pMapSup.showCoordinates);
+            app.basemapGallery = new BasemapGallery({ showArcGISBasemaps: true, map: app.map }, "basemapGallery");
+            app.basemapGallery.startup();
+            app.basemapGallery.on("selection-change", function () { domClass.remove("panelBasemaps", "panelBasemapsOn"); });
+            app.basemapGallery.on("error", function (msg) { console.log("basemap gallery error:  ", msg); });
+        },
 
-
+          showCoordinates: function (evt) {
+            var mp = webMercatorUtils.webMercatorToGeographic(evt.mapPoint);  //the map is in web mercator but display coordinates in geographic (lat, long)
+            dom.byId("txt_xyCoords").innerHTML = "Latitude:" + mp.x.toFixed(4) + ", Longitude:" + mp.y.toFixed(4);  //display mouse coordinates
+          },
 
           Phase2: function () {
 
-              //              var pLegendBase_Pop = new FeatureLayer(strBase_URL + "2", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: "LegendPop", outFields: [strlabelField1], visible: false });
-              //              var pLegendBase_MZ = new FeatureLayer(strBase_URL + "3", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: "LegendMZ", outFields: [strlabelField2], visible: false });
-              //              var pLegendCED_PP_point = new FeatureLayer(strBase_URL + "4", { mode: FeatureLayer.MODE_ONDEMAND, id: "LegendPt", visible: true });
-              //              var pLegendCED_PP_line = new FeatureLayer(strBase_URL + "5", { mode: FeatureLayer.MODE_ONDEMAND, id: "LegendLine", visible: true });
-              //              var pLegendCED_PP_poly = new FeatureLayer(strBase_URL + "6", { "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, id: "LegendPoly", visible: true });
-
-              //              legendLayers.push({ layer: pLegendCED_PP_poly, title: 'CED Plans and Projects (area)' });
-              //              legendLayers.push({ layer: pLegendCED_PP_line, title: 'CED Plans and Projects (line)' });
-              //              legendLayers.push({ layer: pLegendCED_PP_point, title: 'CED Plans and Projects (point)' });
-
-              //              dojo.connect(app.map, 'onLayersAddResult', function (results) {
-              //                  var legend = new Legend({ map: app.map, layerInfos: legendLayers, respectCurrentMapScale: false, autoUpdate: false }, "legendDiv");
-              //                  legend.startup();
-              //              });
-
-              //              var strTPK_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/"
-              //              CED_PP_point_tpk = new ArcGISDynamicMapServiceLayer(strTPK_URL + "54f0a7b5e4b02419550ce925/MapServer", { id: 10, visible: true });
-              //              CED_PP_line_tpk = new ArcGISDynamicMapServiceLayer(strTPK_URL + "54f0a722e4b02419550ce91d/MapServer", { id: 11, visible: true });
-              //              CED_PP_poly_tpk = new ArcGISDynamicMapServiceLayer(strTPK_URL + "54f0a8b1e4b02419550ce930/MapServer", { "opacity": 0.6, id: 12, visible: true });
-
-              //              var cbxLayers = [];
-              //              cbxLayers.push({ layers: [CED_PP_poly, CED_PP_poly_tpk], title: 'CED Plans and Projects (area)' });
-              //              cbxLayers.push({ layers: [CED_PP_point, CED_PP_point_tpk], title: 'CED Plans and Projects (point)' });
-              //              cbxLayers.push({ layers: [CED_PP_line, CED_PP_line_tpk], title: 'CED Plans and Projects (line)' });
-              //              cbxLayers.push({ layers: [pBase_Pop, plabels1], title: 'GRSG Population Areas' });
-              //              cbxLayers.push({ layers: [pBase_MZ, plabels2], title: 'WAFWA Management Zones' });
-
-              //              dojo.connect(app.map, 'onLayersAddResult', function (results) {            //add check boxes 
-              //                  if (results !== 'undefined') {
-              //                      dojo.forEach(cbxLayers, function (playerset) {
-              //                          var layerName = playerset.title;
-              //                          var blnClear = AllFiltersClear();  // determine if no definition queries set
-              //                          var clayer0 = playerset.layers[0];
-              //                          var clayer1 = playerset.layers[1];
-              //                          var pID0 = clayer0.id;
-              //                          var pID1 = clayer1.id;
-
-              //                          var blnCEDLayer = false; // determine if this layer is a ced point line or poly layer
-              //                          if ((pID0 == 0) | (pID0 == 1) | (pID0 == 2) | (pID0 == "graphicsLayer1")) {
-              //                              blnCEDLayer = true;
-              //                          }
-
-              //                          var blnCheckIt = false;  // determine if checkbox will be on/off
-              //                          if (((blnCEDLayer) & (clayer0.visible | clayer1.visible)) | ((!(blnCEDLayer)) & (clayer0.visible))) {
-              //                              blnCheckIt = true;
-              //                          }
-
-              //                          var checkBox = new CheckBox({ name: "checkBox" + pID0, value: [pID0, pID1], checked: blnCheckIt,
-              //                              onChange: function (evt) {
-              //                                  if (blnCEDLayer) {
-              //                                      if ((clayer0.visible) | (clayer1.visible)) {
-              //                                          clayer0.hide();
-              //                                          clayer1.hide();
-              //                                      }
-              //                                      else {
-              //                                          if (blnClear) { clayer1.show(); }
-              //                                          else { clayer0.show(); }
-              //                                      }
-              //                                      if (clayer0.visible | clayer1.visible) { this.checked = true; }
-              //                                      else { this.checked = false; }
-              //                                  }
-              //                                  else {
-              //                                      if (clayer0.visible) {
-              //                                          clayer0.hide();
-              //                                          clayer1.hide();
-              //                                      } else {
-              //                                          clayer0.show();
-              //                                          clayer1.show();
-              //                                      }
-              //                                      this.checked = clayer0.visible;
-              //                                  }
-              //                              }
-              //                          });
-
-              //                          dojo.place(checkBox.domNode, dojo.byId("toggle"), "after"); //add the check box and label to the toc
-              //                          var checkLabel = dojo.create('label', { 'for': checkBox.name, innerHTML: layerName }, checkBox.domNode, "after");
-              //                          dojo.place("<br />", checkLabel, "after");
-              //                      });
-              //                  }
-              //              });
-              //              return arrayLayers;
           },
 
           Phase3: function () {
               var scalebar = new Scalebar({ map: app.map, scalebarUnit: "dual" });
+
+              var basemapTitle = dom.byId("basemapTitle");
+              on(basemapTitle, "click", function () { domClass.toggle("panelBasemaps", "panelBasemapsOn"); });
+              on(basemapTitle, mouse.enter, function () { domClass.add("panelBasemaps", "panelBasemapsOn"); });
+              var panelBasemaps = dom.byId("panelBasemaps");
+              on(panelBasemaps, mouse.leave, function () { domClass.remove("panelBasemaps", "panelBasemapsOn"); });
+
+              if (app.map.loaded) { 
+                   app.pMapSup.mapLoaded(); }
+              else {
+                  app.map.on("load", function () {
+                      app.pMapSup.mapLoaded(); 
+                    }); }
+
+
               //              var pGeocoder = new Geocoder({ autoComplete: true, arcgisGeocoder: { placeholder: "Find a place" }, map: app.map }, dojo.byId('search'));
               //              pGeocoder.startup();
 
-              //              var basemapTitle = dom.byId("basemapTitle");
-              //              on(basemapTitle, "click", function () {
-              //                  domClass.toggle("panelBasemaps", "panelBasemapsOn");
-              //              });
 
-              //              on(basemapTitle, mouse.enter, function () {
-              //                  domClass.add("panelBasemaps", "panelBasemapsOn");
-              //              });
 
-              //              var panelBasemaps = dom.byId("panelBasemaps");
-              //              on(panelBasemaps, mouse.leave, function () { domClass.remove("panelBasemaps", "panelBasemapsOn"); });
               //              pPTS_Projects = new FeatureLayer(app.strTheme1_URL + "0", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: 0, visible: true });
               $('#loc').autocomplete({
                   source: function (request, response) {

@@ -231,8 +231,9 @@ define([
                   this.app.gPjrReportQuery.SendQuery4DataGrid(this.app.gPjrReportQuery.m_arrayQuery4DataGrid, this.app.gPjrReportQuery.m_igridArrayIndex)
               }
               else {
-                  app.pMapSup_prjReport = new MH_MapSetup_prjReport({ strQuery: this.app.gPjrReportQuery.m_prjQuery, dblExpandNum: 0.8 }); // instantiate the class
-                  app.pMapSup_prjReport.Phase1();
+//                  app.pMapSup_prjReport = new MH_MapSetup_prjReport({ strQuery: this.app.gPjrReportQuery.m_prjQuery, dblExpandNum: 0.8 }); // instantiate the class
+//                  app.pMapSup_prjReport.Phase1();
+//                  app.pMapSup_prjReport.Phase3();
 
               }
 

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/esri/css/esri.css"/>
     <link rel="stylesheet" href="css/github.css" type="text/css" />
     <link rel="stylesheet" href="css/collapse.css" type="text/css" />
+    <link rel="stylesheet" href="css/panel.css" type="text/css" />
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/dojox/grid/resources/Grid.css"/>
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/dojox/grid/resources/soriaGrid.css"/>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css" />
@@ -47,13 +48,14 @@
                                     -moz-border-radius:5px; border-radius:2px; box-shadow:0px 0px 2px #555; font-weight:bold; font-size:70%;    }
 
     #btn_clear:hover, #btn_Print_Friendly:hover {box-shadow:0px 0px 3px #555;}
-    /*#rightPane {font-size:30pt;text-align:center;width:40%;overflow:none;}*/
 </style>
 
 <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
 <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
 
 <script type="text/javascript">
+    dojo.require("dijit.layout.TabContainer");
+    dojo.require("dijit.layout.ContentPane");
     var app = {};
     require([
         "esri/map",
@@ -61,7 +63,7 @@
         "esri/urlUtils", "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on",
         "dijit/form/CheckBox",
         "dojo/_base/Color",
-        "dojo/mouse", "dojo/query",
+        "dojo/mouse", "dojo/query", "esri/geometry/webMercatorUtils", "esri/dijit/BasemapGallery",
         "esri/arcgis/utils",
         "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
         "dijit/layout/AccordionContainer", "dojo/domReady!"
@@ -71,7 +73,7 @@
                 MH_UniqueSetup, MH_CreateQueryDef, MH_Query4Results, MH_Query4Summary, MH_MapSetup,
                 urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on,
                 CheckBox,
-                Color, mouse, query) {
+                Color, mouse, query, webMercatorUtils, BasemapGallery) {
 
         var strURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer"
         app.gCQD = new MH_CreateQueryDef({}); // instantiate the class
@@ -85,7 +87,6 @@
         var tokens = getTokens
 
         parser.parse();
-
         app.pMapSup = new MH_MapSetup({}); // instantiate the class
         app.pMapSup.Phase1();
         app.pMapSup.Phase3();
@@ -123,19 +124,8 @@
             if (app.gQuery.strQuery !== null) {
                 strHTML += "?Prjs=" + app.gQuery.strQuery.replace("ProjectID in (", "").replace(")", "");
             }
-
-            //strQuery = "ProjectID in " + arrayValues.join(",");
-
-            //            for (var colId in rowItem) {
-            //                var colVal = rowItem[colId];
-            //                if (!colVal || colVal == "") {
-            //                    //column is empty
-            //                }
-            //            }
-
             window.open(strHTML);
         }
-
     });
 </script>
 
@@ -448,8 +438,15 @@
             <div id="map"
                 data-dojo-type="dijit/layout/ContentPane"
                 data-dojo-props="region:'center'"
-                style="overflow:hidden; background-color:rgb(255, 255, 255);">
+                style="overflow:hidden; background-color:rgb(255, 255, 255); z-index:49; ">
                     <img id="loadingImg" src="images/loading.gif" style="position:absolute; right:50%; top:50%; z-index:100;" />
+                    <div id="panelBasemaps" class="panelBasemaps bg rounded shadow" >		    <!-- Panel Basemaps -->
+	                    <div id="basemapTitle"><img src="images/basemaps.png" height="30" title="Switch Base Map" /></div>
+	                    <div id="basemapContent">
+		                    <div id="basemapGallery" ></div>
+	                    </div>
+                    </div>
+                    <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
             </div>
 </div>
 </body>
