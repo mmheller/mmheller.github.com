@@ -129,7 +129,7 @@ define([
                                      "<u>Project Lead Org:</u>  " + attr.PI_Org + "<br />" +
                                      "<u>Partner Organizations:</u> " + attr.Partner_Organizaitons + "<br />" +
                                      "<u>Total Funding by GNLCC:</u> $" + attr.Total__Funding_by_Your_LCC + "<br />" +
-                                     "<u>Fiscal Years of Allocaiton:</u>  " + attr.Fiscal_Years_of_Allocation + "<br />"
+                                     "<u>Fiscal Years of Allocation:</u>  " + attr.Fiscal_Years_of_Allocation + "<br />"
             this.strFeatureContent = tempstrcontent;
             this.strFeatureContent += "(<A href='#' onclick='showReportPage(" + attr.ProjectID + ");'>Show project detail</A>)<br/>";
 
