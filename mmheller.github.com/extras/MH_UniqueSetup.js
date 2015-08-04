@@ -5,7 +5,6 @@ function StartQuery(blnSelect) {    //loop through the checkboxes and disable, s
     app.map.graphics.clear();
     app.map.infoWindow.hide();
     //app.map.infoWindow.destroy();
-    
     arrayCheckedCheckboxes = [];
     var pform = document.getElementById("NavigationForm");
     for (var i = 0; i < pform.elements.length; i++) {  

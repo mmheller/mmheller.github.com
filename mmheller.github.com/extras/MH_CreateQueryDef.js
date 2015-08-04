@@ -25,7 +25,7 @@ define([
 
               for (var i = 0; i < pform.elements.length; i++) {  //loop through the checkboxes of the form and determin if one of the ones to click
                   if (pform.elements[i].type == 'checkbox') {
-                      if (pform.elements[i].checked) {
+                      if ((pform.elements[i].checked) & (pform.elements[i].parentElement.parentElement.id != "GISLayerContent")) {
                           strID = pform.elements[i].id;
                           var n1st = strID.indexOf("-") + 1;
                           var n2nd = strID.indexOf("-", n1st);
