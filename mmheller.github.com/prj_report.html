@@ -21,8 +21,8 @@
     <script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>
 
 <style>
-    /*    #eniro{ position:relative; z-index:10; height:168px; overflow:hidden;}
-    #cover-up {position: absolute; z-index: 20; width: 98%; height: 168px; background: rgba(255, 255, 255, 0.01)}*/
+    #eniro{ position:relative; z-index:10; height:135px; overflow:hidden;}
+    #cover-up {position: absolute; z-index: 20; width: 98%; height: 135px; background: rgba(255, 255, 255, 0.01)}
 
     .soria .NavigationForm .content {font-size:.3em;}
     .soria .dojoxGridRowOver .dojoxGridCell {border: 0px solid; color:#000000; background-color: #B2B2B2}
@@ -98,9 +98,9 @@
         app.pMapSup_prjReport.Phase3();
         document.getElementById("page_collapsibleMapDestination").appendChild(document.getElementById("mapPrjReport"));  //move the grid to the designated div, grids need to be built outside the collapsable panel otherwise risk not rendering properly
 
-//        $('#cover-up').click(function () {
-//            window.open("http://greatnorthernlcc.org/", "_self");
-//        });
+        $('#cover-up').click(function () {
+            window.open("http://greatnorthernlcc.org/", "_self");
+        });
 
         function getTokens() {
             var tokens = [];
@@ -197,17 +197,15 @@
 
 <body class="soria">
 
+<div id="cover-up"></div>
+<div id="eniro"><iframe src="GNLCC_Banner.html" style="border:none" scrolling="no" width="980" height="135" id="iframe_a"></iframe></div>
+
+
 <div id="WideContent">
-<!--    <div id="cover-up"></div>
-    <div id="eniro"><iframe src="http://greatnorthernlcc.org/" style="border:none" scrolling="no" width="960" height="168"  id="iframe_a"></iframe></div>-->
-
-    <!--<a href="#" id="closeAll" title="Close all" style="font-size:.65em;">Close All</a> | <a href="#" id="openAll" title="Open All" style="font-size:.65em;">Open All</a>-->
-
-         <a href="#" id="closeAll" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
-          <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
+    <a href="#" id="closeAll" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
+    <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
     
-    <!-- collapsible -->
-    <div class="page_collapsible" id="page_collapsible1">Project Information<span></span></div>
+    <div class="page_collapsible" id="page_collapsible1">Project Information<span></span></div>    <!-- collapsible -->
         <div class="container"  id="container1" >
             <div id="divTitle"></div>
                     <hr>

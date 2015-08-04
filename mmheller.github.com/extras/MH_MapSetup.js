@@ -36,7 +36,7 @@ define([
   "esri/layers/LabelLayer",
   "esri/symbols/TextSymbol",
   "esri/geometry/webMercatorUtils",
-  "esri/dijit/BasemapGallery", 
+  "esri/dijit/BasemapGallery",
   "extras/PTS_Identify"
   ], function (
         declare, lang, esriRequest, all, urlUtils, FeatureLayer, ArcGISDynamicMapServiceLayer, CheckBox,
@@ -70,21 +70,91 @@ define([
               var pLabelRenderer1 = new SimpleRenderer(pLabel1);
               var plabels1 = new LabelLayer({ id: "labels1" });
               plabels1.addFeatureLayer(pBase_LCC, pLabelRenderer1, "{" + strlabelField1 + "}");
-              arrayLayers = [pPTS_Projects, plabels1, pBase_LCC];
+
+              pHeatLayer = new FeatureLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55c00cf2e4b033ef52104158/MapServer/0", { mode: FeatureLayer.MODE_ONDEMAND, id: "GNLCC Project Heat Map", visible: false });
+              pHeatLayer2 = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55c00cf2e4b033ef52104158/MapServer", { "opacity": 0.8, id: "GNLCCProjectHeatMap2", visible: false });
+
+              pRefugesLayer = new FeatureLayer(strBase_URL + "2", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "USFWS Refuges", visible: false });
+              pUSNativeLayer = new FeatureLayer(strBase_URL + "5", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "US Native Lands", visible: false });
+              pNPSLayer = new FeatureLayer(strBase_URL + "6", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "US National Park Service", visible: false });
+              pUSFSLayer = new FeatureLayer(strBase_URL + "8", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "USFS Forests", visible: false });
+              pBLMLayer = new FeatureLayer(strBase_URL + "9", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "BLM Land", visible: false });
+
+
+              arrayLayers = [pPTS_Projects, plabels1, pHeatLayer2, pHeatLayer, pBase_LCC, pRefugesLayer, pUSNativeLayer, pNPSLayer, pUSFSLayer, pBLMLayer];
+
+
+              var cbxLayers = [];
+              cbxLayers.push({ layer: pPTS_Projects, title: 'Projects' });
+              cbxLayers.push({ layer: pBase_LCC, title: 'GNLCC Boundary' });
+              cbxLayers.push({ layer: pHeatLayer, title: 'GNLCC Project Heat Map' });
+
+              cbxLayers.push({ layer: pRefugesLayer, title: 'USFWS Refuges' });
+              cbxLayers.push({ layer: pUSNativeLayer, title: 'US Native Lands' });
+              cbxLayers.push({ layer: pNPSLayer, title: 'US National Park Service' });
+              cbxLayers.push({ layer: pUSFSLayer, title: 'USFS Forests' });
+              cbxLayers.push({ layer: pBLMLayer, title: 'BLM Land' });
+
+              dojo.connect(app.map, 'onLayersAddResult', function (results) {
+                  var legend = new Legend({ map: app.map, layerInfos: cbxLayers, respectCurrentMapScale: false, autoUpdate: true }, "legendDiv");
+                  legend.startup();
+              });
+
 
               app.map.addLayers(arrayLayers);
               dojo.connect(app.map, "onClick", app.pMapSup.executeIdeintifyQueries);
+
+
+              dojo.connect(app.map, 'onLayersAddResult', function (results) {            //add check boxes 
+                  if (results !== 'undefined') {
+                      dojo.forEach(cbxLayers, function (layer) {
+                          var layerName = layer.title;
+                          var checkBox = new CheckBox({ name: "checkBox" + layer.layer.id, value: layer.layer.id, checked: layer.layer.visible,
+                              onChange: function (evt) {
+                                  var clayer = app.map.getLayer(this.value);
+                                  if (clayer.visible) {
+                                      clayer.hide();
+                                      if (this.value == "GNLCC Project Heat Map") {
+                                          var clayer2 = app.map.getLayer("GNLCCProjectHeatMap2");
+                                          clayer2.hide();
+                                      }
+
+
+                                  } else {
+                                      clayer.show();
+                                      if (this.value == "GNLCC Project Heat Map") {
+                                          var clayer2 = app.map.getLayer("GNLCCProjectHeatMap2");
+                                          clayer2.show();
+                                      }
+                                      
+                                  }
+                                  this.checked = clayer.visible;
+                              }
+                          });
+                          dojo.place(checkBox.domNode, dojo.byId("toggle"), "after"); //add the check box and label to the toc
+                          var checkLabel = dojo.create('label', { 'for': checkBox.name, innerHTML: layerName }, checkBox.domNode, "after");
+                          dojo.place("<br />", checkLabel, "after");
+                      });
+                  }
+              });
+
+
+
+
+
+
+
           },
 
 
           executeIdeintifyQueries: function (e) {
-            app.map.graphics.clear();
-            app.map.infoWindow.hide();
-            app.pPTS_Identify = new PTS_Identify({ pLayer1: pPTS_Projects, pMap: app.map, strQueryString4ID: app.gQuery.strQuery, strURL: app.strTheme1_URL,
-                pInfoWindow: app.infoWindow
-            }); // instantiate the ID Search class
-            app.pEvt = e;
-            var pPTS_Identify_Results = app.pPTS_Identify.executeQueries(e, "", 0, 0, 0);
+              app.map.graphics.clear();
+              app.map.infoWindow.hide();
+              app.pPTS_Identify = new PTS_Identify({ pLayer1: pPTS_Projects, pMap: app.map, strQueryString4ID: app.gQuery.strQuery, strURL: app.strTheme1_URL,
+                  pInfoWindow: app.infoWindow
+              }); // instantiate the ID Search class
+              app.pEvt = e;
+              var pPTS_Identify_Results = app.pPTS_Identify.executeQueries(e, "", 0, 0, 0);
           },
 
 
@@ -93,18 +163,18 @@ define([
               pPTS_Projects.setDefinitionExpression(strQuery);
           },
 
-          mapLoaded: function() {        // map loaded//            // Map is ready
-            app.map.on("mouse-move", app.pMapSup.showCoordinates); //after map loads, connect to listen to mouse move & drag events
-            app.map.on("mouse-drag", app.pMapSup.showCoordinates);
-            app.basemapGallery = new BasemapGallery({ showArcGISBasemaps: true, map: app.map }, "basemapGallery");
-            app.basemapGallery.startup();
-            app.basemapGallery.on("selection-change", function () { domClass.remove("panelBasemaps", "panelBasemapsOn"); });
-            app.basemapGallery.on("error", function (msg) { console.log("basemap gallery error:  ", msg); });
-        },
+          mapLoaded: function () {        // map loaded//            // Map is ready
+              app.map.on("mouse-move", app.pMapSup.showCoordinates); //after map loads, connect to listen to mouse move & drag events
+              app.map.on("mouse-drag", app.pMapSup.showCoordinates);
+              app.basemapGallery = new BasemapGallery({ showArcGISBasemaps: true, map: app.map }, "basemapGallery");
+              app.basemapGallery.startup();
+              app.basemapGallery.on("selection-change", function () { domClass.remove("panelBasemaps", "panelBasemapsOn"); });
+              app.basemapGallery.on("error", function (msg) { console.log("basemap gallery error:  ", msg); });
+          },
 
           showCoordinates: function (evt) {
-            var mp = webMercatorUtils.webMercatorToGeographic(evt.mapPoint);  //the map is in web mercator but display coordinates in geographic (lat, long)
-            dom.byId("txt_xyCoords").innerHTML = "Latitude:" + mp.x.toFixed(4) + ", Longitude:" + mp.y.toFixed(4);  //display mouse coordinates
+              var mp = webMercatorUtils.webMercatorToGeographic(evt.mapPoint);  //the map is in web mercator but display coordinates in geographic (lat, long)
+              dom.byId("txt_xyCoords").innerHTML = "Latitude:" + mp.x.toFixed(4) + ", Longitude:" + mp.y.toFixed(4);  //display mouse coordinates
           },
 
           Phase2: function () {
@@ -120,12 +190,14 @@ define([
               var panelBasemaps = dom.byId("panelBasemaps");
               on(panelBasemaps, mouse.leave, function () { domClass.remove("panelBasemaps", "panelBasemapsOn"); });
 
-              if (app.map.loaded) { 
-                   app.pMapSup.mapLoaded(); }
+              if (app.map.loaded) {
+                  app.pMapSup.mapLoaded();
+              }
               else {
                   app.map.on("load", function () {
-                      app.pMapSup.mapLoaded(); 
-                    }); }
+                      app.pMapSup.mapLoaded();
+                  });
+              }
 
 
               //              var pGeocoder = new Geocoder({ autoComplete: true, arcgisGeocoder: { placeholder: "Find a place" }, map: app.map }, dojo.byId('search'));
@@ -184,4 +256,6 @@ define([
 
   }
 );
+
+
 

@@ -66,7 +66,7 @@
         "esri/urlUtils", "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on",
         "dijit/form/CheckBox",
         "dojo/_base/Color",
-        "dojo/mouse", "dojo/query", "esri/geometry/webMercatorUtils", "esri/dijit/BasemapGallery",
+        "dojo/mouse", "dojo/query", "esri/geometry/webMercatorUtils", "esri/dijit/BasemapGallery", "esri/dijit/Legend",
         "esri/arcgis/utils",
         "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
         "dijit/layout/AccordionContainer", "dojo/domReady!"
@@ -76,7 +76,7 @@
                 MH_UniqueSetup, MH_CreateQueryDef, MH_Query4Results, MH_Query4Summary, MH_MapSetup,
                 urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on,
                 CheckBox,
-                Color, mouse, query, webMercatorUtils, BasemapGallery) {
+                Color, mouse, query, webMercatorUtils, BasemapGallery, Legend) {
 
         var strURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer"
         app.gCQD = new MH_CreateQueryDef({}); // instantiate the class
@@ -270,9 +270,19 @@
 
         <div class="collapsible" id="section14">Project Fund Type<span></span></div>
         <div class="container"><div class="content" id="section14content"></div></div>
-
         <div class="collapsible" id="Div1">Funding Amount (not yet enabled)<span></span></div>
         <div class="container"><div class="content" id="Div2"></div></div>
+        <div class="collapsible" id="Div3">Map Layers<span></span></div>
+        <div class="container">
+            <div class="content" id="Div4">
+                <form id="toggleForm">
+                    <div id="toggle" style="padding: 2px 2px;"></div>
+                    <br />
+                    <div id="legendDiv"></div>
+                </form>
+
+            </div>
+        </div>
 
         <br />
        <!-- <input id="btn_clear2" type="button"  value="Reset" 
