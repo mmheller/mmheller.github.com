@@ -88,15 +88,14 @@
         on(dom.byId("btn_Print_Friendly"), "click", btn_Print_Friendly_click);
 
         app.gQuery = new MH_Query4Results({ strURL: strURL, m_grid: grid }); // instantiate the class
-        app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class
+        app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class        
         var tokens = getTokens
-
         parser.parse();
+        app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
         app.pMapSup = new MH_MapSetup({}); // instantiate the class
         app.pMapSup.Phase1();
         app.pMapSup.Phase3();
-
-        app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
+        app.pMapSup.QueryZoom("OBJECTID > 0");
 
         document.getElementById("page_collapsibleMapDestination").appendChild(document.getElementById("map"));  //move the grid to the designated div, grids need to be built outside the collapsable panel otherwise risk not rendering properly
 

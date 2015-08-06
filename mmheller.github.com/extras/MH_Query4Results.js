@@ -131,7 +131,9 @@ define([
 
 
           SendQuery4ProjectResults: function (strQuery, pGrid) {
-              app.pMapSup.QueryZoom(strQuery);
+              if (strQuery != "OBJECTID > 0") {
+                app.pMapSup.QueryZoom(strQuery);
+              }
               this.m_grid = pGrid
               var queryTask = new esri.tasks.QueryTask(this.strURL + "/0");
               var pQuery = new Query();
