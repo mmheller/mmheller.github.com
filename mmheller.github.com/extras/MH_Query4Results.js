@@ -131,7 +131,7 @@ define([
 
 
           SendQuery4ProjectResults: function (strQuery, pGrid) {
-              if (strQuery != "OBJECTID > 0") {
+              if (app.pMapSup != undefined) {
                 app.pMapSup.QueryZoom(strQuery);
               }
               this.m_grid = pGrid
@@ -160,7 +160,11 @@ define([
                   store = new ItemFileReadStore({ data: data });
                   //pGrid.destroy();
                   pGrid.setStore(store);
+
+
                   gSup.Phase1(strURL, [], strQuery);
+                  
+                  
                   gQuerySummary.Summarize(strQuery);
                   
               });

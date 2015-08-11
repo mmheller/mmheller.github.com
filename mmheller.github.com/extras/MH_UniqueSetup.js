@@ -16,8 +16,8 @@ function StartQuery(blnSelect) {    //loop through the checkboxes and disable, s
     
     var strQuery = "";
     var arrayQuery = this.app.gCQD.Return_InitialQueryDefs();
-    var strQuery4Display = "";
-    var strMapServiceURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer";
+//    var strQuery4Display = "";
+//    var strMapServiceURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer";
 
     app.gQuery.SendQuery(arrayQuery, 0);
 }
@@ -48,8 +48,8 @@ function ClearThenStartQuery(strContainterID) {    //loop through the checkboxes
 
     var strQuery = "";
     var arrayQuery = this.app.gCQD.Return_InitialQueryDefs();
-    var strQuery4Display = "";
-    var strMapServiceURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer";
+//    var strQuery4Display = "";
+//    var strMapServiceURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer";
 
     app.gQuery.SendQuery(arrayQuery, 0);
 }
@@ -149,8 +149,14 @@ define([
 
               this.m_arrayCheckedCheckboxes = arrayCheckedCheckboxes;
               this.iTableIndex = 6
-              this.qry_Query4UniquesAndCheckBoxes(strURL, this.arrayQueryStringsPerTable[this.iTableIndex], "Fund_Year", "Fund_Year",
+
+
+              if (document.getElementById("cbx_FilterValues").checked) {
+                  this.qry_Query4UniquesAndCheckBoxes(strURL, this.arrayQueryStringsPerTable[this.iTableIndex], "Fund_Year", "Fund_Year",
                                                     'section3content', this.iTableIndex.toString() + "-Fund_Year");
+              }
+
+
               //              AddCheckbox("section4content", "6-dest_orgname-1", "Funding_Recipients_Dispersal", "UNIVERSITY OF MONTANA SYSTEM", false)
               //              AddCheckbox("section5content", "2-dest_orgname-1", "ConsvTargets", "Sage shrub/grassland (Habitats and Ecosystems)", false)
 
