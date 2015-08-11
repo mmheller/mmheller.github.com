@@ -58,7 +58,7 @@ define([
               dojo.connect(app.map, "onUpdateStart", showLoading);
               dojo.connect(app.map, "onUpdateEnd", hideLoading);
 
-              var legendLayers = [];
+//              var legendLayers = [];
               pPTS_Projects = new FeatureLayer(app.strTheme1_URL + "0", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: 0, visible: true });
               var strBase_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/546cfb04e4b0fc7976bf1d83/MapServer/"
               var strlabelField1 = "area_names";
@@ -80,14 +80,26 @@ define([
               pUSFSLayer = new FeatureLayer(strBase_URL + "8", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "USFS Forests", visible: false });
               pBLMLayer = new FeatureLayer(strBase_URL + "9", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "BLM Land", visible: false });
 
+              var strlabelField2 = "area_names";
+              pLCCNetworkLayer = new FeatureLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55b943ade4b09a3b01b65d78/MapServer/0", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: "LCC Network", outFields: [strlabelField2], visible: false });
+              var vWhiteColor = new Color("#FFFFFF");              // create a text symbol to define the style of labels
+              var pLabel2 = new TextSymbol().setColor(vWhiteColor);
+              pLabel2.font.setSize("10pt");
+              pLabel2.font.setFamily("arial");
+              var pLabelRenderer2 = new SimpleRenderer(pLabel2);
+              var plabels2 = new LabelLayer({ id: "labels2" });
+              plabels2.addFeatureLayer(pLCCNetworkLayer, pLabelRenderer2, "{" + strlabelField2 + "}");
 
-              arrayLayers = [pPTS_Projects, plabels1, pHeatLayer2, pHeatLayer, pBase_LCC, pRefugesLayer, pUSNativeLayer, pNPSLayer, pUSFSLayer, pBLMLayer];
+
+
+              arrayLayers = [pPTS_Projects, plabels1, pHeatLayer2, pHeatLayer, pBase_LCC, pRefugesLayer, pUSNativeLayer, pNPSLayer, pUSFSLayer, pBLMLayer, pLCCNetworkLayer, plabels2];
 
 
               var cbxLayers = [];
               cbxLayers.push({ layer: pPTS_Projects, title: 'Projects' });
               cbxLayers.push({ layer: pBase_LCC, title: 'GNLCC Boundary' });
               cbxLayers.push({ layer: pHeatLayer, title: 'GNLCC Project Heat Map' });
+              cbxLayers.push({ layer: pLCCNetworkLayer, title: 'LCC Network Areas' });
 
               cbxLayers.push({ layer: pRefugesLayer, title: 'USFWS Refuges' });
               cbxLayers.push({ layer: pUSNativeLayer, title: 'US Native Lands' });
