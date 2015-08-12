@@ -93,26 +93,36 @@ define([
               plabels2.addFeatureLayer(pLCCNetworkLayer, pLabelRenderer2, "{" + strlabelField2 + "}");
 
 
+              pCascadiaPF = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba6bfe4b08400b1fddd17/MapServer", { "opacity": 0.9, id: "Cascadia", visible: false });
+              pColumbiaPF = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba71be4b08400b1fddd1a/MapServer", { "opacity": 0.9, id: "Columbia", visible: false });
+              pRMPF = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba7cbe4b08400b1fddd22/MapServer", { "opacity": 0.9, id: "Rocky Mountain", visible: false });
+              pSSPF = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba817e4b08400b1fddd28/MapServer", { "opacity": 0.9, id: "Sage Steppe", visible: false });
+              pPartnershipsAreas = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba773e4b08400b1fddd1f/MapServer", { "opacity": 0.9, id: "PandE_Areas", visible: false });
 
-              arrayLayers = [pPTS_Projects, plabels1, pHeatLayer2, pHeatLayer, pBase_LCC, pRefugesLayer, pUSNativeLayer, pNPSLayer, pUSFSLayer, pBLMLayer, pLCCNetworkLayer, plabels2, pHumanMod];
+
+              arrayLayers = [pCascadiaPF, pColumbiaPF, pRMPF, pSSPF, pPartnershipsAreas, pPTS_Projects, plabels1, pHeatLayer2, pHeatLayer, pBase_LCC, pRefugesLayer,
+                                pUSNativeLayer, pNPSLayer, pUSFSLayer, pBLMLayer, pLCCNetworkLayer, plabels2, pHumanMod];
 
 
               var cbxLayers = [];
-              cbxLayers.push({ layer: pPTS_Projects, title: 'Projects' });
-              cbxLayers.push({ layer: pBase_LCC, title: 'GNLCC Boundary' });
+
               cbxLayers.push({ layer: pHeatLayer, title: 'GNLCC Project Heat Map' });
-
-              cbxLayers.push({ layer: pHumanMod, title: 'Human Modification Index (Theobald)' });
-              
-
+              cbxLayers.push({ layer: pHumanMod, title: 'Human Modification Index' });
               cbxLayers.push({ layer: pLCCNetworkLayer, title: 'LCC Network Areas' });
-
               cbxLayers.push({ layer: pRefugesLayer, title: 'USFWS Refuges' });
               cbxLayers.push({ layer: pUSNativeLayer, title: 'US Native Lands' });
               cbxLayers.push({ layer: pNPSLayer, title: 'US National Park Service' });
               cbxLayers.push({ layer: pUSFSLayer, title: 'USFS Forests' });
               cbxLayers.push({ layer: pBLMLayer, title: 'BLM Land' });
-
+              
+              cbxLayers.push({ layer: pCascadiaPF, title: 'Cascadia PF (General Area)' });
+              cbxLayers.push({ layer: pColumbiaPF, title: 'Columbia Basin PF (General Area)' });
+              cbxLayers.push({ layer: pRMPF, title: 'Rocky Mountain PF (General Area)' });
+              cbxLayers.push({ layer: pSSPF, title: 'Sage Steppe PF (General Area)' });
+              cbxLayers.push({ layer: pPartnershipsAreas, title: 'Partner and Ecosystem Areas of Interest' });
+              cbxLayers.push({ layer: pBase_LCC, title: 'GNLCC Boundary' });
+              cbxLayers.push({ layer: pPTS_Projects, title: 'Projects' });
+                            
               dojo.connect(app.map, 'onLayersAddResult', function (results) {
                   var legend = new Legend({ map: app.map, layerInfos: cbxLayers, respectCurrentMapScale: false, autoUpdate: true }, "legendDiv");
                   legend.startup();

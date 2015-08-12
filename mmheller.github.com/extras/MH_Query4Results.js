@@ -116,7 +116,7 @@ define([
               document.getElementById('dTotalAllocatedbyLCC').innerHTML = "";
               document.getElementById('dNumberOfFundingRecipients').innerHTML = "";
               document.getElementById('dFundRecipientTypes').innerHTML = "";
-              document.getElementById('dYearsFunded').innerHTML = "";
+//              document.getElementById('dYearsFunded').innerHTML = "";
               document.getElementById('dNumberOfProjectContacts').innerHTML = "";
               document.getElementById('dTotalInKindMatch').innerHTML = "";
               document.getElementById('dNumberofInKindOrgs').innerHTML = "";

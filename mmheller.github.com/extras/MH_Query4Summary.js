@@ -43,21 +43,21 @@ define([
               //table/fc index, query string, field 4 aggregation, stat type (count, sum, avg), group by field, html ID, string function
               arrayQuery = [];
               arrayQuery.push(["0", strQuery, "ProjectID", "count", "", "page_collapsible1", 'Results ({0} projects)', ""]);
-              arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "sum", "", "dTotalAllocatedbyLCC", 'Total Funds Allocated by GNLCC: {0} ', "currency"]);
-              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", 'Total Funds Allocated by GNLCC by Year: \n<br> {0} ', "show both"]);
-              arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "sum", "", "dTotalInKindMatch", 'Total Partner In-Kind or Match Funding: {0} ', "currency"]);
+              arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "sum", "", "dTotalAllocatedbyLCC", 'GNLCC Funds Allocated: {0} ', "currency"]);
+              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", 'GNLCC Funds Allocated by Year: \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both"]);
+              arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "sum", "", "dTotalInKindMatch", 'Partner In-Kind or Match Funding: {0} ', "currency"]);
               arrayQuery.push(["7", strQuery, "ProjectID", "count", "orgname ", "dNumberofInKindOrgs", 'Partner Organizations Providing In-Kind or Match Funding: {0} ', "countOfGroupBy"]);
-              arrayQuery.push(["1", strQuery, "ProjectID", "count", "CommonName", "dTotalNumberofConsvTargets", 'Total Number of Consv Targets: {0} ', "countOfGroupBy"]);
-              arrayQuery.push(["6", strQuery, "ProjectID", "count", "Fund_Year", "dYearsFunded", 'Fund Years: {0} ', ""]);
+              arrayQuery.push(["1", strQuery, "ProjectID", "count", "CommonName", "dTotalNumberofConsvTargets", 'Number of Consv Targets: {0} ', "countOfGroupBy"]);
+//              arrayQuery.push(["6", strQuery, "ProjectID", "count", "Fund_Year", "dYearsFunded", 'Fund Years: \n<br>  {0} ', "default"]);
               arrayQuery.push(["9", strQuery, "ProjectID", "count", "contactID", "dNumberOfProjectContacts", 'Number of Project Contacts: {0} ', "countOfGroupBy"]);
-              arrayQuery.push(["2", strQuery, "ProjectID", "count", "DelivType", "dDeliverabletype", 'Deliverable Types: {0} ', ""]);
-              arrayQuery.push(["2", strQuery, "ProjectID", "count", "", "dNumberofDeliverables", 'Number of Deliverables: {0} ', ""]);
-              arrayQuery.push(["0", strQuery, "ProjectID", "count", "PrjStatus", "dPrjStatus", 'Project Status: {0} ', ""]);
+              arrayQuery.push(["2", strQuery, "ProjectID", "count", "NationalLCCDelivType", "dDeliverabletype", 'Deliverable Types: \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default"]);
+              arrayQuery.push(["2", strQuery, "ProjectID", "count", "", "dNumberofDeliverables", 'Number of Deliverables: {0} ', "default"]);
+              arrayQuery.push(["0", strQuery, "ProjectID", "count", "PrjStatus", "dPrjStatus", 'Project Status: \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default"]);
               arrayQuery.push(["5", strQuery, "ProjectID", "count", "dest_orgname", "dNumberOfFundingRecipients", 'Number of Funding Recipient Organizations: {0} ', "countOfGroupBy"]);
-              arrayQuery.push(["5", strQuery, "ProjectID", "count", "DestinationType", "dFundRecipientTypes", 'Funding Recipient Types: {0} ', ""]);
-              arrayQuery.push(["4", strQuery, "ProjectID", "count", "EcotypicAreaName", "dEcotypicAreas", 'Ecotypic (Partner Forum) Areas: {0} ', ""]);
-              arrayQuery.push(["11", strQuery, "ProjectID", "count", "Stressor", "dStressors", 'Stressors: {0} ', ""]);
-              arrayQuery.push(["8", strQuery, "ProjectID", "count", "GoalName", "dGoals", 'Goals: {0} ', ""]);
+              arrayQuery.push(["5", strQuery, "ProjectID", "count", "DestinationType", "dFundRecipientTypes", 'Funding Recipient Types: \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default"]);
+              arrayQuery.push(["4", strQuery, "ProjectID", "count", "EcotypicAreaName", "dEcotypicAreas", 'Ecotypic (Partner Forum) Areas: \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default"]);
+              arrayQuery.push(["11", strQuery, "ProjectID", "count", "Stressor", "dStressors", 'Stressors:  \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "default"]);
+              arrayQuery.push(["8", strQuery, "ProjectID", "count", "GoalName", "dGoals", 'Goals: \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default"]);
 
 
 
@@ -100,6 +100,7 @@ define([
           returnEvents: function (results) {
               pTblindexAndQuery = this.app.gQuerySummary.m_arrayQuery[this.app.gQuerySummary.m_iarrayQueryIndex];
               //              var strQuery = pTblindexAndQuery[1];
+              var strStatisticType = pTblindexAndQuery[3];
               var strGroupByField = pTblindexAndQuery[4];
               var strHTMLElementID = pTblindexAndQuery[5];
               var strStringFormatting = pTblindexAndQuery[6];
@@ -162,13 +163,17 @@ define([
 
                                   if ((strGroupByField != "") & (an == "genericstat") & (strVarType != "show both")) {
                                       //values.push(strText);
+                                  } else if ((strStatisticType == "count") & (strVarType == "default")) {
+                                      strText += "\n<br>&nbsp;&nbsp;&nbsp;";
+                                      values.push(strText);
+                                  } else if ((strVarType == "show both") & (an == "genericstat")) {
+                                      var iTempNumber = Number(strText);
+                                      strText = iTempNumber.toCurrencyString() + "\n<br>&nbsp;&nbsp;&nbsp;";
+                                      values.push(strText);
                                   } else {
-                                      if ((strVarType == "show both") & (an == "genericstat")) {
-                                          var iTempNumber = Number(strText);
-                                          strText = iTempNumber.toCurrencyString() + "\n<br>";
-                                      }
                                       values.push(strText);
                                   }
+
                               });
                           });
                       }

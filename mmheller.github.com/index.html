@@ -44,15 +44,23 @@
     body {background-color:#fff;font-family:arial,helvetica,sans-serif;}
 
     .HTMLTable_styleMiddle    {    width: 13px;background-color: #FFFFFF}
-    .HTMLTable_styleLeft    {    width: 350px; border-bottom-style: solid; border-width: thick; border-color: #FFFFFF;}
-    .HTMLTable_BannerRow    {   width: 350px; background-color: #5B7E8A; color: #FFFFFF; font-weight: bold}
+    .HTMLTable_styleLeft    {    vertical-align:top; width: 350px; border-bottom-style: solid; border-width: thick; border-color: #FFFFFF;}
+    .HTMLTable_BannerRow    {   vertical-align:middle; width: 350px; background-color: #5B7E8A; color: #FFFFFF; font-weight: bold;}
+    /*.HTMLTable_BannerRow    {   vertical-align:middle;}*/
+
+    td {
+    vertical-align: middle;
+    }
+
 
     #map {      padding:0;      margin:0;      height:800px;    }
-
     #btn_clear, #btn_Print_Friendly { border: none; padding:5px; color:white; background-color:gray; -webkit-border-radius:5px;
                                     -moz-border-radius:5px; border-radius:2px; box-shadow:0px 0px 2px #555; font-weight:bold; font-size:70%;    }
 
     #btn_clear:hover, #btn_Print_Friendly:hover {box-shadow:0px 0px 3px #555;}
+    
+
+    
 </style>
 
 <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
@@ -284,9 +292,9 @@
         <hr>
         <div class="collapsible" id="Div3">Map Layers<span></span></div>
         <div class="container">
-            <div class="content" id="GISLayerContent">
+            <div class="content" id="GISLayerContent"  style="font-size:.75em">
                 <form id="toggleForm">
-                    <div id="toggle" style="padding: 2px 2px;"></div>
+                    <div id="toggle" style="padding: 2px 2px"></div>
                     <br />
                     <div id="legendDiv"></div>
                 </form>
@@ -339,14 +347,14 @@
 
 <table style="width:100%; background-color: #f2f5f9;">
         <tr>
-            <td class="HTMLTable_BannerRow">
-                <img src="images/funding.png" alt="Funding" height="30" width="30">
+            <td class="HTMLTable_BannerRow" >
+                <img src="images/funding.png" alt="Funding" height="30" width="30" align="middle" style="PADDING-LEFT: 3px; PADDING-RIGHT: 3px; PADDING-TOP: 3px; PADDING-BOTTOM: 3px;">
                     
-                &nbsp;Funds Allocated&nbsp;</td>
+                Funds Allocated</td>
             <td class="HTMLTable_styleMiddle">
                 &nbsp;</td>
             <td class="HTMLTable_BannerRow">
-                <img src="images/leverage.png" alt="leverage"  height="30">
+                <img src="images/leverage.png" alt="leverage"  height="30" align="middle" style="PADDING-LEFT: 3px; PADDING-RIGHT: 3px; PADDING-TOP: 3px; PADDING-BOTTOM: 3px;">
                 Partner Contributions</td>
         </tr>
         <tr>
@@ -366,7 +374,7 @@
             </td>
             <td class="HTMLTable_styleMiddle">
                 &nbsp;</td>
-            <td class="HTMLTable_styleLeft" rowspan="5">
+            <td class="HTMLTable_styleLeft">
                 <div id="dNumberofInKindOrgs"></div> </td>
         </tr>
 
@@ -376,6 +384,8 @@
                </td>
             <td class="HTMLTable_styleMiddle">
                 &nbsp;</td>
+            <td class="HTMLTable_styleLeft" rowspan="3">
+                <div id="dNumberOfProjectContacts"></div> </td>
         </tr>
         <tr>
             <td class="HTMLTable_styleLeft">
@@ -383,17 +393,10 @@
             <td class="HTMLTable_styleMiddle">
                 &nbsp;</td>
         </tr>
-        <tr>
-            <td class=HTMLTable_styleLeft>
-                <div id="dYearsFunded">
-                </div>
-            </td>
-            <td class="HTMLTable_styleMiddle">
-                &nbsp;</td>
-        </tr>
+
         <tr>
             <td class="HTMLTable_styleLeft">
-                <div id="dNumberOfProjectContacts"></div></td>
+                <div id="dNumberOfProjectContacts2"></div></td>
             <td class="HTMLTable_styleMiddle">
                 &nbsp;</td>
         </tr>
@@ -406,11 +409,11 @@
         </tr>-->
         <tr>
             <td class="HTMLTable_BannerRow">
-                <img src="images/target.png" alt="target"  height="30"> Conservation Goals and Targets</td>
+                <img src="images/target.png" alt="target"  height="30" align="middle" style="PADDING-LEFT: 3px; PADDING-RIGHT: 3px; PADDING-TOP: 3px; PADDING-BOTTOM: 3px;"> Conservation Goals and Targets</td>
             <td class="HTMLTable_styleMiddle">
                 </td>
             <td class="HTMLTable_BannerRow">
-                <img src="images/checkbox.png" alt="checkbox"  height="30"> Deliverables</td>
+                <img src="images/checkbox.png" alt="checkbox"  height="30" align="middle" style="PADDING-LEFT: 3px; PADDING-RIGHT: 3px; PADDING-TOP: 3px; PADDING-BOTTOM: 3px;"> Deliverables</td>
         </tr>
         <tr>
             <td class=HTMLTable_styleLeft>
@@ -475,6 +478,20 @@
                     </div>
                     <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
             </div>
+
+                     
 </div>
+
+
+ 
+
+
+<div style="clear:both; float:left; width:935px;">
+    <div style="float:right;">
+      <font size="1.5" color="#2E2E2E">Design: GNLCC<br/> Development: GNLCC<br/>Data Services: LC MAP</font>
+    </div>
+</div>
+
+
 </body>
 </html>
