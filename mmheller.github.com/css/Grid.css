@@ -73,7 +73,7 @@ background: url(images/grid_dx_gradient.gif) #E8E1CF top repeat-x;}
 .dojoxGridRowbarOver 
 {
 background-image: none; 
-background-color: #33CC33; 
+background-color: #CF2020; 
 border-top-color: #9933FF; 
 border-bottom-color: #FF0000;
 }
@@ -84,7 +84,7 @@ border-bottom-color: #FF0000;
 .dojoxGridRow 
 {position: relative; width: 9000em;}
          
-.dojoxGridRow /*this is it to edit hover1*/
+.dojoxGridRow 
 {border: 1px solid #E8E4D8; 
 border-color: #F8F7F1; 
 border-left: none; 
@@ -92,9 +92,9 @@ border-right: none;
 background-color: white; 
 border-top: none;}   
          
-.dojoxGridRowOver 
+.dojoxGridRowOver /*this is it to edit hover1*/
 {
-background-color: #B2B2B2;
+background-color: #CF2020;
 border-top-color: #00FFFF; 
 border-bottom-color: #FEBE47;
 }

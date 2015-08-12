@@ -395,6 +395,14 @@ define([
                                                                         "Support_Name", "Support_Name",
                                                             'section14content', this.app.gSup.iTableIndex.toString() + "-Support_Name");
                       break;
+
+                  case "Support_Name":
+                      this.app.gSup.iTableIndex = 0;
+                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
+                                                                        "Total__Funding_by_Your_LCC", "Total__Funding_by_Your_LCC",
+                                                            'section15content', this.app.gSup.iTableIndex.toString() + "-Total__Funding_by_Your_LCC");
+                      break;
+
               }
 
               return results;

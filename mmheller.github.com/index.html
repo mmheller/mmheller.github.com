@@ -23,10 +23,10 @@
 <style>
     ul.ui-autocomplete.ui-menu{width:600px;font-size:.7em;} /* this controls the style of the results in the autocomplete  */
     .soria .NavigationForm .content {font-size:.3em;}
-    .soria .dojoxGridRowOver .dojoxGridCell {border: 0px solid; color:#000000; background-color: #B2B2B2}
+    .soria .dojoxGridRowOver .dojoxGridCell {border: 0px solid; color:#000000; background-color: #cccccc}
     .soria .dojoxGridCell {border: 0px solid; color:#000000; font-size:1.2em;}  /* this controls style of grid cells */
     /*.soria .dojoxGridHeader .dojoxGridCell {background-image: url("images/title-bar.png"); border: 0px solid;}*/
-    .soria .dojoxGridHeader .dojoxGridCell {background-image: url(""); background-color: #5B7E8A; border: 0px solid;}
+    .soria .dojoxGridHeader .dojoxGridCell {background-image: url(""); background-color: #5B7E8A; border: 0px solid; color:#FFFFFF !important;}
     
     .soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif;}
     .dojoxGridView {left:0px;}
@@ -231,6 +231,10 @@
         <div class="collapsible" id="section3">Year Funded<span></span></div>
         <div class="container"><div class="content" id="section3content"></div></div>
 
+        
+        <div class="collapsible" id="section12">Project Status<span></span></div>
+        <div class="container"><div class="content" id="section12content"></div></div>
+
         <div class="collapsible" id="section5">Conservation Target<span></span></div>
         <div class="container"><div class="scroll" id="section5content"></div></div>
 
@@ -261,9 +265,7 @@
 
         <div class="collapsible" id="section11">Project Affiliate<span></span></div>
         <div class="container"><div class="scroll" id="section11content"></div></div>
-        
-        <div class="collapsible" id="section12">Project Status<span></span></div>
-        <div class="container"><div class="content" id="section12content"></div></div>
+
 
         <div class="collapsible" id="section13">State/Province<span></span></div>
         <div class="container"><div class="content" id="section13content"></div></div>
@@ -271,8 +273,10 @@
 
         <div class="collapsible" id="section14">Project Fund Type<span></span></div>
         <div class="container"><div class="content" id="section14content"></div></div>
-        <div class="collapsible" id="Div1">Funding Amount <span></span></div>
-        <div class="container"><div class="content" id="Div2"></div></div>
+
+        <div class="collapsible" id="section15">Funding Amount <span></span></div>
+        <div class="container"><div class="content" id="section15content"></div></div>
+        
         <hr>
         <div id="Div4"  style="font-size:10px;">
             <input type="checkbox" id="cbx_FilterValues" checked=checked value="FilterValues"//>Refine Filter Options by Selection

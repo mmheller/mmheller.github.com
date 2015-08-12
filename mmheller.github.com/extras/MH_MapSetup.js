@@ -74,6 +74,8 @@ define([
               pHeatLayer = new FeatureLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55c00cf2e4b033ef52104158/MapServer/0", { mode: FeatureLayer.MODE_ONDEMAND, id: "GNLCC Project Heat Map", visible: false });
               pHeatLayer2 = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55c00cf2e4b033ef52104158/MapServer", { "opacity": 0.8, id: "GNLCCProjectHeatMap2", visible: false });
 
+              pHumanMod = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/5527fe7fe4b026915857c948/MapServer", { "opacity": 0.5, id: "HumanMod", visible: false });
+
               pRefugesLayer = new FeatureLayer(strBase_URL + "2", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "USFWS Refuges", visible: false });
               pUSNativeLayer = new FeatureLayer(strBase_URL + "5", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "US Native Lands", visible: false });
               pNPSLayer = new FeatureLayer(strBase_URL + "6", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "US National Park Service", visible: false });
@@ -92,13 +94,17 @@ define([
 
 
 
-              arrayLayers = [pPTS_Projects, plabels1, pHeatLayer2, pHeatLayer, pBase_LCC, pRefugesLayer, pUSNativeLayer, pNPSLayer, pUSFSLayer, pBLMLayer, pLCCNetworkLayer, plabels2];
+              arrayLayers = [pPTS_Projects, plabels1, pHeatLayer2, pHeatLayer, pBase_LCC, pRefugesLayer, pUSNativeLayer, pNPSLayer, pUSFSLayer, pBLMLayer, pLCCNetworkLayer, plabels2, pHumanMod];
 
 
               var cbxLayers = [];
               cbxLayers.push({ layer: pPTS_Projects, title: 'Projects' });
               cbxLayers.push({ layer: pBase_LCC, title: 'GNLCC Boundary' });
               cbxLayers.push({ layer: pHeatLayer, title: 'GNLCC Project Heat Map' });
+
+              cbxLayers.push({ layer: pHumanMod, title: 'Human Modification Index (Theobald)' });
+              
+
               cbxLayers.push({ layer: pLCCNetworkLayer, title: 'LCC Network Areas' });
 
               cbxLayers.push({ layer: pRefugesLayer, title: 'USFWS Refuges' });

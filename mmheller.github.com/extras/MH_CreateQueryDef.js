@@ -71,7 +71,7 @@ define([
                           strFieldName = arrayField[0];
                           arrayValues = arrayField[1];
 
-                          if (strFieldName == "Fund_Year") {
+                          if ((strFieldName == "Fund_Year") | (strFieldName == "Total__Funding_by_Your_LCC")) {
                               strQuerySubset = strFieldName + " in (" + arrayValues.join(",") + ")";
                           } else {
                               strQuerySubset = strFieldName + " in ('" + arrayValues.join("','") + "')";
