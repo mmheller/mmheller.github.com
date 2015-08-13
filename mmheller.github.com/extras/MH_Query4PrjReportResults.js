@@ -72,10 +72,13 @@ define([
               arrayQuery.push(["0", strQuery, "Prj_Start_Date", "count", "Prj_Start_Date", "divStart", 'Project Start Date: {0} ', ""]);
               arrayQuery.push(["0", strQuery, "Prj_End_Date", "count", "Prj_End_Date", "divEnd", 'Project End Date: {0} ', ""]);
               arrayQuery.push(["2", strQuery, "DelivType", "count", "DelivType", "divDeliverables", 'Deliverable Types: {0} ', ""]);
-              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", 'Total Funds Allocated by GNLCC by Year: \n<br> {0} ', "show both"]);
+              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", 'Total Funds Allocated by GNLCC by Year: \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
               arrayQuery.push(["0", strQuery, "PI_and_Email", "count", "PI_and_Email", "divPI", 'Project Lead: {0}', ""]);
               arrayQuery.push(["0", strQuery, "PI_Org", "count", "PI_Org", "divLeadOrg", 'Lead Organization: {0}', ""]);
-              arrayQuery.push(["5", strQuery, "amount", "sum", "dest_orgname", "divFundingDispersal", 'Funding Dispersal: \n<br> {0} ', "show both"]);
+              arrayQuery.push(["5", strQuery, "amount", "sum", "dest_orgname", "divFundingDispersal", 'Funding Dispersal: \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
+
+              arrayQuery.push(["7", strQuery, "InKindamount", "sum", "orgname", "divInKindMatch", 'In-Kind Contributions: \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
+
               arrayQuery.push(["4", strQuery, "EcotypicAreaName", "count", "EcotypicAreaName", "divEcotypicArea", 'Ecotypic Area(s): \n<br> {0} ', ""]);
               arrayQuery.push(["8", strQuery, "GoalName", "count", "GoalName", "divGoals", 'Goal(s): \n<br> {0} ', ""]);
               arrayQuery.push(["11", strQuery, "Stressor", "count", "Stressor", "divStressors", 'Stressor(s): \n<br> {0} ', ""]);
@@ -232,9 +235,9 @@ define([
                   this.app.gPjrReportQuery.SendQuery4DataGrid(this.app.gPjrReportQuery.m_arrayQuery4DataGrid, this.app.gPjrReportQuery.m_igridArrayIndex)
               }
               else {
-//                  app.pMapSup_prjReport = new MH_MapSetup_prjReport({ strQuery: this.app.gPjrReportQuery.m_prjQuery, dblExpandNum: 0.8 }); // instantiate the class
-//                  app.pMapSup_prjReport.Phase1();
-//                  app.pMapSup_prjReport.Phase3();
+                  //                  app.pMapSup_prjReport = new MH_MapSetup_prjReport({ strQuery: this.app.gPjrReportQuery.m_prjQuery, dblExpandNum: 0.8 }); // instantiate the class
+                  //                  app.pMapSup_prjReport.Phase1();
+                  //                  app.pMapSup_prjReport.Phase3();
 
               }
 
@@ -303,11 +306,12 @@ define([
                                   } else {
                                       if ((strVarType == "show both") & (an == "genericstat")) {
                                           var iTempNumber = Number(strText);
-                                          strText = iTempNumber.toCurrencyString() + "\n<br>";
+                                          strText = iTempNumber.toCurrencyString() + "\n<br>&nbsp;&nbsp;&nbsp;";
+                                      } else {
+                                          strText = strText.replace("unknown", "");
+                                          strText = strText.replace("Unknown", "");
+                                          strText = strText.replace(/\n/g, "<br>");
                                       }
-                                      strText = strText.replace("unknown", "");
-                                      strText = strText.replace("Unknown", "");
-                                      strText = strText.replace(/\n/g, "<br>");
                                       values.push(strText);
                                   }
                               });
@@ -316,7 +320,7 @@ define([
                   }
                   if ((values != null) || (values != undefined)) {
                       if (values.length != 0) {
-                          strText = values.join("\n<br>");
+                          strText = values.join("\n<br>&nbsp;&nbsp;&nbsp;");
                       } else {
                           strText = "unk";
                       }
@@ -360,5 +364,6 @@ define([
 
   }
 );
+
 
 

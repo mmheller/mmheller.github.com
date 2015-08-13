@@ -37,6 +37,9 @@
 
     html,body{height:100%; width:100%; margin:0;}
     
+    .HTMLTable_styleMiddle    {    width: 13px;background-color: #FFFFFF}
+    .HTMLTable_styleLeft    {    vertical-align:top; width: 625px; border-bottom-style: solid; border-width: thick; border-color: #FFFFFF;}    
+    
     body {
         background-color:#fff;font-family:arial,helvetica,sans-serif;
     }
@@ -207,16 +210,29 @@
     
     <div class="page_collapsible" id="page_collapsible1">Project Information<span></span></div>    <!-- collapsible -->
         <div class="container"  id="container1" >
-            <div id="divTitle"></div>
-                    <hr>
-            <div id="divDescription"></div>
-                    <hr>
-            <div id="dTotalAllocatedbyLCCbyYear"></div>
-                    <hr>
-            <div id="divPI"></div>
-            <div id="divLeadOrg"></div>
-                    <hr>
-            <div id="divFundingDispersal"></div>
+            <table style="width: 100%;">
+                <tr>
+                    <td class="HTMLTable_styleLeft">
+                       <div id="divTitle"></div>
+                          <hr>
+                        <div id="divDescription"></div>
+                        <hr>
+                        <div id="divPI"></div>
+                        <div id="divLeadOrg"></div>
+
+                     </td>
+                    <td class="HTMLTable_styleMiddle">
+                        &nbsp;
+                    </td>
+                    <td>
+                        <div id="dTotalAllocatedbyLCCbyYear"></div>
+                        <hr>
+                        <div id="divFundingDispersal"></div>
+                        <hr>
+                        <div id="divInKindMatch"></div>
+                    </td>
+                </tr>
+            </table>
 
             <div class="WideContent" id="content1" >
             </div>
