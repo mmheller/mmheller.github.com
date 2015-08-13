@@ -70,7 +70,7 @@ define([
               arrayQuery.push(["0", strQuery, "Prj_Title", "count", "Prj_Title", "divTitle", 'Title: {0}', ""]);
               arrayQuery.push(["0", strQuery, "Description", "count", "Description", "divDescription", 'Description: {0}', ""]);
               arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "count", "Total__Funding_by_Your_LCC", "dTotalAllocatedbyLCCSum", '<b>Total Funds Allocated by GNLCC: {0}</b>', "currency"]);
-              arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "count", "Total_Matching_or_In_kind_Funds", "dTotalInKindSum", '<b>Total Matching or In-Kind Funds: {0}</b>', "currency"]);
+              arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "count", "Total_Matching_or_In_kind_Funds", "dTotalInKindSum", '<b>Total In-Kind/Match Contributions: {0}</b>', "currency"]);
               arrayQuery.push(["0", strQuery, "Prj_Start_Date", "count", "Prj_Start_Date", "divStart", 'Project Start Date: {0} ', ""]);
               arrayQuery.push(["0", strQuery, "Prj_End_Date", "count", "Prj_End_Date", "divEnd", 'Project End Date: {0} ', ""]);
               arrayQuery.push(["2", strQuery, "DelivType", "count", "DelivType", "divDeliverables", 'Deliverable Types: {0} ', ""]);
@@ -78,7 +78,7 @@ define([
               arrayQuery.push(["0", strQuery, "PI_and_Email", "count", "PI_and_Email", "divPI", 'Project Lead: {0}', ""]);
               arrayQuery.push(["0", strQuery, "PI_Org", "count", "PI_Org", "divLeadOrg", 'Lead Organization: {0}', ""]);
               arrayQuery.push(["5", strQuery, "amount", "sum", "dest_orgname", "divFundingDispersal", 'Funding Dispersal: \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
-              arrayQuery.push(["7", strQuery, "InKindamount", "sum", "orgname", "divInKindMatch", 'In-Kind Contributions: \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
+              arrayQuery.push(["7", strQuery, "InKindamount", "sum", "orgname", "divInKindMatch", 'In-Kind/Match Contributions: \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
               arrayQuery.push(["4", strQuery, "EcotypicAreaName", "count", "EcotypicAreaName", "divEcotypicArea", 'Ecotypic Area(s): \n<br> {0} ', ""]);
               arrayQuery.push(["8", strQuery, "GoalName", "count", "GoalName", "divGoals", 'Goal(s): \n<br> {0} ', ""]);
               arrayQuery.push(["11", strQuery, "Stressor", "count", "Stressor", "divStressors", 'Stressor(s): \n<br> {0} ', ""]);
