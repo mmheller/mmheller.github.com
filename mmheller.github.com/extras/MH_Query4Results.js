@@ -36,6 +36,7 @@ define([
           m_grid: null,
           m_EventAdded2Grid: false,
           strQuery: null,
+          m_arrayUserRemovedPrjs: [],
 
           constructor: function (options) {
               this.strURL = options.strURL || "www.cnn.com"; // default AGS REST URL
@@ -59,6 +60,10 @@ define([
 
                   if (this.arrayProjectIDs.length > 0) {
                       strQuery = "(" + strQuery + ") and (ProjectID in (" + this.arrayProjectIDs.join(",") + "))";
+                  }
+
+                  if (this.m_arrayUserRemovedPrjs.length > 0) {  //if user's right clicked and removed a row then don't include
+                      strQuery += " and (not (ProjectID in (" + this.m_arrayUserRemovedPrjs.join(",") + ")))";
                   }
 
                   pQuery.where = strQuery;
@@ -99,8 +104,8 @@ define([
                           this.app.gQuery.ClearDivs();
                           this.app.gQuery.SendQuery4ProjectResults(this.app.gQuery.strQuery, this.app.gQuery.m_grid)
 
-//                          var div = document.getElementById('querycontent');
-//                          div.innerHTML += "\n<br>" + this.app.gQuery.strQuery;
+                          //                          var div = document.getElementById('querycontent');
+                          //                          div.innerHTML += "\n<br>" + this.app.gQuery.strQuery;
 
                       } else {
                           this.app.gQuery.SendQuery(this.app.gQuery.m_arrayQuery, this.app.gQuery.m_iarrayQueryIndex)
@@ -116,7 +121,7 @@ define([
               document.getElementById('dTotalAllocatedbyLCC').innerHTML = "";
               document.getElementById('dNumberOfFundingRecipients').innerHTML = "";
               document.getElementById('dFundRecipientTypes').innerHTML = "";
-//              document.getElementById('dYearsFunded').innerHTML = "";
+              //              document.getElementById('dYearsFunded').innerHTML = "";
               document.getElementById('dNumberOfProjectContacts').innerHTML = "";
               document.getElementById('dTotalInKindMatch').innerHTML = "";
               document.getElementById('dNumberofInKindOrgs').innerHTML = "";
@@ -132,7 +137,7 @@ define([
 
           SendQuery4ProjectResults: function (strQuery, pGrid) {
               if (app.pMapSup != undefined) {
-                app.pMapSup.QueryZoom(strQuery);
+                  app.pMapSup.QueryZoom(strQuery);
               }
               this.m_grid = pGrid
               var queryTask = new esri.tasks.QueryTask(this.strURL + "/0");
@@ -141,32 +146,23 @@ define([
               pQuery.outFields = ["ProjectID", "Prj_Title", "Fiscal_Years_of_Allocation", "PI_Org", "OBJECTID", "LeadName_LastFirst"];
               pQuery.where = strQuery;
               var items = [];
-
               var gSup = app.gSup;
               strURL = this.strURL;
               var gQuerySummary = app.gQuerySummary;
-//              var pMapSup = app.pMapSup;
 
               if (!this.m_EventAdded2Grid) {  //if don't put this logic in then keeps on adding the click event to the data grid and gets repetitive
                   pGrid.on("rowclick", onRowClickHandler);
                   this.m_EventAdded2Grid = true;
               }
-
               dojo.connect(queryTask, "onComplete", function (featureSet) {
                   var items = dojo.map(featureSet.features, function (feature) {                  //build an array of attributes
                       return feature.attributes;
                   });
                   var data = { identifier: "OBJECTID", items: items };
                   store = new ItemFileReadStore({ data: data });
-                  //pGrid.destroy();
                   pGrid.setStore(store);
-
-
                   gSup.Phase1(strURL, [], strQuery);
-                  
-                  
                   gQuerySummary.Summarize(strQuery);
-                  
               });
               queryTask.execute(pQuery);
           },

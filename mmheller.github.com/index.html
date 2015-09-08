@@ -88,6 +88,8 @@
                 CheckBox,
                 Color, mouse, query, webMercatorUtils, BasemapGallery, Legend) {
 
+        var selectedItem;  // This has to be declared "globally" outside of any functions for the grid context menu
+
         var strURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer"
         app.gCQD = new MH_CreateQueryDef({}); // instantiate the class
         app.gSup = new MH_UniqueSetup({}); // instantiate the class
@@ -140,11 +142,29 @@
             }
             window.open(strHTML);
         }
+
+
+
     });
 </script>
 
 
 <script type="text/javascript">
+    function onRowContextMenuFunc(e) {
+        grid5_rowMenu.bindDomNode(e.grid.domNode);
+        selectedItem = e.grid.getItem(e.rowIndex);
+    }
+
+    function gridRowContextMenu_onClick(e) {
+        app.gQuery.m_arrayUserRemovedPrjs.push(selectedItem.ProjectID);
+        strQuery = app.gQuery.strQuery;
+        if (!(strQuery)) {
+            strQuery = "(OBJECTID > 0)"      
+        }
+        strQuery += " and (not (ProjectID in (" + app.gQuery.m_arrayUserRemovedPrjs.join(",") + ")))"
+        app.gQuery.SendQuery4ProjectResults(strQuery, grid);
+        strQuer2 = app.gQuery.strQuery;
+    }
 
     $(document).ready(function () {
         hljs.tabReplace = '    '; //        syntax highlighter
@@ -323,7 +343,7 @@
     <!-- collapsible -->
     <div class="page_collapsible" id="page_collapsible1">Results<span></span></div>
         <div class="container"  id="container1" >
-            <table dojotype="dojox.grid.DataGrid" style="height:600px;" jsid="grid" id="grid" sortInfo="-1" selectionMode="none"">
+            <table dojotype="dojox.grid.DataGrid" style="height:600px;" jsid="grid" id="grid" sortInfo="-1" selectionMode="none" onRowContextMenu="onRowContextMenuFunc"">
              <thead>
                 <tr>
                   <th field="Fiscal_Years_of_Allocation" width="50" height="60px">Fiscal Year</th>
@@ -482,16 +502,16 @@
                      
 </div>
 
-
- 
-
+<div dojoType="dijit.Menu" id="grid5_rowMenu" jsId="grid5_rowMenu" style="display: none;">
+    <div dojoType="dijit.MenuItem" onClick="gridRowContextMenu_onClick">Delete</div>
+    <div dojoType="dijit.MenuItem">Cancel</div>
+</div> 
 
 <div style="clear:both; float:left; width:935px;">
     <div style="float:right;">
       <font size="1.5" color="#2E2E2E">Design: GNLCC<br/> Development: GNLCC<br/>Data Services: LC MAP</font>
     </div>
 </div>
-
 
 </body>
 </html>
