@@ -353,11 +353,11 @@ define([
                       break;
                   case "GoalName":
                       this.app.gSup.iTableIndex = 2;
-                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex] + " and (not (NationalLCCDelivType in ('Contractual Document')))",
-                                                                        "NationalLCCDelivType", "NationalLCCDelivType",
-                                                            'section8content', this.app.gSup.iTableIndex.toString() + "-NationalLCCDelivType");
+                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
+                                                                        "DelivType", "DelivType",
+                                                            'section8content', this.app.gSup.iTableIndex.toString() + "-DelivType");
                       break;
-                  case "NationalLCCDelivType":
+                  case "DelivType":
                       this.app.gSup.iTableIndex = 7;
                       this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
                                                                         "orgname", "orgname",
@@ -384,8 +384,7 @@ define([
 
                   case "PrjStatus":
                       this.app.gSup.iTableIndex = 12;
-                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex] +
-                                                                    " and (not (NAME in ('Arizona','California','Colorado','Nebraska','Nevada','New Mexico','North Dakota','Saskatchewan','South Dakota','Utah')))",
+                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
                                                                         "NAME", "NAME",
                                                             'section13content', this.app.gSup.iTableIndex.toString() + "-Name");
                       break;

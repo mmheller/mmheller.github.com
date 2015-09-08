@@ -156,6 +156,7 @@
     }
 
     function gridRowContextMenu_onClick(e) {
+       
         app.gQuery.m_arrayUserRemovedPrjs.push(selectedItem.ProjectID);
         strQuery = app.gQuery.strQuery;
         if (!(strQuery)) {
@@ -163,7 +164,7 @@
         }
         strQuery += " and (not (ProjectID in (" + app.gQuery.m_arrayUserRemovedPrjs.join(",") + ")))"
         app.gQuery.SendQuery4ProjectResults(strQuery, grid);
-        strQuer2 = app.gQuery.strQuery;
+        
     }
 
     $(document).ready(function () {
@@ -273,7 +274,7 @@
         <div class="container"><div class="content" id="section10content"></div></div>
 
         <div class="collapsible" id="section8">Deliverable Type<span></span></div>
-        <div class="container"><div class="scroll" id="section8content"></div></div>
+        <div class="container"><div class="content" id="section8content"></div></div>
 
         <div class="collapsible" id="section1">Ecotypic Area<span></span></div>
         <div class="container" ><div class="content" id="section1content"></div></div>
