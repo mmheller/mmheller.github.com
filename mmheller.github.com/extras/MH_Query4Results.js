@@ -119,6 +119,7 @@ define([
 
           ClearDivs: function () {
               document.getElementById('dTotalAllocatedbyLCC').innerHTML = "";
+              document.getElementById('dTotalAllocatedbyLCCbyYear').innerHTML = "";
               document.getElementById('dNumberOfFundingRecipients').innerHTML = "";
               document.getElementById('dFundRecipientTypes').innerHTML = "";
               //              document.getElementById('dYearsFunded').innerHTML = "";
