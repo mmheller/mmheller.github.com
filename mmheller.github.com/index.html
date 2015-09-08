@@ -124,6 +124,7 @@
         }
 
         function btn_clear_click() {
+            app.gQuery.m_arrayUserRemovedPrjs = [];
             document.getElementById("loc").value = "";
             if ($('#page_collapsible1').collapsible('collapsed')) {
                 $('#page_collapsible1').collapsible('open');
@@ -156,7 +157,6 @@
     }
 
     function gridRowContextMenu_onClick(e) {
-       
         app.gQuery.m_arrayUserRemovedPrjs.push(selectedItem.ProjectID);
         strQuery = app.gQuery.strQuery;
         if (!(strQuery)) {
@@ -164,7 +164,6 @@
         }
         strQuery += " and (not (ProjectID in (" + app.gQuery.m_arrayUserRemovedPrjs.join(",") + ")))"
         app.gQuery.SendQuery4ProjectResults(strQuery, grid);
-        
     }
 
     $(document).ready(function () {
