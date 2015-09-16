@@ -25,12 +25,11 @@
     #cover-up {position: absolute; z-index: 20; width: 98%; height: 135px; background: rgba(255, 255, 255, 0.01)}
 
     .soria .NavigationForm .content {font-size:.3em;}
-    .soria .dojoxGridRowOver .dojoxGridCell {border: 0px solid; color:#000000; background-color: #B2B2B2}
+    .soria .dojoxGridRowOver .dojoxGridCell {border: 0px solid; color:#000000; background-color: #cccccc}
     .soria .dojoxGridCell {border: 0px solid; color:#000000; font-size:1.2em;}  /* this controls style of grid cells */
-    .soria .dojoxGridHeader .dojoxGridCell {background-image: url("http://mmheller.github.io/mmheller.github.com/images/title-bar-short.png"); border: 0px solid;}
+    .soria .dojoxGridHeader .dojoxGridCell {background-image: url(""); background-color: #5B7E8A; border: 0px solid; color:#FFFFFF !important;}
     .soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif;}
     .dojoxGridView {left:0px;}
-
    
     div.scroll {    /* this controls content style in the scroll bars   */
             height: 250px; overflow-y: scroll; background:#FFFFFF; margin: 0; padding:10px; font-size:1em; line-height:1.5em; font-family: Arial, Helvetica, sans-serif;}
@@ -246,17 +245,46 @@
     <!-- collapsible -->
     <div class="page_collapsible" id="body-section2">Project Detail<span></span></div>
     <div class="container">
-    <div id="gridDivProposals"></div><br />
-       <div id="divProposals"></div>                    <hr>
-        <div id="divStart"></div>
-        <div id="divEnd"></div>                   <hr>
-            <div id="divLCMAPLink"></div>         <hr>
-        <div id="divDeliverables"></div>            <hr>
-        <div id="divEcotypicArea"></div>                    <hr>
-        <div id="divGoals"></div>                    <hr>
-        <div id="divStressors"></div>                    <hr>
-        <div id="gridDivConservationTargetsSPP"></div><br />
-        <div id="gridDivConservationTargetsOther"></div><br />
+
+       
+           <table style="width:100%;">
+               <tr>
+                   <td valign="top">
+                              <div id="divStart"></div>
+                              <div id="divEnd"></div>       
+                   </td>
+                   <td>
+                       </td>
+                   <td></td>
+               </tr>
+
+               <tr>
+                   <td valign="top">
+                    <div id="gridDivProposals"></div>&nbsp;
+                   </td>
+                   <td>
+                        
+                       </td>
+                   <td></td>
+               </tr>
+               <tr>
+                   <td valign="top">
+                        <div id="divEcotypicArea"></div>
+                   </td>
+                   <td valign="top">
+                        <div id="divGoals"></div>                   
+                   </td>
+                   <td valign="top">
+                        <div id="divStressors"></div>            
+                   </td>
+               </tr>
+           </table>
+        <br />
+        
+
+       
+       <div id="gridDivConservationTargetsSPP"></div><br />
+       <div id="gridDivConservationTargetsOther"></div><br />
     </div>
 
     <div class="page_collapsible" id="Div1">Contact Detail<span></span></div>
@@ -269,6 +297,8 @@
  <!-- collapsible -->
     <div class="page_collapsible" id="Div13">Products/Deliverables<span></span></div>
     <div class="container">
+            <br />
+            <div id="divLCMAPLink"></div>
             <div id="gridDivDeliverablesSupWebinarsPages"></div><br />
             <div id="gridDivDeliverables"></div><br />
     </div>
@@ -310,9 +340,12 @@
             <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridContacts" id="gridContacts" selectionMode="none">
              <thead>
                 <tr>
-                  <th field="PersonName" width="400px" height="60px">Name</th>
+                  <th field="PersonName" width="300px" height="60px">Name</th>
                   <th field="Contact_Type" width="150" height="60px">Type</th>
                   <th field="GroupName" width="auto"  height="60px">Affiliation</th>
+                  <th field="roletype" width="auto"  height="60px">Role</th>
+                  
+
                   <!--<th field="prj_priority" width="80px">Priority</th>-->
                   <!--<th field="uri" width="auto">Email</th> -->             
                 </tr>
@@ -329,13 +362,12 @@
               </thead>
             </table>
 
-          <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" style="height:450px;width:500px;" 
+          <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" style="height:100px;width:75px;" 
                         jsid="gridProposals" id="Table1" selectable="true" style="">
              <thead>
                 <tr>
-                  <th field="Fund_Year" width="120" height="60px">Fund Year</th>
-                  <th field="deliverable_title" width="200" height="60px">Title</th>
-                  <th field="uri" hidden="true" width="200" height="60px">Weblink</th>
+                  <th field="Fund_Year" width="68">Proposal(s)<br /><font size="0.4">(click for doc)</font></th>
+                  <th field="uri" hidden="true" width="1" height="60px">Weblink</th>
                 </tr>
               </thead>
             </table>
