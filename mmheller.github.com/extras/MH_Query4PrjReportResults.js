@@ -188,7 +188,7 @@ define([
                                       }
                                       if (keyField == "Deliverable_Received") {
                                           var pValue = formatDate(pItem[keyField]);
-                                          if (pValue == 0) {
+                                          if (pValue == 1) {
                                               pValue = "Yes";
                                           } else {
                                               pValue = "No";

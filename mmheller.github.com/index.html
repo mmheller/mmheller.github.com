@@ -50,16 +50,10 @@
     td {
     vertical-align: middle;
     }
-
-
     #map {      padding:0;      margin:0;      height:800px;    }
     #btn_clear, #btn_Print_Friendly { border: none; padding:5px; color:white; background-color:gray; -webkit-border-radius:5px;
                                     -moz-border-radius:5px; border-radius:2px; box-shadow:0px 0px 2px #555; font-weight:bold; font-size:70%;    }
-
     #btn_clear:hover, #btn_Print_Friendly:hover {box-shadow:0px 0px 3px #555;}
-    
-
-    
 </style>
 
 <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
@@ -243,11 +237,11 @@
 <div id="navigation">
     <form id="NavigationForm">
         <input id="btn_clear" type="button"  value="Reset Search">
-        <input id="btn_Print_Friendly" type="button"  value="Print Freindly">
+        <input id="btn_Print_Friendly" type="button"  value="Print Friendly">
         <br/><br/>
 
         <font size="2px" color="#2E2E2E">Keyword Search</font>
-        <div id="autocompleteSearch">
+        <div id="autocompleteSearch">    <!--add carraige return event-->
             <input id="loc" class="textbox" type="text"  title="Enter portion of...
             Project Title, Project Lead, Keywords, 
             Partner Organizaitons
