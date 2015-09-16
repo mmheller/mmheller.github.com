@@ -91,8 +91,8 @@ define([
               arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID = 3", ["OBJECTID", "CommonName", "ESA_Status", "TierName", "PrimaryLCCTargetType"], "gridDivConservationTargetsSPP"]);
               arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID <> 3", ["OBJECTID", "CommonName", "ConsvTargetTypeName", "PrimaryLCCTargetType"], "gridDivConservationTargetsOther"]);
 
-              arrayQuery4DataGrid.push(["2", strQuery + " and supplemental = 0 and not (DelivType in ('Statement of Work','Proposal'))", ["OBJECTID", "deliverable_title", "Fund_Year", "duedate", "DelivType", "Deliverable_Received", "deliverableid"], "gridDivDeliverables"]);
-              arrayQuery4DataGrid.push(["2", strQuery + " and supplemental <> 0", ["OBJECTID", "deliverable_title", "Fund_Year", "DelivType", "deliverableid"], "gridDivDeliverablesSupWebinarsPages"]);
+              arrayQuery4DataGrid.push(["2", strQuery + " and supplemental = 0 and not (deliverabletypeid in (22,24))", ["OBJECTID", "deliverable_title", "Fund_Year", "duedate", "DelivType", "Deliverable_Received", "deliverableid"], "gridDivDeliverables"]);
+              arrayQuery4DataGrid.push(["2", strQuery + " and supplemental <> 0 and not (deliverabletypeid in (22,24))", ["OBJECTID", "deliverable_title", "Fund_Year", "DelivType", "deliverableid"], "gridDivDeliverablesSupWebinarsPages"]);
 
               this.m_arrayQuery = arrayQuery;
               this.m_arrayQuery4DataGrid = arrayQuery4DataGrid;
@@ -182,12 +182,13 @@ define([
 
                               for (var keyField in pItem) {
                                   if (pItem.hasOwnProperty(keyField)) {
-                                      if (keyField == "duedate") {
+                                      if (keyField == "duedate") {   // Format the date for user friendly web viewing
                                           var pValue = formatDate(pItem[keyField]);
                                           data["items"][key][keyField] = pValue;
                                       }
+                                      //https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer/2/query?where=Deliverable_Received+%3D+1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=projectid%2C+deliverable_title%2C+receiveddate%2C+Deliverable_Received+&returnGeometry=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&f=html
                                       if (keyField == "Deliverable_Received") {
-                                          var pValue = formatDate(pItem[keyField]);
+                                          var pValue = pItem.Deliverable_Received;
                                           if (pValue == 1) {
                                               pValue = "Yes";
                                           } else {
