@@ -4,7 +4,7 @@
 function onRowClickHandler(evt) {
     var strURL = evt.grid.getItem(evt.rowIndex).uri;
     if (strURL) {
-        window.open(strURL);
+        window.open(strURL, '_blank');
     }
 }
 
@@ -15,7 +15,7 @@ function onDelivSummaryRowClickHandler(evt) {
     var iDelivID = evt.grid.getItem(evt.rowIndex).deliverableid;
     
     arrayQuery4DataGrid = [];
-    arrayQuery4DataGrid.push(["3", "deliverableid = " + iDelivID, ["data_name", "OBJECTID", "receiveddate", "uri"], "gridDivDeliverablesDetail"]);
+    arrayQuery4DataGrid.push(["3", "deliverableid = " + iDelivID, ["data_name", "OBJECTID", "receiveddate", "uri", "Deliverable_Received"], "gridDivDeliverablesDetail"]);
     app.gPjrReportQuery.m_arrayQuery4DataGrid = arrayQuery4DataGrid;
     app.gPjrReportQuery.m_igridArrayIndex = 0;
 
@@ -74,6 +74,7 @@ define([
           m_iarrayQueryIndex4Grid: null,
           m_gridContacts: null,
           m_gridContactOrgsOnly: null,
+          m_ArrayGridsWithEventsAdded: null,
 
           constructor: function (options) {
               this.strURL = options.strURL || "www.cnn.com"; // default AGS REST URL
@@ -83,6 +84,8 @@ define([
               this.m_gridArray = gridArray;
               this.m_prjQuery = strQuery;
               this.m_gridDelivDetail = gridDelivDetail;
+              this.m_ArrayGridsWithEventsAdded = [];
+
               //table/fc index, query string, field 4 aggregation, stat type (count, sum, avg), group by field, html ID, string function
               arrayQuery = [];
               arrayQuery.push(["0", strQuery, "Prj_Title", "count", "Prj_Title", "divTitle", 'Title: {0}', ""]);
@@ -109,8 +112,8 @@ define([
               arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID = 3", ["OBJECTID", "CommonName", "ESA_Status", "TierName", "PrimaryLCCTargetType"], "gridDivConservationTargetsSPP"]);
               arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID <> 3", ["OBJECTID", "CommonName", "ConsvTargetTypeName", "PrimaryLCCTargetType"], "gridDivConservationTargetsOther"]);
 
-              arrayQuery4DataGrid.push(["2", strQuery + " and supplemental = 0 and not (deliverabletypeid in (22,24))", ["OBJECTID", "deliverable_title", "Fund_Year", "duedate", "DelivType", "Deliverable_Received", "deliverableid"], "gridDivDeliverables"]);
-              arrayQuery4DataGrid.push(["2", strQuery + " and supplemental <> 0 and not (deliverabletypeid in (22,24))", ["OBJECTID", "deliverable_title", "Fund_Year", "DelivType", "deliverableid"], "gridDivDeliverablesSupWebinarsPages"]);
+              arrayQuery4DataGrid.push(["2", strQuery + " and supplemental = 0 and not (DelivType in ('Website','Recorded Presentation'))", ["OBJECTID", "deliverable_title", "Fund_Year", "duedate", "DelivType", "Deliverable_Received", "deliverableid"], "gridDivDeliverables"]);
+              arrayQuery4DataGrid.push(["3", strQuery + " and supplemental <> 0 and (DelivType in ('Website','Recorded Presentation'))", ["OBJECTID", "data_name", "DelivType", "deliverableid", "uri"], "gridDivDeliverablesSupWebinarsPages"]);
 
               this.m_arrayQuery = arrayQuery;
               this.m_arrayQuery4DataGrid = arrayQuery4DataGrid;
@@ -211,17 +214,17 @@ define([
                                           data["items"][key][keyField] = pValue;
                                       }
                                       //https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer/2/query?where=Deliverable_Received+%3D+1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=projectid%2C+deliverable_title%2C+receiveddate%2C+Deliverable_Received+&returnGeometry=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&f=html
-                                      if (keyField == "Deliverable_Received") {
-                                          var pValue = pItem.Deliverable_Received;
-                                          if (pValue == 1) { pValue = "Yes"; } 
-                                          else { pValue = "No";}
+                                      if ((keyField == "Deliverable_Received") & (pGrid.id == "gridDeliverables")) {
+                                          pValue = pItem.Deliverable_Received;
+                                          if (pValue == 1) { pValue = "Yes"; }
+                                          else { pValue = "No"; }
                                           data["items"][key][keyField] = pValue;
                                       }
                                       if ((keyField == "uri") & (pGrid.id == "gridDeliverablesDetail")) {
-                                          var pValue = pItem.uri;
+                                          pValue = pItem.uri;
                                           if (pValue.length > 5) { pValue = "Yes"; }
                                           else { pValue = "No"; }
-                                          data["items"][key][keyField] = pValue;
+                                          data["items"][key]["Deliverable_Received"] = pValue;
                                       }
 
                                   }
@@ -233,10 +236,23 @@ define([
 
                   store = new ItemFileReadStore({ data: data });
 
+                  //if ((pGrid.id == "gridDeliverables") | (pGrid.id == "gridDeliverablesSupWebinarsPages")) {
                   if (pGrid.id == "gridDeliverables") {
-                      pGrid.on("rowclick", onDelivSummaryRowClickHandler);
+                      if (this.app.gPjrReportQuery.m_ArrayGridsWithEventsAdded.indexOf(pGrid.id) == -1) {  //if don't put this logic in then keeps on adding the click event to the data grid and gets repetitive
+                          pGrid.on("rowclick", onDelivSummaryRowClickHandler);
+                          this.app.gPjrReportQuery.m_ArrayGridsWithEventsAdded.push(pGrid.id);
+                      }
+//                  }
+//                  else if (pGrid.id == "gridDeliverablesSupWebinarsPages") {
+//                      if (this.app.gPjrReportQuery.m_ArrayGridsWithEventsAdded.indexOf(pGrid.id) == -1) {  //if don't put this logic in then keeps on adding the click event to the data grid and gets repetitive
+//                          pGrid.on("rowclick", onDelivSummaryRowClickHandler);
+//                          this.app.gPjrReportQuery.m_ArrayGridsWithEventsAdded.push(pGrid.id);
+//                      }
                   } else {
-                      pGrid.on("rowclick", onRowClickHandler);
+                      if (this.app.gPjrReportQuery.m_ArrayGridsWithEventsAdded.indexOf(pGrid.id) == -1) {  //if don't put this logic in then keeps on adding the click event to the data grid and gets repetitive
+                          pGrid.on("rowclick", onRowClickHandler);
+                          this.app.gPjrReportQuery.m_ArrayGridsWithEventsAdded.push(pGrid.id);
+                      }
                   }
 
 

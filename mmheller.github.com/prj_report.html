@@ -328,8 +328,10 @@
             <div id="divLCMAPLink"></div>
             <div id="gridDivDeliverablesSupWebinarsPages"></div><br />
             <div id="gridDivDeliverables"></div><br />
-            <div id="divDelivDetailCount"></div>
-            <div id="gridDivDeliverablesDetail"></div><br />
+            <div align="right">
+                <div id="divDelivDetailCount"></div>
+                <div id="gridDivDeliverablesDetail" ></div><br />
+            </div>
     </div>
 
     <!-- end collapsible -->
@@ -366,7 +368,7 @@
     </div>
 
 
-            <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridContacts" id="gridContacts" selectionMode="none">
+            <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridContacts" id="gridContacts" selectionMode="none">
              <thead>
                 <tr>
                   <th field="PersonName" width="300px" height="60px">Name</th>
@@ -381,7 +383,7 @@
               </thead>
             </table>
 
-           <table dojotype="dojox.grid.DataGrid" style="height:300px" jsid="gridContactOrgsOnly" id="gridContactOrgsOnly" selectionMode="none" style="">
+           <table dojotype="dojox.grid.DataGrid" style="height:300px display:none;" jsid="gridContactOrgsOnly" id="gridContactOrgsOnly" selectionMode="none" style="">
              <thead>
                 <tr>
                   <th field="GroupName" width="450" height="60px">Group Name (individuals not specified)</th>
@@ -391,7 +393,7 @@
               </thead>
             </table>
 
-          <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" style="height:100px;width:75px;" 
+          <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" style="height:100px;width:120px; display:none;" 
                         jsid="gridProposals" id="Table1" selectable="true" style="">
              <thead>
                 <tr>
@@ -402,7 +404,7 @@
             </table>
 
 
-            <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridConservationTargetsSPP" id="gridConservationTargetsSPP" selectionMode="none">
+            <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridConservationTargetsSPP" id="gridConservationTargetsSPP" selectionMode="none">
              <thead>
                 <tr>
                   <th field="CommonName" width="240px" height="auto">Species Conservation Targets</th>
@@ -413,7 +415,7 @@
               </thead>
             </table>
 
-            <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridConservationTargetsOther" id="gridConservationTargetsOther" selectionMode="none">
+            <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridConservationTargetsOther" id="gridConservationTargetsOther" selectionMode="none">
              <thead>
                 <tr>
                   <th field="CommonName" width="400px" height="auto">Habitats, Ecosystems, & Processess Consv. Targets</th>
@@ -425,10 +427,10 @@
 
 
             <table id="gridDeliverables" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" 
-                        jsid="gridDeliverables"  style="height:200px;" >
+                        jsid="gridDeliverables"  style="height:200px; display:none;" >
                 <thead>
                     <tr>
-                        <th field="deliverable_title" width="550px">Title</th>
+                        <th field="deliverable_title" width="550px">Title<br /><font size="0.4">(click for detail/weblink)</th>
                         <th field="Fund_Year" width="90px" height="auto">Fund Year</th>
                         <th field="duedate" width="auto">Due Date</th>           
                         <th field="DelivType" width="auto">Deliv Type</th>    
@@ -438,24 +440,26 @@
                 </thead>
             </table>
 
-            <table dojotype="dojox.grid.DataGrid" style="height:200px;" jsid="gridDeliverablesSupWebinarsPages" id="Table3" selectionMode="none" >
+            <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridDeliverablesSupWebinarsPages" 
+                                id="gridDeliverablesSupWebinarsPages" selectionMode="none" >
              <thead>
                 <tr>
-                  <th field="deliverable_title" width="150px">Title</th>
-                  <th field="Fund_Year" width="90px" height="auto">Fund Year</th>
+                  <th field="data_name" width="450px">Title<br /><font size="0.4">(click for detail/weblink)</font></th>
                   <th field="DelivType" width="auto">Deliv Type</th>    
                   <th field="deliverableid" hidden="true">deliverableid</th>
+                  <th field="uri" hidden="true">uri</th>
                 </tr>
               </thead>
             </table>
 
-            <table id="gridDeliverablesDetail" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" 
-                        jsid="gridDeliverablesDetail"  style="height:200px;" >
+            <table id="gridDeliverablesDetail" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false,showheader:false" 
+                        jsid="gridDeliverablesDetail"  style="height:auto; width:675px; display:none;">
                 <thead>
                     <tr>
-                        <th field="data_name" width="550px">Detail Title</th>
-                        <th field="receiveddate" >Date Received</th>
-                        <th field="uri">Weblink</th>
+                        <th field="data_name" width="450px">Detail Title <font size="0.4">(click for webpage if weblink = Yes)</th>
+                        <th field="receiveddate" width="auto" >Date Received</th>
+                        <th field="Deliverable_Received">Weblink </font></th>
+                        <th field="uri" hidden="true">uri</th>
                     </tr>
                 </thead>
             </table>
