@@ -9,10 +9,14 @@
 
 #WideContent {
     width:960px;
-
 }
 
-#navigation,#content,#WideContent {
+#WideContent2 {
+    width:935px;
+}
+
+
+#navigation,#content,#WideContent,WideContent2{
     float:left;
     margin:2px;
 }
@@ -31,6 +35,13 @@
     font-size:.75em;  /*this controls the syle of the text in the collapsable banner */
 }
 
+
+/*#DivBanner:collapse-open {
+    background:#FF0000;
+    color: #fff;
+}*/
+
+
 .collapse-open {
     background:#6E6E6E;
     color: #fff;
@@ -42,9 +53,11 @@
     padding:10px;  /*changes the Arrow padding*/
 }
 
+
 .collapse-open span {
     background:url(../images/minus.png) center center no-repeat;
 }
+
 
 .collapse-close span {
     display:block;
@@ -71,11 +84,11 @@ div.content { /*this controls style inside collapsable panel, in the grey*/
 }
 
 
-
 div.content ul, div.content p {
     margin:0;
     padding:3px;
 }
+
 
 div.content ul li {
     list-style-position:inside;

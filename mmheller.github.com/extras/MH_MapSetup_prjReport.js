@@ -13,6 +13,7 @@ function hideLoading(error) {
     app.mapPrjReport.showZoomSlider();
 }
 
+
 define([
   "dojo/_base/declare",
   "dojo/_base/lang",
@@ -112,12 +113,6 @@ define([
               var mp = webMercatorUtils.webMercatorToGeographic(evt.mapPoint);  //the map is in web mercator but display coordinates in geographic (lat, long)
               dom.byId("txt_xyCoords").innerHTML = "Latitude:" + mp.x.toFixed(4) + ", Longitude:" + mp.y.toFixed(4);  //display mouse coordinates
           },
-
-
-          Phase2: function () {
-
-          },
-
 
           Phase3: function () {
               var scalebar = new Scalebar({ map: app.mapPrjReport, scalebarUnit: "dual" });

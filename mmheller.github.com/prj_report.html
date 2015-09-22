@@ -73,27 +73,17 @@
                 Color, mouse, query, DataGrid, webMercatorUtils, BasemapGallery) {
 
         var strURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer"
-
+        
         app.gPjrReportQuery = new MH_Query4PrjReportResults({ strURL: strURL }); // instantiate the class
+
         var tokens = getTokens
         var strPRJ_ID = getTokens()['PRJ_ID']; //?RButton=true
-
-//        if (strPRJ_ID) {
-//            var div = document.getElementById('querycontent');
-//            div.innerHTML += "\n<br>" + strPRJ_ID;
-//        } else {
-//            strPRJ_ID = 293;
-//            var div = document.getElementById('querycontent');
-//            div.innerHTML += "\n<br>" + strPRJ_ID;
-//        }
 
         parser.parse();
         app.gPjrReportQuery.RunReport("ProjectID = " + strPRJ_ID, [gridContacts, gridContactOrgsOnly, gridProposals,
                                                                     gridConservationTargetsSPP, gridConservationTargetsOther,
-                                                                    gridDeliverables, gridDeliverablesSupWebinarsPages]);  // this needs sync'ing with the grids below, the div's below, and the array in the MH_Query4PrjReportResults
-        //app.gPjrReportQuery.RunReport("ProjectID = " + strPRJ_ID, [gridConservationTargets]);  // this needs sync'ing with the grids below, the div's below, and the array in the MH_Query4PrjReportResults
-//        app.pMapSup_prjReport = new MH_MapSetup_prjReport({ strQuery: "ProjectID = " + strPRJ_ID, dblExpandNum: 0.8 }); // instantiate the class
-//        app.pMapSup_prjReport.Phase1();
+                                                                    gridDeliverables, gridDeliverablesSupWebinarsPages], 
+                                                                    gridDeliverablesDetail);  // this needs sync'ing with the grids below, the div's below, and the array in the MH_Query4PrjReportResults
 
         app.pMapSup_prjReport = new MH_MapSetup_prjReport({ strQuery: this.app.gPjrReportQuery.m_prjQuery, dblExpandNum: 0.8 }); // instantiate the class
         app.pMapSup_prjReport.Phase1();
@@ -117,6 +107,7 @@
             });
             return tokens;
         }
+
 
 
 
@@ -216,14 +207,45 @@
                           <hr>
                         <div id="divDescription"></div>
                         <hr>
-                        <div id="divPI"></div>
-                        <div id="divLeadOrg"></div>
+
+
+                        <table style="width:100%;">
+                                   <tr>
+                                       <td valign="top">
+                                            <div id="divPI"></div>
+                                            <div id="divLeadOrg"></div>
+                                            <div id="divStart"></div>
+                                            <div id="divEnd"></div>
+                                            <div id="gridDivProposals"></div>   
+                                       </td>
+                                       <td valign="top">
+                                            <div id="div3"></div>                   
+                                       </td>
+                                       <td valign="top">
+         
+                                       </td>
+                                   </tr>
+
+                                   <tr>
+                                       <td valign="top">
+                                            
+                                       </td>
+                                       <td valign="top">
+                                            <div id="div5"></div>                   
+                                       </td>
+                                       <td valign="top">
+                                            <div id="Div6"></div>            
+                                       </td>
+                                   </tr>
+                        </table>       
+
+
 
                      </td>
                     <td class="HTMLTable_styleMiddle">
                         &nbsp;
                     </td>
-                    <td>
+                    <td valign="top">
                         <div id="dTotalAllocatedbyLCCSum"></div>
                         <hr>
                         <div id="dTotalAllocatedbyLCCbyYear"></div>
@@ -237,36 +259,40 @@
                 </tr>
             </table>
 
-            <div class="WideContent" id="content1" >
-            </div>
-        </div>
-    <!-- end collapsible -->
-
-    <!-- collapsible -->
-    <div class="page_collapsible" id="body-section2">Project Detail<span></span></div>
-    <div class="container">
-
-       
            <table style="width:100%;">
                <tr>
                    <td valign="top">
-                              <div id="divStart"></div>
-                              <div id="divEnd"></div>       
+
+
+
+                                    
+                                    
+                                     
                    </td>
                    <td>
                        </td>
-                   <td></td>
+                                      <td valign="top">
+
+                   </td>
                </tr>
 
                <tr>
-                   <td valign="top">
-                    <div id="gridDivProposals"></div>&nbsp;
-                   </td>
+
                    <td>
                         
                        </td>
                    <td></td>
                </tr>
+             
+           </table>
+        </div>
+    <!-- end collapsible -->
+
+    <!-- collapsible -->
+    <div class="page_collapsible" id="body-section2">Strategic Conservation Framework Detail<span></span></div>
+    <div class="container">
+
+           <table style="width:100%;">
                <tr>
                    <td valign="top">
                         <div id="divEcotypicArea"></div>
@@ -278,7 +304,8 @@
                         <div id="divStressors"></div>            
                    </td>
                </tr>
-           </table>
+           </table>       
+
         <br />
         
 
@@ -301,6 +328,8 @@
             <div id="divLCMAPLink"></div>
             <div id="gridDivDeliverablesSupWebinarsPages"></div><br />
             <div id="gridDivDeliverables"></div><br />
+            <div id="divDelivDetailCount"></div>
+            <div id="gridDivDeliverablesDetail"></div><br />
     </div>
 
     <!-- end collapsible -->
@@ -317,7 +346,7 @@
 
         <div id="page_collapsibleMapDestination" style="position:relative" >
         </div>
-
+    </div>
 
  <!--   <div class="page_collapsible" id="body-section3">Map<span></span></div>
       <div class="container">
@@ -420,7 +449,16 @@
               </thead>
             </table>
 
-
+            <table id="gridDeliverablesDetail" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" 
+                        jsid="gridDeliverablesDetail"  style="height:200px;" >
+                <thead>
+                    <tr>
+                        <th field="data_name" width="550px">Detail Title</th>
+                        <th field="receiveddate" >Date Received</th>
+                        <th field="uri">Weblink</th>
+                    </tr>
+                </thead>
+            </table>
 
 
 </div>
@@ -429,3 +467,4 @@
 
 
 </html>
+

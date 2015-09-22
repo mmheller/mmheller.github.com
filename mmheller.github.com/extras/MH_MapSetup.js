@@ -13,6 +13,8 @@ function hideLoading(error) {
     app.map.showZoomSlider();
 }
 
+
+
 define([
   "dojo/_base/declare",
   "dojo/_base/lang",

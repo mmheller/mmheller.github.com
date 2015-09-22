@@ -8,6 +8,22 @@ function onRowClickHandler(evt) {
     }
 }
 
+function onDelivSummaryRowClickHandler(evt) {
+    var div = document.getElementById("divDelivDetailCount");
+    div.innerHTML = "Finding deliverable detail records";
+
+    var iDelivID = evt.grid.getItem(evt.rowIndex).deliverableid;
+    
+    arrayQuery4DataGrid = [];
+    arrayQuery4DataGrid.push(["3", "deliverableid = " + iDelivID, ["data_name", "OBJECTID", "receiveddate", "uri"], "gridDivDeliverablesDetail"]);
+    app.gPjrReportQuery.m_arrayQuery4DataGrid = arrayQuery4DataGrid;
+    app.gPjrReportQuery.m_igridArrayIndex = 0;
+
+    app.gPjrReportQuery.m_gridArray = [app.gPjrReportQuery.m_gridDelivDetail]
+
+    app.gPjrReportQuery.SendQuery4DataGrid(arrayQuery4DataGrid, app.gPjrReportQuery.m_igridArrayIndex);
+}
+
 define([
   "dojo/_base/declare",
   "dojo/_base/lang",
@@ -50,6 +66,7 @@ define([
           m_prjQuery: null,
           strURL: null,
           m_gridArray: null,
+          m_gridDelivDetail: null,
           m_igridArrayIndex: null,
           m_iarrayQueryIndex: null,
           m_arrayQuery: null,
@@ -62,9 +79,10 @@ define([
               this.strURL = options.strURL || "www.cnn.com"; // default AGS REST URL
           },
 
-          RunReport: function (strQuery, gridArray) {
+          RunReport: function (strQuery, gridArray, gridDelivDetail) {
               this.m_gridArray = gridArray;
               this.m_prjQuery = strQuery;
+              this.m_gridDelivDetail = gridDelivDetail;
               //table/fc index, query string, field 4 aggregation, stat type (count, sum, avg), group by field, html ID, string function
               arrayQuery = [];
               arrayQuery.push(["0", strQuery, "Prj_Title", "count", "Prj_Title", "divTitle", 'Title: {0}', ""]);
@@ -73,7 +91,7 @@ define([
               arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "count", "Total_Matching_or_In_kind_Funds", "dTotalInKindSum", '<b>Total In-Kind/Match Contributions: {0}</b>', "currency"]);
               arrayQuery.push(["0", strQuery, "Prj_Start_Date", "count", "Prj_Start_Date", "divStart", 'Project Start Date: {0} ', ""]);
               arrayQuery.push(["0", strQuery, "Prj_End_Date", "count", "Prj_End_Date", "divEnd", 'Project End Date: {0} ', ""]);
-//              arrayQuery.push(["2", strQuery, "DelivType", "count", "DelivType", "divDeliverables", 'Deliverable Types: {0} ', ""]);
+              //              arrayQuery.push(["2", strQuery, "DelivType", "count", "DelivType", "divDeliverables", 'Deliverable Types: {0} ', ""]);
               arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", 'Total Funds Allocated by GNLCC by Year: \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
               arrayQuery.push(["0", strQuery, "PI_and_Email", "count", "PI_and_Email", "divPI", 'Project Lead: {0}', ""]);
               arrayQuery.push(["0", strQuery, "PI_Org", "count", "PI_Org", "divLeadOrg", 'Lead Organization: {0}', ""]);
@@ -82,7 +100,7 @@ define([
               arrayQuery.push(["4", strQuery, "EcotypicAreaName", "count", "EcotypicAreaName", "divEcotypicArea", 'Ecotypic Area(s): \n<br> {0} ', ""]);
               arrayQuery.push(["8", strQuery, "GoalName", "count", "GoalName", "divGoals", 'Goal(s): \n<br> {0} ', ""]);
               arrayQuery.push(["11", strQuery, "Stressor", "count", "Stressor", "divStressors", 'Stressor(s): \n<br> {0} ', ""]);
-              arrayQuery.push(["0", strQuery, "Comments", "count", "Comments", "divLCMAPLink", '<a href="{0}">LC MAP Collaborative Project Workspace Link</a>  ', ""]);
+              arrayQuery.push(["0", strQuery, "Comments", "count", "Comments", "divLCMAPLink", '<a href="{0}">LC MAP Project Workspace</a>  ', ""]);
               //              arrayQuery.push(["1", strQuery, "CommonName", "count", "CommonName", "divConservationTargets", 'Conservation Target(s): \n<br> {0} ', ""]);
               arrayQuery4DataGrid = [];
               arrayQuery4DataGrid.push(["9", strQuery + " and organization = 0", ["PersonName", "Contact_Type", "GroupName", "prj_priority", "OBJECTID", "roletype"], "gridDivContacts"]);
@@ -162,6 +180,12 @@ define([
               var pGrid = gridArray[iarrayQueryIndex4Grid];
               var resultFeatures = results.features;
 
+              if (pGrid.id == "gridDeliverablesDetail") {
+                  var div = document.getElementById("divDelivDetailCount");
+                  div.innerHTML = 'Deliverable Detail: {0} records'.format(resultFeatures.length);
+              }
+
+
               if (resultFeatures.length == 0) {
                   dojo.style(pGrid.domNode, 'display', 'none');
               } else {
@@ -174,7 +198,7 @@ define([
 
                   var data = { identifier: "OBJECTID", items: items };
 
-                  if (strHTMLElementID == "gridDivDeliverables") {
+                  if ((strHTMLElementID == "gridDivDeliverables") | (strHTMLElementID == "gridDivDeliverablesDetail")) {
                       var pItems = data["items"]
                       for (var key in pItems) {
                           if (pItems.hasOwnProperty(key)) {
@@ -189,13 +213,17 @@ define([
                                       //https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer/2/query?where=Deliverable_Received+%3D+1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=projectid%2C+deliverable_title%2C+receiveddate%2C+Deliverable_Received+&returnGeometry=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&f=html
                                       if (keyField == "Deliverable_Received") {
                                           var pValue = pItem.Deliverable_Received;
-                                          if (pValue == 1) {
-                                              pValue = "Yes";
-                                          } else {
-                                              pValue = "No";
-                                          }
+                                          if (pValue == 1) { pValue = "Yes"; } 
+                                          else { pValue = "No";}
                                           data["items"][key][keyField] = pValue;
                                       }
+                                      if ((keyField == "uri") & (pGrid.id == "gridDeliverablesDetail")) {
+                                          var pValue = pItem.uri;
+                                          if (pValue.length > 5) { pValue = "Yes"; }
+                                          else { pValue = "No"; }
+                                          data["items"][key][keyField] = pValue;
+                                      }
+
                                   }
                               }
                           }
@@ -203,9 +231,16 @@ define([
 
                   }
 
-
                   store = new ItemFileReadStore({ data: data });
-                  pGrid.on("rowclick", onRowClickHandler);
+
+                  if (pGrid.id == "gridDeliverables") {
+                      pGrid.on("rowclick", onDelivSummaryRowClickHandler);
+                  } else {
+                      pGrid.on("rowclick", onRowClickHandler);
+                  }
+
+
+
                   pGrid.setStore(store);
 
                   var iRowHeight4Grid = 80 // Adjust the grid height based on number of records
