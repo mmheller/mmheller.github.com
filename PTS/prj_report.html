@@ -28,7 +28,7 @@
     .soria .dojoxGridRowOver .dojoxGridCell {border: 0px solid; color:#000000; background-color: #cccccc}
     .soria .dojoxGridCell {border: 0px solid; color:#000000; font-size:1.2em;}  /* this controls style of grid cells */
     .soria .dojoxGridHeader .dojoxGridCell {background-image: url(""); background-color: #5B7E8A; border: 0px solid; color:#FFFFFF !important;}
-    .soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif;}
+    .soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif; outline-color:inherit; background-color:White;}
     .dojoxGridView {left:0px;}
    
     div.scroll {    /* this controls content style in the scroll bars   */
@@ -82,7 +82,7 @@
         parser.parse();
         app.gPjrReportQuery.RunReport("ProjectID = " + strPRJ_ID, [gridContacts, gridContactOrgsOnly, gridProposals,
                                                                     gridConservationTargetsSPP, gridConservationTargetsOther,
-                                                                    gridDeliverables, gridDeliverablesSupWebinarsPages], 
+                                                                    gridDeliverables], 
                                                                     gridDeliverablesDetail);  // this needs sync'ing with the grids below, the div's below, and the array in the MH_Query4PrjReportResults
 
         app.pMapSup_prjReport = new MH_MapSetup_prjReport({ strQuery: this.app.gPjrReportQuery.m_prjQuery, dblExpandNum: 0.8 }); // instantiate the class
@@ -93,6 +93,23 @@
         $('#cover-up').click(function () {
             window.open("http://greatnorthernlcc.org/", "_self");
         });
+
+        dojo.connect(gridProposals, "postrender", function () {
+            var headerGrid = this.domNode.firstElementChild;
+            headerGrid.style.display = "none";
+        });
+
+
+        dojo.connect(dijit.byId("gridProposals"), 'onStyleRow', this, function (row) 
+        {
+            var grid = dijit.byId("gridProposals");
+            var item = grid.getItem(row.index);
+            if(item)
+            {   row.customStyles += "background-color:white;";            }
+                grid.focus.styleRow(row);
+                grid.edit.styleRow(row);
+        });
+
 
         function getTokens() {
             var tokens = [];
@@ -191,10 +208,10 @@
 <body class="soria">
 
 <div id="cover-up"></div>
-<div id="eniro"><iframe src="GNLCC_Banner.html" style="border:none" scrolling="no" width="980" height="135" id="iframe_a"></iframe></div>
+<div id="eniro"><iframe src="GNLCC_Banner.html" style="border:none; padding:0px;" scrolling="no" width="980" height="135" id="iframe_a"></iframe></div>
 
 
-<div id="WideContent">
+<div id="WideContent" style="padding-left:6px;">
     <a href="#" id="closeAll" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
     <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
     
@@ -216,6 +233,7 @@
                                             <div id="divLeadOrg"></div>
                                             <div id="divStart"></div>
                                             <div id="divEnd"></div>
+                                            <div id="divStatus"></div>   
                                             <div id="gridDivProposals"></div>   
                                        </td>
                                        <td valign="top">
@@ -326,7 +344,7 @@
     <div class="container">
             <br />
             <div id="divLCMAPLink"></div>
-            <div id="gridDivDeliverablesSupWebinarsPages"></div><br />
+            <!--<div id="gridDivDeliverablesSupWebinarsPages"></div><br />-->
             <div id="gridDivDeliverables"></div><br />
             <div align="right">
                 <div id="divDelivDetailCount"></div>
@@ -393,19 +411,19 @@
               </thead>
             </table>
 
-          <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" style="height:100px;width:120px; display:none;" 
-                        jsid="gridProposals" id="Table1" selectable="true" style="">
+          <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" sortInfo="-1" style="width:130; height:105px;" 
+                        jsid="gridProposals" id="gridProposals" selectable="true">
              <thead>
                 <tr>
-                  <th field="Fund_Year" width="68">Proposal(s)<br /><font size="0.4">(click for doc)</font></th>
-                  <th field="uri" hidden="true" width="1" height="60px">Weblink</th>
+                  <th field="Fund_Year" width="120"  height="15px">Proposal</th>
+                  <th field="uri" hidden="true" >Weblink</th>
                 </tr>
               </thead>
             </table>
 
 
             <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridConservationTargetsSPP" id="gridConservationTargetsSPP" selectionMode="none">
-             <thead>
+             <thead>    
                 <tr>
                   <th field="CommonName" width="240px" height="auto">Species Conservation Targets</th>
                   <th field="ESA_Status" width="280px" height="60px">ESA Status</th>
@@ -426,37 +444,38 @@
             </table>
 
 
-            <table id="gridDeliverables" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" 
+            <table id="gridDeliverables" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" sortInfo="4"
                         jsid="gridDeliverables"  style="height:200px; display:none;" >
                 <thead>
                     <tr>
-                        <th field="deliverable_title" width="550px">Title<br /><font size="0.4">(click for detail/weblink)</th>
-                        <th field="Fund_Year" width="90px" height="auto">Fund Year</th>
+                        <th field="deliverable_title" width="530px">Title</th>
+                        <th field="Fund_Year" width="70px" height="auto">Fund Year</th>
                         <th field="duedate" width="auto">Due Date</th>           
                         <th field="DelivType" width="auto">Deliv Type</th>    
-                        <th field="Deliverable_Received" width="auto">Received</th>    
+                        <th field="supplemental" width="auto">Supplemental</th>    
+                        <th field="Deliverable_Received" width="60px">Received</th>    
                         <th field="deliverableid" hidden="true">deliverableid</th>
                     </tr>
                 </thead>
             </table>
 
-            <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridDeliverablesSupWebinarsPages" 
+  <!--          <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridDeliverablesSupWebinarsPages" 
                                 id="gridDeliverablesSupWebinarsPages" selectionMode="none" >
              <thead>
                 <tr>
-                  <th field="data_name" width="450px">Title<br /><font size="0.4">(click for detail/weblink)</font></th>
+                  <th field="data_name" width="450px">Title</th>
                   <th field="DelivType" width="auto">Deliv Type</th>    
                   <th field="deliverableid" hidden="true">deliverableid</th>
                   <th field="uri" hidden="true">uri</th>
                 </tr>
               </thead>
-            </table>
+            </table>-->
 
             <table id="gridDeliverablesDetail" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false,showheader:false" 
                         jsid="gridDeliverablesDetail"  style="height:auto; width:675px; display:none;">
                 <thead>
                     <tr>
-                        <th field="data_name" width="450px">Detail Title <font size="0.4">(click for webpage if weblink = Yes)</th>
+                        <th field="data_name" width="410px">Detail Title</th>
                         <th field="receiveddate" width="auto" >Date Received</th>
                         <th field="Deliverable_Received">Weblink </font></th>
                         <th field="uri" hidden="true">uri</th>

@@ -24,17 +24,21 @@
     ul.ui-autocomplete.ui-menu{width:600px;font-size:.7em;} /* this controls the style of the results in the autocomplete  */
     .soria .NavigationForm .content {font-size:.3em;}
     .soria .dojoxGridRowOver .dojoxGridCell {border: 0px solid; color:#000000; background-color: #cccccc}
-    .soria .dojoxGridCell {border: 0px solid; color:#000000; font-size:1.2em;}  /* this controls style of grid cells */
+    .soria .dojoxGridCell {border: none !important; color:#000000; font-size:1.2em;}  /* this controls style of grid cells */
     /*.soria .dojoxGridHeader .dojoxGridCell {background-image: url("images/title-bar.png"); border: 0px solid;}*/
-    .soria .dojoxGridHeader .dojoxGridCell {background-image: url(""); background-color: #5B7E8A; border: 0px solid; color:#FFFFFF !important;}
+    .soria .dojoxGridHeader .dojoxGridCell {background-image: url(""); background-color: #5B7E8A; border: none !important; color:#FFFFFF !important;}
     
-    .soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif;}
+    /*.soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif; border-left: none!important; border-left-style:none; border-collapse:collapse; outline:none !imoprtant; outline-color:Black; outline-width:thick; background-color:Fuchsia; padding-left:0px; border-width: 10px 0 !important; padding-left:0px; }*/
+    .soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif;  background-color:#5B7E8A; outline-color:Lime; padding:0px;  
+                       border-collapse: separate; border-spacing: 0px; outline-style:none; outline-width:none; border-collapse:collapse;}
+
     .dojoxGridView {left:0px;}
     
     .esriPopup .titlePane {padding-left: 20;}
     .esriPopup {right: 30;}
     
-    table { display: table; border-collapse: separate; border-spacing: 0px; border-color: white;}
+    table { display: table; border-collapse: separate; border-spacing: 0px; outline-style:none; outline-width:none; border-collapse:collapse;}
+    /*table { display: table;}*/
     
     div.scroll {    /* this controls content style in the scroll bars   */
         height: 250px; overflow-y: scroll; background:#FFFFFF; margin: 0; padding:2px; font-size:1em; line-height:1.5em; font-family: Arial, Helvetica, sans-serif;}
@@ -346,7 +350,7 @@
     <!-- collapsible -->
     <div class="page_collapsible" id="page_collapsible1">Results<span></span></div>
         <div class="container"  id="container1" >
-            <table dojotype="dojox.grid.DataGrid" style="height:600px;" jsid="grid" id="grid" sortInfo="-1" selectionMode="none" onRowContextMenu="onRowContextMenuFunc"">
+            <table dojotype="dojox.grid.DataGrid" style="height:600px; width:100%;" jsid="grid" id="grid" sortInfo="-1" selectionMode="none" onRowContextMenu="onRowContextMenuFunc"">
              <thead>
                 <tr>
                   <th field="Fiscal_Years_of_Allocation" width="50" height="60px">Fiscal Year</th>

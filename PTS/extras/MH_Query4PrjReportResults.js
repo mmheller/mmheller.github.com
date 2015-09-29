@@ -92,18 +92,19 @@ define([
               arrayQuery.push(["0", strQuery, "Description", "count", "Description", "divDescription", 'Description: {0}', ""]);
               arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "count", "Total__Funding_by_Your_LCC", "dTotalAllocatedbyLCCSum", '<b>Total Funds Allocated by GNLCC: {0}</b>', "currency"]);
               arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "count", "Total_Matching_or_In_kind_Funds", "dTotalInKindSum", '<b>Total In-Kind/Match Contributions: {0}</b>', "currency"]);
-              arrayQuery.push(["0", strQuery, "Prj_Start_Date", "count", "Prj_Start_Date", "divStart", 'Project Start Date: {0} ', ""]);
-              arrayQuery.push(["0", strQuery, "Prj_End_Date", "count", "Prj_End_Date", "divEnd", 'Project End Date: {0} ', ""]);
+              arrayQuery.push(["0", strQuery, "Prj_Start_Date", "count", "Prj_Start_Date", "divStart", 'Project Start Date:&nbsp;&nbsp;&nbsp;{0} ', ""]);
+              arrayQuery.push(["0", strQuery, "Prj_End_Date", "count", "Prj_End_Date", "divEnd", 'Project End Date:&nbsp;&nbsp;&nbsp;&nbsp;{0} ', ""]);
               //              arrayQuery.push(["2", strQuery, "DelivType", "count", "DelivType", "divDeliverables", 'Deliverable Types: {0} ', ""]);
               arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", 'Total Funds Allocated by GNLCC by Year: \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
-              arrayQuery.push(["0", strQuery, "PI_and_Email", "count", "PI_and_Email", "divPI", 'Project Lead: {0}', ""]);
-              arrayQuery.push(["0", strQuery, "PI_Org", "count", "PI_Org", "divLeadOrg", 'Lead Organization: {0}', ""]);
+              arrayQuery.push(["0", strQuery, "PI_and_Email", "count", "PI_and_Email", "divPI", 'Project Lead:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0}', ""]);
+              arrayQuery.push(["0", strQuery, "PI_Org", "count", "PI_Org", "divLeadOrg", 'Lead Organization:&nbsp;&nbsp;{0}', ""]);
               arrayQuery.push(["5", strQuery, "amount", "sum", "dest_orgname", "divFundingDispersal", 'Funding Dispersal: \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
               arrayQuery.push(["7", strQuery, "InKindamount", "sum", "orgname", "divInKindMatch", 'In-Kind/Match Contributions: \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
               arrayQuery.push(["4", strQuery, "EcotypicAreaName", "count", "EcotypicAreaName", "divEcotypicArea", 'Ecotypic Area(s): \n<br> {0} ', ""]);
               arrayQuery.push(["8", strQuery, "GoalName", "count", "GoalName", "divGoals", 'Goal(s): \n<br> {0} ', ""]);
               arrayQuery.push(["11", strQuery, "Stressor", "count", "Stressor", "divStressors", 'Stressor(s): \n<br> {0} ', ""]);
               arrayQuery.push(["0", strQuery, "Comments", "count", "Comments", "divLCMAPLink", '<a href="{0}">LC MAP Project Workspace</a>  ', ""]);
+              arrayQuery.push(["0", strQuery, "PrjStatus", "count", "PrjStatus", "divStatus", 'Project Status:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0}', ""]);
               //              arrayQuery.push(["1", strQuery, "CommonName", "count", "CommonName", "divConservationTargets", 'Conservation Target(s): \n<br> {0} ', ""]);
               arrayQuery4DataGrid = [];
               arrayQuery4DataGrid.push(["9", strQuery + " and organization = 0", ["PersonName", "Contact_Type", "GroupName", "prj_priority", "OBJECTID", "roletype"], "gridDivContacts"]);
@@ -112,8 +113,8 @@ define([
               arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID = 3", ["OBJECTID", "CommonName", "ESA_Status", "TierName", "PrimaryLCCTargetType"], "gridDivConservationTargetsSPP"]);
               arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID <> 3", ["OBJECTID", "CommonName", "ConsvTargetTypeName", "PrimaryLCCTargetType"], "gridDivConservationTargetsOther"]);
 
-              arrayQuery4DataGrid.push(["2", strQuery + " and supplemental = 0 and not (DelivType in ('Website','Recorded Presentation'))", ["OBJECTID", "deliverable_title", "Fund_Year", "duedate", "DelivType", "Deliverable_Received", "deliverableid"], "gridDivDeliverables"]);
-              arrayQuery4DataGrid.push(["3", strQuery + " and supplemental <> 0 and (DelivType in ('Website','Recorded Presentation'))", ["OBJECTID", "data_name", "DelivType", "deliverableid", "uri"], "gridDivDeliverablesSupWebinarsPages"]);
+              arrayQuery4DataGrid.push(["2", strQuery + " and supplemental = 0 and not (DelivType in ('Budget','Proposal', 'Statement of Work'))", ["OBJECTID", "deliverable_title", "Fund_Year", "duedate", "DelivType", "Deliverable_Received", "deliverableid", "supplemental"], "gridDivDeliverables"]);
+              //arrayQuery4DataGrid.push(["3", strQuery + " and supplemental <> 0 and not (DelivType in ('Website','Recorded Presentation'))", ["OBJECTID", "data_name", "DelivType", "deliverableid", "uri"], "gridDivDeliverablesSupWebinarsPages"]);
 
               this.m_arrayQuery = arrayQuery;
               this.m_arrayQuery4DataGrid = arrayQuery4DataGrid;
@@ -186,6 +187,9 @@ define([
               if (pGrid.id == "gridDeliverablesDetail") {
                   var div = document.getElementById("divDelivDetailCount");
                   div.innerHTML = 'Deliverable Detail: {0} records'.format(resultFeatures.length);
+                  //div.scrollIntoView();
+                  //$('html, body').animate({ scrollTop: (($(div).offset().top) - ($(div).offset().outerHeight())) }, 'slow');
+                  $('html, body').animate({ scrollTop: (($(div).offset().top) - 300) }, 'slow');
               }
 
 
@@ -201,7 +205,7 @@ define([
 
                   var data = { identifier: "OBJECTID", items: items };
 
-                  if ((strHTMLElementID == "gridDivDeliverables") | (strHTMLElementID == "gridDivDeliverablesDetail")) {
+                  if ((strHTMLElementID == "gridDivDeliverables") | (strHTMLElementID == "gridDivDeliverablesDetail") | (strHTMLElementID == "gridDivProposals")) {
                       var pItems = data["items"]
                       for (var key in pItems) {
                           if (pItems.hasOwnProperty(key)) {
@@ -209,7 +213,7 @@ define([
 
                               for (var keyField in pItem) {
                                   if (pItem.hasOwnProperty(keyField)) {
-                                      if (keyField == "duedate") {   // Format the date for user friendly web viewing
+                                      if ((keyField == "duedate") | (keyField == "receiveddate")) {   // Format the date for user friendly web viewing
                                           var pValue = formatDate(pItem[keyField]);
                                           data["items"][key][keyField] = pValue;
                                       }
@@ -220,13 +224,32 @@ define([
                                           else { pValue = "No"; }
                                           data["items"][key][keyField] = pValue;
                                       }
+                                      if ((keyField == "supplemental") & (pGrid.id == "gridDeliverables")) {
+                                          pValue = pItem.supplemental;
+                                          if (pValue == 1) { pValue = "Yes"; }
+                                          else { pValue = ""; }
+                                          data["items"][key][keyField] = pValue;
+                                      }
                                       if ((keyField == "uri") & (pGrid.id == "gridDeliverablesDetail")) {
                                           pValue = pItem.uri;
                                           if (pValue.length > 5) { pValue = "Yes"; }
                                           else { pValue = "No"; }
                                           data["items"][key]["Deliverable_Received"] = pValue;
-                                      }
 
+                                          if ((resultFeatures.length == 1) & (pValue == "Yes")) {
+                                                  window.open(pItem.uri, '_blank');
+                                          }
+
+                                      }
+                                      if (pGrid.id == "gridProposals") {
+                                          strtemp = pItem.Fund_Year;
+                                          //pValue = '<font color="blue">  FY{0} Proposal</font>'.format(pItem.Fund_Year);
+                                          pValue = '<font size="1" color="blue">  FY{0} Proposal</font>'.format(pItem.Fund_Year);
+                                          strURI = pItem.uri;
+                                          //pValue = '<a href="{0}">{1}</a>'.format(pItem.uri, pValue);
+                                          data["items"][key][keyField] = pValue;
+                                          data["items"][key]["uri"] = strURI;
+                                      }
                                   }
                               }
                           }
@@ -242,12 +265,12 @@ define([
                           pGrid.on("rowclick", onDelivSummaryRowClickHandler);
                           this.app.gPjrReportQuery.m_ArrayGridsWithEventsAdded.push(pGrid.id);
                       }
-//                  }
-//                  else if (pGrid.id == "gridDeliverablesSupWebinarsPages") {
-//                      if (this.app.gPjrReportQuery.m_ArrayGridsWithEventsAdded.indexOf(pGrid.id) == -1) {  //if don't put this logic in then keeps on adding the click event to the data grid and gets repetitive
-//                          pGrid.on("rowclick", onDelivSummaryRowClickHandler);
-//                          this.app.gPjrReportQuery.m_ArrayGridsWithEventsAdded.push(pGrid.id);
-//                      }
+                      //                  }
+                      //                  else if (pGrid.id == "gridDeliverablesSupWebinarsPages") {
+                      //                      if (this.app.gPjrReportQuery.m_ArrayGridsWithEventsAdded.indexOf(pGrid.id) == -1) {  //if don't put this logic in then keeps on adding the click event to the data grid and gets repetitive
+                      //                          pGrid.on("rowclick", onDelivSummaryRowClickHandler);
+                      //                          this.app.gPjrReportQuery.m_ArrayGridsWithEventsAdded.push(pGrid.id);
+                      //                      }
                   } else {
                       if (this.app.gPjrReportQuery.m_ArrayGridsWithEventsAdded.indexOf(pGrid.id) == -1) {  //if don't put this logic in then keeps on adding the click event to the data grid and gets repetitive
                           pGrid.on("rowclick", onRowClickHandler);
@@ -255,28 +278,25 @@ define([
                       }
                   }
 
-
-
                   pGrid.setStore(store);
 
-                  var iRowHeight4Grid = 80 // Adjust the grid height based on number of records
-
-                  //                  if (resultFeatures != undefined) {
-                  if (resultFeatures.length <= 2) {
-                      //iRowHeight4Grid = (45 * resultFeatures.length);
-                      iRowHeight4Grid = (85 * resultFeatures.length);
-                  } else if (resultFeatures.length > 2 & resultFeatures.length <= 5) {
-                      //iRowHeight4Grid = (30 * resultFeatures.length);
-                      iRowHeight4Grid = (35 * resultFeatures.length);
-                  } else {
-                      //iRowHeight4Grid = (30 * resultFeatures.length);
-                      iRowHeight4Grid = (32 * resultFeatures.length);
+                  if (pGrid.id != "gridProposals") {
+                      var iRowHeight4Grid = 80 // Adjust the grid height based on number of records
+                      if (resultFeatures.length <= 2) {
+                          iRowHeight4Grid = (85 * resultFeatures.length);
+                      } else if (resultFeatures.length > 2 & resultFeatures.length <= 5) {
+                          iRowHeight4Grid = (65 * resultFeatures.length);
+                      } else if (resultFeatures.length > 5 & resultFeatures.length <= 10) {
+                          iRowHeight4Grid = (45 * resultFeatures.length);
+                      } else {
+                          iRowHeight4Grid = (25 * resultFeatures.length);
+                      }
+                      var strRowHeight4Grid = iRowHeight4Grid.toString() + "px";
+                      document.getElementById(pGrid.id).style.height = strRowHeight4Grid;
+                      dijit.byId(pGrid.id).resize();
+                      dijit.byId(pGrid.id).update();
                   }
-                  //                  }
-                  var strRowHeight4Grid = iRowHeight4Grid.toString() + "px";
-                  document.getElementById(pGrid.id).style.height = strRowHeight4Grid;
-                  dijit.byId(pGrid.id).resize();
-                  dijit.byId(pGrid.id).update();
+
 
                   document.getElementById(strHTMLElementID).appendChild(document.getElementById(pGrid.id));  //move the grid to the designated div, grids need to be built outside the collapsable panel otherwise risk not rendering properly
               }
