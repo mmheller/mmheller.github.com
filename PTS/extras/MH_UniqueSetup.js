@@ -4,7 +4,6 @@
 function StartQuery(blnSelect) {    //loop through the checkboxes and disable, so user interaction dosen't disrupt the queryies
     app.map.graphics.clear();
     app.map.infoWindow.hide();
-    //app.map.infoWindow.destroy();
     arrayCheckedCheckboxes = [];
     var pform = document.getElementById("NavigationForm");
     for (var i = 0; i < pform.elements.length; i++) {  
@@ -13,12 +12,8 @@ function StartQuery(blnSelect) {    //loop through the checkboxes and disable, s
             document.getElementById(strID).disabled = true;
         }
     }
-    
     var strQuery = "";
     var arrayQuery = this.app.gCQD.Return_InitialQueryDefs();
-//    var strQuery4Display = "";
-//    var strMapServiceURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer";
-
     app.gQuery.SendQuery(arrayQuery, 0);
 }
 
@@ -26,10 +21,7 @@ function StartQuery(blnSelect) {    //loop through the checkboxes and disable, s
 function ClearThenStartQuery(strContainterID) {    //loop through the checkboxes and disable, so user interaction dosen't disrupt the queryies
     app.map.graphics.clear();
     app.map.infoWindow.hide();
-    //app.map.infoWindow.destroy();
-
-    //clear out the checkboxes from the container that houses the clicked clear button
-    var pContainter = document.getElementById(strContainterID);
+    var pContainter = document.getElementById(strContainterID);    //clear out the checkboxes from the container that houses the clicked clear button
     for (var i = 0; i < pContainter.childNodes.length; i++) {
         if (pContainter.childNodes[i].type == 'checkbox') {
             strID = pContainter.childNodes[i].id;
@@ -45,12 +37,8 @@ function ClearThenStartQuery(strContainterID) {    //loop through the checkboxes
             document.getElementById(strID).disabled = true
         }
     }
-
     var strQuery = "";
     var arrayQuery = this.app.gCQD.Return_InitialQueryDefs();
-//    var strQuery4Display = "";
-//    var strMapServiceURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer";
-
     app.gQuery.SendQuery(arrayQuery, 0);
 }
 
@@ -64,11 +52,9 @@ function AddCheckbox(strContainerDivID, strNewID, strValueField, strLableText, b
     cb.checked = blnChecked;
     cb.disabled = blnDisabled;
     cb.onclick = function (evt) { StartQuery(evt); }
-    
     var text = document.createTextNode(strLableText);
     document.getElementById(strContainerDivID).appendChild(cb);
     document.getElementById(strContainerDivID).appendChild(text);
-
     var br = document.createElement("br");
     document.getElementById(strContainerDivID).appendChild(br);
 }
@@ -86,11 +72,7 @@ function AddClearButton(strContainerDivID, strNewID, strValueField, strLableText
 
     var text = document.createTextNode(strLableText);
     document.getElementById(strContainerDivID).appendChild(btn);
-//    var br = document.createElement("br");
-//    document.getElementById(strContainerDivID).appendChild(br);
 }
-
-
 
 define([
   "dojo/_base/declare",
@@ -131,9 +113,7 @@ define([
                       this.arrayQueryStringsPerTable.push(strQuery);
                   }
               }
-              //strURL, strQuery, strFieldNameText, strFieldNameValue, strContainerDivID, strNewDivID
-              //populate an array of checked checkboxes
-              arrayCheckedCheckboxes = [];
+              arrayCheckedCheckboxes = []; //populate an array of checked checkboxes
 
               if (strQuery != "OBJECTID > 0") {  //if initial query or clear'ing then don't store the checked boxes
                   var pform = document.getElementById("NavigationForm");
@@ -150,40 +130,30 @@ define([
               this.m_arrayCheckedCheckboxes = arrayCheckedCheckboxes;
               this.iTableIndex = 6
 
-
               if (document.getElementById("cbx_FilterValues").checked) {
                   this.qry_Query4UniquesAndCheckBoxes(strURL, this.arrayQueryStringsPerTable[this.iTableIndex], "Fund_Year", "Fund_Year",
                                                     'section3content', this.iTableIndex.toString() + "-Fund_Year");
               }
-
-
               //              AddCheckbox("section4content", "6-dest_orgname-1", "Funding_Recipients_Dispersal", "UNIVERSITY OF MONTANA SYSTEM", false)
               //              AddCheckbox("section5content", "2-dest_orgname-1", "ConsvTargets", "Sage shrub/grassland (Habitats and Ecosystems)", false)
-
           },
 
           qry_Query4UniquesAndCheckBoxes: function (strURL, strQuery, strFieldNameText, strFieldNameValue, strContainerDivID, strNewDivID) {
               if (strFieldNameText == "PersonName") {
                   var strstop = "";
               }
-
               this.strContainerDivID = strContainerDivID;
               this.strFieldNameText = strFieldNameText;
               this.strFieldNameValue = strFieldNameValue;
               this.strNewDivID = strNewDivID;
-
               var pQueryTask = new esri.tasks.QueryTask(strURL + "/" + this.iTableIndex);
               var pQuery = new esri.tasks.Query();
               var pstatDef = new esri.tasks.StatisticDefinition();
-
               pstatDef.statisticType = "count";
               pstatDef.onStatisticField = strFieldNameText;
               pstatDef.outStatisticFieldName = "genericstat";
-
               pQuery.returnGeometry = false;
               pQuery.where = strQuery + " and (" + strFieldNameText + " is not NULL)";
-
-
               pQuery.outFields = [strFieldNameText];
               pQuery.groupByFieldsForStatistics = [strFieldNameText];
               pQuery.outStatistics = [pstatDef];
@@ -235,27 +205,27 @@ define([
                           iValue = "";
                       });
 
-                      if (this.strFieldNameText != "Project_ID") {
+                      if (this.app.gSup.strFieldNameText != "Project_ID") {
                           var all = [];
                           for (var i = 0; i < values.length; i++) {
                               all.push({ 'T': texts[i], 'V': values[i] });
                           }
-                          if (this.strFieldNameText == "ST_ID") {
-                              var temp = "";
+                          if (this.app.gSup.strFieldNameText == "Fund_Year") {
+                              all.reverse(sortFunction);
+                          } else {
+                              all.sort(sortFunction);
                           }
-                          all.sort(sortFunction);
                           texts = [];
                           values = [];
-
                           for (var i = 0; i < all.length; i++) {
                               texts.push(all[i].T);
                               values.push(all[i].V);
                           }
                       }
                   }
-                  
+
                   document.getElementById(this.app.gSup.strContainerDivID).innerHTML = ''; // clear out existing items
-                  
+
                   if (values != undefined) {
                       var blnCheckedAny = false;
                       strFirstNewDiv = "";
@@ -275,8 +245,8 @@ define([
 
                           var strNewDivID = this.app.gSup.strNewDivID + strDivSuffix;
 
-                          if (strFirstNewDiv == ""){   //store the 1st new checkbox div so can later place the clear button ahead of it
-                            strFirstNewDiv =strNewDivID;
+                          if (strFirstNewDiv == "") {   //store the 1st new checkbox div so can later place the clear button ahead of it
+                              strFirstNewDiv = strNewDivID;
                           }
 
                           if (this.app.gSup.m_arrayCheckedCheckboxes != undefined) {
@@ -291,14 +261,13 @@ define([
                           AddCheckbox(this.app.gSup.strContainerDivID, strNewDivID, varValue, tt, blnChecked, true)
                       }
                       if (blnCheckedAny == true) {
-//                          document.getElementById(this.app.gSup.strContainerDivID).innerHTML = ''; // clear out existing items
                           strNewDivIDClear = this.app.gSup.strNewDivID + "-clear";
                           AddClearButton(this.app.gSup.strContainerDivID, strNewDivIDClear, "Clear", this.app.gSup.strContainerDivID, false, "visible")
                           var br = document.createElement("br");
                           var parentDiv = document.getElementById(strFirstNewDiv).parentNode;
                           parentDiv.insertBefore(document.getElementById(strNewDivIDClear), document.getElementById(strFirstNewDiv))
                           parentDiv.insertBefore(br, document.getElementById(strFirstNewDiv))
-                      } 
+                      }
                   }
                   else if (this.strFieldNameText == "Project_ID") {
                       if (values == undefined) {
@@ -372,10 +341,10 @@ define([
                   case "Stressor":
                       this.app.gSup.iTableIndex = 9;
                       this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
-                                                                        "PersonName", "PersonName",
-                                                            'section11content', this.app.gSup.iTableIndex.toString() + "-PersonName");
+                                                                        "GroupName", "GroupName",
+                                                            'section11content', this.app.gSup.iTableIndex.toString() + "-GroupName");
                       break;
-                  case "PersonName":
+                  case "GroupName":
                       this.app.gSup.iTableIndex = 0;
                       this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
                                                                         "PrjStatus", "PrjStatus",
@@ -397,12 +366,12 @@ define([
                                                             'section14content', this.app.gSup.iTableIndex.toString() + "-Support_Name");
                       break;
 
-                  case "Support_Name":
-                      this.app.gSup.iTableIndex = 0;
-                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
-                                                                        "Total__Funding_by_Your_LCC", "Total__Funding_by_Your_LCC",
-                                                            'section15content', this.app.gSup.iTableIndex.toString() + "-Total__Funding_by_Your_LCC");
-                      break;
+                  //                  case "Support_Name":   
+                  //                      this.app.gSup.iTableIndex = 0;   
+                  //                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],   
+                  //                                                                        "Total__Funding_by_Your_LCC", "Total__Funding_by_Your_LCC",   
+                  //                                                            'section15content', this.app.gSup.iTableIndex.toString() + "-Total__Funding_by_Your_LCC");   
+                  //                      break;   
 
               }
 

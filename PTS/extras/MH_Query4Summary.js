@@ -26,11 +26,23 @@ define([
       "esri/tasks/query",
       "dojox/grid/DataGrid",
       "dojo/data/ItemFileReadStore",
-  ], function (
+  ],
+
+
+  function (
       declare, lang, esriRequest, IdentityManager, FeatureLayer, FeatureTable,
       domConstruct, dom, parser, ready, on,
       registry, Query, DataGrid, ItemFileReadStore
 ) {
+
+      function sortFunction(a, b) {
+          //          var textA = a.T.toUpperCase();
+          //          var textB = b.T.toUpperCase();
+          var textA = a.T;
+          var textB = b.T;
+          return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+      }
+
       return declare([], {
           strURL: null,
           m_iarrayQueryIndex: null,
@@ -42,24 +54,22 @@ define([
           Summarize: function (strQuery) {
               //table/fc index, query string, field 4 aggregation, stat type (count, sum, avg), group by field, html ID, string function
               arrayQuery = [];
-              arrayQuery.push(["0", strQuery, "ProjectID", "count", "", "page_collapsible1", 'Results ({0} projects)', ""]);
-              arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "sum", "", "dTotalAllocatedbyLCC", 'GNLCC Funds Allocated: {0} ', "currency"]);
-              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", 'GNLCC Funds Allocated by Year: \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both"]);
-              arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "sum", "", "dTotalInKindMatch", 'Partner In-Kind or Match Funding: {0} ', "currency"]);
-              arrayQuery.push(["7", strQuery, "ProjectID", "count", "orgname ", "dNumberofInKindOrgs", 'Partner Organizations Providing In-Kind or Match Funding: {0} ', "countOfGroupBy"]);
-              arrayQuery.push(["1", strQuery, "ProjectID", "count", "CommonName", "dTotalNumberofConsvTargets", 'Number of Consv Targets: {0} ', "countOfGroupBy"]);
-//              arrayQuery.push(["6", strQuery, "ProjectID", "count", "Fund_Year", "dYearsFunded", 'Fund Years: \n<br>  {0} ', "default"]);
-              arrayQuery.push(["9", strQuery, "ProjectID", "count", "contactID", "dNumberOfProjectContacts", 'Number of Project Contacts: {0} ', "countOfGroupBy"]);
-              arrayQuery.push(["2", strQuery, "ProjectID", "count", "NationalLCCDelivType", "dDeliverabletype", 'Deliverable Types: \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default"]);
-              arrayQuery.push(["2", strQuery, "ProjectID", "count", "", "dNumberofDeliverables", 'Number of Deliverables: {0} ', "default"]);
-              arrayQuery.push(["0", strQuery, "ProjectID", "count", "PrjStatus", "dPrjStatus", 'Project Status: \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default"]);
-              arrayQuery.push(["5", strQuery, "ProjectID", "count", "dest_orgname", "dNumberOfFundingRecipients", 'Number of Funding Recipient Organizations: {0} ', "countOfGroupBy"]);
-              arrayQuery.push(["5", strQuery, "ProjectID", "count", "DestinationType", "dFundRecipientTypes", 'Funding Recipient Types: \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default"]);
-              arrayQuery.push(["4", strQuery, "ProjectID", "count", "EcotypicAreaName", "dEcotypicAreas", 'Ecotypic (Partner Forum) Areas: \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default"]);
-              arrayQuery.push(["11", strQuery, "ProjectID", "count", "Stressor", "dStressors", 'Stressors:  \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "default"]);
-              arrayQuery.push(["8", strQuery, "ProjectID", "count", "GoalName", "dGoals", 'Goals: \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default"]);
-
-
+              arrayQuery.push(["0", strQuery, "ProjectID", "count", "", "page_collapsible1", 'Results ({0} projects)', "", ""]);
+              arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "sum", "", "dTotalAllocatedbyLCC", '<b>GNLCC Funds Allocated:</b> {0}', "currency", ""]);
+              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", '<b>GNLCC Funds Allocated by Year:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both", "desc"]);
+              arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "sum", "", "dTotalInKindMatch", '<b>Partner In-Kind or Match Funding:</b> {0} ', "currency", ""]);
+              arrayQuery.push(["7", strQuery, "ProjectID", "count", "orgname", "dNumberofInKindOrgs", '<b>Partner Organizations Providing In-Kind or Match Funding:</b> {0} ', "countOfGroupBy", ""]);
+              arrayQuery.push(["1", strQuery, "ProjectID", "count", "CommonName", "dTotalNumberofConsvTargets", '<b>Number of Conservation Targets:</b> {0} ', "countOfGroupBy", ""]);
+              //              arrayQuery.push(["6", strQuery, "ProjectID", "count", "Fund_Year", "dYearsFunded", 'Fund Years: \n<br>  {0} ', "default"]);
+              arrayQuery.push(["9", strQuery, "ProjectID", "count", "contactID", "dNumberOfProjectContacts", '<b>Number of Project Contacts:</b> {0} ', "countOfGroupBy", ""]);
+              arrayQuery.push(["2", strQuery, "ProjectID", "count", "NationalLCCDelivType", "dDeliverabletype", '<b>Deliverable Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default", "asc"]);
+              arrayQuery.push(["2", strQuery, "ProjectID", "count", "", "dNumberofDeliverables", '<b>Number of Deliverables:</b> {0} ', "default", ""]);
+              arrayQuery.push(["0", strQuery, "ProjectID", "count", "PrjStatus", "dPrjStatus", '<b>Project Status:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default", ""]);
+              arrayQuery.push(["5", strQuery, "ProjectID", "count", "dest_orgname", "dNumberOfFundingRecipients", '<b>Number of Funding Recipient Organizations:</b> {0} ', "countOfGroupBy", ""]);
+              arrayQuery.push(["5", strQuery, "ProjectID", "count", "DestinationType", "dFundRecipientTypes", '<b>Funding Recipient Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default", "asc"]);
+              arrayQuery.push(["4", strQuery, "ProjectID", "count", "EcotypicAreaName", "dEcotypicAreas", '<b>Ecotypic Areas (Partner Forums):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default", "asc"]);
+              arrayQuery.push(["11", strQuery, "ProjectID", "count", "Stressor", "dStressors", '<b>Stressors:</b>  \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "default", "asc"]);
+              arrayQuery.push(["8", strQuery, "ProjectID", "count", "GoalName", "dGoals", '<b>Conservation Goals:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default", "asc"]);
 
               this.m_arrayQuery = arrayQuery;
               this.SendQuery(arrayQuery, 0)
@@ -79,15 +89,18 @@ define([
 
               pstatDef.statisticType = pTblindexAndQuery[3];
               pstatDef.onStatisticField = strFieldNameText;
+
               pstatDef.outStatisticFieldName = "genericstat";
 
               pQuery.returnGeometry = false;
               pQuery.where = strQuery;
+
               pQuery.outFields = [strFieldNameText];
               var strGroupByField = pTblindexAndQuery[4];
-
+                            
               if (strGroupByField != "") {
                   pQuery.groupByFieldsForStatistics = [strGroupByField];
+                  //pQuery.orderByFields = [strGroupByField + " DESC"];
               }
 
               pQuery.outStatistics = [pstatDef];
@@ -99,14 +112,29 @@ define([
 
           returnEvents: function (results) {
               pTblindexAndQuery = this.app.gQuerySummary.m_arrayQuery[this.app.gQuerySummary.m_iarrayQueryIndex];
-              //              var strQuery = pTblindexAndQuery[1];
               var strStatisticType = pTblindexAndQuery[3];
+              var strFieldNameText = pTblindexAndQuery[2];
               var strGroupByField = pTblindexAndQuery[4];
               var strHTMLElementID = pTblindexAndQuery[5];
               var strStringFormatting = pTblindexAndQuery[6];
               var strVarType = pTblindexAndQuery[7];
+              var strSortType = pTblindexAndQuery[8];
               var div = document.getElementById(strHTMLElementID);
               var resultFeatures = results.features;
+
+              if (strSortType == "desc") {
+                  resultFeatures = results.features.reverse(function (a, b) {
+                      var textA = a.attributes[strGroupByField].toString().toUpperCase();
+                      var textB = b.attributes[strGroupByField].toString().toUpperCase();
+                      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+                  });
+              }  else if (strSortType == "asc") {
+                  resultFeatures = results.features.sort(function (a, b) {
+                      var textA = a.attributes[strGroupByField].toString().toUpperCase();
+                      var textB = b.attributes[strGroupByField].toString().toUpperCase();
+                      return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+                  });
+              }
 
               if (!String.prototype.format) {
                   String.prototype.format = function () {
@@ -147,22 +175,14 @@ define([
 
                               blnAdd2Dropdown = false;
                               dojo.forEach(attrNames, function (an) {
-                                  if (this.app.gQuerySummary.m_iarrayQueryIndex == 10) {
-                                      temp = "";
-                                  }
-
-                                  if (feature.attributes[an] == null) {
-                                      strText = "null or undefined";
+                                  if ((feature.attributes[an] == null) | (feature.attributes[an] == undefined)) {
+                                      strText = "";   
                                   } else {
                                       var strText = feature.attributes[an].toString();
                                   }
-                                  //                                  if ((strText == null) || (strText == undefined)) {
-                                  if (strText == undefined) {
-                                      strText = "null or undefined";
-                                  }
-
-                                  if ((strGroupByField != "") & (an == "genericstat") & (strVarType != "show both")) {
+                                  if (((strGroupByField != "") & (an == "genericstat") & (strVarType != "show both")) | (strText == "")) {
                                       //values.push(strText);
+                                      //do nothing
                                   } else if ((strStatisticType == "count") & (strVarType == "default")) {
                                       strText += "\n<br>&nbsp;&nbsp;&nbsp;";
                                       values.push(strText);
@@ -178,6 +198,7 @@ define([
                           });
                       }
                   }
+
                   strText = values.join(" ");
               }
 

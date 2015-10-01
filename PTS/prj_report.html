@@ -21,31 +21,12 @@
     <script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>
 
 <style>
-    #eniro{ position:relative; z-index:10; height:135px; overflow:hidden;}
-    #cover-up {position: absolute; z-index: 20; width: 98%; height: 135px; background: rgba(255, 255, 255, 0.01)}
-
     .soria .NavigationForm .content {font-size:.3em;}
     .soria .dojoxGridRowOver .dojoxGridCell {border: 0px solid; color:#000000; background-color: #cccccc}
     .soria .dojoxGridCell {border: 0px solid; color:#000000; font-size:1.2em;}  /* this controls style of grid cells */
     .soria .dojoxGridHeader .dojoxGridCell {background-image: url(""); background-color: #5B7E8A; border: 0px solid; color:#FFFFFF !important;}
-    .soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif; outline-color:inherit; background-color:White;}
+    .soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif; outline-color:inherit; background-color:White; font-size:9px;}
     .dojoxGridView {left:0px;}
-   
-    div.scroll {    /* this controls content style in the scroll bars   */
-            height: 250px; overflow-y: scroll; background:#FFFFFF; margin: 0; padding:10px; font-size:1em; line-height:1.5em; font-family: Arial, Helvetica, sans-serif;}
-
-    html,body{height:100%; width:100%; margin:0;}
-    
-    .HTMLTable_styleMiddle    {    width: 13px;background-color: #FFFFFF}
-    .HTMLTable_styleLeft    {    vertical-align:top; width: 625px; border-bottom-style: solid; border-width: thick; border-color: #FFFFFF;}    
-    
-    body {
-        background-color:#fff;font-family:arial,helvetica,sans-serif;
-    }
-    
-    #mapPrjReport {padding:0;      margin:0;      height:800px;    }
-
-    /*#rightPane {font-size:10pt; text-align:center; width:40%; overflow:none;}*/
 </style>
 
 <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
@@ -85,10 +66,7 @@
                                                                     gridDeliverables], 
                                                                     gridDeliverablesDetail);  // this needs sync'ing with the grids below, the div's below, and the array in the MH_Query4PrjReportResults
 
-        app.pMapSup_prjReport = new MH_MapSetup_prjReport({ strQuery: this.app.gPjrReportQuery.m_prjQuery, dblExpandNum: 0.8 }); // instantiate the class
-        app.pMapSup_prjReport.Phase1();
-        app.pMapSup_prjReport.Phase3();
-        document.getElementById("page_collapsibleMapDestination").appendChild(document.getElementById("mapPrjReport"));  //move the grid to the designated div, grids need to be built outside the collapsable panel otherwise risk not rendering properly
+
 
         $('#cover-up').click(function () {
             window.open("http://greatnorthernlcc.org/", "_self");
@@ -212,14 +190,15 @@
 
 
 <div id="WideContent" style="padding-left:6px;">
-    <a href="#" id="closeAll" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
-    <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
-    
+    <div style="padding-top:6px; padding-bottom:6px;">
+        <a href="#" id="closeAll" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
+        <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
+    </div>
     <div class="page_collapsible" id="page_collapsible1">Project Information<span></span></div>    <!-- collapsible -->
         <div class="container"  id="container1" >
             <table style="width: 100%;">
                 <tr>
-                    <td class="HTMLTable_styleLeft">
+                    <td class="HTMLTable_styleLeftLessPad">
                        <div id="divTitle"></div>
                           <hr>
                         <div id="divDescription"></div>
@@ -260,7 +239,7 @@
 
 
                      </td>
-                    <td class="HTMLTable_styleMiddle">
+                    <td class="HTMLTable_styleMiddleLessPad">
                         &nbsp;
                     </td>
                     <td valign="top">
@@ -445,16 +424,28 @@
 
 
             <table id="gridDeliverables" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" sortInfo="4"
-                        jsid="gridDeliverables"  style="height:200px; display:none;" >
+                        jsid="gridDeliverables"  style="height:auto; display:none;" >
                 <thead>
                     <tr>
-                        <th field="deliverable_title" width="530px">Title</th>
+                        <th field="deliverable_title" width="500px">Title</th>
                         <th field="Fund_Year" width="70px" height="auto">Fund Year</th>
-                        <th field="duedate" width="auto">Due Date</th>           
-                        <th field="DelivType" width="auto">Deliv Type</th>    
+                        <th field="duedate" width="70px">Due Date</th>           
+                        <th field="DelivType" width="120px">Type</th>    
                         <th field="supplemental" width="auto">Supplemental</th>    
                         <th field="Deliverable_Received" width="60px">Received</th>    
                         <th field="deliverableid" hidden="true">deliverableid</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <table id="gridDeliverablesDetail" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" 
+                        jsid="gridDeliverablesDetail"  style="height:auto; width:675px; display:none;">
+                <thead>
+                    <tr>
+                        <th field="data_name" width="410px">Detail Title</th>
+                        <th field="receiveddate" width="auto" >Date Received</th>
+                        <th field="Deliverable_Received">Weblink </font></th>
+                        <th field="uri" hidden="true">uri</th>
                     </tr>
                 </thead>
             </table>
@@ -471,17 +462,7 @@
               </thead>
             </table>-->
 
-            <table id="gridDeliverablesDetail" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false,showheader:false" 
-                        jsid="gridDeliverablesDetail"  style="height:auto; width:675px; display:none;">
-                <thead>
-                    <tr>
-                        <th field="data_name" width="410px">Detail Title</th>
-                        <th field="receiveddate" width="auto" >Date Received</th>
-                        <th field="Deliverable_Received">Weblink </font></th>
-                        <th field="uri" hidden="true">uri</th>
-                    </tr>
-                </thead>
-            </table>
+
 
 
 </div>

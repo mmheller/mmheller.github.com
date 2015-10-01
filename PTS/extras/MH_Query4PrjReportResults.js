@@ -88,23 +88,23 @@ define([
 
               //table/fc index, query string, field 4 aggregation, stat type (count, sum, avg), group by field, html ID, string function
               arrayQuery = [];
-              arrayQuery.push(["0", strQuery, "Prj_Title", "count", "Prj_Title", "divTitle", 'Title: {0}', ""]);
-              arrayQuery.push(["0", strQuery, "Description", "count", "Description", "divDescription", 'Description: {0}', ""]);
-              arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "count", "Total__Funding_by_Your_LCC", "dTotalAllocatedbyLCCSum", '<b>Total Funds Allocated by GNLCC: {0}</b>', "currency"]);
+              arrayQuery.push(["0", strQuery, "Prj_Title", "count", "Prj_Title", "divTitle", '<b>Title:</b> {0}', ""]);
+              arrayQuery.push(["0", strQuery, "Description", "count", "Description", "divDescription", '<b>Description:</b> {0}', ""]);
+              arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "count", "Total__Funding_by_Your_LCC", "dTotalAllocatedbyLCCSum", '<b>Total GNLCC Funds Allocated: {0}</b>', "currency"]);
               arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "count", "Total_Matching_or_In_kind_Funds", "dTotalInKindSum", '<b>Total In-Kind/Match Contributions: {0}</b>', "currency"]);
-              arrayQuery.push(["0", strQuery, "Prj_Start_Date", "count", "Prj_Start_Date", "divStart", 'Project Start Date:&nbsp;&nbsp;&nbsp;{0} ', ""]);
-              arrayQuery.push(["0", strQuery, "Prj_End_Date", "count", "Prj_End_Date", "divEnd", 'Project End Date:&nbsp;&nbsp;&nbsp;&nbsp;{0} ', ""]);
+              arrayQuery.push(["0", strQuery, "Prj_Start_Date", "count", "Prj_Start_Date", "divStart", '<b>Project Start Date:</b>&nbsp;&nbsp;&nbsp;{0} ', ""]);
+              arrayQuery.push(["0", strQuery, "Prj_End_Date", "count", "Prj_End_Date", "divEnd", '<b>Project End Date:</b>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', ""]);
               //              arrayQuery.push(["2", strQuery, "DelivType", "count", "DelivType", "divDeliverables", 'Deliverable Types: {0} ', ""]);
-              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", 'Total Funds Allocated by GNLCC by Year: \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
-              arrayQuery.push(["0", strQuery, "PI_and_Email", "count", "PI_and_Email", "divPI", 'Project Lead:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0}', ""]);
-              arrayQuery.push(["0", strQuery, "PI_Org", "count", "PI_Org", "divLeadOrg", 'Lead Organization:&nbsp;&nbsp;{0}', ""]);
-              arrayQuery.push(["5", strQuery, "amount", "sum", "dest_orgname", "divFundingDispersal", 'Funding Dispersal: \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
-              arrayQuery.push(["7", strQuery, "InKindamount", "sum", "orgname", "divInKindMatch", 'In-Kind/Match Contributions: \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
-              arrayQuery.push(["4", strQuery, "EcotypicAreaName", "count", "EcotypicAreaName", "divEcotypicArea", 'Ecotypic Area(s): \n<br> {0} ', ""]);
-              arrayQuery.push(["8", strQuery, "GoalName", "count", "GoalName", "divGoals", 'Goal(s): \n<br> {0} ', ""]);
-              arrayQuery.push(["11", strQuery, "Stressor", "count", "Stressor", "divStressors", 'Stressor(s): \n<br> {0} ', ""]);
+              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", '<b>Total GNLCC Funds Allocated by Year:</b> \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
+              arrayQuery.push(["0", strQuery, "PI_and_Email", "count", "PI_and_Email", "divPI", '<b>Project Lead:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0}', ""]);
+              arrayQuery.push(["0", strQuery, "PI_Org", "count", "PI_Org", "divLeadOrg", '<b>Lead Organization</b>:&nbsp;&nbsp;{0}', ""]);
+              arrayQuery.push(["5", strQuery, "amount", "sum", "dest_orgname", "divFundingDispersal", '<b>Funding Recipient:</b> \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
+              arrayQuery.push(["7", strQuery, "InKindamount", "sum", "orgname", "divInKindMatch", '<b>In-Kind/Match Contributions:</b> \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
+              arrayQuery.push(["4", strQuery, "EcotypicAreaName", "count", "EcotypicAreaName", "divEcotypicArea", '<b>Ecotypic Areas:</b> \n<br> {0} ', ""]);
+              arrayQuery.push(["8", strQuery, "GoalName", "count", "GoalName", "divGoals", '<b>Goals:</b> \n<br> {0} ', ""]);
+              arrayQuery.push(["11", strQuery, "Stressor", "count", "Stressor", "divStressors", '<b>Stressors:</b> \n<br> {0} ', ""]);
               arrayQuery.push(["0", strQuery, "Comments", "count", "Comments", "divLCMAPLink", '<a href="{0}">LC MAP Project Workspace</a>  ', ""]);
-              arrayQuery.push(["0", strQuery, "PrjStatus", "count", "PrjStatus", "divStatus", 'Project Status:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0}', ""]);
+              arrayQuery.push(["0", strQuery, "PrjStatus", "count", "PrjStatus", "divStatus", '<b>Project Status:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0}', ""]);
               //              arrayQuery.push(["1", strQuery, "CommonName", "count", "CommonName", "divConservationTargets", 'Conservation Target(s): \n<br> {0} ', ""]);
               arrayQuery4DataGrid = [];
               arrayQuery4DataGrid.push(["9", strQuery + " and organization = 0", ["PersonName", "Contact_Type", "GroupName", "prj_priority", "OBJECTID", "roletype"], "gridDivContacts"]);
@@ -189,7 +189,7 @@ define([
                   div.innerHTML = 'Deliverable Detail: {0} records'.format(resultFeatures.length);
                   //div.scrollIntoView();
                   //$('html, body').animate({ scrollTop: (($(div).offset().top) - ($(div).offset().outerHeight())) }, 'slow');
-                  $('html, body').animate({ scrollTop: (($(div).offset().top) - 300) }, 'slow');
+                  $('html, body').animate({ scrollTop: (($(div).offset().top) - 400) }, 'slow');
               }
 
 
@@ -283,20 +283,20 @@ define([
                   if (pGrid.id != "gridProposals") {
                       var iRowHeight4Grid = 80 // Adjust the grid height based on number of records
                       if (resultFeatures.length <= 2) {
-                          iRowHeight4Grid = (85 * resultFeatures.length);
-                      } else if (resultFeatures.length > 2 & resultFeatures.length <= 5) {
-                          iRowHeight4Grid = (65 * resultFeatures.length);
-                      } else if (resultFeatures.length > 5 & resultFeatures.length <= 10) {
                           iRowHeight4Grid = (45 * resultFeatures.length);
-                      } else {
+                      } else if (resultFeatures.length > 2 & resultFeatures.length <= 5) {
+                          iRowHeight4Grid = (35 * resultFeatures.length);
+                      } else if (resultFeatures.length > 5 & resultFeatures.length <= 10) {
                           iRowHeight4Grid = (25 * resultFeatures.length);
+                      } else {
+                          iRowHeight4Grid = (22 * resultFeatures.length);
                       }
                       var strRowHeight4Grid = iRowHeight4Grid.toString() + "px";
                       document.getElementById(pGrid.id).style.height = strRowHeight4Grid;
                       dijit.byId(pGrid.id).resize();
                       dijit.byId(pGrid.id).update();
                   }
-
+                                      
 
                   document.getElementById(strHTMLElementID).appendChild(document.getElementById(pGrid.id));  //move the grid to the designated div, grids need to be built outside the collapsable panel otherwise risk not rendering properly
               }
@@ -305,12 +305,11 @@ define([
                   this.app.gPjrReportQuery.SendQuery4DataGrid(this.app.gPjrReportQuery.m_arrayQuery4DataGrid, this.app.gPjrReportQuery.m_igridArrayIndex)
               }
               else {
-                  //                  app.pMapSup_prjReport = new MH_MapSetup_prjReport({ strQuery: this.app.gPjrReportQuery.m_prjQuery, dblExpandNum: 0.8 }); // instantiate the class
-                  //                  app.pMapSup_prjReport.Phase1();
-                  //                  app.pMapSup_prjReport.Phase3();
-
+                  app.pMapSup_prjReport = new MH_MapSetup_prjReport({ strQuery: this.app.gPjrReportQuery.m_prjQuery, dblExpandNum: 0.8 }); // instantiate the class
+                  app.pMapSup_prjReport.Phase1();
+                  app.pMapSup_prjReport.Phase3();
+                  document.getElementById("page_collapsibleMapDestination").appendChild(document.getElementById("mapPrjReport"));  //move the grid to the designated div, grids need to be built outside the collapsable panel otherwise risk not rendering properly
               }
-
           },
 
 

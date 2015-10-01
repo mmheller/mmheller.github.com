@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Draft - GNLCC Project Tracking System Public Website</title>
+    <title>Supported Science Projects</title>
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/dijit/themes/soria/soria.css">
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/esri/css/esri.css"/>
     <link rel="stylesheet" href="css/collapse.css" type="text/css" />
@@ -25,14 +25,12 @@
     .soria .NavigationForm .content {font-size:.3em;}
     .soria .dojoxGridRowOver .dojoxGridCell {border: 0px solid; color:#000000; background-color: #cccccc}
     .soria .dojoxGridCell {border: none !important; color:#000000; font-size:1.2em;}  /* this controls style of grid cells */
-    /*.soria .dojoxGridHeader .dojoxGridCell {background-image: url("images/title-bar.png"); border: 0px solid;}*/
     .soria .dojoxGridHeader .dojoxGridCell {background-image: url(""); background-color: #5B7E8A; border: none !important; color:#FFFFFF !important;}
-    
     /*.soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif; border-left: none!important; border-left-style:none; border-collapse:collapse; outline:none !imoprtant; outline-color:Black; outline-width:thick; background-color:Fuchsia; padding-left:0px; border-width: 10px 0 !important; padding-left:0px; }*/
     .soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif;  background-color:#5B7E8A; outline-color:Lime; padding:0px;  
                        border-collapse: separate; border-spacing: 0px; outline-style:none; outline-width:none; border-collapse:collapse;}
 
-    .dojoxGridView {left:0px;}
+    /*.dojoxGridView {left:0px;}*/
     
     .esriPopup .titlePane {padding-left: 20;}
     .esriPopup {right: 30;}
@@ -40,25 +38,7 @@
     table { display: table; border-collapse: separate; border-spacing: 0px; outline-style:none; outline-width:none; border-collapse:collapse;}
     /*table { display: table;}*/
     
-    div.scroll {    /* this controls content style in the scroll bars   */
-        height: 250px; overflow-y: scroll; background:#FFFFFF; margin: 0; padding:2px; font-size:1em; line-height:1.5em; font-family: Arial, Helvetica, sans-serif;}
 
-    html,body {height:100%;width:100%;}
-    
-    body {background-color:#fff;font-family:arial,helvetica,sans-serif;}
-
-    .HTMLTable_styleMiddle    {    width: 13px;background-color: #FFFFFF}
-    .HTMLTable_styleLeft    {    vertical-align:top; width: 350px; border-bottom-style: solid; border-width: thick; border-color: #FFFFFF;}
-    .HTMLTable_BannerRow    {   vertical-align:middle; width: 350px; background-color: #5B7E8A; color: #FFFFFF; font-weight: bold;}
-    /*.HTMLTable_BannerRow    {   vertical-align:middle;}*/
-
-    td {
-    vertical-align: middle;
-    }
-    #map {      padding:0;      margin:0;      height:800px;    }
-    #btn_clear, #btn_Print_Friendly { border: none; padding:5px; color:white; background-color:gray; -webkit-border-radius:5px;
-                                    -moz-border-radius:5px; border-radius:2px; box-shadow:0px 0px 2px #555; font-weight:bold; font-size:70%;    }
-    #btn_clear:hover, #btn_Print_Friendly:hover {box-shadow:0px 0px 3px #555;}
 </style>
 
 <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
@@ -230,9 +210,13 @@
 
 <div id="WideContent2">
 
-    <div class="page_collapsible" id="DivBanner" style="color:#888888; background:#F8F8F8;">Supported Science - Data Management, Funded Projects, and Proposal Guidance<span></span></div>    <!-- collapsible -->
+<h3>Support of strategically-identified and applied science is a core GNLCC Function.  Likewise, GNLCC supports partners and partnerships retain capacity to interpret and use the science. These pages describe, in detail, GNLCC's process for identifying science and capacity needs, requesting and evaluating proposals, the projects selected for support, the partnership they engender, and the science and capacity products and processes they deliver.</h2>
+
+    <div class="page_collapsible" id="Div1" style="color:#888888; background:#F8F8F8;">GNLCC Strategic Science Support Program, 2010 – 2015 (click for overview)<span></span></div>
+    <!--<div class="page_collapsible" id="DivBanner">Supported Science - Data Management, Funded Projects, and Proposal Guidance<span></span></div>-->    <!-- collapsible -->
         <div class="container"  id="Div2" >
-            These documents contain information on data management guidance for supported projects, the funded projects, and instructions for submitting proposals.
+            <br />
+            These summary documents contain data management standards for funded projects, and proposal guidance and funding allocation by fiscal year.
             <ul>
             <li><a href="/sites/default/files/documents/gnlcc_datamgt_sharing_policy.pdf">Data Management Standards</a></li>
             <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/fy15_funding_allocation.pdf">2015 Funding Allocation</a> and <a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_fy15_funding_guidance.pdf">Funding Guidance</a></li>
@@ -245,6 +229,7 @@
 
 
         </div>
+        <br />
     <!-- end collapsible -->
 </div>
 
@@ -267,7 +252,7 @@
         <div class="container"><div class="content" id="section3content"></div></div>
 
         
-        <div class="collapsible" id="section12">Project Status<span></span></div>
+        <div class="collapsible" id="section12">Project<span></span></div>
         <div class="container"><div class="content" id="section12content"></div></div>
 
         <div class="collapsible" id="section5">Conservation Target<span></span></div>
@@ -306,11 +291,11 @@
         <div class="container"><div class="content" id="section13content"></div></div>
 
 
-        <div class="collapsible" id="section14">Project Fund Type<span></span></div>
+        <div class="collapsible" id="section14">Fund Type<span></span></div>
         <div class="container"><div class="content" id="section14content"></div></div>
 
-        <div class="collapsible" id="section15">Funding Amount <span></span></div>
-        <div class="container"><div class="content" id="section15content"></div></div>
+<!--        <div class="collapsible" id="section15">Funding Amount <span></span></div>
+        <div class="container"><div class="content" id="section15content"></div></div>-->
         
         <hr>
         <div id="Div4"  style="font-size:10px;">
@@ -343,10 +328,8 @@
 <!-- /left column collapsible -->
 
 <div id="content">
-         <a href="#" id="closeAll" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
-          <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
-    
-
+    <a href="#" id="closeAll" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
+    <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
     <!-- collapsible -->
     <div class="page_collapsible" id="page_collapsible1">Results<span></span></div>
         <div class="container"  id="container1" >
@@ -355,8 +338,8 @@
                 <tr>
                   <th field="Fiscal_Years_of_Allocation" width="50" height="60px">Fiscal Year</th>
                   <th field="ProjectID" hidden="true">ProjectID</th>
-                  <th field="Prj_Title" width="290px" height="60px">Project Title</th>
-                  <th field="LeadName_LastFirst" width="135px">Project Lead</th>
+                  <th field="Prj_Title" width="320px" height="60px">Project Title</th>
+                  <th field="LeadName_LastFirst" width="115px">Project Lead</th>
                   <th field="PI_Org" width="auto">Affiliation</th>      
                           
                 </tr>
