@@ -92,19 +92,19 @@ define([
               arrayQuery.push(["0", strQuery, "Description", "count", "Description", "divDescription", '<b>Description:</b> {0}', ""]);
               arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "count", "Total__Funding_by_Your_LCC", "dTotalAllocatedbyLCCSum", '<b>Total GNLCC Funds Allocated: {0}</b>', "currency"]);
               arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "count", "Total_Matching_or_In_kind_Funds", "dTotalInKindSum", '<b>Total In-Kind/Match Contributions: {0}</b>', "currency"]);
-              arrayQuery.push(["0", strQuery, "Prj_Start_Date", "count", "Prj_Start_Date", "divStart", '<b>Project Start Date:</b>&nbsp;&nbsp;&nbsp;{0} ', ""]);
-              arrayQuery.push(["0", strQuery, "Prj_End_Date", "count", "Prj_End_Date", "divEnd", '<b>Project End Date:</b>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', ""]);
+              arrayQuery.push(["0", strQuery, "Prj_Start_Date", "count", "Prj_Start_Date", "divStart", '{0} ', ""]);
+              arrayQuery.push(["0", strQuery, "Prj_End_Date", "count", "Prj_End_Date", "divEnd", '{0} ', ""]);
               //              arrayQuery.push(["2", strQuery, "DelivType", "count", "DelivType", "divDeliverables", 'Deliverable Types: {0} ', ""]);
-              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", '<b>Total GNLCC Funds Allocated by Year:</b> \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
-              arrayQuery.push(["0", strQuery, "PI_and_Email", "count", "PI_and_Email", "divPI", '<b>Project Lead:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0}', ""]);
-              arrayQuery.push(["0", strQuery, "PI_Org", "count", "PI_Org", "divLeadOrg", '<b>Lead Organization</b>:&nbsp;&nbsp;{0}', ""]);
-              arrayQuery.push(["5", strQuery, "amount", "sum", "dest_orgname", "divFundingDispersal", '<b>Funding Recipient:</b> \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
-              arrayQuery.push(["7", strQuery, "InKindamount", "sum", "orgname", "divInKindMatch", '<b>In-Kind/Match Contributions:</b> \n<br>&nbsp;&nbsp;&nbsp;{0} ', "show both"]);
-              arrayQuery.push(["4", strQuery, "EcotypicAreaName", "count", "EcotypicAreaName", "divEcotypicArea", '<b>Ecotypic Areas:</b> \n<br> {0} ', ""]);
-              arrayQuery.push(["8", strQuery, "GoalName", "count", "GoalName", "divGoals", '<b>Goals:</b> \n<br> {0} ', ""]);
-              arrayQuery.push(["11", strQuery, "Stressor", "count", "Stressor", "divStressors", '<b>Stressors:</b> \n<br> {0} ', ""]);
-              arrayQuery.push(["0", strQuery, "Comments", "count", "Comments", "divLCMAPLink", '<a href="{0}">LC MAP Project Workspace</a>  ', ""]);
-              arrayQuery.push(["0", strQuery, "PrjStatus", "count", "PrjStatus", "divStatus", '<b>Project Status:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0}', ""]);
+              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", '<b>Total GNLCC Funds Allocated by Year:</b> \n<br>{0} ', "show both"]);
+              arrayQuery.push(["0", strQuery, "PI_and_Email", "count", "PI_and_Email", "divPI", '{0}', ""]);
+              arrayQuery.push(["0", strQuery, "PI_Org", "count", "PI_Org", "divLeadOrg", '{0}', ""]);
+              arrayQuery.push(["5", strQuery, "amount", "sum", "dest_orgname", "divFundingDispersal", '<b>Funding Recipient:</b> \n<br>{0} ', "show both"]);
+              arrayQuery.push(["7", strQuery, "InKindamount", "sum", "orgname", "divInKindMatch", '<b>In-Kind/Match Contributions:</b> \n<br>{0} ', "show both"]);
+              arrayQuery.push(["4", strQuery, "EcotypicAreaName", "count", "EcotypicAreaName", "divEcotypicArea", '{0}', ""]);
+              arrayQuery.push(["8", strQuery, "GoalName", "count", "GoalName", "divGoals", '{0}', ""]);
+              arrayQuery.push(["11", strQuery, "Stressor", "count", "Stressor", "divStressors", '{0}', ""]);
+              arrayQuery.push(["0", strQuery, "Comments", "count", "Comments", "divLCMAPLink", '<a href="{0}">LC MAP Project Storage Workspace</a>  ', ""]);
+              arrayQuery.push(["0", strQuery, "PrjStatus", "count", "PrjStatus", "divStatus", '{0}', ""]);
               //              arrayQuery.push(["1", strQuery, "CommonName", "count", "CommonName", "divConservationTargets", 'Conservation Target(s): \n<br> {0} ', ""]);
               arrayQuery4DataGrid = [];
               arrayQuery4DataGrid.push(["9", strQuery + " and organization = 0", ["PersonName", "Contact_Type", "GroupName", "prj_priority", "OBJECTID", "roletype"], "gridDivContacts"]);
@@ -113,7 +113,7 @@ define([
               arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID = 3", ["OBJECTID", "CommonName", "ESA_Status", "TierName", "PrimaryLCCTargetType"], "gridDivConservationTargetsSPP"]);
               arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID <> 3", ["OBJECTID", "CommonName", "ConsvTargetTypeName", "PrimaryLCCTargetType"], "gridDivConservationTargetsOther"]);
 
-              arrayQuery4DataGrid.push(["2", strQuery + " and supplemental = 0 and not (DelivType in ('Budget','Proposal', 'Statement of Work'))", ["OBJECTID", "deliverable_title", "Fund_Year", "duedate", "DelivType", "Deliverable_Received", "deliverableid", "supplemental"], "gridDivDeliverables"]);
+              arrayQuery4DataGrid.push(["2", strQuery + " and not (DelivType in ('Budget','Proposal', 'Statement of Work'))", ["OBJECTID", "deliverable_title", "Fund_Year", "duedate", "DelivType", "Deliverable_Received", "deliverableid", "supplemental"], "gridDivDeliverables"]);
               //arrayQuery4DataGrid.push(["3", strQuery + " and supplemental <> 0 and not (DelivType in ('Website','Recorded Presentation'))", ["OBJECTID", "data_name", "DelivType", "deliverableid", "uri"], "gridDivDeliverablesSupWebinarsPages"]);
 
               this.m_arrayQuery = arrayQuery;
@@ -193,6 +193,8 @@ define([
               }
 
 
+
+
               if (resultFeatures.length == 0) {
                   dojo.style(pGrid.domNode, 'display', 'none');
               } else {
@@ -205,7 +207,8 @@ define([
 
                   var data = { identifier: "OBJECTID", items: items };
 
-                  if ((strHTMLElementID == "gridDivDeliverables") | (strHTMLElementID == "gridDivDeliverablesDetail") | (strHTMLElementID == "gridDivProposals")) {
+                  if ((strHTMLElementID == "gridDivDeliverables") | (strHTMLElementID == "gridDivDeliverablesDetail") |
+                            (strHTMLElementID == "gridDivProposals") | (strHTMLElementID == "gridDivConservationTargetsOther") | (strHTMLElementID == "gridDivConservationTargetsSPP")) {
                       var pItems = data["items"]
                       for (var key in pItems) {
                           if (pItems.hasOwnProperty(key)) {
@@ -220,7 +223,11 @@ define([
                                       //https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer/2/query?where=Deliverable_Received+%3D+1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=projectid%2C+deliverable_title%2C+receiveddate%2C+Deliverable_Received+&returnGeometry=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&f=html
                                       if ((keyField == "Deliverable_Received") & (pGrid.id == "gridDeliverables")) {
                                           pValue = pItem.Deliverable_Received;
-                                          if (pValue == 1) { pValue = "Yes"; }
+                                          if (pValue == 1) {
+                                              pValue = "Yes";
+                                              data["items"][key]["deliverable_title"] = '<font color="blue">FY{0} Proposal</font>'.format(data["items"][key]["deliverable_title"]);
+                                              //pValue = '<font color="blue">FY{0} Proposal</font>'.format(pItem.Fund_Year);
+                                          }
                                           else { pValue = "No"; }
                                           data["items"][key][keyField] = pValue;
                                       }
@@ -230,25 +237,29 @@ define([
                                           else { pValue = ""; }
                                           data["items"][key][keyField] = pValue;
                                       }
+
+                                      if (keyField == "PrimaryLCCTargetType") {
+                                          pValue = pItem.PrimaryLCCTargetType;
+                                          if (pValue == 1) { pValue = "Yes"; }
+                                          else { pValue = "No"; }
+                                          data["items"][key][keyField] = pValue;
+                                      }
+
+
                                       if ((keyField == "uri") & (pGrid.id == "gridDeliverablesDetail")) {
                                           pValue = pItem.uri;
                                           if (pValue.length > 5) { pValue = "Yes"; }
                                           else { pValue = "No"; }
                                           data["items"][key]["Deliverable_Received"] = pValue;
-
                                           if ((resultFeatures.length == 1) & (pValue == "Yes")) {
-                                                  window.open(pItem.uri, '_blank');
+                                              window.open(pItem.uri, '_blank');
                                           }
-
                                       }
                                       if (pGrid.id == "gridProposals") {
-                                          strtemp = pItem.Fund_Year;
-                                          //pValue = '<font color="blue">  FY{0} Proposal</font>'.format(pItem.Fund_Year);
-                                          pValue = '<font size="1" color="blue">  FY{0} Proposal</font>'.format(pItem.Fund_Year);
-                                          strURI = pItem.uri;
-                                          //pValue = '<a href="{0}">{1}</a>'.format(pItem.uri, pValue);
-                                          data["items"][key][keyField] = pValue;
-                                          data["items"][key]["uri"] = strURI;
+                                          if (keyField == "Fund_Year") {
+                                              pValue = '<font color="blue">FY{0} Proposal</font>'.format(pItem.Fund_Year);
+                                              data["items"][key][keyField] = pValue;
+                                          }
                                       }
                                   }
                               }
@@ -259,18 +270,11 @@ define([
 
                   store = new ItemFileReadStore({ data: data });
 
-                  //if ((pGrid.id == "gridDeliverables") | (pGrid.id == "gridDeliverablesSupWebinarsPages")) {
                   if (pGrid.id == "gridDeliverables") {
                       if (this.app.gPjrReportQuery.m_ArrayGridsWithEventsAdded.indexOf(pGrid.id) == -1) {  //if don't put this logic in then keeps on adding the click event to the data grid and gets repetitive
                           pGrid.on("rowclick", onDelivSummaryRowClickHandler);
                           this.app.gPjrReportQuery.m_ArrayGridsWithEventsAdded.push(pGrid.id);
                       }
-                      //                  }
-                      //                  else if (pGrid.id == "gridDeliverablesSupWebinarsPages") {
-                      //                      if (this.app.gPjrReportQuery.m_ArrayGridsWithEventsAdded.indexOf(pGrid.id) == -1) {  //if don't put this logic in then keeps on adding the click event to the data grid and gets repetitive
-                      //                          pGrid.on("rowclick", onDelivSummaryRowClickHandler);
-                      //                          this.app.gPjrReportQuery.m_ArrayGridsWithEventsAdded.push(pGrid.id);
-                      //                      }
                   } else {
                       if (this.app.gPjrReportQuery.m_ArrayGridsWithEventsAdded.indexOf(pGrid.id) == -1) {  //if don't put this logic in then keeps on adding the click event to the data grid and gets repetitive
                           pGrid.on("rowclick", onRowClickHandler);
@@ -280,23 +284,22 @@ define([
 
                   pGrid.setStore(store);
 
-                  if (pGrid.id != "gridProposals") {
-                      var iRowHeight4Grid = 80 // Adjust the grid height based on number of records
-                      if (resultFeatures.length <= 2) {
-                          iRowHeight4Grid = (45 * resultFeatures.length);
-                      } else if (resultFeatures.length > 2 & resultFeatures.length <= 5) {
-                          iRowHeight4Grid = (35 * resultFeatures.length);
-                      } else if (resultFeatures.length > 5 & resultFeatures.length <= 10) {
-                          iRowHeight4Grid = (25 * resultFeatures.length);
-                      } else {
-                          iRowHeight4Grid = (22 * resultFeatures.length);
-                      }
-                      var strRowHeight4Grid = iRowHeight4Grid.toString() + "px";
-                      document.getElementById(pGrid.id).style.height = strRowHeight4Grid;
-                      dijit.byId(pGrid.id).resize();
-                      dijit.byId(pGrid.id).update();
+                  var iRowHeight4Grid = 80 // Adjust the grid height based on number of records
+                  if (resultFeatures.length <= 2) {
+                      iRowHeight4Grid = (48 * resultFeatures.length);
+                  } else if (resultFeatures.length > 2 & resultFeatures.length <= 5) {
+                      iRowHeight4Grid = (30 * resultFeatures.length);
+                  } else if (resultFeatures.length > 5 & resultFeatures.length <= 10) {
+                      iRowHeight4Grid = (27 * resultFeatures.length);
+                  } else {
+                      iRowHeight4Grid = (27 * resultFeatures.length);
                   }
-                                      
+                  var strRowHeight4Grid = iRowHeight4Grid.toString() + "px";
+                  document.getElementById(pGrid.id).style.height = strRowHeight4Grid;
+                  dijit.byId(pGrid.id).resize();
+                  dijit.byId(pGrid.id).update();
+
+
 
                   document.getElementById(strHTMLElementID).appendChild(document.getElementById(pGrid.id));  //move the grid to the designated div, grids need to be built outside the collapsable panel otherwise risk not rendering properly
               }
@@ -365,17 +368,17 @@ define([
 
                               blnAdd2Dropdown = false;
                               dojo.forEach(attrNames, function (an) {
-                                  var strText = feature.attributes[an].toString();
-
                                   if ((strText == null) || (strText == undefined)) {
                                       strText = "null or undefined";
+                                  } else {
+                                      strText = feature.attributes[an].toString();
                                   }
                                   if ((strGroupByField != "") & (an == "genericstat") & (strVarType != "show both")) {
                                       //values.push(strText);
                                   } else {
                                       if ((strVarType == "show both") & (an == "genericstat")) {
                                           var iTempNumber = Number(strText);
-                                          strText = iTempNumber.toCurrencyString() + "\n<br>&nbsp;&nbsp;&nbsp;";
+                                          strText = iTempNumber.toCurrencyString() + "\n<br>";
                                       } else {
                                           strText = strText.replace("unknown", "");
                                           strText = strText.replace("Unknown", "");
@@ -389,12 +392,12 @@ define([
                   }
                   if ((values != null) || (values != undefined)) {
                       if (values.length != 0) {
-                          strText = values.join("\n<br>&nbsp;&nbsp;&nbsp;");
+                          strText = values.join("\n<br>");
                       } else {
-                          strText = "unk";
+                          strText = " ";
                       }
                   } else {
-                      strText = "unk";
+                      strText = " ";
                   }
               }
 

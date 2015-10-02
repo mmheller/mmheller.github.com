@@ -2,13 +2,12 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>GNLCC Project Tracking System Public Website</title>
+    <title>Supported Science Project Report</title>
     <!-- CSS -->
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/dijit/themes/soria/soria.css" type="text/css">
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/dojox/grid/resources/soriaGrid.css"/>
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/dojox/grid/resources/Grid.css" type="text/css">
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/esri/css/esri.css"/>
-    <!--<link rel="stylesheet" href="css/github.css" type="text/css" />-->
     <link rel="stylesheet" href="css/collapse.css" type="text/css" />
     <link rel="stylesheet" href="css/panel.css" type="text/css" />
 
@@ -23,9 +22,9 @@
 <style>
     .soria .NavigationForm .content {font-size:.3em;}
     .soria .dojoxGridRowOver .dojoxGridCell {border: 0px solid; color:#000000; background-color: #cccccc}
-    .soria .dojoxGridCell {border: 0px solid; color:#000000; font-size:1.2em;}  /* this controls style of grid cells */
-    .soria .dojoxGridHeader .dojoxGridCell {background-image: url(""); background-color: #5B7E8A; border: 0px solid; color:#FFFFFF !important;}
-    .soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif; outline-color:inherit; background-color:White; font-size:9px;}
+    .soria .dojoxGridCell {border: 0px solid; color:#000000; font-size:12px;}  /* this controls style of grid cells */
+    .soria .dojoxGridHeader .dojoxGridCell {background-image: url(""); background-color: #5B7E8A; border: 0px solid; color:#FFFFFF !important; padding:5px;}
+    .soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif; outline-color:inherit; background-color:White; font-size:12px;}
     .dojoxGridView {left:0px;}
 </style>
 
@@ -52,6 +51,15 @@
                 urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on,
                 CheckBox,
                 Color, mouse, query, DataGrid, webMercatorUtils, BasemapGallery) {
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        today = mm + '/' + dd + '/' + yyyy;
+        document.getElementById('time').innerHTML = today;
+
+        on(dom.byId("btn_back2search"), "click", btn_btn_back2search_click);
 
         var strURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer"
         
@@ -103,9 +111,9 @@
             return tokens;
         }
 
-
-
-
+        function btn_btn_back2search_click() {
+            window.open("index.html", "_self");
+        }
     });
 </script>
 
@@ -179,6 +187,18 @@
     });
 </script>
 
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+  m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-28254785-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
 </head>
 
 
@@ -191,8 +211,19 @@
 
 <div id="WideContent" style="padding-left:6px;">
     <div style="padding-top:6px; padding-bottom:6px;">
-        <a href="#" id="closeAll" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
-        <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
+        <table style="width:100%;">
+            <tr>
+                <td>
+                    <input id="btn_back2search" type="button"  value="Return to Projects"> |
+                    <a href="#" id="closeAll" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
+                    <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
+                </td>
+                <td class="HTMLTable_styleRight">
+                    <font size="1px" color="#2E2E2E"><b>Date:</b> <span id="time"></span></font>
+                </td>
+            </tr>
+        </table>
+
     </div>
     <div class="page_collapsible" id="page_collapsible1">Project Information<span></span></div>    <!-- collapsible -->
         <div class="container"  id="container1" >
@@ -200,23 +231,26 @@
                 <tr>
                     <td class="HTMLTable_styleLeftLessPad">
                        <div id="divTitle"></div>
-                          <hr>
-                        <div id="divDescription"></div>
                         <hr>
 
 
                         <table style="width:100%;">
                                    <tr>
-                                       <td valign="top">
-                                            <div id="divPI"></div>
-                                            <div id="divLeadOrg"></div>
-                                            <div id="divStart"></div>
-                                            <div id="divEnd"></div>
-                                            <div id="divStatus"></div>   
-                                            <div id="gridDivProposals"></div>   
+                                       <td valign="top"  width="120px">
+                                            <b>Project Lead:</b><br />
+                                            <b>Lead Organization:</b><br />
+                                            <b>Project Start Date:</b><br />
+                                            <b>Project End Date:</b><br />
+                                            <b>Project Status:</b><br />
+                                            <b>Proposal(s):</b>
                                        </td>
                                        <td valign="top">
-                                            <div id="div3"></div>                   
+                                            <div id="divPI" style="padding-left:3px;"></div>
+                                            <div id="divLeadOrg" style="padding-left:3px;"></div>
+                                            <div id="divStart" style="padding-left:3px;"></div>
+                                            <div id="divEnd" style="padding-left:3px;"></div>
+                                            <div id="divStatus" style="padding-left:3px;"></div>   
+                                            <div id="gridDivProposals"></div>        
                                        </td>
                                        <td valign="top">
          
@@ -234,7 +268,10 @@
                                             <div id="Div6"></div>            
                                        </td>
                                    </tr>
-                        </table>       
+                        </table>   
+                          <hr>
+                        <div id="divDescription"></div>
+    
 
 
 
@@ -286,10 +323,38 @@
     <!-- end collapsible -->
 
     <!-- collapsible -->
+    <div class="page_collapsible" id="Div13">Products/Deliverables<span></span></div>
+    <div class="container">
+            <!--<div id="gridDivDeliverablesSupWebinarsPages"></div><br />-->
+            <div id="gridDivDeliverables"></div><br />
+            <div align="right">
+                <div id="divDelivDetailCount"></div>
+                <div id="gridDivDeliverablesDetail" ></div><br />
+            </div>
+
+            <br />
+            <div id="divLCMAPLink"></div>
+            <br />
+    </div>
+    <!-- end collapsible -->
+
+
+    <!-- collapsible -->
     <div class="page_collapsible" id="body-section2">Strategic Conservation Framework Detail<span></span></div>
     <div class="container">
 
            <table style="width:100%;">
+               <tr>
+                   <td class="HTMLTable_BannerRow2" >
+                        <b>Ecotypic Areas</b>
+                   </td>
+                   <td class="HTMLTable_BannerRow2" >
+                        <b>Goals</b>
+                   </td>
+                   <td class="HTMLTable_BannerRow2" >
+                        <b>Stressors</b>
+                   </td>
+               </tr>
                <tr>
                    <td valign="top">
                         <div id="divEcotypicArea"></div>
@@ -318,41 +383,21 @@
 
     </div>
 
- <!-- collapsible -->
-    <div class="page_collapsible" id="Div13">Products/Deliverables<span></span></div>
-    <div class="container">
-            <br />
-            <div id="divLCMAPLink"></div>
-            <!--<div id="gridDivDeliverablesSupWebinarsPages"></div><br />-->
-            <div id="gridDivDeliverables"></div><br />
-            <div align="right">
-                <div id="divDelivDetailCount"></div>
-                <div id="gridDivDeliverablesDetail" ></div><br />
-            </div>
-    </div>
 
-    <!-- end collapsible -->
 
-    <!-- end collapsible -->
-    <!-- collapsible -->
 
 
     <div class="page_collapsible" id="page_collapsibleMap">Map Summary<span></span></div>
     <div class="container">
-            <p>
+     <!--       <p>
                 MapService URL: <a href="https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer" title="rest endpoing">https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer</a>
-            </p>
+            </p>-->
 
         <div id="page_collapsibleMapDestination" style="position:relative" >
         </div>
     </div>
 
- <!--   <div class="page_collapsible" id="body-section3">Map<span></span></div>
-      <div class="container">
-        <div class="content" id="querycontent">
-        </div>
-    </div>-->
-  
+ 
     <div id="mapPrjReport"    data-dojo-type="dijit/layout/ContentPane"    data-dojo-props="region:'center'"    style="overflow:hidden; background-color:rgb(255, 255, 255);">
         <img id="loadingImg" src="images/loading.gif" style="position:absolute; right:50%; top:50%; z-index:100;" />
         <div id="panelBasemaps" class="panelBasemaps bg rounded shadow" >		    <!-- Panel Basemaps -->
@@ -369,33 +414,33 @@
              <thead>
                 <tr>
                   <th field="PersonName" width="300px" height="60px">Name</th>
-                  <th field="Contact_Type" width="150" height="60px">Type</th>
+                  <th field="roletype" width="130px"  height="60px">Role</th>
                   <th field="GroupName" width="auto"  height="60px">Affiliation</th>
-                  <th field="roletype" width="auto"  height="60px">Role</th>
-                  
-
+                  <th field="Contact_Type" width="150px" height="60px">Type</th>
+ 
                   <!--<th field="prj_priority" width="80px">Priority</th>-->
                   <!--<th field="uri" width="auto">Email</th> -->             
                 </tr>
               </thead>
             </table>
 
-           <table dojotype="dojox.grid.DataGrid" style="height:300px display:none;" jsid="gridContactOrgsOnly" id="gridContactOrgsOnly" selectionMode="none" style="">
+           <table dojotype="dojox.grid.DataGrid" style="height:300px; width:600px; display:none;" jsid="gridContactOrgsOnly" id="gridContactOrgsOnly" selectionMode="none" style="">
              <thead>
                 <tr>
-                  <th field="GroupName" width="450" height="60px">Group Name (individuals not specified)</th>
-                  <th field="Contact_Type" width="200" height="60px">Type</th>
+                  <th field="GroupName" width="450" height="60px">Additional Collaborators</th>
+                  <th field="Contact_Type" width="auto" height="60px">Type</th>
     
                 </tr>
               </thead>
             </table>
 
-          <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" sortInfo="-1" style="width:130; height:105px;" 
+          <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" sortInfo="-1" style="width:130; height:105px; display:none;" 
                         jsid="gridProposals" id="gridProposals" selectable="true">
              <thead>
                 <tr>
-                  <th field="Fund_Year" width="120"  height="15px">Proposal</th>
+                  <th field="Fund_Year" width="120px;" height="100px;">Proposal</th>
                   <th field="uri" hidden="true" >Weblink</th>
+                  <th field="deliverableid" hidden="true" >deliverableid</th>
                 </tr>
               </thead>
             </table>
@@ -404,9 +449,9 @@
             <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridConservationTargetsSPP" id="gridConservationTargetsSPP" selectionMode="none">
              <thead>    
                 <tr>
-                  <th field="CommonName" width="240px" height="auto">Species Conservation Targets</th>
-                  <th field="ESA_Status" width="280px" height="60px">ESA Status</th>
-                  <th field="TierName" width="50px"  height="30px">Tier</th>
+                  <th field="CommonName" width="340px" height="auto">Species Conservation Targets</th>
+                  <th field="ESA_Status" width="320px" height="60px">ESA Status</th>
+                  <th field="TierName" width="130px"  height="30px">Tier</th>
                   <th field="PrimaryLCCTargetType" width="auto">LCC Identified</th>              
                 </tr>
               </thead>
@@ -415,8 +460,8 @@
             <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridConservationTargetsOther" id="gridConservationTargetsOther" selectionMode="none">
              <thead>
                 <tr>
-                  <th field="CommonName" width="400px" height="auto">Habitats, Ecosystems, & Processess Consv. Targets</th>
-                  <th field="ConsvTargetTypeName" width="150px">Type</th>
+                  <th field="CommonName" width="400px" height="auto">Habitats, Ecosystems & Processess Conservation Targets</th>
+                  <th field="ConsvTargetTypeName" width="400px">Type</th>
                   <th field="PrimaryLCCTargetType" width="auto">LCC Identified</th>              
                 </tr>
               </thead>
@@ -427,48 +472,36 @@
                         jsid="gridDeliverables"  style="height:auto; display:none;" >
                 <thead>
                     <tr>
-                        <th field="deliverable_title" width="500px">Title</th>
-                        <th field="Fund_Year" width="70px" height="auto">Fund Year</th>
+                        <th field="deliverable_title" width="auto">Title</th>
+                        <th field="Fund_Year" width="60px" height="auto">Fund Year</th>
                         <th field="duedate" width="70px">Due Date</th>           
-                        <th field="DelivType" width="120px">Type</th>    
-                        <th field="supplemental" width="auto">Supplemental</th>    
-                        <th field="Deliverable_Received" width="60px">Received</th>    
+                        <th field="DelivType" width="145px">Type</th>    
+                        <th field="supplemental" width="80px">Supplemental</th>    
+                        <th field="Deliverable_Received" width="55px">Received</th>    
                         <th field="deliverableid" hidden="true">deliverableid</th>
                     </tr>
                 </thead>
             </table>
 
             <table id="gridDeliverablesDetail" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" 
-                        jsid="gridDeliverablesDetail"  style="height:auto; width:675px; display:none;">
+                        jsid="gridDeliverablesDetail"  style="height:auto; width:750px; display:none;">
                 <thead>
                     <tr>
-                        <th field="data_name" width="410px">Detail Title</th>
-                        <th field="receiveddate" width="auto" >Date Received</th>
-                        <th field="Deliverable_Received">Weblink </font></th>
+                        <th field="data_name" width="550px">Detail Title</th>
+                        <th field="receiveddate" width="100px" >Date Received</th>
+                        <th field="Deliverable_Received" width="auto">Weblink</font></th>
                         <th field="uri" hidden="true">uri</th>
                     </tr>
                 </thead>
             </table>
+</div>
 
-  <!--          <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridDeliverablesSupWebinarsPages" 
-                                id="gridDeliverablesSupWebinarsPages" selectionMode="none" >
-             <thead>
-                <tr>
-                  <th field="data_name" width="450px">Title</th>
-                  <th field="DelivType" width="auto">Deliv Type</th>    
-                  <th field="deliverableid" hidden="true">deliverableid</th>
-                  <th field="uri" hidden="true">uri</th>
-                </tr>
-              </thead>
-            </table>-->
-
-
-
-
+<div style="clear:both; float:left; width:935px;">
+    <div style="float:right;">
+      <font size="1.5" color="#2E2E2E">Design: GNLCC<br/> Development: GNLCC<br/>Data Services: LC MAP</font>
+    </div>
 </div>
 
 </body>
-
-
 </html>
 

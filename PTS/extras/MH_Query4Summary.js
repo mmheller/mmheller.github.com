@@ -56,20 +56,20 @@ define([
               arrayQuery = [];
               arrayQuery.push(["0", strQuery, "ProjectID", "count", "", "page_collapsible1", 'Results ({0} projects)', "", ""]);
               arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "sum", "", "dTotalAllocatedbyLCC", '<b>GNLCC Funds Allocated:</b> {0}', "currency", ""]);
-              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", '<b>GNLCC Funds Allocated by Year:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both", "desc"]);
-              arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "sum", "", "dTotalInKindMatch", '<b>Partner In-Kind or Match Funding:</b> {0} ', "currency", ""]);
-              arrayQuery.push(["7", strQuery, "ProjectID", "count", "orgname", "dNumberofInKindOrgs", '<b>Partner Organizations Providing In-Kind or Match Funding:</b> {0} ', "countOfGroupBy", ""]);
-              arrayQuery.push(["1", strQuery, "ProjectID", "count", "CommonName", "dTotalNumberofConsvTargets", '<b>Number of Conservation Targets:</b> {0} ', "countOfGroupBy", ""]);
+              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", '<b>GNLCC Funds Allocated by Year:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both-currency", "desc"]);
+              arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "sum", "", "dTotalInKindMatch", '<b>In-Kind or Match Funding:</b> {0} ', "currency", ""]);
+              arrayQuery.push(["7", strQuery, "ProjectID", "count", "orgname", "dNumberofInKindOrgs", '<b>Organizations Providing In-Kind or Match Funding:</b> {0} ', "countOfGroupBy", ""]);
+              arrayQuery.push(["1", strQuery, "ProjectID", "count", "CommonName", "dTotalNumberofConsvTargets", '<b>Conservation Targets:</b> {0} ', "countOfGroupBy", ""]);
               //              arrayQuery.push(["6", strQuery, "ProjectID", "count", "Fund_Year", "dYearsFunded", 'Fund Years: \n<br>  {0} ', "default"]);
-              arrayQuery.push(["9", strQuery, "ProjectID", "count", "contactID", "dNumberOfProjectContacts", '<b>Number of Project Contacts:</b> {0} ', "countOfGroupBy", ""]);
-              arrayQuery.push(["2", strQuery, "ProjectID", "count", "NationalLCCDelivType", "dDeliverabletype", '<b>Deliverable Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default", "asc"]);
-              arrayQuery.push(["2", strQuery, "ProjectID", "count", "", "dNumberofDeliverables", '<b>Number of Deliverables:</b> {0} ', "default", ""]);
-              arrayQuery.push(["0", strQuery, "ProjectID", "count", "PrjStatus", "dPrjStatus", '<b>Project Status:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default", ""]);
-              arrayQuery.push(["5", strQuery, "ProjectID", "count", "dest_orgname", "dNumberOfFundingRecipients", '<b>Number of Funding Recipient Organizations:</b> {0} ', "countOfGroupBy", ""]);
-              arrayQuery.push(["5", strQuery, "ProjectID", "count", "DestinationType", "dFundRecipientTypes", '<b>Funding Recipient Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default", "asc"]);
-              arrayQuery.push(["4", strQuery, "ProjectID", "count", "EcotypicAreaName", "dEcotypicAreas", '<b>Ecotypic Areas (Partner Forums):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default", "asc"]);
-              arrayQuery.push(["11", strQuery, "ProjectID", "count", "Stressor", "dStressors", '<b>Stressors:</b>  \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "default", "asc"]);
-              arrayQuery.push(["8", strQuery, "ProjectID", "count", "GoalName", "dGoals", '<b>Conservation Goals:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "default", "asc"]);
+              arrayQuery.push(["9", strQuery, "ProjectID", "count", "contactID", "dNumberOfProjectContacts", '<b>Contacts:</b> {0} ', "countOfGroupBy", ""]);
+              arrayQuery.push(["2", strQuery, "ProjectID", "count", "NationalLCCDelivType", "dDeliverabletype", '<b>Deliverable Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
+              arrayQuery.push(["2", strQuery, "ProjectID", "count", "", "dNumberofDeliverables", '<b>Deliverables:</b> {0} ', "default", ""]);
+              arrayQuery.push(["0", strQuery, "ProjectID", "count", "PrjStatus", "dPrjStatus", '<b>Project Status:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", ""]);
+              arrayQuery.push(["5", strQuery, "ProjectID", "count", "dest_orgname", "dNumberOfFundingRecipients", '<b>Funding Recipient Organizations:</b> {0} ', "countOfGroupBy", ""]);
+              arrayQuery.push(["5", strQuery, "ProjectID", "count", "DestinationType", "dFundRecipientTypes", '<b>Funding Recipient Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
+              arrayQuery.push(["4", strQuery, "ProjectID", "count", "EcotypicAreaName", "dEcotypicAreas", '<b>Ecotypic Areas (Partner Forums):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
+              arrayQuery.push(["11", strQuery, "ProjectID", "count", "Stressor", "dStressors", '<b>Stressors:</b>  \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", "asc"]);
+              arrayQuery.push(["8", strQuery, "ProjectID", "count", "GoalName", "dGoals", '<b>Conservation Goals:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
 
               this.m_arrayQuery = arrayQuery;
               this.SendQuery(arrayQuery, 0)
@@ -97,7 +97,7 @@ define([
 
               pQuery.outFields = [strFieldNameText];
               var strGroupByField = pTblindexAndQuery[4];
-                            
+
               if (strGroupByField != "") {
                   pQuery.groupByFieldsForStatistics = [strGroupByField];
                   //pQuery.orderByFields = [strGroupByField + " DESC"];
@@ -128,7 +128,7 @@ define([
                       var textB = b.attributes[strGroupByField].toString().toUpperCase();
                       return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
                   });
-              }  else if (strSortType == "asc") {
+              } else if (strSortType == "asc") {
                   resultFeatures = results.features.sort(function (a, b) {
                       var textA = a.attributes[strGroupByField].toString().toUpperCase();
                       var textB = b.attributes[strGroupByField].toString().toUpperCase();
@@ -176,20 +176,25 @@ define([
                               blnAdd2Dropdown = false;
                               dojo.forEach(attrNames, function (an) {
                                   if ((feature.attributes[an] == null) | (feature.attributes[an] == undefined)) {
-                                      strText = "";   
+                                      strText = "TBD";
                                   } else {
                                       var strText = feature.attributes[an].toString();
                                   }
-                                  if (((strGroupByField != "") & (an == "genericstat") & (strVarType != "show both")) | (strText == "")) {
+                                  if (((strGroupByField != "") & (an == "genericstat") & (strVarType != "show both") & (strVarType != "show both-currency")) | (strText == "")) {
                                       //values.push(strText);
                                       //do nothing
                                   } else if ((strStatisticType == "count") & (strVarType == "default")) {
                                       strText += "\n<br>&nbsp;&nbsp;&nbsp;";
                                       values.push(strText);
-                                  } else if ((strVarType == "show both") & (an == "genericstat")) {
+                                  } else if ((strVarType == "show both-currency") & (an == "genericstat")) {
                                       var iTempNumber = Number(strText);
                                       strText = iTempNumber.toCurrencyString() + "\n<br>&nbsp;&nbsp;&nbsp;";
                                       values.push(strText);
+                                  } else if ((strVarType == "show both") & (an == "genericstat")) {
+//                                      var iTempNumber = Number(strText);
+                                      strText = "(" + strText + ")\n<br>&nbsp;&nbsp;&nbsp;";
+                                      values.push(strText);
+
                                   } else {
                                       values.push(strText);
                                   }

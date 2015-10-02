@@ -66,6 +66,13 @@
                 CheckBox,
                 Color, mouse, query, webMercatorUtils, BasemapGallery, Legend) {
 
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        today = mm + '/' + dd + '/' + yyyy;
+        document.getElementById('time').innerHTML = today;
+
         var selectedItem;  // This has to be declared "globally" outside of any functions for the grid context menu
 
         var strURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer"
@@ -205,6 +212,18 @@
     });
 </script>
 
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+  m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-28254785-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
 </head>
 <body class="soria">
 
@@ -212,7 +231,7 @@
 
 <h3>Support of strategically-identified and applied science is a core GNLCC Function.  Likewise, GNLCC supports partners and partnerships retain capacity to interpret and use the science. These pages describe, in detail, GNLCC's process for identifying science and capacity needs, requesting and evaluating proposals, the projects selected for support, the partnership they engender, and the science and capacity products and processes they deliver.</h2>
 
-    <div class="page_collapsible" id="Div1" style="color:#888888; background:#F8F8F8;">GNLCC Strategic Science Support Program, 2010 – 2015 (click for overview)<span></span></div>
+    <div class="page_collapsible" id="Div1" style="color:#FFFFFF; background:#cccccc;">Data Management, Proposal Guidance, and Funding Allocation Documents<span></span></div>
     <!--<div class="page_collapsible" id="DivBanner">Supported Science - Data Management, Funded Projects, and Proposal Guidance<span></span></div>-->    <!-- collapsible -->
         <div class="container"  id="Div2" >
             <br />
@@ -236,7 +255,7 @@
 <div id="navigation">
     <form id="NavigationForm">
         <input id="btn_clear" type="button"  value="Reset Search">
-        <input id="btn_Print_Friendly" type="button"  value="Print Friendly">
+        <input id="btn_Print_Friendly" type="button"  value="Print Friendly" style="visibility:collapse;">
         <br/><br/>
 
         <font size="2px" color="#2E2E2E">Keyword Search</font>
@@ -280,10 +299,10 @@
         <div class="collapsible" id="section6">Funding Recipient Type<span></span></div>
         <div class="container"><div class="content" id="section6content"></div></div>
 
-        <div class="collapsible" id="section9">Project In-Kind/Match<span></span></div>
+        <div class="collapsible" id="section9">In-Kind/Match<span></span></div>
         <div class="container"><div class="scroll" id="section9content"></div></div>
 
-        <div class="collapsible" id="section11">Project Affiliate<span></span></div>
+        <div class="collapsible" id="section11">Affiliate<span></span></div>
         <div class="container"><div class="scroll" id="section11content"></div></div>
 
 
@@ -328,8 +347,22 @@
 <!-- /left column collapsible -->
 
 <div id="content">
-    <a href="#" id="closeAll" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
-    <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
+   
+
+    <table style="width:100%;">
+        <tr>
+            <td>
+                <a href="#" id="closeAll" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
+                <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
+            </td>
+            <td class="HTMLTable_styleRight">
+                <font size="1px" color="#2E2E2E"><b>Date:</b> <span id="time"></span></font>
+            </td>
+        </tr>
+    </table>
+
+
+
     <!-- collapsible -->
     <div class="page_collapsible" id="page_collapsible1">Results<span></span></div>
         <div class="container"  id="container1" >
