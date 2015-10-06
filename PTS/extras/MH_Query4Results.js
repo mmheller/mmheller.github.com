@@ -102,13 +102,10 @@ define([
 
                       if (this.app.gQuery.m_iarrayQueryIndex >= this.app.gQuery.m_arrayQuery.length) {
                           this.app.gQuery.ClearDivs();
-                          this.app.gQuery.SendQuery4ProjectResults(this.app.gQuery.strQuery, this.app.gQuery.m_grid)
-
-                          //                          var div = document.getElementById('querycontent');
-                          //                          div.innerHTML += "\n<br>" + this.app.gQuery.strQuery;
+                          this.app.gQuery.SendQuery4ProjectResults(this.app.gQuery.strQuery, this.app.gQuery.m_grid);  //reset the entire search page
 
                       } else {
-                          this.app.gQuery.SendQuery(this.app.gQuery.m_arrayQuery, this.app.gQuery.m_iarrayQueryIndex)
+                          this.app.gQuery.SendQuery(this.app.gQuery.m_arrayQuery, this.app.gQuery.m_iarrayQueryIndex);  //append the the existing search page projects
                       }
                   }
               }

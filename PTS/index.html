@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/dijit/themes/soria/soria.css">
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/esri/css/esri.css"/>
     <link rel="stylesheet" href="css/collapse.css" type="text/css" />
-    <link rel="stylesheet" href="css/collapse2.css" type="text/css" />
+    <!--<link rel="stylesheet" href="css/collapse2.css" type="text/css" />-->
     <link rel="stylesheet" href="css/panel.css" type="text/css" />
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/dojox/grid/resources/Grid.css"/>
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/dojox/grid/resources/soriaGrid.css"/>
@@ -15,7 +15,7 @@
     <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script type="text/javascript" src="http://softwaremaniacs.org/media/soft/highlight/highlight.pack.js"></script>
+  <!--  <script type="text/javascript" src="http://softwaremaniacs.org/media/soft/highlight/highlight.pack.js"></script>-->
     <script type="text/javascript" src="extras/jquery.cookie.js"></script>
     <script type="text/javascript" src="extras/jquery.collapsible.js"></script>
     <script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>
@@ -54,7 +54,7 @@
         "esri/urlUtils", "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on",
         "dijit/form/CheckBox",
         "dojo/_base/Color",
-        "dojo/mouse", "dojo/query", "esri/geometry/webMercatorUtils", "esri/dijit/BasemapGallery", "esri/dijit/Legend",
+        "dojo/mouse", "dojo/query", "esri/geometry/webMercatorUtils", "esri/dijit/BasemapGallery", "esri/dijit/Legend", "extras/CK_AutoCompleteSearchAndZoom",
         "esri/arcgis/utils",
         "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
         "dijit/layout/AccordionContainer", "dojo/domReady!"
@@ -64,7 +64,7 @@
                 MH_UniqueSetup, MH_CreateQueryDef, MH_Query4Results, MH_Query4Summary, MH_MapSetup,
                 urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on,
                 CheckBox,
-                Color, mouse, query, webMercatorUtils, BasemapGallery, Legend) {
+                Color, mouse, query, webMercatorUtils, BasemapGallery, Legend, CK_AutoCompleteSearchAndZoom) {
 
         var today = new Date();
         var dd = today.getDate();
@@ -91,6 +91,8 @@
         app.pMapSup.Phase1();
         app.pMapSup.Phase3();
         app.pMapSup.QueryZoom("OBJECTID > 0");
+
+        CK_ASZ = new CK_AutoCompleteSearchAndZoom({ strSearchField: "ProjectID", strURL: strURL }); // instantiate the class
 
         document.getElementById("page_collapsibleMapDestination").appendChild(document.getElementById("map"));  //move the grid to the designated div, grids need to be built outside the collapsable panel otherwise risk not rendering properly
 
@@ -128,14 +130,21 @@
             }
             window.open(strHTML);
         }
-
-
-
     });
 </script>
 
 
 <script type="text/javascript">
+    function onkeypressHandleReturn()
+    {
+        if (event.keyCode == 13) {
+            CK_ASZ.ExecutePTSFind(document.getElementById("loc").value);
+            document.getElementById("loc").value = "";
+            return false;
+        } else
+            return true;
+    }
+
     function onRowContextMenuFunc(e) {
         grid5_rowMenu.bindDomNode(e.grid.domNode);
         selectedItem = e.grid.getItem(e.rowIndex);
@@ -152,8 +161,8 @@
     }
 
     $(document).ready(function () {
-        hljs.tabReplace = '    '; //        syntax highlighter
-        hljs.initHighlightingOnLoad();
+//        hljs.tabReplace = '    '; //        syntax highlighter
+//        hljs.initHighlightingOnLoad();
         $.fn.slideFadeToggle = function (speed, easing, callback) { return this.animate({ opacity: 'toggle', height: 'toggle' }, speed, easing, callback); };
 
         $('.collapsible').collapsible({             //collapsible management
@@ -229,7 +238,7 @@
 
 <div id="WideContent2">
 
-<h3>Support of strategically-identified and applied science is a core GNLCC Function.  Likewise, GNLCC supports partners and partnerships retain capacity to interpret and use the science. These pages describe, in detail, GNLCC's process for identifying science and capacity needs, requesting and evaluating proposals, the projects selected for support, the partnership they engender, and the science and capacity products and processes they deliver.</h2>
+<h3>A core function of the Great Northern LCC is to strategically identify and support applied landscape science, and to support its partners' capacity to interpret and use the science. These pages contain information on how projects are selected, project details and products, including the partnerships that are engendered and funds leveraged.</h2>
 
     <div class="page_collapsible" id="Div1" style="color:#FFFFFF; background:#cccccc;">Data Management, Proposal Guidance, and Funding Allocation Documents<span></span></div>
     <!--<div class="page_collapsible" id="DivBanner">Supported Science - Data Management, Funded Projects, and Proposal Guidance<span></span></div>-->    <!-- collapsible -->
@@ -237,13 +246,13 @@
             <br />
             These summary documents contain data management standards for funded projects, and proposal guidance and funding allocation by fiscal year.
             <ul>
-            <li><a href="/sites/default/files/documents/gnlcc_datamgt_sharing_policy.pdf">Data Management Standards</a></li>
+            <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_datamgt_sharing_policy.pdf">Data Management Standards</a></li>
             <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/fy15_funding_allocation.pdf">2015 Funding Allocation</a> and <a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_fy15_funding_guidance.pdf">Funding Guidance</a></li>
-            <li><a href="sites/default/files/documents/gnlcc_fy14_final_funding_allocation.pdf">2014 Funding Allocation</a> and <a href="/sites/default/files/documents/gnlcc_fy14_funding_guidance_feb_10-14.pdf" target="_blank">Funding Guidance</a></li>
-            <li><a href="/sites/default/files/documents/fy13_gnlcc_final_funding_allocation_may_2013.pdf">2013 Funding Allocation</a> and <a href="/sites/default/files/documents/gnlcc_fy13_funding_guidance_jan2013.pdf">Funding Guidance</a></li>
-            <li><a href="/sites/default/files/documents/fy12_gnlcc_final_funding_allocation_june_2012.pdf">2012 Funding Allocation</a> and <a href="/sites/default/files/documents/gnlcc_final_fy12_funding_guidance.pdf">Funding Guidance</a></li>
-            <li><a href="/sites/default/files/documents/final_fy11_funding_allocation_june_2011.pdf">2011 Funding Allocation</a> and <a href="/sites/default/files/documents/gnlcc_fy11_funding_guidance_final.pdf">Funding Guidance</a></li>
-            <li><a href="/sites/default/files/documents/gnlcc_fy10_funding_process_recommend.pdf">2010 Funding Guidance and Selection</a></li>
+            <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_fy14_final_funding_allocation.pdf">2014 Funding Allocation</a> and <a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_fy14_funding_guidance_feb_10-14.pdf" target="_blank">Funding Guidance</a></li>
+            <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/fy13_gnlcc_final_funding_allocation_may_2013.pdf">2013 Funding Allocation</a> and <a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_fy13_funding_guidance_jan2013.pdf">Funding Guidance</a></li>
+            <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/fy12_gnlcc_final_funding_allocation_june_2012.pdf">2012 Funding Allocation</a> and <a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_final_fy12_funding_guidance.pdf">Funding Guidance</a></li>
+            <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/final_fy11_funding_allocation_june_2011.pdf">2011 Funding Allocation</a> and <a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_fy11_funding_guidance_final.pdf">Funding Guidance</a></li>
+            <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_fy10_funding_process_recommend.pdf">2010 Funding Guidance and Selection</a></li>
             </ul>            
 
 
@@ -260,7 +269,7 @@
 
         <font size="2px" color="#2E2E2E">Keyword Search</font>
         <div id="autocompleteSearch">    <!--add carraige return event-->
-            <input id="loc" class="textbox" type="text"  title="Enter portion of...
+            <input id="loc" class="textbox" type="text" onkeypress="return onkeypressHandleReturn()" title="Enter portion of...
             Project Title, Project Lead, Keywords, 
             Partner Organizaitons
         and wait a moment for a pick list"/><br />

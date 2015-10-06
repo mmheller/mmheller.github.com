@@ -5,8 +5,10 @@ define([
   "dojo/_base/declare",
   "dojo/_base/lang",
   "esri/request",
+  "esri/tasks/FindTask",
+   "esri/tasks/FindParameters",
 ], function (
-  declare, lang, esriRequest
+  declare, lang, esriRequest, FindTask, FindParameters
 ) {
 
     return declare([], {
@@ -16,6 +18,7 @@ define([
         divTag4Results: null,
         strSearchField: null,
         pSR: null,
+        strURL: null,
 
         constructor: function (options) {
             this.pMap = options.pMap || null;
@@ -24,7 +27,61 @@ define([
             this.divTag4Results = options.divTag4Results || null;
             this.strSearchField = options.strSearchField || null;
             this.pSR = options.pSR || null;
+            this.strURL = options.strURL || null;
         },
+
+        ExecutePTSFind: function (strSearchValue) {
+            app.gQuery.ClearDivs();
+            var pFindask = new esri.tasks.FindTask(this.strURL);
+
+            var params = new FindParameters();
+            params.layerIds = [0];
+            params.searchFields = ["ProjectID", "Prj_Title", "PI_Org", "Partner_Organizaitons", "Subject_Keywords", "Location_Keywords", "LeadName_LastFirst"];
+            params.searchText = strSearchValue;
+            params.returnGeometry = false;
+            pFindask.execute(params, this.showResultsFromFind);
+        },
+
+        showResultsFromFind: function (resultFeatures) {
+            if ((resultFeatures != null) && (resultFeatures != undefined)) {
+                if (resultFeatures.length > 0) {
+                    var tempValue;
+                    var arrayValues = [];
+                    var testVals = {};
+
+                    dojo.forEach(resultFeatures, function (pfeatureItem) {  //Loop through the QueryTask results and populate an array with the unique values
+                        tempValue = pfeatureItem.feature.attributes.ProjectID;
+                        if (tempValue == undefined) {
+                            tempValue = pfeatureItem.feature.attributes.projectid;
+                        }
+                        if (!testVals[tempValue]) {
+                            testVals[tempValue] = true;
+                            var CheckedValue = tempValue;
+                            arrayValues.push(CheckedValue); //values.push({ name: zone });//values.push("'" + strValue + "'"); //values.push({ name: zone });
+                        }
+                    });
+                    this.app.gQuery.arrayProjectIDs = arrayValues;
+                    this.app.gQuery.m_iarrayQueryIndex += 1; //increment the index value of the query array by 1
+
+
+                    if (app.gQuery.strQuery == null) {
+                        app.gQuery.strQuery = "ProjectID in (" + arrayValues.join(",") + ")";
+                    } else {
+                        app.gQuery.strQuery = app.gQuery.strQuery.replace(")", "," + arrayValues.join(",") + ")");
+                    }
+                    app.gQuery.SendQuery4ProjectResults(app.gQuery.strQuery, app.gQuery.m_grid);
+
+                    //this.app.gQuery.strQuery = "ProjectID in (" + arrayValues.join(",") + ")";
+
+//                    app.gQuery.SendQuery4ProjectResults(app.gQuery.strQuery, app.gQuery.m_grid);  //reset the entire search page
+                    
+                }
+            }
+            else {
+                // do nothing
+            }
+        },
+
 
         zoomToPoint: function (pointx, pointy, option, dblZoom) {
             require(["esri/graphic", "esri/geometry/Point", "esri/SpatialReference"

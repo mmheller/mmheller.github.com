@@ -109,7 +109,7 @@ define([
               arrayQuery4DataGrid = [];
               arrayQuery4DataGrid.push(["9", strQuery + " and organization = 0", ["PersonName", "Contact_Type", "GroupName", "prj_priority", "OBJECTID", "roletype"], "gridDivContacts"]);
               arrayQuery4DataGrid.push(["9", strQuery + " and organization <> 0", ["OBJECTID", "GroupName", "Contact_Type"], "gridDivContactOrgsOnly"]);
-              arrayQuery4DataGrid.push(["3", strQuery + " and DelivType in ('Statement of Work','Proposal')", ["OBJECTID", "Fund_Year", "deliverable_title", "uri"], "gridDivProposals"]);
+              arrayQuery4DataGrid.push(["3", strQuery + " and DelivType in ('Statement of Work','Proposal')", ["OBJECTID", "Fund_Year", "deliverable_title", "uri", "DelivType"], "gridDivProposals"]);
               arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID = 3", ["OBJECTID", "CommonName", "ESA_Status", "TierName", "PrimaryLCCTargetType"], "gridDivConservationTargetsSPP"]);
               arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID <> 3", ["OBJECTID", "CommonName", "ConsvTargetTypeName", "PrimaryLCCTargetType"], "gridDivConservationTargetsOther"]);
 
@@ -225,7 +225,7 @@ define([
                                           pValue = pItem.Deliverable_Received;
                                           if (pValue == 1) {
                                               pValue = "Yes";
-                                              data["items"][key]["deliverable_title"] = '<font color="blue">FY{0} Proposal</font>'.format(data["items"][key]["deliverable_title"]);
+                                              data["items"][key]["deliverable_title"] = '<font color="blue">{0}</font>'.format(data["items"][key]["deliverable_title"]);
                                               //pValue = '<font color="blue">FY{0} Proposal</font>'.format(pItem.Fund_Year);
                                           }
                                           else { pValue = "No"; }
@@ -257,7 +257,7 @@ define([
                                       }
                                       if (pGrid.id == "gridProposals") {
                                           if (keyField == "Fund_Year") {
-                                              pValue = '<font color="blue">FY{0} Proposal</font>'.format(pItem.Fund_Year);
+                                              pValue = '<font color="blue">FY{0} {1}</font>'.format(pItem.Fund_Year, pItem.DelivType);
                                               data["items"][key][keyField] = pValue;
                                           }
                                       }
@@ -285,14 +285,22 @@ define([
                   pGrid.setStore(store);
 
                   var iRowHeight4Grid = 80 // Adjust the grid height based on number of records
-                  if (resultFeatures.length <= 2) {
-                      iRowHeight4Grid = (48 * resultFeatures.length);
-                  } else if (resultFeatures.length > 2 & resultFeatures.length <= 5) {
-                      iRowHeight4Grid = (30 * resultFeatures.length);
+                  if (resultFeatures.length == 1) {
+                      if (pGrid.id == "gridProposals") {
+                          iRowHeight4Grid = (45 * resultFeatures.length);
+                      } else {
+                          iRowHeight4Grid = (60 * resultFeatures.length);
+                      }
+                  } else if (resultFeatures.length >= 2 & resultFeatures.length <= 5) {
+                      if (pGrid.id == "gridProposals") {
+                          iRowHeight4Grid = (27 * resultFeatures.length);
+                      } else {
+                          iRowHeight4Grid = (35 * resultFeatures.length);
+                      }
                   } else if (resultFeatures.length > 5 & resultFeatures.length <= 10) {
                       iRowHeight4Grid = (27 * resultFeatures.length);
                   } else {
-                      iRowHeight4Grid = (27 * resultFeatures.length);
+                      iRowHeight4Grid = (22 * resultFeatures.length);
                   }
                   var strRowHeight4Grid = iRowHeight4Grid.toString() + "px";
                   document.getElementById(pGrid.id).style.height = strRowHeight4Grid;

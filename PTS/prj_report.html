@@ -14,7 +14,7 @@
     <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script type="text/javascript" src="http://softwaremaniacs.org/media/soft/highlight/highlight.pack.js"></script>
+<!--    <script type="text/javascript" src="http://softwaremaniacs.org/media/soft/highlight/highlight.pack.js"></script>-->
     <script type="text/javascript" src="extras/jquery.cookie.js"></script>
     <script type="text/javascript" src="extras/jquery.collapsible.js"></script>
     <script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>
@@ -120,8 +120,8 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-        hljs.tabReplace = '    '; //        syntax highlighter
-        hljs.initHighlightingOnLoad();
+//        hljs.tabReplace = '    '; //        syntax highlighter
+//        hljs.initHighlightingOnLoad();
         $.fn.slideFadeToggle = function (speed, easing, callback) { return this.animate({ opacity: 'toggle', height: 'toggle' }, speed, easing, callback); };
 
         $('.collapsible').collapsible({             //collapsible management
@@ -441,6 +441,7 @@
                   <th field="Fund_Year" width="120px;" height="100px;">Proposal</th>
                   <th field="uri" hidden="true" >Weblink</th>
                   <th field="deliverableid" hidden="true" >deliverableid</th>
+                  <th field="DelivType" hidden="true" >DelivType</th>
                 </tr>
               </thead>
             </table>
