@@ -19,7 +19,7 @@ define([
         strSearchField: null,
         pSR: null,
         strURL: null,
-
+  
         constructor: function (options) {
             this.pMap = options.pMap || null;
             this.dblExpandNum = options.dblExpandNum || null;
@@ -36,6 +36,7 @@ define([
 
             var params = new FindParameters();
             params.layerIds = [0];
+            
             params.searchFields = ["ProjectID", "Prj_Title", "PI_Org", "Partner_Organizaitons", "Subject_Keywords", "Location_Keywords", "LeadName_LastFirst"];
             params.searchText = strSearchValue;
             params.returnGeometry = false;
@@ -70,11 +71,6 @@ define([
                         app.gQuery.strQuery = app.gQuery.strQuery.replace(")", "," + arrayValues.join(",") + ")");
                     }
                     app.gQuery.SendQuery4ProjectResults(app.gQuery.strQuery, app.gQuery.m_grid);
-
-                    //this.app.gQuery.strQuery = "ProjectID in (" + arrayValues.join(",") + ")";
-
-//                    app.gQuery.SendQuery4ProjectResults(app.gQuery.strQuery, app.gQuery.m_grid);  //reset the entire search page
-                    
                 }
             }
             else {
