@@ -178,7 +178,7 @@ define([
 
           SendQuery4ProjectResults: function (strQuery, pGrid) {
               this.ClearDivs();
-
+              document.getElementById("ImgResultsLoading").style.visibility = "visible";
               //              if (app.pMapSup != undefined) {
               //                  app.pMapSup.QueryZoom(strQuery);
               //              }
