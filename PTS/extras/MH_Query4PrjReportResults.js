@@ -113,7 +113,7 @@ define([
               arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID = 3", ["OBJECTID", "CommonName", "ESA_Status", "TierName", "PrimaryLCCTargetType"], "gridDivConservationTargetsSPP"]);
               arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID <> 3", ["OBJECTID", "CommonName", "ConsvTargetTypeName", "PrimaryLCCTargetType"], "gridDivConservationTargetsOther"]);
 
-              arrayQuery4DataGrid.push(["2", strQuery + " and not (NationalLCCDelivType in ('Budget','Proposal', 'Statement of Work', 'Data Management Plan'))", ["OBJECTID", "deliverable_title", "Fund_Year", "duedate", "DelivType", "Deliverable_Received", "deliverableid", "supplemental"], "gridDivDeliverables"]);
+              arrayQuery4DataGrid.push(["2", strQuery + " and not (DelivType in ('Budget','Proposal', 'Statement of Work', 'Data Management Plan'))", ["OBJECTID", "deliverable_title", "Fund_Year", "duedate", "DelivType", "Deliverable_Received", "deliverableid", "supplemental"], "gridDivDeliverables"]);
               //arrayQuery4DataGrid.push(["3", strQuery + " and supplemental <> 0 and not (DelivType in ('Website','Recorded Presentation'))", ["OBJECTID", "data_name", "DelivType", "deliverableid", "uri"], "gridDivDeliverablesSupWebinarsPages"]);
 
               this.m_arrayQuery = arrayQuery;
