@@ -25,14 +25,15 @@ define([
       "dijit/registry",
       "esri/tasks/query",
       "dojox/grid/DataGrid",
-      "dojo/data/ItemFileReadStore",
+      "dojo/data/ItemFileReadStore", 
+      "extras/MH_MapSetup",
   ],
 
 
   function (
       declare, lang, esriRequest, IdentityManager, FeatureLayer, FeatureTable,
       domConstruct, dom, parser, ready, on,
-      registry, Query, DataGrid, ItemFileReadStore
+      registry, Query, DataGrid, ItemFileReadStore, MH_MapSetup
 ) {
 
       function sortFunction(a, b) {
@@ -47,6 +48,7 @@ define([
           strURL: null,
           m_iarrayQueryIndex: null,
           m_arrayQuery: null,
+          m_query4SummaryMap: null,
           constructor: function (options) {
               this.strURL = options.strURL || "www.cnn.com"; // default AGS REST URL
           },
@@ -54,6 +56,7 @@ define([
           Summarize: function (strQuery) {
               //table/fc index, query string, field 4 aggregation, stat type (count, sum, avg), group by field, html ID, string function
               arrayQuery = [];
+              this.m_query4SummaryMap = strQuery;
               arrayQuery.push(["0", strQuery, "ProjectID", "count", "", "page_collapsible1", 'Results ({0} projects)', "", ""]);
               arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "sum", "", "dTotalAllocatedbyLCC", '<b>GNLCC Funds Allocated:</b> {0}', "currency", ""]);
               arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", '<b>GNLCC Funds Allocated by Year:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both-currency", "desc"]);
@@ -191,7 +194,7 @@ define([
                                       strText = iTempNumber.toCurrencyString() + "\n<br>&nbsp;&nbsp;&nbsp;";
                                       values.push(strText);
                                   } else if ((strVarType == "show both") & (an == "genericstat")) {
-//                                      var iTempNumber = Number(strText);
+                                      //                                      var iTempNumber = Number(strText);
                                       strText = "(" + strText + ")\n<br>&nbsp;&nbsp;&nbsp;";
                                       values.push(strText);
 
@@ -234,6 +237,16 @@ define([
                           strID = pform.elements[i].id;
                           document.getElementById(strID).disabled = false;
                       }
+                  }
+
+                  if (app.pMapSup == undefined) {
+                      app.pMapSup = new MH_MapSetup({}); // instantiate the class
+                      //app.pMapSup.QueryZoom(strQuery);
+                      app.pMapSup.Phase1();
+                      app.pMapSup.Phase3();
+                      app.pMapSup.QueryZoom("OBJECTID > 0");
+                  } else {
+                      app.pMapSup.QueryZoom(this.app.gQuerySummary.m_query4SummaryMap);
                   }
 
 

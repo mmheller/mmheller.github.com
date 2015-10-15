@@ -88,10 +88,10 @@
         var tokens = getTokens
         parser.parse();
         app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
-        app.pMapSup = new MH_MapSetup({}); // instantiate the class
-        app.pMapSup.Phase1();
-        app.pMapSup.Phase3();
-        app.pMapSup.QueryZoom("OBJECTID > 0");
+//        app.pMapSup = new MH_MapSetup({}); // instantiate the class
+//        app.pMapSup.Phase1();
+//        app.pMapSup.Phase3();
+//        app.pMapSup.QueryZoom("OBJECTID > 0");
 
         CK_ASZ = new CK_AutoCompleteSearchAndZoom({ strSearchField: "ProjectID", strURL: strURL }); // instantiate the class
 

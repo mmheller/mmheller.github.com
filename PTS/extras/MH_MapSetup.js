@@ -1,5 +1,5 @@
 ﻿//Created By:  Matt Heller, Great Northern Landscape Conservation Cooperative / U.S. Fish and Wildlife Service
-//Date:        Oct 2014
+//Date:        Oct 2015
 
 function showLoading() {
     esri.show(app.loading);
@@ -9,11 +9,11 @@ function showLoading() {
 
 function hideLoading(error) {
     esri.hide(app.loading);
-    app.map.enableMapNavigation();
-    app.map.showZoomSlider();
+    if (app.map) {
+        app.map.enableMapNavigation();
+        app.map.showZoomSlider();
+    }
 }
-
-
 
 define([
   "dojo/_base/declare",

@@ -291,7 +291,13 @@ define([
                       } else {
                           iRowHeight4Grid = (60 * resultFeatures.length);
                       }
-                  } else if (resultFeatures.length >= 2 & resultFeatures.length <= 5) {
+                  } else if (resultFeatures.length == 2) {
+                      if (pGrid.id == "gridProposals") {
+                          iRowHeight4Grid = (30 * resultFeatures.length);
+                      } else {
+                          iRowHeight4Grid = (35 * resultFeatures.length);
+                      }
+                  } else if (resultFeatures.length >= 3 & resultFeatures.length <= 5) {
                       if (pGrid.id == "gridProposals") {
                           iRowHeight4Grid = (27 * resultFeatures.length);
                       } else {

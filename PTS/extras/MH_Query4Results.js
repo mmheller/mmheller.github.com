@@ -7,6 +7,37 @@ function onRowClickHandler(evt) {
     //window.open(strURL, "_self");
 }
 
+//function returnRangeStringQuery(strFieldName, arrayValues) {
+//  var strQueryStandard = "ProjectID in (" + arrayValues.join(",") + ")";
+//  var strQuery = "";
+//  arrayValues = arrayValues.sort();
+//  var ranges = [], singles = [], rstart, rend;
+// 
+//  for (var i = 0; i < arrayValues.length; i++) {
+//    rstart = arrayValues[i];
+//    rend = rstart;
+//    while (arrayValues[i + 1] - arrayValues[i] == 1) {
+//      rend = arrayValues[i + 1]; // increment the index if the numbers sequential
+//      i++;
+//    }
+//    //ranges.push(rstart == rend ? rstart+'' : rstart + '-' + rend);
+//    if (rstart == rend){
+//        singles.push(rstart);
+//    }else {
+//        ranges.push([rstart, rend]);
+//    }
+//  }
+//  strQuery = strFieldName + " in (" + singles.join(",") + ")";
+//  for (var ii = 0; ii < ranges.length; ii++) {
+//    strQuery += " and ((" + strFieldName + " >= " + ranges[ii][0].toString() + ") and (" + strFieldName + " <= " + ranges[ii][1].toString() + "))";
+//  }
+
+//  if (strQueryStandard.length < strQuery.length) {//if the original formatted query is shorter than the new, go with the original
+//      strQuery = strQueryStandard;
+//  }
+//  return strQuery;
+//}
+
 define([
   "dojo/_base/declare",
   "dojo/_base/lang",
@@ -61,6 +92,10 @@ define([
                   if (this.arrayProjectIDs.length > 0) {
                       strQuery = "(" + strQuery + ") and (ProjectID in (" + this.arrayProjectIDs.join(",") + "))";
                   }
+                  //                  if (this.arrayProjectIDs.length > 25) {
+                  //                      strQuery2ndTry4Shorter = "(" + strQuery + ") and (ProjectID in (" + this.arrayProjectIDs.join(",") + "))";
+                  //                  }
+
 
                   if (this.m_arrayUserRemovedPrjs.length > 0) {  //if user's right clicked and removed a row then don't include
                       strQuery += " and (not (ProjectID in (" + this.m_arrayUserRemovedPrjs.join(",") + ")))";
@@ -98,7 +133,15 @@ define([
                       this.app.gQuery.arrayProjectIDs = arrayValues;
                       this.app.gQuery.m_iarrayQueryIndex += 1; //increment the index value of the query array by 1
 
-                      this.app.gQuery.strQuery = "ProjectID in (" + arrayValues.join(",") + ")";
+
+
+//                      if (arrayValues.length < 15) {
+                      this.app.gQuery.strQuery = "ProjectID in (" + arrayValues.join(",") + ")";  //!!!!!!!!!!!!!!!!!!this gets used for the summary and the gis layer
+//                      } else {
+//                          this.app.gQuery.strQuery = returnRangeStringQuery("ProjectID", arrayValues);
+//                      }
+
+//                      alert(this.app.gQuery.strQuery);
 
                       if (this.app.gQuery.m_iarrayQueryIndex >= this.app.gQuery.m_arrayQuery.length) {
                           this.app.gQuery.ClearDivs();
@@ -136,9 +179,9 @@ define([
           SendQuery4ProjectResults: function (strQuery, pGrid) {
               this.ClearDivs();
 
-              if (app.pMapSup != undefined) {
-                  app.pMapSup.QueryZoom(strQuery);
-              }
+              //              if (app.pMapSup != undefined) {
+              //                  app.pMapSup.QueryZoom(strQuery);
+              //              }
               this.m_grid = pGrid
               var queryTask = new esri.tasks.QueryTask(this.strURL + "/0");
               var pQuery = new Query();
