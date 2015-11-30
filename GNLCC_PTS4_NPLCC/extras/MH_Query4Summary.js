@@ -58,8 +58,8 @@ define([
               arrayQuery = [];
               this.m_query4SummaryMap = strQuery;
               arrayQuery.push(["0", strQuery, "ProjectID", "count", "", "page_collapsible1", 'Results ({0} projects)', "", ""]);
-              arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "sum", "", "dTotalAllocatedbyLCC", '<b>GNLCC Funds Allocated:</b> {0}', "currency", ""]);
-              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", '<b>GNLCC Funds Allocated by Year:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both-currency", "desc"]);
+              arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "sum", "", "dTotalAllocatedbyLCC", '<b>NPLCC Funds Allocated:</b> {0}', "currency", ""]);
+              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", '<b>NPLCC Funds Allocated by Year:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both-currency", "desc"]);
               arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "sum", "", "dTotalInKindMatch", '<b>In-Kind or Match Funding:</b> {0} ', "currency", ""]);
               arrayQuery.push(["7", strQuery, "ProjectID", "count", "orgname", "dNumberofInKindOrgs", '<b>Organizations Providing In-Kind or Match Funding:</b> {0} ', "countOfGroupBy", ""]);
               arrayQuery.push(["1", strQuery, "ProjectID", "count", "CommonName", "dTotalNumberofConsvTargets", '<b>Conservation Targets:</b> {0} ', "countOfGroupBy", ""]);
@@ -76,7 +76,7 @@ define([
               
               arrayQuery.push(["4", strQuery, "ProjectID", "count", "EcotypicAreaName", "dEcotypicAreas", '<b>Ecotypic Areas (Partner Forums):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
               arrayQuery.push(["11", strQuery, "ProjectID", "count", "Stressor", "dStressors", '<b>Stressors:</b>  \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", "asc"]);
-              arrayQuery.push(["8", strQuery, "ProjectID", "count", "GoalName", "dGoals", '<b>Conservation Goals:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
+              arrayQuery.push(["8", strQuery, "ProjectID", "count", "GoalName", "dGoals", '<b>Conservation Topic:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
 
               this.m_arrayQuery = arrayQuery;
               this.SendQuery(arrayQuery, 0)
