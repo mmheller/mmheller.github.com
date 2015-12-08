@@ -69,7 +69,11 @@ define([
               arrayQuery.push(["2", strQuery, "ProjectID", "count", "", "dNumberofDeliverables", '<b>Deliverables:</b> {0} ', "default", ""]);
               arrayQuery.push(["0", strQuery, "ProjectID", "count", "PrjStatus", "dPrjStatus", '<b>Project Status:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", ""]);
               arrayQuery.push(["5", strQuery, "ProjectID", "count", "dest_orgname", "dNumberOfFundingRecipients", '<b>Funding Recipient Organizations:</b> {0} ', "countOfGroupBy", ""]);
-              arrayQuery.push(["5", strQuery, "ProjectID", "count", "DestinationType", "dFundRecipientTypes", '<b>Funding Recipient Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
+              
+              //arrayQuery.push(["5", strQuery, "ProjectID", "count", "DestinationType", "dFundRecipientTypes", '<b>Funding Recipient Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
+              arrayQuery.push(["5", strQuery, "amount", "sum", "DestinationType", "dFundRecipientTypes", '<b>Funding Recipient Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both-currency", "desc"]);
+              
+              
               arrayQuery.push(["4", strQuery, "ProjectID", "count", "EcotypicAreaName", "dEcotypicAreas", '<b>Ecotypic Areas (Partner Forums):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
               arrayQuery.push(["11", strQuery, "ProjectID", "count", "Stressor", "dStressors", '<b>Stressors:</b>  \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", "asc"]);
               arrayQuery.push(["8", strQuery, "ProjectID", "count", "GoalName", "dGoals", '<b>Conservation Goals:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);

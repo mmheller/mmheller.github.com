@@ -79,7 +79,7 @@ define([
               pHumanMod = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/5527fe7fe4b026915857c948/MapServer", { "opacity": 0.5, id: "HumanMod", visible: false });
 
               pRefugesLayer = new FeatureLayer(strBase_URL + "2", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "USFWS Refuges", visible: false });
-              pUSNativeLayer = new FeatureLayer(strBase_URL + "5", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "US Native Lands", visible: false });
+              pUSNativeLayer = new FeatureLayer("http://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_TribalIndianLands_01/MapServer/0", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "US Native Lands", visible: false });
               pNPSLayer = new FeatureLayer(strBase_URL + "6", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "US National Park Service", visible: false });
               pUSFSLayer = new ArcGISDynamicMapServiceLayer("http://apps.fs.fed.us/arcx/rest/services/RDW_AdminAndOwnership/PublicPrivateForestOwnership_CONUS/MapServer", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: "US Public/Private Forest Ownership", visible: false });
               pBLMLayer = new ArcGISDynamicMapServiceLayer("http://www.geocommunicator.gov/ArcGIS/rest/services/SMA/MapServer", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "BLM Land", visible: false });
@@ -112,7 +112,7 @@ define([
               cbxLayers.push({ layer: pHumanMod, title: 'Human Modification Index' });
               cbxLayers.push({ layer: pLCCNetworkLayer, title: 'LCC Network Areas' });
               cbxLayers.push({ layer: pRefugesLayer, title: 'USFWS Refuges' });
-              cbxLayers.push({ layer: pUSNativeLayer, title: 'US Native Lands' });
+              cbxLayers.push({ layer: pUSNativeLayer, title: 'US Indian Lands Boundaries' });
               cbxLayers.push({ layer: pNPSLayer, title: 'US National Park Service' });
               cbxLayers.push({ layer: pUSFSLayer, title: 'US Public/Private Forest Ownership' });
               cbxLayers.push({ layer: pBLMLayer, title: 'BLM Land' });
