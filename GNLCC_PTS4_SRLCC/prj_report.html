@@ -1,0 +1,509 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Supported Science Project Report</title>
+    <!-- CSS -->
+    <link rel="shortcut icon" href="http://southernrockieslcc.org/southrock/wp-content/themes/southern-rockies/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/dijit/themes/soria/soria.css" type="text/css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/dojox/grid/resources/soriaGrid.css"/>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/dojox/grid/resources/Grid.css" type="text/css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/esri/css/esri.css"/>
+    <link rel="stylesheet" href="css/collapse.css" type="text/css" />
+    <link rel="stylesheet" href="css/panel.css" type="text/css" />
+
+    <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<!--    <script type="text/javascript" src="http://softwaremaniacs.org/media/soft/highlight/highlight.pack.js"></script>-->
+    <script type="text/javascript" src="extras/jquery.cookie.js"></script>
+    <script type="text/javascript" src="extras/jquery.collapsible.js"></script>
+    <script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>
+
+<style>
+    .soria .NavigationForm .content {font-size:.3em;}
+    .soria .dojoxGridRowOver .dojoxGridCell {border: 0px solid; color:#000000; background-color: #cccccc}
+    .soria .dojoxGridCell {border: 0px solid; color:#000000; font-size:12px;}  /* this controls style of grid cells */
+    .soria .dojoxGridHeader .dojoxGridCell {background-image: url(""); background-color: #5B7E8A; border: 0px solid; color:#FFFFFF !important; padding:5px;}
+    .soria .dojoxGrid {font-family: Arial, Helvetica, sans-serif; outline-color:inherit; background-color:White; font-size:12px;}
+    .dojoxGridView {left:0px;}
+</style>
+
+<!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
+<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+
+<script type="text/javascript">
+    var app = {};
+    require([
+        "esri/map",
+        "extras/MH_UniqueSetup", "extras/MH_CreateQueryDef", "extras/MH_Query4Results", "extras/MH_Query4Summary", "extras/MH_MapSetup_prjReport", "extras/MH_Query4PrjReportResults",
+        "esri/urlUtils", "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on",
+        "dijit/form/CheckBox",
+        "dojo/_base/Color",
+        "dojo/mouse", "dojo/query", "dojox/grid/DataGrid", "esri/geometry/webMercatorUtils", "esri/dijit/BasemapGallery",
+        "dojo/date/locale",
+        "esri/arcgis/utils",
+        "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
+        "dijit/layout/AccordionContainer", "dojo/domReady!"
+        ],
+
+    function (Map,
+                MH_UniqueSetup, MH_CreateQueryDef, MH_Query4Results, MH_Query4Summary, MH_MapSetup_prjReport, MH_Query4PrjReportResults,
+                urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on,
+                CheckBox,
+                Color, mouse, query, DataGrid, webMercatorUtils, BasemapGallery) {
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        today = mm + '/' + dd + '/' + yyyy;
+        document.getElementById('time').innerHTML = today;
+
+        on(dom.byId("btn_back2search"), "click", btn_btn_back2search_click);
+
+        var strURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/5679cdaae4b0da412f4fc2ec/MapServer"
+        
+        app.gPjrReportQuery = new MH_Query4PrjReportResults({ strURL: strURL }); // instantiate the class
+
+        var tokens = getTokens
+        var strPRJ_ID = getTokens()['PRJ_ID']; //?RButton=true
+
+        parser.parse();
+        app.gPjrReportQuery.RunReport("ProjectID = " + strPRJ_ID, [gridContacts, gridContactOrgsOnly, gridProposals,
+                                                                    gridConservationTargetsSPP, gridConservationTargetsOther,
+                                                                    gridDeliverables], 
+                                                                    gridDeliverablesDetail);  // this needs sync'ing with the grids below, the div's below, and the array in the MH_Query4PrjReportResults
+
+
+
+        $('#cover-up').click(function () {
+            window.open("http://southernrockieslcc.org/", "_self");
+        });
+
+        dojo.connect(gridProposals, "postrender", function () {
+            var headerGrid = this.domNode.firstElementChild;
+            headerGrid.style.display = "none";
+        });
+
+
+        dojo.connect(dijit.byId("gridProposals"), 'onStyleRow', this, function (row) 
+        {
+            var grid = dijit.byId("gridProposals");
+            var item = grid.getItem(row.index);
+            if(item)
+            {   row.customStyles += "background-color:white;";            }
+                grid.focus.styleRow(row);
+                grid.edit.styleRow(row);
+        });
+
+
+        function getTokens() {
+            var tokens = [];
+            var query = location.search;
+            query = query.slice(1);
+            query = query.split('&');
+            $.each(query, function (i, value) {
+                var token = value.split('=');
+                var key = decodeURIComponent(token[0]);
+                var data = decodeURIComponent(token[1]);
+                tokens[key] = data;
+            });
+            return tokens;
+        }
+
+        function btn_btn_back2search_click() {
+            window.open("http://greatnorthernlcc.org/strategic-science-support", "_self");
+        }
+    });
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+//        hljs.tabReplace = '    '; //        syntax highlighter
+//        hljs.initHighlightingOnLoad();
+        $.fn.slideFadeToggle = function (speed, easing, callback) { return this.animate({ opacity: 'toggle', height: 'toggle' }, speed, easing, callback); };
+
+        $('.collapsible').collapsible({             //collapsible management
+            defaultOpen: 'page_collapsible1,body-section2,body-section3',
+            cookieName: 'nav',
+            speed: 'slow',
+            animateOpen: function (elem, opts) { //replace the standard slideUp with custom function
+                elem.next().slideFadeToggle(opts.speed);
+            },
+            animateClose: function (elem, opts) { //replace the standard slideDown with custom function
+                elem.next().slideFadeToggle(opts.speed);
+            },
+            loadOpen: function (elem) { //replace the standard open state with custom function
+                elem.next().show();
+            },
+            loadClose: function (elem, opts) { //replace the close state with custom function
+                elem.next().hide();
+            }
+        });
+        $('.page_collapsible').collapsible({
+            defaultOpen: '',
+            cookieName: 'body2',
+            speed: 'slow',
+            animateOpen: function (elem, opts) { //replace the standard slideUp with custom function
+                elem.next().slideFadeToggle(opts.speed);
+            },
+            animateClose: function (elem, opts) { //replace the standard slideDown with custom function
+                elem.next().slideFadeToggle(opts.speed);
+            },
+            loadOpen: function (elem) { //replace the standard open state with custom function
+                elem.next().show();
+            },
+            loadClose: function (elem, opts) { //replace the close state with custom function
+                elem.next().hide();
+            }
+        });
+
+        if ($('#page_collapsible1').collapsible('collapsed')) {
+            $('#page_collapsible1').collapsible('open');
+        }
+        if ($('#Div4').collapsible('collapsed')) {
+            $('#Div4').collapsible('open');
+        }
+        if ($('#body-section3').collapsible('collapsed')) {
+            $('#body-section3').collapsible('open');
+        }
+
+        
+
+        function openAll() { $('.page_collapsible').collapsible('openAll'); } //assign open/close all to functions
+        function closeAll() { $('.page_collapsible').collapsible('closeAll'); }
+
+        //listen for close/open all
+        $('#closeAll').click(function (event) {
+            event.preventDefault();
+            closeAll();
+        });
+        $('#openAll').click(function (event) {
+            event.preventDefault();
+            openAll();
+        });
+
+    });
+</script>
+
+<script>
+    (function (i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+  m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-28254785-1', 'auto');
+    ga('send', 'pageview');
+
+</script>
+</head>
+
+
+
+<body class="soria">
+
+<div id="cover-up"></div>
+<div id="eniro"><iframe src="SRLCC_Banner.html" style="border:none; padding:0px;" scrolling="no" width="980" height="135" id="iframe_a"></iframe></div>
+
+
+<div id="WideContent" style="padding-left:6px;">
+    <div style="padding-top:6px; padding-bottom:6px;">
+        <table style="width:100%;">
+            <tr>
+                <td>
+                    <input id="btn_back2search" type="button"  value="Return to Projects"> |
+                    <a href="#" id="closeAll" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
+                    <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
+                </td>
+                <td class="HTMLTable_styleRight">
+                    <font size="1px" color="#2E2E2E"><b>Date:</b> <span id="time"></span></font>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+    <div class="page_collapsible" id="page_collapsible1">Project Information<span></span></div>    <!-- collapsible -->
+        <div class="container"  id="container1" >
+            <table style="width: 100%;">
+                <tr>
+                    <td class="HTMLTable_styleLeftLessPad">
+                       <div id="divTitle"></div>
+                        <hr>
+
+
+                        <table style="width:100%;">
+                                   <tr>
+                                       <td valign="top"  width="120px">
+                                            <b>Project Lead:</b><br />
+                                            <b>Lead Organization:</b><br />
+                                            <b>Project Start Date:</b><br />
+                                            <b>Project End Date:</b><br />
+                                            <b>Project Status:</b><br />
+                                            <b>Proposal(s):</b>
+                                       </td>
+                                       <td valign="top">
+                                            <div id="divPI" style="padding-left:3px;"></div>
+                                            <div id="divLeadOrg" style="padding-left:3px;"></div>
+                                            <div id="divStart" style="padding-left:3px;"></div>
+                                            <div id="divEnd" style="padding-left:3px;"></div>
+                                            <div id="divStatus" style="padding-left:3px;"></div>   
+                                            <div id="gridDivProposals"></div>        
+                                       </td>
+                                       <td valign="top">
+         
+                                       </td>
+                                   </tr>
+
+                                   <tr>
+                                       <td valign="top">
+                                            
+                                       </td>
+                                       <td valign="top">
+                                            <div id="div5"></div>                   
+                                       </td>
+                                       <td valign="top">
+                                            <div id="Div6"></div>            
+                                       </td>
+                                   </tr>
+                        </table>   
+                          <hr>
+                        <div id="divDescription"></div>
+    
+
+
+
+                     </td>
+                    <td class="HTMLTable_styleMiddleLessPad">
+                        &nbsp;
+                    </td>
+                    <td valign="top">
+                        <div id="dTotalAllocatedbyLCCSum"></div>
+                        <hr>
+                        <div id="dTotalAllocatedbyLCCbyYear"></div>
+                        <hr>
+                        <div id="divFundingDispersal"></div>
+                        <hr>
+                        <div id="dTotalInKindSum"></div>
+                        <hr>
+                        <div id="divInKindMatch"></div>
+                    </td>
+                </tr>
+            </table>
+
+           <table style="width:100%;">
+               <tr>
+                   <td valign="top">
+
+
+
+                                    
+                                    
+                                     
+                   </td>
+                   <td>
+                       </td>
+                                      <td valign="top">
+
+                   </td>
+               </tr>
+
+               <tr>
+
+                   <td>
+                        
+                       </td>
+                   <td></td>
+               </tr>
+             
+           </table>
+        </div>
+    <!-- end collapsible -->
+
+    <!-- collapsible -->
+    <div class="page_collapsible" id="Div13">Products/Deliverables<span></span></div>
+    <div class="container">
+            <!--<div id="gridDivDeliverablesSupWebinarsPages"></div><br />-->
+            <div id="gridDivDeliverables"></div><br />
+            <div align="right">
+                <div id="divDelivDetailCount"></div>
+                <div id="gridDivDeliverablesDetail" ></div><br />
+            </div>
+
+            <br />
+            <div id="divLCMAPLink"></div>
+            <br />
+    </div>
+    <!-- end collapsible -->
+
+
+    <!-- collapsible -->
+    <div class="page_collapsible" id="body-section2">Strategic Conservation Framework Detail<span></span></div>
+    <div class="container">
+
+           <table style="width:100%;">
+               <tr>
+                   <td class="HTMLTable_BannerRow2" >
+                        <b>Ecotypic Areas</b>
+                   </td>
+                   <td class="HTMLTable_BannerRow2" >
+                        <b>Goals</b>
+                   </td>
+                   <td class="HTMLTable_BannerRow2" >
+                        <b>Stressors</b>
+                   </td>
+               </tr>
+               <tr>
+                   <td valign="top">
+                        <div id="divEcotypicArea"></div>
+                   </td>
+                   <td valign="top">
+                        <div id="divGoals"></div>                   
+                   </td>
+                   <td valign="top">
+                        <div id="divStressors"></div>            
+                   </td>
+               </tr>
+           </table>       
+
+        <br />
+        
+
+       
+       <div id="gridDivConservationTargetsSPP"></div><br />
+       <div id="gridDivConservationTargetsOther"></div><br />
+    </div>
+
+    <div class="page_collapsible" id="Div1">Contact Detail<span></span></div>
+    <div class="container">
+            <div id="gridDivContacts"></div><br />
+            <div id="gridDivContactOrgsOnly"></div><br />
+
+    </div>
+
+
+
+
+
+    <div class="page_collapsible" id="page_collapsibleMap">Map Summary<span></span></div>
+    <div class="container">
+     <!--       <p>
+                MapService URL: <a href="https://www.sciencebase.gov/arcgis/rest/services/Catalog/5679cdaae4b0da412f4fc2ec/MapServer" title="rest endpoing">https://www.sciencebase.gov/arcgis/rest/services/Catalog/5679cdaae4b0da412f4fc2ec/MapServer</a>
+            </p>-->
+
+        <div id="page_collapsibleMapDestination" style="position:relative" >
+        </div>
+    </div>
+
+ 
+    <div id="mapPrjReport"    data-dojo-type="dijit/layout/ContentPane"    data-dojo-props="region:'center'"    style="overflow:hidden; background-color:rgb(255, 255, 255);">
+        <img id="loadingImg" src="images/loading.gif" style="position:absolute; right:50%; top:50%; z-index:100;" />
+        <div id="panelBasemaps" class="panelBasemaps bg rounded shadow" >		    <!-- Panel Basemaps -->
+	        <div id="basemapTitle"><img src="images/basemaps.png" height="30" title="Switch Base Map" /></div>
+	        <div id="basemapContent">
+		        <div id="basemapGallery" ></div>
+	        </div>
+        </div>
+        <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
+    </div>
+
+
+            <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridContacts" id="gridContacts" selectionMode="none">
+             <thead>
+                <tr>
+                  <th field="PersonName" width="300px" height="60px">Name</th>
+                  <th field="roletype" width="130px"  height="60px">Role</th>
+                  <th field="GroupName" width="auto"  height="60px">Affiliation</th>
+                  <th field="Contact_Type" width="150px" height="60px">Type</th>
+ 
+                  <!--<th field="prj_priority" width="80px">Priority</th>-->
+                  <!--<th field="uri" width="auto">Email</th> -->             
+                </tr>
+              </thead>
+            </table>
+
+           <table dojotype="dojox.grid.DataGrid" style="height:300px; width:600px; display:none;" jsid="gridContactOrgsOnly" id="gridContactOrgsOnly" selectionMode="none" style="">
+             <thead>
+                <tr>
+                  <th field="GroupName" width="450" height="60px">Additional Collaborators</th>
+                  <th field="Contact_Type" width="auto" height="60px">Type</th>
+    
+                </tr>
+              </thead>
+            </table>
+
+          <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" sortInfo="-1" style="width:400; height:105px; display:none;" 
+                        jsid="gridProposals" id="gridProposals" selectable="true">
+             <thead>
+                <tr>
+                  <th field="Fund_Year" width="350px;" height="100px;">Proposal</th>
+                  <th field="uri" hidden="true" >Weblink</th>
+                  <th field="deliverableid" hidden="true" >deliverableid</th>
+                  <th field="DelivType" hidden="true" >DelivType</th>
+                </tr>
+              </thead>
+            </table>
+
+
+            <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridConservationTargetsSPP" id="gridConservationTargetsSPP" selectionMode="none">
+             <thead>    
+                <tr>
+                  <th field="CommonName" width="340px" height="auto">Species Conservation Targets</th>
+                  <th field="ESA_Status" width="320px" height="60px">ESA Status</th>
+                  <th field="TierName" width="130px"  height="30px">Tier</th>
+                  <th field="PrimaryLCCTargetType" width="auto">LCC Identified</th>              
+                </tr>
+              </thead>
+            </table>
+
+            <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridConservationTargetsOther" id="gridConservationTargetsOther" selectionMode="none">
+             <thead>
+                <tr>
+                  <th field="CommonName" width="400px" height="auto">Habitats, Ecosystems & Processess Conservation Targets</th>
+                  <th field="ConsvTargetTypeName" width="400px">Type</th>
+                  <th field="PrimaryLCCTargetType" width="auto">LCC Identified</th>              
+                </tr>
+              </thead>
+            </table>
+
+
+            <table id="gridDeliverables" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" sortInfo="4"
+                        jsid="gridDeliverables"  style="height:auto; display:none;" >
+                <thead>
+                    <tr>
+                        <th field="deliverable_title" width="auto">Title</th>
+                        <th field="Fund_Year" width="60px" height="auto">Fund Year</th>
+                        <th field="duedate" width="70px">Due Date</th>           
+                        <th field="DelivType" width="145px">Type</th>    
+                        <th field="supplemental" width="80px">Supplemental</th>    
+                        <th field="Deliverable_Received" width="55px">Received</th>    
+                        <th field="deliverableid" hidden="true">deliverableid</th>
+                    </tr>
+                </thead>
+            </table>
+
+            <table id="gridDeliverablesDetail" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" 
+                        jsid="gridDeliverablesDetail"  style="height:auto; width:750px; display:none;">
+                <thead>
+                    <tr>
+                        <th field="data_name" width="550px">Detail Title</th>
+                        <th field="receiveddate" width="100px" >Date Received</th>
+                        <th field="Deliverable_Received" width="auto">Weblink</font></th>
+                        <th field="uri" hidden="true">uri</th>
+                    </tr>
+                </thead>
+            </table>
+</div>
+
+<div style="clear:both; float:left; width:935px;">
+    <div style="float:right;">
+            <font size="1.5" color="#2E2E2E">Design: GNLCC<br/> Development: GNLCC<br/>Data Services: <a href="https://www.sciencebase.gov/arcgis/rest/services/Catalog/5679cdaae4b0da412f4fc2ec/MapServer" target="_blank">LC MAP</a></font>
+    </div>
+</div>
+
+</body>
+</html>
+
