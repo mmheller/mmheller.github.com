@@ -168,8 +168,8 @@ define([
               document.getElementById('dNumberofInKindOrgs').innerHTML = "";
               document.getElementById('dTotalNumberofConsvTargets').innerHTML = "";
               document.getElementById('dEcotypicAreas').innerHTML = "";
-              document.getElementById('dStressors').innerHTML = "";
-              document.getElementById('dGoals').innerHTML = "";
+//              document.getElementById('dStressors').innerHTML = "";
+//              document.getElementById('dGoals').innerHTML = "";
               document.getElementById('dNumberofDeliverables').innerHTML = "";
               document.getElementById('dDeliverabletype').innerHTML = "";
               document.getElementById('dPrjStatus').innerHTML = "";

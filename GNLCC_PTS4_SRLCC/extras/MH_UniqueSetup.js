@@ -139,7 +139,7 @@ define([
           },
 
           qry_Query4UniquesAndCheckBoxes: function (strURL, strQuery, strFieldNameText, strFieldNameValue, strContainerDivID, strNewDivID) {
-              if (strFieldNameText == "PersonName") {
+              if (strFieldNameText == "GoalName") {
                   var strstop = "";
               }
               this.strContainerDivID = strContainerDivID;
@@ -161,6 +161,9 @@ define([
           },
 
           returnEvents: function (results) {
+              if (this.app.gSup.strFieldNameText == "GoalName") {
+                  var strstop = "";
+              }
               var arrayRemoveStrings = ["", "---select an effort type---"];
               var resultFeatures = results.features;
               if ((resultFeatures != null) || (resultFeatues != undefined)) {
@@ -224,7 +227,9 @@ define([
                       }
                   }
 
-                  document.getElementById(this.app.gSup.strContainerDivID).innerHTML = ''; // clear out existing items
+                  if (document.getElementById(this.app.gSup.strContainerDivID) != undefined) {
+                      document.getElementById(this.app.gSup.strContainerDivID).innerHTML = ''; // clear out existing items
+                  }
 
                   if (values != undefined) {
                       var blnCheckedAny = false;
@@ -258,7 +263,11 @@ define([
                                   }
                               }
                           }
-                          AddCheckbox(this.app.gSup.strContainerDivID, strNewDivID, varValue, tt, blnChecked, true)
+
+                          if ((strNewDivID != undefined) | (strNewDivID != null)) {
+                              AddCheckbox(this.app.gSup.strContainerDivID, strNewDivID, varValue, tt, blnChecked, true)
+                          }
+
                       }
                       if (blnCheckedAny == true) {
                           strNewDivIDClear = this.app.gSup.strNewDivID + "-clear";
@@ -359,19 +368,19 @@ define([
                                                             'section13content', this.app.gSup.iTableIndex.toString() + "-Name");
                       break;
 
-//                  case "NAME":
-//                      this.app.gSup.iTableIndex = 0;
-//                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
-//                                                                        "Support_Name", "Support_Name",
-//                                                            'section14content', this.app.gSup.iTableIndex.toString() + "-Support_Name");
-//                      break;
+                  //                  case "NAME":    
+                  //                      this.app.gSup.iTableIndex = 0;    
+                  //                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],    
+                  //                                                                        "Support_Name", "Support_Name",    
+                  //                                                            'section14content', this.app.gSup.iTableIndex.toString() + "-Support_Name");    
+                  //                      break;    
 
-                  //                  case "Support_Name":   
-                  //                      this.app.gSup.iTableIndex = 0;   
-                  //                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],   
-                  //                                                                        "Total__Funding_by_Your_LCC", "Total__Funding_by_Your_LCC",   
-                  //                                                            'section15content', this.app.gSup.iTableIndex.toString() + "-Total__Funding_by_Your_LCC");   
-                  //                      break;   
+                  //                  case "Support_Name":       
+                  //                      this.app.gSup.iTableIndex = 0;       
+                  //                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],       
+                  //                                                                        "Total__Funding_by_Your_LCC", "Total__Funding_by_Your_LCC",       
+                  //                                                            'section15content', this.app.gSup.iTableIndex.toString() + "-Total__Funding_by_Your_LCC");       
+                  //                      break;       
 
               }
 

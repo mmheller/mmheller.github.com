@@ -101,8 +101,8 @@ define([
               arrayQuery.push(["5", strQuery, "amount", "sum", "dest_orgname", "divFundingDispersal", '<b>Funding Recipient:</b> \n<br>{0} ', "show both"]);
               arrayQuery.push(["7", strQuery, "InKindamount", "sum", "orgname", "divInKindMatch", '<b>In-Kind/Match Contributions:</b> \n<br>{0} ', "show both"]);
               arrayQuery.push(["4", strQuery, "EcotypicAreaName", "count", "EcotypicAreaName", "divEcotypicArea", '{0}', ""]);
-              arrayQuery.push(["8", strQuery, "GoalName", "count", "GoalName", "divGoals", '{0}', ""]);
-              arrayQuery.push(["11", strQuery, "Stressor", "count", "Stressor", "divStressors", '{0}', ""]);
+//              arrayQuery.push(["8", strQuery, "GoalName", "count", "GoalName", "divGoals", '{0}', ""]);
+//              arrayQuery.push(["11", strQuery, "Stressor", "count", "Stressor", "divStressors", '{0}', ""]);
               arrayQuery.push(["0", strQuery, "Comments", "count", "Comments", "divLCMAPLink", '<a href="{0}">LC MAP Project Storage Workspace</a>  ', ""]);
               arrayQuery.push(["0", strQuery, "PrjStatus", "count", "PrjStatus", "divStatus", '{0}', ""]);
               //              arrayQuery.push(["1", strQuery, "CommonName", "count", "CommonName", "divConservationTargets", 'Conservation Target(s): \n<br> {0} ', ""]);

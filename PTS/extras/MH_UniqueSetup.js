@@ -224,7 +224,9 @@ define([
                       }
                   }
 
-                  document.getElementById(this.app.gSup.strContainerDivID).innerHTML = ''; // clear out existing items
+                  if (document.getElementById(this.app.gSup.strContainerDivID) != undefined) {
+                      document.getElementById(this.app.gSup.strContainerDivID).innerHTML = ''; // clear out existing items
+                  }
 
                   if (values != undefined) {
                       var blnCheckedAny = false;

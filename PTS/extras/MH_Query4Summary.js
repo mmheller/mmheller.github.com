@@ -211,7 +211,11 @@ define([
                       }
                   }
 
-                  strText = values.join(" ");
+                  if ((values == null) | (values == undefined)) {
+                      strText = "no results";
+                  } else {
+                      strText = values.join(" ");
+                  }
               }
 
               if (strVarType == "currency") {
