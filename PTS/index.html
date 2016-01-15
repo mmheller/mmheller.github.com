@@ -88,10 +88,10 @@
         var tokens = getTokens
         parser.parse();
         app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
-//        app.pMapSup = new MH_MapSetup({}); // instantiate the class
-//        app.pMapSup.Phase1();
-//        app.pMapSup.Phase3();
-//        app.pMapSup.QueryZoom("OBJECTID > 0");
+        //        app.pMapSup = new MH_MapSetup({}); // instantiate the class
+        //        app.pMapSup.Phase1();
+        //        app.pMapSup.Phase3();
+        //        app.pMapSup.QueryZoom("OBJECTID > 0");
 
         CK_ASZ = new CK_AutoCompleteSearchAndZoom({ strSearchField: "ProjectID", strURL: strURL }); // instantiate the class
 
@@ -112,6 +112,7 @@
         }
 
         function btn_clear_click() {
+            document.getElementById("cbx_FilterValues").checked = true;
             app.gQuery.m_arrayUserRemovedPrjs = [];
             document.getElementById("loc").value = "";
             if ($('#page_collapsible1').collapsible('collapsed')) {
@@ -120,7 +121,8 @@
             app.gQuery.strQuery = null;
             app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
             app.map.graphics.clear();
-            app.map.infoWindow.destroy();
+            //app.map.infoWindow.destroy();
+            app.map.infoWindow.hide();
         }
 
         function btn_Print_Friendly_click() {
@@ -320,8 +322,8 @@
         <div class="container"><div class="content" id="section13content"></div></div>
 
 
-<!--        <div class="collapsible" id="section14">Fund Type<span></span></div>
-        <div class="container"><div class="content" id="section14content"></div></div>-->
+        <div class="collapsible" id="section14">Funding Amount<span></span></div>
+        <div class="container"><div class="content" id="section14content"></div></div>
 
 <!--        <div class="collapsible" id="section15">Funding Amount <span></span></div>
         <div class="container"><div class="content" id="section15content"></div></div>-->
@@ -439,7 +441,7 @@
                </td>
             <td class="HTMLTable_styleMiddle">
                 &nbsp;</td>
-            <td class="HTMLTable_styleLeft" rowspan="3">
+            <td class="HTMLTable_styleLeft">
                 <div id="dNumberOfProjectContacts"></div> </td>
         </tr>
         <tr>
@@ -447,6 +449,8 @@
                 <div id="dFundRecipientTypes"></div></td>
             <td class="HTMLTable_styleMiddle">
                 &nbsp;</td>
+            <td class="HTMLTable_styleLeft">
+                <div id="dInKindFundingTypes"></div> </td>
         </tr>
 
         <tr>

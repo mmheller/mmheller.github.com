@@ -18,6 +18,7 @@ function StartQuery(blnSelect) {    //loop through the checkboxes and disable, s
 }
 
 
+
 function ClearThenStartQuery(strContainterID) {    //loop through the checkboxes and disable, so user interaction dosen't disrupt the queryies
     app.map.graphics.clear();
     app.map.infoWindow.hide();
@@ -31,9 +32,9 @@ function ClearThenStartQuery(strContainterID) {    //loop through the checkboxes
 
     arrayCheckedCheckboxes = [];
     var pform = document.getElementById("NavigationForm");
-    for (var i = 0; i < pform.elements.length; i++) {
-        if (pform.elements[i].type == 'checkbox') {
-            strID = pform.elements[i].id;
+    for (var ii = 0; ii < pform.elements.length; ii++) {
+        if (pform.elements[ii].type == 'checkbox') {
+            strID = pform.elements[ii].id;
             document.getElementById(strID).disabled = true
         }
     }
@@ -59,6 +60,7 @@ function AddCheckbox(strContainerDivID, strNewID, strValueField, strLableText, b
     document.getElementById(strContainerDivID).appendChild(br);
 }
 
+
 function AddClearButton(strContainerDivID, strNewID, strValueField, strLableText, blnDisabled, strButtonVis) {
     var btn = document.createElement("input");
     btn.type = "button";
@@ -77,9 +79,9 @@ function AddClearButton(strContainerDivID, strNewID, strValueField, strLableText
 define([
   "dojo/_base/declare",
   "dojo/_base/lang",
-  "esri/request",
+  "esri/request", "esri/tasks/query", "esri/tasks/QueryTask"
   ], function (
-  declare, lang, esriRequest
+  declare, lang, esriRequest, Query, QueryTask
 ) {
 
       function trimStringWhiteSpace(str) {
@@ -98,9 +100,11 @@ define([
           strFieldNameValue: null,
           strNewDivID: null,
           arrayQueryStringsPerTable: null,
+          //          arrayRangeCheckboxes2add: null,
           iTableIndex: null,
           strURL: null,
           m_arrayCheckedCheckboxes: null,
+          iCountofRangeCheckboxes2check: null,
 
           constructor: function (options) {
           },
@@ -137,6 +141,115 @@ define([
               //              AddCheckbox("section4content", "6-dest_orgname-1", "Funding_Recipients_Dispersal", "UNIVERSITY OF MONTANA SYSTEM", false)
               //              AddCheckbox("section5content", "2-dest_orgname-1", "ConsvTargets", "Sage shrub/grassland (Habitats and Ecosystems)", false)
           },
+
+
+          SetRangeCheckboxes: function (arrayCheckboxText, strContainerDivID, strNewID, strValueField, blnChecked, blnDisabled, strURL, strQuery) {
+              this.strContainerDivID = strContainerDivID;
+              document.getElementById(strContainerDivID).innerHTML = ''; // clear out existing items
+              strFirstNewDiv = "";
+              var blnCheckedAny = false;
+
+              if (strQuery != "OBJECTID > 0") {  //if not initial query then determine if range in data exists 
+                  var pQuery = new Query();
+                  var pQueryTask = new esri.tasks.QueryTask(strURL + "/" + this.iTableIndex);
+                  pQuery.where = strQuery;
+                  pQuery.outFields = [strValueField, "ProjectID"];
+                  pQueryTask.execute(pQuery, function (results) {   //execute the query and deal with the results in this function (not calling a results function)
+                      var resultFeatures = results.features;
+                      if ((resultFeatures != null) || (resultFeatues != undefined)) {  //if get results then continue
+                          for (var iRange in arrayCheckboxText) {                                       // loop through each checkbox range!!!!!!!!!!!!!!
+                              blnAddCheckbox = false;
+                              for (var i = 0, il = resultFeatures.length; i < il; i++) {
+                                  var pFeature = resultFeatures[i];
+                                  var iValue = pFeature.attributes[strValueField];
+                                  var strRange = arrayCheckboxText[iRange];
+                                  var strCodeFriendlyValue = strRange.replace("$", "").replace("$", "").replace(" - ", "_").replace(/,/g, "")
+                                  var strNewDivID = strNewID + "-ValueRange" + strCodeFriendlyValue;
+
+                                  if (strCodeFriendlyValue == "0") {
+                                      if (iValue == 0) {
+                                          blnAddCheckbox = true;
+                                          break;
+                                      }
+                                  } else if (strCodeFriendlyValue.indexOf("and up") > 0) {
+                                      var n1stRangeIndex = strCodeFriendlyValue.indexOf(" and up");
+                                      var n1stRangeValue = strCodeFriendlyValue.substring(0, n1stRangeIndex);
+                                      if (iValue >= n1stRangeValue) {
+                                          blnAddCheckbox = true;
+                                          break;
+                                      }
+                                  } else {
+                                      var n1stRangeIndex = strCodeFriendlyValue.indexOf("_");
+                                      var n1stRangeValue = strCodeFriendlyValue.substring(0, n1stRangeIndex);
+                                      var n2ndRangeValue = strCodeFriendlyValue.substring(n1stRangeIndex + 1, strCodeFriendlyValue.length);
+                                      if ((iValue >= n1stRangeValue) & (iValue <= n2ndRangeValue)) {
+                                          blnAddCheckbox = true;
+                                          break;
+                                      }
+                                  }
+                              }
+                              if (blnAddCheckbox) {
+                                  if (strFirstNewDiv == "") {   //store the 1st new checkbox div so can later place the clear button ahead of it
+                                      strFirstNewDiv = strNewDivID;
+                                  }
+                                  var blnChecked = false;
+                                  if (app.gSup.m_arrayCheckedCheckboxes != undefined) {
+                                      if (app.gSup.m_arrayCheckedCheckboxes.length > 0) {
+                                          var iExists = app.gSup.m_arrayCheckedCheckboxes.indexOf(strNewDivID);
+                                          if (iExists >= 0) {
+                                              blnChecked = true;
+                                              blnCheckedAny = true;
+                                          }
+                                      }
+                                  }
+                                  AddCheckbox(strContainerDivID, strNewDivID, strCodeFriendlyValue, strRange, blnChecked, false);
+                              }
+                          }
+                      }
+                      if (blnCheckedAny) {
+                          strNewDivIDClear = strNewDivID + "-clear";
+                          AddClearButton(strContainerDivID, strNewDivIDClear, "Clear", strContainerDivID, false, "visible")
+                          var br = document.createElement("br");
+                          var parentDiv = document.getElementById(strFirstNewDiv).parentNode;
+                          parentDiv.insertBefore(document.getElementById(strNewDivIDClear), document.getElementById(strFirstNewDiv))
+                          parentDiv.insertBefore(br, document.getElementById(strFirstNewDiv))
+                      }
+                  }, function (error) {
+                      console.log(error);
+                  });
+              } else {
+                  for (var iRange in arrayCheckboxText) {
+                      var strRange = arrayCheckboxText[iRange];
+                      var strCodeFriendlyValue = strRange.replace("$", "").replace("$", "").replace(" - ", "_").replace(/,/g, "")
+                      var strNewDivID = strNewID + "-ValueRange" + strCodeFriendlyValue;
+
+                      if (strFirstNewDiv == "") {   //store the 1st new checkbox div so can later place the clear button ahead of it
+                          strFirstNewDiv = strNewDivID;
+                      }
+                      var blnChecked = false;
+                      if (this.m_arrayCheckedCheckboxes != undefined) {
+                          if (this.m_arrayCheckedCheckboxes.length > 0) {
+                              var iExists = this.m_arrayCheckedCheckboxes.indexOf(strNewDivID);
+                              if (iExists >= 0) {
+                                  blnChecked = true;
+                                  blnCheckedAny = true;
+                              }
+                          }
+                      }
+                      AddCheckbox(strContainerDivID, strNewDivID, strCodeFriendlyValue, strRange, blnChecked, false);
+                  }
+
+              }
+              if (blnCheckedAny) {
+                  strNewDivIDClear = strNewDivID + "-clear";
+                  AddClearButton(strContainerDivID, strNewDivIDClear, "Clear", strContainerDivID, false, "visible")
+                  var br = document.createElement("br");
+                  var parentDiv = document.getElementById(strFirstNewDiv).parentNode;
+                  parentDiv.insertBefore(document.getElementById(strNewDivIDClear), document.getElementById(strFirstNewDiv))
+                  parentDiv.insertBefore(br, document.getElementById(strFirstNewDiv))
+              }
+          },
+
 
           qry_Query4UniquesAndCheckBoxes: function (strURL, strQuery, strFieldNameText, strFieldNameValue, strContainerDivID, strNewDivID) {
               if (strFieldNameText == "PersonName") {
@@ -360,26 +473,16 @@ define([
                                                                         "NAME", "NAME",
                                                             'section13content', this.app.gSup.iTableIndex.toString() + "-Name");
                       break;
-
-//                  case "NAME":
-//                      this.app.gSup.iTableIndex = 0;
-//                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
-//                                                                        "Support_Name", "Support_Name",
-//                                                            'section14content', this.app.gSup.iTableIndex.toString() + "-Support_Name");
-//                      break;
-
-                  //                  case "Support_Name":   
-                  //                      this.app.gSup.iTableIndex = 0;   
-                  //                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],   
-                  //                                                                        "Total__Funding_by_Your_LCC", "Total__Funding_by_Your_LCC",   
-                  //                                                            'section15content', this.app.gSup.iTableIndex.toString() + "-Total__Funding_by_Your_LCC");   
-                  //                      break;   
-
+                  case "NAME":
+                      this.app.gSup.iTableIndex = 0;
+                      this.app.gSup.SetRangeCheckboxes(["$0", "$1 - $12,499", "$12,500 - $24,999", "$25,000 - $49,999", "$50,000 - $99,999", "$100,000 - $199,999", "$200,000 - $499,999", "$500,000 and up"],
+                                                            'section14content', this.app.gSup.iTableIndex.toString() + "-Total__Funding_by_Your_LCC", "Total__Funding_by_Your_LCC",
+                                                            false, false, this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex]);
+                      break;
               }
 
               return results;
           },
-
 
           err: function (err) {
               console.log("Failed to get stat results due to an error: ", err);

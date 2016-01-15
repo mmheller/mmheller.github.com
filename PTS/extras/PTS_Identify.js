@@ -2,6 +2,12 @@
 //Date:        Oct 2014
 
 function showFeaturePrep(feature, strURL, strTheme) {
+    //remedied the issue of zooming to the top of the page
+    var div = document.getElementById("page_collapsibleMap");
+    //div.scrollIntoView();
+    //$('html, body').animate({ scrollTop: (($(div).offset().top) - ($(div).offset().outerHeight())) }, 'slow');
+    $('html, body').animate({ scrollTop: ($(div).offset().top) }, 'fast');
+
     this.app.pPTS_Identify.strURL4Statquery = strURL;
     this.app.pPTS_Identify.showFeature(feature, strTheme);
     //    this.showFeature(feature);
@@ -74,9 +80,6 @@ define([
 
         executeQueries: function (pEvt, strSingleLayerName, iSingleObjectID, dblX, dblY) {
             esri.show(app.loading);
-            //           app.map.disableMapNavigation();
-            //            app.map.hideZoomSlider();
-
             this.pEvt = pEvt;
             this.strMultipleContent = null;
             this.m_ExceedCount = null;
@@ -95,7 +98,6 @@ define([
                 this.m_dblX = dblX
                 this.m_dblY = dblY
             }
-
             this.pSP = pSP;
             qt_Layer1 = new esri.tasks.QueryTask(this.pLayer1.url);
             q_Layer1 = new esri.tasks.Query();
@@ -178,7 +180,6 @@ define([
                 }
                 else { //some issue
                 }
-//                this.strURL4Statquery = strURL4query;
                 this.showFeature(pFeature, strTheme);
             }
             else { this.showFeatureSet(results); }
@@ -191,8 +192,6 @@ define([
                 CK_ASZ.zoomToPoint(this.m_dblX, this.m_dblY, "", null);
             }
             esri.hide(app.loading);
-            //            app.map.enableMapNavigation();
-            //            app.map.showZoomSlider();
         },
 
         err: function (err) {

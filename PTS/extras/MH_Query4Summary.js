@@ -72,7 +72,9 @@ define([
               
               //arrayQuery.push(["5", strQuery, "ProjectID", "count", "DestinationType", "dFundRecipientTypes", '<b>Funding Recipient Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
               arrayQuery.push(["5", strQuery, "amount", "sum", "DestinationType", "dFundRecipientTypes", '<b>Funding Recipient Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both-currency", "desc"]);
+              arrayQuery.push(["7", strQuery, "InKindamount", "sum", "Contact_Type", "dInKindFundingTypes", '<b>InKind/Match Provider Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both-currency", "desc"]);
               
+
               
               arrayQuery.push(["4", strQuery, "ProjectID", "count", "EcotypicAreaName", "dEcotypicAreas", '<b>Ecotypic Areas (Partner Forums):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
               arrayQuery.push(["11", strQuery, "ProjectID", "count", "Stressor", "dStressors", '<b>Stressors:</b>  \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", "asc"]);
