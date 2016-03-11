@@ -2,7 +2,7 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>Supported Science Projects</title>
+    <title>Ecological Connectivity Project Searchable Web App</title>
     <link rel="shortcut icon" href="http://greatnorthernlcc.org/sites/default/files/fusion_gnlcc_favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/dijit/themes/soria/soria.css">
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/esri/css/esri.css"/>
@@ -67,6 +67,8 @@
                 CheckBox,
                 Color, mouse, query, webMercatorUtils, BasemapGallery, Legend, CK_AutoCompleteSearchAndZoom) {
 
+        document.getElementById("rdo_1").checked = true;
+
         var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth() + 1; //January is 0!
@@ -83,11 +85,12 @@
         on(dom.byId("btn_clear"), "click", btn_clear_click);
         on(dom.byId("btn_Print_Friendly"), "click", btn_Print_Friendly_click);
 
-        app.gQuery = new MH_Query4Results({ strURL: strURL, m_grid: grid }); // instantiate the class
+        app.gQuery = new MH_Query4Results({ strURL: strURL }); // instantiate the class
+        //app.gQuery = new MH_Query4Results({ strURL: strURL, m_grid: getGrid() }); // instantiate the class
         app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class        
         var tokens = getTokens
         parser.parse();
-        app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
+        app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", getGridOrFields()[0], $('input[name=results]:checked').val(), getGridOrFields()[1]);
         //        app.pMapSup = new MH_MapSetup({}); // instantiate the class
         //        app.pMapSup.Phase1();
         //        app.pMapSup.Phase3();
@@ -96,6 +99,28 @@
         CK_ASZ = new CK_AutoCompleteSearchAndZoom({ strSearchField: "ProjectID", strURL: strURL }); // instantiate the class
 
         document.getElementById("page_collapsibleMapDestination").appendChild(document.getElementById("map"));  //move the grid to the designated div, grids need to be built outside the collapsable panel otherwise risk not rendering properly
+
+
+        function getGridOrFields() {
+            dojo.style(grid1.domNode, 'display', 'none');
+            dojo.style(grid2.domNode, 'display', 'none');
+            dojo.style(grid3.domNode, 'display', 'none');
+            if ($('input[name=results]:checked').val() == "0") {
+                pGrid = grid1;
+                array_outFields = ["ProjectID", "Title", "StartYear", "LeadPerson", "LeadOrg", "OBJECTID"];
+            } else if ($('input[name=results]:checked').val() == "4") {
+                pGrid = grid2;
+                array_outFields = ["EffectiveDate", "ProjectID", "ActionTitle", "ContactName", "Org_Name", "OBJECTID"];
+            }
+            else if ($('input[name=results]:checked').val() == "5") {
+                pGrid = grid3;
+                array_outFields = ["EffectiveDate", "ProjectID", "ToolName", "Agency", "ToolType", "OBJECTID"];
+            }
+
+            dojo.style(pGrid.domNode, 'display', '');
+            pGrid.resize();
+            return [pGrid, array_outFields];
+        }
 
         function getTokens() {
             var tokens = [];
@@ -119,7 +144,7 @@
                 $('#page_collapsible1').collapsible('open');
             }
             app.gQuery.strQuery = null;
-            app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
+            app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", getGridOrFields()[0], $('input[name=results]:checked').val(), getGridOrFields()[1]);
             app.map.graphics.clear();
             //app.map.infoWindow.destroy();
             app.map.infoWindow.hide();
@@ -133,11 +158,43 @@
             }
             window.open(strHTML);
         }
+
+
+
     });
 </script>
 
 
 <script type="text/javascript">
+    function rdo_Results_Click() {
+        strQuery = app.gQuery.strQuery;
+        if (!(strQuery)) {
+            strQuery = "OBJECTID > 0"
+        }
+        app.gQuery.SendQuery4ProjectResults(strQuery, getGridOrFields()[0], $('input[name=results]:checked').val(), getGridOrFields()[1]);
+    }
+
+    function getGridOrFields() {
+        dojo.style(grid1.domNode, 'display', 'none');
+        dojo.style(grid2.domNode, 'display', 'none');
+        dojo.style(grid3.domNode, 'display', 'none');
+        if ($('input[name=results]:checked').val() == "0") {
+            pGrid = grid1;
+            array_outFields = ["ProjectID", "Title", "StartYear", "LeadPerson", "LeadOrg", "OBJECTID"];
+        } else if ($('input[name=results]:checked').val() == "4") {
+            pGrid = grid2;
+            array_outFields = ["EffectiveDate", "ProjectID", "ActionTitle", "ContactName", "Org_Name", "OBJECTID"];
+        }
+        else if ($('input[name=results]:checked').val() == "5") {
+            pGrid = grid3;
+            array_outFields = ["EffectiveDate", "ProjectID", "ToolName", "Agency", "ToolType", "OBJECTID"];
+        }
+
+        dojo.style(pGrid.domNode, 'display', '');
+        pGrid.resize();
+        return [pGrid, array_outFields];
+    }
+
     function onkeypressHandleReturn()
     {
         if (event.keyCode == 13) {
@@ -153,6 +210,13 @@
         selectedItem = e.grid.getItem(e.rowIndex);
     }
 
+    function onRowClickHandlerFunc(evt) {
+        var strProjectID = evt.grid.getItem(evt.rowIndex).ProjectID.toString();
+        var strURL = "prj_report.html?PRJ_ID=" + strProjectID;
+        window.open(strURL);
+        //window.open(strURL, "_self");
+    }
+
     function gridRowContextMenu_onClick(e) {
         app.gQuery.m_arrayUserRemovedPrjs.push(selectedItem.ProjectID);
         strQuery = app.gQuery.strQuery;
@@ -160,7 +224,7 @@
             strQuery = "(OBJECTID > 0)"      
         }
         strQuery += " and (not (ProjectID in (" + app.gQuery.m_arrayUserRemovedPrjs.join(",") + ")))"
-        app.gQuery.SendQuery4ProjectResults(strQuery, grid);
+        app.gQuery.SendQuery4ProjectResults(strQuery, getGridOrFields()[0], $('input[name=results]:checked').val(), getGridOrFields()[1]);
     }
 
     $(document).ready(function () {
@@ -241,24 +305,19 @@
 
 <div id="WideContent2">
 
-<h3>A core function of the Great Northern LCC is to strategically identify and support applied landscape science, and to support its partners' capacity to interpret and use the science. These pages contain information on how projects are selected, project details and products, including the partnerships that are engendered and funds leveraged.</h2>
+<!--<h3>A core function of the Great Northern LCC is to strategically identify and support applied landscape science, and to support its partners' capacity to interpret and use the science. These pages contain information on how projects are selected, project details and products, including the partnerships that are engendered and funds leveraged.</h2>-->
 
-    <div class="page_collapsible" id="Div1" style="color:#FFFFFF; background:#cccccc;">Data Management, Proposal Guidance, and Funding Allocation Documents<span></span></div>
+    <div class="page_collapsible" id="Div1" style="color:#FFFFFF; background:#cccccc;">Connectivity Quick Links<span></span></div>
     <!--<div class="page_collapsible" id="DivBanner">Supported Science - Data Management, Funded Projects, and Proposal Guidance<span></span></div>-->    <!-- collapsible -->
         <div class="container"  id="Div2" >
             <br />
-            These summary documents contain data management standards for funded projects, and proposal guidance and funding allocation by fiscal year.
             <ul>
-            <li><a href="https://www.sciencebase.gov/catalog/item/56041859e4b03bc34f544bba" target="_blank">Data Management Standards</a></li>
-            <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/fy15_funding_allocation.pdf" target="_blank">2015 Funding Allocation</a> and <a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_fy15_funding_guidance.pdf" target="_blank">Funding Guidance</a></li>
-            <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_fy14_final_funding_allocation.pdf" target="_blank">2014 Funding Allocation</a> and <a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_fy14_funding_guidance_feb_10-14.pdf target="_blank"" target="_blank">Funding Guidance</a></li>
-            <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/fy13_gnlcc_final_funding_allocation_may_2013.pdf" target="_blank">2013 Funding Allocation</a> and <a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_fy13_funding_guidance_jan2013.pdf" target="_blank">Funding Guidance</a></li>
-            <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/fy12_gnlcc_final_funding_allocation_june_2012.pdf" target="_blank">2012 Funding Allocation</a> and <a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_final_fy12_funding_guidance.pdf" target="_blank">Funding Guidance</a></li>
-            <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/final_fy11_funding_allocation_june_2011.pdf" target="_blank">2011 Funding Allocation</a> and <a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_fy11_funding_guidance_final.pdf" target="_blank">Funding Guidance</a></li>
-            <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_fy10_funding_process_recommend.pdf" target="_blank">2010 Funding Guidance and Selection</a></li>
+            <li><a href="https://sites.google.com/site/gnecoconnectivity/home" target="_blank">Ecological Connectivity Project Wiki</a></li>            
+            <li><a href="https://www.sciencebase.gov/catalog/item/56041859e4b03bc34f544bba" target="_blank">Resource Managers' Connectivity Workshop Apr 15 2015 Event Page</a></li>
+            <li><a href="http://databasin.org/galleries/5c51bde995e84581b444b9bec7942b43" target="_blank">Great Northern Ecological Connectivity Data Atlas </a></li>
+            <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_sc_connectivity_project_report_4may2015.pdf" target="_blank">Connectivity Pilot Project Preliminary Report (May 4 2015)</a></li>
+            <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_framework_final_small.pdf" target="_blank">Great Northern LCC Strategic Conservation Framework</a></li>
             </ul>            
-
-
         </div>
         <br />
     <!-- end collapsible -->
@@ -358,16 +417,20 @@
 <!-- /left column collapsible -->
 
 <div id="content">
-   
-
     <table style="width:100%;">
         <tr>
             <td>
                 <a href="#" id="closeAll" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
-                <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
+                <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a> | 
+
+                <input type="radio" onclick="rdo_Results_Click();" id="rdo_1" name="results" value="0" /> <font size="1px" color="#2E2E2E"><label for="rdo_1">Projects</label></font>
+                <input type="radio" onclick="rdo_Results_Click();" id="rdo_2" name="results" value="4" /> <font size="1px" color="#2E2E2E"><label for="rdo_2">Actions</label></font>
+                <input type="radio" onclick="rdo_Results_Click();" id="rdo_3" name="results" value="5" /> <font size="1px" color="#2E2E2E"><label for="rdo_3">Tools/Resources</label></font>
+
                 <img id="ImgResultsLoading" src="images/loading.gif" style="height:15px" />
             </td>
             <td class="HTMLTable_styleRight">
+
                 <font size="1px" color="#2E2E2E"><b>Date:</b> <span id="time"></span></font>
             </td>
         </tr>
@@ -378,7 +441,7 @@
     <!-- collapsible -->
     <div class="page_collapsible" id="page_collapsible1">Results<span></span></div>
         <div class="container"  id="container1" >
-            <table dojotype="dojox.grid.DataGrid" style="height:400px; width:100%;" jsid="grid" id="grid" sortInfo="-1" selectionMode="none" onRowContextMenu="onRowContextMenuFunc"">
+            <table dojotype="dojox.grid.DataGrid" style="height:400px; width:100%;" jsid="grid1" id="grid1" sortInfo="-1" selectionMode="none" onRowClick="onRowClickHandlerFunc" onRowContextMenu="onRowContextMenuFunc">
              <thead>
                 <tr>
                   <th field="StartYear" width="50" height="60px">Fiscal Year</th>
@@ -386,14 +449,37 @@
                   <th field="Title" width="320px" height="60px">Project Title</th>
                   <th field="LeadPerson" width="115px">Project Lead</th>
                   <th field="LeadOrg" width="auto">Affiliation</th>      
-                          
                 </tr>
               </thead>
             </table>
+
+            <table dojotype="dojox.grid.DataGrid" style="height:400px; width:100%; display:none;" jsid="grid2" id="grid2" sortInfo="-1" selectionMode="none" onRowClick="onRowClickHandlerFunc" onRowContextMenu="onRowContextMenuFunc">
+             <thead>
+                <tr>
+       <!--           <th field="EffectiveDate" width="50" height="60px">EffectiveDate</th>-->
+                  <th field="ProjectID" hidden="true">ProjectID</th>
+                  <th field="ActionTitle" width="320px" height="60px">Action Title</th>
+                  <th field="ContactName" width="115px">Lead</th>
+                  <th field="Org_Name" width="auto">Org Name</th>      
+                </tr>
+              </thead>
+            </table>
+            
+            <table dojotype="dojox.grid.DataGrid" style="height:400px; width:100%; display:none;" jsid="grid3" id="grid3" sortInfo="-1" selectionMode="none" onRowClick="onRowClickHandlerFunc" onRowContextMenu="onRowContextMenuFunc">
+             <thead>
+                <tr>
+<!--                  <th field="EffectiveDate" width="50" height="60px">Effective Date</th>-->
+                  <th field="ProjectID" hidden="true">ProjectID</th>
+                  <th field="ToolName" width="320px" height="60px">Tool Name</th>
+                  <th field="Agency" width="115px">Agency</th>
+                  <th field="ToolType" width="auto">Tool Type</th>      
+                </tr>
+              </thead>
+            </table>
+
             <div class="content" id="content1" >
                             <!--<img id="ImgResultsLoading" src="images/loading.gif" style="position:absolute; right:50%; top:50%; z-index:100;" />-->
             </div>
-
         </div>
     <!-- end collapsible -->
 
@@ -402,7 +488,7 @@
     <div class="container">
 
 <table style="width:100%; background-color: #f2f5f9;">
-        <tr>
+<!--        <tr>
             <td class="HTMLTable_BannerRow" >
                 <img src="images/funding.png" alt="Funding" height="30" width="30" align="middle" style="PADDING-LEFT: 3px; PADDING-RIGHT: 3px; PADDING-TOP: 3px; PADDING-BOTTOM: 3px;">
                     
@@ -412,8 +498,8 @@
             <td class="HTMLTable_BannerRow">
                 <img src="images/leverage.png" alt="leverage"  height="30" align="middle" style="PADDING-LEFT: 3px; PADDING-RIGHT: 3px; PADDING-TOP: 3px; PADDING-BOTTOM: 3px;">
                 Partner Contributions</td>
-        </tr>
-        <tr>
+        </tr>-->
+      <!--  <tr>
             <td class="HTMLTable_styleLeft">
                 <div id="dTotalAllocatedbyLCC"></div>
                 </td>
@@ -422,8 +508,9 @@
             <td class="HTMLTable_styleLeft">
                 <div id="dTotalInKindMatch"></div>
                 </td>
-        </tr>
-        <tr>
+        </tr>-->
+
+<!--        <tr>
             <td class="HTMLTable_styleLeft">
                 <div id="dTotalAllocatedbyLCCbyYear">
                 </div>
@@ -432,9 +519,9 @@
                 &nbsp;</td>
             <td class="HTMLTable_styleLeft">
                 <div id="dNumberofInKindOrgs"></div> </td>
-        </tr>
+        </tr>-->
 
-        <tr>
+<!--        <tr>
             <td class="HTMLTable_styleLeft">
                     <div id="dNumberOfFundingRecipients"></div>  
                </td>
@@ -442,22 +529,22 @@
                 &nbsp;</td>
             <td class="HTMLTable_styleLeft">
                 <div id="dNumberOfProjectContacts"></div> </td>
-        </tr>
-        <tr>
+        </tr>-->
+<!--        <tr>
             <td class="HTMLTable_styleLeft">
                 <div id="dFundRecipientTypes"></div></td>
             <td class="HTMLTable_styleMiddle">
                 &nbsp;</td>
             <td class="HTMLTable_styleLeft">
                 <div id="dInKindFundingTypes"></div> </td>
-        </tr>
+        </tr>-->
 
-        <tr>
+  <!--      <tr>
             <td class="HTMLTable_styleLeft">
                 <div id="dNumberOfProjectContacts2"></div></td>
             <td class="HTMLTable_styleMiddle">
                 &nbsp;</td>
-        </tr>
+        </tr>-->
 
 <!--        <tr>
             <td class="HTMLTable_styleLeft">
@@ -467,37 +554,39 @@
         </tr>-->
         <tr>
             <td class="HTMLTable_BannerRow">
-                <img src="images/target.png" alt="target"  height="30" align="middle" style="PADDING-LEFT: 3px; PADDING-RIGHT: 3px; PADDING-TOP: 3px; PADDING-BOTTOM: 3px;"> Conservation Goals and Targets</td>
+                <img src="images/checkbox.png" alt="checkbox"  height="30" align="middle" style="PADDING-LEFT: 3px; PADDING-RIGHT: 3px; PADDING-TOP: 3px; PADDING-BOTTOM: 3px;"> Action Categories</td>
             <td class="HTMLTable_styleMiddle">
                 </td>
             <td class="HTMLTable_BannerRow">
-                <img src="images/checkbox.png" alt="checkbox"  height="30" align="middle" style="PADDING-LEFT: 3px; PADDING-RIGHT: 3px; PADDING-TOP: 3px; PADDING-BOTTOM: 3px;"> Deliverables</td>
+                <img src="images/target.png" alt="target"  height="30" align="middle" style="PADDING-LEFT: 3px; PADDING-RIGHT: 3px; PADDING-TOP: 3px; PADDING-BOTTOM: 3px;"> Conservation Targets and Tools/Resources</td>
         </tr>
         <tr>
             <td class=HTMLTable_styleLeft>
-                <div id="dTotalNumberofConsvTargets">
-                </div>
+                <div id="dEcotypicAreas"></div>
             </td>
             <td class="HTMLTable_styleMiddle">
                 </td>
             <td class="HTMLTable_styleLeft">
-                <div id="dNumberofDeliverables">
-                </div>
+                <div id="dTotalNumberofConsvTargets"></div>
+                <div id="dConsvTargetBreakdown"></div>
             </td>
         </tr>
 
         <tr>
             <td class="HTMLTable_styleLeft">
-                <div id="dEcotypicAreas"></div></td>
+                    <div id="dStressors"></div>
+                </td>
             <td class="HTMLTable_styleMiddle">
                 </td>
             <td class="HTMLTable_styleLeft">
-                <div id="dDeliverabletype">
-                </div></td>
+                <div id="dNumberofDeliverables"></div>
+                <div id="dDeliverabletype"></div>
+                </td>
         </tr>
         <tr>
             <td class="HTMLTable_styleLeft">
-                <div id="dStressors"></div>  </td>
+                <div id="dGoals"></div>
+                  </td>
             <td class="HTMLTable_styleMiddle">
                 &nbsp;</td>
             <td class="HTMLTable_styleLeft">
@@ -506,10 +595,13 @@
         </tr>
         <tr>
             <td class="HTMLTable_styleLeft">
-                <div id="dGoals"></div></td>
+                
+                </td>
             <td class="HTMLTable_styleMiddle">
                 </td>
             <td class="HTMLTable_styleLeft">
+                <div id="dNumberOfProjectContacts"></div>
+                <div id="dFundRecipientTypes"></div>
                 </td>
         </tr>
     </table>

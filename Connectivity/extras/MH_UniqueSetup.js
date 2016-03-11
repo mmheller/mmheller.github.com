@@ -7,11 +7,17 @@ function StartQuery(blnSelect) {    //loop through the checkboxes and disable, s
     arrayCheckedCheckboxes = [];
     var pform = document.getElementById("NavigationForm");
     for (var i = 0; i < pform.elements.length; i++) {  
-        if (pform.elements[i].type == 'checkbox') {
+        if ((pform.elements[i].type == 'checkbox') | (pform.elements[i].type == 'radio')) {
             strID = pform.elements[i].id;
             document.getElementById(strID).disabled = true;
         }
     }
+    
+    document.getElementById("rdo_1").disabled = true;
+    document.getElementById("rdo_2").disabled = true;
+    document.getElementById("rdo_3").disabled = true;
+    document.getElementById("btn_clear").disabled = true;
+
     var strQuery = "";
     var arrayQuery = this.app.gCQD.Return_InitialQueryDefs();
     app.gQuery.SendQuery(arrayQuery, 0);
@@ -33,11 +39,12 @@ function ClearThenStartQuery(strContainterID) {    //loop through the checkboxes
     arrayCheckedCheckboxes = [];
     var pform = document.getElementById("NavigationForm");
     for (var ii = 0; ii < pform.elements.length; ii++) {
-        if (pform.elements[ii].type == 'checkbox') {
+        if (pform.elements[i].type == 'checkbox') {
             strID = pform.elements[ii].id;
             document.getElementById(strID).disabled = true
         }
     }
+
     var strQuery = "";
     var arrayQuery = this.app.gCQD.Return_InitialQueryDefs();
     app.gQuery.SendQuery(arrayQuery, 0);

@@ -63,16 +63,19 @@ define([
 //              arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "sum", "", "dTotalInKindMatch", '<b>In-Kind or Match Funding:</b> {0} ', "currency", ""]);
 //              arrayQuery.push(["7", strQuery, "ProjectID", "count", "orgname", "dNumberofInKindOrgs", '<b>Organizations Providing In-Kind or Match Funding:</b> {0} ', "countOfGroupBy", ""]);
               arrayQuery.push(["7", strQuery, "ProjectID", "count", "CommonName", "dTotalNumberofConsvTargets", '<b>Conservation Targets:</b> {0} ', "countOfGroupBy", ""]);
+              arrayQuery.push(["7", strQuery, "ProjectID", "count", "CommonName", "dConsvTargetBreakdown", '<b>Consv Targets:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
               //              arrayQuery.push(["6", strQuery, "ProjectID", "count", "Fund_Year", "dYearsFunded", 'Fund Years: \n<br>  {0} ', "default"]);
               arrayQuery.push(["6", strQuery, "ProjectID", "count", "contactID", "dNumberOfProjectContacts", '<b>Contacts:</b> {0} ', "countOfGroupBy", ""]);
               arrayQuery.push(["5", strQuery, "ProjectID", "count", "ToolType", "dDeliverabletype", '<b>Tool Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
               arrayQuery.push(["5", strQuery, "ProjectID", "count", "", "dNumberofDeliverables", '<b>Tools/Resources:</b> {0} ', "default", ""]);
               arrayQuery.push(["0", strQuery, "ProjectID", "count", "Status", "dPrjStatus", '<b>Project Status:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", ""]);
 //              arrayQuery.push(["5", strQuery, "ProjectID", "count", "dest_orgname", "dNumberOfFundingRecipients", '<b>Funding Recipient Organizations:</b> {0} ', "countOfGroupBy", ""]);
-              
-              //arrayQuery.push(["5", strQuery, "ProjectID", "count", "DestinationType", "dFundRecipientTypes", '<b>Funding Recipient Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
+
+              arrayQuery.push(["6", strQuery, "ProjectID", "count", "Contact_Type", "dFundRecipientTypes", '<b>Contact Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
 //              arrayQuery.push(["5", strQuery, "amount", "sum", "DestinationType", "dFundRecipientTypes", '<b>Funding Recipient Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both-currency", "desc"]);
 //              arrayQuery.push(["7", strQuery, "InKindamount", "sum", "Contact_Type", "dInKindFundingTypes", '<b>InKind/Match Provider Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both-currency", "desc"]);
+
+
 
 
 
@@ -246,11 +249,16 @@ define([
                   arrayCheckedCheckboxes = [];
                   var pform = document.getElementById("NavigationForm");
                   for (var i = 0; i < pform.elements.length; i++) {
-                      if (pform.elements[i].type == 'checkbox') {
+                      if ((pform.elements[i].type == 'checkbox') | (pform.elements[i].type == 'radio')) { 
                           strID = pform.elements[i].id;
                           document.getElementById(strID).disabled = false;
                       }
                   }
+
+                  document.getElementById("rdo_1").disabled = false;
+                  document.getElementById("rdo_2").disabled = false;
+                  document.getElementById("rdo_3").disabled = false;
+                  document.getElementById("btn_clear").disabled = false;
 
                   if (app.pMapSup == undefined) {
                       app.pMapSup = new MH_MapSetup({}); // instantiate the class
@@ -272,13 +280,15 @@ define([
               arrayCheckedCheckboxes = [];
               var pform = document.getElementById("NavigationForm");
               for (var i = 0; i < pform.elements.length; i++) {
-                  if (pform.elements[i].type == 'checkbox') {
+                  if ((pform.elements[i].type == 'checkbox') | (pform.elements[i].type == 'radio')) { 
                       strID = pform.elements[i].id;
                       document.getElementById(strID).disabled = false;
                   }
               }
-
-
+              document.getElementById("rdo_1").disabled = false;
+              document.getElementById("rdo_2").disabled = false;
+              document.getElementById("rdo_3").disabled = false;
+              document.getElementById("btn_clear").disabled = false;
           }
       }
     )

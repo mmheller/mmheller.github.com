@@ -104,7 +104,7 @@ define([
             q_Layer1.returnGeometry = true;
             q_Layer1.maxAllowableOffset = 200;
             q_Layer1.outSpatialReference = new esri.SpatialReference({ "wkid": 3857 })
-            q_Layer1.outFields = ["ProjectID, Prj_Title, PI_Org, Partner_Organizaitons, Total__Funding_by_Your_LCC, Fiscal_Years_of_Allocation, LeadName_LastFirst"];
+            q_Layer1.outFields = ["ProjectID, Title, LeadPerson, LeadOrg, StartYear"];
 
             var strQuery = this.pLayer1.getDefinitionExpression();
             q_Layer1.where = this.pLayer1.getDefinitionExpression();
@@ -116,22 +116,18 @@ define([
             return qt_Layer1.execute(q_Layer1, this.returnEvents, this.err);
         },
 
-
-
         showFeature: function (pFeature, strTheme) {
             this.pMap.graphics.clear();
             pFeature.setSymbol(new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID, new Color([255, 0, 0]), 2), new Color([0, 255, 255, 0.2])));
             var attr = pFeature.attributes;
 
-            var strTitle = attr.Prj_Title;
+            var strTitle = attr.Title;
             strTitle = strTitle.split(/((?:\w+ ){7})/g).filter(Boolean).join("<br>");
 
             var tempstrcontent = ""
-            tempstrcontent += "<u>Project Lead:</u>  " + attr.LeadName_LastFirst + "<br />" +
-                                     "<u>Project Lead Org:</u>  " + attr.PI_Org + "<br />" +
-                                     "<u>Partner Organizations:</u> " + attr.Partner_Organizaitons + "<br />" +
-                                     "<u>Total Funding by GNLCC:</u> $" + attr.Total__Funding_by_Your_LCC + "<br />" +
-                                     "<u>Fiscal Years of Allocation:</u>  " + attr.Fiscal_Years_of_Allocation + "<br />"
+            tempstrcontent += "<u>Project Lead:</u>  " + attr.LeadPerson + "<br />" +
+                                     "<u>Project Lead Org:</u>  " + attr.LeadOrg + "<br />" +
+                                     "<u>Start Year:</u> " + attr.StartYear + "<br />"
             this.strFeatureContent = tempstrcontent;
             this.strFeatureContent += "(<A href='#' onclick='showReportPage(" + attr.ProjectID + ");'>Show project detail</A>)<br/>";
 
@@ -152,12 +148,12 @@ define([
                 var graphic3 = pLayer1[iii];
                 strThemeT = "Polygon";
                 strURL4query3 = this.strURL + "0";
-                if (graphic3.attributes.Prj_Title != null) {
-                    var strTrimmedTitle = graphic3.attributes.Prj_Title.substring(0, 20) + "...";
+                if (graphic3.attributes.Title != null) {
+                    var strTrimmedTitle = graphic3.attributes.Title.substring(0, 20) + "...";
                 } else {
                     var strTrimmedTitle = "unknown title";
                 }
-                content += "  " + strTrimmedTitle + " (" + graphic3.attributes.LeadName_LastFirst + ") (<A href='#' onclick='showFeaturePrep(pLayer1[" + iii + "],strURL4query3,strThemeT);'>show</A>)<br/>";
+                content += "  " + strTrimmedTitle + " (" + graphic3.attributes.LeadOrg + ") (<A href='#' onclick='showFeaturePrep(pLayer1[" + iii + "],strURL4query3,strThemeT);'>show</A>)<br/>";
             }
             this.strMultipleContent = content;
             this.pMap.infoWindow.setContent(content);
