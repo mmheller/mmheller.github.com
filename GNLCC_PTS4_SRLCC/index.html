@@ -88,10 +88,10 @@
         var tokens = getTokens
         parser.parse();
         app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
-//        app.pMapSup = new MH_MapSetup({}); // instantiate the class
-//        app.pMapSup.Phase1();
-//        app.pMapSup.Phase3();
-//        app.pMapSup.QueryZoom("OBJECTID > 0");
+        //        app.pMapSup = new MH_MapSetup({}); // instantiate the class
+        //        app.pMapSup.Phase1();
+        //        app.pMapSup.Phase3();
+        //        app.pMapSup.QueryZoom("OBJECTID > 0");
 
         CK_ASZ = new CK_AutoCompleteSearchAndZoom({ strSearchField: "ProjectID", strURL: strURL }); // instantiate the class
 
@@ -112,6 +112,7 @@
         }
 
         function btn_clear_click() {
+            document.getElementById("cbx_FilterValues").checked = true;
             app.gQuery.m_arrayUserRemovedPrjs = [];
             document.getElementById("loc").value = "";
             if ($('#page_collapsible1').collapsible('collapsed')) {
@@ -120,7 +121,8 @@
             app.gQuery.strQuery = null;
             app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
             app.map.graphics.clear();
-            app.map.infoWindow.destroy();
+            //app.map.infoWindow.destroy();
+            app.map.infoWindow.hide();
         }
 
         function btn_Print_Friendly_click() {
@@ -239,7 +241,7 @@
 
 <div id="WideContent2">
 
-<h3>DRAFT WEB APPLICATION!!!!: A core function of the Southern Rockies LCC is to strategically identify and support applied landscape science, and to support its partners' capacity to interpret and use the science. These pages contain information on how projects are selected, project details and products, including the partnerships that are engendered and funds leveraged.</h2>
+<h3>DRAFT WEB APPLICATION!!!!:A core function of the Southern Rockies LCC is to strategically identify and support applied landscape science, and to support its partners' capacity to interpret and use the science. These pages contain information on how projects are selected, project details and products, including the partnerships that are engendered and funds leveraged.</h2>
 
     <div class="page_collapsible" id="Div1" style="color:#FFFFFF; background:#cccccc;">Data Management, Proposal Guidance, and Funding Allocation Documents<span></span></div>
     <!--<div class="page_collapsible" id="DivBanner">Supported Science - Data Management, Funded Projects, and Proposal Guidance<span></span></div>-->    <!-- collapsible -->
@@ -247,7 +249,7 @@
             <br />
             These summary documents contain data management standards for funded projects, and proposal guidance and funding allocation by fiscal year.
             <ul>
-            <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_datamgt_sharing_policy.pdf" target="_blank">Data Management Standards</a></li>
+            <li><a href="https://www.sciencebase.gov/catalog/item/56041859e4b03bc34f544bba" target="_blank">Data Management Standards</a></li>
             <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/fy15_funding_allocation.pdf" target="_blank">2015 Funding Allocation</a> and <a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_fy15_funding_guidance.pdf" target="_blank">Funding Guidance</a></li>
             <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_fy14_final_funding_allocation.pdf" target="_blank">2014 Funding Allocation</a> and <a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_fy14_funding_guidance_feb_10-14.pdf target="_blank"" target="_blank">Funding Guidance</a></li>
             <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/fy13_gnlcc_final_funding_allocation_may_2013.pdf" target="_blank">2013 Funding Allocation</a> and <a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_fy13_funding_guidance_jan2013.pdf" target="_blank">Funding Guidance</a></li>
@@ -284,7 +286,7 @@
         <div class="collapsible" id="section12">Status<span></span></div>
         <div class="container"><div class="content" id="section12content"></div></div>
 
-        <div class="collapsible" id="section5">Focal Resource<span></span></div>
+        <div class="collapsible" id="section5">Focal Resources<span></span></div>
         <div class="container"><div class="scroll" id="section5content"></div></div>
 
 <!--        <div class="collapsible" id="section7">Conservation Goal<span></span></div>
@@ -320,8 +322,8 @@
         <div class="container"><div class="content" id="section13content"></div></div>
 
 
-<!--        <div class="collapsible" id="section14">Fund Type<span></span></div>
-        <div class="container"><div class="content" id="section14content"></div></div>-->
+        <div class="collapsible" id="section14">Funding Amount<span></span></div>
+        <div class="container"><div class="content" id="section14content"></div></div>
 
 <!--        <div class="collapsible" id="section15">Funding Amount <span></span></div>
         <div class="container"><div class="content" id="section15content"></div></div>-->
@@ -439,7 +441,7 @@
                </td>
             <td class="HTMLTable_styleMiddle">
                 &nbsp;</td>
-            <td class="HTMLTable_styleLeft" rowspan="3">
+            <td class="HTMLTable_styleLeft">
                 <div id="dNumberOfProjectContacts"></div> </td>
         </tr>
         <tr>
@@ -447,6 +449,8 @@
                 <div id="dFundRecipientTypes"></div></td>
             <td class="HTMLTable_styleMiddle">
                 &nbsp;</td>
+            <td class="HTMLTable_styleLeft">
+                <div id="dInKindFundingTypes"></div> </td>
         </tr>
 
         <tr>
@@ -494,14 +498,14 @@
         </tr>
         <tr>
             <td class="HTMLTable_styleLeft">
-                <!--<div id="dStressors"></div>-->  </td>
+                <!--<div id="dStressors"></div>  </td>-->
             <td class="HTMLTable_styleMiddle">
                 &nbsp;</td>
             <td class="HTMLTable_styleLeft">
                 <div id="dPrjStatus"></div>
             </td>
         </tr>
-<!--        <tr>
+        <!--<tr>
             <td class="HTMLTable_styleLeft">
                 <div id="dGoals"></div></td>
             <td class="HTMLTable_styleMiddle">

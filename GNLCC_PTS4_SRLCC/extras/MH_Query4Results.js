@@ -7,37 +7,6 @@ function onRowClickHandler(evt) {
     //window.open(strURL, "_self");
 }
 
-//function returnRangeStringQuery(strFieldName, arrayValues) {
-//  var strQueryStandard = "ProjectID in (" + arrayValues.join(",") + ")";
-//  var strQuery = "";
-//  arrayValues = arrayValues.sort();
-//  var ranges = [], singles = [], rstart, rend;
-// 
-//  for (var i = 0; i < arrayValues.length; i++) {
-//    rstart = arrayValues[i];
-//    rend = rstart;
-//    while (arrayValues[i + 1] - arrayValues[i] == 1) {
-//      rend = arrayValues[i + 1]; // increment the index if the numbers sequential
-//      i++;
-//    }
-//    //ranges.push(rstart == rend ? rstart+'' : rstart + '-' + rend);
-//    if (rstart == rend){
-//        singles.push(rstart);
-//    }else {
-//        ranges.push([rstart, rend]);
-//    }
-//  }
-//  strQuery = strFieldName + " in (" + singles.join(",") + ")";
-//  for (var ii = 0; ii < ranges.length; ii++) {
-//    strQuery += " and ((" + strFieldName + " >= " + ranges[ii][0].toString() + ") and (" + strFieldName + " <= " + ranges[ii][1].toString() + "))";
-//  }
-
-//  if (strQueryStandard.length < strQuery.length) {//if the original formatted query is shorter than the new, go with the original
-//      strQuery = strQueryStandard;
-//  }
-//  return strQuery;
-//}
-
 define([
   "dojo/_base/declare",
   "dojo/_base/lang",
@@ -161,6 +130,7 @@ define([
               document.getElementById('dTotalAllocatedbyLCC').innerHTML = "";
               document.getElementById('dTotalAllocatedbyLCCbyYear').innerHTML = "";
               document.getElementById('dNumberOfFundingRecipients').innerHTML = "";
+              document.getElementById('dInKindFundingTypes').innerHTML = "";
               document.getElementById('dFundRecipientTypes').innerHTML = "";
               //              document.getElementById('dYearsFunded').innerHTML = "";
               document.getElementById('dNumberOfProjectContacts').innerHTML = "";

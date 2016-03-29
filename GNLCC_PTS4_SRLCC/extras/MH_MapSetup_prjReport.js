@@ -55,7 +55,7 @@ define([
           },
           Phase1: function () {
               app.loading = dojo.byId("loadingImg");  //loading image. id
-              var customExtentAndSR = new esri.geometry.Extent(-11500000, 3300000, -10300000, 4300000, new esri.SpatialReference({ "wkid": 3857 }));
+              var customExtentAndSR = new esri.geometry.Extent(-14000000, 4800000, -11000000, 6200000, new esri.SpatialReference({ "wkid": 3857 }));
               app.mapPrjReport = new esri.Map("mapPrjReport", { basemap: "topo", logo: false, extent: customExtentAndSR });
               app.strTheme1_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/5679cdaae4b0da412f4fc2ec/MapServer/";  //Theme Layers
               dojo.connect(app.mapPrjReport, "onUpdateStart", showLoading);
@@ -63,18 +63,19 @@ define([
 
               var legendLayers = [];
               pPTS_Projects = new FeatureLayer(app.strTheme1_URL + "0", { "opacity": 0.7, mode: FeatureLayer.MODE_ONDEMAND, id: 0, visible: true });
-              var strBase_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/546cfb04e4b0fc7976bf1d83/MapServer/"
-              var strlabelField1 = "area_names";
-              pBase_LCC = new FeatureLayer(strBase_URL + "12", { mode: FeatureLayer.MODE_ONDEMAND, id: "LCC", outFields: [strlabelField1], visible: true });
-              var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
-              var pLabel1 = new TextSymbol().setColor(vGreyColor);
-              pLabel1.font.setSize("10pt");
-              pLabel1.font.setFamily("arial");
-              var pLabelRenderer1 = new SimpleRenderer(pLabel1);
-              var plabels1 = new LabelLayer({ id: "labels1" });
-              plabels1.addFeatureLayer(pBase_LCC, pLabelRenderer1, "{" + strlabelField1 + "}");
+//              var strBase_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/546cfb04e4b0fc7976bf1d83/MapServer/"
+//              var strlabelField1 = "area_names";
+//              pBase_LCC = new FeatureLayer(strBase_URL + "11", { mode: FeatureLayer.MODE_ONDEMAND, id: "LCC", outFields: [strlabelField1], visible: true });
+//              var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
+//              var pLabel1 = new TextSymbol().setColor(vGreyColor);
+//              pLabel1.font.setSize("10pt");
+//              pLabel1.font.setFamily("arial");
+//              var pLabelRenderer1 = new SimpleRenderer(pLabel1);
+//              var plabels1 = new LabelLayer({ id: "labels1" });
+//              plabels1.addFeatureLayer(pBase_LCC, pLabelRenderer1, "{" + strlabelField1 + "}");
 
-              arrayLayers = [pPTS_Projects, plabels1, pBase_LCC];
+//              arrayLayers = [pPTS_Projects, plabels1, pBase_LCC];
+              arrayLayers = [pPTS_Projects];
               app.mapPrjReport.addLayers(arrayLayers);
 
               this.QueryZoom(this.strQuery);
