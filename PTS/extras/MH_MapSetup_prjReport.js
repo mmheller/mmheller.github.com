@@ -55,10 +55,11 @@ define([
           },
           Phase1: function () {
               app.loading = dojo.byId("loadingImg");  //loading image. id
-              var customExtentAndSR = new esri.geometry.Extent(-14000000, 4800000, -11000000, 6200000, new esri.SpatialReference({ "wkid": 3857 }));
+              var customExtentAndSR = new esri.geometry.Extent(-14900000, 5200000, -11500000, 7600000, new esri.SpatialReference({ "wkid": 3857 }));
+
               app.mapPrjReport = new esri.Map("mapPrjReport", { basemap: "topo", logo: false, extent: customExtentAndSR });
               app.strTheme1_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer/";  //Theme Layers
-              dojo.connect(app.mapPrjReport, "onUpdateStart", showLoading);
+//              dojo.connect(app.mapPrjReport, "onUpdateStart", showLoading);
               dojo.connect(app.mapPrjReport, "onUpdateEnd", hideLoading);
 
               var legendLayers = [];
@@ -105,7 +106,9 @@ define([
               app.basemapGallery = new BasemapGallery({ showArcGISBasemaps: true, map: app.mapPrjReport }, "basemapGallery");
               app.basemapGallery.startup();
               app.basemapGallery.on("selection-change", function () { domClass.remove("panelBasemaps", "panelBasemapsOn"); });
-              app.basemapGallery.on("error", function (msg) { console.log("basemap gallery error:  ", msg); });
+              app.basemapGallery.on("error", function (msg) {
+                  console.log("basemap gallery error:  ", msg); 
+                });
           },
 
 
