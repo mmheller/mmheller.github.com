@@ -164,7 +164,7 @@ define([
           },
 
           err: function (err) {
-              console.log("Failed to get stat results due to an error: ", err);
+              console.log("Error: ", err);
               alert(error.name);
           }
       }
