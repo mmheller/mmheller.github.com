@@ -101,9 +101,11 @@ define([
               pSSPF = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba817e4b08400b1fddd28/MapServer", { "opacity": 0.9, id: "Sage Steppe", visible: false });
               pPartnershipsAreas = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba773e4b08400b1fddd1f/MapServer", { "opacity": 0.9, id: "PandE_Areas", visible: false });
 
+              pGNLCCJurisdictionalBoundaries = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/56155684e4b0ba4884c612ac/MapServer/", { "opacity": 0.9, id: "Juris_Areas", visible: false });
+              pGNLCCJurisdictionalBoundaries.setVisibleLayers([1, 2, 3]);
 
               arrayLayers = [pCascadiaPF, pColumbiaPF, pRMPF, pSSPF, pPartnershipsAreas, pPTS_Projects, plabels1, pHeatLayer2, pHeatLayer, pBase_LCC, pRefugesLayer,
-                                pUSNativeLayer, pNPSLayer, pUSFSLayer, pBLMLayer, pLCCNetworkLayer, plabels2, pHumanMod];
+                                pUSNativeLayer, pNPSLayer, pUSFSLayer, pBLMLayer, pLCCNetworkLayer, plabels2, pHumanMod, pGNLCCJurisdictionalBoundaries];
 
 
               var cbxLayers = [];
@@ -121,6 +123,9 @@ define([
               cbxLayers.push({ layer: pColumbiaPF, title: 'Columbia Basin PF (General Area)' });
               cbxLayers.push({ layer: pRMPF, title: 'Rocky Mountain PF (General Area)' });
               cbxLayers.push({ layer: pSSPF, title: 'Sage Steppe PF (General Area)' });
+              cbxLayers.push({ layer: pGNLCCJurisdictionalBoundaries, title: 'Canadian Jurisdictional Boundaries ' });
+
+
               cbxLayers.push({ layer: pPartnershipsAreas, title: 'Partner and Ecosystem Areas of Interest' });
               cbxLayers.push({ layer: pBase_LCC, title: 'GNLCC Boundary' });
               cbxLayers.push({ layer: pPTS_Projects, title: 'Projects' });
@@ -241,7 +246,7 @@ define([
                       $.ajax({
                           // this is for use with a proxy page url: app.strPxURL  "?" + app.strTheme1_URL + "find"  "?searchFields=ProjectID,Prj_Title,PI_Org,Partner_Organizaitons,Subject_Keywords,Location_Keywords,LeadName_LastFirst&SearchText=" + request.term + "&layers=0&f=pjson&returnGeometry=true",
                           url: app.strTheme1_URL + "find" +
-                                    "?searchFields=ProjectID,Prj_Title,PI_Org,Partner_Organizaitons,Subject_Keywords,Location_Keywords,LeadName_LastFirst" +
+                                    "?searchFields=ProjectID, Title, Description, LeadPerson, LeadOrg" +
                                     "&SearchText=" + request.term +
                                     "&layers=0,9&f=pjson&returnGeometry=true",
                           dataType: "jsonp",
@@ -249,8 +254,8 @@ define([
                           success: function (data) {
                               if (data.results) {                           //                            if (data.features) {
                                   response($.map(data.results.slice(0, 19), function (item) {      //only display first 10
-                                      return { label: item.attributes.Prj_Title + " ID:" + item.attributes.ProjectID +
-                                        " (PI:" + item.attributes.LeadName_LastFirst + ")",
+                                      return { label: item.attributes.Title + " ID:" + item.attributes.ProjectID +
+                                        " (PI:" + item.attributes.LeadPerson + ")",
                                           value2: item.attributes.ProjectID, value3: item.attributes.ProjectID, value4: item.layerName
                                       }
 
@@ -269,7 +274,8 @@ define([
                       } else {
                           app.gQuery.strQuery = app.gQuery.strQuery.replace(")", "," + iProjectID + ")");
                       }
-                      app.gQuery.SendQuery4ProjectResults(app.gQuery.strQuery, grid);
+                      app.gQuery.SendQuery4ProjectResults(app.gQuery.strQuery, getGridOrFields()[0], $('input[name=results]:checked').val(), getGridOrFields()[1]);
+//                      app.gQuery.SendQuery4ProjectResults(app.gQuery.strQuery, grid);
                       this.value = "";
                       return false;
                   }

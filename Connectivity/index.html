@@ -317,6 +317,9 @@
             <li><a href="http://databasin.org/galleries/5c51bde995e84581b444b9bec7942b43" target="_blank">Great Northern Ecological Connectivity Data Atlas </a></li>
             <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_sc_connectivity_project_report_4may2015.pdf" target="_blank">Connectivity Pilot Project Preliminary Report (May 4 2015)</a></li>
             <li><a href="http://greatnorthernlcc.org/sites/default/files/documents/gnlcc_framework_final_small.pdf" target="_blank">Great Northern LCC Strategic Conservation Framework</a></li>
+            <li><a href="https://www.sciencebase.gov/catalog/item/571564b5e4b0ef3b7ca86788" target="_blank">Blank Tools Actions Matrix</a></li>
+            <li><a href="https://www.sciencebase.gov/catalog/item/54355544e4b0a4f4b46a240a" target="_blank">LC MAP/Sciencebase Project Storage Workspace</a></li>
+
             </ul>            
         </div>
         <br />
@@ -345,8 +348,11 @@
         <div class="container"><div class="content" id="section12content"></div></div>-->
 
         <div class="collapsible" id="section5">Jurisdiction<span></span></div>
-        <div class="container"><div class="scroll" id="section5content"></div></div>
+        <div class="container"><div class="content" id="section5content"></div></div>
 
+<!--        <div class="collapsible" id="section5">Jurisdiction<span></span></div>
+        <div class="container"><div class="scroll" id="section5content"></div></div>
+-->
         <div class="collapsible" id="section7">Affiliate<span></span></div>
         <div class="container"><div class="content" id="section7content"></div></div>
 
@@ -360,20 +366,20 @@
         <div class="container" ><div class="content" id="section1content"></div></div>
 
         <div class="collapsible" id="section2">Secondary Category<span></span></div>
-        <div class="container"><div class="scroll" id="section2content"></div></div>
+        <div class="container"><div class="content" id="section2content"></div></div>
 
 
         <div class="collapsible" id="section4">Tertiary Category<span></span></div>
-        <div class="container"><div class="scroll" id="section4content"></div></div>
+        <div class="container"><div class="scroll   " id="section4content"></div></div>
         
         <div class="collapsible" id="section6">Tool Type<span></span></div>
         <div class="container"><div class="content" id="section6content"></div></div>
 
         <div class="collapsible" id="section9">Consv Target<span></span></div>
-        <div class="container"><div class="scroll" id="section9content"></div></div>
+        <div class="container"><div class="content" id="section9content"></div></div>
 
         <div class="collapsible" id="section11">Project Status<span></span></div>
-        <div class="container"><div class="scroll" id="section11content"></div></div>
+        <div class="container"><div class="content" id="section11content"></div></div>
 
 
 <!--        <div class="collapsible" id="section13">State/Province<span></span></div>
@@ -423,9 +429,9 @@
                 <a href="#" id="closeAll" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
                 <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a> | 
 
-                <input type="radio" onclick="rdo_Results_Click();" id="rdo_1" name="results" value="0" /> <font size="1px" color="#2E2E2E"><label for="rdo_1">Projects</label></font>
-                <input type="radio" onclick="rdo_Results_Click();" id="rdo_2" name="results" value="4" /> <font size="1px" color="#2E2E2E"><label for="rdo_2">Actions</label></font>
-                <input type="radio" onclick="rdo_Results_Click();" id="rdo_3" name="results" value="5" /> <font size="1px" color="#2E2E2E"><label for="rdo_3">Tools/Resources</label></font>
+                <input type="radio" onclick="rdo_Results_Click();" id="rdo_1" name="results" value="0" /> <font size="3px" color="#2E2E2E"><label for="rdo_1">Projects</label></font>
+                <input type="radio" onclick="rdo_Results_Click();" id="rdo_2" name="results" value="4" /> <font size="3px" color="#2E2E2E"><label for="rdo_2">Actions</label></font>
+                <input type="radio" onclick="rdo_Results_Click();" id="rdo_3" name="results" value="5" /> <font size="3px" color="#2E2E2E"><label for="rdo_3">Tools/Resources</label></font>
 
                 <img id="ImgResultsLoading" src="images/loading.gif" style="height:15px" />
             </td>
@@ -444,7 +450,7 @@
             <table dojotype="dojox.grid.DataGrid" style="height:400px; width:100%;" jsid="grid1" id="grid1" sortInfo="-1" selectionMode="none" onRowClick="onRowClickHandlerFunc" onRowContextMenu="onRowContextMenuFunc">
              <thead>
                 <tr>
-                  <th field="StartYear" width="50" height="60px">Fiscal Year</th>
+                  <th field="StartYear" hidden="true" height="60px">Fiscal Year</th>
                   <th field="ProjectID" hidden="true">ProjectID</th>
                   <th field="Title" width="320px" height="60px">Project Title</th>
                   <th field="LeadPerson" width="115px">Project Lead</th>
@@ -460,7 +466,7 @@
                   <th field="ProjectID" hidden="true">ProjectID</th>
                   <th field="ActionTitle" width="320px" height="60px">Action Title</th>
                   <th field="ContactName" width="115px">Lead</th>
-                  <th field="Org_Name" width="auto">Org Name</th>      
+                  <th field="Org_Name" width="auto">Affiliation</th>      
                 </tr>
               </thead>
             </table>
@@ -471,8 +477,8 @@
 <!--                  <th field="EffectiveDate" width="50" height="60px">Effective Date</th>-->
                   <th field="ProjectID" hidden="true">ProjectID</th>
                   <th field="ToolName" width="320px" height="60px">Tool Name</th>
-                  <th field="Agency" width="115px">Agency</th>
                   <th field="ToolType" width="auto">Tool Type</th>      
+                  <th field="Agency" width="165px">Affiliation</th>
                 </tr>
               </thead>
             </table>

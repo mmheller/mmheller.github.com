@@ -35,9 +35,14 @@ define([
             var pFindask = new esri.tasks.FindTask(this.strURL);
 
             var params = new FindParameters();
+
             params.layerIds = [0];
-            
-            params.searchFields = ["ProjectID", "Prj_Title", "PI_Org", "Partner_Organizaitons", "Subject_Keywords", "Location_Keywords", "LeadName_LastFirst"];
+            params.searchFields = ["ProjectID", "Title", "Description", "LeadPerson", "LeadOrg"];
+
+//            var searchlayerindex = $('input[name=results]:checked').val()
+//            params.layerIds = [searchlayerindex]
+//            params.searchFields = getGridOrFields()[1]
+
             params.searchText = strSearchValue;
             params.returnGeometry = false;
             pFindask.execute(params, this.showResultsFromFind);
@@ -70,7 +75,9 @@ define([
                     } else {
                         app.gQuery.strQuery = app.gQuery.strQuery.replace(")", "," + arrayValues.join(",") + ")");
                     }
-                    app.gQuery.SendQuery4ProjectResults(app.gQuery.strQuery, app.gQuery.m_grid);
+
+                    app.gQuery.SendQuery4ProjectResults(app.gQuery.strQuery, getGridOrFields()[0], $('input[name=results]:checked').val(), getGridOrFields()[1]);
+//                    app.gQuery.SendQuery4ProjectResults(app.gQuery.strQuery, app.gQuery.m_grid);
                 }
             }
             else {
