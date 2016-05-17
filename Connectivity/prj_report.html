@@ -70,10 +70,7 @@
         var strPRJ_ID = getTokens()['PRJ_ID']; //?RButton=true
 
         parser.parse();
-        app.gPjrReportQuery.RunReport("ProjectID = " + strPRJ_ID, [gridContacts, gridContactOrgsOnly, gridProposals,
-                                                                    gridConservationTargetsSPP, gridConservationTargetsOther,
-                                                                    gridDeliverables], 
-                                                                    gridDeliverablesDetail);  // this needs sync'ing with the grids below, the div's below, and the array in the MH_Query4PrjReportResults
+        app.gPjrReportQuery.RunReport("ProjectID = " + strPRJ_ID, [gridContacts, gridContactOrgsOnly, gridActions, gridActionsDetail, gridTandR, gridTandRDetail]);  // this needs sync'ing with the grids below, the div's below, and the array in the MH_Query4PrjReportResults
 
 
 
@@ -238,12 +235,12 @@
                         <table style="width:100%;">
                                    <tr>
                                        <td valign="top"  width="120px">
-                                            <b>Project Lead:</b><br />
-                                            <b>Lead Organization:</b><br />
+                                            <b>Primary Contact:</b><br />
+                                            <b>Primary Org:</b><br />
                                             <b>Project Start Date:</b><br />
                                             <b>Project End Date:</b><br />
                                             <b>Project Status:</b><br />
-                                            <b>Proposal(s):</b>
+                                            <!--<b>Proposal(s):</b>-->
                                        </td>
                                        <td valign="top">
                                             <div id="divPI" style="padding-left:3px;"></div>
@@ -251,7 +248,8 @@
                                             <div id="divStart" style="padding-left:3px;"></div>
                                             <div id="divEnd" style="padding-left:3px;"></div>
                                             <div id="divStatus" style="padding-left:3px;"></div>   
-                                            <div id="gridDivProposals"></div>        
+                                            <div id="divLCMAPLink"></div>
+                                            <!--<div id="gridDivProposals"></div>   -->     
                                        </td>
                                        <td valign="top">
          
@@ -282,13 +280,13 @@
                     </td>
                     <td valign="top">
                         <div id="dTotalAllocatedbyLCCSum"></div>
-                        <hr>
+                        <!--<hr>-->
                         <div id="dTotalAllocatedbyLCCbyYear"></div>
-                        <hr>
+                        <!--<hr>-->
                         <div id="divFundingDispersal"></div>
-                        <hr>
+                        <!--<hr>-->
                         <div id="dTotalInKindSum"></div>
-                        <hr>
+                        <!--<hr>-->
                         <div id="divInKindMatch"></div>
                     </td>
                 </tr>
@@ -324,27 +322,37 @@
     <!-- end collapsible -->
 
     <!-- collapsible -->
-    <div class="page_collapsible" id="Div13">Products/Deliverables<span></span></div>
+    <div class="page_collapsible" id="Div13">Actions<span></span></div>
     <div class="container">
             <!--<div id="gridDivDeliverablesSupWebinarsPages"></div><br />-->
-            <div id="gridDivDeliverables"></div><br />
+            <div id="gridDivAction"></div>
+            <!--<div id="gridDivDeliverables"></div><br />-->
             <div align="right">
-                <div id="divDelivDetailCount"></div>
-                <div id="gridDivDeliverablesDetail" ></div><br />
+                
+<!--                <div id="divDelivDetailCount"></div>
+                <div id="gridDivDeliverablesDetail" ></div><br />-->
+                <div id="gridDivActionsDetail" ></div><br />
             </div>
 
             <br />
-            <div id="divLCMAPLink"></div>
+
             <br />
     </div>
     <!-- end collapsible -->
 
 
     <!-- collapsible -->
-    <div class="page_collapsible" id="body-section2">Strategic Conservation Framework Detail<span></span></div>
+    <div class="page_collapsible" id="body-section2">Tools/Resources<span></span></div>
     <div class="container">
+            <div id="gridDivTandR"></div>   <br />   <br />
+            
+            <div align="right">
+<!--                <div id="divDelivDetailCount"></div>
+                <div id="gridDivDeliverablesDetail" ></div><br />-->
+                <div id="gridDivTandRDetail"></div><br />
+            </div>
 
-           <table style="width:100%;">
+           <!--<table style="width:100%;">
                <tr>
                    <td class="HTMLTable_BannerRow2" >
                         <b>Ecotypic Areas</b>
@@ -368,13 +376,11 @@
                    </td>
                </tr>
            </table>       
-
+-->
         <br />
-        
-
-       
-       <div id="gridDivConservationTargetsSPP"></div><br />
-       <div id="gridDivConservationTargetsOther"></div><br />
+               
+ <!--      <div id="gridDivConservationTargetsSPP"></div><br />
+       <div id="gridDivConservationTargetsOther"></div><br />-->
     </div>
 
     <div class="page_collapsible" id="Div1">Contact Detail<span></span></div>
@@ -429,7 +435,8 @@
              <thead>
                 <tr>
                   <th field="GroupName" width="450" height="60px">Additional Collaborators</th>
-                  <th field="Contact_Type" width="auto" height="60px">Type</th>
+                  <th field="Cont
+                  act_Type" width="auto" height="60px">Type</th>
     
                 </tr>
               </thead>
@@ -447,7 +454,6 @@
               </thead>
             </table>
 
-
             <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridConservationTargetsSPP" id="gridConservationTargetsSPP" selectionMode="none">
              <thead>    
                 <tr>
@@ -459,7 +465,7 @@
               </thead>
             </table>
 
-            <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridConservationTargetsOther" id="gridConservationTargetsOther" selectionMode="none">
+          <!--  <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridConservationTargetsOther" id="gridConservationTargetsOther" selectionMode="none">
              <thead>
                 <tr>
                   <th field="CommonName" width="400px" height="auto">Habitats, Ecosystems & Processess Conservation Targets</th>
@@ -467,10 +473,10 @@
                   <th field="PrimaryLCCTargetType" width="auto">LCC Identified</th>              
                 </tr>
               </thead>
-            </table>
+            </table>-->
 
 
-            <table id="gridDeliverables" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" sortInfo="4"
+      <!--      <table id="gridDeliverables" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" sortInfo="4"
                         jsid="gridDeliverables"  style="height:auto; display:none;" >
                 <thead>
                     <tr>
@@ -483,9 +489,74 @@
                         <th field="deliverableid" hidden="true">deliverableid</th>
                     </tr>
                 </thead>
+            </table>-->
+          <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" style="height:auto; display:none;" 
+                        jsid="gridActions" id="gridActions" selectable="true">
+             <thead>
+                <tr>
+                  <th field="ActionTitle" width="350px;" height="100px;">ActionTitle</th>
+                  <th field="URL" width="320px" >Weblink</th>
+                  <th field="EffectiveDate" width="130px" >Effective</th>
+                  <th field="Jurisdiction" width="auto" >Juris</th>
+                  <th field="ConsvActionID" hidden="true" >ConsvActionID</th>
+                  
+                </tr>
+              </thead>
+            </table>
+         <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" style="height:auto; width:650px display:none;" 
+                        jsid="gridActionsDetail" id="gridActionsDetail" selectable="true">
+             <thead>
+                <tr>
+                  <th field="PrimaryCategory_A" width="150px;" height="100px;">Primary Category</th>
+                  <th field="SecondaryCategory_A" width="250px" >Secondary Category</th>
+                  <th field="TertiaryCategory_A" width="250px" >Tertiary Category</th>
+                  <th field="ConsvActions_ID" hidden="true" >ConsvActionID</th>
+                  
+                </tr>
+              </thead>
             </table>
 
-            <table id="gridDeliverablesDetail" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" 
+
+
+
+
+          <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" style="height:auto; display:none;" 
+                        jsid="gridTandR" id="gridTandR" selectable="true">
+             <thead>
+                <tr>
+                  <th field="ToolName" width="200px;" height="100px;">ActionTitle</th>
+                  <th field="URL" width="auto" >Weblink</th>
+                  <th field="Agency" width="150px" >Org</th>
+                  <th field="ToolType" width="120px" >Tool Type</th>
+                  <th field="EffectiveDate" width="75px" >Effective</th>
+                  <th field="Jurisdiction" width="50" >Juris</th>
+                  <th field="ConsvToolsResourcesID" hidden="true" >ConsvActionID</th>
+                  
+                </tr>
+              </thead>
+            </table>
+            
+            </br>
+
+         <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" style="height:auto; width:650px display:none;" 
+                        jsid="gridTandRDetail" id="gridTandRDetail" selectable="true">
+             <thead>
+                <tr>
+                  <th field="PrimaryCategory_T" width="150px;" height="100px;">Primary Category</th>
+                  <th field="SecondaryCategory_T" width="250px" >Secondary Category</th>
+                  <th field="TertiaryCategory_T" width="250px" >Tertiary Category</th>
+                  <th field="ConsvToolsResourcesID" hidden="true" >ConsvActionID</th>
+                  
+                </tr>
+              </thead>
+            </table>
+
+
+
+
+
+
+       <!--     <table id="gridDeliverablesDetail" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" 
                         jsid="gridDeliverablesDetail"  style="height:auto; width:750px; display:none;">
                 <thead>
                     <tr>
@@ -495,7 +566,7 @@
                         <th field="uri" hidden="true">uri</th>
                     </tr>
                 </thead>
-            </table>
+            </table>-->
 </div>
 
 <div style="clear:both; float:left; width:935px;">

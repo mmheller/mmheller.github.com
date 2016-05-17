@@ -88,32 +88,42 @@ define([
 
               //table/fc index, query string, field 4 aggregation, stat type (count, sum, avg), group by field, html ID, string function
               arrayQuery = [];
-              arrayQuery.push(["0", strQuery, "Prj_Title", "count", "Prj_Title", "divTitle", '<b>Title:</b> {0}', ""]);
+              arrayQuery.push(["0", strQuery, "Title", "count", "Title", "divTitle", '<b>Title:</b> {0}', ""]);
               arrayQuery.push(["0", strQuery, "Description", "count", "Description", "divDescription", '<b>Description:</b> {0}', ""]);
-              arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "count", "Total__Funding_by_Your_LCC", "dTotalAllocatedbyLCCSum", '<b>Total GNLCC Funds Allocated: {0}</b>', "currency"]);
-              arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "count", "Total_Matching_or_In_kind_Funds", "dTotalInKindSum", '<b>Total In-Kind/Match Contributions: {0}</b>', "currency"]);
-              arrayQuery.push(["0", strQuery, "Prj_Start_Date", "count", "Prj_Start_Date", "divStart", '{0} ', ""]);
-              arrayQuery.push(["0", strQuery, "Prj_End_Date", "count", "Prj_End_Date", "divEnd", '{0} ', ""]);
+              arrayQuery.push(["0", strQuery, "LeadPerson", "count", "LeadPerson", "divPI", '{0}', ""]);
+              arrayQuery.push(["0", strQuery, "LeadOrg", "count", "LeadOrg", "divLeadOrg", '{0}', ""]);
+              arrayQuery.push(["0", strQuery, "StartDate", "count", "StartDate", "divStart", '{0} ', ""]);
+              arrayQuery.push(["0", strQuery, "EndDate", "count", "EndDate", "divEnd", '{0} ', ""]);
+
+              //              arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "count", "Total__Funding_by_Your_LCC", "dTotalAllocatedbyLCCSum", '<b>Total GNLCC Funds Allocated: {0}</b>', "currency"]);
+              //              arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "count", "Total_Matching_or_In_kind_Funds", "dTotalInKindSum", '<b>Total In-Kind/Match Contributions: {0}</b>', "currency"]);
               //              arrayQuery.push(["2", strQuery, "DelivType", "count", "DelivType", "divDeliverables", 'Deliverable Types: {0} ', ""]);
-              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", '<b>Total GNLCC Funds Allocated by Year:</b> \n<br>{0} ', "show both"]);
-              arrayQuery.push(["0", strQuery, "PI_and_Email", "count", "PI_and_Email", "divPI", '{0}', ""]);
-              arrayQuery.push(["0", strQuery, "PI_Org", "count", "PI_Org", "divLeadOrg", '{0}', ""]);
-              arrayQuery.push(["5", strQuery, "amount", "sum", "dest_orgname", "divFundingDispersal", '<b>Funding Recipient:</b> \n<br>{0} ', "show both"]);
-              arrayQuery.push(["7", strQuery, "InKindamount", "sum", "orgname", "divInKindMatch", '<b>In-Kind/Match Contributions:</b> \n<br>{0} ', "show both"]);
-              arrayQuery.push(["4", strQuery, "EcotypicAreaName", "count", "EcotypicAreaName", "divEcotypicArea", '{0}', ""]);
-              arrayQuery.push(["8", strQuery, "GoalName", "count", "GoalName", "divGoals", '{0}', ""]);
-              arrayQuery.push(["11", strQuery, "Stressor", "count", "Stressor", "divStressors", '{0}', ""]);
-              arrayQuery.push(["0", strQuery, "Comments", "count", "Comments", "divLCMAPLink", '<a href="{0}">LC MAP Project Storage Workspace</a>  ', ""]);
-              arrayQuery.push(["0", strQuery, "PrjStatus", "count", "PrjStatus", "divStatus", '{0}', ""]);
+              //              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", '<b>Total GNLCC Funds Allocated by Year:</b> \n<br>{0} ', "show both"]);
+
+
+              //              arrayQuery.push(["5", strQuery, "amount", "sum", "dest_orgname", "divFundingDispersal", '<b>Funding Recipient:</b> \n<br>{0} ', "show both"]);
+              //              arrayQuery.push(["7", strQuery, "InKindamount", "sum", "orgname", "divInKindMatch", '<b>In-Kind/Match Contributions:</b> \n<br>{0} ', "show both"]);
+              //              arrayQuery.push(["4", strQuery, "EcotypicAreaName", "count", "EcotypicAreaName", "divEcotypicArea", '{0}', ""]);
+              //              arrayQuery.push(["8", strQuery, "GoalName", "count", "GoalName", "divGoals", '{0}', ""]);
+              //              arrayQuery.push(["11", strQuery, "Stressor", "count", "Stressor", "divStressors", '{0}', ""]);
+              arrayQuery.push(["0", strQuery, "URL", "count", "URL", "divLCMAPLink", '<a href="{0}">Source Weblink</a>  ', ""]);
+              arrayQuery.push(["0", strQuery, "Status", "count", "Status", "divStatus", '{0}', ""]);
               //              arrayQuery.push(["1", strQuery, "CommonName", "count", "CommonName", "divConservationTargets", 'Conservation Target(s): \n<br> {0} ', ""]);
               arrayQuery4DataGrid = [];
-              arrayQuery4DataGrid.push(["9", strQuery + " and organization = 0", ["PersonName", "Contact_Type", "GroupName", "prj_priority", "OBJECTID", "roletype"], "gridDivContacts"]);
-              arrayQuery4DataGrid.push(["9", strQuery + " and organization <> 0", ["OBJECTID", "GroupName", "Contact_Type"], "gridDivContactOrgsOnly"]);
-              arrayQuery4DataGrid.push(["3", strQuery + " and DelivType in ('Statement of Work','Proposal', 'Data Management Plan')", ["OBJECTID", "Fund_Year", "deliverable_title", "uri", "DelivType"], "gridDivProposals"]);
-              arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID = 3", ["OBJECTID", "CommonName", "ESA_Status", "TierName", "PrimaryLCCTargetType"], "gridDivConservationTargetsSPP"]);
-              arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID <> 3", ["OBJECTID", "CommonName", "ConsvTargetTypeName", "PrimaryLCCTargetType"], "gridDivConservationTargetsOther"]);
+              arrayQuery4DataGrid.push(["6", strQuery + " and organization = 0", ["PersonName", "Contact_Type", "GroupName", "prj_priority", "OBJECTID", "roletype"], "gridDivContacts"]);
+              arrayQuery4DataGrid.push(["6", strQuery + " and organization <> 0", ["OBJECTID", "GroupName", "Contact_Type"], "gridDivContactOrgsOnly"]);
+              arrayQuery4DataGrid.push(["4", strQuery, ["OBJECTID", "ActionTitle", "URL", "Org_Name", "EffectiveDate", "Jurisdiction", "ConsvActionID"], "gridDivAction"]);
+              arrayQuery4DataGrid.push(["2", strQuery, ["OBJECTID", "ConsvActions_ID", "PrimaryCategory_A", "SecondaryCategory_A", "TertiaryCategory_A"], "gridDivActionsDetail"]);
 
-              arrayQuery4DataGrid.push(["2", strQuery + " and not (DelivType in ('Budget','Proposal', 'Statement of Work', 'Data Management Plan'))", ["OBJECTID", "deliverable_title", "Fund_Year", "duedate", "DelivType", "Deliverable_Received", "deliverableid", "supplemental"], "gridDivDeliverables"]);
+              arrayQuery4DataGrid.push(["5", strQuery, ["OBJECTID", "ToolName", "URL", "Agency", "ToolType", "EffectiveDate", "Jurisdiction", "ConsvToolsResourcesID "], "gridDivTandR"]);
+              arrayQuery4DataGrid.push(["3", strQuery, ["OBJECTID", "ConsvToolsResourcesID", "PrimaryCategory_T", "SecondaryCategory_T", "TertiaryCategory_T"], "gridDivTandRDetail"]);
+
+//              gridDivActionsDetail
+
+              //              arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID = 3", ["OBJECTID", "CommonName", "ESA_Status", "TierName", "PrimaryLCCTargetType"], "gridDivConservationTargetsSPP"]);
+              //              arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID <> 3", ["OBJECTID", "CommonName", "ConsvTargetTypeName", "PrimaryLCCTargetType"], "gridDivConservationTargetsOther"]);
+
+              //arrayQuery4DataGrid.push(["2", strQuery + " and not (DelivType in ('Budget','Proposal', 'Statement of Work', 'Data Management Plan'))", ["OBJECTID", "deliverable_title", "Fund_Year", "duedate", "DelivType", "Deliverable_Received", "deliverableid", "supplemental"], "gridDivDeliverables"]);
               //arrayQuery4DataGrid.push(["3", strQuery + " and supplemental <> 0 and not (DelivType in ('Website','Recorded Presentation'))", ["OBJECTID", "data_name", "DelivType", "deliverableid", "uri"], "gridDivDeliverablesSupWebinarsPages"]);
 
               this.m_arrayQuery = arrayQuery;
@@ -192,14 +202,10 @@ define([
                   $('html, body').animate({ scrollTop: (($(div).offset().top) - 400) }, 'slow');
               }
 
-
-
-
               if (resultFeatures.length == 0) {
                   dojo.style(pGrid.domNode, 'display', 'none');
               } else {
                   dojo.style(pGrid.domNode, 'display', '');
-
 
                   var items = dojo.map(resultFeatures, function (feature) {                  //build an array of attributes
                       return feature.attributes;
@@ -207,7 +213,7 @@ define([
 
                   var data = { identifier: "OBJECTID", items: items };
 
-                  if ((strHTMLElementID == "gridDivDeliverables") | (strHTMLElementID == "gridDivDeliverablesDetail") |
+                  if ((strHTMLElementID == "gridDivAction") | (strHTMLElementID == "gridDivDeliverablesDetail") |
                             (strHTMLElementID == "gridDivProposals") | (strHTMLElementID == "gridDivConservationTargetsOther") | (strHTMLElementID == "gridDivConservationTargetsSPP")) {
                       var pItems = data["items"]
                       for (var key in pItems) {
@@ -216,7 +222,7 @@ define([
 
                               for (var keyField in pItem) {
                                   if (pItem.hasOwnProperty(keyField)) {
-                                      if ((keyField == "duedate") | (keyField == "receiveddate")) {   // Format the date for user friendly web viewing
+                                      if ((keyField == "duedate") | (keyField == "receiveddate") | (keyField == "EffectiveDate")) {   // Format the date for user friendly web viewing
                                           var pValue = formatDate(pItem[keyField]);
                                           data["items"][key][keyField] = pValue;
                                       }
@@ -333,6 +339,7 @@ define([
           returnEvents: function (results) {
               pTblindexAndQuery = this.app.gPjrReportQuery.m_arrayQuery[this.app.gPjrReportQuery.m_iarrayQueryIndex];
 
+
               var strGroupByField = pTblindexAndQuery[4];
               var strHTMLElementID = pTblindexAndQuery[5];
               var strStringFormatting = pTblindexAndQuery[6];
@@ -380,25 +387,40 @@ define([
 
                           dojo.forEach(resultFeatures, function (feature) {//Loop through the QueryTask results and populate an array with the unique values
 
+
                               blnAdd2Dropdown = false;
                               dojo.forEach(attrNames, function (an) {
-                                  if ((strText == null) || (strText == undefined)) {
-                                      strText = "null or undefined";
+
+                                  if (this.app.gPjrReportQuery.m_iarrayQueryIndex == 4) {
+                                      var temp = "";
+                                  }
+
+
+                                  if ((feature.attributes[an] == null) || (feature.attributes[an] == undefined)) {
+                                      strText = "N/A or undefined";
+                                      values.push(strText);
                                   } else {
                                       strText = feature.attributes[an].toString();
-                                  }
-                                  if ((strGroupByField != "") & (an == "genericstat") & (strVarType != "show both")) {
-                                      //values.push(strText);
-                                  } else {
-                                      if ((strVarType == "show both") & (an == "genericstat")) {
-                                          var iTempNumber = Number(strText);
-                                          strText = iTempNumber.toCurrencyString() + "\n<br>";
-                                      } else {
-                                          strText = strText.replace("unknown", "");
-                                          strText = strText.replace("Unknown", "");
-                                          strText = strText.replace(/\n/g, "<br>");
+
+                                      if ((an == "StartDate") | (an == "EndDate")) {   // Format the date for user friendly web viewing
+                                          var dateasEpoch = feature.attributes[an];
+                                          strText = formatDate(dateasEpoch);
                                       }
-                                      values.push(strText);
+
+
+                                      if ((strGroupByField != "") & (an == "genericstat") & (strVarType != "show both")) {
+                                          //values.push(strText);
+                                      } else {
+                                          if ((strVarType == "show both") & (an == "genericstat")) {
+                                              var iTempNumber = Number(strText);
+                                              strText = iTempNumber.toCurrencyString() + "\n<br>";
+                                          } else {
+                                              strText = strText.replace("unknown", "");
+                                              strText = strText.replace("Unknown", "");
+                                              strText = strText.replace(/\n/g, "<br>");
+                                          }
+                                          values.push(strText);
+                                      }
                                   }
                               });
                           });
@@ -432,16 +454,21 @@ define([
           },
           err: function (err) {
               console.log("Failed to get stat results due to an error: ", err);
-              this.app.gPjrReportQuery.m_iarrayQueryIndex += 1
+
+              var tmp2 = this.app.gPjrReportQuery.m_iarrayQueryIndex;
+
+              this.app.gPjrReportQuery.m_iarrayQueryIndex += 1;
+
+
               if (this.app.gPjrReportQuery.m_iarrayQueryIndex < this.app.gPjrReportQuery.m_arrayQuery.length) {
-                  this.app.gPjrReportQuery.SendQuery(this.app.gPjrReportQuery.m_arrayQuery, this.app.gPjrReportQuery.m_iarrayQueryIndex)
+                  this.app.gPjrReportQuery.SendQuery(this.app.gPjrReportQuery.m_arrayQuery, this.app.gPjrReportQuery.m_iarrayQueryIndex);
               }
           },
           errDG: function (err) {
               console.log("Failed to get stat results due to an error: ", err);
-              this.app.gPjrReportQuery.m_iarrayQueryIndex += 1
+              this.app.gPjrReportQuery.m_iarrayQueryIndex += 1;
               if (this.app.gPjrReportQuery.m_iarrayQueryIndex < this.app.gPjrReportQuery.m_arrayQuery.length) {
-                  this.app.gPjrReportQuery.SendQuery(this.app.gPjrReportQuery.m_arrayQuery, this.app.gPjrReportQuery.m_iarrayQueryIndex)
+                  this.app.gPjrReportQuery.SendQuery(this.app.gPjrReportQuery.m_arrayQuery, this.app.gPjrReportQuery.m_iarrayQueryIndex);
               }
           }
       }

@@ -95,6 +95,18 @@ define([
               plabels2.addFeatureLayer(pLCCNetworkLayer, pLabelRenderer2, "{" + strlabelField2 + "}");
 
 
+
+              var strlabelField3 = "Name";
+              pFocalConLayer = new FeatureLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/573b3a99e4b0dae0d5e3ad54/MapServer/0", {mode: FeatureLayer.MODE_ONDEMAND, id: "FocalCon", outFields: [strlabelField3], visible: false });
+              var vWhiteColor = new Color("#FFFFFF");              // create a text symbol to define the style of labels
+              var pLabel3 = new TextSymbol().setColor(vWhiteColor);
+              pLabel3.font.setSize("10pt");
+              pLabel3.font.setFamily("arial");
+              var pLabelRenderer3 = new SimpleRenderer(pLabel3);
+              var plabels3 = new LabelLayer({ id: "labels3" });
+              plabels3.addFeatureLayer(pFocalConLayer, pLabelRenderer3, "{" + strlabelField3 + "}");
+
+
               pCascadiaPF = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba6bfe4b08400b1fddd17/MapServer", { "opacity": 0.9, id: "Cascadia", visible: false });
               pColumbiaPF = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba71be4b08400b1fddd1a/MapServer", { "opacity": 0.9, id: "Columbia", visible: false });
               pRMPF = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba7cbe4b08400b1fddd22/MapServer", { "opacity": 0.9, id: "Rocky Mountain", visible: false });
@@ -105,7 +117,7 @@ define([
               pGNLCCJurisdictionalBoundaries.setVisibleLayers([1, 2, 3]);
 
               arrayLayers = [pCascadiaPF, pColumbiaPF, pRMPF, pSSPF, pPartnershipsAreas, pPTS_Projects, plabels1, pHeatLayer2, pHeatLayer, pBase_LCC, pRefugesLayer,
-                                pUSNativeLayer, pNPSLayer, pUSFSLayer, pBLMLayer, pLCCNetworkLayer, plabels2, pHumanMod, pGNLCCJurisdictionalBoundaries];
+                                pUSNativeLayer, pNPSLayer, pUSFSLayer, pBLMLayer, pLCCNetworkLayer, plabels2, pHumanMod, pGNLCCJurisdictionalBoundaries, pFocalConLayer, plabels3];
 
 
               var cbxLayers = [];
@@ -127,6 +139,7 @@ define([
 
 
               cbxLayers.push({ layer: pPartnershipsAreas, title: 'Partner and Ecosystem Areas of Interest' });
+              cbxLayers.push({ layer: pFocalConLayer, title: 'Connectivity Focal Connections' });
               cbxLayers.push({ layer: pBase_LCC, title: 'GNLCC Boundary' });
               cbxLayers.push({ layer: pPTS_Projects, title: 'Projects' });
                             
