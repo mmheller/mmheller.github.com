@@ -1,0 +1,234 @@
+﻿/* Classes */
+.bg {
+	display: block;
+	background-color: #5B7E8A;
+	/*background-color: rgb(151, 118, 123);*/
+	filter: alpha(opacity=80);
+	-moz-opacity: 0.80;
+	-khtml-opacity: 0.80;
+	opacity: 0.80;
+}
+.rounded {
+	-moz-border-radius: 0px 0px 0px 0px;
+	-webkit-border-radius: 0px 0px 0px 0px;
+	border-radius: 0px 0px 0px 0px;
+}
+.shadow {
+	-moz-box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+	box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=135, Color='#000000')";
+}
+.panelTitle {
+	position: absolute;
+	height: 84px;
+	right: 15px;
+	top: 15px;
+	color: #FFFFFF;
+	font-size: 35px;
+	font-weight: normal;
+	line-height: 40px;
+	padding: 0px;
+	text-align: right;
+	font-family: Arial;
+}
+#panelMain {
+	width: 575px;
+	height: 34px;
+	overflow: hidden;
+	float: Right;
+	line-height: 30px;
+	font-weight: normal;
+    margin-right: 5px;
+}
+
+#panelContainer {
+	margin: auto;
+	width: 880px;
+	height: 90px;
+	overflow: hidden;
+	display: none;
+}
+.panelTitleDraft {
+	position: absolute;
+	height: 33px;
+	right: 15px;
+	top: 15px;
+	color: #FF0000;
+	font-size: 28px;
+	font-weight: normal;
+	line-height: 40px;
+	padding: 0px;
+	text-align: right;
+}
+#panelMainDraft {
+	width: 575px;
+	height: 34px;
+	overflow: hidden;
+	float: Right;
+	line-height: 30px;
+	font-weight: normal;
+    margin-right: 5px;
+}
+
+.col {
+	position: relative;
+	width: 219px;
+	height: 80px;
+	padding: 0px;
+	margin-top: 10px;
+	margin-bottom: 0px;
+	display: none;
+	text-align: center;
+	float: left;
+}
+
+.line {
+	border-left: 1px solid #fff;
+}
+    /* ################################## */
+    #rightPane {width: 20%;}
+    #legendPane {border: solid #97DCF2 1px;}
+
+    #search {
+    width: 97%;
+    z-index: 2;
+    }
+
+    /* customize geocoder appearance */
+    .simpleGeocoder, .simpleGeocoder .esriGeocoderContainer {
+    width: 100%;
+    }
+    .simpleGeocoder .esriGeocoder {
+    border: 0;
+    height: 100%;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px #888;
+    box-shadow: 0 0 5px #888;
+    }
+    
+    .simpleGeocoder .esriGeocoderIcon { 
+    display: none;
+    }
+    .simpleGeocoder .esriGeocoder .esriGeocoderReset {
+    margin: 0;
+    }
+          
+    h1 {
+      position: relative;
+      color: #FFF;
+    }
+    
+    h2 {
+       font-size: 16px;
+       font-family:  Arial, Helvetica, sans-serif;
+       color: #353536;
+       font-weight:normal;
+    }    
+    
+    h3 {
+       font-size: 13px;
+       font-family:  Arial, Helvetica, sans-serif; 
+       color: #353536;
+       font-weight:normal;
+    }  
+    
+    h1 span {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 100%;
+      height: 100%;
+    }
+    h1 span.last {
+      top: 2px;
+      left: 2px;
+      color: #000;
+    }
+ 
+ 
+    .textbox {
+        border: 1px solid #c4c4c4;
+        width: 92%;
+        height: 17px;
+        font-size: 12px;
+        font-family:  Arial, Helvetica, sans-serif;
+        padding: 4px;
+        box-shadow: 0px 0px 8px #d9d9d9;
+        -moz-box-shadow: 0px 0px 8px #d9d9d9;
+        -webkit-box-shadow: 0px 0px 8px #d9d9d9;
+    }
+
+    /*.textbox:focus { 
+        outline: none;
+        border: 1px solid #7bc1f7;
+        box-shadow: 0px 0px 8px #7bc1f7;
+        -moz-box-shadow: 0px 0px 8px #7bc1f7;
+        -webkit-box-shadow: 0px 0px 8px #7bc1f7;
+    }*/
+ 
+    .selectClass {
+       font-size: 12px;
+       font-family: 'Tahoma', cursive;
+       width: 95%;
+    }​
+  
+     .esriScalebar
+     {
+        left:2px; 
+        bottom:35px;
+     }
+     
+     .tundra .dijitAccordionTitle 
+     {
+         /*background: url("images/titleBar1.png") repeat-x scroll left bottom rgb(151, 118, 123);*/
+         border-top: 2px solid rgb(127, 105, 127);
+         color:#5C5C2E;
+         font-family: Arial;
+     }
+     
+     
+     /* BASEMAPS */
+    .panelBasemaps {
+	    position: absolute;
+	    width: 140px;
+	    height: 30px;
+	    font-family: HelveticaNeueUltraLight;
+	    color: #ffffff;
+	    right: 5px;
+	    font-size: 14px;
+	    padding: 0px;
+	    overflow: hidden;
+	    z-index:80;
+    }
+
+    .panelBasemapsOn {
+	    height: 400px;
+    }
+
+    #basemapTitle {
+	    display: block;
+	    width: 140px;
+	    height: 30px;
+	    font-family: HelveticaNeue;
+	    text-align: center;
+	    line-height: 50px;
+	    cursor: pointer;
+	    padding: 0px;
+	    z-index:81;
+    }
+
+    #basemapContent {
+	    display: block;
+	    width: 140px;
+	    height: 350px;
+	    font-family: HelveticaNeue;
+	    text-align: center;
+	    cursor: pointer;
+	    overflow-y: auto;
+	    overflow-x: hidden;
+	    padding: 0px;
+    }
