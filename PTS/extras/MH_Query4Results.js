@@ -7,6 +7,7 @@ function onRowClickHandler(evt) {
     //window.open(strURL, "_self");
 }
 
+
 define([
   "dojo/_base/declare",
   "dojo/_base/lang",
@@ -41,6 +42,33 @@ define([
           constructor: function (options) {
               this.strURL = options.strURL || "www.cnn.com"; // default AGS REST URL
           },
+
+          SendQuery2: function (arrayQuery, iarrayQueryIndex, pGrid) {
+            this.m_grid = pGrid;
+            this.m_arrayQuery = arrayQuery;
+            this.m_iarrayQueryIndex = iarrayQueryIndex;
+
+            if (iarrayQueryIndex == 0) {
+                this.arrayProjectIDs = [];  //clear out the array if index is zero
+            }
+            pTblindexAndQuery = arrayQuery[iarrayQueryIndex];
+            var iIndex = pTblindexAndQuery[0];
+            var strQuery = pTblindexAndQuery[1];
+            var queryTask = new esri.tasks.QueryTask(this.strURL + "/" + iIndex.toString() + "?returnDistinctValues=true");
+            var pQuery = new Query();
+            pQuery.returnGeometry = false;
+            pQuery.outFields = ["ProjectID"];
+
+            if (this.arrayProjectIDs.length > 0) {
+                strQuery = "(" + strQuery + ") and (ProjectID in (" + this.arrayProjectIDs.join(",") + "))";
+            }
+            if (this.m_arrayUserRemovedPrjs.length > 0) {  //if user's right clicked and removed a row then don't include
+                strQuery += " and (not (ProjectID in (" + this.m_arrayUserRemovedPrjs.join(",") + ")))";
+            }
+            pQuery.where = strQuery;
+            queryTask.execute(pQuery, this.SendQueryResults, this.err);
+          },
+
           SendQuery: function (arrayQuery, iarrayQueryIndex) {
               if (arrayQuery.length > 0) {
                   this.m_arrayQuery = arrayQuery;
@@ -49,7 +77,6 @@ define([
                   if (iarrayQueryIndex == 0) {
                       this.arrayProjectIDs = [];  //clear out the array if index is zero
                   }
-
                   pTblindexAndQuery = arrayQuery[iarrayQueryIndex];
                   var iIndex = pTblindexAndQuery[0];
                   var strQuery = pTblindexAndQuery[1];
@@ -61,21 +88,13 @@ define([
                   if (this.arrayProjectIDs.length > 0) {
                       strQuery = "(" + strQuery + ") and (ProjectID in (" + this.arrayProjectIDs.join(",") + "))";
                   }
-                  //                  if (this.arrayProjectIDs.length > 25) {
-                  //                      strQuery2ndTry4Shorter = "(" + strQuery + ") and (ProjectID in (" + this.arrayProjectIDs.join(",") + "))";
-                  //                  }
-
-
                   if (this.m_arrayUserRemovedPrjs.length > 0) {  //if user's right clicked and removed a row then don't include
                       strQuery += " and (not (ProjectID in (" + this.m_arrayUserRemovedPrjs.join(",") + ")))";
                   }
-
                   pQuery.where = strQuery;
                   queryTask.execute(pQuery, this.SendQueryResults, this.err);
               } else {  // if not query filters query all the values
-
                   this.SendQuery4ProjectResults("OBJECTID > 0", this.m_grid);
-                  //                  this.m_grid.on("rowclick", onRowClickHandler);
                   var tmp = "";
               }
           },
@@ -149,9 +168,6 @@ define([
           SendQuery4ProjectResults: function (strQuery, pGrid) {
               this.ClearDivs();
               document.getElementById("ImgResultsLoading").style.visibility = "visible";
-              //              if (app.pMapSup != undefined) {
-              //                  app.pMapSup.QueryZoom(strQuery);
-              //              }
               this.m_grid = pGrid
               var queryTask = new esri.tasks.QueryTask(this.strURL + "/0");
               var pQuery = new Query();

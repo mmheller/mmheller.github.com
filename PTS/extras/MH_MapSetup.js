@@ -15,6 +15,38 @@ function hideLoading(error) {
     }
 }
 
+function btn_EmailLink_click(e) {
+    strURL = document.URL;
+    strQuery = "?"
+    arrayQuery = app.gCQD.Return_InitialQueryDefs();
+    for (var i = 0; i < arrayQuery.length; i++) {  //loop through the checkboxes of the form and determin if one of the ones to click
+        strTableIndex = arrayQuery[i][0];
+        strQueryString = arrayQuery[i][1];
+        strQuery += strTableIndex + "|" + strQueryString
+        if (i != (arrayQuery.length - 1)) {
+            strQuery += "&"
+        }
+    }
+    strURL += strQuery;
+    btn_Get_filter_link2.value = strURL;
+    btn_Get_filter_link2.style.visibility = "visible";
+    var t = e.target // find target element
+    var c = t.dataset.copytarget
+    var inp = (c ? document.querySelector(c) : null);
+    if (inp && inp.select) {            // is element selectable?
+        inp.select();                // select text
+        try {
+            document.execCommand('copy');                    // copy text
+            inp.blur();
+            t.classList.add('copied');// copied animation
+            setTimeout(function () { t.classList.remove('copied'); }, 1500);
+        }
+        catch (err) {
+            alert('please press Ctrl/Cmd+C to copy');
+        }
+    }
+}
+
 define([
   "dojo/_base/declare",
   "dojo/_base/lang",
@@ -228,13 +260,8 @@ define([
                   });
               }
 
+              document.getElementById("btn_Get_filter_link1").addEventListener('click', btn_EmailLink_click);
 
-              //              var pGeocoder = new Geocoder({ autoComplete: true, arcgisGeocoder: { placeholder: "Find a place" }, map: app.map }, dojo.byId('search'));
-              //              pGeocoder.startup();
-
-
-
-              //              pPTS_Projects = new FeatureLayer(app.strTheme1_URL + "0", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: 0, visible: true });
               $('#loc').autocomplete({
                   source: function (request, response) {
                       $.ajax({

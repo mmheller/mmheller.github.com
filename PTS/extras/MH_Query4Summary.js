@@ -257,7 +257,12 @@ define([
                       //app.pMapSup.QueryZoom(strQuery);
                       app.pMapSup.Phase1();
                       app.pMapSup.Phase3();
-                      app.pMapSup.QueryZoom("OBJECTID > 0");
+                      if (this.app.gQuerySummary.m_query4SummaryMap == undefined){
+                          app.pMapSup.QueryZoom("OBJECTID > 0");
+                      } else {
+                          app.pMapSup.QueryZoom(this.app.gQuerySummary.m_query4SummaryMap);
+                      }
+                      
                   } else {
                       app.pMapSup.QueryZoom(this.app.gQuerySummary.m_query4SummaryMap);
                   }

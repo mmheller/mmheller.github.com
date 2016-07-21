@@ -17,7 +17,105 @@ function StartQuery(blnSelect) {    //loop through the checkboxes and disable, s
     app.gQuery.SendQuery(arrayQuery, 0);
 }
 
+function getTokens() {  //this is duplicate code from the index page
+    var tokens = [];
+    var query = location.search;
+    query = query.slice(1);
+    query = query.split('&');
+    $.each(query, function (i, value) {
+        var token = value.split('|');
+        var key = decodeURIComponent(token[0]);
+        var data = decodeURIComponent(token[1]);
+        tokens[key] = data;
+    });
+    return tokens;
+}
 
+function ParseToken4PotentialQueryArgs(tokens) {  //this is duplicate code from the index page
+    var arrayQuery = [];
+    for (var key in tokens) {
+        var data = tokens[key];
+        if (isNumber(key)) {
+            arrayQuery.push([key, data]);
+        }
+    }
+    return arrayQuery;
+}
+
+function isNumber(obj) { return !isNaN(parseFloat(obj)) }  //this is duplicate code from the index page
+
+function CheckURLParameters4Checked(strDivID) {
+    var blnChecked = false;
+    var tokens = getTokens();
+    arrayQuery = [];
+    if (tokens.length > 0) {
+        arrayQuery = ParseToken4PotentialQueryArgs(tokens);
+    }
+
+    if (arrayQuery.length > 0) {        //if the returned tokens are query filters then setup for using the filters
+        for (i = 0; i < arrayQuery.length; i++) {
+            strTableIndex = arrayQuery[i][0];
+            strQuery = arrayQuery[i][1];
+            
+            if ((strQuery.indexOf(' >= ') < 0) & (strQuery.indexOf(' = 0') < 0)) {
+                strQuery = strQuery.replace("(", "").replace(")", "")
+                strfield = strQuery.split(" in ")[0];
+                strValues = strQuery.split(" in ")[1];
+                strValuesArray = strValues.split(",");
+                for (ii = 0; ii < strValuesArray.length; ii++) {
+                    strValue = strValuesArray[ii];
+                    if (strValue.indexOf("'") >= 0) {  //if string then trim the ' at the beginning and end of the string
+                        strValue = strValue.slice(1);
+                        strValue = strValue.slice(0, -1);
+                    }
+                    strTestDivID = strTableIndex + "-" + strfield + "-" + strValue;
+                    if (strTestDivID == strDivID) {
+                        blnChecked = true;
+                    }
+                }
+            } else {
+                if (strQuery.indexOf(" = ") > 0){
+                    strfield = strQuery.split(" = ")[0];
+                }else{
+                    strfield = strQuery.split(" >= ")[0];
+                }
+                strfield = strfield.replace("(((", "");
+                strfield = strfield.replace("((", "");
+                strValuesArray = strQuery.split(") or (");
+                for (ii = 0; ii < strValuesArray.length; ii++) {
+                    strValue = strValuesArray[ii];
+                    strValue = strValue.replace(")))", "");
+                    strValue = strValue.replace("))", "");
+
+                    if (strValue.indexOf(" >= ") > 0) {
+                        if (strValue.indexOf(") and (") > 0) {
+                            strFromValue = strValue.substring((strValue.indexOf(" >= ") + 4), strValue.indexOf(") and ("));
+                        } else {
+                            strFromValue = strValue.substring((strValue.indexOf(" >= ") + 4), strValue.length);
+                        }
+                        strValue = strValue.replace(")", "");
+                        strValue = strValue.replace(")", "");
+                        if (strValue.indexOf(" <= ") > 0) {
+                            strToValue = strValue.substring((strValue.indexOf(" <= ") + 4), strValue.length);
+                            strTestDivID = strTableIndex + "-" + strfield + "-ValueRange" + strFromValue + "_" + strToValue;
+                        } else {
+                            strTestDivID = strTableIndex + "-" + strfield + "-ValueRange" + strFromValue + " and up";
+                        }
+                    } else {
+                        strValue = strValue.replace("))", "");
+                        strValue = strValue.substring((strValue.indexOf(" = ") + 3), strValue.length);
+                        strTestDivID = strTableIndex + "-" + strfield + "-ValueRange" + strValue;
+                    }
+                    
+                    if (strTestDivID == strDivID) {
+                        blnChecked = true;
+                    }
+                }
+            }
+        }
+    }
+    return blnChecked;
+}
 
 function ClearThenStartQuery(strContainterID) {    //loop through the checkboxes and disable, so user interaction dosen't disrupt the queryies
     app.map.graphics.clear();
@@ -201,6 +299,9 @@ define([
                                               blnCheckedAny = true;
                                           }
                                       }
+                                  } 
+                                  if (!(blnChecked)) {
+                                      blnChecked = CheckURLParameters4Checked(strNewDivID);
                                   }
                                   AddCheckbox(strContainerDivID, strNewDivID, strCodeFriendlyValue, strRange, blnChecked, false);
                               }
@@ -235,7 +336,10 @@ define([
                                   blnCheckedAny = true;
                               }
                           }
-                      }
+                      } 
+                      //if (!(blnChecked)) {  // no need to check if has a url parameter match becasuse this section of code deals with objectid > 0
+                      //    blnChecked = CheckURLParameters4Checked(strNewDivID);
+                      //}
                       AddCheckbox(strContainerDivID, strNewDivID, strCodeFriendlyValue, strRange, blnChecked, false);
                   }
 
@@ -373,6 +477,10 @@ define([
                                   }
                               }
                           }
+                          if (!(blnChecked)) {
+                              blnChecked = CheckURLParameters4Checked(strNewDivID);
+                          }
+
                           AddCheckbox(this.app.gSup.strContainerDivID, strNewDivID, varValue, tt, blnChecked, true)
                       }
                       if (blnCheckedAny == true) {

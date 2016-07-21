@@ -19,7 +19,7 @@
   <!--  <script type="text/javascript" src="http://softwaremaniacs.org/media/soft/highlight/highlight.pack.js"></script>-->
     <script type="text/javascript" src="extras/jquery.cookie.js"></script>
     <script type="text/javascript" src="extras/jquery.collapsible.js"></script>
-    <script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>
+    <script type="text/javascript" src="https://js.arcgis.com/3.14/init.js"></script>
 
 <style>
     ul.ui-autocomplete.ui-menu{width:600px;font-size:.7em;} /* this controls the style of the results in the autocomplete  */
@@ -81,21 +81,37 @@
         app.gSup = new MH_UniqueSetup({}); // instantiate the class
 
         on(dom.byId("btn_clear"), "click", btn_clear_click);
-        on(dom.byId("btn_Print_Friendly"), "click", btn_Print_Friendly_click);
+        //on(dom.byId("btn_Print_Friendly"), "click", btn_Print_Friendly_click);
 
         app.gQuery = new MH_Query4Results({ strURL: strURL, m_grid: grid }); // instantiate the class
         app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class        
-        var tokens = getTokens
+        var tokens = getTokens();
         parser.parse();
-        app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
-        //        app.pMapSup = new MH_MapSetup({}); // instantiate the class
-        //        app.pMapSup.Phase1();
-        //        app.pMapSup.Phase3();
-        //        app.pMapSup.QueryZoom("OBJECTID > 0");
+        arrayQuery = [];
+        if (tokens.length > 0) {
+            arrayQuery = ParseToken4PotentialQueryArgs(tokens);
 
+            //document.getElementById("cover-up").style.visible = "Expand"
+            //document.getElementById("eniro").style.visible = "Expand"
+            $('.showMe').slideToggle('slow');
+
+            $('#cover-up').click(function () {
+                window.open("http://greatnorthernlcc.org/", "_self");
+            });
+        }
+        
         CK_ASZ = new CK_AutoCompleteSearchAndZoom({ strSearchField: "ProjectID", strURL: strURL }); // instantiate the class
+        if (arrayQuery.length > 0) {        //if the returned tokens are query filters then setup for using the filters
+            app.gQuery.SendQuery2(arrayQuery, 0, grid);
+        } else {
+            app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
+        }
+
 
         document.getElementById("page_collapsibleMapDestination").appendChild(document.getElementById("map"));  //move the grid to the designated div, grids need to be built outside the collapsable panel otherwise risk not rendering properly
+
+
+
 
         function getTokens() {
             var tokens = [];
@@ -103,7 +119,7 @@
             query = query.slice(1);
             query = query.split('&');
             $.each(query, function (i, value) {
-                var token = value.split('=');
+                var token = value.split('|');
                 var key = decodeURIComponent(token[0]);
                 var data = decodeURIComponent(token[1]);
                 tokens[key] = data;
@@ -111,7 +127,26 @@
             return tokens;
         }
 
+        function ParseToken4PotentialQueryArgs(tokens) {
+            var arrayQuery = [];
+            for (var key in tokens) {
+                var data = tokens[key];
+                if (isNumber(key)) {
+                    arrayQuery.push([key, data]);
+                }
+            }
+            return arrayQuery;
+        }
+
+        function isNumber(obj) { return !isNaN(parseFloat(obj)) }
+
         function btn_clear_click() {
+            var tokens = getTokens();
+            if (tokens.length > 0) {
+                window.history.pushState("object or string", "Title", "/" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1).split("?")[0]);
+            }
+
+
             document.getElementById("cbx_FilterValues").checked = true;
             app.gQuery.m_arrayUserRemovedPrjs = [];
             document.getElementById("loc").value = "";
@@ -125,14 +160,7 @@
             app.map.infoWindow.hide();
         }
 
-        function btn_Print_Friendly_click() {
-            var strHTML = "indexPF.html"
-
-            if (app.gQuery.strQuery !== null) {
-                strHTML += "?Prjs=" + app.gQuery.strQuery.replace("ProjectID in (", "").replace(")", "");
-            }
-            window.open(strHTML);
-        }
+        
     });
 </script>
 
@@ -142,7 +170,7 @@
     {
         if (event.keyCode == 13) {
             CK_ASZ.ExecutePTSFind(document.getElementById("loc").value);
-            document.getElementById("loc").value = "";
+            //document.getElementById("loc").value = "";
             return false;
         } else
             return true;
@@ -239,7 +267,11 @@
 </head>
 <body class="soria">
 
+
 <div id="WideContent2">
+<div class="showMe" id="cover-up" style="display:none"></div>
+<div class="showMe" style="display:none" id="eniro"><iframe src="GNLCC_Banner.html" style="border:none; padding:0px;" scrolling="no" width="1320" height="135" id="iframe_a"></iframe></div>
+
 
 <h3>A core function of the Great Northern LCC is to strategically identify and support applied landscape science, and to support its partners' capacity to interpret and use the science. These pages contain information on how projects are selected, project details and products, including the partnerships that are engendered and funds leveraged.</h2>
 
@@ -268,7 +300,7 @@
 <div id="navigation">
     <form id="NavigationForm">
         <input id="btn_clear" type="button"  value="Reset Search">
-        <input id="btn_Print_Friendly" type="button"  value="Print Friendly" style="visibility:collapse;">
+        <!--<input id="btn_Print_Friendly" type="button"  value="Print Friendly" style="visibility:collapse;">-->
         <br/><br/>
 
         <font size="2px" color="#2E2E2E">Keyword Search</font>
@@ -548,6 +580,10 @@
 </div> 
 
 <div style="clear:both; float:left; width:935px;">
+    <div style="float:left; width: 752px; padding-top: 5px;">
+              <button data-copytarget="#btn_Get_filter_link2" id="btn_Get_filter_link1">Copy Fiter Link</button>
+              <input type="text" id="btn_Get_filter_link2" value="http://www.cnn.com/" size="1" style="visibility:collapse; width: 564px;"/>
+    </div>
     <div style="float:right;">
       <font size="1.5" color="#2E2E2E">Design: GNLCC<br/> Development: GNLCC<br/>Data Services: <a href="https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer" target="_blank">LC MAP</a></font>
     </div>
