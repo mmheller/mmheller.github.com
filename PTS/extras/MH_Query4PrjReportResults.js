@@ -105,6 +105,10 @@ define([
               arrayQuery.push(["11", strQuery, "Stressor", "count", "Stressor", "divStressors", '{0}', ""]);
               arrayQuery.push(["0", strQuery, "Comments", "count", "Comments", "divLCMAPLink", '<a href="{0}">LC MAP Project Storage Workspace</a>  ', ""]);
               arrayQuery.push(["0", strQuery, "PrjStatus", "count", "PrjStatus", "divStatus", '{0}', ""]);
+
+              arrayQuery.push(["0", strQuery, "Subject_Keywords", "count", "Subject_Keywords", "txtKeywords", 'Subject Keywords: {0}', ""]);
+              arrayQuery.push(["0", strQuery, "Location_Keywords", "count", "Location_Keywords", "txtLocationKeywords", 'Location Keywords: {0}', ""]);
+
               //              arrayQuery.push(["1", strQuery, "CommonName", "count", "CommonName", "divConservationTargets", 'Conservation Target(s): \n<br> {0} ', ""]);
               arrayQuery4DataGrid = [];
               arrayQuery4DataGrid.push(["9", strQuery + " and organization = 0", ["PersonName", "Contact_Type", "GroupName", "prj_priority", "OBJECTID", "roletype"], "gridDivContacts"]);

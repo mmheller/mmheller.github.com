@@ -31,16 +31,33 @@ function getTokens() {  //this is duplicate code from the index page
     return tokens;
 }
 
-function ParseToken4PotentialQueryArgs(tokens) {  //this is duplicate code from the index page
+//function ParseToken4PotentialQueryArgs(tokens) {  //this is duplicate code from the index page
+//    var arrayQuery = [];
+//    for (var key in tokens) {
+//        var data = tokens[key];
+//        if (isNumber(key)) {
+//            arrayQuery.push([key, data]);
+//        }
+//    }
+//    return arrayQuery;
+//}
+function ParseToken4PotentialQueryArgs(tokens) {//this is duplicate code from the index page
     var arrayQuery = [];
     for (var key in tokens) {
         var data = tokens[key];
         if (isNumber(key)) {
             arrayQuery.push([key, data]);
         }
+        if (key == "PrjID2Add") {
+            app.gQuery.arrayProjectIDs = data.split(",");
+        }
+        if (key == "PrjID2Remove") {
+            app.gQuery.m_arrayUserRemovedPrjs = data.split(",");
+        }
     }
     return arrayQuery;
 }
+
 
 function isNumber(obj) { return !isNaN(parseFloat(obj)) }  //this is duplicate code from the index page
 
@@ -428,7 +445,9 @@ define([
                               all.push({ 'T': texts[i], 'V': values[i] });
                           }
                           if (this.app.gSup.strFieldNameText == "Fund_Year") {
-                              all.reverse(sortFunction);
+                              all.sort(sortFunction);
+                              all.reverse();
+                              
                           } else {
                               all.sort(sortFunction);
                           }

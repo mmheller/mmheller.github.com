@@ -73,15 +73,11 @@
         var yyyy = today.getFullYear();
         today = mm + '/' + dd + '/' + yyyy;
         document.getElementById('time').innerHTML = today;
-
         var selectedItem;  // This has to be declared "globally" outside of any functions for the grid context menu
-
         var strURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer"
         app.gCQD = new MH_CreateQueryDef({}); // instantiate the class
         app.gSup = new MH_UniqueSetup({}); // instantiate the class
-
         on(dom.byId("btn_clear"), "click", btn_clear_click);
-        //on(dom.byId("btn_Print_Friendly"), "click", btn_Print_Friendly_click);
 
         app.gQuery = new MH_Query4Results({ strURL: strURL, m_grid: grid }); // instantiate the class
         app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class        
@@ -90,11 +86,7 @@
         arrayQuery = [];
         if (tokens.length > 0) {
             arrayQuery = ParseToken4PotentialQueryArgs(tokens);
-
-            //document.getElementById("cover-up").style.visible = "Expand"
-            //document.getElementById("eniro").style.visible = "Expand"
             $('.showMe').slideToggle('slow');
-
             $('#cover-up').click(function () {
                 window.open("http://greatnorthernlcc.org/", "_self");
             });
@@ -107,11 +99,7 @@
             app.gQuery.SendQuery4ProjectResults("OBJECTID > 0", grid);
         }
 
-
         document.getElementById("page_collapsibleMapDestination").appendChild(document.getElementById("map"));  //move the grid to the designated div, grids need to be built outside the collapsable panel otherwise risk not rendering properly
-
-
-
 
         function getTokens() {
             var tokens = [];
@@ -134,6 +122,12 @@
                 if (isNumber(key)) {
                     arrayQuery.push([key, data]);
                 }
+                if (key == "PrjID2Add") {
+                    app.gQuery.arryExtraPrjIDs4URLParam = data.split(",");
+                }
+                if (key == "PrjID2Remove") {
+                    app.gQuery.m_arrayUserRemovedPrjs = data.split(",");
+                }
             }
             return arrayQuery;
         }
@@ -149,6 +143,7 @@
 
             document.getElementById("cbx_FilterValues").checked = true;
             app.gQuery.m_arrayUserRemovedPrjs = [];
+            app.gQuery.arryExtraPrjIDs4URLParam = [];
             document.getElementById("loc").value = "";
             if ($('#page_collapsible1').collapsible('collapsed')) {
                 $('#page_collapsible1').collapsible('open');
@@ -158,6 +153,7 @@
             app.map.graphics.clear();
             //app.map.infoWindow.destroy();
             app.map.infoWindow.hide();
+            btn_Get_filter_link2.value = "";
         }
 
         
@@ -307,7 +303,7 @@
         <div id="autocompleteSearch">    <!--add carraige return event-->
             <input id="loc" class="textbox" type="text" onkeypress="return onkeypressHandleReturn()" title="Enter portion of...
             Project Title, Project Lead, Keywords, 
-            Partner Organizaitons
+            Partner Organizations
         and wait a moment for a pick list"/><br />
             &nbsp;
         </div>
@@ -581,7 +577,7 @@
 
 <div style="clear:both; float:left; width:935px;">
     <div style="float:left; width: 752px; padding-top: 5px;">
-              <button data-copytarget="#btn_Get_filter_link2" id="btn_Get_filter_link1">Copy Fiter Link</button>
+              <button data-copytarget="#btn_Get_filter_link2" id="btn_Get_filter_link1">Copy Saved Search Link</button>
               <input type="text" id="btn_Get_filter_link2" value="http://www.cnn.com/" size="1" style="visibility:collapse; width: 564px;"/>
     </div>
     <div style="float:right;">

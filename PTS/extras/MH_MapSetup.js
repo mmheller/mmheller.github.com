@@ -16,7 +16,8 @@ function hideLoading(error) {
 }
 
 function btn_EmailLink_click(e) {
-    strURL = document.URL;
+    //strURL = document.URL;
+    strURL = window.location.href.split('?')[0]
     strQuery = "?"
     arrayQuery = app.gCQD.Return_InitialQueryDefs();
     for (var i = 0; i < arrayQuery.length; i++) {  //loop through the checkboxes of the form and determin if one of the ones to click
@@ -26,6 +27,20 @@ function btn_EmailLink_click(e) {
         if (i != (arrayQuery.length - 1)) {
             strQuery += "&"
         }
+    }
+    if (app.gQuery.arryExtraPrjIDs4URLParam.length > 0) {  //add individually added project (i.e. from text search) to a query option)
+        if (document.URL.length + 1 != (strURL.length + strQuery.length)) {
+            strQuery += "&";
+        }
+        //strQuery += "PrjID2Add|ProjectID in (" + app.gQuery.arryExtraPrjIDs4URLParam.join(",") + ")";
+        strQuery += "PrjID2Add|" + app.gQuery.arryExtraPrjIDs4URLParam.join(",");
+    }
+    if (app.gQuery.m_arrayUserRemovedPrjs.length > 0) {    //remove individually removed projects (i.e. from right click-->reomve) to a query option)
+        if (document.URL.length + 1 != (strURL.length + strQuery.length)) {
+            strQuery += "&";
+        }
+        strQuery += "PrjID2Remove|" + app.gQuery.m_arrayUserRemovedPrjs.join(",");
+        //strQuery += "PrjID2Remove|ProjectID in (" + app.gQuery.m_arrayUserRemovedPrjs.join(",") + ")";
     }
     strURL += strQuery;
     btn_Get_filter_link2.value = strURL;
