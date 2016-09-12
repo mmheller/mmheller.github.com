@@ -435,13 +435,13 @@ define([
                                                                         "GoalName", "GoalName",
                                                             'section7content', this.app.gSup.iTableIndex.toString() + "-GoalName");
                       break;
+//                  case "GoalName":
+//                      this.app.gSup.iTableIndex = 2;
+//                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex] + " and (not (NationalLCCDelivType in ('Contractual Document')))",
+//                                                                        "NationalLCCDelivType", "NationalLCCDelivType",
+//                                                            'section8content', this.app.gSup.iTableIndex.toString() + "-NationalLCCDelivType");
+//                      break;
                   case "GoalName":
-                      this.app.gSup.iTableIndex = 2;
-                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex] + " and (not (NationalLCCDelivType in ('Contractual Document')))",
-                                                                        "NationalLCCDelivType", "NationalLCCDelivType",
-                                                            'section8content', this.app.gSup.iTableIndex.toString() + "-NationalLCCDelivType");
-                      break;
-                  case "NationalLCCDelivType":
                       this.app.gSup.iTableIndex = 7;
                       this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
                                                                         "orgname", "orgname",
