@@ -70,7 +70,7 @@
         var strPRJ_ID = getTokens()['PRJ_ID']; //?RButton=true
 
         parser.parse();
-        app.gPjrReportQuery.RunReport("ProjectID = " + strPRJ_ID, [gridContacts, gridContactOrgsOnly, gridProposals,
+        app.gPjrReportQuery.RunReport("ProjectID = " + strPRJ_ID, [gridContacts, gridContactOrgsOnly, gridProposals, gridQuickLinks,
                                                                     gridConservationTargetsSPP, gridConservationTargetsOther,
                                                                     gridDeliverables], 
                                                                     gridDeliverablesDetail);  // this needs sync'ing with the grids below, the div's below, and the array in the MH_Query4PrjReportResults
@@ -234,7 +234,6 @@
                        <div id="divTitle"></div>
                         <hr>
 
-
                         <table style="width:100%;">
                                    <tr>
                                        <td valign="top"  width="120px">
@@ -254,7 +253,7 @@
                                             <div id="gridDivProposals"></div>        
                                        </td>
                                        <td valign="top">
-         
+     
                                        </td>
                                    </tr>
 
@@ -281,14 +280,16 @@
                         &nbsp;
                     </td>
                     <td valign="top">
+                        <div id="gridDivQuicklinks"></div>
+                        <input type="text" disabled="disabled" value="Funding Summary" style="border-style: none; background-color:#5B7E8A; color:#FFFFFF; width:305px; font-weight: bold; padding-top: 5px; padding-bottom: 5px; padding-left: 5px; font-size: 12px;" />
                         <div id="dTotalAllocatedbyLCCSum"></div>
-                        <hr>
+                        <!--<hr>-->
                         <div id="dTotalAllocatedbyLCCbyYear"></div>
                         <hr>
                         <div id="divFundingDispersal"></div>
                         <hr>
                         <div id="dTotalInKindSum"></div>
-                        <hr>
+                        <!--<hr>-->
                         <div id="divInKindMatch"></div>
                     </td>
                 </tr>
@@ -409,23 +410,18 @@
         </div>
         <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
     </div>
-
-
-            <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridContacts" id="gridContacts" selectionMode="none">
+            <table dojotype="dojox.grid.DataGrid" style="height:200px; display:none;" jsid="gridContacts" id="gridContacts" sortInfo="1" selectionMode="none">
              <thead>
                 <tr>
-                  <th field="PersonName" width="300px" height="60px">Name</th>
+                  <th field="PersonName" width="275px" height="60px">Name</th>
                   <th field="roletype" width="130px"  height="60px">Role</th>
                   <th field="GroupName" width="auto"  height="60px">Affiliation</th>
-                  <th field="Contact_Type" width="150px" height="60px">Type</th>
- 
-                  <!--<th field="prj_priority" width="80px">Priority</th>-->
-                  <!--<th field="uri" width="auto">Email</th> -->             
+                  <th field="Contact_Type" width="60px" height="60px">Type</th>
                 </tr>
               </thead>
             </table>
 
-           <table dojotype="dojox.grid.DataGrid" style="height:300px; width:600px; display:none;" jsid="gridContactOrgsOnly" id="gridContactOrgsOnly" selectionMode="none" style="">
+           <table dojotype="dojox.grid.DataGrid" style="height:300px; width:600px; display:none;" sortInfo="1"  jsid="gridContactOrgsOnly" id="gridContactOrgsOnly" selectionMode="none" style="">
              <thead>
                 <tr>
                   <th field="GroupName" width="450" height="60px">Additional Collaborators</th>
@@ -434,6 +430,19 @@
                 </tr>
               </thead>
             </table>
+
+              <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" sortInfo="-1" style="width:400; height:105px; padding-bottom: 15px;  display:none;" 
+                        jsid="gridQuickLinks" id="gridQuickLinks" selectable="true">
+             <thead>
+                <tr>
+                  <th field="deliverable_title" width="350px;" height="100px;">Quick Links</th>
+                  <th field="uri" hidden="true" >Weblink</th>
+                  <th field="deliverableid" hidden="true" >deliverableid</th>
+                  <th field="DelivType" hidden="true" >DelivType</th>
+                </tr>
+              </thead>
+            </table>
+
 
           <table dojotype="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" sortInfo="-1" style="width:400; height:105px; display:none;" 
                         jsid="gridProposals" id="gridProposals" selectable="true">
@@ -470,7 +479,7 @@
             </table>
 
 
-            <table id="gridDeliverables" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" sortInfo="4"
+            <table id="gridDeliverables" dojoType="dojox.grid.DataGrid" data-dojo-props="escapeHTMLInData:false" sortInfo="3"
                         jsid="gridDeliverables"  style="height:auto; display:none;" >
                 <thead>
                     <tr>
@@ -478,7 +487,7 @@
                         <th field="Fund_Year" width="60px" height="auto">Fund Year</th>
                         <th field="duedate" width="70px">Due Date</th>           
                         <th field="DelivType" width="145px">Type</th>    
-                        <th field="supplemental" width="80px">Supplemental</th>    
+                        <th field="supplemental" width="38px">Suppl.</th>    
                         <th field="Deliverable_Received" width="55px">Received</th>    
                         <th field="deliverableid" hidden="true">deliverableid</th>
                     </tr>

@@ -137,7 +137,8 @@
         function btn_clear_click() {
             var tokens = getTokens();
             if (tokens.length > 0) {
-                window.history.pushState("object or string", "Title", "/" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1).split("?")[0]);
+                //window.history.pushState("object or string", "Title", "/" + window.location.href.substring(window.location.href.lastIndexOf('/') + 1).split("?")[0]);
+                window.history.pushState("object or string", "Title", window.location.href.substring(0, window.location.href.lastIndexOf("?")));
             }
 
 
@@ -461,7 +462,8 @@
             <td class="HTMLTable_styleMiddle">
                 &nbsp;</td>
             <td class="HTMLTable_styleLeft">
-                <div id="dNumberofInKindOrgs"></div> </td>
+                <div id="dTotalInKindMatchbyYear"></div>
+            </td>
         </tr>
 
         <tr>
@@ -471,7 +473,8 @@
             <td class="HTMLTable_styleMiddle">
                 &nbsp;</td>
             <td class="HTMLTable_styleLeft">
-                <div id="dNumberOfProjectContacts"></div> </td>
+                 <div id="dNumberofInKindOrgs"></div> 
+            </td>
         </tr>
         <tr>
             <td class="HTMLTable_styleLeft">
@@ -487,6 +490,9 @@
                 <div id="dNumberOfProjectContacts2"></div></td>
             <td class="HTMLTable_styleMiddle">
                 &nbsp;</td>
+            <td class="HTMLTable_styleLeft">
+                <div id="dNumberOfProjectContacts"></div> 
+            </td>
         </tr>
 
 <!--        <tr>

@@ -114,6 +114,7 @@ define([
               arrayQuery4DataGrid.push(["9", strQuery + " and organization = 0", ["PersonName", "Contact_Type", "GroupName", "prj_priority", "OBJECTID", "roletype"], "gridDivContacts"]);
               arrayQuery4DataGrid.push(["9", strQuery + " and organization <> 0", ["OBJECTID", "GroupName", "Contact_Type"], "gridDivContactOrgsOnly"]);
               arrayQuery4DataGrid.push(["3", strQuery + " and DelivType in ('Statement of Work','Proposal', 'Data Management Plan')", ["OBJECTID", "Fund_Year", "deliverable_title", "uri", "DelivType"], "gridDivProposals"]);
+              arrayQuery4DataGrid.push(["3", strQuery + " and quicklink = 1", ["OBJECTID", "deliverable_title", "uri", "deliverableid", "DelivType"], "gridDivQuicklinks"]);
               arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID = 3", ["OBJECTID", "CommonName", "ESA_Status", "TierName", "PrimaryLCCTargetType"], "gridDivConservationTargetsSPP"]);
               arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID <> 3", ["OBJECTID", "CommonName", "ConsvTargetTypeName", "PrimaryLCCTargetType"], "gridDivConservationTargetsOther"]);
 
@@ -212,7 +213,7 @@ define([
                   var data = { identifier: "OBJECTID", items: items };
 
                   if ((strHTMLElementID == "gridDivDeliverables") | (strHTMLElementID == "gridDivDeliverablesDetail") |
-                            (strHTMLElementID == "gridDivProposals") | (strHTMLElementID == "gridDivConservationTargetsOther") | (strHTMLElementID == "gridDivConservationTargetsSPP")) {
+                            (strHTMLElementID == "gridDivQuicklinks") | (strHTMLElementID == "gridDivProposals") | (strHTMLElementID == "gridDivConservationTargetsOther") | (strHTMLElementID == "gridDivConservationTargetsSPP")) {
                       var pItems = data["items"]
                       for (var key in pItems) {
                           if (pItems.hasOwnProperty(key)) {
@@ -262,6 +263,12 @@ define([
                                       if (pGrid.id == "gridProposals") {
                                           if (keyField == "Fund_Year") {
                                               pValue = '<font color="blue">FY{0} {1}</font>'.format(pItem.Fund_Year, pItem.DelivType);
+                                              data["items"][key][keyField] = pValue;
+                                          }
+                                      }
+                                      if (pGrid.id == "gridQuickLinks") {
+                                          if (keyField == "deliverable_title") {
+                                              pValue = '<font color="blue">{0}</font>'.format(pItem.deliverable_title);
                                               data["items"][key][keyField] = pValue;
                                           }
                                       }
