@@ -113,7 +113,8 @@ define([
               if (strGroupByField != "") {
                   pQuery.groupByFieldsForStatistics = [strGroupByField];
                   //pQuery.groupByFieldsForStatistics = [strGroupByField];
-                  pQuery.orderByFields = [strGroupByField + " DESC"];
+                  //pQuery.orderByFields = [strGroupByField + " DESC"];
+                  pQuery.orderByFields = [strGroupByField + " ASC"];
               }
 
               pQuery.outStatistics = [pstatDef];

@@ -154,6 +154,7 @@ define([
 
               if (strGroupByField != "") {
                   pQuery.groupByFieldsForStatistics = [strGroupByField];
+                  pQuery.orderByFields = [strGroupByField + " DESC"];
               }
 
 
