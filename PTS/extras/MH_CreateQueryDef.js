@@ -12,6 +12,11 @@ define([
           constructor: function (options) {
           },
 
+
+          GetMasterAGSMapservicURL: function () {
+              return "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer/";
+          },
+
           Return_InitialQueryDefs: function () {
               //do not turn off layer visibility here, the checkbox click methods will handle layer visibility
               var pform = document.getElementById("NavigationForm");

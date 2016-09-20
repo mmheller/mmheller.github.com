@@ -74,10 +74,13 @@
         today = mm + '/' + dd + '/' + yyyy;
         document.getElementById('time').innerHTML = today;
         var selectedItem;  // This has to be declared "globally" outside of any functions for the grid context menu
-        var strURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer"
+
         app.gCQD = new MH_CreateQueryDef({}); // instantiate the class
+        var strURL = app.gCQD.GetMasterAGSMapservicURL();
         app.gSup = new MH_UniqueSetup({}); // instantiate the class
         on(dom.byId("btn_clear"), "click", btn_clear_click);
+
+        document.getElementById('MapserviceLink').href = strURL;
 
         app.gQuery = new MH_Query4Results({ strURL: strURL, m_grid: grid }); // instantiate the class
         app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class        
@@ -587,7 +590,7 @@
               <input type="text" id="btn_Get_filter_link2" value="http://www.cnn.com/" size="1" style="visibility:collapse; width: 564px;"/>
     </div>
     <div style="float:right;">
-      <font size="1.5" color="#2E2E2E">Design: GNLCC<br/> Development: GNLCC<br/>Data Services: <a href="https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer" target="_blank">LC MAP</a></font>
+      <font size="1.5" color="#2E2E2E">Design: GNLCC<br/> Development: GNLCC<br/>Data Services: <a id="MapserviceLink" target="_blank">LC MAP</a></font>
     </div>
 </div>
 

@@ -62,7 +62,8 @@
 
         on(dom.byId("btn_back2search"), "click", btn_btn_back2search_click);
 
-        var strURL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer"
+        app.gCQD = new MH_CreateQueryDef({}); // instantiate the class
+        var strURL = app.gCQD.GetMasterAGSMapservicURL();
         
         app.gPjrReportQuery = new MH_Query4PrjReportResults({ strURL: strURL }); // instantiate the class
 
@@ -75,7 +76,7 @@
                                                                     gridDeliverables], 
                                                                     gridDeliverablesDetail);  // this needs sync'ing with the grids below, the div's below, and the array in the MH_Query4PrjReportResults
 
-
+        document.getElementById('MapserviceLink2').href = strURL;
 
         $('#cover-up').click(function () {
             window.open("http://greatnorthernlcc.org/", "_self");
@@ -391,10 +392,6 @@
 
     <div class="page_collapsible" id="page_collapsibleMap">Map Summary<span></span></div>
     <div class="container">
-     <!--       <p>
-                MapService URL: <a href="https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer" title="rest endpoing">https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer</a>
-            </p>-->
-
         <div id="page_collapsibleMapDestination" style="position:relative" >
         </div>
     </div>
@@ -509,7 +506,7 @@
 
 <div style="clear:both; float:left; width:935px;">
     <div style="float:right;">
-            <font size="1.5" color="#2E2E2E">Design: GNLCC<br/> Development: GNLCC<br/>Data Services: <a href="https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer" target="_blank">LC MAP</a></font>
+            <font size="1.5" color="#2E2E2E">Design: GNLCC<br /> Development: GNLCC<br />Data Services: <a id="MapserviceLink2" target="_blank">LC MAP</a></font>
     </div>
     <div class="keywordtype" id="txtKeywords">
     </div>

@@ -56,9 +56,9 @@ define([
           Phase1: function () {
               app.loading = dojo.byId("loadingImg");  //loading image. id
               var customExtentAndSR = new esri.geometry.Extent(-14900000, 5200000, -11500000, 7600000, new esri.SpatialReference({ "wkid": 3857 }));
-
               app.mapPrjReport = new esri.Map("mapPrjReport", { basemap: "topo", logo: false, extent: customExtentAndSR });
-              app.strTheme1_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer/";  //Theme Layers
+              app.strTheme1_URL = app.gCQD.GetMasterAGSMapservicURL();
+
 //              dojo.connect(app.mapPrjReport, "onUpdateStart", showLoading);
               dojo.connect(app.mapPrjReport, "onUpdateEnd", hideLoading);
 

@@ -451,9 +451,9 @@ define([
           },
           errDG: function (err) {
               console.log("Failed to get stat results due to an error: ", err);
-              this.app.gPjrReportQuery.m_iarrayQueryIndex += 1
-              if (this.app.gPjrReportQuery.m_iarrayQueryIndex < this.app.gPjrReportQuery.m_arrayQuery.length) {
-                  this.app.gPjrReportQuery.SendQuery(this.app.gPjrReportQuery.m_arrayQuery, this.app.gPjrReportQuery.m_iarrayQueryIndex)
+              this.app.gPjrReportQuery.m_igridArrayIndex += 1
+              if (this.app.gPjrReportQuery.m_igridArrayIndex < this.app.gPjrReportQuery.arrayQuery4DataGrid.length) {
+                  this.app.gPjrReportQuery.SendQuery4DataGrid(this.app.gPjrReportQuery.arrayQuery4DataGrid, this.app.gPjrReportQuery.m_igridArrayIndex)
               }
           }
       }
