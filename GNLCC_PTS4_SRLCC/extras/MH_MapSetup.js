@@ -15,6 +15,53 @@ function hideLoading(error) {
     }
 }
 
+function btn_EmailLink_click(e) {
+    //strURL = document.URL;
+    strURL = window.location.href.split('?')[0]
+    strQuery = "?"
+    arrayQuery = app.gCQD.Return_InitialQueryDefs();
+    for (var i = 0; i < arrayQuery.length; i++) {  //loop through the checkboxes of the form and determin if one of the ones to click
+        strTableIndex = arrayQuery[i][0];
+        strQueryString = arrayQuery[i][1];
+        strQuery += strTableIndex + "|" + strQueryString
+        if (i != (arrayQuery.length - 1)) {
+            strQuery += "&"
+        }
+    }
+    if (app.gQuery.arryExtraPrjIDs4URLParam.length > 0) {  //add individually added project (i.e. from text search) to a query option)
+        if (document.URL.length + 1 != (strURL.length + strQuery.length)) {
+            strQuery += "&";
+        }
+        //strQuery += "PrjID2Add|ProjectID in (" + app.gQuery.arryExtraPrjIDs4URLParam.join(",") + ")";
+        strQuery += "PrjID2Add|" + app.gQuery.arryExtraPrjIDs4URLParam.join(",");
+    }
+    if (app.gQuery.m_arrayUserRemovedPrjs.length > 0) {    //remove individually removed projects (i.e. from right click-->reomve) to a query option)
+        if (document.URL.length + 1 != (strURL.length + strQuery.length)) {
+            strQuery += "&";
+        }
+        strQuery += "PrjID2Remove|" + app.gQuery.m_arrayUserRemovedPrjs.join(",");
+        //strQuery += "PrjID2Remove|ProjectID in (" + app.gQuery.m_arrayUserRemovedPrjs.join(",") + ")";
+    }
+    strURL += strQuery;
+    btn_Get_filter_link2.value = strURL;
+    btn_Get_filter_link2.style.visibility = "visible";
+    var t = e.target // find target element
+    var c = t.dataset.copytarget
+    var inp = (c ? document.querySelector(c) : null);
+    if (inp && inp.select) {            // is element selectable?
+        inp.select();                // select text
+        try {
+            document.execCommand('copy');                    // copy text
+            inp.blur();
+            t.classList.add('copied');// copied animation
+            setTimeout(function () { t.classList.remove('copied'); }, 1500);
+        }
+        catch (err) {
+            alert('please press Ctrl/Cmd+C to copy');
+        }
+    }
+}
+
 define([
   "dojo/_base/declare",
   "dojo/_base/lang",
@@ -54,10 +101,12 @@ define([
           },
           Phase1: function () {
               app.loading = dojo.byId("loadingImg");  //loading image. id
+              //var customExtentAndSR = new esri.geometry.Extent(-14900000, 5200000, -11500000, 7600000, new esri.SpatialReference({ "wkid": 3857 }));
               var customExtentAndSR = new esri.geometry.Extent(-13500000, 3500000, -11000000, 4900000, new esri.SpatialReference({ "wkid": 3857 }));
 
               app.map = new esri.Map("map", { basemap: "topo", logo: false, extent: customExtentAndSR });
-              app.strTheme1_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/5679cdaae4b0da412f4fc2ec/MapServer/";  //Theme Layers
+              app.strTheme1_URL = app.gCQD.GetMasterAGSMapservicURL();
+
               dojo.connect(app.map, "onUpdateStart", showLoading);
               dojo.connect(app.map, "onUpdateEnd", hideLoading);
 
@@ -65,23 +114,22 @@ define([
               pPTS_Projects = new FeatureLayer(app.strTheme1_URL + "0", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: 0, visible: true });
               var strBase_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/546cfb04e4b0fc7976bf1d83/MapServer/"
               var strlabelField1 = "area_names";
-//              pBase_LCC = new FeatureLayer(strBase_URL + "11", { mode: FeatureLayer.MODE_ONDEMAND, id: "LCC", outFields: [strlabelField1], visible: true });
-//              var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
-//              var pLabel1 = new TextSymbol().setColor(vGreyColor);
-//              pLabel1.font.setSize("10pt");
-//              pLabel1.font.setFamily("arial");
-//              var pLabelRenderer1 = new SimpleRenderer(pLabel1);
-//              var plabels1 = new LabelLayer({ id: "labels1" });
-//              plabels1.addFeatureLayer(pBase_LCC, pLabelRenderer1, "{" + strlabelField1 + "}");
-
-//              pHeatLayer = new FeatureLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55c00cf2e4b033ef52104158/MapServer/0", { mode: FeatureLayer.MODE_ONDEMAND, id: "GNLCC Project Heat Map", visible: false });
-//              pHeatLayer2 = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55c00cf2e4b033ef52104158/MapServer", { "opacity": 0.8, id: "GNLCCProjectHeatMap2", visible: false });
-
-//              pHumanMod = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/5527fe7fe4b026915857c948/MapServer", { "opacity": 0.5, id: "HumanMod", visible: false });
+              //pBase_LCC = new FeatureLayer(strBase_URL + "11", { mode: FeatureLayer.MODE_ONDEMAND, id: "LCC", outFields: [strlabelField1], visible: true });
+              //var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
+              //var pLabel1 = new TextSymbol().setColor(vGreyColor);
+              //pLabel1.font.setSize("10pt");
+              //pLabel1.font.setFamily("arial");
+              //var pLabelRenderer1 = new SimpleRenderer(pLabel1);
+              //var plabels1 = new LabelLayer({ id: "labels1" });
+              //plabels1.addFeatureLayer(pBase_LCC, pLabelRenderer1, "{" + strlabelField1 + "}");
+              //pHeatLayer = new FeatureLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55c00cf2e4b033ef52104158/MapServer/0", { mode: FeatureLayer.MODE_ONDEMAND, id: "GNLCC Project Heat Map", visible: false });
+              //pHeatLayer2 = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55c00cf2e4b033ef52104158/MapServer", { "opacity": 0.8, id: "GNLCCProjectHeatMap2", visible: false });
+              //pHumanMod = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/5527fe7fe4b026915857c948/MapServer", { "opacity": 0.5, id: "HumanMod", visible: false });
 
               pRefugesLayer = new FeatureLayer(strBase_URL + "2", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "USFWS Refuges", visible: false });
               pUSNativeLayer = new FeatureLayer("http://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_TribalIndianLands_01/MapServer/0", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "US Native Lands", visible: false });
-              pNPSLayer = new FeatureLayer(strBase_URL + "6", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "US National Park Service", visible: false });
+              //pCANNationalParks = new ArcGISDynamicMapServiceLayer("http://maps.natureserve.org/landscope1/rest/services/CAN/PRO_CAN_NationalParks/MapServer", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "Can National Parks", visible: false });
+              pNPSLayer = new ArcGISDynamicMapServiceLayer("https://mapservices.nps.gov/arcgis/rest/services/LandResourcesDivisionTractAndBoundaryService/MapServer", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "US National Park Service", visible: false });
               pUSFSLayer = new ArcGISDynamicMapServiceLayer("http://apps.fs.fed.us/arcx/rest/services/RDW_AdminAndOwnership/PublicPrivateForestOwnership_CONUS/MapServer", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: "US Public/Private Forest Ownership", visible: false });
               pBLMLayer = new ArcGISDynamicMapServiceLayer("http://www.geocommunicator.gov/ArcGIS/rest/services/SMA/MapServer", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "BLM Land", visible: false });
 
@@ -95,33 +143,34 @@ define([
               var plabels2 = new LabelLayer({ id: "labels2" });
               plabels2.addFeatureLayer(pLCCNetworkLayer, pLabelRenderer2, "{" + strlabelField2 + "}");
 
-//              pCascadiaPF = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba6bfe4b08400b1fddd17/MapServer", { "opacity": 0.9, id: "Cascadia", visible: false });
-//              pColumbiaPF = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba71be4b08400b1fddd1a/MapServer", { "opacity": 0.9, id: "Columbia", visible: false });
-//              pRMPF = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba7cbe4b08400b1fddd22/MapServer", { "opacity": 0.9, id: "Rocky Mountain", visible: false });
+              //pCascadiaPF = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba6bfe4b08400b1fddd17/MapServer", { "opacity": 0.9, id: "Cascadia", visible: false });
+              //pColumbiaPF = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba71be4b08400b1fddd1a/MapServer", { "opacity": 0.9, id: "Columbia", visible: false });
+              //pRMPF = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba7cbe4b08400b1fddd22/MapServer", { "opacity": 0.9, id: "Rocky Mountain", visible: false });
               //pSSPF = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba817e4b08400b1fddd28/MapServer", { "opacity": 0.9, id: "Sage Steppe", visible: false });
-//              pPartnershipsAreas = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba773e4b08400b1fddd1f/MapServer", { "opacity": 0.9, id: "PandE_Areas", visible: false });
-
-//              arrayLayers = [pCascadiaPF, pColumbiaPF, pRMPF, pSSPF, pPartnershipsAreas, pPTS_Projects, plabels1, pHeatLayer2, pHeatLayer, pBase_LCC, pRefugesLayer,
-//                                pUSNativeLayer, pNPSLayer, pUSFSLayer, pBLMLayer, pLCCNetworkLayer, plabels2, pHumanMod];
+              //pPartnershipsAreas = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55cba773e4b08400b1fddd1f/MapServer", { "opacity": 0.9, id: "PandE_Areas", visible: false });
+              
+              //arrayLayers = [pCascadiaPF, pColumbiaPF, pRMPF, pSSPF, pPartnershipsAreas, pPTS_Projects, plabels1, pHeatLayer2, pHeatLayer, pBase_LCC, pRefugesLayer,
+              //                  pUSNativeLayer, pCANNationalParks, pNPSLayer, pUSFSLayer, pBLMLayer, pLCCNetworkLayer, plabels2, pHumanMod];
 
               arrayLayers = [pPTS_Projects, pRefugesLayer, pUSNativeLayer, pNPSLayer, pUSFSLayer, pBLMLayer, pLCCNetworkLayer, plabels2];
+
               var cbxLayers = [];
 
-//              cbxLayers.push({ layer: pHeatLayer, title: 'GNLCC Project Heat Map' });
-//              cbxLayers.push({ layer: pHumanMod, title: 'Human Modification Index' });
+              //cbxLayers.push({ layer: pHeatLayer, title: 'GNLCC Project Heat Map' });
+              //cbxLayers.push({ layer: pHumanMod, title: 'Human Modification Index' });
               cbxLayers.push({ layer: pLCCNetworkLayer, title: 'LCC Network Areas' });
               cbxLayers.push({ layer: pRefugesLayer, title: 'USFWS Refuges' });
               cbxLayers.push({ layer: pUSNativeLayer, title: 'US Indian Lands Boundaries' });
+              //cbxLayers.push({ layer: pCANNationalParks, title: 'Canada National Parks' });
               cbxLayers.push({ layer: pNPSLayer, title: 'US National Park Service' });
               cbxLayers.push({ layer: pUSFSLayer, title: 'US Public/Private Forest Ownership' });
               cbxLayers.push({ layer: pBLMLayer, title: 'BLM Land' });
-              
-//              cbxLayers.push({ layer: pCascadiaPF, title: 'Cascadia PF (General Area)' });
-//              cbxLayers.push({ layer: pColumbiaPF, title: 'Columbia Basin PF (General Area)' });
-//              cbxLayers.push({ layer: pRMPF, title: 'Rocky Mountain PF (General Area)' });
+              //cbxLayers.push({ layer: pCascadiaPF, title: 'Cascadia PF (General Area)' });
+              //cbxLayers.push({ layer: pColumbiaPF, title: 'Columbia Basin PF (General Area)' });
+              //cbxLayers.push({ layer: pRMPF, title: 'Rocky Mountain PF (General Area)' });
               //cbxLayers.push({ layer: pSSPF, title: 'Sage Steppe PF (General Area)' });
-//              cbxLayers.push({ layer: pPartnershipsAreas, title: 'Partner and Ecosystem Areas of Interest' });
-//              cbxLayers.push({ layer: pBase_LCC, title: 'SRLCC Boundary' });
+              //cbxLayers.push({ layer: pPartnershipsAreas, title: 'Partner and Ecosystem Areas of Interest' });
+              //cbxLayers.push({ layer: pBase_LCC, title: 'GNLCC Boundary' });
               cbxLayers.push({ layer: pPTS_Projects, title: 'Projects' });
                             
               dojo.connect(app.map, 'onLayersAddResult', function (results) {
@@ -167,12 +216,6 @@ define([
                   }
               });
 
-
-
-
-
-
-
           },
 
 
@@ -185,9 +228,7 @@ define([
               app.pEvt = e;
               var pPTS_Identify_Results = app.pPTS_Identify.executeQueries(e, "", 0, 0, 0);
           },
-
-
-
+          
           QueryZoom: function (strQuery) {
               pPTS_Projects.setDefinitionExpression(strQuery);
           },
@@ -228,13 +269,8 @@ define([
                   });
               }
 
+              document.getElementById("btn_Get_filter_link1").addEventListener('click', btn_EmailLink_click);
 
-              //              var pGeocoder = new Geocoder({ autoComplete: true, arcgisGeocoder: { placeholder: "Find a place" }, map: app.map }, dojo.byId('search'));
-              //              pGeocoder.startup();
-
-
-
-              //              pPTS_Projects = new FeatureLayer(app.strTheme1_URL + "0", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: 0, visible: true });
               $('#loc').autocomplete({
                   source: function (request, response) {
                       $.ajax({

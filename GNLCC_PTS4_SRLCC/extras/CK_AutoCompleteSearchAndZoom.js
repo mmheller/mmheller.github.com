@@ -59,11 +59,11 @@ define([
                             testVals[tempValue] = true;
                             var CheckedValue = tempValue;
                             arrayValues.push(CheckedValue); //values.push({ name: zone });//values.push("'" + strValue + "'"); //values.push({ name: zone });
+                            this.app.gQuery.arryExtraPrjIDs4URLParam.push(CheckedValue);
                         }
                     });
                     this.app.gQuery.arrayProjectIDs = arrayValues;
                     this.app.gQuery.m_iarrayQueryIndex += 1; //increment the index value of the query array by 1
-
 
                     if (app.gQuery.strQuery == null) {
                         app.gQuery.strQuery = "ProjectID in (" + arrayValues.join(",") + ")";

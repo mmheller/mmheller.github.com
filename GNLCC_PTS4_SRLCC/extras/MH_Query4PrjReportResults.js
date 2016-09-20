@@ -101,15 +101,20 @@ define([
               arrayQuery.push(["5", strQuery, "amount", "sum", "dest_orgname", "divFundingDispersal", '<b>Funding Recipient:</b> \n<br>{0} ', "show both"]);
               arrayQuery.push(["7", strQuery, "InKindamount", "sum", "orgname", "divInKindMatch", '<b>In-Kind/Match Contributions:</b> \n<br>{0} ', "show both"]);
               arrayQuery.push(["4", strQuery, "EcotypicAreaName", "count", "EcotypicAreaName", "divEcotypicArea", '{0}', ""]);
-//              arrayQuery.push(["8", strQuery, "GoalName", "count", "GoalName", "divGoals", '{0}', ""]);
-//              arrayQuery.push(["11", strQuery, "Stressor", "count", "Stressor", "divStressors", '{0}', ""]);
+              //arrayQuery.push(["8", strQuery, "GoalName", "count", "GoalName", "divGoals", '{0}', ""]);
+              //arrayQuery.push(["11", strQuery, "Stressor", "count", "Stressor", "divStressors", '{0}', ""]);
               arrayQuery.push(["0", strQuery, "Comments", "count", "Comments", "divLCMAPLink", '<a href="{0}">LC MAP Project Storage Workspace</a>  ', ""]);
               arrayQuery.push(["0", strQuery, "PrjStatus", "count", "PrjStatus", "divStatus", '{0}', ""]);
+
+              arrayQuery.push(["0", strQuery, "Subject_Keywords", "count", "Subject_Keywords", "txtKeywords", 'Subject Keywords: {0}', ""]);
+              arrayQuery.push(["0", strQuery, "Location_Keywords", "count", "Location_Keywords", "txtLocationKeywords", 'Location Keywords: {0}', ""]);
+
               //              arrayQuery.push(["1", strQuery, "CommonName", "count", "CommonName", "divConservationTargets", 'Conservation Target(s): \n<br> {0} ', ""]);
               arrayQuery4DataGrid = [];
               arrayQuery4DataGrid.push(["9", strQuery + " and organization = 0", ["PersonName", "Contact_Type", "GroupName", "prj_priority", "OBJECTID", "roletype"], "gridDivContacts"]);
               arrayQuery4DataGrid.push(["9", strQuery + " and organization <> 0", ["OBJECTID", "GroupName", "Contact_Type"], "gridDivContactOrgsOnly"]);
               arrayQuery4DataGrid.push(["3", strQuery + " and DelivType in ('Statement of Work','Proposal', 'Data Management Plan')", ["OBJECTID", "Fund_Year", "deliverable_title", "uri", "DelivType"], "gridDivProposals"]);
+              //arrayQuery4DataGrid.push(["3", strQuery + " and quicklink = 1", ["OBJECTID", "deliverable_title", "uri", "deliverableid", "DelivType"], "gridDivQuicklinks"]);
               arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID = 3", ["OBJECTID", "CommonName", "ESA_Status", "TierName", "PrimaryLCCTargetType"], "gridDivConservationTargetsSPP"]);
               arrayQuery4DataGrid.push(["1", strQuery + " and CTTYPE_ID <> 3", ["OBJECTID", "CommonName", "ConsvTargetTypeName", "PrimaryLCCTargetType"], "gridDivConservationTargetsOther"]);
 
@@ -126,7 +131,7 @@ define([
               this.m_iarrayQueryIndex = iarrayQueryIndex;
               pTblindexAndQuery = arrayQuery[iarrayQueryIndex];
 
-              if (pTblindexAndQuery[5] == "divProposals") {
+              if (iarrayQueryIndex == "divProposals") {
                   var temp2 = "";
               }
 
@@ -149,6 +154,7 @@ define([
 
               if (strGroupByField != "") {
                   pQuery.groupByFieldsForStatistics = [strGroupByField];
+                  pQuery.orderByFields = [strGroupByField + " DESC"];
               }
 
 
@@ -171,10 +177,19 @@ define([
               pQuery.where = strQuery;
               pQuery.outFields = arrayFields;
 
+              //if (iarrayQueryIndex == 3) {
+              //    var temp2 = "";
+              //}
+
               return pQueryTask.execute(pQuery, this.returnEvents4DataGrid, this.errDG);
           },
 
           returnEvents4DataGrid: function (results) {
+
+              //if (this.app.gPjrReportQuery.m_igridArrayIndex == 3) {
+              //    var temp2 = "";
+              //}
+
               pTblindexAndQuery = this.app.gPjrReportQuery.m_arrayQuery4DataGrid[this.app.gPjrReportQuery.m_igridArrayIndex];
               var strHTMLElementID = pTblindexAndQuery[3];
 
@@ -208,7 +223,7 @@ define([
                   var data = { identifier: "OBJECTID", items: items };
 
                   if ((strHTMLElementID == "gridDivDeliverables") | (strHTMLElementID == "gridDivDeliverablesDetail") |
-                            (strHTMLElementID == "gridDivProposals") | (strHTMLElementID == "gridDivConservationTargetsOther") | (strHTMLElementID == "gridDivConservationTargetsSPP")) {
+                            (strHTMLElementID == "gridDivQuicklinks") | (strHTMLElementID == "gridDivProposals") | (strHTMLElementID == "gridDivConservationTargetsOther") | (strHTMLElementID == "gridDivConservationTargetsSPP")) {
                       var pItems = data["items"]
                       for (var key in pItems) {
                           if (pItems.hasOwnProperty(key)) {
@@ -220,7 +235,7 @@ define([
                                           var pValue = formatDate(pItem[keyField]);
                                           data["items"][key][keyField] = pValue;
                                       }
-                                      //https://www.sciencebase.gov/arcgis/rest/services/Catalog/5679cdaae4b0da412f4fc2ec/MapServer/2/query?where=Deliverable_Received+%3D+1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=projectid%2C+deliverable_title%2C+receiveddate%2C+Deliverable_Received+&returnGeometry=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&f=html
+                                      //https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer/2/query?where=Deliverable_Received+%3D+1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=projectid%2C+deliverable_title%2C+receiveddate%2C+Deliverable_Received+&returnGeometry=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&f=html
                                       if ((keyField == "Deliverable_Received") & (pGrid.id == "gridDeliverables")) {
                                           pValue = pItem.Deliverable_Received;
                                           if (pValue == 1) {
@@ -258,6 +273,12 @@ define([
                                       if (pGrid.id == "gridProposals") {
                                           if (keyField == "Fund_Year") {
                                               pValue = '<font color="blue">FY{0} {1}</font>'.format(pItem.Fund_Year, pItem.DelivType);
+                                              data["items"][key][keyField] = pValue;
+                                          }
+                                      }
+                                      if (pGrid.id == "gridQuickLinks") {
+                                          if (keyField == "deliverable_title") {
+                                              pValue = '<font color="blue">{0}</font>'.format(pItem.deliverable_title);
                                               data["items"][key][keyField] = pValue;
                                           }
                                       }
@@ -439,9 +460,9 @@ define([
           },
           errDG: function (err) {
               console.log("Failed to get stat results due to an error: ", err);
-              this.app.gPjrReportQuery.m_iarrayQueryIndex += 1
-              if (this.app.gPjrReportQuery.m_iarrayQueryIndex < this.app.gPjrReportQuery.m_arrayQuery.length) {
-                  this.app.gPjrReportQuery.SendQuery(this.app.gPjrReportQuery.m_arrayQuery, this.app.gPjrReportQuery.m_iarrayQueryIndex)
+              this.app.gPjrReportQuery.m_igridArrayIndex += 1
+              if (this.app.gPjrReportQuery.m_igridArrayIndex < this.app.gPjrReportQuery.arrayQuery4DataGrid.length) {
+                  this.app.gPjrReportQuery.SendQuery4DataGrid(this.app.gPjrReportQuery.arrayQuery4DataGrid, this.app.gPjrReportQuery.m_igridArrayIndex)
               }
           }
       }

@@ -7,6 +7,7 @@ function onRowClickHandler(evt) {
     //window.open(strURL, "_self");
 }
 
+
 define([
   "dojo/_base/declare",
   "dojo/_base/lang",
@@ -37,10 +38,42 @@ define([
           m_EventAdded2Grid: false,
           strQuery: null,
           m_arrayUserRemovedPrjs: [],
-
+          arryExtraPrjIDs4URLParam: [],
+          arryExtraPrjIDs4URLParam2Remove: [],
+          
           constructor: function (options) {
               this.strURL = options.strURL || "www.cnn.com"; // default AGS REST URL
+              //this.arrayProjectIDs = options.strURL || [];
+              this.arryExtraPrjIDs4URLParam = options.arryExtraPrjIDs4URLParam || []
+              this.m_arrayUserRemovedPrjs = options.m_arrayUserRemovedPrjs || [];
+
           },
+
+          SendQuery2: function (arrayQuery, iarrayQueryIndex, pGrid) {
+            this.m_grid = pGrid;
+            this.m_arrayQuery = arrayQuery;
+            this.m_iarrayQueryIndex = iarrayQueryIndex;
+            if (iarrayQueryIndex == 0) { 
+                this.arrayProjectIDs = [];  //clear out the array if index is zero
+            }
+            pTblindexAndQuery = arrayQuery[iarrayQueryIndex];
+            var iIndex = pTblindexAndQuery[0];
+            var strQuery = pTblindexAndQuery[1];
+            var queryTask = new esri.tasks.QueryTask(this.strURL + "/" + iIndex.toString() + "?returnDistinctValues=true");
+            var pQuery = new Query();
+            pQuery.returnGeometry = false;
+            pQuery.outFields = ["ProjectID"];
+            //if (this.arrayProjectIDs.length > 0) {  !!!!!!!!!!!!!don't do this when handleing url parameters and the 1st of queries
+            //    strQuery = "(" + strQuery + ") and (ProjectID in (" + this.arrayProjectIDs.join(",") + "))";
+            //}
+            if (this.m_arrayUserRemovedPrjs.length > 0) {  //if user's right clicked and removed a row then don't include
+                strQuery += " and (not (ProjectID in (" + this.m_arrayUserRemovedPrjs.join(",") + ")))";
+            }
+
+            pQuery.where = strQuery;
+            queryTask.execute(pQuery, this.SendQueryResults, this.err);
+          },
+
           SendQuery: function (arrayQuery, iarrayQueryIndex) {
               if (arrayQuery.length > 0) {
                   this.m_arrayQuery = arrayQuery;
@@ -49,7 +82,6 @@ define([
                   if (iarrayQueryIndex == 0) {
                       this.arrayProjectIDs = [];  //clear out the array if index is zero
                   }
-
                   pTblindexAndQuery = arrayQuery[iarrayQueryIndex];
                   var iIndex = pTblindexAndQuery[0];
                   var strQuery = pTblindexAndQuery[1];
@@ -61,21 +93,13 @@ define([
                   if (this.arrayProjectIDs.length > 0) {
                       strQuery = "(" + strQuery + ") and (ProjectID in (" + this.arrayProjectIDs.join(",") + "))";
                   }
-                  //                  if (this.arrayProjectIDs.length > 25) {
-                  //                      strQuery2ndTry4Shorter = "(" + strQuery + ") and (ProjectID in (" + this.arrayProjectIDs.join(",") + "))";
-                  //                  }
-
-
                   if (this.m_arrayUserRemovedPrjs.length > 0) {  //if user's right clicked and removed a row then don't include
                       strQuery += " and (not (ProjectID in (" + this.m_arrayUserRemovedPrjs.join(",") + ")))";
                   }
-
                   pQuery.where = strQuery;
                   queryTask.execute(pQuery, this.SendQueryResults, this.err);
               } else {  // if not query filters query all the values
-
                   this.SendQuery4ProjectResults("OBJECTID > 0", this.m_grid);
-                  //                  this.m_grid.on("rowclick", onRowClickHandler);
                   var tmp = "";
               }
           },
@@ -102,17 +126,11 @@ define([
                       this.app.gQuery.arrayProjectIDs = arrayValues;
                       this.app.gQuery.m_iarrayQueryIndex += 1; //increment the index value of the query array by 1
 
-
-
-//                      if (arrayValues.length < 15) {
+                      if (this.app.gQuery.arryExtraPrjIDs4URLParam.length > 0) {   //////if id's passed via url then add for the query
+                          arrayValues = arrayValues.concat(this.app.gQuery.arryExtraPrjIDs4URLParam)
+                      }
                       this.app.gQuery.strQuery = "ProjectID in (" + arrayValues.join(",") + ")";  //!!!!!!!!!!!!!!!!!!this gets used for the summary and the gis layer
-//                      } else {
-//                          this.app.gQuery.strQuery = returnRangeStringQuery("ProjectID", arrayValues);
-//                      }
-
-//                      alert(this.app.gQuery.strQuery);
-
-                      if (this.app.gQuery.m_iarrayQueryIndex >= this.app.gQuery.m_arrayQuery.length) {
+                      if (this.app.gQuery.m_iarrayQueryIndex >= this.app.gQuery.m_arrayQuery.length) {  //final query for projects
                           this.app.gQuery.ClearDivs();
                           this.app.gQuery.SendQuery4ProjectResults(this.app.gQuery.strQuery, this.app.gQuery.m_grid);  //reset the entire search page
 
@@ -129,6 +147,7 @@ define([
           ClearDivs: function () {
               document.getElementById('dTotalAllocatedbyLCC').innerHTML = "";
               document.getElementById('dTotalAllocatedbyLCCbyYear').innerHTML = "";
+              document.getElementById('dTotalInKindMatchbyYear').innerHTML = "";
               document.getElementById('dNumberOfFundingRecipients').innerHTML = "";
               document.getElementById('dInKindFundingTypes').innerHTML = "";
               document.getElementById('dFundRecipientTypes').innerHTML = "";
@@ -138,8 +157,8 @@ define([
               document.getElementById('dNumberofInKindOrgs').innerHTML = "";
               document.getElementById('dTotalNumberofConsvTargets').innerHTML = "";
               document.getElementById('dEcotypicAreas').innerHTML = "";
-//              document.getElementById('dStressors').innerHTML = "";
-//              document.getElementById('dGoals').innerHTML = "";
+              //document.getElementById('dStressors').innerHTML = "";
+              //document.getElementById('dGoals').innerHTML = "";
               document.getElementById('dNumberofDeliverables').innerHTML = "";
               document.getElementById('dDeliverabletype').innerHTML = "";
               document.getElementById('dPrjStatus').innerHTML = "";
@@ -149,9 +168,6 @@ define([
           SendQuery4ProjectResults: function (strQuery, pGrid) {
               this.ClearDivs();
               document.getElementById("ImgResultsLoading").style.visibility = "visible";
-              //              if (app.pMapSup != undefined) {
-              //                  app.pMapSup.QueryZoom(strQuery);
-              //              }
               this.m_grid = pGrid
               var queryTask = new esri.tasks.QueryTask(this.strURL + "/0");
               var pQuery = new Query();
