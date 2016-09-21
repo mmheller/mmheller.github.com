@@ -556,21 +556,21 @@ define([
                                                             'section6content', this.app.gSup.iTableIndex.toString() + "-DestinationType");
                       break;
 
-                  case "DestinationType":
-                      this.app.gSup.iTableIndex = 8;
-                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
-                                                                        "GoalName", "GoalName",
-                                                            'section7content', this.app.gSup.iTableIndex.toString() + "-GoalName");
-                      break;
-                  //case "GoalName":
-                  //    this.app.gSup.iTableIndex = 2;
-                  //    this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex] + " and (not (NationalLCCDelivType in ('Contractual Document')))",
-                  //                                                      "NationalLCCDelivType", "NationalLCCDelivType",
-                  //                                          'section8content', this.app.gSup.iTableIndex.toString() + "-NationalLCCDelivType");
+                  //case "DestinationType":
+                  //    this.app.gSup.iTableIndex = 8;
+                  //    this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
+                  //                                                      "GoalName", "GoalName",
+                  //                                          'section7content', this.app.gSup.iTableIndex.toString() + "-GoalName");
                   //    break;
+                  case "DestinationType":
+                      this.app.gSup.iTableIndex = 2;
+                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex] + " and (not (NationalLCCDelivType in ('Contractual Document')))",
+                                                                        "NationalLCCDelivType", "NationalLCCDelivType",
+                                                            'section8content', this.app.gSup.iTableIndex.toString() + "-NationalLCCDelivType");
+                      break;
 
 
-                  case "GoalName":
+                  case "NationalLCCDelivType":
                       this.app.gSup.iTableIndex = 7;
                       this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
                                                                         "orgname", "orgname",
@@ -595,14 +595,14 @@ define([
                                                             'section12content', this.app.gSup.iTableIndex.toString() + "-PrjStatus");
                       break;
 
+                  //case "PrjStatus":
+                  //    this.app.gSup.iTableIndex = 12;
+                  //    this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex] +
+                  //                                                  " and (not (NAME in ('Montana','California','Nebraska','South Dakota','Alberta','British Columbia', 'North Dakota', 'Oregon', 'Saskatchewan', 'Washington')))",
+                  //                                                      "NAME", "NAME",
+                  //                                          'section13content', this.app.gSup.iTableIndex.toString() + "-Name");
+                  //    break;
                   case "PrjStatus":
-                      this.app.gSup.iTableIndex = 12;
-                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex] +
-                                                                    " and (not (NAME in ('Arizona','California','Colorado','Nebraska','Nevada','New Mexico','North Dakota','Saskatchewan','South Dakota','Utah')))",
-                                                                        "NAME", "NAME",
-                                                            'section13content', this.app.gSup.iTableIndex.toString() + "-Name");
-                      break;
-                  case "NAME":
                       this.app.gSup.iTableIndex = 0;
                       //this.app.gSup.SetRangeCheckboxes(["$0", "$1 - $12,499", "$12,500 - $24,999", "$25,000 - $49,999", "$50,000 - $99,999", "$100,000 - $199,999", "$200,000 - $499,999", "$500,000 and up"],
                       //                                      'section14content', this.app.gSup.iTableIndex.toString() + "-Total__Funding_by_Your_LCC", "Total__Funding_by_Your_LCC",
