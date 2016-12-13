@@ -133,7 +133,7 @@ define([
               pCANNationalParks = new ArcGISDynamicMapServiceLayer("http://maps.natureserve.org/landscope1/rest/services/CAN/PRO_CAN_NationalParks/MapServer", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "Can National Parks", visible: false });
 
               pNPSLayer = new ArcGISDynamicMapServiceLayer("https://mapservices.nps.gov/arcgis/rest/services/LandResourcesDivisionTractAndBoundaryService/MapServer", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "US National Park Service", visible: false });
-              pUSFSLayer = new ArcGISDynamicMapServiceLayer("http://apps.fs.fed.us/arcx/rest/services/RDW_AdminAndOwnership/PublicPrivateForestOwnership_CONUS/MapServer", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: "US Public/Private Forest Ownership", visible: false });
+              pUSFSLayer = new ArcGISDynamicMapServiceLayer("https://apps.fs.fed.us/arcx/rest/services/EDW/EDW_BasicOwnership_01/MapServer", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: "US Forest Service Land (Zoom in to View)", visible: false });
               pBLMLayer = new ArcGISDynamicMapServiceLayer("http://www.geocommunicator.gov/ArcGIS/rest/services/SMA/MapServer", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "BLM Land", visible: false });
 
               var strlabelField2 = "area_names";
@@ -167,7 +167,7 @@ define([
               cbxLayers.push({ layer: pUSNativeLayer, title: 'US Indian Lands Boundaries' });
               cbxLayers.push({ layer: pCANNationalParks, title: 'Canada National Parks' });
               cbxLayers.push({ layer: pNPSLayer, title: 'US National Park Service' });
-              cbxLayers.push({ layer: pUSFSLayer, title: 'US Public/Private Forest Ownership' });
+              cbxLayers.push({ layer: pUSFSLayer, title: 'US Forest Service Land (Zoom in to View)' });
               cbxLayers.push({ layer: pBLMLayer, title: 'BLM Land' });
               
               cbxLayers.push({ layer: pCascadiaPF, title: 'Cascadia PF (General Area)' });
