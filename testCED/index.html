@@ -1,0 +1,641 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Created By:  Matt Heller, Great Northern Landscape Conservation Cooperative / U.S. Fish and Wildlife Service
+Date:        Oct 2014-->
+<!--{% load staticfiles %}-->
+
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+    <title>Greater Sage Grouse: Conservation Efforts - Draft</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/dijit/themes//tundra/tundra.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/esri/css/esri.css" />
+
+  <!--  <link rel="stylesheet" href="https://js.arcgis.com/3.12/dijit/themes//tundra/tundra.css"/>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.12/esri/css/esri.css"/>-->
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+    <link rel="stylesheet" type="text/css" href="Styles/panel.css" />
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/images/grsgmap/Styles/panel.css' %}"/>-->
+    <style>
+        html, body {
+            height: 98%;
+            width: 99.95%;
+            margin: 0.00005%;
+            background-color: rgb(127, 105, 127);
+        }
+    </style>
+    <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
+    <!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/images/grsgmap/extras' %}"} };</script>-->
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>
+    <!--<script type="text/javascript" src="https://js.arcgis.com/3.12/"></script>-->
+    <script src="https://raw.githubusercontent.com/Chaussette/esri.symbol.MultiLineTextSymbol/master/esri.symbol.MultiLineTextSymbol.js"></script>
+
+
+<script type="text/javascript">
+    dojo.require("dijit.layout.TabContainer");
+    dojo.require("dijit.layout.ContentPane");
+    var app = {};
+    require([
+        "esri/map", "esri/layers/FeatureLayer", "esri/dijit/Legend", "esri/urlUtils",
+        "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on", "extras/PS_MeasSiteSearch4Definition", "extras/PS_ReturnQuerySt",
+        "dijit/form/CheckBox", "extras/PS_MeasSiteSearch_SetVisableQueryDef", "extras/MH_Zoom2FeatureLayer", "extras/MH_Setup",
+        "extras/MH_FeatureCount", "extras/MH_Query4Summary",
+        "esri/tasks/RelationshipQuery", "esri/symbols/SimpleMarkerSymbol", "dojo/_base/Color", "esri/dijit/Scalebar",
+        "esri/dijit/Geocoder", "extras/PS_Identify", "extras/CK_AutoCompleteSearchAndZoom", "extras/PS_PopUniqueQueryInterfaceValues",
+        "esri/geometry/webMercatorUtils", "esri/dijit/BasemapGallery", "dojo/mouse", "dojo/query", "esri/tasks/FindTask", "esri/tasks/FindParameters",
+        "esri/arcgis/utils",
+        "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
+        "dijit/layout/AccordionContainer", "dojo/domReady!"
+        ],
+
+    function (Map, FeatureLayer, Legend, urlUtils,
+                arrayUtils, parser, esriConfig, dom, domClass, on, PS_MeasSiteSearch4Definition, PS_ReturnQuerySt, CheckBox,
+                PS_MeasSiteSearch_SetVisableQueryDef, MH_Zoom2FeatureLayer, MH_Setup, MH_FeatureCount, MH_Query4Summary,
+                RelationshipQuery, SimpleMarkerSymbol,
+                Color, Scalebar, Geocoder, PS_Identify, CK_AutoCompleteSearchAndZoom, PS_PopUniqueQueryInterfaceValues,
+                webMercatorUtils, BasemapGallery, mouse, query, FindTask, FindParameters) {
+
+        document.getElementById("txtQueryResults").innerHTML = "-";
+        document.getElementById("dTotalProjects").innerHTML = "-";
+
+        document.getElementById("ImgResultsLoading").style.visibility = "visible";
+        var pSup = new MH_Setup({}); // instantiate the class
+        pSup.Phase1();
+
+        var tokens = getTokens
+        var blnShoReportButton = getTokens()['RButton'];
+        if (blnShoReportButton) { document.getElementById("btn_TextSummary").style.display = "inline"; }
+
+        var blnnoBannter = getTokens()['noBanner'];
+        if (typeof blnnoBannter != 'undefined') {
+            document.getElementById("panelMain").style.display = "none";
+            document.getElementById("theImage1").style.visibility = "hidden";
+            document.getElementById("theImage2").style.visibility = "hidden";
+            document.getElementById("theImage3").style.visibility = "hidden";
+            document.getElementById("theImage4").style.visibility = "hidden";
+            document.getElementById("panelBasemaps").style.top = "15px";
+        }
+
+        var strA_TypeAct = getTokens()['TA'];
+        var strA_entry_type = getTokens()['ET'];
+        var strA_activity = getTokens()['ACT'];
+        var strA_Subactivity = getTokens()['SACT'];
+        var strA_implementing_party = getTokens()['IP'];
+        var strA_office = getTokens()['FO'];
+        var strA_State = getTokens()['ST'];
+        var strA_POPArea = getTokens()['POP'];
+        var strA_Managementunit = getTokens()['MU'];
+
+        //else { document.getElementById("panelMain").style.display = "block"; }
+        parser.parse();
+        app.SIDs = null;
+        app.PSQ = null;
+        app.PSQS = null;
+        app.PS_Stat = null;
+        app.pSetQS = null;
+
+        app.arrayLayers = pSup.Phase2();
+        var CED_PP_poly = arrayLayers[4];
+        var CED_PP_line = arrayLayers[5];
+        var CED_PP_point = arrayLayers[6];
+
+        var CED_PP_polyTPK = arrayLayers[7];
+        var CED_PP_lineTPK = arrayLayers[8];
+        var CED_PP_pointTPK = arrayLayers[9];
+        //var layerTPK = arrayLayers[7];
+
+        on(dom.byId("btn_clear"), "click", btn_clear_click);
+        on(dom.byId("btn_TextSummary"), "click", btn_TextSummary_click);
+        on(dom.byId("ddlMatrix"), "change", ddlMatrix_Change);
+        on(dom.byId("ddlEntry"), "change", ddlMatrix_Change);
+        on(dom.byId("ddlActivity"), "change", ddlMatrix_Change);
+        on(dom.byId("ddlImpParty"), "change", ddlMatrix_Change);
+        on(dom.byId("ddlOffice"), "change", ddlMatrix_Change);
+        on(dom.byId("ddlState"), "change", ddlMatrix_Change);
+        on(dom.byId("ddlManagUnit"), "change", ddlMatrix_Change);
+        on(dom.byId("ddlPopArea"), "change", ddlMatrix_Change);
+
+        dojo.connect(app.map, "onClick", executeIdeintifyQueries);
+        pSup.Phase3(CED_PP_point, CED_PP_line, CED_PP_poly);
+
+        app.iNonSpatialTableIndex = 0;  //these 3 lines populate the list values
+        app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, strQuery1: "objectid > 0", divTagSource: null });
+
+        app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
+        app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"));
+
+        if (app.map.loaded) {
+            mapLoaded();
+        } else {
+            app.map.on("load", function () { mapLoaded(); });
+        }
+
+
+        app.pFC = new MH_FeatureCount({}); // instantiate the zoom class
+
+        //https://conservationefforts.org/grsgmap/?IP=11,14,16&TA=3&ST=183,985,1992,4512,9901,12665,15561,19432
+        if ((strA_TypeAct) || (strA_entry_type) || (strA_activity) || (strA_Subactivity) || (strA_implementing_party) || (strA_State) || (strA_POPArea) || (strA_Managementunit || strA_office)) {
+            RunQueryArgs(strA_TypeAct, strA_entry_type, strA_activity, strA_Subactivity, strA_implementing_party, strA_State, strA_POPArea, strA_Managementunit, strA_office);
+        } else {
+            document.getElementById("btn_TextSummary").disabled = true;
+            app.pFC.GetCountOfFCDef_ShowText(CED_PP_point.getDefinitionExpression(), CED_PP_point.url, "txtQueryResults", "count", "project_id", "");
+            //app.pFC.GetCountOfFCDef_ShowText(CED_PP_point, "txtQueryResults", "count", "project_id");
+        }
+
+        app.gQuerySummary = new MH_Query4Summary({ strURL: app.strTheme1_URL }); // instantiate the class      
+
+        function calcOffset() {
+            //            return (app.map.extent.getWidth() / app.map.width);
+            return 200000
+        }
+
+        function mapLoaded() {        // map loaded//            // Map is ready
+            app.map.on("mouse-move", showCoordinates); //after map loads, connect to listen to mouse move & drag events
+            app.map.on("mouse-drag", showCoordinates);
+            //query(".esriSimpleSlider").style("backgroundColor", "#C8C8C8");
+            app.basemapGallery = new BasemapGallery({ showArcGISBasemaps: true, map: app.map }, "basemapGallery");
+            app.basemapGallery.startup();
+            app.basemapGallery.on("selection-change", function () { domClass.remove("panelBasemaps", "panelBasemapsOn"); });
+            app.basemapGallery.on("error", function (msg) { console.log("basemap gallery error:  ", msg); });
+            //SetupSearchAutoComplete("Project_Name");
+        }
+
+        function showCoordinates(evt) {
+            var mp = webMercatorUtils.webMercatorToGeographic(evt.mapPoint);  //the map is in web mercator but display coordinates in geographic (lat, long)
+            dom.byId("txt_xyCoords").innerHTML = "Latitude:" + mp.x.toFixed(4) + ", Longitude:" + mp.y.toFixed(4);  //display mouse coordinates
+        }
+
+        function getTokens() {
+            var tokens = [];
+            var query = location.search;
+            query = query.slice(1);
+            query = query.split('&');
+            $.each(query, function (i, value) {
+                var token = value.split('=');
+                var key = decodeURIComponent(token[0]);
+                var data = decodeURIComponent(token[1]);
+                tokens[key] = data;
+            });
+            return tokens;
+        }
+
+        function executeIdeintifyQueries(e) {
+            app.map.graphics.clear();
+            var strMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].text;  //get dropdown menu selection
+            var strManagUnit = document.getElementById("ddlManagUnit").options[document.getElementById("ddlManagUnit").selectedIndex].value;  //get dropdown menu selection
+            app.PSQS = new PS_ReturnQuerySt({ strURL: app.strTheme1_URL, strMatrix: strMatrix, strManagUnit: strManagUnit, SIDs: null, iNonSpatialTableIndex: null }); // instantiate the Seat Geek Search class
+            var psqs_strQueryString = app.PSQS.returnQS();
+
+            app.map.infoWindow.hide();            //var strquery4id = "Contaminant LIKE '%Mercury%'";
+            app.pPS_Identify = new PS_Identify({ pLayer1: CED_PP_point, pLayer2: CED_PP_line, pLayer3: CED_PP_poly, pMap: app.map,
+                strQueryString4Measurements: psqs_strQueryString, strURL: app.strTheme1_URL,
+                pInfoWindow: app.infoWindow
+            }); // instantiate the ID Search class
+            app.pEvt = e;
+            var pPS_Identify_Results = app.pPS_Identify.executeQueries(e, "", 0, 0, 0);
+        }
+
+        function RunQueryArgs(strA_TypeAct, strA_entry_type, strA_activity, strA_Subactivity, strA_implementing_party, strA_State, strA_POPArea, strA_Managementunit, strA_office) {
+            dojo.forEach(app.arrayLayers, function (player) {
+                var id = player.id;
+                if ((id == 10) | (id == 11) | (id == 12) | (id == "graphicsLayer1")) { player.setVisibility(false); }
+                if ((id == 0) | (id == 1) | (id == 2) | (id == "graphicsLayer1")) {
+                    player.setDefinitionExpression("ObjectID < 0");  // set the definition expression for quick display of nothing
+                    player.setVisibility(true); 
+                    }
+            });
+
+            var strQuery = ""
+            if (strA_TypeAct) {
+                strQuery = "(ta_id in (" + strA_TypeAct + "))";
+            }
+            if (strA_entry_type) {
+                if (strQuery !== "") { strQuery += " and "; }
+                strQuery += "(entry_type in (" + strA_entry_type + "))";
+            }
+            if (strA_activity) {  //            if ((strActivity !== "All") & (strActivity != 99)) {
+                if (strQuery !== "") { strQuery += " and "; }
+                strQuery += "(ACT_ID in (" + strA_activity + "))";
+            }
+            if (strA_Subactivity) {  //            if ((strActivity !== "All") & (strActivity != 99)) {
+                if (strQuery !== "") { strQuery += " and "; }
+                strQuery += "(SACT_ID in (" + strA_Subactivity + "))";
+            }
+            if (strA_implementing_party) {    //            if (strImpParty !== "All") {
+                if (strQuery !== "") { strQuery += " and "; }
+                strQuery += "(IP_ID in (" + strA_implementing_party + "))";
+            }
+            if (strA_office) {    //            if (strImpParty !== "All") {
+                if (strQuery !== "") { strQuery += " and "; }
+                strQuery += "(FO_ID in (" + strA_office + "))";
+            }
+            
+
+            app.PSQ = new PS_MeasSiteSearch4Definition({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
+                strState: strA_State, strPopArea: strA_POPArea, strManagUnit: strA_Managementunit, strQuerySaved: strQuery, divTagSource: document.getElementById("ddlMatrix"),
+                pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line
+            }); // instantiate the class
+
+            if ((strA_State != undefined) || (strA_POPArea != undefined) || (strA_Managementunit != undefined)) {
+                var PSQResults = app.PSQ.qry_Non_SpatialTable("", null, "ST_ID");
+                PSQResults.then(PSQsearchSucceeded, PSQsearchFailed);
+            } else {
+                app.PSQ.ExecutetheDerivedQuery(strQuery, document.getElementById("ddlMatrix"));
+            }
+            app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL,
+                iNonSpatialTableIndex: 0, strQuery1: strQuery,
+                divTagSource: null
+            }); // instantiate the  class
+            app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
+            app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"));
+
+        }
+
+        function ddlMatrix_Change(divTagSource) {
+            document.getElementById("ImgResultsLoading").style.visibility = "visible";
+            app.map.infoWindow.hide();
+            app.map.graphics.clear();
+            document.getElementById("txtQueryResults").innerHTML = "";
+            var strddlMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].value;
+            var strddlEntry = document.getElementById("ddlEntry").options[document.getElementById("ddlEntry").selectedIndex].value;
+            var strActivity = document.getElementById("ddlActivity").options[document.getElementById("ddlActivity").selectedIndex].value;  //get dropdown menu selection
+            var strImpParty = document.getElementById("ddlImpParty").options[document.getElementById("ddlImpParty").selectedIndex].value;  //get dropdown menu selection
+            var strOffice = document.getElementById("ddlOffice").options[document.getElementById("ddlOffice").selectedIndex].value;  //get dropdown menu selection
+            var strState = document.getElementById("ddlState").options[document.getElementById("ddlState").selectedIndex].value;  //get dropdown menu selection
+            var strPopArea = document.getElementById("ddlPopArea").options[document.getElementById("ddlPopArea").selectedIndex].value;  //get dropdown menu selection
+            var strManagUnit = document.getElementById("ddlManagUnit").options[document.getElementById("ddlManagUnit").selectedIndex].value;  //get dropdown menu selection
+
+            if (((strddlMatrix == "All") | (strddlMatrix == "99")) &
+                 (strddlEntry == "99") &
+                 (strActivity == "99") &
+                 (strImpParty == "99") &
+                 (strOffice == "99") &
+                 (strState == "99") &
+                 (strPopArea == "99") &
+                 (strManagUnit == "99")) {
+                blnTPKs = true;
+
+                dojo.forEach(app.arrayLayers, function (player) {
+                    var id = player.id;
+                    if ((id == 0) | (id == 1) | (id == 2) | (id == "graphicsLayer1")) { player.setVisibility(!blnTPKs); }
+                });
+            }
+            else {
+                dojo.forEach(app.arrayLayers, function (player) {
+                    var id = player.id;
+                    if ((id == 10) | (id == 11) | (id == 12) | (id == "graphicsLayer1")) { player.setVisibility(false); }
+                });
+            }
+
+            var strQuery = "";
+            if ((strddlMatrix !== "All") & (strddlMatrix !== "99")) {
+                strQuery = "typeact = '" + strddlMatrix + "'";
+            }
+            if (strddlEntry !== "99") {
+                if (strQuery !== "") { strQuery += " and "; }
+                strQuery += "entry_type = " + strddlEntry + "";
+            }
+            if (strActivity !== "99") {  //            if ((strActivity !== "All") & (strActivity != 99)) {
+                if (strQuery !== "") { strQuery += " and "; }
+                strQuery += "ACT_ID = " + strActivity + "";
+            }
+            if (strImpParty !== "99") {    //            if (strImpParty !== "All") {
+                if (strQuery !== "") { strQuery += " and "; }
+                strQuery += "IP_ID = " + strImpParty + "";
+            }
+            if (strOffice !== "99") {    //            if (strImpParty !== "All") {
+                if (strQuery !== "") { strQuery += " and "; }
+                strQuery += "FO_ID = " + strOffice + "";
+            }
+            app.PSQ = new PS_MeasSiteSearch4Definition({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
+                strState: strState, strPopArea: strPopArea, strManagUnit: strManagUnit, strQuerySaved: strQuery, divTagSource: divTagSource, pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line
+            }); // instantiate the class
+
+            if ((strState != "99") || (strPopArea != "99") || (strManagUnit != "99")) {
+                var PSQResults = app.PSQ.qry_Non_SpatialTable("", null, "ST_ID");
+                PSQResults.then(PSQsearchSucceeded, PSQsearchFailed);
+            } else {
+                app.PSQ.ExecutetheDerivedQuery(strQuery, divTagSource);
+            }
+        }
+
+        function PSQsearchSucceeded(results) { }
+
+        function btn_clear_click() {
+            document.getElementById("ImgResultsLoading").style.visibility = "visible";
+            app.map.infoWindow.hide();
+            app.map.graphics.clear();
+            document.getElementById("btn_TextSummary").disabled = true;
+
+            CED_PP_poly.hide();
+            CED_PP_point.hide();
+            CED_PP_line.hide();
+
+            CED_PP_polyTPK.show();
+            CED_PP_pointTPK.show();
+            CED_PP_lineTPK.show();
+            
+            // do not turn off layer visibility here, the checkbox click methods will handle layer visibility
+            var pform = dom.byId("toggleForm");
+            for (var i = 0; i < pform.elements.length; i++) {  //loop through the checkboxes of the form and determin if one of the ones to click
+                if (pform.elements[i].type == 'checkbox') {
+                    if ((pform.elements[i].name == "checkBoxMZ") || (pform.elements[i].name == "checkBoxPop")) {
+                        //pform.elements[i].checked = false;
+                        if (pform.elements[i].checked == true) {
+                            pform.elements[i].click();  //turn the layer visiblity on by firing the click event of the checkboxes
+                        }
+                    }
+                    if (!((pform.elements[i].name == "checkBoxMZ") || (pform.elements[i].name == "checkBoxPop"))) {
+                        pform.elements[i].checked = true;
+                        if (pform.elements[i].checked == false) {
+                            pform.elements[i].click();  //turn the layer visiblity on by firing the click event of the checkboxes
+                        }
+                    }
+                }
+            }
+
+            CED_PP_point.setDefinitionExpression("(SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)");
+            CED_PP_line.setDefinitionExpression("");
+            CED_PP_poly.setDefinitionExpression("");
+            document.getElementById("txtQueryResults").innerHTML = ""; //clear the text results
+            app.pFC.GetCountOfFCDef_ShowText(CED_PP_point.getDefinitionExpression(), CED_PP_point.url, "txtQueryResults", "count", "project_id", "");
+
+
+            if (document.getElementById("cbx_zoom").checked) {
+                var customExtentAndSR = new esri.geometry.Extent(-14000000, 4595472, -11000000, 5943351, new esri.SpatialReference({ "wkid": 3857 }));
+                app.map.setExtent(customExtentAndSR, true);
+            }
+
+            app.iNonSpatialTableIndex = 0;  //
+            app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL,
+                iNonSpatialTableIndex: 0, strQuery1: "objectid > 0",
+                divTagSource: null
+            }); // instantiate the  class
+            app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
+            app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"));
+        }
+
+        function PSStatSucceeded(results) {
+            if (results) { }  //do nothing            
+            else { document.getElementById("txtQueryResults").innerHTML = "Search completed successfully, no locations meeting search criteria found at any location."; }
+        }
+
+        function PSStatFailed(err) { document.getElementById("txtQueryResults").innerHTML = " Search error " + err.toString(); }
+        function PSQsearchFailed(err) { document.getElementById("txtQueryResults").innerHTML = " Search error " + err.toString(); }
+
+        function btn_TextSummary_click() {
+            var strddlMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].value;
+            var strddlEntry = document.getElementById("ddlEntry").options[document.getElementById("ddlEntry").selectedIndex].value;
+            var strActivity = document.getElementById("ddlActivity").options[document.getElementById("ddlActivity").selectedIndex].value;  //get dropdown menu selection
+            var strImpParty = document.getElementById("ddlImpParty").options[document.getElementById("ddlImpParty").selectedIndex].value;  //get dropdown menu selection
+            var strOffice = document.getElementById("ddlOffice").options[document.getElementById("ddlOffice").selectedIndex].value;  //get dropdown menu selection
+            var strState = document.getElementById("ddlState").options[document.getElementById("ddlState").selectedIndex].value;  //get dropdown menu selection
+            var strPopArea = document.getElementById("ddlPopArea").options[document.getElementById("ddlPopArea").selectedIndex].value;  //get dropdown menu selection
+            var strManagUnit = document.getElementById("ddlManagUnit").options[document.getElementById("ddlManagUnit").selectedIndex].value;  //get dropdown menu selection
+
+            var strQuery = "";
+            if (strddlMatrix !== "99") {
+                strQuery += "&TA=" + strddlMatrix.replace("Plan", "2").replace("Project", "3"); //TypeAct
+            }
+            if (strddlEntry !== "99") {
+                strQuery += "&ET=" + strddlEntry; //entry_type
+            }
+            if (strActivity !== "99") {
+                strQuery += "&ACT=" + strActivity; //activity
+            }
+            if (strImpParty !== "99") {
+                strQuery += "&IP=" + strImpParty; //implementing_party
+            }
+            if (strOffice !== "99") {
+                strQuery += "&FO=" + strOffice; //implementing_party
+            }            
+            if (strState != "99") {
+                strQuery += "&ST=" + strState; //State 
+            }
+            if (strPopArea != "99") {
+                strQuery += "&POP=" + strPopArea; //pop area
+            }
+            if (strManagUnit != "99") {
+                strQuery += "&MU=" + strManagUnit; //management unit
+            }
+            if (strQuery !== "") {
+                var strURL = "https://conservationefforts.org/sgce/sgcedquery/" + strQuery.replace('&', '?');
+                window.open(strURL);
+            }
+        }
+
+
+    });
+</script>
+</head>
+
+<body class="tundra">
+<!--[if IE 7]>
+<style>
+html, body {
+margin: 0;
+}
+</style>
+<![endif]-->
+
+<div id="content" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline', gutters:false" 
+                    style="width: 100%; height: 100%; margin: 0; background-color:rgb(127, 105, 127); font-family: Arial;">
+    <div id="rightPane"
+        data-dojo-type="dijit/layout/ContentPane"
+        data-dojo-props="region:'left'" style="background-color:rgb(151, 118, 123);">
+
+        <div data-dojo-type="dijit/layout/AccordionContainer">
+            <div data-dojo-type="dijit/layout/ContentPane" id="legendPane"
+                data-dojo-props="title:'Legend'">
+                <div id="legendDiv"></div>
+            </div>
+            <div data-dojo-type="dijit/layout/ContentPane"
+                data-dojo-props="title:'Search Query Tools', selected:true" style="overflow-x: hidden !important; overflow-y: scroll"
+                <br />
+                <form id="dropdownForm">
+
+
+                    <center><h2>Filter/Query Data<img id="ImgResultsLoading" src="images/loading.gif" style="height:15px" /></h2></center>
+                    <font size="2"><u>Project or Plan:</u></font><br />
+                    <select id="ddlMatrix" class="selectClass">
+                        <option value="All">All</option>
+                        <!--                      <option value="Project">Project</option>
+            <option value="Plan">Plan</option>-->
+                    </select><br /><br />
+
+                    <font size="2"><u>Entry Type:</u></font><br />
+                    <select id="ddlEntry" class="selectClass">
+                        <option value="99">All</option>
+                    </select><br /><br />
+
+                    <font size="2"><u>Activity:</u></font><br />
+                    <select id="ddlActivity" class="selectClass">
+                        <option value="99">All</option>
+                    </select><br /><br />
+
+                    <font size="2"><u>Implementing Party:</u></font><br />
+                    <select id="ddlImpParty" class="selectClass">
+                        <option value="99">All</option>
+                    </select><br /><br />
+
+                    <font size="2"><u>Office:</u></font><br />
+                    <select id="ddlOffice" class="selectClass">
+                        <option value="99">All</option>
+                    </select><br /><br />
+
+                    <font size="2"><u>WAFWA Management Zone:</u></font><br />
+                    <select id="ddlManagUnit" class="selectClass">
+                        <option value="99">All</option>
+                    </select><br /><br />
+
+                    <font size="2"><u>State/Province:</u></font><br />
+                    <select id="ddlState" class="selectClass">
+                        <option value="99"> All</option>
+                    </select><br /><br />
+
+                    <font size="2"><u>GRSG Population Area:</u></font><br />
+                    <select id="ddlPopArea" class="selectClass">
+                        <option value="99">All</option>
+                    </select><br /><br />
+
+                    <input id="btn_clear" type="button" value="Clear" />
+                </form>
+                <input id="btn_TextSummary" type="button" value="Report" style="display: none;" />
+                <br />
+
+                <div id="Div1" style="font-size:12px;">
+                    <input type="checkbox" id="cbx_zoom" checked=checked checked=checked value="zoomzoom?"//>Zoom to results
+                </div>
+
+                <div id="txtQueryResults" style="font-size:12px;"></div>
+                </br>
+
+                <center><h2>Search Projects <br />and Plans</h2></center>
+                <div id="autocompleteSearch">
+                    <input id="loc" class="textbox" type="text" /><br />
+                    &nbsp;
+                </div>
+
+                <!--              <center><h2>Search Projects and Plans</h2></center>
+                    <div id="Div4">
+                        <input id="Text1"/><br />
+                        &nbsp;
+                    </div>-->
+
+                <center><h2>Search Locations</h2></center>
+                <div id="search"></div>
+
+                <center><h2>Layer Visibility</h2></center>
+                <form id="toggleForm">
+                    <div id="toggle" style="padding: 2px 2px;"></div>
+                </form>
+
+                <input id="btn_query_QS" type="button" value="Run Search/Filter" disabled=true style="visibility: hidden;" />
+                <!--</form>-->
+            </div>
+
+            <div data-dojo-type="dijit/layout/ContentPane" id="prjinfopane"
+                data-dojo-props="title:'Project Background'">
+                <div id="Div2">
+                    <p>The Conservation Efforts Database is a partnership between the US Fish and Wildlife Service and the US Geological Survey. The goal of the Conservation Efforts Database is to efficiently and effectively collect and analyze ongoing conservation efforts for unlisted, candidate, and listed species alike. Understanding the distribution and type of conservation actions happening across the landscape will allow visualization and quantification of the extent to which threats are being addressed. Currently, this database contains only information on the Greater sage-grouse. However, it could also be useful beyond Greater sage-grouse conservation and may act as a template for tracking conservation actions across the landscape for other candidate, sensitive, or listed species. The spatially explicit, web-based Conservation Efforts Database is capable of (1) allowing multiple-users to enter data from different locations, (2) uploading and storing documents, (3) linking conservation actions to one or more threats (one-to-many relationships), (4) reporting functions that would allow summaries of the conservation actions at multiple scales (e.g., management zones, populations, or priority areas for conservation), and (5) accounting for actions at multiple scales from small easements to state-wide planning efforts.</p>
+                </div>
+            </div>
+
+            <div data-dojo-type="dijit/layout/ContentPane" id="helpdata"
+                data-dojo-props="title:'Help/Data'">
+                <div id="Div5">
+                     Contact Email: fw1sagegrouseced@fws.gov<br /><br />
+                     Note: contact partner data provider directly for questions/comments related to data specifics<br />
+                     <hr>
+                     <p>CED Front Page Map - Version 1.1</p>
+                </div>
+            </div>
+
+       <!--     <div data-dojo-type="dijit/layout/ContentPane" id="disclaimer"
+                data-dojo-props="title:'Disclaimer'">
+                <div id="Div3">
+                     <p>Disclaimer Placehoder</p>
+                </div>
+            </div>-->
+
+        </div>
+    </div>
+    <div id="map"
+        data-dojo-type="dijit/layout/ContentPane"
+        data-dojo-props="region:'center'"
+        style="overflow:hidden; background-color:rgb(151, 118, 123);">
+            <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
+            <img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
+            <!--<img id="loadingImg" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="position:fixed; right:40%; top:50%; z-index:100;" />-->
+        </div>
+    </div>
+    
+	<div class="panelTitle bg rounded shadow"><!-- Panel Title -->
+		<div id="panelMain">
+                                  
+        </div>
+	</div>
+
+    <div class="panelStats bg rounded shadow">
+        <!-- Panel Title -->
+        <div id="panelStat">
+            Quck Summary
+
+            <table>
+                <tr>
+                    <td>Total # of Projects</td>                    <td><div id="dTotalProjects"></div></td>
+                </tr>
+
+                <tr>
+                    <td># of offices</td>                    <td>test 4</td>
+                </tr>
+
+                <tr>
+                    <td># of activity types</td>                    <td>test 4</td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+
+<!--    <div class="panelTitleDraft bg rounded shadow">
+		<div id="panelMainDraft">
+            Draft Website / Under Construction
+        </div>
+	</div>-->
+    <div id="panelBasemaps" class="panelBasemaps bg rounded shadow" >		    <!-- Panel Basemaps -->
+	    <div id="basemapTitle"><img src="images/basemaps.png" height="30" title="Switch Base Map"/></div>
+        <!--<div id="basemapTitle"><img src="{% static 'ced_main/images/grsgmap/basemaps.png' %}" height="30" title="Switch Base Map"/></div>-->
+	    <div id="basemapContent">
+		    <div id="basemapGallery" ></div>
+	    </div>
+    </div>
+
+<!--    <a href="http://lccnetwork.org" target="_blank"> <img id="theImage1" border="0" src="{% static 'ced_main/images/ced_main/lcc_logo_centered_white_small.png' %}"
+        style="position:absolute; top:33px; right:18px;" height="38" /></a>
+    <a href="http://www.usgs.gov" target="_blank"><img id="theImage2" border="0" src="{% static 'ced_main/images/ced_main/USGS_117x31.png' %}"
+        style="position:absolute; top:40px; right:97px;" height="26"  /></a>
+    <a href="http://www.fws.gov" target="_blank"> <img id="theImage3" border="0" src="{% static 'ced_main/images/ced_main/USFWS_150x31.png' %}"
+        style="position:absolute; top:40px; right:200px;" height="26" /></a>&nbsp;&nbsp;
+    <a href="http://conservationefforts.org/welcome/" target="_blank"> <img id="theImage4" border="0" src="{% static 'ced_main/images/ced_main/CEDlogo_white_180x31.png' %}"
+        style="position:absolute; top:35px; right:355px;" height="40" /></a>-->
+
+    <a href="http://lccnetwork.org" target="_blank"> <img id="theImage1" border="0" src="https://conservationefforts.org/static/ced_main/images/ced_main/lcc_logo_centered_white_small.png" 
+        style="position:absolute; top:33px; right:18px;" height="38" /></a>
+    <a href="http://www.usgs.gov" target="_blank"><img id="theImage2" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USGS_117x31.png" 
+        style="position:absolute; top:40px; right:97px;" height="26"  /></a>
+    <a href="http://www.fws.gov" target="_blank"> <img id="theImage3" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USFWS_150x31.png" 
+        style="position:absolute; top:40px; right:200px;" height="26" /></a>&nbsp;&nbsp;
+    <a href="http://conservationefforts.org/welcome/" target="_blank"> <img id="theImage4" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/CEDlogo_white_180x31.png" 
+        style="position:absolute; top:35px; right:355px;" height="40" /></a>
+        
+
+</body>
+
+</html>
+
+
