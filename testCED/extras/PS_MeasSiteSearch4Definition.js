@@ -124,7 +124,7 @@ define([
             var blnQSSet = app.pSetQS.setQS(strQuery);
 
             //app.pFC.GetCountOfFCDef_ShowText(this.pCED_PP_point, "txtQueryResults", "count", "project_id");
-            app.pFC.GetCountOfFCDef_ShowText(this.CED_PP_point.getDefinitionExpression(), this.CED_PP_point.url, "txtQueryResults", "count", "project_id", "");
+            app.pFC.GetCountOfFCDef_ShowText(this.pCED_PP_point.getDefinitionExpression(), this.pCED_PP_point.url, "txtQueryResults", "count", "project_id", "");
 
             if (document.getElementById("cbx_zoom").checked) {
                 var pZoom2 = new MH_Zoom2FeatureLayer({ pMap: app.map, dblExpandNum: 1.0 }); // instantiate the zoom class

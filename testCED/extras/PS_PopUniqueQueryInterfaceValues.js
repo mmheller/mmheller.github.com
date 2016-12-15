@@ -72,11 +72,7 @@ define([
             pQuery.outFields = [this.strFieldNameText, this.strFieldNameValue];
             pQuery.where = this.strQuery1;
 
-//            if ((resultFeatures != null) || (resultFeatues != undefined)) { 
-//            
-//            }
-
-            if (this.strFieldNameValue == "ST_ID") {
+            if (this.strFieldNameValue == "WAFWA_Zone") {
                 var strstop = "";
             }
             return pQueryT.execute(pQuery, this.returnEvents, this.err);
@@ -84,7 +80,7 @@ define([
 
 
         returnEvents: function (results) {
-            if (this.strFieldNameValue == "ST_ID") {
+            if (this.strFieldNameValue == "WAFWA_Zone") {
                 var strstop = "";
             }
             var strRemoveStrings = ["", "---select an effort type---"];
@@ -245,7 +241,9 @@ define([
                     disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
 
                     //app.gQuerySummary.Summarize(this.m_strCED_PP_pointQuery);
-                    app.pFC.GetCountOfFCDef_ShowText(this.m_strCED_PP_pointQuery.getDefinitionExpression(), this.m_strCED_PP_pointQuery.url, "dTotalProjects", "count", "project_id", " and (typeact = 'Project')");
+
+                    ////not due to max record count not being increased yet, not going with ....this.strQuery1
+                    //app.pFC.GetCountOfFCDef_ShowText(this.m_strCED_PP_pointQuery, this.strURL + "0", "dTotalProjects", "count", "project_id", " and (typeact = 'Project')");
                     break;
             }
 

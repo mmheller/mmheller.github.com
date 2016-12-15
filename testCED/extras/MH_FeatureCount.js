@@ -24,6 +24,7 @@ define([
         divTag4Results: null,
         numberOfErrors: 0,
         strQueryStored: null,
+        strURLStored: null,
 
         constructor: function (options) {// specify class defaults
             this.returnEvents = lang.hitch(this, this.returnEvents);            // returnEvents is called by an external function, esri.request hitch() is used to provide the proper context so that returnEvents will have access to the instance of this class
@@ -36,6 +37,7 @@ define([
             disableOrEnableFormElements("dropdownForm", 'select-one', true);  //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
             this.strHTML_ID = strHTML_ID;
+            this.strURLStored = strURL;
 
             if (this.strHTML_ID != "txtQueryResults") {
                 var temp = "";
@@ -63,16 +65,31 @@ define([
 
         returnEvents: function (results) {
             var iStatValue = results.count;
-            strDispaly = iStatValue + " Results";
-            if ((iStatValue > 1000) & (this.strHTML_ID == "txtQueryResults")) {
-                strDispaly += "<br> Note: Limits displaying over 1000 features, zoom into area of interest or add filters to handle display limits"
-            }
-
-            if (this.strHTML_ID != "txtQueryResults") {
-                var temp = "";
+            strDispaly = iStatValue.toString();
+            //strDispaly = iStatValue + " Results";
+            if (this.strHTML_ID == "txtQueryResults") {
+                strDispaly = strDispaly + " Results";
+                if (iStatValue > 1000) {
+                    strDispaly += "<br> Note: Limits displaying over 1000 features, zoom into area of interest or add filters to handle display limits"
+                }
             }
 
             document.getElementById(this.strHTML_ID).innerHTML = strDispaly;
+
+            switch (this.strHTML_ID) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'
+                case "txtQueryResults":
+                    //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"));
+                    app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalProjects", "count", "project_id", " and (typeact = 'Project')");
+                    break;
+                case "dTotalProjects":
+                    app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalPlans", "count", "project_id", " and (typeact = 'Plan')");
+                    break;
+                case "dTotalPlans":
+                    //app.pFC.GetCountOfFCDef_ShowText(this.m_strCED_PP_pointQuery, this.strURL + "0", "dTotalProjects", "count", "project_id", " and (typeact = 'Project')");
+                    disableOrEnableFormElements("dropdownForm", 'select-one', false) //disable/enable to avoid user clicking query options during pending queries
+                    disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+                    break;
+            }
 
 
             //var pform = document.getElementById("dropdownForm");   // enable all the dropdown menu's while queries are running
@@ -91,7 +108,7 @@ define([
             this.app.pFC.numberOfErrors += 1;
 
             if (this.app.pFC.numberOfErrors < 5) {
-                this.app.pFC.GetCountOfFCDef_ShowText(this.app.pFC.pLayerStored, "txtQueryResults", "count", "project_id");
+                this.app.pFC.GetCountOfFCDef_ShowText(this.app.pFC.strQueryStored, this.app.pFC.strURLStored, "txtQueryResults", "count", "project_id");
             }
         }
     }

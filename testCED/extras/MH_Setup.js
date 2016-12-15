@@ -86,44 +86,45 @@ define([
           app.loading = dojo.byId("loadingImg");  //loading image. id
               var customExtentAndSR = new esri.geometry.Extent(-14000000, 4800000, -11000000, 6200000, new esri.SpatialReference({ "wkid": 3857 }));
               app.map = new esri.Map("map", { basemap: "topo", logo: false, extent: customExtentAndSR });
-              app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/a9bd0c665cc543f7800991255031638b/rest/services/Catalog/53d6d123e4b00d9e8ffa6124/MapServer/";  //Theme Layers
+              //app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/a9bd0c665cc543f7800991255031638b/rest/services/Catalog/53d6d123e4b00d9e8ffa6124/MapServer/";  //Theme Layers
+              app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/636fc6181db341218d8e594e96eca923/rest/services/Catalog/5851daa2e4b0e2663625ebcb/MapServer/"
 
               dojo.connect(app.map, "onUpdateStart", showLoading);
               dojo.connect(app.map, "onUpdateEnd", hideLoading);
 
               var legendLayers = [];
-              CED_PP_point = new FeatureLayer(app.strTheme1_URL + "0", { mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+              CED_PP_point = new FeatureLayer(app.strTheme1_URL + "0", { id: "0", mode: FeatureLayer.MODE_ONDEMAND, visible: false });
               CED_PP_point.setDefinitionExpression("(SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)");
-              CED_PP_line = new FeatureLayer(app.strTheme1_URL + "1", { mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              CED_PP_poly = new FeatureLayer(app.strTheme1_URL + "2", { "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: false });
+              CED_PP_line = new FeatureLayer(app.strTheme1_URL + "1", { id: "1", mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+              CED_PP_poly = new FeatureLayer(app.strTheme1_URL + "2", { id: "2", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: false });
 
               var strBase_URL = "https://utility.arcgis.com/usrsvcs/servers/8631d8c78be64789a68a049f5dfe01e9/rest/services/Catalog/54ee573fe4b02d776a684ac8/MapServer/"
               var strlabelField1 = "population";
               var strlabelField2 = "name";
               var strlabelField3 = "mgmt_zone";
-              pBase_Pop = new FeatureLayer(strBase_URL + "0", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: false });
-              pBase_MZ = new FeatureLayer(strBase_URL + "1", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: false });
+              pBase_Pop = new FeatureLayer(strBase_URL + "0", {id: "Pop", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: false });
+              pBase_MZ = new FeatureLayer(strBase_URL + "1", { id: "MZ", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: false });
               var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
               var pLabel1 = new TextSymbol().setColor(vGreyColor);
               pLabel1.font.setSize("10pt");
               pLabel1.font.setFamily("arial");
               var pLabelRenderer1 = new SimpleRenderer(pLabel1);
-              var plabels1 = new LabelLayer({});
+              var plabels1 = new LabelLayer({ id: "labels1" });
               plabels1.addFeatureLayer(pBase_Pop, pLabelRenderer1, "{" + strlabelField1 + "}");
 
               var pLabel2 = new TextSymbol().setColor(vGreyColor);
               pLabel2.font.setSize("10pt");
               pLabel2.font.setFamily("Arial Black");
               var pLabelRenderer2 = new SimpleRenderer(pLabel2);
-              var plabels2 = new LabelLayer({});
+              var plabels2 = new LabelLayer({ id: "labels2" });
               plabels2.addFeatureLayer(pBase_MZ, pLabelRenderer2, "{" + strlabelField2 + "} \n {" + strlabelField3 + "}");
 
 
-              var pLegendBase_Pop = new FeatureLayer(strBase_URL + "2", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: false });
-              var pLegendBase_MZ = new FeatureLayer(strBase_URL + "3", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2], visible: false });
-              var pLegendCED_PP_point = new FeatureLayer(strBase_URL + "4", { mode: FeatureLayer.MODE_ONDEMAND, visible: true });
-              var pLegendCED_PP_line = new FeatureLayer(strBase_URL + "5", { mode: FeatureLayer.MODE_ONDEMAND, visible: true });
-              var pLegendCED_PP_poly = new FeatureLayer(strBase_URL + "6", { "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, visible: true });
+              var pLegendBase_Pop = new FeatureLayer(strBase_URL + "2", { id: "LegendPop", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: false });
+              var pLegendBase_MZ = new FeatureLayer(strBase_URL + "3", { id: "LegendMZ", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2], visible: false });
+              var pLegendCED_PP_point = new FeatureLayer(strBase_URL + "4", { id: "LegendPt", mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+              var pLegendCED_PP_line = new FeatureLayer(strBase_URL + "5", {id: "LegendLine", mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+              var pLegendCED_PP_poly = new FeatureLayer(strBase_URL + "6", { id: "LegendPoly", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, visible: true });
 
               legendLayers.push({ layer: pLegendCED_PP_poly, title: 'CED Plans and Projects (area)' });
               legendLayers.push({ layer: pLegendCED_PP_line, title: 'CED Plans and Projects (line)' });
@@ -135,9 +136,9 @@ define([
               });
 
               var strTPK_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/"
-              CED_PP_point_tpk = new ArcGISDynamicMapServiceLayer(strTPK_URL + "54f0a7b5e4b02419550ce925/MapServer", { visible: true });
-              CED_PP_line_tpk = new ArcGISDynamicMapServiceLayer(strTPK_URL + "54f0a722e4b02419550ce91d/MapServer", {visible: true });
-              CED_PP_poly_tpk = new ArcGISDynamicMapServiceLayer(strTPK_URL + "54f0a8b1e4b02419550ce930/MapServer", { "opacity": 0.6, visible: true });
+              CED_PP_point_tpk = new ArcGISDynamicMapServiceLayer(strTPK_URL + "54f0a7b5e4b02419550ce925/MapServer", { id: "10", visible: true });
+              CED_PP_line_tpk = new ArcGISDynamicMapServiceLayer(strTPK_URL + "54f0a722e4b02419550ce91d/MapServer", { id: "11", visible: true });
+              CED_PP_poly_tpk = new ArcGISDynamicMapServiceLayer(strTPK_URL + "54f0a8b1e4b02419550ce930/MapServer", { id: "12", "opacity": 0.6, visible: true });
 
               var cbxLayers = [];
               cbxLayers.push({ layers: [CED_PP_poly, CED_PP_poly_tpk], title: 'CED Plans and Projects (area)' });
