@@ -264,27 +264,27 @@ define([
             var attr = pFeature.attributes;
 
             var strTotalAcres = "n/a";
-            if (attr.totalacres != undefined && attr.totalacres != null) { strTotalAcres = attr.totalacres.toString(); }
+            if (attr.TotalAcres != undefined && attr.TotalAcres != null) { strTotalAcres = attr.TotalAcres.toString(); }
             var strTotalMiles = "n/a";
-            if (attr.totalmiles != undefined && attr.totalmiles != null) { strTotalMiles = attr.totalmiles.toString(); }
+            if (attr.TotalMiles != undefined && attr.TotalMiles != null) { strTotalMiles = attr.TotalMiles.toString(); }
             var strTotalRemoved = "n/a";
-            if (attr.totalnumberremoved != undefined && attr.totalnumberremoved != null) { strTotalRemoved = attr.totalnumberremoved.toString(); }
+            if (attr.TotalNumberRemoved != undefined && attr.TotalNumberRemoved != null) { strTotalRemoved = attr.TotalNumberRemoved.toString(); }
             var strOffice = "n/a";
-            if (attr.office != undefined && attr.office != null) { strOffice = attr.office.toString(); }
+            if (attr.Office != undefined && attr.Office != null) { strOffice = attr.Office.toString(); }
             var strImplementing_party = "n/a";
-            if (attr.implementing_party != undefined && attr.implementing_party != null) { strImplementing_party = attr.implementing_party.toString(); }
+            if (attr.Implementing_Party != undefined && attr.Implementing_Party != null) { strImplementing_party = attr.Implementing_Party.toString(); }
 
             blnwobble_gis = false;
-            if (attr.wobbled_gis != undefined && attr.wobbled_gis != null) {
-                blnwobble_gis = attr.wobbled_gis;
+            if (attr.Wobbled_GIS != undefined && attr.Wobbled_GIS != null) {
+                blnwobble_gis = attr.Wobbled_GIS;
             }
 
-            var title = attr.typeact + " Effort Name:" + attr.project_name + "<br /> Effort Identification Number: " + attr.project_id;
+            var title = attr.TypeAct + " Effort Name:" + attr.Project_Name + "<br /> Effort Identification Number: " + attr.Project_ID;
             var tempstrcontent = ""
             if ((blnwobble_gis) | (strTheme == "Polygon")) { tempstrcontent += "<b><i>Note: Some locations may be buffered, generalized, or altered</i></b>" + "<br />" }
-            tempstrcontent += "<u>Implementing Party:</u>  " + attr.implementing_party + "<br />" +
-                                     "<u>Activity:</u> " + attr.activity + "<br />" +
-                                     "<u>Subactivity:</u> " + attr.subactivity +
+            tempstrcontent += "<u>Implementing Party:</u>  " + attr.Implementing_Party + "<br />" +
+                                     "<u>Activity:</u> " + attr.Activity + "<br />" +
+                                     "<u>Subactivity:</u> " + attr.SubActivity +
                                         "<br/><hr>" + "Summary" + "<br />" +
                                         "<u>Total Acres:</u>  " + strTotalAcres + "<br />" +
                                         "<u>Total Miles:</u>  " + strTotalMiles + "<br />" +
@@ -375,7 +375,7 @@ define([
                 var graphic1 = pLayer1[i];
                 strThemeT = "Point";
                 strURL4query1 = this.strURL + "0";
-                content += "  " + graphic1.attributes.project_id + ", " + graphic1.attributes.project_name.substring(0, 35) + " (<A href='#' onclick='showFeaturePrep(pLayer1[" + i + "],strURL4query1,strThemeT);'>show</A>)<br/>";
+                content += "  " + graphic1.attributes.Project_ID + ", " + graphic1.attributes.Project_Name.substring(0, 35) + " (<A href='#' onclick='showFeaturePrep(pLayer1[" + i + "],strURL4query1,strThemeT);'>show</A>)<br/>";
             }
             content += "<br /><u>Number of line projects/plans:  " + pLayer2.length + "</u><br />";
             arrayUtils.forEach(pLayer2, function (feat) { feat.setSymbol(new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([0, 255, 255]), 3)); app.map.graphics.add(feat); }); // add the results to the map
@@ -383,7 +383,7 @@ define([
                 var graphic2 = pLayer2[ii];
                 strThemeT = "Line";
                 strURL4query2 = this.strURL + "1";
-                content += "  " + graphic2.attributes.project_id + ", " + graphic2.attributes.project_name.substring(0, 35) + " (<A href='#' onclick='showFeaturePrep(pLayer2[" + ii + "],strURL4query2,strThemeT);'>show</A>)<br/>";
+                content += "  " + graphic2.attributes.Project_ID + ", " + graphic2.attributes.Project_Name.substring(0, 35) + " (<A href='#' onclick='showFeaturePrep(pLayer2[" + ii + "],strURL4query2,strThemeT);'>show</A>)<br/>";
             }
             content += "<br /><u>Number of area projects/plans:  " + pLayer3.length + "</u><br />";
             arrayUtils.forEach(pLayer3, function (feat) { feat.setSymbol(new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_NULL, new Color([255, 0, 0]), 2), new Color([0, 255, 255, 0.2]))); app.map.graphics.add(feat); }); // add the results to the map
@@ -391,7 +391,7 @@ define([
                 var graphic3 = pLayer3[iii];
                 strThemeT = "Polygon";
                 strURL4query3 = this.strURL + "2";
-                content += "  " + graphic3.attributes.project_id + ", " + graphic3.attributes.project_name.substring(0, 35) + " (<A href='#' onclick='showFeaturePrep(pLayer3[" + iii + "],strURL4query3,strThemeT);'>show</A>)<br/>";
+                content += "  " + graphic3.attributes.Project_ID + ", " + graphic3.attributes.Project_Name.substring(0, 35) + " (<A href='#' onclick='showFeaturePrep(pLayer3[" + iii + "],strURL4query3,strThemeT);'>show</A>)<br/>";
             }
             this.strMultipleContent = content;
             this.pMap.infoWindow.setContent(content);

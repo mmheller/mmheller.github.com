@@ -240,8 +240,6 @@ define([
                     disableOrEnableFormElements("dropdownForm", 'select-one', false) //disable/enable to avoid user clicking query options during pending queries
                     disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
 
-                    //app.gQuerySummary.Summarize(this.m_strCED_PP_pointQuery);
-
                     ////not due to max record count not being increased yet, not going with ....this.strQuery1
                     //app.pFC.GetCountOfFCDef_ShowText(this.m_strCED_PP_pointQuery, this.strURL + "0", "dTotalProjects", "count", "project_id", " and (typeact = 'Project')");
                     break;

@@ -124,6 +124,12 @@ define([
             var blnQSSet = app.pSetQS.setQS(strQuery);
 
             //app.pFC.GetCountOfFCDef_ShowText(this.pCED_PP_point, "txtQueryResults", "count", "project_id");
+
+            document.getElementById("txtQueryResults").innerHTML = "-";
+            document.getElementById("dTotalProjectsQ").innerHTML = "-";
+            document.getElementById("dTotalPlansQ").innerHTML = "-";
+            document.getElementById("dTotalAcresQ").innerHTML = "-";
+
             app.pFC.GetCountOfFCDef_ShowText(this.pCED_PP_point.getDefinitionExpression(), this.pCED_PP_point.url, "txtQueryResults", "count", "project_id", "");
 
             if (document.getElementById("cbx_zoom").checked) {
@@ -142,8 +148,8 @@ define([
                     var testVals = {};
                     var features = results.features; //Loop through the QueryTask results and populate an array with the unique values
                     dojo.forEach(features, function (feature) {
-                        zone = feature.attributes.project_id;
-                        //zone = feature.attributes.Project_ID;
+                        //zone = feature.attributes.project_id;
+                        zone = feature.attributes.Project_ID;
                         if (!testVals[zone]) {
                             testVals[zone] = true;
                             var strValue = zone;

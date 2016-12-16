@@ -8,7 +8,7 @@ Date:        Oct 2014-->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
-    <title>Greater Sage Grouse: Conservation Efforts - Draft</title>
+    <title>2.0 Draft: Greater Sage Grouse: Conservation Efforts - Draft</title>
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/dijit/themes//tundra/tundra.css" />
     <link rel="stylesheet" href="https://js.arcgis.com/3.14/esri/css/esri.css" />
 
@@ -60,8 +60,9 @@ Date:        Oct 2014-->
                 webMercatorUtils, BasemapGallery, mouse, query, FindTask, FindParameters) {
 
         document.getElementById("txtQueryResults").innerHTML = "-";
-        document.getElementById("dTotalProjects").innerHTML = "-";
-        document.getElementById("dTotalPlans").innerHTML = "-";
+        document.getElementById("dTotalProjectsQ").innerHTML = "-";
+        document.getElementById("dTotalPlansQ").innerHTML = "-";
+        document.getElementById("dTotalAcresQ").innerHTML = "-";
         
         document.getElementById("ImgResultsLoading").style.visibility = "visible";
         var pSup = new MH_Setup({}); // instantiate the class
@@ -327,6 +328,11 @@ Date:        Oct 2014-->
         function PSQsearchSucceeded(results) { }
 
         function btn_clear_click() {
+            document.getElementById("txtQueryResults").innerHTML = "-";
+            document.getElementById("dTotalProjectsQ").innerHTML = "-";
+            document.getElementById("dTotalPlansQ").innerHTML = "-";
+            document.getElementById("dTotalAcresQ").innerHTML = "-";
+
             document.getElementById("ImgResultsLoading").style.visibility = "visible";
             app.map.infoWindow.hide();
             app.map.graphics.clear();
@@ -586,16 +592,16 @@ margin: 0;
         <div id="panelStat">
             <table>
                 <tr>
-                    <td><u>Quick Summary</u></td>          <td><div id="stitle"></div></td><td><body link="white"><a href="CEDPSummary.html" target="_blank">      More Summaries...</a></body></td>
+                    <td><u>Quick Summary</u></td>   <td><body link="white"><a href="CEDPSummary.html" target="_blank">      More...</a></body></td>
                 </tr>
                 <tr>
-                    <td>Total # of Projects</td>    <td><div id="dTotalProjects"></div></td><td></td>
+                    <td>Total # of Projects</td>    <td><div id="dTotalProjectsQ"></div></td>
                 </tr>
                 <tr>
-                    <td>Total # of Plans</td>       <td><div id="dTotalPlans"></div></td> <td></td>
+                    <td>Total # of Plans</td>       <td><div id="dTotalPlansQ"></div></td>
                 </tr>
                 <tr>
-                    <td>Total Acres</td>    <td>-</td> <td></td>
+                    <td>Total Acres</td>            <td><div id="dTotalAcresQ"></div></td>
                 </tr>
       <!--          <tr>
                     <td><u><a href="CEDPSummary.html" target="_blank">More info...</a></u></td>    <td>-</td>
@@ -628,6 +634,16 @@ margin: 0;
         style="position:absolute; top:40px; right:200px;" height="26" /></a>&nbsp;&nbsp;
     <a href="http://conservationefforts.org/welcome/" target="_blank"> <img id="theImage4" border="0" src="{% static 'ced_main/images/ced_main/CEDlogo_white_180x31.png' %}"
         style="position:absolute; top:35px; right:355px;" height="40" /></a>-->
+
+    
+    <div style="
+         top:20px;
+         right:600px;
+         position:absolute;
+         z-index:1;
+         visibility:show;">
+        <font size="5px" color="red"><b>DRAFT<br />VERSION<br />2.0<br /></b></font>
+    </div>
 
     <a href="http://lccnetwork.org" target="_blank"> <img id="theImage1" border="0" src="https://conservationefforts.org/static/ced_main/images/ced_main/lcc_logo_centered_white_small.png" 
         style="position:absolute; top:33px; right:18px;" height="38" /></a>

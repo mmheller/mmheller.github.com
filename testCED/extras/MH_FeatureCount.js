@@ -79,15 +79,18 @@ define([
             switch (this.strHTML_ID) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'
                 case "txtQueryResults":
                     //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"));
-                    app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalProjects", "count", "project_id", " and (typeact = 'Project')");
+                    app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalProjectsQ", "count", "project_id", " and (typeact = 'Project')");
                     break;
-                case "dTotalProjects":
-                    app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalPlans", "count", "project_id", " and (typeact = 'Plan')");
+                case "dTotalProjectsQ":
+                    app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalPlansQ", "count", "project_id", " and (typeact = 'Plan')");
                     break;
-                case "dTotalPlans":
+                case "dTotalPlansQ":
                     //app.pFC.GetCountOfFCDef_ShowText(this.m_strCED_PP_pointQuery, this.strURL + "0", "dTotalProjects", "count", "project_id", " and (typeact = 'Project')");
                     disableOrEnableFormElements("dropdownForm", 'select-one', false) //disable/enable to avoid user clicking query options during pending queries
                     disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+
+                    app.gQuerySummary.Summarize(this.strQueryStored);
+
                     break;
             }
 
