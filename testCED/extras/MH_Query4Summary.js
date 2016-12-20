@@ -87,7 +87,6 @@ define([
                 arrayQuery.push(["0", strQuery + " and (typeact = 'Project')", "Project_ID", "count", "", "dTotalProjects", '<b>&nbspTotal Number of Projects:</b> {0}', "", ""]);
                 arrayQuery.push(["0", strQuery + " and (typeact = 'Plan')", "Project_ID", "count", "", "dTotalPlans", '<b>&nbspTotal Number of Plans:</b> {0}', "", ""]);
                 
-
                 arrayQuery.push(["0", strQuery, "totalacres", "sum", "", "dTotalAcresQ2", '<b>&nbspTotal Acres:</b> {0}', "commas-no-round-decimal", ""]);
 
                 arrayQuery.push(["0", strQuery, "Project_ID", "count", "Implementing_Party", "dNumofDistinctImpParties", '<b>Number of Unique Implementing Parties:</b> {0}', "countOfGroupBy", ""]);
