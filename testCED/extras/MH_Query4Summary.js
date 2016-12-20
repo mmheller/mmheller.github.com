@@ -2,26 +2,26 @@
 //Date:        Oct 2016
 
 
-function disableOrEnableFormElements(strFormName, strElementType, TorF) {
-    var pform = document.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
+function disableOrEnableFormElements(strFormName, strElementType, TorF, pDocument) {
+    var pform = pDocument.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
     for (var i = 0; i < pform.elements.length; i++) {
         if (pform.elements[i].type == strElementType) {
             strID = pform.elements[i].id;
-            document.getElementById(strID).disabled = TorF;
+            pDocument.getElementById(strID).disabled = TorF;
         }
     }
 }
 
 
-function disableOrEnableFormElements(strFormName, strElementType, TorF) {
-    var pform = document.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
-    for (var i = 0; i < pform.elements.length; i++) {
-        if (pform.elements[i].type == strElementType) {
-            strID = pform.elements[i].id;
-            document.getElementById(strID).disabled = TorF;
-        }
-    }
-}
+//function disableOrEnableFormElements(strFormName, strElementType, TorF) {
+//    var pform = document.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
+//    for (var i = 0; i < pform.elements.length; i++) {
+//        if (pform.elements[i].type == strElementType) {
+//            strID = pform.elements[i].id;
+//            document.getElementById(strID).disabled = TorF;
+//        }
+//    }
+//}
 
 
 define([
@@ -61,11 +61,12 @@ define([
         m_query4SummaryMap: null,
         iTempIndexSubmit: 0,
         iTempIndexResults: 0,
+        mNewDoc: null,
         constructor: function (options) {
             this.strURL = options.strURL || "www.cnn.com"; // default AGS REST URL
         },
 
-        Summarize: function (strQuery) {
+        Summarize: function (strQuery, blnOpenEntireSummary) {
             document.getElementById("ImgResultsLoading").style.visibility = "visible";
             disableOrEnableFormElements("dropdownForm", 'select-one', true) //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
@@ -79,24 +80,39 @@ define([
             }
 
             this.m_query4SummaryMap = strQuery;
-            arrayQuery.push(["0", strQuery, "totalacres", "sum", "", "dTotalAcresQ", '{0}', "commas-no-round-decimal", ""]);
-            //arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", '<b>GNLCC Funds Allocated by Year:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both-currency", "desc"]);
-            //arrayQuery.push(["7", strQuery, "InKindamount", "sum", "Fund_Year", "dTotalInKindMatchbyYear", '<b>In-Kind or Match Funding by Year:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both-currency", "desc"]);
-            //arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "sum", "", "dTotalInKindMatch", '<b>In-Kind or Match Funding:</b> {0} ', "currency", ""]);
-            //arrayQuery.push(["7", strQuery, "ProjectID", "count", "orgname", "dNumberofInKindOrgs", '<b>Organizations Providing In-Kind or Match Funding:</b> {0} ', "countOfGroupBy", ""]);
-            //arrayQuery.push(["1", strQuery, "ProjectID", "count", "CommonName", "dTotalNumberofConsvTargets", '<b>Conservation Targets:</b> {0} ', "countOfGroupBy", ""]);
-            ////              arrayQuery.push(["6", strQuery, "ProjectID", "count", "Fund_Year", "dYearsFunded", 'Fund Years: \n<br>  {0} ', "default"]);
-            //arrayQuery.push(["9", strQuery, "ProjectID", "count", "contactID", "dNumberOfProjectContacts", '<b>Contacts:</b> {0} ', "countOfGroupBy", ""]);
-            //arrayQuery.push(["2", strQuery, "ProjectID", "count", "NationalLCCDelivType", "dDeliverabletype", '<b>Deliverable Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
-            //arrayQuery.push(["2", strQuery, "ProjectID", "count", "", "dNumberofDeliverables", '<b>Deliverables:</b> {0} ', "default", ""]);
-            //arrayQuery.push(["0", strQuery, "ProjectID", "count", "PrjStatus", "dPrjStatus", '<b>Project Status:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", ""]);
-            //arrayQuery.push(["5", strQuery, "ProjectID", "count", "dest_orgname", "dNumberOfFundingRecipients", '<b>Funding Recipient Organizations:</b> {0} ', "countOfGroupBy", ""]);
-            ////arrayQuery.push(["5", strQuery, "ProjectID", "count", "DestinationType", "dFundRecipientTypes", '<b>Funding Recipient Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
-            //arrayQuery.push(["5", strQuery, "amount", "sum", "DestinationType", "dFundRecipientTypes", '<b>Funding Recipient Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both-currency", "desc"]);
-            //arrayQuery.push(["7", strQuery, "InKindamount", "sum", "Contact_Type", "dInKindFundingTypes", '<b>InKind/Match Provider Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both-currency", "desc"]);
-            //arrayQuery.push(["4", strQuery, "ProjectID", "count", "EcotypicAreaName", "dEcotypicAreas", '<b>Ecotypic Areas (Partner Forums):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
-            //arrayQuery.push(["11", strQuery, "ProjectID", "count", "Stressor", "dStressors", '<b>Stressors:</b>  \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", "asc"]);
-            //arrayQuery.push(["8", strQuery, "ProjectID", "count", "GoalName", "dGoals", '<b>Conservation Goals:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
+
+            if (blnOpenEntireSummary) {
+                var pNewWindow = window.open("CEDPSummary.html");
+                this.mNewDoc = pNewWindow.document;
+                arrayQuery.push(["0", strQuery + " and (typeact = 'Project')", "Project_ID", "count", "", "dTotalProjects", '<b>&nbspTotal Number of Projects:</b> {0}', "", ""]);
+                arrayQuery.push(["0", strQuery + " and (typeact = 'Plan')", "Project_ID", "count", "", "dTotalPlans", '<b>&nbspTotal Number of Plans:</b> {0}', "", ""]);
+                
+
+                arrayQuery.push(["0", strQuery, "totalacres", "sum", "", "dTotalAcresQ2", '<b>&nbspTotal Acres:</b> {0}', "commas-no-round-decimal", ""]);
+
+                arrayQuery.push(["0", strQuery, "Project_ID", "count", "Implementing_Party", "dNumofDistinctImpParties", '<b>Number of Unique Implementing Parties:</b> {0}', "countOfGroupBy", ""]);
+                arrayQuery.push(["0", strQuery, "totalacres", "sum", "Implementing_Party", "dTotalAcresQ2byImplementing_Party", '<b>Total Acres by Implementing Party:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["0", strQuery, "Project_ID", "count", "Implementing_Party", "dNumberOfRecordsbyImpParty", '<b>Number of Projects/Plans by Implementing Party:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+
+                arrayQuery.push(["0", strQuery, "Project_ID", "count", "Activity", "dNumofDistinctActivities", '<b>Number of Unique Activities:</b> {0}', "countOfGroupBy", ""]);
+                arrayQuery.push(["0", strQuery, "Project_ID", "sum", "Activity", "dTotalAcresQ2byActivity", '<b>Total Acres by Activity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["0", strQuery, "Project_ID", "count", "Activity", "dNumberOfRecordsbyActivity", '<b>Number of Projects/Plans by Activity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+
+                arrayQuery.push(["0", strQuery, "Project_ID", "count", "Office", "dNumofDistinctOffices", '<b>Number of Unique Offices:</b> {0}', "countOfGroupBy", ""]);
+                arrayQuery.push(["0", strQuery, "Project_ID", "sum", "Office", "dTotalAcresQ2byOffice", '<b>Total Acres by Office:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["0", strQuery, "Project_ID", "count", "Office", "dNumberOfRecordsbyOffice", '<b>Number of Projects/Plans by Office:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+
+                arrayQuery.push(["0", strQuery, "Project_ID", "count", "SubActivity", "dNumofDistinctSubActivities", '<b>Number of Unique Sub-Activities:</b> {0}', "countOfGroupBy", ""]);
+                arrayQuery.push(["0", strQuery, "Project_ID", "sum", "SubActivity", "dTotalAcresQ2bySubActivity", '<b>Total Acres by SubActivity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["0", strQuery, "Project_ID", "count", "SubActivity", "dNumberOfRecordsbySubActivity", '<b>Number of Projects/Plans by SubActivity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+
+                arrayQuery.push(["9", app.PS_Uniques.strQuery1, "Project_ID", "count", "State", "dNumberofOverlappingStates", '<b>Number of Overlapping States:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+                arrayQuery.push(["3", app.PS_Uniques.strQuery1, "Project_ID", "count", "WAFWA_Zone", "dNumberofOverlappingMngmtZones", '<b>Number of Overlapping Management Zones:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+                arrayQuery.push(["8", app.PS_Uniques.strQuery1, "Project_ID", "count", "Pop_Name", "dNumberofOverlappingPopAreas", '<b>Number of Overlapping Population Areas:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+
+            } else {
+                arrayQuery.push(["0", strQuery, "totalacres", "sum", "", "dTotalAcresQ", '{0}', "commas-no-round-decimal", ""]);
+            }
 
             this.m_arrayQuery = arrayQuery;
             this.SendQuery(arrayQuery, 0)
@@ -104,6 +120,10 @@ define([
 
 
         SendQuery: function (arrayQuery, iarrayQueryIndex) {
+            if (iarrayQueryIndex == 15) {
+                var tempstop = 1;
+            }
+
             this.iTempIndexSubmit += 0;
             
             this.m_iarrayQueryIndex = iarrayQueryIndex;
@@ -158,6 +178,11 @@ define([
                 var strVarType = pTblindexAndQuery[7];
                 var strSortType = pTblindexAndQuery[8];
                 var div = document.getElementById(strHTMLElementID);
+
+                if (div == undefined){
+                    var div = this.app.gQuerySummary.mNewDoc.getElementById(strHTMLElementID);
+                }
+
                 var resultFeatures = results.features;
 
                 if (strSortType == "desc") {
@@ -218,7 +243,13 @@ define([
                                     } else {
                                         var strText = feature.attributes[an].toString();
                                     }
-                                    if (((strGroupByField != "") & (an == "genericstat") & (strVarType != "show both") & (strVarType != "show both-currency")) | (strText == "")) {
+
+                                    if (this.app.gQuerySummary.m_iarrayQueryIndex == 1) {
+                                        var tempstop = 1;
+                                    }
+
+
+                                    if (((strGroupByField != "") & (an == "genericstat") & (strVarType != "show both") & (strVarType != "show both-commas-no-round-decimal")) | (strText == "")) {
                                         //values.push(strText);
                                         //do nothing
                                     } else if ((strStatisticType == "count") & (strVarType == "default")) {
@@ -228,7 +259,12 @@ define([
                                         var iTempNumber = Number(strText);
                                         strText = iTempNumber.toCurrencyString() + "\n<br>&nbsp;&nbsp;&nbsp;";
                                         values.push(strText);
-                                    } else if ("commas-no-round-decimal") {
+                                    } else if ((strVarType == "show both-commas-no-round-decimal") & (an == "genericstat")) {
+                                        var iTempNumber = Number(strText);
+                                        iTempNumber = Math.round(iTempNumber);
+                                        strText = iTempNumber.toCurrencyString().replace("$", "") + "\n<br>&nbsp;&nbsp;&nbsp;";
+                                        values.push(strText);
+                                    } else if ((strVarType == "commas-no-round-decimal") & (an == "genericstat")) {
                                         var iTempNumber = Number(strText);
                                         iTempNumber = Math.round(iTempNumber);
                                         strText = iTempNumber.toCurrencyString().replace("$", "");
@@ -273,12 +309,11 @@ define([
                 }
                 else {
                     //loop through the checkboxes and enable, so user interaction dosen't disrupt the queryies
-
-                    document.getElementById("ImgResultsLoading").style.visibility = "hidden";
-
-                    disableOrEnableFormElements("dropdownForm", 'select-one', false) //disable/enable to avoid user clicking query options during pending queries
-                    disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
-
+                    if (document.getElementById("ImgResultsLoading") != undefined) {
+                        document.getElementById("ImgResultsLoading").style.visibility = "hidden";
+                        disableOrEnableFormElements("dropdownForm", 'select-one', false, document) //disable/enable to avoid user clicking query options during pending queries
+                        disableOrEnableFormElements("dropdownForm", 'button', false, document);  //disable/enable to avoid user clicking query options during pending queries
+                    }
                 }
             }
             //return results;

@@ -121,6 +121,16 @@ Date:        Oct 2014-->
         on(dom.byId("ddlManagUnit"), "change", ddlMatrix_Change);
         on(dom.byId("ddlPopArea"), "change", ddlMatrix_Change);
 
+
+        //on(dom.byId("btnOpenStats"), "onclick", openCEDPSummary);
+        $(function () {
+            $('.divOpenStats').click(function () {
+                openCEDPSummary()
+            });
+        });
+
+
+
         dojo.connect(app.map, "onClick", executeIdeintifyQueries);
         pSup.Phase3(CED_PP_point, CED_PP_line, CED_PP_poly);
 
@@ -255,6 +265,11 @@ Date:        Oct 2014-->
             app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
             app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"));
 
+        }
+
+
+        function openCEDPSummary() {
+            app.gQuerySummary.Summarize(CED_PP_point.getDefinitionExpression(), true);
         }
 
         function ddlMatrix_Change(divTagSource) {
@@ -592,16 +607,27 @@ margin: 0;
         <div id="panelStat">
             <table>
                 <tr>
-                    <td><u>Quick Summary</u></td>   <td><body link="white"><a href="CEDPSummary.html" target="_blank">      More...</a></body></td>
+                    <!--<td><u>Quick Summary</u></td>   <td><body link="white"><a href="CEDPSummary.html" target="_blank">      More...</a></body></td>-->
+                    <td class="HTMLTable_styleRightJ_Compact"><b><u>Quick Summary</u></b></td>
+                    <td class="HTMLTable_styleMiddle_Compact"> </td>
+                    <td class="HTMLTable_styleLeftJ_Compact">
+                            <div class="divOpenStats" onmouseover="" style="cursor: pointer;"><font size="2px" color="white"><u><I>Click for more info...</I></u></font></div>
+                    </td>
                 </tr>
                 <tr>
-                    <td>Total # of Projects</td>    <td><div id="dTotalProjectsQ"></div></td>
+                    <td class="HTMLTable_styleRightJ_Compact">Total # of Projects</td>
+                    <td class="HTMLTable_styleMiddle_Compact"> </td>
+                    <td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalProjectsQ"></div></td>
                 </tr>
                 <tr>
-                    <td>Total # of Plans</td>       <td><div id="dTotalPlansQ"></div></td>
+                    <td class="HTMLTable_styleRightJ_Compact">Total # of Plans</td>
+                    <td class="HTMLTable_styleMiddle_Compact"> </td>
+                    <td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalPlansQ"></div></td>
                 </tr>
                 <tr>
-                    <td>Total Acres</td>            <td><div id="dTotalAcresQ"></div></td>
+                    <td class="HTMLTable_styleRightJ_Compact">Total Acres</td>
+                    <td class="HTMLTable_styleMiddle_Compact"> </td>
+                    <td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalAcresQ"></div></td>
                 </tr>
       <!--          <tr>
                     <td><u><a href="CEDPSummary.html" target="_blank">More info...</a></u></td>    <td>-</td>

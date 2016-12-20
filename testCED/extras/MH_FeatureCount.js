@@ -89,7 +89,7 @@ define([
                     disableOrEnableFormElements("dropdownForm", 'select-one', false) //disable/enable to avoid user clicking query options during pending queries
                     disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
 
-                    app.gQuerySummary.Summarize(this.strQueryStored);
+                    app.gQuerySummary.Summarize(this.strQueryStored, false);
 
                     break;
             }
