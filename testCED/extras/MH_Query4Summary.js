@@ -95,15 +95,15 @@ define([
                 arrayQuery.push(["0", strQuery, "Project_ID", "count", "Implementing_Party", "dNumberOfRecordsbyImpParty", '<b>Number of Projects/Plans by Implementing Party:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
 
                 arrayQuery.push(["0", strQuery, "Project_ID", "count", "Activity", "dNumofDistinctActivities", '<b>Number of Unique Activities:</b> {0}', "countOfGroupBy", ""]);
-                arrayQuery.push(["0", strQuery, "Project_ID", "sum", "Activity", "dTotalAcresQ2byActivity", '<b>Total Acres by Activity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["0", strQuery, "totalacres", "sum", "Activity", "dTotalAcresQ2byActivity", '<b>Total Acres by Activity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
                 arrayQuery.push(["0", strQuery, "Project_ID", "count", "Activity", "dNumberOfRecordsbyActivity", '<b>Number of Projects/Plans by Activity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
 
                 arrayQuery.push(["0", strQuery, "Project_ID", "count", "Office", "dNumofDistinctOffices", '<b>Number of Unique Offices:</b> {0}', "countOfGroupBy", ""]);
-                arrayQuery.push(["0", strQuery, "Project_ID", "sum", "Office", "dTotalAcresQ2byOffice", '<b>Total Acres by Office:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["0", strQuery, "totalacres", "sum", "Office", "dTotalAcresQ2byOffice", '<b>Total Acres by Office:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
                 arrayQuery.push(["0", strQuery, "Project_ID", "count", "Office", "dNumberOfRecordsbyOffice", '<b>Number of Projects/Plans by Office:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
 
                 arrayQuery.push(["0", strQuery, "Project_ID", "count", "SubActivity", "dNumofDistinctSubActivities", '<b>Number of Unique Sub-Activities:</b> {0}', "countOfGroupBy", ""]);
-                arrayQuery.push(["0", strQuery, "Project_ID", "sum", "SubActivity", "dTotalAcresQ2bySubActivity", '<b>Total Acres by SubActivity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["0", strQuery, "totalacres", "sum", "SubActivity", "dTotalAcresQ2bySubActivity", '<b>Total Acres by SubActivity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
                 arrayQuery.push(["0", strQuery, "Project_ID", "count", "SubActivity", "dNumberOfRecordsbySubActivity", '<b>Number of Projects/Plans by SubActivity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
 
                 arrayQuery.push(["9", app.PS_Uniques.strQuery1, "Project_ID", "count", "State", "dNumberofOverlappingStates", '<b>Number of Overlapping States:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
