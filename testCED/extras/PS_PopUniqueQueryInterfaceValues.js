@@ -3,12 +3,16 @@
 
 function disableOrEnableFormElements(strFormName, strElementType, TorF) {
     var pform = document.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
-    for (var i = 0; i < pform.elements.length; i++) {
-        if (pform.elements[i].type == strElementType) {
-            strID = pform.elements[i].id;
-            document.getElementById(strID).disabled = TorF;
+
+    if (pform != null) {
+        for (var i = 0; i < pform.elements.length; i++) {
+            if (pform.elements[i].type == strElementType) {
+                strID = pform.elements[i].id;
+                document.getElementById(strID).disabled = TorF;
+            }
         }
     }
+
 }  
 
 define([

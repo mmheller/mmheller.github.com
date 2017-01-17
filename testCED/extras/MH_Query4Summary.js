@@ -66,7 +66,7 @@ define([
             this.strURL = options.strURL || "www.cnn.com"; // default AGS REST URL
         },
 
-        Summarize: function (strQuery, blnOpenEntireSummary) {
+        Summarize: function (strQuery, strQuery2, blnOpenEntireSummary) {
             document.getElementById("ImgResultsLoading").style.visibility = "visible";
             disableOrEnableFormElements("dropdownForm", 'select-one', true) //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
@@ -82,8 +82,9 @@ define([
             this.m_query4SummaryMap = strQuery;
 
             if (blnOpenEntireSummary) {
-                var pNewWindow = window.open("CEDPSummary.html");
-                this.mNewDoc = pNewWindow.document;
+                //var pNewWindow = window.open("/CEDPSummary.html", "_blank", "", "");
+                //this.mNewDoc = pNewWindow.document;
+                
                 arrayQuery.push(["0", strQuery + " and (typeact = 'Project')", "Project_ID", "count", "", "dTotalProjects", '<b>&nbspTotal Number of Projects:</b> {0}', "", ""]);
                 arrayQuery.push(["0", strQuery + " and (typeact = 'Plan')", "Project_ID", "count", "", "dTotalPlans", '<b>&nbspTotal Number of Plans:</b> {0}', "", ""]);
                 
@@ -105,9 +106,13 @@ define([
                 arrayQuery.push(["0", strQuery, "totalacres", "sum", "SubActivity", "dTotalAcresQ2bySubActivity", '<b>Total Acres by SubActivity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
                 arrayQuery.push(["0", strQuery, "Project_ID", "count", "SubActivity", "dNumberOfRecordsbySubActivity", '<b>Number of Projects/Plans by SubActivity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
 
-                arrayQuery.push(["9", app.PS_Uniques.strQuery1, "Project_ID", "count", "State", "dNumberofOverlappingStates", '<b>Number of Overlapping States:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
-                arrayQuery.push(["3", app.PS_Uniques.strQuery1, "Project_ID", "count", "WAFWA_Zone", "dNumberofOverlappingMngmtZones", '<b>Number of Overlapping Management Zones:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
-                arrayQuery.push(["8", app.PS_Uniques.strQuery1, "Project_ID", "count", "Pop_Name", "dNumberofOverlappingPopAreas", '<b>Number of Overlapping Population Areas:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+                arrayQuery.push(["9", strQuery2, "Project_ID", "count", "State", "dNumberofOverlappingStates", '<b>Number of Overlapping States:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+                arrayQuery.push(["3", strQuery2, "Project_ID", "count", "WAFWA_Zone", "dNumberofOverlappingMngmtZones", '<b>Number of Overlapping Management Zones:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+                arrayQuery.push(["8", strQuery2, "Project_ID", "count", "Pop_Name", "dNumberofOverlappingPopAreas", '<b>Number of Overlapping Population Areas:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+
+                //arrayQuery.push(["9", app.PS_Uniques.strQuery1, "Project_ID", "count", "State", "dNumberofOverlappingStates", '<b>Number of Overlapping States:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+                //arrayQuery.push(["3", app.PS_Uniques.strQuery1, "Project_ID", "count", "WAFWA_Zone", "dNumberofOverlappingMngmtZones", '<b>Number of Overlapping Management Zones:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+                //arrayQuery.push(["8", app.PS_Uniques.strQuery1, "Project_ID", "count", "Pop_Name", "dNumberofOverlappingPopAreas", '<b>Number of Overlapping Population Areas:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
 
             } else {
                 arrayQuery.push(["0", strQuery, "totalacres", "sum", "", "dTotalAcresQ", '{0}', "commas-no-round-decimal", ""]);
@@ -178,8 +183,8 @@ define([
                 var strSortType = pTblindexAndQuery[8];
                 var div = document.getElementById(strHTMLElementID);
 
-                if (div == undefined){
-                    var div = this.app.gQuerySummary.mNewDoc.getElementById(strHTMLElementID);
+                if (div == undefined) {
+                    console.log("div undefined for " + strHTMLElementID);
                 }
 
                 var resultFeatures = results.features;

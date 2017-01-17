@@ -87,7 +87,8 @@ define([
               var customExtentAndSR = new esri.geometry.Extent(-14000000, 4800000, -11000000, 6200000, new esri.SpatialReference({ "wkid": 3857 }));
               app.map = new esri.Map("map", { basemap: "topo", logo: false, extent: customExtentAndSR });
               //app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/a9bd0c665cc543f7800991255031638b/rest/services/Catalog/53d6d123e4b00d9e8ffa6124/MapServer/";  //Theme Layers
-              app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/636fc6181db341218d8e594e96eca923/rest/services/Catalog/5851daa2e4b0e2663625ebcb/MapServer/"
+              //app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/636fc6181db341218d8e594e96eca923/rest/services/Catalog/5851daa2e4b0e2663625ebcb/MapServer/"
+              app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/d725bb5ba60348fd841b05f80cf4465d/rest/services/CEDfrontpage_map_v9_Restrict/FeatureServer/"
 
               dojo.connect(app.map, "onUpdateStart", showLoading);
               dojo.connect(app.map, "onUpdateEnd", hideLoading);

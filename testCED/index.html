@@ -32,7 +32,7 @@ Date:        Oct 2014-->
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>
     <!--<script type="text/javascript" src="https://js.arcgis.com/3.12/"></script>-->
-    <script src="https://raw.githubusercontent.com/Chaussette/esri.symbol.MultiLineTextSymbol/master/esri.symbol.MultiLineTextSymbol.js"></script>
+    <!--<script src="https://raw.githubusercontent.com/Chaussette/esri.symbol.MultiLineTextSymbol/master/esri.symbol.MultiLineTextSymbol.js"></script>-->
 
 
 <script type="text/javascript">
@@ -68,7 +68,7 @@ Date:        Oct 2014-->
         var pSup = new MH_Setup({}); // instantiate the class
         pSup.Phase1();
 
-        var tokens = getTokens
+        var tokens = getTokens;
         var blnShoReportButton = getTokens()['RButton'];
         if (blnShoReportButton) { document.getElementById("btn_TextSummary").style.display = "inline"; }
 
@@ -269,7 +269,14 @@ Date:        Oct 2014-->
 
 
         function openCEDPSummary() {
-            app.gQuerySummary.Summarize(CED_PP_point.getDefinitionExpression(), true);
+            //app.gQuerySummary.Summarize(CED_PP_point.getDefinitionExpression(), true);
+            localStorage.setItem("ls_strTheme1_URL", app.strTheme1_URL);
+            localStorage.setItem("ls_strDefQuery", CED_PP_point.getDefinitionExpression());
+            localStorage.setItem("ls_strDefQuery2", app.PS_Uniques.strQuery1);
+            //var pNewWindow = window.open("CEDPSummary.html?strURL|" + app.strTheme1_URL +
+            //                            "&strDefQuery|" + CED_PP_point.getDefinitionExpression() +
+            //                            "&strDefQuery2|" + app.PS_Uniques.strQuery1);
+            var pNewWindow = window.open("CEDPSummary.html");
         }
 
         function ddlMatrix_Change(divTagSource) {

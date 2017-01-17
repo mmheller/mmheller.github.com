@@ -1,18 +1,29 @@
-﻿<!DOCTYPE html>
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
 <html>
+
 <head>
-    <title>CED Summary Info</title>
-	<meta charset="utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+    <title>2.0 Draft: Greater Sage Grouse: Conservation Efforts - Draft</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/dijit/themes//tundra/tundra.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/esri/css/esri.css" />
+
+    <!--  <link rel="stylesheet" href="https://js.arcgis.com/3.12/dijit/themes//tundra/tundra.css"/>
+      <link rel="stylesheet" href="https://js.arcgis.com/3.12/esri/css/esri.css"/>-->
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="Styles/panel.css" />
-    <script type="text/javascript" src="https://js.arcgis.com/3.14/init.js"></script>
-
-
-    
-<!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
-<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
-
-
-
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/images/grsgmap/Styles/panel.css' %}"/>-->
+<!--    <style>
+        html, body {
+            height: 98%;
+            width: 99.95%;
+            margin: 0.00005%;
+            background-color: rgb(127, 105, 127);
+        }
+    </style>-->
 
     <style type="text/css">
         .auto-style1 {
@@ -25,166 +36,99 @@
         }
     </style>
 
+    <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
+    <!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/images/grsgmap/extras' %}"} };</script>-->
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>
+    <!--<script type="text/javascript" src="https://js.arcgis.com/3.12/"></script>-->
+    <!--<script src="https://raw.githubusercontent.com/Chaussette/esri.symbol.MultiLineTextSymbol/master/esri.symbol.MultiLineTextSymbol.js"></script>-->
 
-
-
-</head>
-<body>
-    <form id="form1">
-                      
-             
-  
-           
-    <table style="width:100%; background-color: #f2f5f9;">
-        <tr>
-            <td class="auto-style1" colspan="3">
-                <a href="http://conservationefforts.org/welcome/" target="_blank"> <img id="theImage4" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/CEDlogo_white_180x31.png" style="position: absolute; left: 15px; top: 18px; height: 45px;" /></a>
-                <a href="http://www.fws.gov" target="_blank"> <img id="theImage3" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USFWS_150x31.png" height="36"  /></a>&nbsp;&nbsp;
-                <a href="http://www.usgs.gov" target="_blank"><img id="theImage2" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USGS_117x31.png" height="36"   /></a>
-                <a href="http://lccnetwork.org" target="_blank"> <img id="theImage1" border="0" src="https://conservationefforts.org/static/ced_main/images/ced_main/lcc_logo_centered_white_small.png" height="50"  /></a>
-            </td>
-        </tr>
-
-        <tr>
-            <td class="auto-style1" colspan="3">
-                <font size="8px" color="red"><b>DRAFT VERSION 2.0</b></font>
-            </td>
-        </tr>
-
-
-        <tr>
-            <td class="HTMLTable_styleMiddleLessPad" colspan="3">
-                &nbsp;<b>Report Date:</b> <span id="time"></span>
-            </td>
-        </tr>
-        <tr>
-            <td class="HTMLTable_styleLeftLessPad">
-                <div id="dTotalProjects"></div>
-                <div id="dTotalPlans"></div>
-                <div id="dTotalAcresQ2"></div>
-            </td>
-            <td class="HTMLTable_styleMiddleLessPad"></td>
-            <td class="HTMLTable_styleLeftLessPad"></td>
-        </tr>
-        <tr>
-            <td class="HTMLTable_styleMiddleLessPad">
-                
-            </td>
-            <td></td>
-            <td>
-                
-            </td>
-        </tr>
-
-        <tr>
-            <td class="HTMLTable_BannerRow">
-                &nbsp;Implementing Party
-            </td>
-            <td class="HTMLTable_styleMiddle">
-                &nbsp;
-            </td>
-            <td class="HTMLTable_BannerRow">
-                &nbsp;Activity
-            </td>
-        </tr>
-        <tr>
-            <td class="HTMLTable_styleLeft">
-                <div id="dTotalAcresQ2byImplementing_Party">
-                </div>
-            </td>
-            <td class="HTMLTable_styleMiddle"></td>
-            <td class="HTMLTable_styleLeft">
-                <div id="dTotalAcresQ2byActivity">
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <td class="HTMLTable_styleLeft">
-                <div id="dNumofDistinctImpParties"></div>
-                <div id="dNumberOfRecordsbyImpParty"></div>
-            </td>
-            <td class="HTMLTable_styleMiddle">
-                &nbsp;
-            </td>
-            <td class="HTMLTable_styleLeft">
-                <div id="dNumofDistinctActivities"></div>
-                <div id="dNumberOfRecordsbyActivity"></div>
-            </td>
-        </tr>
-
-        <tr>
-            <td class="HTMLTable_BannerRow">
-                Office
-                </td>
-            <td class="HTMLTable_styleMiddle"></td>
-            <td class="HTMLTable_BannerRow">
-             SubActivities
-                </td>
-            </td>
-        </tr>
-        <tr>
-            <td class=HTMLTable_styleLeft>
-                <div id="dTotalAcresQ2byOffice">
-                </div>
-            </td>
-            <td class="HTMLTable_styleMiddle"></td>
-            <td class="HTMLTable_styleLeft">
-                <div id="dTotalAcresQ2bySubActivity">
-                </div>
-            </td>
-        </tr>
-
-        <tr>
-            <td class="HTMLTable_styleLeft">
-                <div id="dNumofDistinctOffices"></div>
-                <div id="dNumberOfRecordsbyOffice"></div>
-            </td>
-            <td class="HTMLTable_styleMiddle"></td>
-            <td class="HTMLTable_styleLeft">
-                <div id="dNumofDistinctSubActivities"></div>
-                <div id="dNumberOfRecordsbySubActivity">
-                </div>
-            </td>
-        </tr>
-
-
-        <tr>
-            <td class="HTMLTable_BannerRow" colspan="3">
-                DRAFT This section under construciton!&nbsp;
-                Overlapping Areas
-                </td>
-            </td>
-        </tr>
-        
-        <tr>
-            <td class="HTMLTable_styleLeft">
-                <div id="dNumberofOverlappingStates"></div>
-            </td>
-            <td class="HTMLTable_styleMiddle">
-                &nbsp;
-            </td>
-            <td class="HTMLTable_styleLeft" rowspan="2">
-                <div id="dNumberofOverlappingPopAreas"></div>    
-            </td>
-        </tr>
-        <tr>
-            <td class="HTMLTable_styleLeft">
-                <div id="dNumberofOverlappingMngmtZones"></div>
-            </td>
-            <td class="HTMLTable_styleMiddle"></td>
-        </tr>
-    </table>
-           
-
-    </form>
 
     <script type="text/javascript">
-        var app = {};
-        require([
-            "dojo/date/locale"
+    dojo.require("dijit.layout.TabContainer");
+    dojo.require("dijit.layout.ContentPane");
+    var app = {};
+    require([
+        "esri/map", "esri/layers/FeatureLayer", "esri/dijit/Legend", "esri/urlUtils",
+        "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on", "extras/PS_MeasSiteSearch4Definition", "extras/PS_ReturnQuerySt",
+        "dijit/form/CheckBox", "extras/PS_MeasSiteSearch_SetVisableQueryDef", "extras/MH_Zoom2FeatureLayer", "extras/MH_Setup",
+        "extras/MH_FeatureCount", "extras/MH_Query4Summary",
+        "esri/tasks/RelationshipQuery", "esri/symbols/SimpleMarkerSymbol", "dojo/_base/Color", "esri/dijit/Scalebar",
+        "esri/dijit/Geocoder", "extras/PS_Identify", "extras/CK_AutoCompleteSearchAndZoom", "extras/PS_PopUniqueQueryInterfaceValues",
+        "esri/geometry/webMercatorUtils", "esri/dijit/BasemapGallery", "dojo/mouse", "dojo/query", "esri/tasks/FindTask", "esri/tasks/FindParameters",
+        "esri/arcgis/utils",
+        "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
+        "dijit/layout/AccordionContainer", "dojo/domReady!"
         ],
 
-        window.onload = function () {
+    function (Map, FeatureLayer, Legend, urlUtils,
+                arrayUtils, parser, esriConfig, dom, domClass, on, PS_MeasSiteSearch4Definition, PS_ReturnQuerySt, CheckBox,
+                PS_MeasSiteSearch_SetVisableQueryDef, MH_Zoom2FeatureLayer, MH_Setup, MH_FeatureCount, MH_Query4Summary,
+                RelationshipQuery, SimpleMarkerSymbol,
+                Color, Scalebar, Geocoder, PS_Identify, CK_AutoCompleteSearchAndZoom, PS_PopUniqueQueryInterfaceValues,
+                webMercatorUtils, BasemapGallery, mouse, query, FindTask, FindParameters) {
+
+        parser.parse();
+
+        var strURL = localStorage.getItem("ls_strTheme1_URL");
+        var strDefQuery = localStorage.getItem("ls_strDefQuery");
+        var strDefQuery2 = localStorage.getItem("ls_strDefQuery2");
+
+        app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class
+
+        app.gQuerySummary.Summarize(strDefQuery, strDefQuery2, true);
+
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth() + 1; //January is 0!
+        var yyyy = today.getFullYear();
+        today = mm + '/' + dd + '/' + yyyy;
+        document.getElementById('time').innerHTML = today;
+
+        function getTokens() {
+            var tokens = [];
+            var query = location.search;
+            query = query.slice(1);
+            query = query.split('&');
+            $.each(query, function (i, value) {
+                var token = value.split('|');
+                var key = decodeURIComponent(token[0]);
+                var data = decodeURIComponent(token[1]);
+                tokens[key] = data;
+            });
+            return tokens;
+        }
+
+        
+
+
+    });
+    </script>
+</head>
+    <!--<style type="text/css">.auto-style1 {vertical-align: middle; text-align: right; background-color: rgb(151, 118, 123);  color: #FFFFFF; font-weight: bold; height: 59px;}</style>-->
+
+    <!--<script type="text/javascript">
+        var app2 = {};
+        require([
+            "extras/MH_Query4Summary",
+            "dojo/_base/array", "dojo/parser", "dojo/dom", "dojo/dom-class", "dojo/on",
+            "dojo/date/locale",
+             "dojo/domReady!"
+        ],-->
+
+
+    <!--<script type="text/javascript">
+        var app = {};
+        require(["extras/MH_Query4Summary", "dojo/date/locale",
+        "esri/arcgis/utils",
+        "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
+        "dijit/layout/AccordionContainer", "dojo/domReady!"],
+        function (MH_Query4Summary) {
+            var strURL = getTokens()['strURL']
+            var strDefQuery = getTokens()['strDefQuery']
+            app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class
+            app.gQuerySummary.Summarize(strDefQuery, true);
 
             var today = new Date();
             var dd = today.getDate();
@@ -192,7 +136,170 @@
             var yyyy = today.getFullYear();
             today = mm + '/' + dd + '/' + yyyy;
             document.getElementById('time').innerHTML = today;
+
+            function getTokens() {
+                var tokens = [];
+                var query = location.search;
+                query = query.slice(1);
+                query = query.split('&');
+                $.each(query, function (i, value) {
+                    var token = value.split('|');
+                    var key = decodeURIComponent(token[0]);
+                    var data = decodeURIComponent(token[1]);
+                    tokens[key] = data;
+                });
+                return tokens;
+            }
+
         });
-    </script>
+    </script>-->
+
+<body>
+
+                     
+           
+        <table style="width:100%; background-color: #f2f5f9;">
+            <tr>
+                <td class="auto-style1" colspan="4">
+                    <a href="http://conservationefforts.org/welcome/" target="_blank"> <img id="theImage4" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/CEDlogo_white_180x31.png" style="position: absolute; left: 15px; top: 18px; height: 45px;" /></a>
+                    <a href="http://www.fws.gov" target="_blank"> <img id="theImage3" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USFWS_150x31.png" height="36"  /></a>&nbsp;&nbsp;
+                    <a href="http://www.usgs.gov" target="_blank"><img id="theImage2" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USGS_117x31.png" height="36"   /></a>
+                    <a href="http://lccnetwork.org" target="_blank"> <img id="theImage1" border="0" src="https://conservationefforts.org/static/ced_main/images/ced_main/lcc_logo_centered_white_small.png" height="50"  /></a>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="auto-style1" colspan="4">
+                    <font size="8px" color="red"><b>DRAFT VERSION 2.0</b></font>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="HTMLTable_styleMiddleLessPad" colspan="2">
+                    &nbsp;<b>Report Date:</b> <span id="time"></span>
+                </td>
+                <td class="HTMLTable_styleMiddleLessPad" colspan="2">
+                    <img id="ImgResultsLoading" src="images/loading.gif" style="height:15px" /></td>
+            </tr>
+            <tr>
+                <td class="HTMLTable_styleLeftLessPad">
+                    <div id="dTotalProjects"></div>
+                    <div id="dTotalPlans"></div>
+                    <div id="dTotalAcresQ2"></div>
+                </td>
+                <td class="HTMLTable_styleMiddleLessPad" colspan="2"></td>
+                <td class="HTMLTable_styleLeftLessPad"></td>
+            </tr>
+            <tr>
+                <td class="HTMLTable_styleMiddleLessPad">
+                
+                </td>
+                <td colspan="2"></td>
+                <td>
+                
+                </td>
+            </tr>
+
+            <tr>
+                <td class="HTMLTable_BannerRow">
+                    &nbsp;Implementing Party
+                </td>
+                <td class="HTMLTable_styleMiddle" colspan="2">
+                    &nbsp;
+                </td>
+                <td class="HTMLTable_BannerRow">
+                    &nbsp;Activity
+                </td>
+            </tr>
+            <tr>
+                <td class="HTMLTable_styleLeft">
+                    <div id="dTotalAcresQ2byImplementing_Party">
+                    </div>
+                </td>
+                <td class="HTMLTable_styleMiddle" colspan="2"></td>
+                <td class="HTMLTable_styleLeft">
+                    <div id="dTotalAcresQ2byActivity">
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="HTMLTable_styleLeft">
+                    <div id="dNumofDistinctImpParties"></div>
+                    <div id="dNumberOfRecordsbyImpParty"></div>
+                </td>
+                <td class="HTMLTable_styleMiddle" colspan="2">
+                    &nbsp;
+                </td>
+                <td class="HTMLTable_styleLeft">
+                    <div id="dNumofDistinctActivities"></div>
+                    <div id="dNumberOfRecordsbyActivity"></div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="HTMLTable_BannerRow">
+                    Office
+                    </td>
+                <td class="HTMLTable_styleMiddle" colspan="2"></td>
+                <td class="HTMLTable_BannerRow">
+                 SubActivities
+                    </td>
+                </td>
+            </tr>
+            <tr>
+                <td class=HTMLTable_styleLeft>
+                    <div id="dTotalAcresQ2byOffice">
+                    </div>
+                </td>
+                <td class="HTMLTable_styleMiddle" colspan="2"></td>
+                <td class="HTMLTable_styleLeft">
+                    <div id="dTotalAcresQ2bySubActivity">
+                    </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="HTMLTable_styleLeft">
+                    <div id="dNumofDistinctOffices"></div>
+                    <div id="dNumberOfRecordsbyOffice"></div>
+                </td>
+                <td class="HTMLTable_styleMiddle" colspan="2"></td>
+                <td class="HTMLTable_styleLeft">
+                    <div id="dNumofDistinctSubActivities"></div>
+                    <div id="dNumberOfRecordsbySubActivity">
+                    </div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="HTMLTable_BannerRow" colspan="4">
+                    DRAFT This section under construciton!&nbsp;
+                    Overlapping Areas
+                    </td>
+                </td>
+            </tr>
+        
+            <tr>
+                <td class="HTMLTable_styleLeft">
+                    <div id="dNumberofOverlappingStates"></div>
+                </td>
+                <td class="HTMLTable_styleMiddle" colspan="2">
+                    &nbsp;
+                </td>
+                <td class="HTMLTable_styleLeft" rowspan="2">
+                    <div id="dNumberofOverlappingPopAreas"></div>    
+                </td>
+            </tr>
+            <tr>
+                <td class="HTMLTable_styleLeft">
+                    <div id="dNumberofOverlappingMngmtZones"></div>
+                </td>
+                <td class="HTMLTable_styleMiddle" colspan="2"></td>
+            </tr>
+        </table>
+           
+
 </body>
 </html>
