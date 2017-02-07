@@ -12,6 +12,19 @@ function disableOrEnableFormElements(strFormName, strElementType, TorF, pDocumen
     }
 }
 
+function getRanges(array) {
+    var ranges = [], rstart, rend;
+    for (var i = 0; i < array.length; i++) {
+        rstart = array[i];
+        rend = rstart;
+        while (array[i + 1] - array[i] == 1) {
+            rend = array[i + 1]; // increment the index if the numbers sequential
+            i++;
+        }
+        ranges.push(rstart == rend ? rstart + '' : rstart + '-' + rend);
+    }
+    return ranges;
+}
 
 //function disableOrEnableFormElements(strFormName, strElementType, TorF) {
 //    var pform = document.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
@@ -39,11 +52,11 @@ define([
       "dijit/registry",
       "esri/tasks/query",
       "dojox/grid/DataGrid",
-      "dojo/data/ItemFileReadStore",
+      "dojo/data/ItemFileReadStore", "esri/config",
 ], function (
       declare, lang, esriRequest, IdentityManager, FeatureLayer, FeatureTable,
       domConstruct, dom, parser, ready, on,
-      registry, Query, DataGrid, ItemFileReadStore
+      registry, Query, DataGrid, ItemFileReadStore, esriConfig
 ) {
 
     function sortFunction(a, b) {
@@ -67,52 +80,52 @@ define([
         },
 
         Summarize: function (strQuery, strQuery2, blnOpenEntireSummary) {
+            esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
+
+
             document.getElementById("ImgResultsLoading").style.visibility = "visible";
             disableOrEnableFormElements("dropdownForm", 'select-one', true) //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
 
-            //table/fc index, query string, field 4 aggregation, stat type (count, sum, avg), group by field, html ID, string function
-            arrayQuery = [];
+            arrayQuery = [];            //table/fc index, query string, field 4 aggregation, stat type (count, sum, avg), group by field, html ID, string function
 
             strQuery = strQuery.replace(" and ((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))", "");
             if (strQuery == "(SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)") {
                 strQuery = "objectid > 0";
             }
 
+            
             this.m_query4SummaryMap = strQuery;
 
             if (blnOpenEntireSummary) {
-                //var pNewWindow = window.open("/CEDPSummary.html", "_blank", "", "");
-                //this.mNewDoc = pNewWindow.document;
+                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "", "dTotalAcresQ2", '<b>&nbspAll Efforts:</b> {0}', "commas-no-round-decimal", ""]);
+                arrayQuery.push(["0", strQuery + " and (typeact = 'Project')", "Project_ID,totalacres", "count,sum", "", "dTotalProjects", '<b>&nbspProjects:</b> {0}', "", ""]);
+                arrayQuery.push(["0", strQuery + " and (typeact = 'Plan')", "Project_ID,totalacres", "count,sum", "", "dTotalPlans", '<b>&nbspPlans:</b> {0}', "", ""]);
                 
-                arrayQuery.push(["0", strQuery + " and (typeact = 'Project')", "Project_ID", "count", "", "dTotalProjects", '<b>&nbspTotal Number of Projects:</b> {0}', "", ""]);
-                arrayQuery.push(["0", strQuery + " and (typeact = 'Plan')", "Project_ID", "count", "", "dTotalPlans", '<b>&nbspTotal Number of Plans:</b> {0}', "", ""]);
-                
-                arrayQuery.push(["0", strQuery, "totalacres", "sum", "", "dTotalAcresQ2", '<b>&nbspTotal Acres:</b> {0}', "commas-no-round-decimal", ""]);
-
                 arrayQuery.push(["0", strQuery, "Project_ID", "count", "Implementing_Party", "dNumofDistinctImpParties", '<b>Number of Unique Implementing Parties:</b> {0}', "countOfGroupBy", ""]);
-                arrayQuery.push(["0", strQuery, "totalacres", "sum", "Implementing_Party", "dTotalAcresQ2byImplementing_Party", '<b>Total Acres by Implementing Party:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["0", strQuery, "Project_ID", "count", "Implementing_Party", "dNumberOfRecordsbyImpParty", '<b>Number of Projects/Plans by Implementing Party:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+                //arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Implementing_Party", "dTotalAcresQ2byImplementing_Party", '<b>Total Acres by Implementing Party:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Implementing_Party", "dNumberOfRecordsbyImpParty", '<b># of Efforts and Total Acres by Implementing Party:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                //arrayQuery.push(["0", strQuery, "Project_ID", "count", "Implementing_Party", "dNumberOfRecordsbyImpParty", '<b>Number of Projects/Plans by Implementing Party:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
 
                 arrayQuery.push(["0", strQuery, "Project_ID", "count", "Activity", "dNumofDistinctActivities", '<b>Number of Unique Activities:</b> {0}', "countOfGroupBy", ""]);
-                arrayQuery.push(["0", strQuery, "totalacres", "sum", "Activity", "dTotalAcresQ2byActivity", '<b>Total Acres by Activity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["0", strQuery, "Project_ID", "count", "Activity", "dNumberOfRecordsbyActivity", '<b>Number of Projects/Plans by Activity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+                //arrayQuery.push(["0", strQuery, "totalacres", "sum", "Activity", "dTotalAcresQ2byActivity", '<b>Total Acres by Activity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Activity", "dNumberOfRecordsbyActivity", '<b># of Efforts and Total Acres by Activity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                //arrayQuery.push(["0", strQuery, "Project_ID", "count", "Activity", "dNumberOfRecordsbyActivity", '<b>Number of Projects/Plans by Activity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
 
                 arrayQuery.push(["0", strQuery, "Project_ID", "count", "Office", "dNumofDistinctOffices", '<b>Number of Unique Offices:</b> {0}', "countOfGroupBy", ""]);
-                arrayQuery.push(["0", strQuery, "totalacres", "sum", "Office", "dTotalAcresQ2byOffice", '<b>Total Acres by Office:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["0", strQuery, "Project_ID", "count", "Office", "dNumberOfRecordsbyOffice", '<b>Number of Projects/Plans by Office:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+                //arrayQuery.push(["0", strQuery, "totalacres", "sum", "Office", "dTotalAcresQ2byOffice", '<b>Total Acres by Office:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                //arrayQuery.push(["0", strQuery, "Project_ID", "count", "Office", "dNumberOfRecordsbyOffice", '<b>Number of Projects/Plans by Office:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Office", "dNumberOfRecordsbyOffice", '<b># of Efforts and Total Acres by Office:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
 
                 arrayQuery.push(["0", strQuery, "Project_ID", "count", "SubActivity", "dNumofDistinctSubActivities", '<b>Number of Unique Sub-Activities:</b> {0}', "countOfGroupBy", ""]);
-                arrayQuery.push(["0", strQuery, "totalacres", "sum", "SubActivity", "dTotalAcresQ2bySubActivity", '<b>Total Acres by SubActivity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["0", strQuery, "Project_ID", "count", "SubActivity", "dNumberOfRecordsbySubActivity", '<b>Number of Projects/Plans by SubActivity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+                //arrayQuery.push(["0", strQuery, "totalacres", "sum", "SubActivity", "dTotalAcresQ2bySubActivity", '<b>Total Acres by SubActivity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                //arrayQuery.push(["0", strQuery, "Project_ID", "count", "SubActivity", "dNumberOfRecordsbySubActivity", '<b>Number of Projects/Plans by SubActivity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "SubActivity", "dNumberOfRecordsbySubActivity", '<b># of Efforts and Total Acres by SubActivity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
 
                 arrayQuery.push(["9", strQuery2, "Project_ID", "count", "State", "dNumberofOverlappingStates", '<b>Number of Overlapping States:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
                 arrayQuery.push(["3", strQuery2, "Project_ID", "count", "WAFWA_Zone", "dNumberofOverlappingMngmtZones", '<b>Number of Overlapping Management Zones:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
                 arrayQuery.push(["8", strQuery2, "Project_ID", "count", "Pop_Name", "dNumberofOverlappingPopAreas", '<b>Number of Overlapping Population Areas:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
 
-                //arrayQuery.push(["9", app.PS_Uniques.strQuery1, "Project_ID", "count", "State", "dNumberofOverlappingStates", '<b>Number of Overlapping States:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
-                //arrayQuery.push(["3", app.PS_Uniques.strQuery1, "Project_ID", "count", "WAFWA_Zone", "dNumberofOverlappingMngmtZones", '<b>Number of Overlapping Management Zones:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
-                //arrayQuery.push(["8", app.PS_Uniques.strQuery1, "Project_ID", "count", "Pop_Name", "dNumberofOverlappingPopAreas", '<b>Number of Overlapping Population Areas:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
 
             } else {
                 arrayQuery.push(["0", strQuery, "totalacres", "sum", "", "dTotalAcresQ", '{0}', "commas-no-round-decimal", ""]);
@@ -124,10 +137,6 @@ define([
 
 
         SendQuery: function (arrayQuery, iarrayQueryIndex) {
-            if (iarrayQueryIndex == 15) {
-                var tempstop = 1;
-            }
-
             this.iTempIndexSubmit += 0;
             
             this.m_iarrayQueryIndex = iarrayQueryIndex;
@@ -138,18 +147,45 @@ define([
             var pQueryTask = new esri.tasks.QueryTask(this.strURL + iTableIndex);
             //var pQueryTask = new esri.tasks.QueryTask(this.strURL + "/" + iTableIndex);
             var pQuery = new esri.tasks.Query();
-            var pstatDef = new esri.tasks.StatisticDefinition();
 
             strFieldNameText = pTblindexAndQuery[2];
-            pstatDef.statisticType = pTblindexAndQuery[3];
-            pstatDef.onStatisticField = strFieldNameText;
 
-            pstatDef.outStatisticFieldName = "genericstat";
+            var array_QueryStatDefs = [];
+
+            if (strFieldNameText.indexOf(",") > -1) {
+                var strFieldNameText1 = strFieldNameText.substring(0, strFieldNameText.indexOf(","));
+                var strFieldNameText2 = strFieldNameText.replace(strFieldNameText1 + ",", "");
+
+                var strStateType = pTblindexAndQuery[3];
+                var strStateType1 = strStateType.substring(0, strStateType.indexOf(","));
+                var strStateType2 = strStateType.replace(strStateType1 + ",", "");
+
+                var pstatDef1 = new esri.tasks.StatisticDefinition();
+                pstatDef1.statisticType = strStateType1
+                pstatDef1.onStatisticField = strFieldNameText1;
+                pstatDef1.outStatisticFieldName = strFieldNameText1;
+                //pstatDef1.outStatisticFieldName = "genericstat1";
+                array_QueryStatDefs.push(pstatDef1);
+
+                var pstatDef2 = new esri.tasks.StatisticDefinition();
+                pstatDef2.statisticType = strStateType2;
+                pstatDef2.onStatisticField = strFieldNameText2;
+                pstatDef2.outStatisticFieldName = strFieldNameText2;
+                //pstatDef2.outStatisticFieldName = "genericstat2";
+                array_QueryStatDefs.push(pstatDef2);
+            } else {
+                var pstatDef = new esri.tasks.StatisticDefinition();
+                pstatDef.statisticType = pTblindexAndQuery[3];
+                pstatDef.onStatisticField = strFieldNameText;
+                pstatDef.outStatisticFieldName = "genericstat";
+                array_QueryStatDefs.push(pstatDef);
+            }
 
             pQuery.returnGeometry = false;
             pQuery.where = strQuery;
 
-            pQuery.outFields = [strFieldNameText];
+            //pQuery.outFields = [strFieldNameText];
+            pQuery.outFields = ["*"];
             var strGroupByField = pTblindexAndQuery[4];
 
             if (strGroupByField != "") {
@@ -159,7 +195,7 @@ define([
                 pQuery.orderByFields = [strGroupByField + " ASC"];
             }
 
-            pQuery.outStatistics = [pstatDef];
+            pQuery.outStatistics = array_QueryStatDefs;
             console.log(iarrayQueryIndex, iarrayQueryIndex);
 
 
@@ -176,7 +212,11 @@ define([
                 
                 var strStatisticType = pTblindexAndQuery[3];
                 var strFieldNameText = pTblindexAndQuery[2];
+
                 var strGroupByField = pTblindexAndQuery[4];
+
+
+
                 var strHTMLElementID = pTblindexAndQuery[5];
                 var strStringFormatting = pTblindexAndQuery[6];
                 var strVarType = pTblindexAndQuery[7];
@@ -235,38 +275,56 @@ define([
                             var strValue = "";
                             var testTexts = {};
                             var attrNames = [];
+                            var strTextTemp = "";
                             var blnAdd2Dropdown;
                             for (var i in featAttrs) { attrNames.push(i); }
 
                             dojo.forEach(resultFeatures, function (feature) {//Loop through the QueryTask results and populate an array with the unique values
-
                                 blnAdd2Dropdown = false;
+
+                                if (strGroupByField != "") {   //because the order of attribute retreival can differ, get the attribute that is the group by
+                                    if ((feature.attributes[strGroupByField] == null) | (feature.attributes[strGroupByField] == undefined)) {
+                                        strText = "Unknown :";
+                                    } else {
+                                        strText = feature.attributes[strGroupByField] + ":";
+                                    }
+                                    values.push(strText);
+                                }
+
                                 dojo.forEach(attrNames, function (an) {
+
                                     if ((feature.attributes[an] == null) | (feature.attributes[an] == undefined)) {
                                         strText = "TBD";
                                     } else {
-                                        var strText = feature.attributes[an].toString();
+                                        strText = feature.attributes[an].toString();
                                     }
-
-                                    if (this.app.gQuerySummary.m_iarrayQueryIndex == 1) {
-                                        var tempstop = 1;
-                                    }
-
 
                                     if (((strGroupByField != "") & (an == "genericstat") & (strVarType != "show both") & (strVarType != "show both-commas-no-round-decimal")) | (strText == "")) {
                                         //values.push(strText);
-                                        //do nothing
-                                    } else if ((strStatisticType == "count") & (strVarType == "default")) {
+                                        //do nothing, don't add the the array of values
+                                    } else if (an == strGroupByField){
+                                        //do nothing, don't add the the array of values
+                                    }
+                                    else if ((strStatisticType == "count") & (strVarType == "default")) {
                                         strText += "\n<br>&nbsp;&nbsp;&nbsp;";
                                         values.push(strText);
                                     } else if ((strVarType == "show both-currency") & (an == "genericstat")) {
                                         var iTempNumber = Number(strText);
                                         strText = iTempNumber.toCurrencyString() + "\n<br>&nbsp;&nbsp;&nbsp;";
                                         values.push(strText);
-                                    } else if ((strVarType == "show both-commas-no-round-decimal") & (an == "genericstat")) {
+                                    //} else if ((strVarType == "show both-commas-no-round-decimal") & (an == "genericstat")) {
+                                    } else if (strVarType == "show both-commas-no-round-decimal") {
                                         var iTempNumber = Number(strText);
                                         iTempNumber = Math.round(iTempNumber);
-                                        strText = iTempNumber.toCurrencyString().replace("$", "") + "\n<br>&nbsp;&nbsp;&nbsp;";
+                                        //strText = iTempNumber.toCurrencyString().replace("$", "") + "\n<br>&nbsp;&nbsp;&nbsp;";
+                                        strText = iTempNumber.toCurrencyString().replace("$", "");
+
+                                        if (attrNames[0] == an) {
+                                            strText += " efforts, ";
+                                        } else if (attrNames[1] == an) {
+                                            strText += " acres\n<br>&nbsp;&nbsp;&nbsp;";
+                                        }
+
                                         values.push(strText);
                                     } else if ((strVarType == "commas-no-round-decimal") & (an == "genericstat")) {
                                         var iTempNumber = Number(strText);
@@ -277,7 +335,22 @@ define([
                                         //                                      var iTempNumber = Number(strText);
                                         strText = "(" + strText + ")\n<br>&nbsp;&nbsp;&nbsp;";
                                         values.push(strText);
-                                    } else {
+                                    } else if (attrNames.length >= 2) {
+                                        if (!(isNaN.strText)) {
+                                            var iTempNumber = Number(strText);
+                                            iTempNumber = Math.round(iTempNumber);
+                                            strText = iTempNumber.toCurrencyString().replace("$", "");
+                                        }
+
+                                        if (attrNames[0] == an) {
+                                            //strTextTemp = strText + " efforts, ";
+                                            values.push(strText + " efforts, ");
+                                        } else {
+                                            //values.push(strTextTemp + ", " + an + ":" + strText);
+                                            values.push(strText + " acres");
+                                        }
+                                    }
+                                    else {
                                         values.push(strText);
                                     }
 
@@ -336,4 +409,5 @@ define([
     );
 }
 );
+
 

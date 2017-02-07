@@ -69,11 +69,24 @@
                 Color, Scalebar, Geocoder, PS_Identify, CK_AutoCompleteSearchAndZoom, PS_PopUniqueQueryInterfaceValues,
                 webMercatorUtils, BasemapGallery, mouse, query, FindTask, FindParameters) {
 
+        esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
+
         parser.parse();
 
         var strURL = localStorage.getItem("ls_strTheme1_URL");
         var strDefQuery = localStorage.getItem("ls_strDefQuery");
         var strDefQuery2 = localStorage.getItem("ls_strDefQuery2");
+        var strQueryLabelText = localStorage.getItem("ls_strQueryLabelText");
+
+        if ((strQueryLabelText == "") | (strQueryLabelText == "undefined")) {
+            strQueryLabelText = "<b>User Selected Query Filters:</b>  None selected"
+        } else {
+            strQueryLabelText = "<b>User Selected Query Filters:</b>  " + strQueryLabelText.substring(0, strQueryLabelText.length - 2);
+        }
+
+        var div = document.getElementById("dFilterParameters");
+        div.innerHTML = strQueryLabelText;
+
 
         app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class
 
@@ -160,7 +173,7 @@
            
         <table style="width:100%; background-color: #f2f5f9;">
             <tr>
-                <td class="auto-style1" colspan="4">
+                <td class="auto-style1" colspan="3">
                     <a href="http://conservationefforts.org/welcome/" target="_blank"> <img id="theImage4" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/CEDlogo_white_180x31.png" style="position: absolute; left: 15px; top: 18px; height: 45px;" /></a>
                     <a href="http://www.fws.gov" target="_blank"> <img id="theImage3" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USFWS_150x31.png" height="36"  /></a>&nbsp;&nbsp;
                     <a href="http://www.usgs.gov" target="_blank"><img id="theImage2" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USGS_117x31.png" height="36"   /></a>
@@ -169,33 +182,33 @@
             </tr>
 
             <tr>
-                <td class="auto-style1" colspan="4">
+                <td class="auto-style1" colspan="3">
                     <font size="8px" color="red"><b>DRAFT VERSION 2.0</b></font>
                 </td>
             </tr>
 
 
             <tr>
-                <td class="HTMLTable_styleMiddleLessPad" colspan="2">
+                <td class="HTMLTable_styleMiddleLessPad" colspan="3">
                     &nbsp;<b>Report Date:</b> <span id="time"></span>
-                </td>
-                <td class="HTMLTable_styleMiddleLessPad" colspan="2">
                     <img id="ImgResultsLoading" src="images/loading.gif" style="height:15px" /></td>
             </tr>
             <tr>
                 <td class="HTMLTable_styleLeftLessPad">
+                    <div id="dTotalAcresQ2"></div>
                     <div id="dTotalProjects"></div>
                     <div id="dTotalPlans"></div>
-                    <div id="dTotalAcresQ2"></div>
                 </td>
-                <td class="HTMLTable_styleMiddleLessPad" colspan="2"></td>
-                <td class="HTMLTable_styleLeftLessPad"></td>
+                <td class="HTMLTable_styleMiddleLessPad"></td>
+                <td class="HTMLTable_styleLeftLessPad">
+                    <div id="dFilterParameters"></div>
+                </td>
             </tr>
             <tr>
                 <td class="HTMLTable_styleMiddleLessPad">
                 
                 </td>
-                <td colspan="2"></td>
+                <td></td>
                 <td>
                 
                 </td>
@@ -205,14 +218,14 @@
                 <td class="HTMLTable_BannerRow">
                     &nbsp;Implementing Party
                 </td>
-                <td class="HTMLTable_styleMiddle" colspan="2">
+                <td class="HTMLTable_styleMiddle">
                     &nbsp;
                 </td>
                 <td class="HTMLTable_BannerRow">
                     &nbsp;Activity
                 </td>
             </tr>
-            <tr>
+          <!--  <tr>
                 <td class="HTMLTable_styleLeft">
                     <div id="dTotalAcresQ2byImplementing_Party">
                     </div>
@@ -222,13 +235,13 @@
                     <div id="dTotalAcresQ2byActivity">
                     </div>
                 </td>
-            </tr>
+            </tr>-->
             <tr>
                 <td class="HTMLTable_styleLeft">
                     <div id="dNumofDistinctImpParties"></div>
                     <div id="dNumberOfRecordsbyImpParty"></div>
                 </td>
-                <td class="HTMLTable_styleMiddle" colspan="2">
+                <td class="HTMLTable_styleMiddle">
                     &nbsp;
                 </td>
                 <td class="HTMLTable_styleLeft">
@@ -241,13 +254,13 @@
                 <td class="HTMLTable_BannerRow">
                     Office
                     </td>
-                <td class="HTMLTable_styleMiddle" colspan="2"></td>
+                <td class="HTMLTable_styleMiddle"></td>
                 <td class="HTMLTable_BannerRow">
                  SubActivities
                     </td>
                 </td>
             </tr>
-            <tr>
+           <!-- <tr>
                 <td class=HTMLTable_styleLeft>
                     <div id="dTotalAcresQ2byOffice">
                     </div>
@@ -257,14 +270,14 @@
                     <div id="dTotalAcresQ2bySubActivity">
                     </div>
                 </td>
-            </tr>
+            </tr>-->
 
             <tr>
                 <td class="HTMLTable_styleLeft">
                     <div id="dNumofDistinctOffices"></div>
                     <div id="dNumberOfRecordsbyOffice"></div>
                 </td>
-                <td class="HTMLTable_styleMiddle" colspan="2"></td>
+                <td class="HTMLTable_styleMiddle"></td>
                 <td class="HTMLTable_styleLeft">
                     <div id="dNumofDistinctSubActivities"></div>
                     <div id="dNumberOfRecordsbySubActivity">
@@ -274,7 +287,7 @@
 
 
             <tr>
-                <td class="HTMLTable_BannerRow" colspan="4">
+                <td class="HTMLTable_BannerRow" colspan="3">
                     DRAFT This section under construciton!&nbsp;
                     Overlapping Areas
                     </td>
@@ -285,7 +298,7 @@
                 <td class="HTMLTable_styleLeft">
                     <div id="dNumberofOverlappingStates"></div>
                 </td>
-                <td class="HTMLTable_styleMiddle" colspan="2">
+                <td class="HTMLTable_styleMiddle">
                     &nbsp;
                 </td>
                 <td class="HTMLTable_styleLeft" rowspan="2">
@@ -296,7 +309,7 @@
                 <td class="HTMLTable_styleLeft">
                     <div id="dNumberofOverlappingMngmtZones"></div>
                 </td>
-                <td class="HTMLTable_styleMiddle" colspan="2"></td>
+                <td class="HTMLTable_styleMiddle"></td>
             </tr>
         </table>
            

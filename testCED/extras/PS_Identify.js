@@ -70,11 +70,14 @@ define([
             app.map.disableMapNavigation();
             app.map.hideZoomSlider();
 
-
             this.pEvt = pEvt;
             this.strMultipleContent = null;
             this.m_ExceedCount = null;
             this.m_ExceedSum = null;
+
+            var strQuery1 = "";
+            var strQuery23 = "";
+
             if (pEvt != null) {
                 dblX = pEvt.mapPoint.x;
                 dblY = pEvt.mapPoint.y;
@@ -82,12 +85,24 @@ define([
                 pSP = pEvt.screenPoint;
                 pxWidth = app.map.extent.getWidth() / app.map.width; // create an extent from the mapPoint that was clicked // this is used to return features within 3 pixels of the click point
                 padding = 8 * pxWidth;
+
+                strQuery1 = this.pLayer1.getDefinitionExpression();
+                if (this.pLayer2.getDefinitionExpression() != "") {
+                    strQuery23 = this.pLayer2.getDefinitionExpression();
+                } else {
+                    strQuery23 = "OBJECTID > 0";
+                }
+
             } else {
                 var pMP = new esri.geometry.Point(dblX, dblY, new esri.SpatialReference({ "wkid": 3857 }));
+                this.mSR = new esri.SpatialReference({ "wkid": 3857 });
                 var pSP = app.map.toScreen(pMP);
-                padding = 0.0005
+                padding = 500
+                //padding = 0.0005
                 this.m_dblX = dblX
                 this.m_dblY = dblY
+                strQuery1 = "((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))"
+                strQuery23 = "OBJECTID > 0";
             }
 
             this.pSP = pSP;
@@ -98,16 +113,15 @@ define([
             qt_Layer3 = new esri.tasks.QueryTask(this.pLayer3.url);
             q_Layer3 = new esri.tasks.Query();
 
-            //q_Layer1.returnGeometry = q_Layer2.returnGeometry = q_Layer3.returnGeometry = false;
             q_Layer1.returnGeometry = q_Layer2.returnGeometry = q_Layer3.returnGeometry = true;
             q_Layer1.outSpatialReference = q_Layer2.outSpatialReference = q_Layer3.outSpatialReference = new esri.SpatialReference({ "wkid": 3857 })
 
             q_Layer3.maxAllowableOffset = 200;
             q_Layer1.outFields = q_Layer2.outFields = q_Layer3.outFields = ["*"];
-
-            var strQuery = this.pLayer1.getDefinitionExpression();
-            q_Layer1.where = this.pLayer1.getDefinitionExpression();
-            q_Layer2.where = q_Layer3.where = this.pLayer2.getDefinitionExpression(); ;
+            
+            q_Layer1.where = strQuery1;
+            q_Layer2.where = q_Layer3.where = strQuery23;
+                                    
             var pLayer1, pLayer2, pLayer3, pPromises, pxWidth, padding;
 
             qGeom = new esri.geometry.Extent({ "xmin": dblX - padding, "ymin": dblY - padding, "xmax": dblX + padding, "ymax": dblY + padding, "spatialReference": this.mSR });

@@ -59,6 +59,8 @@ Date:        Oct 2014-->
                 Color, Scalebar, Geocoder, PS_Identify, CK_AutoCompleteSearchAndZoom, PS_PopUniqueQueryInterfaceValues,
                 webMercatorUtils, BasemapGallery, mouse, query, FindTask, FindParameters) {
 
+        esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
+
         document.getElementById("txtQueryResults").innerHTML = "-";
         document.getElementById("dTotalProjectsQ").innerHTML = "-";
         document.getElementById("dTotalPlansQ").innerHTML = "-";
@@ -101,14 +103,9 @@ Date:        Oct 2014-->
         app.pSetQS = null;
 
         app.arrayLayers = pSup.Phase2();
-        var CED_PP_poly = arrayLayers[4];
-        var CED_PP_line = arrayLayers[5];
-        var CED_PP_point = arrayLayers[6];
-
-        var CED_PP_polyTPK = arrayLayers[7];
-        var CED_PP_lineTPK = arrayLayers[8];
-        var CED_PP_pointTPK = arrayLayers[9];
-        //var layerTPK = arrayLayers[7];
+        var CED_PP_poly = arrayLayers[12];  //index depends on MH_Setup-->Phase2-->arrayLayers = 
+        var CED_PP_line = arrayLayers[13];
+        var CED_PP_point = arrayLayers[14];
 
         on(dom.byId("btn_clear"), "click", btn_clear_click);
         on(dom.byId("btn_TextSummary"), "click", btn_TextSummary_click);
@@ -120,17 +117,12 @@ Date:        Oct 2014-->
         on(dom.byId("ddlState"), "change", ddlMatrix_Change);
         on(dom.byId("ddlManagUnit"), "change", ddlMatrix_Change);
         on(dom.byId("ddlPopArea"), "change", ddlMatrix_Change);
-
-
         //on(dom.byId("btnOpenStats"), "onclick", openCEDPSummary);
         $(function () {
             $('.divOpenStats').click(function () {
                 openCEDPSummary()
             });
         });
-
-
-
         dojo.connect(app.map, "onClick", executeIdeintifyQueries);
         pSup.Phase3(CED_PP_point, CED_PP_line, CED_PP_poly);
 
@@ -214,7 +206,7 @@ Date:        Oct 2014-->
         function RunQueryArgs(strA_TypeAct, strA_entry_type, strA_activity, strA_Subactivity, strA_implementing_party, strA_State, strA_POPArea, strA_Managementunit, strA_office) {
             dojo.forEach(app.arrayLayers, function (player) {
                 var id = player.id;
-                if ((id == "10") | (id == "11") | (id == "12") | (id == "graphicsLayer1")) { player.setVisibility(false); }
+                //if ((id == "10") | (id == "11") | (id == "12") | (id == "graphicsLayer1")) { player.setVisibility(false); }
                 if ((id == "0") | (id == "1") | (id == "2") | (id == "graphicsLayer1")) {
                     player.setDefinitionExpression("ObjectID < 0");  // set the definition expression for quick display of nothing
                     player.setVisibility(true); 
@@ -273,6 +265,9 @@ Date:        Oct 2014-->
             localStorage.setItem("ls_strTheme1_URL", app.strTheme1_URL);
             localStorage.setItem("ls_strDefQuery", CED_PP_point.getDefinitionExpression());
             localStorage.setItem("ls_strDefQuery2", app.PS_Uniques.strQuery1);
+
+            localStorage.setItem("ls_strQueryLabelText", app.strQueryLabelText);
+
             //var pNewWindow = window.open("CEDPSummary.html?strURL|" + app.strTheme1_URL +
             //                            "&strDefQuery|" + CED_PP_point.getDefinitionExpression() +
             //                            "&strDefQuery2|" + app.PS_Uniques.strQuery1);
@@ -305,35 +300,45 @@ Date:        Oct 2014-->
 
                 dojo.forEach(app.arrayLayers, function (player) {
                     var id = player.id;
-                    if ((id == "0") | (id == "1") | (id == "2") | (id == "graphicsLayer1")) { player.setVisibility(!blnTPKs); }
+                    //if ((id == "0") | (id == "1") | (id == "2") | (id == "graphicsLayer1")) { player.setVisibility(!blnTPKs); }
+                    if (id == "graphicsLayer1") { player.setVisibility(!blnTPKs); }
                 });
             }
             else {
                 dojo.forEach(app.arrayLayers, function (player) {
                     var id = player.id;
-                    if ((id == "10") | (id == "11") | (id == "12") | (id == "graphicsLayer1")) { player.setVisibility(false); }
+                    if (id == "graphicsLayer1") { player.setVisibility(false); }
+                    //if ((id == "10") | (id == "11") | (id == "12") | (id == "graphicsLayer1")) { player.setVisibility(false); }
                 });
             }
+
+            app.strQueryLabelText = "";
 
             var strQuery = "";
             if ((strddlMatrix !== "All") & (strddlMatrix !== "99")) {
                 strQuery = "typeact = '" + strddlMatrix + "'";
+
+                app.strQueryLabelText += "Effort Type = " + document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].text + ", ";
             }
             if (strddlEntry !== "99") {
                 if (strQuery !== "") { strQuery += " and "; }
                 strQuery += "entry_type = " + strddlEntry + "";
+                app.strQueryLabelText += "Entry Type = " + document.getElementById("ddlEntry").options[document.getElementById("ddlEntry").selectedIndex].text + ", ";
             }
             if (strActivity !== "99") {  //            if ((strActivity !== "All") & (strActivity != 99)) {
                 if (strQuery !== "") { strQuery += " and "; }
                 strQuery += "ACT_ID = " + strActivity + "";
+                app.strQueryLabelText += "Activity Type = " + document.getElementById("ddlActivity").options[document.getElementById("ddlActivity").selectedIndex].text + ", ";
             }
             if (strImpParty !== "99") {    //            if (strImpParty !== "All") {
                 if (strQuery !== "") { strQuery += " and "; }
                 strQuery += "IP_ID = " + strImpParty + "";
+                app.strQueryLabelText += "Implementing Party = " + document.getElementById("ddlImpParty").options[document.getElementById("ddlImpParty").selectedIndex].text + ", ";
             }
             if (strOffice !== "99") {    //            if (strImpParty !== "All") {
                 if (strQuery !== "") { strQuery += " and "; }
                 strQuery += "FO_ID = " + strOffice + "";
+                app.strQueryLabelText += "Field Office = " + document.getElementById("ddlOffice").options[document.getElementById("ddlOffice").selectedIndex].text + ", ";
             }
             app.PSQ = new PS_MeasSiteSearch4Definition({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
                 strState: strState, strPopArea: strPopArea, strManagUnit: strManagUnit, strQuerySaved: strQuery, divTagSource: divTagSource, pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line
@@ -342,6 +347,17 @@ Date:        Oct 2014-->
             if ((strState != "99") || (strPopArea != "99") || (strManagUnit != "99")) {
                 var PSQResults = app.PSQ.qry_Non_SpatialTable("", null, "ST_ID");
                 PSQResults.then(PSQsearchSucceeded, PSQsearchFailed);
+
+                if (strState !== "99") {    //            if (strImpParty !== "All") {
+                    app.strQueryLabelText += "State = " + document.getElementById("ddlState").options[document.getElementById("ddlState").selectedIndex].text + ", ";
+                }
+                if (strPopArea !== "99") {    //            if (strImpParty !== "All") {
+                    app.strQueryLabelText += "GRSG Population Area = " + document.getElementById("ddlPopArea").options[document.getElementById("ddlPopArea").selectedIndex].text + ", ";
+                }
+                if (strManagUnit !== "99") {    //            if (strImpParty !== "All") {
+                    app.strQueryLabelText += "GRSG Management Zone = " + document.getElementById("ddlManagUnit").options[document.getElementById("ddlManagUnit").selectedIndex].text + ", ";
+                }
+
             } else {
                 app.PSQ.ExecutetheDerivedQuery(strQuery, divTagSource);
             }
@@ -360,13 +376,16 @@ Date:        Oct 2014-->
             app.map.graphics.clear();
             document.getElementById("btn_TextSummary").disabled = true;
 
-            CED_PP_poly.hide();
-            CED_PP_point.hide();
-            CED_PP_line.hide();
+            CED_PP_poly.show();
+            CED_PP_point.show();
+            CED_PP_line.show();
 
-            CED_PP_polyTPK.show();
-            CED_PP_pointTPK.show();
-            CED_PP_lineTPK.show();
+            //CED_PP_poly.hide();
+            //CED_PP_point.hide();
+            //CED_PP_line.hide();
+            //CED_PP_polyTPK.show();
+            //CED_PP_pointTPK.show();
+            //CED_PP_lineTPK.show();
             
             // do not turn off layer visibility here, the checkbox click methods will handle layer visibility
             var pform = dom.byId("toggleForm");
@@ -617,10 +636,13 @@ margin: 0;
                     <!--<td><u>Quick Summary</u></td>   <td><body link="white"><a href="CEDPSummary.html" target="_blank">      More...</a></body></td>-->
                     <td class="HTMLTable_styleRightJ_Compact"><b><u>Quick Summary</u></b></td>
                     <td class="HTMLTable_styleMiddle_Compact"> </td>
-                    <td class="HTMLTable_styleLeftJ_Compact">
-                            <div class="divOpenStats" onmouseover="" style="cursor: pointer;"><font size="2px" color="white"><u><I>Click for more info...</I></u></font></div>
-                    </td>
+                    <td class="HTMLTable_styleLeftJ_Compact"> </td>
                 </tr>
+
+                <!--<tr>
+                    <td colspan="3"><div class="divOpenStats" onmouseover="" style="cursor: pointer;"><font size="2px" color="white"><u><I>Click for summary report...</I></u></font></div></td>
+                </tr>-->
+
                 <tr>
                     <td class="HTMLTable_styleRightJ_Compact"><b>Total # of Projects</b></td>
                     <td class="HTMLTable_styleMiddle_Compact"> </td>
@@ -639,10 +661,8 @@ margin: 0;
       <!--          <tr>
                     <td><u><a href="CEDPSummary.html" target="_blank">More info...</a></u></td>    <td>-</td>
                 </tr>-->
-
-
-                
             </table>
+            <div class="divOpenStats" onmouseover="" style="cursor: pointer;"><font size="2px" color="white"><b><u><I>Click for summary report...</I></u></b></font></div>
         </div>
     </div>
 

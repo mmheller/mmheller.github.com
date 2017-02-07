@@ -86,25 +86,34 @@ define([
           app.loading = dojo.byId("loadingImg");  //loading image. id
               var customExtentAndSR = new esri.geometry.Extent(-14000000, 4800000, -11000000, 6200000, new esri.SpatialReference({ "wkid": 3857 }));
               app.map = new esri.Map("map", { basemap: "topo", logo: false, extent: customExtentAndSR });
-              //app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/a9bd0c665cc543f7800991255031638b/rest/services/Catalog/53d6d123e4b00d9e8ffa6124/MapServer/";  //Theme Layers
-              //app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/636fc6181db341218d8e594e96eca923/rest/services/Catalog/5851daa2e4b0e2663625ebcb/MapServer/"
-              app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/d725bb5ba60348fd841b05f80cf4465d/rest/services/CEDfrontpage_map_v9_Restrict/FeatureServer/"
+              //app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/d725bb5ba60348fd841b05f80cf4465d/rest/services/CEDfrontpage_map_v9_Restrict/FeatureServer/"
+              app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/5d5fc053dd7e4de4b9765f7a6b6f1f61/rest/services/CEDfrontpage_map_v9_Restrict/FeatureServer/";
 
               dojo.connect(app.map, "onUpdateStart", showLoading);
               dojo.connect(app.map, "onUpdateEnd", hideLoading);
 
               var legendLayers = [];
-              CED_PP_point = new FeatureLayer(app.strTheme1_URL + "0", { id: "0", mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+              CED_PP_point = new FeatureLayer(app.strTheme1_URL + "0", { id: "0", mode: FeatureLayer.MODE_ONDEMAND, visible: true });
               CED_PP_point.setDefinitionExpression("(SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)");
-              CED_PP_line = new FeatureLayer(app.strTheme1_URL + "1", { id: "1", mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              CED_PP_poly = new FeatureLayer(app.strTheme1_URL + "2", { id: "2", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: false });
+              CED_PP_line = new FeatureLayer(app.strTheme1_URL + "1", { id: "1", mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+              CED_PP_poly = new FeatureLayer(app.strTheme1_URL + "2", { id: "2", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: true });
 
-              var strBase_URL = "https://utility.arcgis.com/usrsvcs/servers/8631d8c78be64789a68a049f5dfe01e9/rest/services/Catalog/54ee573fe4b02d776a684ac8/MapServer/"
-              var strlabelField1 = "population";
-              var strlabelField2 = "name";
-              var strlabelField3 = "mgmt_zone";
+              var strBase_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/"
+              var strlabelField1 = "POPULATION";
+              var strlabelField2 = "Name";
+              var strlabelField3 = "Mgmt_zone";
               pBase_Pop = new FeatureLayer(strBase_URL + "0", {id: "Pop", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: false });
               pBase_MZ = new FeatureLayer(strBase_URL + "1", { id: "MZ", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: false });
+
+              pBase_RRP = new FeatureLayer(strBase_URL + "2", { id: "RRP", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: false });
+              pBase_RRB = new FeatureLayer(strBase_URL + "3", { id: "RRB", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: false });
+              pBase_Breed = new FeatureLayer(strBase_URL + "4", { id: "Breed", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: false });
+              pBase_PI = new FeatureLayer(strBase_URL + "5", { id: "PI", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: false });
+              pBase_Eco = new FeatureLayer(strBase_URL + "6", { id: "Eco", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: false });
+              pBase_PHMA = new FeatureLayer(strBase_URL + "7", { id: "PHMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: false });
+              pBase_GHMA = new FeatureLayer(strBase_URL + "8", { id: "GHMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: false });
+              pBase_SMA = new FeatureLayer(strBase_URL + "9", { id: "SMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: false });
+
               var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
               var pLabel1 = new TextSymbol().setColor(vGreyColor);
               pLabel1.font.setSize("10pt");
@@ -118,37 +127,44 @@ define([
               pLabel2.font.setFamily("Arial Black");
               var pLabelRenderer2 = new SimpleRenderer(pLabel2);
               var plabels2 = new LabelLayer({ id: "labels2" });
-              plabels2.addFeatureLayer(pBase_MZ, pLabelRenderer2, "{" + strlabelField2 + "} \n {" + strlabelField3 + "}");
+              plabels2.addFeatureLayer(pBase_MZ, pLabelRenderer2, "{" + strlabelField2 + "} : {" + strlabelField3 + "}");
 
-
-              var pLegendBase_Pop = new FeatureLayer(strBase_URL + "2", { id: "LegendPop", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: false });
-              var pLegendBase_MZ = new FeatureLayer(strBase_URL + "3", { id: "LegendMZ", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2], visible: false });
-              var pLegendCED_PP_point = new FeatureLayer(strBase_URL + "4", { id: "LegendPt", mode: FeatureLayer.MODE_ONDEMAND, visible: true });
-              var pLegendCED_PP_line = new FeatureLayer(strBase_URL + "5", {id: "LegendLine", mode: FeatureLayer.MODE_ONDEMAND, visible: true });
-              var pLegendCED_PP_poly = new FeatureLayer(strBase_URL + "6", { id: "LegendPoly", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, visible: true });
-
-              legendLayers.push({ layer: pLegendCED_PP_poly, title: 'CED Plans and Projects (area)' });
-              legendLayers.push({ layer: pLegendCED_PP_line, title: 'CED Plans and Projects (line)' });
-              legendLayers.push({ layer: pLegendCED_PP_point, title: 'CED Plans and Projects (point)' });
+              legendLayers.push({ layer: pBase_SMA, title: 'Surface Management Agencies' });
+              legendLayers.push({ layer: pBase_GHMA, title: 'Prop GRSG Gen Hab Mngmt Areas' });
+              legendLayers.push({ layer: pBase_PHMA, title: 'Prop GRSG Priority Hab Mngmt Areas' });
+              legendLayers.push({ layer: pBase_Eco, title: 'Ecosystem RResil./Resist of GRSG Mngmt Zones' });
+              legendLayers.push({ layer: pBase_RRP, title: 'Resil./Resist. & Pop Index (H/L Dens)' });
+              legendLayers.push({ layer: pBase_RRB, title: 'Resil./Resist. & Breeding Habitat Prob' });
+              legendLayers.push({ layer: pBase_Breed, title: 'Breeding Habitat Distribution' });
+              legendLayers.push({ layer: pBase_PI, title: 'Pop Index (Rel Abundance 25% Bins)' });
+              legendLayers.push({ layer: CED_PP_poly, title: 'CED Plans and Projects (area)' });
+              legendLayers.push({ layer: CED_PP_line, title: 'CED Plans and Projects (line)' });
+              legendLayers.push({ layer: CED_PP_point, title: 'CED Plans and Projects (point)' });
+              legendLayers.push({ layer: pBase_Pop, title: 'GRSG Population Areas' });
+              legendLayers.push({ layer: pBase_MZ, title: 'WAFWA Management Zones' });
 
               dojo.connect(app.map, 'onLayersAddResult', function (results) {
-                  var legend = new Legend({ map: app.map, layerInfos: legendLayers, respectCurrentMapScale: false, autoUpdate: false }, "legendDiv");
+                  var legend = new Legend({ map: app.map, layerInfos: legendLayers, respectCurrentMapScale: false, autoUpdate: true }, "legendDiv");
                   legend.startup();
               });
 
-              var strTPK_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/"
-              CED_PP_point_tpk = new ArcGISDynamicMapServiceLayer(strTPK_URL + "54f0a7b5e4b02419550ce925/MapServer", { id: "10", visible: true });
-              CED_PP_line_tpk = new ArcGISDynamicMapServiceLayer(strTPK_URL + "54f0a722e4b02419550ce91d/MapServer", { id: "11", visible: true });
-              CED_PP_poly_tpk = new ArcGISDynamicMapServiceLayer(strTPK_URL + "54f0a8b1e4b02419550ce930/MapServer", { id: "12", "opacity": 0.6, visible: true });
-
               var cbxLayers = [];
-              cbxLayers.push({ layers: [CED_PP_poly, CED_PP_poly_tpk], title: 'CED Plans and Projects (area)' });
-              cbxLayers.push({ layers: [CED_PP_point, CED_PP_point_tpk], title: 'CED Plans and Projects (point)' });
-              cbxLayers.push({ layers: [CED_PP_line, CED_PP_line_tpk], title: 'CED Plans and Projects (line)' });
+
+              cbxLayers.push({ layers: [pBase_SMA, pBase_SMA], title: 'Surface Management Agencies' });
+              cbxLayers.push({ layers: [pBase_GHMA, pBase_GHMA], title: 'Prop GRSG Gen Hab Mngmt Areas' });
+              cbxLayers.push({ layers: [pBase_PHMA, pBase_PHMA], title: 'Prop GRSG Priority Hab Mngmt Areas' });
+              cbxLayers.push({ layers: [pBase_Eco, pBase_Eco], title: 'Ecosystem RResil./Resist of GRSG Mngmt Zones' });
+              cbxLayers.push({ layers: [pBase_RRP, pBase_RRP], title: 'Resil./Resist. & Pop Index (H/L Dens)' });
+              cbxLayers.push({ layers: [pBase_RRB, pBase_RRB], title: 'Resil./Resist. & Breeding Habitat Prob' });
+              cbxLayers.push({ layers: [pBase_Breed, pBase_Breed], title: 'Breeding Habitat Distribution' });
+              cbxLayers.push({ layers: [pBase_PI, plabels2], title: 'Pop Index (Rel Abundance 25% Bins)' });
+              cbxLayers.push({ layers: [CED_PP_poly, CED_PP_poly], title: 'CED Plans and Projects (area)' });
+              cbxLayers.push({ layers: [CED_PP_point, CED_PP_point], title: 'CED Plans and Projects (point)' });
+              cbxLayers.push({ layers: [CED_PP_line, CED_PP_line], title: 'CED Plans and Projects (line)' });
               cbxLayers.push({ layers: [pBase_Pop, plabels1], title: 'GRSG Population Areas' });
               cbxLayers.push({ layers: [pBase_MZ, plabels2], title: 'WAFWA Management Zones' });
 
-              arrayLayers = [pBase_MZ, pBase_Pop, plabels1, plabels2, CED_PP_poly, CED_PP_line, CED_PP_point, CED_PP_poly_tpk, CED_PP_line_tpk, CED_PP_point_tpk];
+              arrayLayers = [pBase_SMA, pBase_GHMA, pBase_PHMA, pBase_Eco, pBase_RRP, pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop, plabels1, plabels2, CED_PP_poly, CED_PP_line, CED_PP_point];
               app.map.addLayers(arrayLayers);
 
               dojo.connect(app.map, 'onLayersAddResult', function (results) {            //add check boxes 
@@ -162,15 +178,13 @@ define([
                           var pID1 = clayer1.id;
 
                           var blnCEDLayer = false; // determine if this layer is a ced point line or poly layer
-                          if ((pID0 == 0) | (pID0 == 1) | (pID0 == 2) | (pID0 == "graphicsLayer1")) {
+                          if ((pID0 == "0") | (pID0 == "1") | (pID0 == "2") | (pID0 == "graphicsLayer1")) {
                               blnCEDLayer = true; 
                           }
-
                           var blnCheckIt = false;  // determine if checkbox will be on/off
                           if (((blnCEDLayer) & (clayer0.visible | clayer1.visible)) | ((!(blnCEDLayer)) & (clayer0.visible))) {
                               blnCheckIt = true;
                           }
-
                           var checkBox = new CheckBox({ name: "checkBox" + pID0, value: [pID0, pID1], checked: blnCheckIt,
                               onChange: function (evt) {
                                   if (blnCEDLayer) {
@@ -226,17 +240,27 @@ define([
 
               $('#loc').autocomplete({
                   source: function (request, response) {
+                      var strURL4Search = "";
+                      if (!(isNaN(request.term))) {
+                          strURL4Search = app.strTheme1_URL + "0/query" +
+                                       "?where=Project_Name+like+%27%25" + request.term + "%25%27+or+Project_ID+%3D+" + request.term + "&f=pjson&outFields=*&returnGeometry=true&outFields=Project_Name%2C+Project_ID%2C+SourceFeatureType%2C+TypeAct%2C+geometry";
+                      } else {
+                          strURL4Search = app.strTheme1_URL + "0/query" +
+                                       "?where=Project_Name+like+'%25" + request.term + "%25'" + "&f=pjson&outFields=*&returnGeometry=true&outFields=Project_Name%2C+Project_ID%2C+SourceFeatureType%2C+TypeAct%2C+geometry";
+                      }
                       $.ajax({
-                          url: app.strTheme1_URL + "find" +
-                                    "?searchFields=Project_Name,Project_ID&SearchText=" + request.term + "&layers=0&f=pjson&returnGeometry=true",
+                          //url: app.strTheme1_URL + "find" + "?searchFields=Project_Name,Project_ID&SearchText=" + request.term + "&layers=0&f=pjson&returnGeometry=true",
+                          url: strURL4Search,
+
                           dataType: "jsonp",
                           data: {},                        //data: { where: strSearchField + " LIKE '%" + request.term.replace(/\'/g, '\'\'').toUpperCase() + "%'", outFields: strSearchField, returnGeometry: true, f: "pjson" },                        
                           success: function (data) {
-                              if (data.results) {                           //                            if (data.features) {
-                                  response($.map(data.results.slice(0, 19), function (item) {      //only display first 10
+                              //if (data.results) {                           //                            if (data.features) {
+                              if (data.features) {                           //                            if (data.features) {
+                                  response($.map(data.features.slice(0, 19), function (item) {      //only display first 10
                                       return { label: item.attributes.Project_Name + " ID:" + item.attributes.Project_ID +
                                         " (Layer:" + item.attributes.SourceFeatureType.replace("poly", "area") + ",Type:" + item.attributes.TypeAct + ")",
-                                          value2: item.geometry, value3: item.attributes.Project_ID, value4: item.layerName
+                                          value2: item.geometry, value3: item.attributes.Project_ID, value4: "CED Projects and Plans (point)"
                                       }
                                   }));
                               }
@@ -257,11 +281,11 @@ define([
                       var dblX = pGeometryPoint[0];
                       var dblY = pGeometryPoint[1];
                       var strValue3 = ui.item.value3;
-                      var psqs_strQueryString = "objectid  > 0";
+                      //var psqs_strQueryString = "objectid  > 0";
                       app.map.infoWindow.hide();            //var strquery4id = "Contaminant LIKE '%Mercury%'";
                       app.map.graphics.clear();
                       app.pPS_Identify = new PS_Identify({ pLayer1: CED_PP_point, pLayer2: CED_PP_line, pLayer3: CED_PP_poly, pMap: app.map,
-                          strQueryString4Measurements: "objectid  > 0", strURL: app.strTheme1_URL, pInfoWindow: app.infoWindow, mSR: pSR
+                          strQueryString4Measurements: "OBJECTID > 0", strURL: app.strTheme1_URL, pInfoWindow: app.infoWindow, mSR: pSR
                       }); // instantiate the ID Search class    
                       var pPS_Identify_Results = app.pPS_Identify.executeQueries(null, "", 0, pGeometryPoint[0], pGeometryPoint[1]);
                   }
