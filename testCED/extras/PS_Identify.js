@@ -175,7 +175,7 @@ define([
 
                 if (strStat_Type == "nostat") {  // code handles features and displaying features in the identify window
                     tab3Content = "<i>Total features returned: " + resultFeatures.length + "</i>";
-                    if (resultFeatures.length > 999) { tab3Content += "<i> (Note: Maximum Number of Records Returned is 1,000)</i>"; }
+                    //if (resultFeatures.length > 999) { tab3Content += "<i> (Note: Maximum Number of Records Returned is 1,000)</i>"; }
                     var strFieldNamesStrings = "";
 
                     strFieldNamesStrings = ["threats"];
