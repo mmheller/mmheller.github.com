@@ -68,10 +68,10 @@ define([
             strDispaly = iStatValue.toString();
             //strDispaly = iStatValue + " Results";
             if (this.strHTML_ID == "txtQueryResults") {
-                strDispaly = strDispaly + " Results";
-                if (iStatValue > 1000) {
-                    strDispaly += "<br> Note: Limits displaying over 1000 features, zoom into area of interest or add filters to handle display limits"
-                }
+                strDispaly = strDispaly + " Resulting Efforts";
+                //if (iStatValue > 1000) {
+                //    strDispaly += "<br> Note: Limits displaying over 1000 features, zoom into area of interest or add filters to handle display limits"
+                //}
             }
 
             document.getElementById(this.strHTML_ID).innerHTML = strDispaly;
