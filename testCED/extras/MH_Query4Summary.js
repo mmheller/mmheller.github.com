@@ -99,6 +99,8 @@ define([
 
             if (blnOpenEntireSummary) {
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "", "dTotalAcresQ2", '<b>&nbspAll Efforts:</b> {0}', "commas-no-round-decimal", ""]);
+                arrayQuery.push(["11", strQuery2, "GIS_Acres", "sum", "", "dTotalCalcAcresQ2", '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0} GIS calculated acres', "commas-no-round-decimal", ""]);
+
                 arrayQuery.push(["0", strQuery + " and (typeact = 'Project')", "Project_ID,totalacres", "count,sum", "", "dTotalProjects", '<b>&nbspProjects:</b> {0}', "", ""]);
                 arrayQuery.push(["0", strQuery + " and (typeact = 'Plan')", "Project_ID,totalacres", "count,sum", "", "dTotalPlans", '<b>&nbspPlans:</b> {0}', "", ""]);
                 
@@ -123,7 +125,14 @@ define([
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "SubActivity", "dNumberOfRecordsbySubActivity", '<b>Number of Efforts and Total Acres by SubActivity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
 
                 arrayQuery.push(["9", strQuery2, "Project_ID", "count", "State", "dNumberofOverlappingStates", '<b>Number of Overlapping States:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+                arrayQuery.push(["11", strQuery2, "Project_ID,GIS_Acres", "count,sum", "State", "dGISStates", '<b>Number of Efforts and Total Acres by State (NOTE: GIS Calculated, Does Include Point or Line Data):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                
+
                 arrayQuery.push(["3", strQuery2, "Project_ID", "count", "WAFWA_Zone", "dNumberofOverlappingMngmtZones", '<b>Number of Overlapping Management Zones:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+
+                arrayQuery.push(["10", strQuery2, "Project_ID,GIS_Acres", "count,sum", "ADMIN_AGEN", "dGISSMA", '<b>Number of Efforts and Total Acres by Surface Management Agency (NOTE: GIS Calculated, Does Include Point or Line Data):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                
+
                 arrayQuery.push(["8", strQuery2, "Project_ID", "count", "Pop_Name", "dNumberofOverlappingPopAreas", '<b>Number of Overlapping Population Areas:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
 
 
@@ -142,7 +151,15 @@ define([
             this.m_iarrayQueryIndex = iarrayQueryIndex;
             pTblindexAndQuery = arrayQuery[iarrayQueryIndex];
 
+
+
+
             var iTableIndex = pTblindexAndQuery[0];
+
+            if (iTableIndex == 11) {
+                var temp = "";
+            }
+
             var strQuery = pTblindexAndQuery[1];
             var pQueryTask = new esri.tasks.QueryTask(this.strURL + iTableIndex);
             //var pQueryTask = new esri.tasks.QueryTask(this.strURL + "/" + iTableIndex);
@@ -212,12 +229,9 @@ define([
                 
                 var strStatisticType = pTblindexAndQuery[3];
                 var strFieldNameText = pTblindexAndQuery[2];
-
                 var strGroupByField = pTblindexAndQuery[4];
-
-
-
                 var strHTMLElementID = pTblindexAndQuery[5];
+
                 var strStringFormatting = pTblindexAndQuery[6];
                 var strVarType = pTblindexAndQuery[7];
                 var strSortType = pTblindexAndQuery[8];
@@ -292,9 +306,13 @@ define([
                                 }
 
                                 dojo.forEach(attrNames, function (an) {
+                                    //if (strHTMLElementID == "dTotalPlans") {
+                                    //    var temp = "";
+                                    //}
+
 
                                     if ((feature.attributes[an] == null) | (feature.attributes[an] == undefined)) {
-                                        strText = "TBD";
+                                        strText = "N/A";
                                     } else {
                                         strText = feature.attributes[an].toString();
                                     }
@@ -316,31 +334,39 @@ define([
                                     } else if (strVarType == "show both-commas-no-round-decimal") {
                                         var iTempNumber = Number(strText);
                                         iTempNumber = Math.round(iTempNumber);
-                                        //strText = iTempNumber.toCurrencyString().replace("$", "") + "\n<br>&nbsp;&nbsp;&nbsp;";
-                                        strText = iTempNumber.toCurrencyString().replace("$", "");
-
+                                        if (iTempNumber >= 1000) {
+                                            strText = iTempNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                        }
                                         if (attrNames[0] == an) {
                                             strText += " efforts, ";
                                         } else if (attrNames[1] == an) {
                                             strText += " acres\n<br>&nbsp;&nbsp;&nbsp;";
                                         }
 
+                                        if (strText == "NaN"){
+                                            var temptemp = "";
+                                        }
+
                                         values.push(strText);
                                     } else if ((strVarType == "commas-no-round-decimal") & (an == "genericstat")) {
                                         var iTempNumber = Number(strText);
                                         iTempNumber = Math.round(iTempNumber);
-                                        strText = iTempNumber.toCurrencyString().replace("$", "");
+                                        //strText = iTempNumber.toCurrencyString().replace("$", "");
+                                        if (iTempNumber >= 1000) {
+                                            strText = iTempNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                            }
                                         values.push(strText);
                                     } else if ((strVarType == "show both") & (an == "genericstat")) {
                                         //                                      var iTempNumber = Number(strText);
                                         strText = "(" + strText + ")\n<br>&nbsp;&nbsp;&nbsp;";
                                         values.push(strText);
                                     } else if (attrNames.length >= 2) {
-                                        if (!(isNaN.strText)) {
+
                                             var iTempNumber = Number(strText);
                                             iTempNumber = Math.round(iTempNumber);
-                                            strText = iTempNumber.toCurrencyString().replace("$", "");
-                                        }
+                                            if (iTempNumber >= 1000) {
+                                                strText = iTempNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                            }
 
                                         if (attrNames[0] == an) {
                                             //strTextTemp = strText + " efforts, ";

@@ -69,24 +69,24 @@ define([
             this.divTag4Results = divTag4Results;
             this.strFieldNameText = strFieldNameText;
             this.strFieldNameValue = strFieldNameValue;
-            var strQuery = "";
+            //var strQuery = "";
             var pQueryT = new esri.tasks.QueryTask(this.strURL + this.iNonSpatialTableIndex + "?returnDistinctValues=true");
             var pQuery = new esri.tasks.Query();
             pQuery.returnGeometry = false;
             pQuery.outFields = [this.strFieldNameText, this.strFieldNameValue];
             pQuery.where = this.strQuery1;
 
-            if (this.strFieldNameValue == "WAFWA_Zone") {
-                var strstop = "";
-            }
+            //if (this.strFieldNameValue == "WAFWA_Zone") {
+            //    var strstop = "";
+            //}
             return pQueryT.execute(pQuery, this.returnEvents, this.err);
         },
 
 
         returnEvents: function (results) {
-            if (this.strFieldNameValue == "WAFWA_Zone") {
-                var strstop = "";
-            }
+            //if (this.strFieldNameValue == "WAFWA_Zone") {
+            //    var strstop = "";
+            //}
             var strRemoveStrings = ["", "---select an effort type---"];
             var resultFeatures = results.features;
             var strdivTagSourceID = "";
@@ -113,9 +113,9 @@ define([
                     dojo.forEach(resultFeatures, function (feature) {//Loop through the QueryTask results and populate an array with the unique values
                         blnAdd2Dropdown = false;
                         dojo.forEach(attrNames, function (an) {
-                            if (this.app.PS_Uniques.strFieldNameValue == "ST_ID") {
-                                var strstop = "";
-                            }
+                            //if (this.app.PS_Uniques.strFieldNameValue == "ST_ID") {
+                            //    var strstop = "";
+                            //}
 
                             if (an.toLowerCase() == this.app.PS_Uniques.strFieldNameText.toString().toLowerCase()) {
                                 var strTempText = feature.attributes[an];
@@ -206,9 +206,13 @@ define([
                         var strstop = ""; 
                     }
 
-                    var strQuery2 = "Project_ID in (";
-                    for (var i = 0; i < values.length; i++) { strQuery2 += values[i] + ","; }
-                    this.strQuery1 = strQuery2.slice(0, -1) + ")";
+                    if (this.strQuery1 == "objectid > 0") {
+                        //do nothing
+                    } else {
+                        var strQuery2 = "Project_ID in (";
+                        for (var i = 0; i < values.length; i++) { strQuery2 += values[i] + ","; }
+                        this.strQuery1 = strQuery2.slice(0, -1) + ")";
+                    }
                 }
             }
             switch (this.strFieldNameText) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'

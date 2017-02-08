@@ -76,6 +76,7 @@
         var strURL = localStorage.getItem("ls_strTheme1_URL");
         var strDefQuery = localStorage.getItem("ls_strDefQuery");
         var strDefQuery2 = localStorage.getItem("ls_strDefQuery2");
+        //var strDefQuery3 = localStorage.getItem("ls_strDefQuery3");
         var strQueryLabelText = localStorage.getItem("ls_strQueryLabelText");
 
         if ((strQueryLabelText == "") | (strQueryLabelText == "undefined")) {
@@ -119,54 +120,7 @@
     });
     </script>
 </head>
-    <!--<style type="text/css">.auto-style1 {vertical-align: middle; text-align: right; background-color: rgb(151, 118, 123);  color: #FFFFFF; font-weight: bold; height: 59px;}</style>-->
-
-    <!--<script type="text/javascript">
-        var app2 = {};
-        require([
-            "extras/MH_Query4Summary",
-            "dojo/_base/array", "dojo/parser", "dojo/dom", "dojo/dom-class", "dojo/on",
-            "dojo/date/locale",
-             "dojo/domReady!"
-        ],-->
-
-
-    <!--<script type="text/javascript">
-        var app = {};
-        require(["extras/MH_Query4Summary", "dojo/date/locale",
-        "esri/arcgis/utils",
-        "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
-        "dijit/layout/AccordionContainer", "dojo/domReady!"],
-        function (MH_Query4Summary) {
-            var strURL = getTokens()['strURL']
-            var strDefQuery = getTokens()['strDefQuery']
-            app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class
-            app.gQuerySummary.Summarize(strDefQuery, true);
-
-            var today = new Date();
-            var dd = today.getDate();
-            var mm = today.getMonth() + 1; //January is 0!
-            var yyyy = today.getFullYear();
-            today = mm + '/' + dd + '/' + yyyy;
-            document.getElementById('time').innerHTML = today;
-
-            function getTokens() {
-                var tokens = [];
-                var query = location.search;
-                query = query.slice(1);
-                query = query.split('&');
-                $.each(query, function (i, value) {
-                    var token = value.split('|');
-                    var key = decodeURIComponent(token[0]);
-                    var data = decodeURIComponent(token[1]);
-                    tokens[key] = data;
-                });
-                return tokens;
-            }
-
-        });
-    </script>-->
-
+   
 <body>
 
                      
@@ -195,9 +149,9 @@
             </tr>
             <tr>
                 <td class="HTMLTable_styleLeftLessPad">
-                    <div id="dTotalAcresQ2"></div>
-                    <div id="dTotalProjects"></div>
-                    <div id="dTotalPlans"></div>
+                    <div id="dTotalAcresQ2"></div><div id="dTotalCalcAcresQ2"></div>
+                    <div id="dTotalProjects"></div><div id="dTotalProjCalcAcresQ2"></div>
+                    <div id="dTotalPlans"></div><div id="dTotalPlanCalcAcresQ2"></div>
                 </td>
                 <td class="HTMLTable_styleMiddleLessPad"></td>
                 <td class="HTMLTable_styleLeftLessPad">
@@ -297,11 +251,12 @@
             <tr>
                 <td class="HTMLTable_styleLeft">
                     <div id="dNumberofOverlappingStates"></div>
+                    <div id="dGISStates"></div>
                 </td>
                 <td class="HTMLTable_styleMiddle">
                     &nbsp;
                 </td>
-                <td class="HTMLTable_styleLeft" rowspan="2">
+                <td class="HTMLTable_styleLeft">
                     <div id="dNumberofOverlappingPopAreas"></div>    
                 </td>
             </tr>
@@ -310,6 +265,9 @@
                     <div id="dNumberofOverlappingMngmtZones"></div>
                 </td>
                 <td class="HTMLTable_styleMiddle"></td>
+                <td class="HTMLTable_styleLeft" >
+                    <div id="dGISSMA"></div>    
+                </td>
             </tr>
         </table>
            
