@@ -99,7 +99,7 @@ define([
 
             if (blnOpenEntireSummary) {
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "", "dTotalAcresQ2", '<b>&nbspAll Efforts:</b> {0}', "commas-no-round-decimal", ""]);
-                arrayQuery.push(["11", strQuery2, "GIS_Acres", "sum", "", "dTotalCalcAcresQ2", '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0} GIS calculated acres', "commas-no-round-decimal", ""]);
+                arrayQuery.push(["11", strQuery2, "GIS_Acres", "sum", "", "dTotalCalcAcresQ2", '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0} GIS calculated acres', "commas-no-round-decimal", ""]);
 
                 arrayQuery.push(["0", strQuery + " and (typeact = 'Project')", "Project_ID,totalacres", "count,sum", "", "dTotalProjects", '<b>&nbspProjects:</b> {0}', "", ""]);
                 arrayQuery.push(["0", strQuery + " and (typeact = 'Plan')", "Project_ID,totalacres", "count,sum", "", "dTotalPlans", '<b>&nbspPlans:</b> {0}', "", ""]);
@@ -341,10 +341,6 @@ define([
                                             strText += " efforts, ";
                                         } else if (attrNames[1] == an) {
                                             strText += " acres\n<br>&nbsp;&nbsp;&nbsp;";
-                                        }
-
-                                        if (strText == "NaN"){
-                                            var temptemp = "";
                                         }
 
                                         values.push(strText);
