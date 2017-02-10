@@ -132,7 +132,7 @@ define([
               legendLayers.push({ layer: pBase_SMA, title: 'Surface Management Agencies' });
               legendLayers.push({ layer: pBase_GHMA, title: 'Prop GRSG Gen Hab Mngmt Areas' });
               legendLayers.push({ layer: pBase_PHMA, title: 'Prop GRSG Priority Hab Mngmt Areas' });
-              legendLayers.push({ layer: pBase_Eco, title: 'Ecosystem RResil./Resist of GRSG Mngmt Zones' });
+              legendLayers.push({ layer: pBase_Eco, title: 'Ecosystem Resil./Resist of GRSG Mngmt Zones' });
               legendLayers.push({ layer: pBase_RRP, title: 'Resil./Resist. & Pop Index (H/L Dens)' });
               legendLayers.push({ layer: pBase_RRB, title: 'Resil./Resist. & Breeding Habitat Prob' });
               legendLayers.push({ layer: pBase_Breed, title: 'Breeding Habitat Distribution' });
@@ -153,7 +153,7 @@ define([
               cbxLayers.push({ layers: [pBase_SMA, pBase_SMA], title: 'Surface Management Agencies' });
               cbxLayers.push({ layers: [pBase_GHMA, pBase_GHMA], title: 'Prop GRSG Gen Hab Mngmt Areas' });
               cbxLayers.push({ layers: [pBase_PHMA, pBase_PHMA], title: 'Prop GRSG Priority Hab Mngmt Areas' });
-              cbxLayers.push({ layers: [pBase_Eco, pBase_Eco], title: 'Ecosystem RResil./Resist of GRSG Mngmt Zones' });
+              cbxLayers.push({ layers: [pBase_Eco, pBase_Eco], title: 'Ecosystem Resil./Resist of GRSG Mngmt Zones' });
               cbxLayers.push({ layers: [pBase_RRP, pBase_RRP], title: 'Resil./Resist. & Pop Index (H/L Dens)' });
               cbxLayers.push({ layers: [pBase_RRB, pBase_RRB], title: 'Resil./Resist. & Breeding Habitat Prob' });
               cbxLayers.push({ layers: [pBase_Breed, pBase_Breed], title: 'Breeding Habitat Distribution' });
