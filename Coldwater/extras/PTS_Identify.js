@@ -134,20 +134,21 @@ define([
             q_Layer1.outSpatialReference = new esri.SpatialReference({ "wkid": 3857 })
             q_Layer1.outFields = ["Receiver, TagIDnum, FishID, Temp_c, Depth_m, Date_Time_noMin, OBJECTID"];
 
-            var strQuery = this.pLayer1.getDefinitionExpression();
+            var strQuery = this.pLayer1.getDefinitionExpression();  //ex. (Date_Time_noMin >= '08/05/2015') and (Date_Time_noMin <= '08/13/2015')
 
-            if (app.slider != undefined) {
-                var iFromThumb = app.slider._slider.value[0];
-                //var iFromTime = app.slider.fullTimeExtent[2];                //app.slider.value[0] = 1;
-                var iFromTime = app.slider.fullTimeExtent.startTime;
-                var strFromDate = formatDate_and_AddDays(iFromTime, iFromThumb);
-                var iToThumb = app.slider._slider.value[1];
-                //var iToTime = app.slider.fullTimeExtent[1];
-                var iToTime = app.slider.fullTimeExtent.endTime;
-                var strToDate = formatDate_and_AddDays(iToTime, iToThumb);
-                //strQuery += " and (Date_Time_noMin > date '" + strFromDate + " 8:00:00' and Date_Time_noMin <= date '" + strToDate + " 8:00:00')";
-                strQuery += " and (Date_Time_noMin > date '" + strFromDate + "' and Date_Time_noMin <= date '" + strToDate + "')";
-            }
+            //if (app.slider != undefined) {
+            //    var iFromThumb = app.slider._slider.value[0];
+            //    //var iFromTime = app.slider.fullTimeExtent[2];                //app.slider.value[0] = 1;
+            //    var iFromTime = app.slider.fullTimeExtent.startTime;
+            //    var strFromDate = formatDate_and_AddDays(iFromTime, iFromThumb);
+            //    var iToThumb = app.slider._slider.value[1];
+            //    //var iToTime = app.slider.fullTimeExtent[1];
+            //    var iToTime = app.slider.fullTimeExtent.endTime;
+            //    var strToDate = formatDate_and_AddDays(iToTime, iToThumb);
+            //    //strQuery += " and (Date_Time_noMin > date '" + strFromDate + " 8:00:00' and Date_Time_noMin <= date '" + strToDate + " 8:00:00')";
+            //    //strQuery += " and (Date_Time_noMin > date '" + strFromDate + "' and Date_Time_noMin <= date '" + strToDate + "')";
+            //    strQuery += " and (Date_Time_noMin >= '" + strFromDate + "' and Date_Time_noMin <= '" + strToDate + "')";
+            //}
 
             q_Layer1.where = strQuery;
             var pLayer1, pPromises, pxWidth, padding;

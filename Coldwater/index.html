@@ -219,10 +219,15 @@
             }
         });
 
-        //if ($('#page_collapsible1').collapsible('collapsed')) {
-        //    $('#page_collapsible1').collapsible('open');
-        //}
+        if ($('#collapsible_dteRange').collapsible('collapsed')) {
+            $('#collapsible_dteRange').collapsible('open');
+        }
 
+        if ($('#collapsible_FishID').collapsible('collapsed')) {
+            $('#collapsible_FishID').collapsible('open');
+        }
+
+        
 
         //function openAll() { $('.page_collapsible').collapsible('openAll'); } //assign open/close all to functions
         //function closeAll() { $('.page_collapsible').collapsible('closeAll'); }
@@ -277,14 +282,14 @@
             &nbsp;
         </div>-->
 
-        <div class="collapsible" id="Div333">Date Ranges<span></span></div>
+        <div class="collapsible" id="collapsible_dteRange">Date Ranges<span></span></div>
         <div class="container">
             <p>From Date: <input type="text" id="datepickerFrom"></p>
             <p>To Date: <input type="text" id="datepickerTo"></p>
         </div>
 
 
-        <div class="collapsible" id="section3">FishID<span></span></div>
+        <div class="collapsible" id="collapsible_FishID">FishID<span></span></div>
         <div class="container"><div class="scroll" id="section3content"></div></div>
         <!--<hr>-->
         <div class="collapsible" id="Div3">Map Layers<span></span></div>
@@ -339,7 +344,7 @@
         </div>
 
         <div id="HISTInfo" style="position:absolute; bottom: 50px; z-index: 1; width: 80%;">
-            <div>Hugoton Gas Field Wells from <span id="daterange">1921 to 2009</span> (Completion date)</div>
+            <div>Fish detections from <span id="daterange">- to -</span></div>
             <div id="Div_FilterValues" style="font-size:10px;visibility:visible">
                 <input type="checkbox" id="cbx_FilterValues" checked="" value="FilterValues"//>Refine Filter Options by Selection
             </div>            
