@@ -7,8 +7,21 @@ function showLoading() {
     app.map.hideZoomSlider();
 }
 
+function formatDateTime(value) {
+    var inputDate = new Date(value);
+    return dojo.date.locale.format(inputDate, {
+        datePattern: 'MM/dd/yyyy',
+        timePattern: "K:mm:ss a"
+        //timePattern: "h:MM:ss TT"
+    });
+}
+
 function hideLoading(error) {
-    esri.hide(app.loading);
+    var pform = document.getElementById("section3content");
+    if (pform.elements != undefined) {
+        esri.hide(app.loading);
+    }
+    
     if (app.map) {
         app.map.enableMapNavigation();
         app.map.showZoomSlider();
@@ -39,15 +52,18 @@ define([
   "esri/symbols/TextSymbol",
   "esri/geometry/webMercatorUtils",
   "esri/dijit/BasemapGallery",
-  "extras/PTS_Identify", "esri/dijit/HistogramTimeSlider", "dojo/parser", "dojo/dom-construct"
+  "extras/PTS_Identify", "esri/dijit/HistogramTimeSlider",
+  "esri/TimeExtent", "esri/dijit/TimeSlider", "dojo/_base/array", "dojo/parser", "dojo/dom-construct"
   ], function (
         declare, lang, esriRequest, all, urlUtils, FeatureLayer, ArcGISDynamicMapServiceLayer, CheckBox,
-        Legend, Scalebar, Geocoder, dom, domClass, mouse, on, BasemapGallery, Map, Color, SimpleRenderer, LabelLayer, TextSymbol, webMercatorUtils, BasemapGallery, PTS_Identify, HistogramTimeSlider, parser, domConstruct
+        Legend, Scalebar, Geocoder, dom, domClass, mouse, on, BasemapGallery, Map, Color, SimpleRenderer, LabelLayer, TextSymbol, webMercatorUtils, BasemapGallery, PTS_Identify, HistogramTimeSlider, TimeExtent, TimeSlider, arrayUtils, parser, domConstruct
 ) {
       return declare([], {
           pMap: null,
           dblExpandNum: null,
           pFeatureLayer: null,
+          iSliderDateStart: null,
+          iSliderDateEnd: null,
           constructor: function (options) {
               this.pMap = options.pMap || null;
               this.dblExpandNum = options.dblExpandNum || 4;
@@ -56,13 +72,14 @@ define([
               app.loading = dojo.byId("loadingImg");  //loading image. id
               var customExtentAndSR = new esri.geometry.Extent(-12310232, 5492317, -12260927, 5575417, new esri.SpatialReference({ "wkid": 3857 }));
               app.map = new esri.Map("map", { basemap: "topo", logo: false, extent: customExtentAndSR });
-              app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/56d91717c576443f8385cd1e1001fd6d/rest/services/Catalog/57506bc5e4b033c61ac3d5dd/MapServer/";  //Theme Layers
+              app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/5d9e8587a07a41b09c9b1f62cf51b920/rest/services/Layers/FeatureServer/";  //Theme Layers
               dojo.connect(app.map, "onUpdateStart", showLoading);
               dojo.connect(app.map, "onUpdateEnd", hideLoading);
               pDetectionsLayer = new FeatureLayer(app.strTheme1_URL + "0", { "opacity": 0.5, mode: FeatureLayer.MODE_SNAPSHOT, id: 0, visible: true });
-              pDetectionsLayer.setDefinitionExpression("OBJECTID < 0");
 
-              var strBase_URL = "https://utility.arcgis.com/usrsvcs/servers/56d91717c576443f8385cd1e1001fd6d/rest/services/Catalog/57506bc5e4b033c61ac3d5dd/MapServer/"
+              pDetectionsLayer.setDefinitionExpression("OBJECTID < 0");  //set initial def query to show nothing
+
+              var strBase_URL = "https://utility.arcgis.com/usrsvcs/servers/5d9e8587a07a41b09c9b1f62cf51b920/rest/services/Layers/FeatureServer/"
               var strlabelField1 = "Receiver";
               pReceiversLayer = new FeatureLayer(strBase_URL + "1", { "opacity": 0.5, mode: FeatureLayer.MODE_SNAPSHOT, id: "Receiver", outFields: [strlabelField1], visible: true });
               
@@ -136,48 +153,94 @@ define([
               var pPTS_Identify_Results = app.pPTS_Identify.executeQueries(e, "", 0, 0, 0);
           },
 
+          TimeSliderStart: function (strdte_Start, strdteEnd) {
+              if (app.slider == undefined) {
+                  app.slider = new TimeSlider({ style: "width: 100%;" }, dom.byId("timeSliderDiv"));
+              } else {
+                  app.slider.pause();
+              }
+              
+              app.map.setTimeSlider(app.slider);
+              var timeExtent = new TimeExtent();
+              timeExtent.startTime = new Date(strdte_Start);
+              timeExtent.endTime = new Date(strdteEnd);
+              app.slider.setThumbCount(2);
 
+              //figure out the difference of days and set the scale appropriately
+              //var dteFromTime = app.slider.fullTimeExtent.startTime;
+              //var dteToTime = app.slider.fullTimeExtent.endTime;
+              var timeDiff = Math.abs(new Date(strdteEnd) - new Date(strdte_Start).getTime());
+              var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+              if (diffDays > 400) {
+                  app.slider.createTimeStopsByTimeInterval(timeExtent, 3, "esriTimeUnitsMonths");
+              } else if ((diffDays <= 400) & (diffDays > 200)) {
+                  app.slider.createTimeStopsByTimeInterval(timeExtent, 20, "esriTimeUnitsDays");
+              } else if ((diffDays <= 205) & (diffDays > 60)) {
+                  app.slider.createTimeStopsByTimeInterval(timeExtent, 10, "esriTimeUnitsDays");
+              } else if ((diffDays <= 60) & (diffDays > 30)) {
+                  app.slider.createTimeStopsByTimeInterval(timeExtent, 2, "esriTimeUnitsDays");
+              } else if ((diffDays <= 30) & (diffDays > 2)) {
+                  app.slider.createTimeStopsByTimeInterval(timeExtent, 1, "esriTimeUnitsDays");
+              } else if ((diffDays <= 2) & (diffDays > 1)) {
+                  app.slider.createTimeStopsByTimeInterval(timeExtent, 4, "esriTimeUnitsHours");
+              } else {
+                  //app.timeSlider.singleThumbAsTimeInstant(true);
+                  app.slider.createTimeStopsByTimeInterval(timeExtent, 2, "esriTimeUnitsHours");
+                }      
+              app.slider.setThumbIndexes([0, 1]);
+              app.slider.setThumbMovingRate(2000);
+              app.slider.setLoop(true);
+              app.slider.startup();
+              //app.slider.setLoop = true;
+
+              var labels = arrayUtils.map(app.slider.timeStops, function (timeStop, i) {              //add labels for every other time stop
+                  if (i % 2 === 0) {
+                      if (diffDays <= 2) {
+                          return formatDateTime(timeStop.getTime());
+                      } else {
+                          return timeStop.getMonth() + 1 + "/" + timeStop.getDate() + "/" + timeStop.getFullYear();
+                      }
+                  } else {
+                      return "";
+                  }
+              });
+              app.slider.setLabels(labels);
+              app.slider.on("time-extent-change", function (evt) {
+                  var startValString = evt.startTime.getMonth() + 1 + "/" + evt.startTime.getDate() + "/" + evt.startTime.getFullYear();
+                  var endValString = evt.endTime.getMonth() + 1 + "/" + +evt.endTime.getDate() + "/" + evt.endTime.getFullYear();
+
+                  dom.byId("daterange").innerHTML = "<i>" + startValString + " and " + endValString + "<\/i>";
+              });
+              app.slider.play();
+          },
 
           QueryZoom: function (strQuery) {
+              ////strFromDate = app.pMapSup.iSliderDateStart.getMonth() + 1 + "/" + app.pMapSup.iSliderDateStart.getDate() + "/" + app.pMapSup.iSliderDateStart.getFullYear();
+              ////strEndDate = app.pMapSup.iSliderDateEnd.getMonth() + 1 + "/" + app.pMapSup.iSliderDateEnd.getDate() + "/" + app.pMapSup.iSliderDateEnd.getFullYear();
+              strFromDate = $('#datepickerFrom').datepicker({ dateFormat: 'mm/dd/yy' }).val();
+              strEndDate = $('#datepickerTo').datepicker({ dateFormat: 'mm/dd/yy' }).val();
+
+              if (strQuery == "OBJECTID > 0") {
+              //    var tempFromDate = $("#datepickerFrom").datepicker("getDate");
+              //    strFromDate = tempFromDate.getMonth() + 1 + "/" + tempFromDate.getDate() + "/" + tempFromDate.getFullYear();
+              //    strFromDateQuery = tempFromDate.getMonth() + 1 + "-" + tempFromDate.getDate() + "-" + tempFromDate.getFullYear();
+              //    var tempToDate = $("#datepickerTo").datepicker("getDate");
+              //    strEndDate = tempToDate.getMonth() + 1 + "/" + tempToDate.getDate() + "/" + tempToDate.getFullYear();
+              //    strEndDateQuery = tempToDate.getMonth() + 1 + "-" + tempToDate.getDate() + "-" + tempToDate.getFullYear();
+                  strFromDateQuery = $('#datepickerFrom').datepicker({ dateFormat: 'mm-dd-yy' }).val();
+                  strEndDateQuery = $('#datepickerTo').datepicker({ dateFormat: 'mm-dd-yy' }).val();
+                  strQuery = "(Date_Time_noMin >= '" + strFromDateQuery + "') and (Date_Time_noMin <= '" + strEndDateQuery + "')";
+              }
+
               if (app.slider != undefined) {
-                  app.layerUpdateEnd.remove();
-                  app.slider.destroy();
-                  app.slider = null;
-                  app.sliderParams = null;
-                  app.sliderElem = null;
-                  app.map.setTimeSlider(null);
-              } 
-
-              app.layerUpdateEnd = pDetectionsLayer.on("update-end", function () {
-                app.layerUpdateEnd.remove();
-
-                app.sliderElem = domConstruct.create("div", {
-                    id: "timeSlider_" + app.map.id,
-                    style: "margin-bottom:10px; bottom:33px"
-                }, "bottom-div");
-                app.sliderParams = {
-                    // format the dates as mm/dd/yyyy
-                    // more formatting options:  https://developers.arcgis.com/javascript/3/jshelp/intro_formatinfowindow.html
-                    dateFormat: "DateFormat(selector: 'date', fullYear: true)",
-                    layers: [pDetectionsLayer],
-                    mode: "show_all",
-                    timeInterval: "esriTimeUnitsDays",
-                };
-                app.slider = new HistogramTimeSlider(app.sliderParams, app.sliderElem);
-    
-                app.map.setTimeSlider(app.slider);
-                //app.slider.value[0] = 1;
-                //app.slider.value[1] = 2;
-                domConstruct.destroy("loading");
-
-                //app.slider.setThumbIndexes([0, 1]);
-
-              });
-        
+                  app.slider.pause();
+              }
               pDetectionsLayer.setDefinitionExpression(strQuery);
-
-              document.getElementById("ImgResultsLoading").style.visibility = "hidden";
-
+              app.layerUpdateEnd = pDetectionsLayer.on("update-end", function () {
+                  app.layerUpdateEnd.remove();
+                  app.pMapSup.TimeSliderStart(strFromDate + " 12:00:00 UTC", strEndDate + " 00:00:00 UTC");
+              })
+              
               arrayCheckedCheckboxes = [];
               var pform = document.getElementById("NavigationForm");
               for (var i = 0; i < pform.elements.length; i++) {
@@ -186,9 +249,7 @@ define([
                       document.getElementById(strID).disabled = false;
                   }
               }
-
-              document.getElementById("txtQueryResults").innerHTML = "Ready";
-
+              //document.getElementById("txtQueryResults").innerHTML = "Ready";
           },
 
           mapLoaded: function () {        // map loaded//            // Map is ready
@@ -198,8 +259,12 @@ define([
               app.basemapGallery.startup();
               app.basemapGallery.on("selection-change", function () { domClass.remove("panelBasemaps", "panelBasemapsOn"); });
               app.basemapGallery.on("error", function (msg) { console.log("basemap gallery error:  ", msg); });
-
+              //app.gSup.Phase1(app.strTheme1_URL, [], "(Date_Time_noMin > '08-26-2011') and (Date_Time_noMin > '09-13-2011')");
+              //app.gSup.Phase1(app.strTheme1_URL, [], "FishID in ('LKT_0008')");
               app.gSup.Phase1(app.strTheme1_URL, [], "OBJECTID > 0");
+              //pDetectionsLayer.setDefinitionExpression("(OBJECTID > 0)");
+              //app.pMapSup.TimeSliderStart("8/11/2015 12:00:00 UTC", "8/13/2015 00:00:00 UTC");
+              //app.pMapSup.HistSliderStart();
           },
 
           showCoordinates: function (evt) {
@@ -212,7 +277,7 @@ define([
           },
 
           Phase3: function () {
-              var scalebar = new Scalebar({ map: app.map, scalebarUnit: "dual" });
+              var scalebar = new Scalebar({ map: app.map, scalebarUnit: "dual" }, dojo.byId("scalebar"));
 
               var basemapTitle = dom.byId("basemapTitle");
               on(basemapTitle, "click", function () { domClass.toggle("panelBasemaps", "panelBasemapsOn"); });

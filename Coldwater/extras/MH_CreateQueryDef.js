@@ -99,8 +99,10 @@ define([
                   }
               }
 
-
               var arrayTableSLength = arrayTables.length;    // if not field then add the field
+              dte_selectedDateFrom = $('#datepickerFrom').datepicker({ dateFormat: 'mm-dd-yy' }).val();
+              dte_selectedDateTo = $('#datepickerTo').datepicker({ dateFormat: 'mm-dd-yy' }).val();
+
               if (arrayTableSLength > 0) {
                   arrayTables.forEach(function (arrayTable) {
                       nTableIndex = arrayTables.indexOf(arrayTable);
@@ -118,12 +120,20 @@ define([
                               strQuerySubset = strFieldName + " in ('" + arrayValues.join("','") + "')";
                           }
 
+                          if ((dte_selectedDateFrom != "") & (dte_selectedDateFrom != "")) {
+
+                          }
+
+                          strQuerySubset += " and ((Date_Time_noMin >= '" + dte_selectedDateFrom + "') and (Date_Time_noMin <= '" + dte_selectedDateTo + "'))";
                           arrayQuery.push([nTableIndex, strQuerySubset]);
 
                           //strQuery += nTableIndex.toString() + ":" + strQuerySubset + "\n<br>";
                       }) //arrayTable.forEach(function(arrayField) {
                   }) //arrayTables.forEach(function(arrayTable) {
-              } //if (arrayTableSLength > 0) {
+              } else { //if (arrayTableSLength > 0) {
+                  strQuerySubset = "((Date_Time_noMin >= '" + dte_selectedDateFrom + "') and (Date_Time_noMin <= '" + dte_selectedDateTo + "'))";
+                  arrayQuery.push([nTableIndex, strQuerySubset]);
+              }
 
               return arrayQuery;
           },

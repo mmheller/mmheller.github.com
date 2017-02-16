@@ -6,7 +6,7 @@ function showFeaturePrep(feature, strURL, strTheme) {
     var div = document.getElementById("page_collapsibleMap");
     //div.scrollIntoView();
     //$('html, body').animate({ scrollTop: (($(div).offset().top) - ($(div).offset().outerHeight())) }, 'slow');
-    $('html, body').animate({ scrollTop: ($(div).offset().top) }, 'fast');
+    //$('html, body').animate({ scrollTop: ($(div).offset().top) }, 'fast');
 
     this.app.pPTS_Identify.strURL4Statquery = strURL;
     this.app.pPTS_Identify.showFeature(feature, strTheme);
@@ -138,12 +138,15 @@ define([
 
             if (app.slider != undefined) {
                 var iFromThumb = app.slider._slider.value[0];
-                var iFromTime = app.slider.fullTimeExtent[0];                //app.slider.value[0] = 1;
+                //var iFromTime = app.slider.fullTimeExtent[2];                //app.slider.value[0] = 1;
+                var iFromTime = app.slider.fullTimeExtent.startTime;
                 var strFromDate = formatDate_and_AddDays(iFromTime, iFromThumb);
                 var iToThumb = app.slider._slider.value[1];
-                var iToTime = app.slider.fullTimeExtent[0];
+                //var iToTime = app.slider.fullTimeExtent[1];
+                var iToTime = app.slider.fullTimeExtent.endTime;
                 var strToDate = formatDate_and_AddDays(iToTime, iToThumb);
-                strQuery += " and (Date_Time_noMin > date '" + strFromDate + " 8:00:00' and Date_Time_noMin <= date '" + strToDate + " 8:00:00')";
+                //strQuery += " and (Date_Time_noMin > date '" + strFromDate + " 8:00:00' and Date_Time_noMin <= date '" + strToDate + " 8:00:00')";
+                strQuery += " and (Date_Time_noMin > date '" + strFromDate + "' and Date_Time_noMin <= date '" + strToDate + "')";
             }
 
             q_Layer1.where = strQuery;

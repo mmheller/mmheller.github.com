@@ -241,7 +241,7 @@ define([
               else {
                   //loop through the checkboxes and enable, so user interaction dosen't disrupt the queryies
 
-                  document.getElementById("ImgResultsLoading").style.visibility = "hidden";
+                  //document.getElementById("ImgResultsLoading").style.visibility = "hidden";
 
                   arrayCheckedCheckboxes = [];
                   var pform = document.getElementById("NavigationForm");

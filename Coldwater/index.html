@@ -56,47 +56,75 @@
     var app = {};
     require([
         "esri/map",
-        "extras/MH_UniqueSetup", "extras/MH_CreateQueryDef", "extras/MH_Query4Results", "extras/MH_Query4Summary", "extras/MH_MapSetup",
-        "esri/urlUtils", "dojo/_base/array", "dojo/parser", "dojo/dom-construct",  "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on",
+        "extras/MH_UniqueSetup", "extras/MH_CreateQueryDef", "extras/MH_Query4Summary", "extras/MH_MapSetup",
+        "esri/urlUtils", "dojo/_base/array", "dojo/parser", "dojo/dom-construct", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on",
         "dijit/form/CheckBox",
         "dojo/_base/Color",
         "dojo/mouse", "dojo/query", "esri/geometry/webMercatorUtils", "esri/dijit/BasemapGallery", "esri/dijit/Legend", "extras/CK_AutoCompleteSearchAndZoom", "esri/dijit/HistogramTimeSlider",
         "esri/arcgis/utils",
         "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
         "dijit/layout/AccordionContainer", "dojo/domReady!"
-        ],
+    ],
 
     function (Map,
-                MH_UniqueSetup, MH_CreateQueryDef, MH_Query4Results, MH_Query4Summary, MH_MapSetup,
-                urlUtils, arrayUtils, parser, domConstruct, 
+                MH_UniqueSetup, MH_CreateQueryDef, MH_Query4Summary, MH_MapSetup,
+                urlUtils, arrayUtils, parser, domConstruct,
                 esriConfig, dom, domClass, on,
                 CheckBox,
                 Color, mouse, query, webMercatorUtils, BasemapGallery, Legend, CK_AutoCompleteSearchAndZoom, HistogramTimeSlider) {
+                
+        //document.getElementById("txtQueryResults").innerHTML = "Querying database for filter options";
+        //$('input[type=checkbox]').removeAttr('checked'); //uncheck the filter query parameters
+        $(function () {
+            $("#datepickerFrom").datepicker();
+            $("#datepickerTo").datepicker();
+        });
 
-        document.getElementById("txtQueryResults").innerHTML = "Querying database for filter options";
+        $("#datepickerFrom").datepicker("setDate", "8/5/2015");
+        $("#datepickerTo").datepicker("setDate", "8/13/2015");
+
         app.pMapSup = new MH_MapSetup({}); // instantiate the class
         app.pMapSup.Phase1();
         app.pMapSup.Phase3();
 
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1; //January is 0!
-        var yyyy = today.getFullYear();
-        today = mm + '/' + dd + '/' + yyyy;
-        document.getElementById('time').innerHTML = today;
-
         var selectedItem;  // This has to be declared "globally" outside of any functions for the grid context menu
         var strURL = "https://utility.arcgis.com/usrsvcs/servers/56d91717c576443f8385cd1e1001fd6d/rest/services/Catalog/57506bc5e4b033c61ac3d5dd/MapServer"
         app.gCQD = new MH_CreateQueryDef({}); // instantiate the class
-        app.gSup = new MH_UniqueSetup({}); // instantiate the class
 
+        var strAdv = getTokens()['adv']; //?adv=Y is to show all advanced filter options
+        bln_SectionsVisible = "collapse";
+        blnShowAdvFilter = false;
+        if (strAdv) {
+            if (strAdv.toUpperCase() == "Y") {
+                bln_SectionsVisible = "visible";
+                blnShowAdvFilter = true;
+            }
+        }
+        $('#section12').collapsible('closeAll');
+        $('#section14').collapsible('closeAll');
+        $('#section7').collapsible('closeAll');
+        document.getElementById('section12').style.visibility = bln_SectionsVisible;
+        document.getElementById('section12content').style.visibility = bln_SectionsVisible;
+        document.getElementById('section14').style.visibility = bln_SectionsVisible;
+        document.getElementById('section14content').style.visibility = bln_SectionsVisible;
+        document.getElementById('section7').style.visibility = bln_SectionsVisible;
+        document.getElementById('section7content').style.visibility = bln_SectionsVisible;
+        document.getElementById('Div_FilterValues').style.visibility = bln_SectionsVisible;
+        
+        app.gSup = new MH_UniqueSetup({ blnShowAdvancedFilter: blnShowAdvFilter }); // instantiate the class
         on(dom.byId("btn_clear"), "click", btn_clear_click);
 
         app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class        
         var tokens = getTokens
         parser.parse();
 
-        document.getElementById("page_collapsibleMapDestination").appendChild(document.getElementById("map"));  //move the grid to the designated div, grids need to be built outside the collapsable panel otherwise risk not rendering properly
+        $("#datepickerFrom").change(function () {
+            StartQuery(null); // in MH_UniqueSetup.js
+        });
+
+        $("#datepickerTo").change(function () {
+            StartQuery(null); // in MH_UniqueSetup.js
+        });
 
         function getTokens() {
             var tokens = [];
@@ -124,10 +152,11 @@
             }
             var strQuery = "";
 
-            strQuery = "OBJECTID < 0";
-            app.pMapSup.QueryZoom(strQuery);
+            $("#datepickerFrom").datepicker("setDate", "8/5/2015");
+            $("#datepickerTo").datepicker("setDate", "8/13/2015");
+
+            app.gSup.Phase1(app.strTheme1_URL, [], "OBJECTID > 0");
             app.map.graphics.clear();
-            //app.map.infoWindow.destroy();
             app.map.infoWindow.hide();
         }
     });
@@ -195,21 +224,27 @@
         //}
 
 
-        function openAll() { $('.page_collapsible').collapsible('openAll'); } //assign open/close all to functions
-        function closeAll() { $('.page_collapsible').collapsible('closeAll'); }
+        //function openAll() { $('.page_collapsible').collapsible('openAll'); } //assign open/close all to functions
+        //function closeAll() { $('.page_collapsible').collapsible('closeAll'); }
 
-        //listen for close/open all
-        $('#closeAll').click(function (event) {
-            event.preventDefault();
-            closeAll();
-        });
-        $('#openAll').click(function (event) {
-            event.preventDefault();
-            openAll();
-        });
+        ////listen for close/open all
+        //$('#closeAll').click(function (event) {
+        //    event.preventDefault();
+        //    closeAll();
+        //});
+        //$('#openAll').click(function (event) {
+        //    event.preventDefault();
+        //    openAll();
+        //});
 
     });
 </script>
+
+<!--<script>
+  $( function() {
+    $( "#datepicker" ).datepicker();
+  } );
+</script>-->
 
 <script>
     (function (i, s, o, g, r, a, m) {
@@ -242,71 +277,19 @@
             &nbsp;
         </div>-->
 
+        <div class="collapsible" id="Div333">Date Ranges<span></span></div>
+        <div class="container">
+            <p>From Date: <input type="text" id="datepickerFrom"></p>
+            <p>To Date: <input type="text" id="datepickerTo"></p>
+        </div>
+
+
         <div class="collapsible" id="section3">FishID<span></span></div>
         <div class="container"><div class="scroll" id="section3content"></div></div>
-
-        
-        <div class="collapsible" id="section12">Receiver<span></span></div>
-        <div class="container"><div class="scroll" id="section12content"></div></div>
-        
-        <div class="collapsible" id="section14">Temp (c)<span></span></div>
-        <div class="container"><div class="content" id="section14content"></div></div>
-
-
-        <div class="collapsible" id="section7">Depth (m)<span></span></div>
-        <div class="container"><div class="content" id="section7content"></div></div>
-        
-        <!--<div class="collapsible" id="section5">Tag ID<span></span></div>
-        <div class="container"><div class="scroll" id="section5content"></div></div>-->
-
-<!--
-        <div class="collapsible" id="section10">Stressor<span></span></div>
-        <div class="container"><div class="content" id="section10content"></div></div>
-
-        <div class="collapsible" id="section8">Deliverable Type<span></span></div>
-        <div class="container"><div class="content" id="section8content"></div></div>
-
-        <div class="collapsible" id="section1">Ecotypic Area<span></span></div>
-        <div class="container" ><div class="content" id="section1content"></div></div>
-
-        <div class="collapsible" id="section2">Lead Organization<span></span></div>
-        <div class="container"><div class="scroll" id="section2content"></div></div>
-
-
-        <div class="collapsible" id="section4">Funding Recipient<span></span></div>
-        <div class="container"><div class="scroll" id="section4content"></div></div>
-        
-        <div class="collapsible" id="section6">Funding Recipient Type<span></span></div>
-        <div class="container"><div class="content" id="section6content"></div></div>
-
-        <div class="collapsible" id="section9">In-Kind/Match<span></span></div>
-        <div class="container"><div class="scroll" id="section9content"></div></div>
-
-        <div class="collapsible" id="section11">Affiliate<span></span></div>
-        <div class="container"><div class="scroll" id="section11content"></div></div>
-
-
-        <div class="collapsible" id="section13">State/Province<span></span></div>
-        <div class="container"><div class="content" id="section13content"></div></div>-->
-
-
-
-
-<!--        <div class="collapsible" id="section15">Funding Amount <span></span></div>
-        <div class="container"><div class="content" id="section15content"></div></div>-->
-        
-        <hr>
-
-        <div id="txtQueryResults" style="font-size:12px;"></div>
-        <br />
-
-        <div id="Div4"  style="font-size:10px;">
-            <input type="checkbox" id="cbx_FilterValues" checked=checked value="FilterValues"//>Refine Filter Options by Selection
-        </div>
-        <hr>
+        <!--<hr>-->
         <div class="collapsible" id="Div3">Map Layers<span></span></div>
         <div class="container">
-            <div class="content" id="GISLayerContent"  style="font-size:.75em">
+            <div class="content" id="GISLayerContent" style="font-size:.75em">
                 <form id="toggleForm">
                     <div id="toggle" style="padding: 2px 2px"></div>
                     <br />
@@ -315,183 +298,75 @@
 
             </div>
         </div>
-
-
-
         <br />
-       <!-- <input id="btn_clear2" type="button"  value="Reset" 
-                style="border-style: none; padding: 5px; font-size: small;">-->
+               
+        <div class="collapsible" id="section12" style="visibility:collapse">Receiver<span></span></div>
+        <div class="container"><div class="scroll" id="section12content" style="visibility:collapse"></div></div>
+        <div class="collapsible" id="section14" style="visibility:collapse">Temp (c)<span></span></div>
+        <div class="container"><div class="content" id="section14content" style="visibility:collapse"></div></div>
+        <div class="collapsible" id="section7" style="visibility:collapse">Depth (m)<span></span></div>
+        <div class="container"><div class="content" id="section7content" style="visibility:collapse"></div></div>
+       
+        <!--<hr>-->
+<!--        <div id="txtQueryResults" style="font-size:12px;"></div>
+        <br />-->
 
+        <!--<div style="clear:both; float:left; width:935px;">-->
+
+        <!--</div>-->
 
     </form>
 </div>
 
-
-<!-- /left column collapsible -->
-
-<div id="content">
-   
-
-    <table style="width:100%;">
-        <tr>
-            <td>
-                <a href="#" id="closeAll" title="Close all" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Close All Results</a> |
-                <a href="#" id="openAll" title="Open All Results" style="font-size:.65em; text-decoration: none; color:#2E2E2E;">Open All Results</a>
-                <img id="ImgResultsLoading" src="images/loading.gif" style="height:15px" />
-            </td>
-            <td class="HTMLTable_styleRight">
-                <font size="1px" color="#2E2E2E"><b>Date:</b> <span id="time"></span></font>
-            </td>
-        </tr>
-    </table>
-
-    <!-- collapsible -->
-    <div class="page_collapsible" id="body-section2">Results Summary<span></span></div>
-    <div class="container">
-
-<table style="width:100%; background-color: #f2f5f9;">
-        <tr>
-            <td class="HTMLTable_BannerRow" >
-                <img src="images/funding.png" alt="Funding" height="30" width="30" align="middle" style="PADDING-LEFT: 3px; PADDING-RIGHT: 3px; PADDING-TOP: 3px; PADDING-BOTTOM: 3px;">
-                    
-                Funds Allocated</td>
-            <td class="HTMLTable_styleMiddle">
-                &nbsp;</td>
-            <td class="HTMLTable_BannerRow">
-                <img src="images/leverage.png" alt="leverage"  height="30" align="middle" style="PADDING-LEFT: 3px; PADDING-RIGHT: 3px; PADDING-TOP: 3px; PADDING-BOTTOM: 3px;">
-                Partner Contributions</td>
-        </tr>
-        <tr>
-            <td class="HTMLTable_styleLeft">
-                <div id="dTotalAllocatedbyLCC"></div>
-                </td>
-            <td class="HTMLTable_styleMiddle">
-                </td>
-            <td class="HTMLTable_styleLeft">
-                <div id="dTotalInKindMatch"></div>
-                </td>
-        </tr>
-        <tr>
-            <td class="HTMLTable_styleLeft">
-                <div id="dTotalAllocatedbyLCCbyYear">
-                </div>
-            </td>
-            <td class="HTMLTable_styleMiddle">
-                &nbsp;</td>
-            <td class="HTMLTable_styleLeft">
-                <div id="dNumberofInKindOrgs"></div> </td>
-        </tr>
-
-        <tr>
-            <td class="HTMLTable_styleLeft">
-                    <div id="dNumberOfFundingRecipients"></div>  
-               </td>
-            <td class="HTMLTable_styleMiddle">
-                &nbsp;</td>
-            <td class="HTMLTable_styleLeft">
-                <div id="dNumberOfProjectContacts"></div> </td>
-        </tr>
-        <tr>
-            <td class="HTMLTable_styleLeft">
-                <div id="dFundRecipientTypes"></div></td>
-            <td class="HTMLTable_styleMiddle">
-                &nbsp;</td>
-            <td class="HTMLTable_styleLeft">
-                <div id="dInKindFundingTypes"></div> </td>
-        </tr>
-
-        <tr>
-            <td class="HTMLTable_styleLeft">
-                <div id="dNumberOfProjectContacts2"></div></td>
-            <td class="HTMLTable_styleMiddle">
-                &nbsp;</td>
-        </tr>
-
-<!--        <tr>
-            <td class="HTMLTable_styleLeft">
-                &nbsp;</td>
-            <td class="HTMLTable_styleMiddle">
-                &nbsp;</td>
-        </tr>-->
-        <tr>
-            <td class="HTMLTable_BannerRow">
-                <img src="images/target.png" alt="target"  height="30" align="middle" style="PADDING-LEFT: 3px; PADDING-RIGHT: 3px; PADDING-TOP: 3px; PADDING-BOTTOM: 3px;"> Conservation Goals and Targets</td>
-            <td class="HTMLTable_styleMiddle">
-                </td>
-            <td class="HTMLTable_BannerRow">
-                <img src="images/checkbox.png" alt="checkbox"  height="30" align="middle" style="PADDING-LEFT: 3px; PADDING-RIGHT: 3px; PADDING-TOP: 3px; PADDING-BOTTOM: 3px;"> Deliverables</td>
-        </tr>
-        <tr>
-            <td class=HTMLTable_styleLeft>
-                <div id="dTotalNumberofConsvTargets">
-                </div>
-            </td>
-            <td class="HTMLTable_styleMiddle">
-                </td>
-            <td class="HTMLTable_styleLeft">
-                <div id="dNumberofDeliverables">
-                </div>
-            </td>
-        </tr>
-
-        <tr>
-            <td class="HTMLTable_styleLeft">
-                <div id="dEcotypicAreas"></div></td>
-            <td class="HTMLTable_styleMiddle">
-                </td>
-            <td class="HTMLTable_styleLeft">
-                <div id="dDeliverabletype">
-                </div></td>
-        </tr>
-        <tr>
-            <td class="HTMLTable_styleLeft">
-                <div id="dStressors"></div>  </td>
-            <td class="HTMLTable_styleMiddle">
-                &nbsp;</td>
-            <td class="HTMLTable_styleLeft">
-                <div id="dPrjStatus"></div>
-            </td>
-        </tr>
-        <tr>
-            <td class="HTMLTable_styleLeft">
-                <div id="dGoals"></div></td>
-            <td class="HTMLTable_styleMiddle">
-                </td>
-            <td class="HTMLTable_styleLeft">
-                </td>
-        </tr>
-    </table>
-
-    </div>
-    <!-- end collapsible -->
-    <!-- collapsible -->
-    <div class="page_collapsible" id="page_collapsibleMap">Map Summary<span></span></div>
-    <div class="container">
-        <div id="page_collapsibleMapDestination" style="position:relative" >
+    <div id="map"
+         data-dojo-type="dijit/layout/ContentPane"
+         data-dojo-props="region:'center'"
+         style="overflow:hidden; background-color:rgb(255, 255, 255); z-index:49; ">
+        <img id="loadingImg" src="images/loading.gif" style="position:fixed; right:50%; top:50%; z-index:100;" />
+        <!--<div id="txt_xyCoords" style="position:relative; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>-->
+        <div id="txt_xyCoords" style="position:absolute; right: 165px; top: 105px; color:#404040; z-index:50; font-size:11px"></div>
+        <div id="panelBasemaps" class="panelBasemaps bg rounded shadow">
+            <!-- Panel Basemaps -->
+            <div id="basemapTitle"><img src="images/basemaps.png" height="30" title="Switch Base Map" /></div>
+            <div id="basemapContent">
+                <div id="basemapGallery"></div>
+            </div>
+        </div>
+      
+        <div id="scalebar" style="position:absolute; right: 165px; top: 155px;"></div>
+        <div style="position:absolute; right: 195px; top: 185px;">
+            <font size="1.5" color="#2E2E2E">Design: GNLCC<br/> Development: GNLCC<br/>Data Services: <a href="https://www.sciencebase.gov/arcgis/rest/services/Catalog/57506bc5e4b033c61ac3d5dd/MapServer" target="_blank">LC MAP</a></font>
         </div>
 
+        <div id="HISTInfo" style="position:absolute; bottom: 50px; z-index: 1; width: 80%;">
+            <div>Hugoton Gas Field Wells from <span id="daterange">1921 to 2009</span> (Completion date)</div>
+            <div id="Div_FilterValues" style="font-size:10px;visibility:visible">
+                <input type="checkbox" id="cbx_FilterValues" checked="" value="FilterValues"//>Refine Filter Options by Selection
+            </div>            
+            <div id="timeSliderDiv"></div>
+            <br />
+<!--            <div id="HISTSliderDiv" style="height:75px; width:80%; color:#404040; font-size:6px"></div>-->
+            <!--<div id="HISTSliderDiv" style="position:absolute; height:75px; width:80%; color:#404040; font-size:6px"></div>-->
+        </div>
+
+
     </div>
-            <div id="map"
-                data-dojo-type="dijit/layout/ContentPane"
-                data-dojo-props="region:'center'"
-                style="overflow:hidden; background-color:rgb(255, 255, 255); z-index:49; ">
-                    <img id="loadingImg" src="images/loading.gif" style="position:absolute; right:50%; top:50%; z-index:100;" />
-                    <div id="panelBasemaps" class="panelBasemaps bg rounded shadow" >		    <!-- Panel Basemaps -->
-	                    <div id="basemapTitle"><img src="images/basemaps.png" height="30" title="Switch Base Map" /></div>
-	                    <div id="basemapContent">
-		                    <div id="basemapGallery" ></div>
-	                    </div>
-                    </div>
-                    <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
-            </div>
+	<div class="panelTitle bg rounded shadow"><!-- Panel Title -->
+		<div id="panelMain">
+                                  
+        </div>
+	</div>
 
-                     
-</div>
+    <!--<div id="bottomPanel" style="height:10%; overflow:hidden" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region: 'bottom'">-->
+    <!--</div>-->
 
-<div dojoType="dijit.Menu" id="grid5_rowMenu" jsId="grid5_rowMenu" style="display: none;">
+
+
+
+<!--<div dojoType="dijit.Menu" id="grid5_rowMenu" jsId="grid5_rowMenu" style="display: none;">
     <div dojoType="dijit.MenuItem" onClick="gridRowContextMenu_onClick">Remove</div>
     <div dojoType="dijit.MenuItem">Cancel</div>
-</div> 
+</div> -->
 
 
 <!--<div class="edgePanel" id="bottom-div" style="height:145px; overflow:hidden"
@@ -500,19 +375,34 @@
     HERE***************************************************************************************
 </div>-->
 
-<div class="edgePanel" id="bottom-div" style="height:245px; clear:both; float:left; width:935px;"
+<!--<div class="edgePanel" id="bottom-div" style="height:245px; clear:both; float:left; width:935px;"
         data-dojo-type="dijit/layout/ContentPane"
         data-dojo-props="region: 'bottom'">
-</div>
+</div>-->
+    <a href="http://greatnorthernlcc.org/" target="_blank"> <img id="theImage1" border="0" src="http://greatnorthernlcc.org/sites/default/files/images/gnlcc-vertical-large-rgb.jpg" 
+        style="position:absolute; top:18px; right:18px;" height="35" /></a>
+    <a href="http://www.usgs.gov" target="_blank"><img id="theImage2" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USGS_117x31.png" 
+        style="position:absolute; top:20px; right:97px;" height="26"  /></a>
+    <a href="http://www.fws.gov" target="_blank"> <img id="theImage3" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USFWS_150x31.png" 
+        style="position:absolute; top:20px; right:200px;" height="26" /></a>&nbsp;&nbsp;
+    <a href="http://www.tu.org/" target="_blank"> <img id="theImage4" border="0" src="http://www.adamscountytu.org/Logo/TroutLCfinal010816.png" 
+        style="position:absolute; top:25px; right:355px;" height="70" /></a>
+    <a href="http://www.nps.gov/" target="_blank"> <img id="theImage4" border="0" src="http://www.wilderness.net/images/logos/NPScolor-transparent.gif" 
+        style="position:absolute; top:25px; right:435px;" height="70" /></a>
 
-<div style="clear:both; float:left; width:935px;">
-    <div style="float:right;">
-      <font size="1.5" color="#2E2E2E">Design: GNLCC<br/> Development: GNLCC<br/>Data Services: <a href="https://www.sciencebase.gov/arcgis/rest/services/Catalog/57506bc5e4b033c61ac3d5dd/MapServer" target="_blank">LC MAP</a></font>
-    </div>
-</div>
+    <a href="http://www.nps.gov/" target="_blank"> <img id="theImage4" border="0" src="https://cdn.shopify.com/s/files/1/0195/2532/files/WYTU_logo_medium.jpg?435" 
+        style="position:absolute; top:25px; right:485px;" height="60" /></a>
 
+        <a href="http://www.montana.edu/" target="_blank"> <img id="theImage4" border="0" src="http://www.montana.edu/creativeservices/images/MSU-horiz-sm.png" 
+        style="position:absolute; top:65px; right:18px;" height="30" /></a>
 
+        <a href="http://montanatu.org/" target="_blank"> <img id="theImage4" border="0" src="http://montanatu.org/wp-content/uploads/2012/11/MTU-logo-19-KB.gif" 
+        style="position:absolute; top:65px; right:150px;" height="30" /></a>    
+    
+            <a href="www.yellowstoneassociation.org" target="_blank"> <img id="theImage4" border="0" src="http://kevinstraveljournal.com/wp-content/uploads/2013/09/Yellowstone-Association-Institute-Logo-620x217.jpg" 
+        style="position:absolute; top:65px; right:250px;" height="30" /></a>    
 
+    
 
 </body>
 </html>
