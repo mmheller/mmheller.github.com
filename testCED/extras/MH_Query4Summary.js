@@ -401,12 +401,12 @@ define([
 
         err: function (err) {
             console.log("Failed to get stat results due to an error: " + this.app.gQuerySummary.iTempIndexSubmit + " " + this.app.gQuerySummary.iTempIndexResults, err);
+            this.app.pFC.numberOfErrors += 1;
 
-            //this.app.pFC.numberOfErrors += 1;
-
-            //if (this.app.pFC.numberOfErrors < 5) {
-            //    this.app.pFC.GetCountOfFCDef_ShowText(this.app.pFC.pLayerStored, "txtQueryResults", "count", "project_id");
-            //}
+            if (this.app.pFC.numberOfErrors < 5) {
+                //this.app.pFC.GetCountOfFCDef_ShowText(this.app.pFC.pLayerStored, "txtQueryResults", "count", "project_id");
+                this.app.pFC.GetCountOfFCDef_ShowText(this.app.pFC.strQueryStored, this.app.pFC.strURLStored, "txtQueryResults", "count", "project_id");
+            }
         }
     }
     );

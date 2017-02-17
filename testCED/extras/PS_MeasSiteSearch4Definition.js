@@ -111,6 +111,9 @@ define([
         },
 
         ExecutetheDerivedQuery: function (strQuery, divTagSource) {
+
+
+
             document.getElementById("txtQueryResults").innerHTML = "-";
             document.getElementById("dTotalProjectsQ").innerHTML = "-";
             document.getElementById("dTotalPlansQ").innerHTML = "-";
@@ -120,6 +123,11 @@ define([
             if (strQuery == "") { strQuery = "objectid > 0"; }
             app.iNonSpatialTableIndex = 0;  //
             //app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, strQuery1: strQuery, divTagSource: divTagSource }); // instantiate the  class
+
+            //if (divTagSource == undefined) {
+            //    divTagSource = null;
+            //}
+
             app.PS_Uniques.divTagSource = divTagSource;
             //Debug.writeln("qry_SetUniqueValuesOf at dropdown change");
             app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), strQuery);//dropdown change
@@ -204,6 +212,7 @@ define([
                     this.strFinalQuery = this.strQuerySaved;
                 }
 
+                console.log("this.divTagSource" + (this.divTagSource == undefined));
                 //Debug.writeln("firing !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + this.strField + this.strFinalQuery);
                 this.ExecutetheDerivedQuery(this.strFinalQuery, this.divTagSource);
  

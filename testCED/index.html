@@ -256,6 +256,7 @@ Date:        Oct 2014-->
             }
             //app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, strQuery1: strQuery, divTagSource: null}); // instantiate the  class
             app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
+            app.PS_Uniques.divTagSource = null;
             //Debug.writeln("qry_SetUniqueValuesOf at args");
             app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), CED_PP_point.getDefinitionExpression()); //args
 

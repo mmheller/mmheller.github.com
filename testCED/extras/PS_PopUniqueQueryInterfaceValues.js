@@ -90,13 +90,41 @@ define([
             var strRemoveStrings = ["", "---select an effort type---"];
             var resultFeatures = results.features;
             var strdivTagSourceID = "";
-            if ((this.divTagSource != "") & (this.divTagSource != null)) {
-                strdivTagSourceID = this.divTagSource.srcElement.id;
+
+            //console.log("111returnEvents:this.divTagSource.srcElement ID = " + this.divTagSource.srcElement.id);
+           
+            if (this.divTagSource != undefined) {
+                if (this.divTagSource.target != undefined) {
+                    console.log("122 returnEvents:this.divTagSource.target ID = " + this.divTagSource.target.id);
+                    var tempstop = "";
+                    this.divTagSource = null;
+                }
+            } else {
+                console.log("1returnEvents:this.divTagSource is undefined:" + (this.divTagSource == undefined));
             }
+
+            console.log("1returnEvents");
+
+            if ((this.divTagSource != "") & (this.divTagSource != null)) {
+                //console.log("111returnEvents:this.divTagSource.srcElement ID = " + this.divTagSource.srcElement.id);
+                console.log("3returnEvents");
+                console.log("111returnEvents:this.divTagSource.target ID = " + this.divTagSource.target.id);
+
+                if ((this.divTagSource.srcElement == null) | (this.divTagSource.srcElement == undefined)){
+                    strdivTagSourceID = this.divTagSource.target.id;
+                } else {
+                    strdivTagSourceID = this.divTagSource.srcElement.id;
+                }
+                
+            }
+            console.log("4returnEvents");
+            //console.log("2returnEvents:this.divTagSource.srcElement is undefined:" + (this.divTagSource.srcElement == undefined));
             var strdivTag4ResultsID = "";
             if (this.divTag4Results != null) {
                 strdivTag4ResultsID = this.divTag4Results.id;
             }
+            console.log("5returnEvents");
+            //console.log("3returnEvents:this.divTagSource.srcElement is undefined:" + (this.divTagSource.srcElement == undefined));
 
             if ((resultFeatures != null) || (resultFeatues != undefined)) {
                 if (resultFeatures.length > 0) {
@@ -264,9 +292,12 @@ define([
             console.log("Error number" + String(this.app.PS_Uniques.numberOfErrors) + " Failed to get stat results due to an error: " + this.app.PS_Uniques.strFieldNameText + this.app.PS_Uniques.strFieldNameValue + " " + this.app.PS_Uniques.strURL + this.app.iNonSpatialTableIndex, err);
             this.app.PS_Uniques.numberOfErrors += 1;
             
-            if (this.app.PS_Uniques.numberOfErrors < 5) {
-                this.app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"));
-            }
+            //if (this.app.PS_Uniques.numberOfErrors < 5) {
+            //    this.app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"));
+            //}
+
+            disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
+            disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
         }
     });
 }
