@@ -107,6 +107,8 @@ Date:        Oct 2014-->
         var CED_PP_line = arrayLayers[13];
         var CED_PP_point = arrayLayers[14];
 
+        app.pSetQS = new PS_MeasSiteSearch_SetVisableQueryDef({ pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line }); // instantiate the class
+        
         on(dom.byId("btn_clear"), "click", btn_clear_click);
         on(dom.byId("btn_TextSummary"), "click", btn_TextSummary_click);
         on(dom.byId("ddlMatrix"), "change", ddlMatrix_Change);
@@ -127,10 +129,13 @@ Date:        Oct 2014-->
         pSup.Phase3(CED_PP_point, CED_PP_line, CED_PP_poly);
 
         app.iNonSpatialTableIndex = 0;  //these 3 lines populate the list values
-        app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, strQuery1: "objectid > 0", divTagSource: null });
+        app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, divTagSource: null });
+        //app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, strQuery1: "objectid > 0", divTagSource: null });
 
         app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
-        app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"));
+
+        Debug.writeln("qry_SetUniqueValuesOf at startup");
+        app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "objectid > 0"); //startup
 
         if (app.map.loaded) {
             mapLoaded();
@@ -146,8 +151,7 @@ Date:        Oct 2014-->
             RunQueryArgs(strA_TypeAct, strA_entry_type, strA_activity, strA_Subactivity, strA_implementing_party, strA_State, strA_POPArea, strA_Managementunit, strA_office);
         } else {
             document.getElementById("btn_TextSummary").disabled = true;
-            app.pFC.GetCountOfFCDef_ShowText(CED_PP_point.getDefinitionExpression(), CED_PP_point.url, "txtQueryResults", "count", "project_id", "");
-            //app.pFC.GetCountOfFCDef_ShowText(CED_PP_point, "txtQueryResults", "count", "project_id");
+            //app.pFC.GetCountOfFCDef_ShowText(CED_PP_point.getDefinitionExpression(), CED_PP_point.url, "txtQueryResults", "count", "project_id", "");
         }
 
         app.gQuerySummary = new MH_Query4Summary({ strURL: app.strTheme1_URL }); // instantiate the class
@@ -247,15 +251,13 @@ Date:        Oct 2014-->
             if ((strA_State != undefined) || (strA_POPArea != undefined) || (strA_Managementunit != undefined)) {
                 var PSQResults = app.PSQ.qry_Non_SpatialTable("", null, "ST_ID");
                 PSQResults.then(PSQsearchSucceeded, PSQsearchFailed);
-            } else {
+            } else {  // handling arguments passed
                 app.PSQ.ExecutetheDerivedQuery(strQuery, document.getElementById("ddlMatrix"));
             }
-            app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL,
-                iNonSpatialTableIndex: 0, strQuery1: strQuery,
-                divTagSource: null
-            }); // instantiate the  class
+            //app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, strQuery1: strQuery, divTagSource: null}); // instantiate the  class
             app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
-            app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"));
+            Debug.writeln("qry_SetUniqueValuesOf at args");
+            app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), CED_PP_point.getDefinitionExpression()); //args
 
         }
 
@@ -346,8 +348,9 @@ Date:        Oct 2014-->
             }); // instantiate the class
 
             if ((strState != "99") || (strPopArea != "99") || (strManagUnit != "99")) {
-                var PSQResults = app.PSQ.qry_Non_SpatialTable("", null, "ST_ID");
-                PSQResults.then(PSQsearchSucceeded, PSQsearchFailed);
+                //var PSQResults = app.PSQ.qry_Non_SpatialTable("", null, "ST_ID");
+                app.PSQ.qry_Non_SpatialTable("", null, "ST_ID");
+                //PSQResults.then(PSQsearchSucceeded, PSQsearchFailed);
 
                 if (strState !== "99") {    //            if (strImpParty !== "All") {
                     app.strQueryLabelText += "State = " + document.getElementById("ddlState").options[document.getElementById("ddlState").selectedIndex].text + ", ";
@@ -359,7 +362,7 @@ Date:        Oct 2014-->
                     app.strQueryLabelText += "GRSG Management Zone = " + document.getElementById("ddlManagUnit").options[document.getElementById("ddlManagUnit").selectedIndex].text + ", ";
                 }
 
-            } else {
+            } else {  // if not filters realting to related table selected then execute the queries
                 app.PSQ.ExecutetheDerivedQuery(strQuery, divTagSource);
             }
         }
@@ -380,13 +383,6 @@ Date:        Oct 2014-->
             CED_PP_poly.show();
             CED_PP_point.show();
             CED_PP_line.show();
-
-            //CED_PP_poly.hide();
-            //CED_PP_point.hide();
-            //CED_PP_line.hide();
-            //CED_PP_polyTPK.show();
-            //CED_PP_pointTPK.show();
-            //CED_PP_lineTPK.show();
 
             // do not turn off layer visibility here, the checkbox click methods will handle layer visibility
             var pform = dom.byId("toggleForm");
@@ -411,8 +407,6 @@ Date:        Oct 2014-->
             CED_PP_line.setDefinitionExpression("");
             CED_PP_poly.setDefinitionExpression("");
             document.getElementById("txtQueryResults").innerHTML = ""; //clear the text results
-            app.pFC.GetCountOfFCDef_ShowText(CED_PP_point.getDefinitionExpression(), CED_PP_point.url, "txtQueryResults", "count", "project_id", "");
-
 
             if (document.getElementById("cbx_zoom").checked) {
                 var customExtentAndSR = new esri.geometry.Extent(-14000000, 4595472, -11000000, 5943351, new esri.SpatialReference({ "wkid": 3857 }));
@@ -420,12 +414,10 @@ Date:        Oct 2014-->
             }
 
             app.iNonSpatialTableIndex = 0;  //
-            app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL,
-                iNonSpatialTableIndex: 0, strQuery1: "objectid > 0",
-                divTagSource: null
-            }); // instantiate the  class
+            //app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, strQuery1: "objectid > 0", divTagSource: null}); // instantiate the  class
+            app.PS_Uniques.divTagSource = null;
             app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
-            app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix")); //maybe move this to MH_FeatureCount
+            app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "objectid > 0"); //maybe move this to MH_FeatureCount  //clear111
         }
 
         function PSStatSucceeded(results) {
@@ -507,8 +499,9 @@ Date:        Oct 2014-->
                 <br />
                 <form id="dropdownForm">
 
-
+                    <!--<center><h2>Filter/Query Data<img id="ImgResultsLoading" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="height:15px" /></h2></center>-->
                     <center><h2>Filter/Query Data<img id="ImgResultsLoading" src="images/loading.gif" style="height:15px" /></h2></center>
+                    
                     <font size="2"><u>Project or Plan:</u></font><br />
                     <select id="ddlMatrix" class="selectClass">
                         <option value="All">All</option>
@@ -683,24 +676,15 @@ Date:        Oct 2014-->
         </div>
     </div>
 
-    <!--    <a href="http://lccnetwork.org" target="_blank"> <img id="theImage1" border="0" src="{% static 'ced_main/images/ced_main/lcc_logo_centered_white_small.png' %}"
+<!--        <a href="http://lccnetwork.org" target="_blank"> <img id="theImage1" border="0" src="{% static 'ced_main/images/ced_main/lcc_logo_centered_white_small.png' %}"
             style="position:absolute; top:33px; right:18px;" height="38" /></a>
         <a href="http://www.usgs.gov" target="_blank"><img id="theImage2" border="0" src="{% static 'ced_main/images/ced_main/USGS_117x31.png' %}"
             style="position:absolute; top:40px; right:97px;" height="26"  /></a>
         <a href="http://www.fws.gov" target="_blank"> <img id="theImage3" border="0" src="{% static 'ced_main/images/ced_main/USFWS_150x31.png' %}"
             style="position:absolute; top:40px; right:200px;" height="26" /></a>&nbsp;&nbsp;
         <a href="http://conservationefforts.org/welcome/" target="_blank"> <img id="theImage4" border="0" src="{% static 'ced_main/images/ced_main/CEDlogo_white_180x31.png' %}"
-            style="position:absolute; top:35px; right:355px;" height="40" /></a>-->
-
-
-<!--    <div style="
-         top:20px;=top:20px;
-         right:600px;=right:600px;
-         position:absolute;=position:absolute;
-         z-index:1;=z-index:1;
-         visibility:show;"=visibility:show;">
-        <font size="5px" color="red"><b>DRAFT<br />VERSION<br />2.0<br /></b></font>
-    </div>-->
+            style="position:absolute; top:35px; right:355px;" height="40" /></a>
+-->
 
     <a href="http://lccnetwork.org" target="_blank">
         <img id="theImage1" border="0" src="https://conservationefforts.org/static/ced_main/images/ced_main/lcc_logo_centered_white_small.png"

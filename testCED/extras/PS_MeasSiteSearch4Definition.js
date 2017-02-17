@@ -56,39 +56,40 @@ define([
 
         qry_Non_SpatialTable: function (strQuery1, arrayIDTemp, strField) {
             this.strField = strField;
-
+            var strField4NextQuery = "";
             var blnFireInsideQuery = false;
-            switch (this.strField) {
-                case "ST_ID":
-                    if ((this.strState != "99") && (this.strState != undefined)) {
-                        this.iNonSpatialTableIndex = 9; // set the index to the table to query
-                        strQuery = this.strField + " in (" + this.strState + ")";
-                        blnFireInsideQuery = true;
-                    }
-                    else {
-                        this.iNonSpatialTableIndex = 6;  //set the index for the next table to query
-                        this.qry_Non_SpatialTable(strQuery1, arrayIDTemp, "Pop_ID");
-                    }
-                    break;
-                case "Pop_ID":
-                    if ((this.strPopArea != "99") && (this.strPopArea != undefined)) {
-                        this.iNonSpatialTableIndex = 8; // set the index to the table to query
-                        strQuery = this.strField + " in (" + this.strPopArea + ")";
-                        blnFireInsideQuery = true;
-                    }
-                    else {
-                        this.iNonSpatialTableIndex = 3; //set the index for the next table to query
-                        this.qry_Non_SpatialTable(strQuery1, arrayIDTemp, "WAFWA_ID");
-                    }
-                    break;
-                case "WAFWA_ID":
-                    this.iNonSpatialTableIndex = 3; // set the index to the table to query
-                    strQuery = this.strField + " in (" + this.strManagUnit + ")";
+
+            if (this.strField == "ST_ID"){
+                if ((this.strState != "99") && (this.strState != undefined)) {
+                    this.iNonSpatialTableIndex = 9; // set the index to the table to query
+                    strQuery = this.strField + " in (" + this.strState + ")";
                     blnFireInsideQuery = true;
-                    break;
+                }
+                else {
+                    this.iNonSpatialTableIndex = 6;  //set the index for the next table to query
+                    strField4NextQuery = "Pop_ID";
+                    //this.qry_Non_SpatialTable(strQuery1, arrayIDTemp, "Pop_ID");
+                }
+            }
+            if (this.strField == "Pop_ID"){
+                if ((this.strPopArea != "99") && (this.strPopArea != undefined)) {
+                    this.iNonSpatialTableIndex = 8; // set the index to the table to query
+                    strQuery = this.strField + " in (" + this.strPopArea + ")";
+                    blnFireInsideQuery = true;
+                }
+                else {
+                    this.iNonSpatialTableIndex = 3; //set the index for the next table to query
+                    strField4NextQuery = "WAFWA_ID";
+                    //this.qry_Non_SpatialTable(strQuery1, arrayIDTemp, "WAFWA_ID");
+                }
+            }
+            if (this.strField == "WAFWA_ID") {
+                this.iNonSpatialTableIndex = 3; // set the index to the table to query
+                strQuery = this.strField + " in (" + this.strManagUnit + ")";
+                blnFireInsideQuery = true;
             }
 
-            if (blnFireInsideQuery = true) {
+            if (blnFireInsideQuery) {
                 if ((strQuery1 != "") && (strQuery1.length > 0)) {
                     strQuery = "(" + strQuery + ") and (" + strQuery1 + ")";
                 }
@@ -98,7 +99,14 @@ define([
                 pQuery.outFields = ["Project_id"];
                 pQuery.where = strQuery;
                 //this.strQuerySaved = strQuery
-                return pQueryT.execute(pQuery, this.returnEvents, this.err);
+
+                Debug.writeln("1111fireed  qry_Non_SpatialTable:" + this.strField);
+
+                pQueryT.execute(pQuery, this.returnEvents, this.err);
+                //return pQueryT.execute(pQuery, this.returnEvents, this.err);
+            } else {
+                Debug.writeln("skipping to next field  qry_Non_SpatialTable: from:" + this.strField + " to " + strField4NextQuery);
+                this.qry_Non_SpatialTable(strQuery1, arrayIDTemp, strField4NextQuery);
             }
         },
 
@@ -107,30 +115,32 @@ define([
         },
 
 
-        PopulateUniqueQueryInterfaceValues: function(strQuery, divTagSource) {
-            if (strQuery == "") { strQuery = "objectid > 0"; }
-            app.iNonSpatialTableIndex = 0;  //
-            app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL,
-                iNonSpatialTableIndex: 0, strQuery1: strQuery, divTagSource: divTagSource
-            }); // instantiate the  class
-
-            app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"));
-        },
+        //PopulateUniqueQueryInterfaceValues: function(strQuery, divTagSource) {
+        //    if (strQuery == "") { strQuery = "objectid > 0"; }
+        //    app.iNonSpatialTableIndex = 0;  //
+        //    app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, strQuery1: strQuery, divTagSource: divTagSource }); // instantiate the  class
+        //    app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"));
+        //},
 
 
         ExecutetheDerivedQuery: function (strQuery, divTagSource) {
-            this.PopulateUniqueQueryInterfaceValues(strQuery, divTagSource);
-            app.pSetQS = new PS_MeasSiteSearch_SetVisableQueryDef({ pCED_PP_point: this.pCED_PP_point, pCED_PP_poly: this.pCED_PP_poly, pCED_PP_line: this.pCED_PP_line }); // instantiate the class
-            var blnQSSet = app.pSetQS.setQS(strQuery);
-
-            //app.pFC.GetCountOfFCDef_ShowText(this.pCED_PP_point, "txtQueryResults", "count", "project_id");
-
             document.getElementById("txtQueryResults").innerHTML = "-";
             document.getElementById("dTotalProjectsQ").innerHTML = "-";
             document.getElementById("dTotalPlansQ").innerHTML = "-";
             document.getElementById("dTotalAcresQ").innerHTML = "-";
 
-            app.pFC.GetCountOfFCDef_ShowText(this.pCED_PP_point.getDefinitionExpression(), this.pCED_PP_point.url, "txtQueryResults", "count", "project_id", "");
+            //this.PopulateUniqueQueryInterfaceValues(strQuery, divTagSource);
+            if (strQuery == "") { strQuery = "objectid > 0"; }
+            app.iNonSpatialTableIndex = 0;  //
+            //app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, strQuery1: strQuery, divTagSource: divTagSource }); // instantiate the  class
+
+            app.PS_Uniques.divTagSource = divTagSource;
+
+            Debug.writeln("qry_SetUniqueValuesOf at dropdown change");
+            app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), strQuery);//dropdown change
+
+            //app.pSetQS = new PS_MeasSiteSearch_SetVisableQueryDef({ pCED_PP_point: this.pCED_PP_point, pCED_PP_poly: this.pCED_PP_poly, pCED_PP_line: this.pCED_PP_line }); // instantiate the class
+            var blnQSSet = app.pSetQS.setQS(strQuery);
 
             if (document.getElementById("cbx_zoom").checked) {
                 var pZoom2 = new MH_Zoom2FeatureLayer({ pMap: app.map, dblExpandNum: 1.0 }); // instantiate the zoom class
@@ -139,6 +149,8 @@ define([
         },
         
         returnEvents: function (results) {
+            Debug.writeln("Prefireed");
+
             this.strFinalQuery = "";
             var resultFeatures = results.features;
             if ((resultFeatures != null) && (resultFeatures != undefined)) {
@@ -198,7 +210,7 @@ define([
                     blnFireReturnEvents = true;
                     break;
             }
-            if (blnFireReturnEvents) {
+            if (blnFireReturnEvents) {   //stop and move on
                 if ((this.arrayID != null) || (this.arrayID != undefined)) {
                     if (this.strQuerySaved == null) { this.strQuerySaved = ""; }
                     this.strFinalQuery = this.strQuerySaved;
@@ -208,7 +220,10 @@ define([
                     if (this.strQuerySaved == null) { this.strQuerySaved = ""; }
                     this.strFinalQuery = this.strQuerySaved;
                 }
+
+                //Debug.writeln("firing !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" + this.strField + this.strFinalQuery);
                 this.ExecutetheDerivedQuery(this.strFinalQuery, this.divTagSource);
+ 
             }
         },
         err: function (err) {

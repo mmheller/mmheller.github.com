@@ -84,7 +84,7 @@ define([
 
 
             document.getElementById("ImgResultsLoading").style.visibility = "visible";
-            disableOrEnableFormElements("dropdownForm", 'select-one', true) //disable/enable to avoid user clicking query options during pending queries
+            disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
 
             arrayQuery = [];            //table/fc index, query string, field 4 aggregation, stat type (count, sum, avg), group by field, html ID, string function
@@ -105,36 +105,22 @@ define([
                 arrayQuery.push(["0", strQuery + " and (typeact = 'Plan')", "Project_ID,totalacres", "count,sum", "", "dTotalPlans", '<b>&nbspPlans:</b> {0}', "", ""]);
                 
                 arrayQuery.push(["0", strQuery, "Project_ID", "count", "Implementing_Party", "dNumofDistinctImpParties", '<b>Number of Unique Implementing Parties:</b> {0}', "countOfGroupBy", ""]);
-                //arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Implementing_Party", "dTotalAcresQ2byImplementing_Party", '<b>Total Acres by Implementing Party:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Implementing_Party", "dNumberOfRecordsbyImpParty", '<b>Number of Efforts and Total Acres by Implementing Party:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
-                //arrayQuery.push(["0", strQuery, "Project_ID", "count", "Implementing_Party", "dNumberOfRecordsbyImpParty", '<b>Number of Projects/Plans by Implementing Party:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
 
-                arrayQuery.push(["0", strQuery, "Project_ID", "count", "Activity", "dNumofDistinctActivities", '<b>Number of Unique Activities:</b> {0}', "countOfGroupBy", ""]);
-                //arrayQuery.push(["0", strQuery, "totalacres", "sum", "Activity", "dTotalAcresQ2byActivity", '<b>Total Acres by Activity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                //////arrayQuery.push(["0", strQuery, "Project_ID", "count", "Activity", "dNumofDistinctActivities", '<b>Number of Unique Activities:</b> {0}', "countOfGroupBy", ""]);
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Activity", "dNumberOfRecordsbyActivity", '<b>Number of Efforts and Total Acres by Activity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
-                //arrayQuery.push(["0", strQuery, "Project_ID", "count", "Activity", "dNumberOfRecordsbyActivity", '<b>Number of Projects/Plans by Activity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
 
-                arrayQuery.push(["0", strQuery, "Project_ID", "count", "Office", "dNumofDistinctOffices", '<b>Number of Unique Offices:</b> {0}', "countOfGroupBy", ""]);
-                //arrayQuery.push(["0", strQuery, "totalacres", "sum", "Office", "dTotalAcresQ2byOffice", '<b>Total Acres by Office:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
-                //arrayQuery.push(["0", strQuery, "Project_ID", "count", "Office", "dNumberOfRecordsbyOffice", '<b>Number of Projects/Plans by Office:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+                //////arrayQuery.push(["0", strQuery, "Project_ID", "count", "Office", "dNumofDistinctOffices", '<b>Number of Unique Offices:</b> {0}', "countOfGroupBy", ""]);
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Office", "dNumberOfRecordsbyOffice", '<b>Number of Efforts and Total Acres by Office:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
 
-                arrayQuery.push(["0", strQuery, "Project_ID", "count", "SubActivity", "dNumofDistinctSubActivities", '<b>Number of Unique Sub-Activities:</b> {0}', "countOfGroupBy", ""]);
-                //arrayQuery.push(["0", strQuery, "totalacres", "sum", "SubActivity", "dTotalAcresQ2bySubActivity", '<b>Total Acres by SubActivity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
-                //arrayQuery.push(["0", strQuery, "Project_ID", "count", "SubActivity", "dNumberOfRecordsbySubActivity", '<b>Number of Projects/Plans by SubActivity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+                ////arrayQuery.push(["0", strQuery, "Project_ID", "count", "SubActivity", "dNumofDistinctSubActivities", '<b>Number of Unique Sub-Activities:</b> {0}', "countOfGroupBy", ""]);
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "SubActivity", "dNumberOfRecordsbySubActivity", '<b>Number of Efforts and Total Acres by SubActivity:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
 
                 arrayQuery.push(["9", strQuery2, "Project_ID", "count", "State", "dNumberofOverlappingStates", '<b>Number of Overlapping States:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
                 arrayQuery.push(["11", strQuery2, "Project_ID,GIS_Acres", "count,sum", "State", "dGISStates", '<b>Number of Efforts and Total Acres by State (NOTE: GIS Calculated, Does Include Point or Line Data):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
-                
-
                 arrayQuery.push(["3", strQuery2, "Project_ID", "count", "WAFWA_Zone", "dNumberofOverlappingMngmtZones", '<b>Number of Overlapping Management Zones:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
-
                 arrayQuery.push(["10", strQuery2, "Project_ID,GIS_Acres", "count,sum", "ADMIN_AGEN", "dGISSMA", '<b>Number of Efforts and Total Acres by Surface Management Agency (NOTE: GIS Calculated, Does Include Point or Line Data):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
-                
-
                 arrayQuery.push(["8", strQuery2, "Project_ID", "count", "Pop_Name", "dNumberofOverlappingPopAreas", '<b>Number of Overlapping Population Areas:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
-
 
             } else {
                 arrayQuery.push(["0", strQuery, "totalacres", "sum", "", "dTotalAcresQ", '{0}', "commas-no-round-decimal", ""]);
@@ -146,19 +132,17 @@ define([
 
 
         SendQuery: function (arrayQuery, iarrayQueryIndex) {
-            this.iTempIndexSubmit += 0;
+            //this.iTempIndexSubmit += 0;
             
             this.m_iarrayQueryIndex = iarrayQueryIndex;
             pTblindexAndQuery = arrayQuery[iarrayQueryIndex];
 
 
-
-
             var iTableIndex = pTblindexAndQuery[0];
 
-            if (iTableIndex == 11) {
-                var temp = "";
-            }
+            //if (iTableIndex == 11) {
+            //    var temp = "";
+            //}
 
             var strQuery = pTblindexAndQuery[1];
             var pQueryTask = new esri.tasks.QueryTask(this.strURL + iTableIndex);
@@ -166,6 +150,12 @@ define([
             var pQuery = new esri.tasks.Query();
 
             strFieldNameText = pTblindexAndQuery[2];
+
+            Debug.writeln("mh_query4summary:SendQuery:strFieldNameText=" + strFieldNameText + ", iTableIndex=" + iTableIndex 
+                                                + ", stattype=" + pTblindexAndQuery[3]
+                                                + ", groupby=" + pTblindexAndQuery[4]
+                                                + ", query=" + strQuery);
+
 
             var array_QueryStatDefs = [];
 
@@ -410,7 +400,7 @@ define([
                     //loop through the checkboxes and enable, so user interaction dosen't disrupt the queryies
                     if (document.getElementById("ImgResultsLoading") != undefined) {
                         document.getElementById("ImgResultsLoading").style.visibility = "hidden";
-                        disableOrEnableFormElements("dropdownForm", 'select-one', false, document) //disable/enable to avoid user clicking query options during pending queries
+                        disableOrEnableFormElements("dropdownForm", 'select-one', false, document); //disable/enable to avoid user clicking query options during pending queries
                         disableOrEnableFormElements("dropdownForm", 'button', false, document);  //disable/enable to avoid user clicking query options during pending queries
                     }
                 }

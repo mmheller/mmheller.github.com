@@ -64,17 +64,23 @@ define([
         },
 
 
-        qry_SetUniqueValuesOf: function (strFieldNameText, strFieldNameValue, divTag4Results) {
-            
+        qry_SetUniqueValuesOf: function (strFieldNameText, strFieldNameValue, divTag4Results, strQuery) {
             this.divTag4Results = divTag4Results;
             this.strFieldNameText = strFieldNameText;
             this.strFieldNameValue = strFieldNameValue;
+            //Debug.writeln("mh_PopUniqueQueryInterfaceValues:qry_SetUniqueValuesOf:" + this.strFieldNameText + ":" + strQuery);
+            this.strQuery1 = strQuery;
+            //this.strFieldNameText = strFieldNameText;
+            //if (strFieldNameText == "Project_ID") {
+            //    var temp222 = "";
+            //}
             //var strQuery = "";
             var pQueryT = new esri.tasks.QueryTask(this.strURL + this.iNonSpatialTableIndex + "?returnDistinctValues=true");
             var pQuery = new esri.tasks.Query();
             pQuery.returnGeometry = false;
-            pQuery.outFields = [this.strFieldNameText, this.strFieldNameValue];
-            pQuery.where = this.strQuery1;
+            pQuery.outFields = [strFieldNameText, strFieldNameValue];
+            //pQuery.where = this.strQuery1;
+            pQuery.where = strQuery;
 
             //if (this.strFieldNameValue == "WAFWA_Zone") {
             //    var strstop = "";
@@ -84,9 +90,21 @@ define([
 
 
         returnEvents: function (results) {
-            //if (this.strFieldNameValue == "WAFWA_Zone") {
-            //    var strstop = "";
+            //if (this.strFieldNameText == "Activity") {
+            //    var temp222 = "";
             //}
+
+
+
+            Debug.writeln("mh_PopUniqueQueryInterfaceValues:returnevents:" + this.strFieldNameText + ": number of fields =" + results.fields.length);
+
+            if (results.fields.length >= 1) {
+                Debug.writeln("mh_PopUniqueQueryInterfaceValues:returnevents: Attribute Field 1=" + results.fields[0].name);
+            }
+            if (results.fields.length == 2) {
+                Debug.writeln("mh_PopUniqueQueryInterfaceValues:returnevents: Attribute Field 2=" + results.fields[1].name);
+            }
+
             var strRemoveStrings = ["", "---select an effort type---"];
             var resultFeatures = results.features;
             var strdivTagSourceID = "";
@@ -113,10 +131,6 @@ define([
                     dojo.forEach(resultFeatures, function (feature) {//Loop through the QueryTask results and populate an array with the unique values
                         blnAdd2Dropdown = false;
                         dojo.forEach(attrNames, function (an) {
-                            //if (this.app.PS_Uniques.strFieldNameValue == "ST_ID") {
-                            //    var strstop = "";
-                            //}
-
                             if (an.toLowerCase() == this.app.PS_Uniques.strFieldNameText.toString().toLowerCase()) {
                                 var strTempText = feature.attributes[an];
                                 if (!testTexts[strTempText]) {
@@ -165,14 +179,16 @@ define([
                             texts.push(all[i].T);
                             values.push(all[i].V);
                         }
-                    }
+                    } 
                 }
 
                 if ((strdivTag4ResultsID != "") & (strdivTag4ResultsID != strdivTagSourceID)) {
-                    //                    if (this.strFieldNameValue == "ST_ID") {
-                    //                        var strstop = "";
-                    //                    }
                     var strTempValue = this.divTag4Results.options[this.divTag4Results.selectedIndex].text;                //record the existing selection
+
+                    //if (strTempValue != "All") {
+                    //    var strStop = "";
+                    //}
+
                     this.divTag4Results.options.length = 0; // clear out existing items
                     this.divTag4Results.options.add(new Option("All", 99))
                     this.divTag4Results.selectedIndex = 0
@@ -215,41 +231,47 @@ define([
                     }
                 }
             }
+
+            Debug.writeln("mh_PopUniqueQueryInterfaceValues:" + this.strFieldNameText);
+
             switch (this.strFieldNameText) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'
                 case "TypeAct":
-                    this.qry_SetUniqueValuesOf("implementing_party", "IP_ID", document.getElementById("ddlImpParty"));
+                    this.qry_SetUniqueValuesOf("Implementing_Party", "IP_ID", document.getElementById("ddlImpParty"), this.strQuery1);
                     break;
-                case "implementing_party":
-                    this.qry_SetUniqueValuesOf("office", "FO_ID", document.getElementById("ddlOffice"));
+                case "Implementing_Party":
+                    this.qry_SetUniqueValuesOf("Office", "FO_ID", document.getElementById("ddlOffice"), this.strQuery1);
                     break;
-                case "office":
-                    this.qry_SetUniqueValuesOf("entry_type", "entry_type", document.getElementById("ddlEntry"));
+                case "Office":
+                    this.qry_SetUniqueValuesOf("Entry_Type", "Entry_Type", document.getElementById("ddlEntry"), this.strQuery1);
                     break;
-                case "entry_type":
-                    this.qry_SetUniqueValuesOf("activity", "ACT_ID", document.getElementById("ddlActivity"));
+                case "Entry_Type":
+                    this.qry_SetUniqueValuesOf("Activity", "ACT_ID", document.getElementById("ddlActivity"), this.strQuery1);
                     break;
-                case "activity":
-                    this.qry_SetUniqueValuesOf("Project_ID", "Project_ID", null);
+                case "Activity":   // this project_ID query needs to happen here to make sure the query for the related tables works
+                    this.qry_SetUniqueValuesOf("Project_ID", "Project_ID", null, this.strQuery1);
                     break;
                 case "Project_ID":
                     this.iNonSpatialTableIndex = 9;
-                    this.qry_SetUniqueValuesOf("State", "ST_ID", document.getElementById("ddlState"));
+                    this.qry_SetUniqueValuesOf("State", "ST_ID", document.getElementById("ddlState"), this.strQuery1);
                     break;
                 case "State":
                     this.iNonSpatialTableIndex = 8;
-                    this.qry_SetUniqueValuesOf("Pop_Name", "Pop_ID", document.getElementById("ddlPopArea"));
+                    this.qry_SetUniqueValuesOf("Pop_Name", "Pop_ID", document.getElementById("ddlPopArea"), this.strQuery1);
                     break;
                 case "Pop_Name":
                     this.iNonSpatialTableIndex = 3;
-                    this.qry_SetUniqueValuesOf("WAFWA_Zone", "WAFWA_ID", document.getElementById("ddlManagUnit"));
+                    this.qry_SetUniqueValuesOf("WAFWA_Zone", "WAFWA_ID", document.getElementById("ddlManagUnit"), this.strQuery1);
                     break;
                 case "WAFWA_Zone":
                     document.getElementById("ImgResultsLoading").style.visibility = "hidden";
-                    disableOrEnableFormElements("dropdownForm", 'select-one', false) //disable/enable to avoid user clicking query options during pending queries
+                    disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
                     disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+                    
+                    Debug.writeln("mh_PopUniqueQueryInterfaceValues");
+                    app.pFC.GetCountOfFCDef_ShowText(this.strQuery1, this.strURL + 0, "txtQueryResults", "count", "project_id", "");
 
-                    ////not due to max record count not being increased yet, not going with ....this.strQuery1
-                    //app.pFC.GetCountOfFCDef_ShowText(this.m_strCED_PP_pointQuery, this.strURL + "0", "dTotalProjects", "count", "project_id", " and (typeact = 'Project')");
+                    this.iNonSpatialTableIndex = 0; //reset the table index for next time
+
                     break;
             }
 

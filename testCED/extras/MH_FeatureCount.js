@@ -34,9 +34,12 @@ define([
 
 
         GetCountOfFCDef_ShowText: function (strQuery, strURL, strHTML_ID, strStatType, strFieldName, strAddedQueryString) {
+            this.strHTML_ID = strHTML_ID;
+            Debug.writeln("mh_featurecount GetCountOfFCDef_ShowText :" + this.strHTML_ID);
+            
             disableOrEnableFormElements("dropdownForm", 'select-one', true);  //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
-            this.strHTML_ID = strHTML_ID;
+  
             this.strURLStored = strURL;
 
             if (this.strHTML_ID != "txtQueryResults") {
@@ -66,53 +69,54 @@ define([
         returnEvents: function (results) {
             var iStatValue = results.count;
             strDispaly = iStatValue.toString();
-            //strDispaly = iStatValue + " Results";
             if (this.strHTML_ID == "txtQueryResults") {
+                //Debug.writeln("mh_featurecount returnEvents" + strDispaly + ":" + this.strHTML_ID + ", supplemental");
+
+
                 strDispaly = strDispaly + " Resulting Efforts";
-                //if (iStatValue > 1000) {
-                //    strDispaly += "<br> Note: Limits displaying over 1000 features, zoom into area of interest or add filters to handle display limits"
-                //}
             }
+
+            //Debug.writeln("mh_featurecount returnEvents BEFORE CASE" + strDispaly + ":'" + this.strHTML_ID + "'");
+
 
             document.getElementById(this.strHTML_ID).innerHTML = strDispaly;
 
             switch (this.strHTML_ID) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'
                 case "txtQueryResults":
+                    disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
+                    disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+
+                    this.strHTML_ID = "dTotalProjectsQ"; //this is redundant but having issues with some of the callbacks ie. GRSG pop area = Crab Creek
                     //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"));
+                    //Debug.writeln("mh_featurecount returnEvents IN CASE" + strDispaly + ":" + this.strHTML_ID + ":" + this.strQueryStored +  " and (typeact = 'Project')");
+
                     app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalProjectsQ", "count", "project_id", " and (typeact = 'Project')");
                     break;
                 case "dTotalProjectsQ":
+                    this.strHTML_ID = "dTotalPlansQ"; //this is redundant but having issues with some of the callbacks ie. GRSG pop area = Crab Creek
+
+                    //Debug.writeln("mh_featurecount returnEvents IN CASE" + strDispaly + ":" + this.strHTML_ID + ":" + this.strQueryStored + " and (typeact = 'Plan')");
                     app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalPlansQ", "count", "project_id", " and (typeact = 'Plan')");
                     break;
                 case "dTotalPlansQ":
                     //app.pFC.GetCountOfFCDef_ShowText(this.m_strCED_PP_pointQuery, this.strURL + "0", "dTotalProjects", "count", "project_id", " and (typeact = 'Project')");
-                    disableOrEnableFormElements("dropdownForm", 'select-one', false) //disable/enable to avoid user clicking query options during pending queries
-                    disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
 
+                    //Debug.writeln("mh_featurecount returnEvents IN CASE" + strDispaly + ":" + this.strHTML_ID + ":" + this.strQueryStored);
                     app.gQuerySummary.Summarize(this.strQueryStored, "", false);
 
                     break;
             }
-
-
-            //var pform = document.getElementById("dropdownForm");   // enable all the dropdown menu's while queries are running
-            //for (var i = 0; i < pform.elements.length; i++) {
-            //    if (pform.elements[i].type == 'select-one') {
-            //        strID = pform.elements[i].id;
-            //        document.getElementById(strID).disabled = false;
-            //    }
-            //}
         },
 
 
         err: function (err) {
             console.log("Failed to get stat results due to an error: ", err);
 
-            this.app.pFC.numberOfErrors += 1;
+            //this.app.pFC.numberOfErrors += 1;
 
-            if (this.app.pFC.numberOfErrors < 5) {
-                this.app.pFC.GetCountOfFCDef_ShowText(this.app.pFC.strQueryStored, this.app.pFC.strURLStored, "txtQueryResults", "count", "project_id");
-            }
+            //if (this.app.pFC.numberOfErrors < 5) {
+            //    this.app.pFC.GetCountOfFCDef_ShowText(this.app.pFC.strQueryStored, this.app.pFC.strURLStored, "txtQueryResults", "count", "project_id");
+            //}
         }
     }
     );
