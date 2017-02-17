@@ -35,7 +35,7 @@ define([
 
         GetCountOfFCDef_ShowText: function (strQuery, strURL, strHTML_ID, strStatType, strFieldName, strAddedQueryString) {
             this.strHTML_ID = strHTML_ID;
-            Debug.writeln("mh_featurecount GetCountOfFCDef_ShowText :" + this.strHTML_ID);
+            //Debug.writeln("mh_featurecount GetCountOfFCDef_ShowText :" + this.strHTML_ID);
             
             disableOrEnableFormElements("dropdownForm", 'select-one', true);  //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries

@@ -214,7 +214,7 @@ define([
                 }
             }
 
-            Debug.writeln("mh_PopUniqueQueryInterfaceValues:" + this.strFieldNameText);
+            //Debug.writeln("mh_PopUniqueQueryInterfaceValues:" + this.strFieldNameText);
 
             switch (this.strFieldNameText) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'
                 case "TypeAct":
@@ -249,7 +249,7 @@ define([
                     disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
                     disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
                     
-                    Debug.writeln("mh_PopUniqueQueryInterfaceValues");
+                    //Debug.writeln("mh_PopUniqueQueryInterfaceValues");
                     app.pFC.GetCountOfFCDef_ShowText(this.strQuery1, this.strURL + 0, "txtQueryResults", "count", "project_id", "");
 
                     this.iNonSpatialTableIndex = 0; //reset the table index for next time

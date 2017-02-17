@@ -133,28 +133,19 @@ define([
 
         SendQuery: function (arrayQuery, iarrayQueryIndex) {
             //this.iTempIndexSubmit += 0;
-            
             this.m_iarrayQueryIndex = iarrayQueryIndex;
             pTblindexAndQuery = arrayQuery[iarrayQueryIndex];
-
-
             var iTableIndex = pTblindexAndQuery[0];
-
-            //if (iTableIndex == 11) {
-            //    var temp = "";
-            //}
 
             var strQuery = pTblindexAndQuery[1];
             var pQueryTask = new esri.tasks.QueryTask(this.strURL + iTableIndex);
-            //var pQueryTask = new esri.tasks.QueryTask(this.strURL + "/" + iTableIndex);
             var pQuery = new esri.tasks.Query();
-
             strFieldNameText = pTblindexAndQuery[2];
 
-            Debug.writeln("mh_query4summary:SendQuery:strFieldNameText=" + strFieldNameText + ", iTableIndex=" + iTableIndex 
-                                                + ", stattype=" + pTblindexAndQuery[3]
-                                                + ", groupby=" + pTblindexAndQuery[4]
-                                                + ", query=" + strQuery);
+            //Debug.writeln("mh_query4summary:SendQuery:strFieldNameText=" + strFieldNameText + ", iTableIndex=" + iTableIndex 
+            //                                    + ", stattype=" + pTblindexAndQuery[3]
+            //                                    + ", groupby=" + pTblindexAndQuery[4]
+            //                                    + ", query=" + strQuery);
 
 
             var array_QueryStatDefs = [];

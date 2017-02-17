@@ -99,13 +99,9 @@ define([
                 pQuery.outFields = ["Project_id"];
                 pQuery.where = strQuery;
                 //this.strQuerySaved = strQuery
-
-                Debug.writeln("1111fireed  qry_Non_SpatialTable:" + this.strField);
-
                 pQueryT.execute(pQuery, this.returnEvents, this.err);
                 //return pQueryT.execute(pQuery, this.returnEvents, this.err);
             } else {
-                Debug.writeln("skipping to next field  qry_Non_SpatialTable: from:" + this.strField + " to " + strField4NextQuery);
                 this.qry_Non_SpatialTable(strQuery1, arrayIDTemp, strField4NextQuery);
             }
         },
@@ -113,15 +109,6 @@ define([
         getMore: function () {
             var eventsResponse;
         },
-
-
-        //PopulateUniqueQueryInterfaceValues: function(strQuery, divTagSource) {
-        //    if (strQuery == "") { strQuery = "objectid > 0"; }
-        //    app.iNonSpatialTableIndex = 0;  //
-        //    app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, strQuery1: strQuery, divTagSource: divTagSource }); // instantiate the  class
-        //    app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"));
-        //},
-
 
         ExecutetheDerivedQuery: function (strQuery, divTagSource) {
             document.getElementById("txtQueryResults").innerHTML = "-";
@@ -133,10 +120,8 @@ define([
             if (strQuery == "") { strQuery = "objectid > 0"; }
             app.iNonSpatialTableIndex = 0;  //
             //app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, strQuery1: strQuery, divTagSource: divTagSource }); // instantiate the  class
-
             app.PS_Uniques.divTagSource = divTagSource;
-
-            Debug.writeln("qry_SetUniqueValuesOf at dropdown change");
+            //Debug.writeln("qry_SetUniqueValuesOf at dropdown change");
             app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), strQuery);//dropdown change
 
             //app.pSetQS = new PS_MeasSiteSearch_SetVisableQueryDef({ pCED_PP_point: this.pCED_PP_point, pCED_PP_poly: this.pCED_PP_poly, pCED_PP_line: this.pCED_PP_line }); // instantiate the class
@@ -149,8 +134,6 @@ define([
         },
         
         returnEvents: function (results) {
-            Debug.writeln("Prefireed");
-
             this.strFinalQuery = "";
             var resultFeatures = results.features;
             if ((resultFeatures != null) && (resultFeatures != undefined)) {
