@@ -277,8 +277,24 @@ Date:        Oct 2014-->
             var pNewWindow = window.open("CEDPSummary.html");
         }
 
+        function disableOrEnableFormElements(strFormName, strElementType, TorF) {
+            var pform = document.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
+
+            if (pform != null) {
+                for (var i = 0; i < pform.elements.length; i++) {
+                    if (pform.elements[i].type == strElementType) {
+                        strID = pform.elements[i].id;
+                        document.getElementById(strID).disabled = TorF;
+                    }
+                }
+            }
+        }
+
         function ddlMatrix_Change(divTagSource) {
             document.getElementById("ImgResultsLoading").style.visibility = "visible";
+            disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
+            disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
+
             app.map.infoWindow.hide();
             app.map.graphics.clear();
             document.getElementById("txtQueryResults").innerHTML = "";
@@ -303,7 +319,6 @@ Date:        Oct 2014-->
 
                 dojo.forEach(app.arrayLayers, function (player) {
                     var id = player.id;
-                    //if ((id == "0") | (id == "1") | (id == "2") | (id == "graphicsLayer1")) { player.setVisibility(!blnTPKs); }
                     if (id == "graphicsLayer1") { player.setVisibility(!blnTPKs); }
                 });
             }
@@ -311,7 +326,6 @@ Date:        Oct 2014-->
                 dojo.forEach(app.arrayLayers, function (player) {
                     var id = player.id;
                     if (id == "graphicsLayer1") { player.setVisibility(false); }
-                    //if ((id == "10") | (id == "11") | (id == "12") | (id == "graphicsLayer1")) { player.setVisibility(false); }
                 });
             }
 
@@ -370,6 +384,9 @@ Date:        Oct 2014-->
         function PSQsearchSucceeded(results) { }
 
         function btn_clear_click() {
+            disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
+            disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
+
             document.getElementById("txtQueryResults").innerHTML = "-";
             document.getElementById("dTotalProjectsQ").innerHTML = "-";
             document.getElementById("dTotalPlansQ").innerHTML = "-";

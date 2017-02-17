@@ -82,29 +82,11 @@ define([
             //pQuery.where = this.strQuery1;
             pQuery.where = strQuery;
 
-            //if (this.strFieldNameValue == "WAFWA_Zone") {
-            //    var strstop = "";
-            //}
             return pQueryT.execute(pQuery, this.returnEvents, this.err);
         },
 
 
         returnEvents: function (results) {
-            //if (this.strFieldNameText == "Activity") {
-            //    var temp222 = "";
-            //}
-
-
-
-            Debug.writeln("mh_PopUniqueQueryInterfaceValues:returnevents:" + this.strFieldNameText + ": number of fields =" + results.fields.length);
-
-            if (results.fields.length >= 1) {
-                Debug.writeln("mh_PopUniqueQueryInterfaceValues:returnevents: Attribute Field 1=" + results.fields[0].name);
-            }
-            if (results.fields.length == 2) {
-                Debug.writeln("mh_PopUniqueQueryInterfaceValues:returnevents: Attribute Field 2=" + results.fields[1].name);
-            }
-
             var strRemoveStrings = ["", "---select an effort type---"];
             var resultFeatures = results.features;
             var strdivTagSourceID = "";
