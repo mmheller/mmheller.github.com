@@ -226,7 +226,6 @@ define([
                                           var pValue = formatDate(pItem[keyField]);
                                           data["items"][key][keyField] = pValue;
                                       }
-                                      //https://www.sciencebase.gov/arcgis/rest/services/Catalog/56defa6ae4b015c306fc28b1/MapServer/2/query?where=Deliverable_Received+%3D+1&text=&objectIds=&time=&geometry=&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelIntersects&relationParam=&outFields=projectid%2C+deliverable_title%2C+receiveddate%2C+Deliverable_Received+&returnGeometry=false&maxAllowableOffset=&geometryPrecision=&outSR=&returnIdsOnly=false&returnCountOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&gdbVersion=&returnDistinctValues=false&f=html
                                       if ((keyField == "Deliverable_Received") & (pGrid.id == "gridDeliverables")) {
                                           pValue = pItem.Deliverable_Received;
                                           if (pValue == 1) {
