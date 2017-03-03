@@ -93,38 +93,26 @@ define([
 
             //console.log("111returnEvents:this.divTagSource.srcElement ID = " + this.divTagSource.srcElement.id);
            
-            if (this.divTagSource != undefined) {
-                if (this.divTagSource.target != undefined) {
-                    console.log("122 returnEvents:this.divTagSource.target ID = " + this.divTagSource.target.id);
-                    var tempstop = "";
-                    this.divTagSource = null;
-                }
-            } else {
-                console.log("1returnEvents:this.divTagSource is undefined:" + (this.divTagSource == undefined));
-            }
-
-            console.log("1returnEvents");
+            //if (this.divTagSource != undefined) {
+            //    if (this.divTagSource.target != undefined) {
+            //        console.log("122 returnEvents:this.divTagSource.target ID = " + this.divTagSource.target.id);
+            //        var tempstop = "";
+            //        this.divTagSource = null;
+            //    }
+            //} else {
+            //    console.log("1returnEvents:this.divTagSource is undefined:" + (this.divTagSource == undefined));
+            //}
 
             if ((this.divTagSource != "") & (this.divTagSource != null)) {
-                //console.log("111returnEvents:this.divTagSource.srcElement ID = " + this.divTagSource.srcElement.id);
-                console.log("3returnEvents");
-                console.log("111returnEvents:this.divTagSource.target ID = " + this.divTagSource.target.id);
-
-                if ((this.divTagSource.srcElement == null) | (this.divTagSource.srcElement == undefined)){
-                    strdivTagSourceID = this.divTagSource.target.id;
-                } else {
-                    strdivTagSourceID = this.divTagSource.srcElement.id;
-                }
-                
+                console.log("111returnEvents:this.divTagSource.target = " + this.divTagSource.target.id);
+                strdivTagSourceID = this.divTagSource.target.id;
             }
             console.log("4returnEvents");
-            //console.log("2returnEvents:this.divTagSource.srcElement is undefined:" + (this.divTagSource.srcElement == undefined));
             var strdivTag4ResultsID = "";
             if (this.divTag4Results != null) {
                 strdivTag4ResultsID = this.divTag4Results.id;
             }
             console.log("5returnEvents");
-            //console.log("3returnEvents:this.divTagSource.srcElement is undefined:" + (this.divTagSource.srcElement == undefined));
 
             if ((resultFeatures != null) || (resultFeatues != undefined)) {
                 if (resultFeatures.length > 0) {
