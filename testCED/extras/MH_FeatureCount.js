@@ -52,10 +52,15 @@ define([
 
             pQuery.returnGeometry = false;
             //var strQuery = pLayer.getDefinitionExpression();
-            strQuery = strQuery.replace(" and ((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))", "");
-            if (strQuery == "(SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)") {
+
+            strQuery = strQuery.replace(" and (((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))", "");
+            if (strQuery == "((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))") {
                 strQuery = "(objectid > 0) ";
             }
+            //strQuery = strQuery.replace(" and ((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))", "");
+            //if (strQuery == "(SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)") {
+            //    strQuery = "(objectid > 0) ";
+            //}
 
             if (strAddedQueryString != "") {
                 strQuery += strAddedQueryString;
@@ -90,18 +95,20 @@ define([
                     //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"));
                     //Debug.writeln("mh_featurecount returnEvents IN CASE" + strDispaly + ":" + this.strHTML_ID + ":" + this.strQueryStored +  " and (typeact = 'Project')");
 
-                    app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalProjectsQ", "count", "project_id", " and (typeact = 'Project')");
+                    app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalProjectsQ", "count", "project_id", " and (typeact = 'Spatial Project')");
                     break;
                 case "dTotalProjectsQ":
                     this.strHTML_ID = "dTotalPlansQ"; //this is redundant but having issues with some of the callbacks ie. GRSG pop area = Crab Creek
-
-                    //Debug.writeln("mh_featurecount returnEvents IN CASE" + strDispaly + ":" + this.strHTML_ID + ":" + this.strQueryStored + " and (typeact = 'Plan')");
-                    app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalPlansQ", "count", "project_id", " and (typeact = 'Plan')");
+                    app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalNonProjectsQ", "count", "project_id", " and (typeact = 'Non-Spatial Project')");
                     break;
-                case "dTotalPlansQ":
-                    //app.pFC.GetCountOfFCDef_ShowText(this.m_strCED_PP_pointQuery, this.strURL + "0", "dTotalProjects", "count", "project_id", " and (typeact = 'Project')");
 
-                    //Debug.writeln("mh_featurecount returnEvents IN CASE" + strDispaly + ":" + this.strHTML_ID + ":" + this.strQueryStored);
+                case "dTotalNonProjectsQ":
+                    this.strHTML_ID = "dTotalPlansQ"; //this is redundant but having issues with some of the callbacks ie. GRSG pop area = Crab Creek
+                    app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalPlansQ", "count", "project_id", " and (typeact = 'Non-Spatial Plan')");
+                    break;
+
+                case "dTotalPlansQ":
+
                     app.gQuerySummary.Summarize(this.strQueryStored, "", false);
 
                     break;

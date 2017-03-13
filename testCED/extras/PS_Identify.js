@@ -101,7 +101,8 @@ define([
                 //padding = 0.0005
                 this.m_dblX = dblX
                 this.m_dblY = dblY
-                strQuery1 = "((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))"
+                //strQuery1 = "((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))"
+                strQuery1 = "(((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))"
                 strQuery23 = "OBJECTID > 0";
             }
 

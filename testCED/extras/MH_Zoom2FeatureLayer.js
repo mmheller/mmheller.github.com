@@ -26,7 +26,8 @@ define([
         qry_Zoom2FeatureLayerExtent: function (pFeatureLayer1) {
             this.pFeatureLayer1 = pFeatureLayer1;
             var strQuery = pFeatureLayer1.getDefinitionExpression();
-            strQuery = strQuery.replace(" and ((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))", "");
+            //strQuery = strQuery.replace(" and ((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))", "");
+            strQuery = strQuery.replace(" and (((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))", "");
 
             if (strQuery == "") { strQuery = "objectid > 0"; }
             var pQueryT1 = new esri.tasks.QueryTask(pFeatureLayer1.url);
