@@ -111,11 +111,9 @@ define([
         },
 
         ExecutetheDerivedQuery: function (strQuery, divTagSource) {
-
-
-
             document.getElementById("txtQueryResults").innerHTML = "-";
             document.getElementById("dTotalProjectsQ").innerHTML = "-";
+            document.getElementById("dTotalNonProjectsQ").innerHTML = "-";
             document.getElementById("dTotalPlansQ").innerHTML = "-";
             document.getElementById("dTotalAcresQ").innerHTML = "-";
 
