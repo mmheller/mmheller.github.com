@@ -102,8 +102,12 @@ define([
                 this.m_dblX = dblX
                 this.m_dblY = dblY
                 //strQuery1 = "((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))"
-                strQuery1 = "(((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))"
-                strQuery23 = "OBJECTID > 0";
+                //strQuery1 = "(((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))"
+                //strQuery23 = "OBJECTID > 0";
+
+
+                strQuery1 = this.strQueryString4Measurements;
+                strQuery23 = this.strQueryString4Measurements;
             }
 
             this.pSP = pSP;
@@ -297,6 +301,9 @@ define([
             var title = attr.TypeAct + " Effort Name:" + attr.Project_Name + "<br /> Effort Identification Number: " + attr.Project_ID;
             var tempstrcontent = ""
             if ((blnwobble_gis) | (strTheme == "Polygon")) { tempstrcontent += "<b><i>Note: Some locations may be buffered, generalized, or altered</i></b>" + "<br />" }
+
+            if (attr.TypeAct.indexOf("Non-Spatial") >= 0) { tempstrcontent += "<b><i>Note: This is a Non-Spatial Project, This is an arbritrary location!</i></b>" + "<br />" }
+
             tempstrcontent += "<u>Implementing Party:</u>  " + attr.Implementing_Party + "<br />" +
                                      "<u>Activity:</u> " + attr.Activity + "<br />" +
                                      "<u>Subactivity:</u> " + attr.SubActivity +

@@ -285,8 +285,14 @@ define([
                       app.map.infoWindow.hide();            //var strquery4id = "Contaminant LIKE '%Mercury%'";
                       app.map.graphics.clear();
                       app.pPS_Identify = new PS_Identify({ pLayer1: CED_PP_point, pLayer2: CED_PP_line, pLayer3: CED_PP_poly, pMap: app.map,
-                          strQueryString4Measurements: "OBJECTID > 0", strURL: app.strTheme1_URL, pInfoWindow: app.infoWindow, mSR: pSR
+                          strQueryString4Measurements: "Project_ID = " + strValue3, strURL: app.strTheme1_URL, pInfoWindow: app.infoWindow, mSR: pSR
                       }); // instantiate the ID Search class    
+
+                      //app.pPS_Identify = new PS_Identify({
+                      //    pLayer1: CED_PP_point, pLayer2: CED_PP_line, pLayer3: CED_PP_poly, pMap: app.map,
+                      //    strQueryString4Measurements: "OBJECTID > 0", strURL: app.strTheme1_URL, pInfoWindow: app.infoWindow, mSR: pSR
+                      //}); // instantiate the ID Search class    
+
                       var pPS_Identify_Results = app.pPS_Identify.executeQueries(null, "", 0, pGeometryPoint[0], pGeometryPoint[1]);
                   }
               });

@@ -12,6 +12,8 @@ function disableOrEnableFormElements(strFormName, strElementType, TorF, pDocumen
     }
 }
 
+
+
 function getRanges(array) {
     var ranges = [], rstart, rend;
     for (var i = 0; i < array.length; i++) {
@@ -52,7 +54,8 @@ define([
       "dijit/registry",
       "esri/tasks/query",
       "dojox/grid/DataGrid",
-      "dojo/data/ItemFileReadStore", "esri/config",
+      "dojo/data/ItemFileReadStore", "esri/config", 
+      "dojo/date/locale"
 ], function (
       declare, lang, esriRequest, IdentityManager, FeatureLayer, FeatureTable,
       domConstruct, dom, parser, ready, on,
@@ -65,6 +68,20 @@ define([
         var textA = a.T;
         var textB = b.T;
         return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+    }
+
+    function formatDate(value) {
+        if (value) {
+            var inputDate = new Date(value);
+            return dojo.date.locale.format(inputDate, {
+                selector: 'date',
+                datePattern: 'MM/dd/yyyy HH:mm:ss'
+            });
+
+            
+        } else {
+            return "";
+        }
     }
 
     return declare([], {
@@ -101,7 +118,10 @@ define([
             this.m_query4SummaryMap = strQuery;
 
             if (blnOpenEntireSummary) {
+                arrayQuery.push(["12", "OBJECTID > 0", "LastDataProviderEdit", "Max", "", "dMaxLastDataProviderEdit", '<b>Last Approved Data Provider Edit:</b> {0}', "convert2date", ""]);
+
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "", "dTotalAcresQ2", '<b>&nbspAll Efforts:</b> {0}', "commas-no-round-decimal", ""]);
+
                 arrayQuery.push(["11", strQuery2, "GIS_Acres", "sum", "", "dTotalCalcAcresQ2", '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{0} GIS calculated acres', "commas-no-round-decimal", ""]);
 
                 arrayQuery.push(["0", strQuery + " and (typeact = 'Spatial Project')", "Project_ID,totalacres", "count,sum", "", "dTotalProjects", '<b>&nbspProjects:</b> {0}', "", ""]);
@@ -337,6 +357,11 @@ define([
                                             strText = iTempNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
                                             }
                                         values.push(strText);
+
+                                    } else if (strVarType == "convert2date") {
+                                        strText = formatDate(Number(strText));
+                                        values.push(strText);
+
                                     } else if ((strVarType == "show both") & (an == "genericstat")) {
                                         //                                      var iTempNumber = Number(strText);
                                         strText = "(" + strText + ")\n<br>&nbsp;&nbsp;&nbsp;";
