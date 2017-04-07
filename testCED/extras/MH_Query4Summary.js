@@ -119,6 +119,8 @@ define([
 
             if (blnOpenEntireSummary) {
                 arrayQuery.push(["12", "OBJECTID > 0", "LastDataProviderEdit", "Max", "", "dMaxLastDataProviderEdit", '<b>Last Approved Data Provider Edit:</b> {0}', "convert2date", ""]);
+                arrayQuery.push(["12", "OBJECTID > 0", "ProcDate", "Max", "", "dMaxLastPubProc", '<b>Last Data Refresh:</b> {0}', "convert2date", ""]);
+                
 
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "", "dTotalAcresQ2", '<b>&nbspAll Efforts:</b> {0}', "commas-no-round-decimal", ""]);
 
@@ -143,8 +145,18 @@ define([
                 arrayQuery.push(["9", strQuery2, "Project_ID", "count", "State", "dNumberofOverlappingStates", '<b>Number of Overlapping States:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
                 arrayQuery.push(["11", strQuery2, "Project_ID,GIS_Acres", "count,sum", "State", "dGISStates", '<b>Number of Efforts and Total Acres by State (NOTE: GIS Calculated, Does Include Point or Line Data):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
                 arrayQuery.push(["3", strQuery2, "Project_ID", "count", "WAFWA_Zone", "dNumberofOverlappingMngmtZones", '<b>Number of Overlapping Management Zones:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
-                arrayQuery.push(["10", strQuery2, "Project_ID,GIS_Acres", "count,sum", "ADMIN_AGEN", "dGISSMA", '<b>Number of Efforts and Total Acres by Surface Management Agency (NOTE: GIS Calculated, Does Include Point or Line Data):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
                 arrayQuery.push(["8", strQuery2, "Project_ID", "count", "Pop_Name", "dNumberofOverlappingPopAreas", '<b>Number of Overlapping Population Areas:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both", ""]);
+
+                arrayQuery.push(["13", strQuery2, "Project_ID,GIS_Acres", "count,sum", "RR_class_n", "dGISRMZ", '<b>Number of Efforts and Total Acres by Ecosystem Resil./Resist of GRSG Mngmt Zone Class (NOTE: GIS Calculated, Does Include Point or Line Data):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["14", strQuery2, "Project_ID,GIS_Acres", "count,sum", "gridcode", "dGISAB", '<b>Number of Efforts and Total Acres by Pop Index Rel Abundance 25% Bins (NOTE: GIS Calculated, Does Include Point or Line Data):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["15", strQuery2, "Project_ID,GIS_Acres", "count,sum", "class", "dGISBD", '<b>Number of Efforts and Total Acres by Breeding Habitat Distribution Class (NOTE: GIS Calculated, Does Include Point or Line Data):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["16", strQuery2, "Project_ID,GIS_Acres", "count,sum", "GRIDCODE", "dGISBP", '<b>Number of Efforts and Total Acres by Resil./Resist. & Breeding Habitat Prob (NOTE: GIS Calculated, Does Include Point or Line Data):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["17", strQuery2, "Project_ID,GIS_Acres", "count,sum", "EIS_HAB", "dGISGHMA", '<b>Number of Efforts and Total Acres by Prop GRSG Gen Hab Mngmt Areas (NOTE: GIS Calculated, Does Include Point or Line Data):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["18", strQuery2, "Project_ID,GIS_Acres", "count,sum", "Mgmt_zone", "dGISMZ", '<b>Number of Efforts and Total Acres by WAFWA Management Zones (NOTE: GIS Calculated, Does Include Point or Line Data):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["19", strQuery2, "Project_ID,GIS_Acres", "count,sum", "EIS_HAB", "dGISPHMA", '<b>Number of Efforts and Total Acres by Prop GRSG Priority Hab Mngmt Areas (NOTE: GIS Calculated, Does Include Point or Line Data):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["20", strQuery2, "Project_ID,GIS_Acres", "count,sum", "POPULATION", "dGISPoP", '<b>Number of Efforts and Total Acres by GRSG Population Areas (NOTE: GIS Calculated, Does Include Point or Line Data):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["21", strQuery2, "Project_ID,GIS_Acres", "count,sum", "GRIDCODE", "dGISIDX", '<b>Number of Efforts and Total Acres by Resil./Resist. & Pop Index H/L Density Class (NOTE: GIS Calculated, Does Include Point or Line Data):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["10", strQuery2, "Project_ID,GIS_Acres", "count,sum", "ADMIN_AGEN", "dGISSMA", '<b>Number of Efforts and Total Acres by Surface Management Agency (NOTE: GIS Calculated, Does Include Point or Line Data):</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
 
             } else {
                 arrayQuery.push(["0", strQuery, "totalacres", "sum", "", "dTotalAcresQ", '{0}', "commas-no-round-decimal", ""]);
@@ -156,7 +168,6 @@ define([
 
 
         SendQuery: function (arrayQuery, iarrayQueryIndex) {
-            //this.iTempIndexSubmit += 0;
             this.m_iarrayQueryIndex = iarrayQueryIndex;
             pTblindexAndQuery = arrayQuery[iarrayQueryIndex];
             var iTableIndex = pTblindexAndQuery[0];
@@ -165,12 +176,6 @@ define([
             var pQueryTask = new esri.tasks.QueryTask(this.strURL + iTableIndex);
             var pQuery = new esri.tasks.Query();
             strFieldNameText = pTblindexAndQuery[2];
-
-            //Debug.writeln("mh_query4summary:SendQuery:strFieldNameText=" + strFieldNameText + ", iTableIndex=" + iTableIndex 
-            //                                    + ", stattype=" + pTblindexAndQuery[3]
-            //                                    + ", groupby=" + pTblindexAndQuery[4]
-            //                                    + ", query=" + strQuery);
-
 
             var array_QueryStatDefs = [];
 
@@ -433,8 +438,11 @@ define([
             this.app.pFC.numberOfErrors += 1;
 
             if (this.app.pFC.numberOfErrors < 5) {
-                //this.app.pFC.GetCountOfFCDef_ShowText(this.app.pFC.pLayerStored, "txtQueryResults", "count", "project_id");
-                this.app.pFC.GetCountOfFCDef_ShowText(this.app.pFC.strQueryStored, this.app.pFC.strURLStored, "txtQueryResults", "count", "project_id");
+                
+                //this.app.pFC.GetCountOfFCDef_ShowText(this.app.pFC.strQueryStored, this.app.pFC.strURLStored, "txtQueryResults", "count", "project_id");
+
+                this.app.pFC.gQuerySummary.SendQuery(this.app.pFC.gQuerySummary.m_arrayQuery, this.app.pFC.gQuerySummary.m_iarrayQueryIndex + 1)
+
             }
         }
     }
