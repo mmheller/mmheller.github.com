@@ -677,15 +677,15 @@ Date:        Oct 2014-->
                     <td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalAcresQ"></div></td>
                 </tr>
             </table>
-            <div class="divOpenStats" onmouseover="" style="cursor: pointer;"><font size="2px" color="white"><b><u><I>Click for summary report...</I></u></b></font></div>
+            
+            <div id="dFPMaxLastDataProviderEdit"></div>
+            <div id="dFPMaxLastPubProc"></div>
+
+            <div class="divOpenStats" onmouseover="" style="cursor: pointer;"><b><u><I><font size="3px" color="white">Click</font> <font size="3px" color="blue">here</font> <font size="3px" color="white">for summary report...</font></I></u></b></div>
         </div>
     </div>
 
-        <div class="panelTitleDraft bg rounded shadow">
-            <div id="panelMainDraft">
-                Draft Website / Under Construction
-            </div>
-        </div>
+
     <div id="panelBasemaps" class="panelBasemaps bg rounded shadow">
         <!-- Panel Basemaps -->
         <div id="basemapTitle"><img src="images/basemaps.png" height="30" title="Switch Base Map" /></div>
@@ -694,7 +694,11 @@ Date:        Oct 2014-->
             <div id="basemapGallery"></div>
         </div>
     </div>
-
+    <div class="panelTitleDraft bg rounded shadow">
+        <div id="panelMainDraft">
+            Draft Website / Under Construction
+        </div>
+    </div>
         <!--<a href="http://lccnetwork.org" target="_blank"> <img id="theImage1" border="0" src="{% static 'ced_main/images/ced_main/lcc_logo_centered_white_small.png' %}"
             style="position:absolute; top:33px; right:18px;" height="38" /></a>
         <a href="http://www.usgs.gov" target="_blank"><img id="theImage2" border="0" src="{% static 'ced_main/images/ced_main/USGS_117x31.png' %}"

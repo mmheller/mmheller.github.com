@@ -85,9 +85,9 @@
         var strQueryLabelText = localStorage.getItem("ls_strQueryLabelText");
 
         if ((strQueryLabelText == "") | (strQueryLabelText == "undefined")) {
-            strQueryLabelText = "<b>User Selected Query Filters:</b>  None selected"
+            strQueryLabelText = "<b>USER SELECTED QUERY FILTERS:</b>  None selected"
         } else {
-            strQueryLabelText = "<b>User Selected Query Filters:</b>  " + strQueryLabelText.substring(0, strQueryLabelText.length - 2);
+            strQueryLabelText = "<b>USER SELECTED QUERY FILTERS:</b>  " + strQueryLabelText.substring(0, strQueryLabelText.length - 2);
         }
 
         var div = document.getElementById("dFilterParameters");
@@ -130,7 +130,7 @@
 
                      
            
-        <table style="width:100%; background-color: #f2f5f9;">
+        <table style="width:100%; background-color: #f2f5f9; font-family: Arial;">
             <tr>
                 <td class="auto-style1" colspan="5">
                     <a href="http://conservationefforts.org/welcome/" target="_blank"> <img id="theImage4" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/CEDlogo_white_180x31.png" style="position: absolute; left: 15px; top: 18px; height: 45px;" /></a>
@@ -288,6 +288,16 @@
 
             <tr>
                 <td class="HTMLTable_styleLeft" colspan="2">
+                    <div id="dGISGHMA"></div>
+                </td>
+                <td class="HTMLTable_styleMiddle"></td>
+                <td class="HTMLTable_styleLeft" colspan="2" >
+                    <div id="dGISPHMA"></div>    
+                </td>
+            </tr>
+
+            <tr>
+                <td class="HTMLTable_styleLeft" colspan="2">
                     <div id="dGISRMZ"></div>
                 </td>
                 <td class="HTMLTable_styleMiddle"></td>
@@ -308,19 +318,22 @@
             </tr>
 
 
-            <tr>
-                <td class="HTMLTable_styleLeft" colspan="2">
-                    <div id="dGISGHMA"></div>
-                </td>
-                <td class="HTMLTable_styleMiddle"></td>
-                <td class="HTMLTable_styleLeft" colspan="2" >
-                    <div id="dGISPHMA"></div>    
-                </td>
-            </tr>
+
 
             <tr>
                 <td class="HTMLTable_styleLeft" colspan="2">
                     <div id="dGISIDX"></div>
+                </td>
+                <td class="HTMLTable_styleMiddle"></td>
+                <td class="HTMLTable_styleLeft" colspan="2" >
+                    <div></div>    
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="HTMLTable_styleLeft" colspan="2">
+                    <div>Note: GIS Acre values were calculated using Conus Albers/NAD 83 projected coordinate system</div>    
                 </td>
                 <td class="HTMLTable_styleMiddle"></td>
                 <td class="HTMLTable_styleLeft" colspan="2" >

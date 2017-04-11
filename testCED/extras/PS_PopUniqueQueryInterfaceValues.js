@@ -277,7 +277,7 @@ define([
         },
 
         err: function (err) {
-            console.log("Error number" + String(this.app.PS_Uniques.numberOfErrors) + " Failed to get stat results due to an error: " + this.app.PS_Uniques.strFieldNameText + this.app.PS_Uniques.strFieldNameValue + " " + this.app.PS_Uniques.strURL + this.app.iNonSpatialTableIndex, err);
+            FWSconsole.log("Error number" + String(this.app.PS_Uniques.numberOfErrors) + " Failed to get stat results due to an error: " + this.app.PS_Uniques.strFieldNameText + this.app.PS_Uniques.strFieldNameValue + " " + this.app.PS_Uniques.strURL + this.app.iNonSpatialTableIndex, err);
             this.app.PS_Uniques.numberOfErrors += 1;
             
             //if (this.app.PS_Uniques.numberOfErrors < 5) {

@@ -95,6 +95,7 @@ define([
 
             } else {
                 var pMP = new esri.geometry.Point(dblX, dblY, new esri.SpatialReference({ "wkid": 3857 }));
+
                 this.mSR = new esri.SpatialReference({ "wkid": 3857 });
                 var pSP = app.map.toScreen(pMP);
                 padding = 500
@@ -104,7 +105,6 @@ define([
                 //strQuery1 = "((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))"
                 //strQuery1 = "(((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))"
                 //strQuery23 = "OBJECTID > 0";
-
 
                 strQuery1 = this.strQueryString4Measurements;
                 strQuery23 = this.strQueryString4Measurements;
@@ -273,17 +273,21 @@ define([
 
         showFeature: function (pFeature, strTheme) {
             this.pMap.graphics.clear();
+            var attr = pFeature.attributes;
+
             if (strTheme == "Point") {
-                pFeature.setSymbol(new SimpleMarkerSymbol().setColor(new Color([0, 255, 255, 0.4])));
+                if (attr.TypeAct.indexOf("Non-Spatial") < 0) { pFeature.setSymbol(new SimpleMarkerSymbol().setColor(new Color([0, 255, 255, 0.4]))); }
             }
             else if (strTheme == "Line") {
                 pFeature.setSymbol(new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([0, 255, 255]), 3));
             }
             else { pFeature.setSymbol(new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_NULL, new Color([255, 0, 0]), 2), new Color([0, 255, 255, 0.2]))); }
-            var attr = pFeature.attributes;
 
+
+            var strGISTotalAcres = "n/a";
+            if (attr.GIS_Acres != undefined && attr.GIS_Acres != null) { strGISTotalAcres = Math.round(attr.GIS_Acres).toString(); }
             var strTotalAcres = "n/a";
-            if (attr.TotalAcres != undefined && attr.TotalAcres != null) { strTotalAcres = attr.TotalAcres.toString(); }
+            if (attr.TotalAcres != undefined && attr.TotalAcres != null) { strTotalAcres = Math.round(attr.TotalAcres).toString(); }
             var strTotalMiles = "n/a";
             if (attr.TotalMiles != undefined && attr.TotalMiles != null) { strTotalMiles = attr.TotalMiles.toString(); }
             var strTotalRemoved = "n/a";
@@ -309,6 +313,7 @@ define([
                                      "<u>Subactivity:</u> " + attr.SubActivity +
                                         "<br/><hr>" + "Summary" + "<br />" +
                                         "<u>Total Acres:</u>  " + strTotalAcres + "<br />" +
+                                        "<u>Total Acres Calculated by GIS (Areas Efforts Only):</u>  " + strGISTotalAcres + "<br />" +
                                         "<u>Total Miles:</u>  " + strTotalMiles + "<br />" +
                                         "<u>Total Number Removed</u> : " + strTotalRemoved + "<br />"
             this.strFeatureContent = tempstrcontent;
@@ -459,7 +464,12 @@ define([
                     divTag4Results: document.getElementById("loc"),
                     strSearchField: "Project_ID", pSR: this.mSR
                 }); // instantiate the class
-                CK_ASZ.zoomToPoint(this.m_dblX, this.m_dblY, "", null);
+
+                if ((this.m_dblX == -11686922.0000472) & (this.m_dblY == 4828120.99995937)) {
+                    CK_ASZ.zoomToPoint(-12500000, 5500000, "", 6);
+                } else {
+                    CK_ASZ.zoomToPoint(this.m_dblX, this.m_dblY, "", null);
+                }
             }
 
             esri.hide(app.loading);
