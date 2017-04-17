@@ -218,7 +218,9 @@
     <script src="https://js.arcgis.com/3.19/"></script>
 	<script type="text/javascript" src="tooltips.js"></script>
     <script type="text/javascript">
+        var app = {};
         require([
+            "dojo/data/ItemFileReadStore",
             "dojo/_base/array",
         "dojo/store/Memory",
         "dgrid/OnDemandGrid",
@@ -258,7 +260,7 @@
         "dojox/charting/themes/Tufte",
 		"dojo/domReady!"
         ], function(
-            array, Memory, Grid, Selection,
+            ItemFileReadStore,array, Memory, Grid, Selection,
 		Point,
         Map,
 		Draw,
@@ -292,7 +294,9 @@
 		ChrtTooltip,
 		MoveSlice,
         theme
-	  ){
+	  ) {
+
+            app.pGrid = null;
 
             //Create layout widgets for application
             var bcMain = new BorderContainer( {id: "bcMain",design: "sidebar",gutters: false,}, domConstruct.create("div"));
@@ -468,7 +472,17 @@
                 map.graphics.clear();
                 tbStatus = "off";
                 nvCHATFL.clearSelection();
-                clearCharts();
+                //clearCharts();
+
+
+                var emptyCells = { items: "" };
+                var emptyStore = ItemFileReadStore({ data: emptyCells });
+                //grid.setStore(emptyStore)
+                //grid.refresh();
+                app.pGrid.set("store", emptyStore);
+                ////display the results in the grid
+                app.pGrid.refresh();
+
             }
 		
             //Show glossary on mouse over event
@@ -488,8 +502,8 @@
                     nvCHATFL.clearSelection();
 				
                     var scale = map.getScale();
-                    //var minMapScale = nvCHAT.minScale;
-                    var minMapScale = 11111111111111111111 //temporarily a high number to get some values
+                    var minMapScale = nvCHAT.minScale;
+                    //var minMapScale = 11111111111111111111 //temporarily a high number to get some values
 
                     //Respond if map scale is too large to display CHAT data
                     if (scale > minMapScale) {
@@ -576,9 +590,7 @@
                         });
                     }
                 }
-                //strWhere = "hex_id in (" + arrayHexs.join() + ")";
-
-                strWhere = "hex_id in (3246, 3247, 3248, 4752, 4753, 4754, 4755)";
+                strWhere = "hex_id in (" + arrayHexs.join() + ")";
 
                 var pQueryTask = new esri.tasks.QueryTask("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55c3e7dce4b033ef52106cc0/MapServer/2");
                 var pQuery = new esri.tasks.Query();
@@ -605,12 +617,8 @@
             }
 
             function qryNonSpatialResults(results) {
-                var grid;
+                //var grid;
                 // Create a new constructor by mixing in the components // Allow row selection for the grid
-                var myGrid = declare([Grid, Selection]);
-                //columns for the grid 
-                // create the dgrid
-
                 //columns for the grid 
                 var columns = [
                   { 'field': 'hex_id', 'label': 'hex_id' },
@@ -629,19 +637,15 @@
                 { 'field': 'sgcnindicator', 'label': 'sgcnindicator', width: "30%" }
               ];
 
-              grid = new (declare([Grid, Selection]))({
+                app.pGrid = new (declare([Grid, Selection]))({
                   // use Infinity so that all data is available in the grid
                   bufferRows: Infinity,
                   columns: columns
               }, "grid");
 
-
-              grid.on("dgrid-select", onRowClickHandler);
+                app.pGrid.on("dgrid-select", onRowClickHandler);
 
               var resultFeatures = results.features;
-
-
-
               var data = array.map(resultFeatures, function (feature) {
                   return {
                       // property names used here match those used when creating the dgrid
@@ -662,13 +666,11 @@
                   };
               });
 
-
               var memStore = new Memory({ data: data });
-              grid.set("store", memStore);
+              app.pGrid.set("store", memStore);
               ////display the results in the grid
-              grid.refresh();
-              ////grid.renderArray(items);
-              //grid.renderArray(results);
+              app.pGrid.refresh();
+
           }
 
 		//Function to create chart content based on single map click query
