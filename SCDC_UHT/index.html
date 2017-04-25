@@ -99,11 +99,12 @@
 				<span class="pullRight">Least Crucial</span>
 			</span>
 			<div id="sliderDivCHAT" class="sliderDiv"><a id="sliderCHAT"></a></div>
-			<input type="checkbox" id="toggleCHAT" checked></input>
+			<!--<input type="checkbox" id="toggleCHAT"></input>-->
+            <input type="checkbox" id="toggleCHAT" checked></input>
 			<label for="showLayer">Display</label>
 		</div>
 		
-<!--		<div id="legendSOC" class="legendDiv">
+		<div id="legendSOC" class="legendDiv">
 			<h4 id="legendHeadSOC">Species of Concern</h4>
 			<ul class="inlineLegend">
 				<li class="legendItem" id="legendSOC1" style="background-color: #730000">1</li>
@@ -120,9 +121,9 @@
 			<div id="sliderDivSOC" class="sliderDiv"><a id="sliderSOC"></a></div>
 			<input type="checkbox" id="toggleSOC"></input>
 			<label for="showLayer">Display</label>
-		</div>-->
+		</div>
 		
-		<!--<div id="legendSERI" class="legendDiv">
+		<div id="legendSERI" class="legendDiv">
 			<h4 id="legendHeadSERI">Species of Economic and Recreational Importance</h4>
 			<ul class="inlineLegend">
 				<li class="legendItem" id="legendSERI1" style="background-color: #9C6100">1</li>
@@ -139,9 +140,9 @@
 			<div id="sliderDivSERI" class="sliderDiv"><a id="sliderSERI"></a></div>
 			<input type="checkbox" id="toggleSERI"></input>
 			<label for="showLayer">Display</label>
-		</div>-->
+		</div>
 		
-		<!--<div id="legendWetRip" class="legendDiv">
+		<div id="legendWetRip" class="legendDiv">
 			<h4 id="legendHeadWetRip">Wetland/Riparian Habitat</h4>
 			<ul class="inlineLegend">
 				<li class="legendItem" id="legendWetRip1" style="background-color: #4C5C00">1</li>
@@ -158,9 +159,9 @@
 			<div id="sliderDivWetRip" class="sliderDiv"><a id="sliderWetRip"></a></div>
 			<input type="checkbox" id="toggleWetRip"></input>
 			<label for="showLayer">Display</label>
-		</div>-->
+		</div>
 		
-<!--		<div id="legendLC" class="legendDiv">
+		<div id="legendLC" class="legendDiv">
 			<h4 id="legendHeadLC">Landscape Condition</h4>
 			<ul class="inlineLegend">
 				<li class="legendItem" id="legendLC1" style="background-color: #CCB500">1</li>
@@ -177,7 +178,7 @@
 			<div id="sliderDivLC" class="sliderDiv"><a id="sliderLC"></a></div>
 			<input type="checkbox" id="toggleLC"></input>
 			<label for="showLayer">Display</label>
-		</div>-->
+		</div>
 	</div>
 	
 	<div id="baseMapGallery">
@@ -295,8 +296,9 @@
 		MoveSlice,
         theme
 	  ) {
-
+            app.data = null;
             app.pGrid = null;
+            app.memStore = null;
 
             //Create layout widgets for application
             var bcMain = new BorderContainer( {id: "bcMain",design: "sidebar",gutters: false,}, domConstruct.create("div"));
@@ -313,12 +315,9 @@
             infoWindow.startup();
             //Create symbol for displaying selected feature
             var selectSymbol = new SimpleFillSymbol( 			SimpleFillSymbol.STYLE_NULL, 			new SimpleLineSymbol(				SimpleLineSymbol.STYLE_SOLID,				new Color("yellow"), 				3),			new Color(null)		);
-		
             //Create symbols for displaying user drawn graphics
             var markerSymbol = new SimpleMarkerSymbol(			SimpleMarkerSymbol.STYLE_SQUARE,			10,			new SimpleLineSymbol(				SimpleLineSymbol.STYLE_SOLID,				new Color("black"),				1			),			new Color([255, 0 , 0])		);
-		
             var lineSymbol = new CartographicLineSymbol(			CartographicLineSymbol.STYLE_SOLID,			new Color([255, 0, 0]), 			3,			CartographicLineSymbol.CAP_ROUND,			CartographicLineSymbol.JOIN_BEVEL		);
-		
             var fillSymbol = new SimpleFillSymbol(			SimpleFillSymbol.STYLE_SOLID,			new SimpleLineSymbol(				SimpleLineSymbol.STYLE_SOLID,				new Color([255, 0, 0]),				2			),			new Color([255, 255, 0, 0.4])		);
 		
             //Update chart theme with custom settings
@@ -328,54 +327,69 @@
             theme.series.fontColor="black";	
 		
             //Create map
-            var map = new Map("map", {			basemap: "streets",			center: [-122, 48],			zoom: 7,			sliderStyle: "large",			sliderPosition: "bottom-right",			infoWindow: infoWindow		});	
+            var map = new Map("map", {basemap: "streets",			center: [-122, 48],			zoom: 7,			sliderStyle: "large",			sliderPosition: "bottom-right",			infoWindow: infoWindow		});	
 		
             ////Tiled map service for CHAT data
-            var nvCHAT = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58b99206e4b090ec658d7e71/MapServer", { opacity: 0.50 } );
+            var nvCHAT = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58b99206e4b090ec658d7e71/MapServer", { opacity: 0.5 } );
             //Tiled map service for SOC data
-            var nvSOC = new esri.layers.ArcGISTiledMapServiceLayer("http://gis.ndow.nv.gov/arcgis/rest/services/NVCHAT/SOC_11182014/MapServer", {			opacity: 0		});
+            var nvSOC = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58ff662de4b006455f2d62b7/MapServer", { opacity: 0 });
             //Tiled map service for SERI data
-            var nvSERI = new esri.layers.ArcGISTiledMapServiceLayer("http://gis.ndow.nv.gov/arcgis/rest/services/NVCHAT/SERI_11182014/MapServer", {			opacity: 0		});
+            var nvSERI = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58ff6612e4b006455f2d62b5/MapServer", { opacity: 0 });
             //Tiled map service for Wetland/Riparian data
-            var nvWetRip = new esri.layers.ArcGISTiledMapServiceLayer("http://gis.ndow.nv.gov/arcgis/rest/services/NVCHAT/WetRip_11182014/MapServer", {			opacity: 0		});
+            var nvWetRip = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58ff66f9e4b006455f2d62be/MapServer", { opacity: 0 });
             //Tiled map service for Landscape Condition data
-            var nvLC = new esri.layers.ArcGISTiledMapServiceLayer("http://gis.ndow.nv.gov/arcgis/rest/services/NVCHAT/LC_11182014/MapServer", {			opacity: 0		});
-       
+            var nvLC = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58ff6580e4b006455f2d62b1/MapServer", { opacity: 0 });
+            
             //Feature layer for CHAT data queries
-            var nvCHATFL = new esri.layers.FeatureLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55c3e7dce4b033ef52106cc0/MapServer/0", {opacity: 0.20	,
+            var nvCHATFL = new esri.layers.FeatureLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55c3e7dce4b033ef52106cc0/MapServer/0", {opacity: 0	,
                 mode: FeatureLayer.MODE_SELECTION, outFields: ["ch_rank", "hex_id", "ter_soc", "ter_seri", "wet_rip", "ls_cond"],
             });		
             nvCHATFL.setSelectionSymbol(selectSymbol);
-
-            //Feature layer for Nevada extent
-            var nvLayer = new esri.layers.FeatureLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55c3e7dce4b033ef52106cc0/MapServer/0", { mode: FeatureLayer.MODE_SNAPSHOT, opacity: 0.2 });
 	
-            map.addLayers([nvLC, nvWetRip, nvSERI, nvSOC, nvCHAT, nvCHATFL, nvLayer]);
+            map.addLayers([nvLC, nvWetRip, nvSERI, nvSOC, nvCHAT, nvCHATFL]);
 		
             //Set custom mouse cursor when over Nevada data layers
-            nvLayer.on("mouse-over", function() {
+            nvCHATFL.on("mouse-over", function () {
                 if (tbStatus === "off") {
                     map.setMapCursor("url(images/target25.png) 12 12, auto");
                 }
             });
 		
-            nvLayer.on("mouse-out", function() {
+            nvCHATFL.on("mouse-out", function () {
                 map.setMapCursor("default");
             });
-            var sliderCHAT = new HorizontalSlider( {			value: 50,			minimum: 1,			maximum: 100,			intermediateChanges: true,			showButtons: false,			onChange: function(value){				nvCHAT.setOpacity(value/100);			}		}, "sliderCHAT");
-	
+            
+
+            var sliderCHAT = new HorizontalSlider({value: 50,minimum: 1,maximum: 100,intermediateChanges: true,showButtons: false,onChange: function (value) {nvCHAT.setOpacity(value / 100);}}, "sliderCHAT");
+            document.getElementById("sliderDivSOC").style.visibility = "visible";
+
+            var sliderSOC = new HorizontalSlider({value: 50,minimum: 1,maximum: 100,intermediateChanges: true,showButtons: false,onChange: function (value) {nvSOC.setOpacity(value / 100);}}, "sliderSOC");
+            document.getElementById("sliderDivSOC").style.visibility = "hidden";
+
+            var sliderSERI = new HorizontalSlider({value: 50,minimum: 1,maximum: 100,intermediateChanges: true,showButtons: false,onChange: function (value) {nvSERI.setOpacity(value / 100);}}, "sliderSERI");
+            document.getElementById("sliderDivSERI").style.visibility = "hidden";
+
+            var sliderWetRip = new HorizontalSlider({value: 50,minimum: 1,maximum: 100,intermediateChanges: true,showButtons: false,onChange: function (value) {nvWetRip.setOpacity(value / 100);}}, "sliderWetRip");
+            document.getElementById("sliderDivWetRip").style.visibility = "hidden";
+
+            var sliderLC = new HorizontalSlider({value: 50,minimum: 1,maximum: 100,intermediateChanges: true,showButtons: false,onChange: function (value) {nvLC.setOpacity(value / 100);}}, "sliderLC");
+            document.getElementById("sliderDivLC").style.visibility = "hidden";
+
             //Show/hide layers on legend click event
-            document.getElementById("toggleCHAT").onclick = function() {
-                layerToggle(nvCHAT, document.getElementById("sliderDivCHAT"));
-            }
+            document.getElementById("toggleCHAT").onclick = function() {layerToggle(nvCHAT, document.getElementById("sliderDivCHAT"));}
+            document.getElementById("toggleSOC").onclick = function () {layerToggle(nvSOC, document.getElementById("sliderDivSOC"));}
+            document.getElementById("toggleSERI").onclick = function () {layerToggle(nvSERI, document.getElementById("sliderDivSERI"));}
+            document.getElementById("toggleWetRip").onclick = function () {layerToggle(nvWetRip, document.getElementById("sliderDivWetRip"));}
+            document.getElementById("toggleLC").onclick = function () {layerToggle(nvLC, document.getElementById("sliderDivLC"));}
+            
             //Function to show/hide data layers on legend click event
             function layerToggle(layer, sliderElement) {
                 if (layer.opacity > 0) {
-                    layer.opacity = 0;
+                    layer.setOpacity(0);
                     sliderElement.style.visibility = "hidden";
                 }
                 else {
-                    layer.opacity = 0.5;
+                    layer.setOpacity(0.5);
                     sliderElement.style.visibility = "visible";
                 }
                 layer.refresh();
@@ -474,15 +488,10 @@
                 nvCHATFL.clearSelection();
                 //clearCharts();
 
-
-                var emptyCells = { items: "" };
-                var emptyStore = ItemFileReadStore({ data: emptyCells });
-                //grid.setStore(emptyStore)
-                //grid.refresh();
-                app.pGrid.set("store", emptyStore);
-                ////display the results in the grid
-                app.pGrid.refresh();
-
+                app.data = new dojo.data.ItemFileReadStore({ data: { identifier: "", items: [] } });
+                
+                app.memStore = new Memory({ data: app.data });
+                app.pGrid.set("store", app.memStore);
             }
 		
             //Show glossary on mouse over event
@@ -617,7 +626,6 @@
             }
 
             function qryNonSpatialResults(results) {
-                //var grid;
                 // Create a new constructor by mixing in the components // Allow row selection for the grid
                 //columns for the grid 
                 var columns = [
@@ -646,7 +654,9 @@
                 app.pGrid.on("dgrid-select", onRowClickHandler);
 
               var resultFeatures = results.features;
-              var data = array.map(resultFeatures, function (feature) {
+
+              //var data = array.map(resultFeatures, function (feature) {
+              app.data = array.map(resultFeatures, function (feature) {
                   return {
                       // property names used here match those used when creating the dgrid
                       "hex_id": feature.attributes['hex_id'],
@@ -665,12 +675,11 @@
                       "sgcnindicator": feature.attributes['sgcnindicator']
                   };
               });
-
-              var memStore = new Memory({ data: data });
-              app.pGrid.set("store", memStore);
+              //var memStore = new Memory({ data: data });
+              app.memStore = new Memory({ data: app.data });
+              app.pGrid.set("store", app.memStore);
               ////display the results in the grid
               app.pGrid.refresh();
-
           }
 
 		//Function to create chart content based on single map click query
