@@ -51,11 +51,14 @@ define([
                 document.getElementById("btn_TextSummary").disabled = false;
 
                 var pExtent;
+                var mapPoint1;
                 if (results[0].features.length > 0) {
                     var resultFeatures1 = results[0].features;
                     pfeatureExtent1 = esri.graphicsExtent(resultFeatures1);
                     if ((pfeatureExtent1 != undefined) & (pfeatureExtent1.xmax != pfeatureExtent1.xmin)) {
                         pExtent = new esri.geometry.Extent(pfeatureExtent1.xmin, pfeatureExtent1.ymin, pfeatureExtent1.xmax, pfeatureExtent1.ymax, new esri.SpatialReference({ "wkid": 3857 }));
+                        pExtent = pExtent.expand(this.dblExpandNum);
+                        app.map.setExtent(pExtent, true);
                     }
                     else {
                         var pFeature1 = resultFeatures1[0];
@@ -64,11 +67,7 @@ define([
                         app.map.centerAndZoom(mapPoint1,10);
                     }
                 }
-                if (pExtent) {
-                    pExtent = pExtent.expand(this.dblExpandNum);
-                    app.map.setExtent(pExtent, true);
-                }
-                else{
+                if (!(pExtent) & !(mapPoint1)){
                     var customExtentAndSR = new esri.geometry.Extent(-14000000, 4800000, -11000000, 6200000, new esri.SpatialReference({ "wkid": 3857 }));
                     app.map.setExtent(customExtentAndSR, true);
                 }
