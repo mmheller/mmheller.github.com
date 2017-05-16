@@ -114,7 +114,7 @@ define([
             }
             console.log("5returnEvents");
 
-            if ((resultFeatures != null) || (resultFeatues != undefined)) {
+            if ((resultFeatures != null) || (resultFeatures != undefined)) {
                 if (resultFeatures.length > 0) {
                     var featAttrs = resultFeatures[0].attributes;
                     var values = [];

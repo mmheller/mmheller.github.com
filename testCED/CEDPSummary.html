@@ -9,15 +9,18 @@
     <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
     <title>Greater Sage Grouse: Conservation Efforts</title>
-    <link rel="stylesheet" href="https://js.arcgis.com/3.14/dijit/themes//tundra/tundra.css" />
-    <link rel="stylesheet" href="https://js.arcgis.com/3.14/esri/css/esri.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.20/dijit/themes//tundra/tundra.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css" />
 
+
+    <!--<link rel="stylesheet" href="https://js.arcgis.com/3.14/dijit/themes//tundra/tundra.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/esri/css/esri.css" />-->
     <!--  <link rel="stylesheet" href="https://js.arcgis.com/3.12/dijit/themes//tundra/tundra.css"/>
       <link rel="stylesheet" href="https://js.arcgis.com/3.12/esri/css/esri.css"/>-->
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="Styles/panel.css" />
-<!--    <link rel="stylesheet" type="text/css" href="{% static 'ced_main/images/grsgmap/Styles/panel.css' %}"/>-->
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/images/grsgmap/Styles/panel.css' %}"/>-->
 
 
 <!--    <style>
@@ -42,10 +45,11 @@
     </style>
 
     <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
-<!--    <script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/images/grsgmap/extras' %}"} };</script>-->
+    <!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/images/grsgmap/extras' %}"} };</script>-->
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>
+    <script type="text/javascript" src="https://js.arcgis.com/3.20/"></script>
+    <!--<script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>-->
     <!--<script type="text/javascript" src="https://js.arcgis.com/3.12/"></script>-->
     <!--<script src="https://raw.githubusercontent.com/Chaussette/esri.symbol.MultiLineTextSymbol/master/esri.symbol.MultiLineTextSymbol.js"></script>-->
 
@@ -326,7 +330,7 @@
                 </td>
                 <td class="HTMLTable_styleMiddle"></td>
                 <td class="HTMLTable_styleLeft" colspan="2" >
-                    <div></div>    
+                    <div id="dGISPACSum"></div>  
                 </td>
             </tr>
 

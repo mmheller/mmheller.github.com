@@ -46,6 +46,7 @@ define([
   "dojo/promise/all",
   "esri/urlUtils",
   "esri/layers/FeatureLayer",
+  "esri/dijit/FeatureTable",
   "esri/layers/ArcGISDynamicMapServiceLayer",
   "dijit/form/CheckBox",
   "esri/dijit/Legend",
@@ -63,14 +64,15 @@ define([
   "esri/layers/LabelLayer",
   "esri/symbols/TextSymbol"
   ], function (
-            declare, lang, esriRequest, all, urlUtils, FeatureLayer, ArcGISDynamicMapServiceLayer, CheckBox, Legend, Scalebar, Geocoder, dom, domClass,
+            declare, lang, esriRequest, all, urlUtils, FeatureLayer, FeatureTable, ArcGISDynamicMapServiceLayer, CheckBox, Legend, Scalebar, Geocoder, dom, domClass,
             mouse, on, BasemapGallery, Map, PS_Identify, Color, SimpleRenderer, LabelLayer, TextSymbol
 ) {
 
       return declare([], {
           pMap: null,
           dblExpandNum: null,
-          pFeatureLayer: null,
+          gCED_PP_point4FeatureTable: null,
+          gFeatureTable: null,
 
           constructor: function (options) {
               this.pMap = options.pMap || null;
@@ -93,8 +95,14 @@ define([
               dojo.connect(app.map, "onUpdateEnd", hideLoading);
 
               var legendLayers = [];
-              CED_PP_point = new FeatureLayer(app.strTheme1_URL + "0", { id: "0", mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+              CED_PP_point = new FeatureLayer(app.strTheme1_URL + "0", {id: "0", mode: FeatureLayer.MODE_ONDEMAND, visible: true});
               CED_PP_point.setDefinitionExpression("((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))");
+
+              this.gCED_PP_point4FeatureTable = new FeatureLayer(app.strTheme1_URL + "0", {
+                  id: "00", mode: FeatureLayer.MODE_ONDEMAND, visible: false,
+                  outFields: ["Project_ID", "SourceFeatureType", "Project_Name", "Entry_Type", "Activity", "SubActivity", "Implementing_Party", "Office", "Date_Created", "Last_Updated", "Date_Approved", "TypeAct", "TotalAcres", "TotalMiles"]
+              });
+
               CED_PP_line = new FeatureLayer(app.strTheme1_URL + "1", { id: "1", mode: FeatureLayer.MODE_ONDEMAND, visible: true });
               CED_PP_poly = new FeatureLayer(app.strTheme1_URL + "2", { id: "2", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: true });
 
@@ -102,17 +110,18 @@ define([
               var strlabelField1 = "POPULATION";
               var strlabelField2 = "Name";
               var strlabelField3 = "Mgmt_zone";
-              pBase_Pop = new FeatureLayer(strBase_URL + "0", {id: "Pop", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: false });
-              pBase_MZ = new FeatureLayer(strBase_URL + "1", { id: "MZ", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: false });
+              var pBase_Pop = new FeatureLayer(strBase_URL + "0", { id: "Pop", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: false });
+              var pBase_MZ = new FeatureLayer(strBase_URL + "1", { id: "MZ", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: false });
 
-              pBase_RRP = new FeatureLayer(strBase_URL + "2", { id: "RRP", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              pBase_RRB = new FeatureLayer(strBase_URL + "3", { id: "RRB", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              pBase_Breed = new FeatureLayer(strBase_URL + "4", { id: "Breed", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              pBase_PI = new FeatureLayer(strBase_URL + "5", { id: "PI", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              pBase_Eco = new FeatureLayer(strBase_URL + "6", { id: "Eco", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              pBase_PHMA = new FeatureLayer(strBase_URL + "7", { id: "PHMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              pBase_GHMA = new FeatureLayer(strBase_URL + "8", { id: "GHMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              pBase_SMA = new FeatureLayer(strBase_URL + "9", { id: "SMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+              var pBase_RRP = new FeatureLayer(strBase_URL + "2", { id: "RRP", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+              var pBase_RRB = new FeatureLayer(strBase_URL + "3", { id: "RRB", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+              var pBase_Breed = new FeatureLayer(strBase_URL + "4", { id: "Breed", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+              var pBase_PI = new FeatureLayer(strBase_URL + "5", { id: "PI", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+              var pBase_Eco = new FeatureLayer(strBase_URL + "6", { id: "Eco", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+              var pBase_PHMA = new FeatureLayer(strBase_URL + "7", { id: "PHMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+              var pBase_GHMA = new FeatureLayer(strBase_URL + "8", { id: "GHMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+              var pBase_SMA = new FeatureLayer(strBase_URL + "9", { id: "SMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+              var pBase_PAC = new FeatureLayer(strBase_URL + "10", { id: "PAC", "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
 
               var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
               var pLabel1 = new TextSymbol().setColor(vGreyColor);
@@ -129,6 +138,7 @@ define([
               var plabels2 = new LabelLayer({ id: "labels2" });
               plabels2.addFeatureLayer(pBase_MZ, pLabelRenderer2, "{" + strlabelField2 + "} : {" + strlabelField3 + "}");
 
+              legendLayers.push({ layer: pBase_PAC, title: 'GRSG Priority Areas for Conservation (PACs)' });
               legendLayers.push({ layer: pBase_SMA, title: 'Surface Management Agencies' });
               legendLayers.push({ layer: pBase_GHMA, title: 'Prop GRSG Gen Hab Mngmt Areas' });
               legendLayers.push({ layer: pBase_PHMA, title: 'Prop GRSG Priority Hab Mngmt Areas' });
@@ -150,6 +160,7 @@ define([
 
               var cbxLayers = [];
 
+              cbxLayers.push({ layers: [pBase_PAC, pBase_PAC], title: 'GRSG Priority Areas for Conservation (PACs)' });
               cbxLayers.push({ layers: [pBase_SMA, pBase_SMA], title: 'Surface Management Agencies' });
               cbxLayers.push({ layers: [pBase_GHMA, pBase_GHMA], title: 'Prop GRSG Gen Hab Mngmt Areas' });
               cbxLayers.push({ layers: [pBase_PHMA, pBase_PHMA], title: 'Prop GRSG Priority Hab Mngmt Areas' });
@@ -164,7 +175,7 @@ define([
               cbxLayers.push({ layers: [pBase_Pop, plabels1], title: 'GRSG Population Areas' });
               cbxLayers.push({ layers: [pBase_MZ, plabels2], title: 'WAFWA Management Zones' });
 
-              arrayLayers = [pBase_SMA, pBase_GHMA, pBase_PHMA, pBase_Eco, pBase_RRP, pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop, plabels1, plabels2, CED_PP_poly, CED_PP_line, CED_PP_point];
+              arrayLayers = [pBase_PAC, pBase_SMA, pBase_GHMA, pBase_PHMA, pBase_Eco, pBase_RRP, pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop, plabels1, plabels2, CED_PP_poly, CED_PP_line, CED_PP_point, this.gCED_PP_point4FeatureTable];
               app.map.addLayers(arrayLayers);
 
               dojo.connect(app.map, 'onLayersAddResult', function (results) {            //add check boxes 
@@ -217,6 +228,53 @@ define([
                           dojo.place("<br />", checkLabel, "after");
                       });
                   }
+              });
+
+              this.gFeatureTable = new FeatureTable({
+                  "featureLayer": this.gCED_PP_point4FeatureTable,
+                  "outFields": [
+                    "Project_ID", "TypeAct", "Project_Name", "Activity", "SubActivity", "Implementing_Party", "Office", "Date_Created",
+                    "Last_Updated", "Date_Approved", "TotalAcres", "TotalMiles", "SourceFeatureType"
+                  ],
+                  fieldInfos: [
+                    { name: 'Project_ID', alias: 'ID'},
+                    { name: 'TypeAct', alias: 'Project or Plan', },
+                    { name: 'Project_Name', alias: 'Effort Name', },
+                    { name: 'Activity', alias: 'Activity', },
+                    { name: 'SubActivity', alias: 'Sub Activity', },
+                    { name: 'Implementing_Party', alias: 'Implementing Party', },
+                    { name: 'Office', alias: 'Office', },
+                    { name: 'Date_Created', alias: 'Date Recorded', },
+                    { name: 'Last_Updated', alias: 'Recorded Update', },
+                    { name: 'Date_Approved', alias: 'Date Approved', },
+                    { name: 'TotalAcres', alias: 'Acres', },
+                    { name: 'TotalMiles', alias: 'Miles', },
+                    { name: 'SourceFeatureType', alias: 'Source', }
+                  ],
+                  "map": map
+              }, 'myTableNode');
+
+              this.gFeatureTable.showGridHeader = false;
+              this.gFeatureTable.columnResizer = false;
+              this.gFeatureTable.startup();
+
+              on(this.gFeatureTable, "load", function (evt) {  //resize the column widths
+                  var pGrid = this.grid;
+                  var arrayColWidths = [55, 145, 380, 380, 360, 230, 290, 150, 150, 150, 80, 80, 60];
+                  var iTotalWidth = 0;
+
+                  dojo.forEach(arrayColWidths, function (iWidth) {
+                      iTotalWidth += iWidth;
+                  });
+                  pGrid.width = iTotalWidth;
+
+                  var iWidthIndex = 1;
+                  dojo.forEach(arrayColWidths, function (iWidth) {
+                      pGrid.resizeColumnWidth(iWidthIndex, iWidth);
+                      
+                      iWidthIndex += 1;
+                  });
+                  pGrid.bodyNode.scrollWidth = iTotalWidth;
               });
               return arrayLayers;
           },

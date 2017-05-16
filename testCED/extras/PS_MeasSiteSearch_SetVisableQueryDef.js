@@ -11,6 +11,7 @@ define([
         pCED_PP_poly: null,
         pCED_PP_line: null,
         pCED_PP_point: null,
+        //pCED_PP_point4FeatureTable: null,
         strQueryDef: null,
         pCurrentFeatureLayer: null,
 
@@ -18,10 +19,13 @@ define([
             this.pCED_PP_poly = options.pCED_PP_poly || null;
             this.pCED_PP_line = options.pCED_PP_line || null;
             this.pCED_PP_point = options.pCED_PP_point || null;
+            //this.pCED_PP_point4FeatureTable = options.pCED_PP_point4FeatureTable || null;
         },
         setQS: function (strQueryDef) {
             this.pCED_PP_poly.setDefinitionExpression(strQueryDef);
             this.pCED_PP_line.setDefinitionExpression(strQueryDef);
+            app.pSup.gCED_PP_point4FeatureTable.setDefinitionExpression(strQueryDef);
+            app.pSup.gFeatureTable.refresh();
 
             if (strQueryDef !== "") { strQueryDef += " and "; }
             strQueryDef += "(((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))"

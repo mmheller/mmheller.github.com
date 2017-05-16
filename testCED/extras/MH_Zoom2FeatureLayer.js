@@ -27,7 +27,11 @@ define([
             this.pFeatureLayer1 = pFeatureLayer1;
             var strQuery = pFeatureLayer1.getDefinitionExpression();
             //strQuery = strQuery.replace(" and ((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))", "");
-            strQuery = strQuery.replace(" and (((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))", "");
+            //strQuery = strQuery.replace(" and (((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))", "");
+
+            strQuery = strQuery.replace(" and (((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))", " and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))");
+
+
 
             if (strQuery == "") { strQuery = "objectid > 0"; }
             var pQueryT1 = new esri.tasks.QueryTask(pFeatureLayer1.url);
@@ -50,25 +54,30 @@ define([
                 if (results[0].features.length > 0) {
                     var resultFeatures1 = results[0].features;
                     pfeatureExtent1 = esri.graphicsExtent(resultFeatures1);
-                    if (pfeatureExtent1) {
+                    if ((pfeatureExtent1 != undefined) & (pfeatureExtent1.xmax != pfeatureExtent1.xmin)) {
                         pExtent = new esri.geometry.Extent(pfeatureExtent1.xmin, pfeatureExtent1.ymin, pfeatureExtent1.xmax, pfeatureExtent1.ymax, new esri.SpatialReference({ "wkid": 3857 }));
                     }
                     else {
                         var pFeature1 = resultFeatures1[0];
                         var ptempSR = new esri.SpatialReference({ "wkid": 3857 });
                         mapPoint1 = new Point(pFeature1.geometry.points[0][0], pFeature1.geometry.points[0][1], ptempSR);
-
-                        app.map.centerAt(mapPoint1);
+                        app.map.centerAndZoom(mapPoint1,10);
                     }
                 }
                 if (pExtent) {
                     pExtent = pExtent.expand(this.dblExpandNum);
                     app.map.setExtent(pExtent, true);
                 }
+                else{
+                    var customExtentAndSR = new esri.geometry.Extent(-14000000, 4800000, -11000000, 6200000, new esri.SpatialReference({ "wkid": 3857 }));
+                    app.map.setExtent(customExtentAndSR, true);
+                }
             }
             else {
-                document.getElementById("txtQueryResults").innerHTML = "0 Results";
-                document.getElementById("btn_TextSummary").disabled = true;
+                //var customExtentAndSR = new esri.geometry.Extent(-14000000, 4800000, -11000000, 6200000, new esri.SpatialReference({ "wkid": 3857 }));
+                //app.map.setExtent(customExtentAndSR, true);
+                //document.getElementById("txtQueryResults").innerHTML = "0 Results";
+                //document.getElementById("btn_TextSummary").disabled = true;
             }
             return results;
         },

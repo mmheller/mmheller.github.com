@@ -9,8 +9,11 @@ Date:        Oct 2014-->
     <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
     <title>Greater Sage Grouse: Conservation Efforts</title>
-    <link rel="stylesheet" href="https://js.arcgis.com/3.14/dijit/themes//tundra/tundra.css" />
-    <link rel="stylesheet" href="https://js.arcgis.com/3.14/esri/css/esri.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.20/dijit/themes//tundra/tundra.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css" />
+
+    <!--<link rel="stylesheet" href="https://js.arcgis.com/3.14/dijit/themes//tundra/tundra.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.14/esri/css/esri.css" />-->
 
     <!--  <link rel="stylesheet" href="https://js.arcgis.com/3.12/dijit/themes//tundra/tundra.css"/>
       <link rel="stylesheet" href="https://js.arcgis.com/3.12/esri/css/esri.css"/>-->
@@ -20,9 +23,14 @@ Date:        Oct 2014-->
     <!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/images/grsgmap/Styles/panel.css' %}"/>-->
     <style>
         html, body {
-            height: 98%;
+            /*height: 98%;
             width: 99.95%;
-            margin: 0.00005%;
+            margin: 0.00005%;*/
+              height: 100%;
+              width: 100%; 
+              margin: 0;
+              padding: 0;
+              overflow: hidden;
             background-color: rgb(127, 105, 127);
         }
     </style>
@@ -30,7 +38,8 @@ Date:        Oct 2014-->
     <!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/images/grsgmap/extras' %}"} };</script>-->
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>
+    <script type="text/javascript" src="https://js.arcgis.com/3.20/"></script>    
+    <!--<script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>-->
     <!--<script type="text/javascript" src="https://js.arcgis.com/3.12/"></script>-->
     <!--<script src="https://raw.githubusercontent.com/Chaussette/esri.symbol.MultiLineTextSymbol/master/esri.symbol.MultiLineTextSymbol.js"></script>-->
 
@@ -68,8 +77,8 @@ Date:        Oct 2014-->
         document.getElementById("dTotalAcresQ").innerHTML = "-";
 
         document.getElementById("ImgResultsLoading").style.visibility = "visible";
-        var pSup = new MH_Setup({}); // instantiate the class
-        pSup.Phase1();
+        app.pSup = new MH_Setup({}); // instantiate the class
+        //app.pSup.Phase1();
 
         var tokens = getTokens;
         var blnShoReportButton = getTokens()['RButton'];
@@ -103,12 +112,13 @@ Date:        Oct 2014-->
         app.PS_Stat = null;
         app.pSetQS = null;
 
-        app.arrayLayers = pSup.Phase2();
-        var CED_PP_poly = arrayLayers[12];  //index depends on MH_Setup-->Phase2-->arrayLayers =
-        var CED_PP_line = arrayLayers[13];
-        var CED_PP_point = arrayLayers[14];
+        app.arrayLayers = app.pSup.Phase2();
+        var CED_PP_poly = arrayLayers[13];  //index depends on MH_Setup-->Phase2-->arrayLayers =
+        var CED_PP_line = arrayLayers[14];
+        var CED_PP_point = arrayLayers[15];
+        var CED_PP_point4FeatureTable = arrayLayers[16];
 
-        app.pSetQS = new PS_MeasSiteSearch_SetVisableQueryDef({ pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line }); // instantiate the class
+        app.pSetQS = new PS_MeasSiteSearch_SetVisableQueryDef({ pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line}); // instantiate the class
         
         on(dom.byId("btn_clear"), "click", btn_clear_click);
         on(dom.byId("btn_TextSummary"), "click", btn_TextSummary_click);
@@ -126,14 +136,12 @@ Date:        Oct 2014-->
             });
         });
         dojo.connect(app.map, "onClick", executeIdeintifyQueries);
-        pSup.Phase3(CED_PP_point, CED_PP_line, CED_PP_poly);
+        app.pSup.Phase3(CED_PP_point, CED_PP_line, CED_PP_poly);
 
         app.iNonSpatialTableIndex = 0;  //these 3 lines populate the list values
         app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, divTagSource: null });
         //app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, strQuery1: "objectid > 0", divTagSource: null });
-
         app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
-
         //Debug.writeln("qry_SetUniqueValuesOf at startup");
         app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "objectid > 0"); //startup
 
@@ -419,7 +427,11 @@ Date:        Oct 2014-->
             }
 
             //CED_PP_point.setDefinitionExpression("(SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)");
+
             CED_PP_point.setDefinitionExpression("((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))");
+            CED_PP_point4FeatureTable.setDefinitionExpression("");
+            app.pSup.gFeatureTable.refresh();
+
             CED_PP_line.setDefinitionExpression("");
             CED_PP_poly.setDefinitionExpression("");
             document.getElementById("txtQueryResults").innerHTML = ""; //clear the text results
@@ -631,6 +643,9 @@ Date:        Oct 2014-->
             <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
             <img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
             <!--<img id="loadingImg" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="position:fixed; right:40%; top:50%; z-index:100;" />-->
+        </div>
+        <div id="bot" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true" style="height:15%">
+              <div id="myTableNode"></div>
         </div>
     </div>
 
