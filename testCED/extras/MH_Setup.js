@@ -139,18 +139,18 @@ define([
               plabels2.addFeatureLayer(pBase_MZ, pLabelRenderer2, "{" + strlabelField2 + "} : {" + strlabelField3 + "}");
 
               legendLayers.push({ layer: pBase_PAC, title: 'GRSG Priority Areas for Conservation (PACs)' });
-              legendLayers.push({ layer: pBase_SMA, title: 'Surface Management Agencies' });
-              legendLayers.push({ layer: pBase_GHMA, title: 'Prop GRSG Gen Hab Mngmt Areas' });
-              legendLayers.push({ layer: pBase_PHMA, title: 'Prop GRSG Priority Hab Mngmt Areas' });
-              legendLayers.push({ layer: pBase_Eco, title: 'Ecosystem Resil./Resist of GRSG Mngmt Zones' });
-              legendLayers.push({ layer: pBase_RRP, title: 'Resil./Resist. & Pop Index (H/L Dens)' });
-              legendLayers.push({ layer: pBase_RRB, title: 'Resil./Resist. & Breeding Habitat Prob' });
-              legendLayers.push({ layer: pBase_Breed, title: 'Breeding Habitat Distribution' });
-              legendLayers.push({ layer: pBase_PI, title: 'Pop Index (Rel Abundance 25% Bins)' });
-              legendLayers.push({ layer: CED_PP_poly, title: 'CED Plans and Projects (area)' });
-              legendLayers.push({ layer: CED_PP_line, title: 'CED Plans and Projects (line)' });
-              legendLayers.push({ layer: CED_PP_point, title: 'CED Plans and Projects (point)' });
-              legendLayers.push({ layer: pBase_Pop, title: 'GRSG Population Areas' });
+              legendLayers.push({ layer: pBase_SMA, title: 'Land Ownership (Surface Management Agency, BLM 2015)' });
+              legendLayers.push({ layer: pBase_GHMA, title: 'GRSG General Habitat Management Areas (GHMA + OHMA [NV, UT]) (BLM/USFS 2015)' });
+              legendLayers.push({ layer: pBase_PHMA, title: 'GRSG Priority Habitat Management Areas (PHMA + IHMA [ID]) (BLM/USFS 2015)' });
+              legendLayers.push({ layer: pBase_Eco, title: 'Ecosystem Resilience & Resistance (R&R) (Chambers et al. 2014, 2016)' });
+              legendLayers.push({ layer: pBase_RRP, title: 'GRSG Pop’l’n Index (High/Low (80% threshold)) + R&R (Chambers et al. 2017 )' });
+              legendLayers.push({ layer: pBase_RRB, title: 'GRSG Breeding Habitat Dist. + R&R (Chambers et al. 2017)' });
+              legendLayers.push({ layer: pBase_Breed, title: 'Breeding Habitat Distribution (Doherty et al. 2017)' });
+              legendLayers.push({ layer: pBase_PI, title: 'GRSG Pop’l’n Index (Relative Abundance) (Doherty et al. 2017)' });
+              legendLayers.push({ layer: CED_PP_poly, title: 'CED Plans and Projects' });
+              //legendLayers.push({ layer: CED_PP_line, title: 'CED Plans and Projects (line)' });
+              //legendLayers.push({ layer: CED_PP_point, title: 'CED Plans and Projects (point)' });
+              legendLayers.push({ layer: pBase_Pop, title: 'GRSG Populations' });
               legendLayers.push({ layer: pBase_MZ, title: 'WAFWA Management Zones' });
 
               dojo.connect(app.map, 'onLayersAddResult', function (results) {
@@ -161,18 +161,19 @@ define([
               var cbxLayers = [];
 
               cbxLayers.push({ layers: [pBase_PAC, pBase_PAC], title: 'GRSG Priority Areas for Conservation (PACs)' });
-              cbxLayers.push({ layers: [pBase_SMA, pBase_SMA], title: 'Surface Management Agencies' });
-              cbxLayers.push({ layers: [pBase_GHMA, pBase_GHMA], title: 'Prop GRSG Gen Hab Mngmt Areas' });
-              cbxLayers.push({ layers: [pBase_PHMA, pBase_PHMA], title: 'Prop GRSG Priority Hab Mngmt Areas' });
-              cbxLayers.push({ layers: [pBase_Eco, pBase_Eco], title: 'Ecosystem Resil./Resist of GRSG Mngmt Zones' });
-              cbxLayers.push({ layers: [pBase_RRP, pBase_RRP], title: 'Resil./Resist. & Pop Index (H/L Dens)' });
-              cbxLayers.push({ layers: [pBase_RRB, pBase_RRB], title: 'Resil./Resist. & Breeding Habitat Prob' });
-              cbxLayers.push({ layers: [pBase_Breed, pBase_Breed], title: 'Breeding Habitat Distribution' });
-              cbxLayers.push({ layers: [pBase_PI, plabels2], title: 'Pop Index (Rel Abundance 25% Bins)' });
+              cbxLayers.push({ layers: [pBase_SMA, pBase_SMA], title: 'Land Ownership<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://landscape.blm.gov/geoportal/catalog/search/resource/details.page?uuid=%7BB425E538-FC75-4B70-B287-4AEC6F9017DB%7D" target="_blank">(Surface Management Agency, BLM 2015)</a>' });
+              
+              cbxLayers.push({ layers: [pBase_GHMA, pBase_GHMA], title: 'GRSG General Habitat Management Areas<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(GHMA + OHMA [NV, UT])<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(BLM/USFS 2015)' });
+              cbxLayers.push({ layers: [pBase_PHMA, pBase_PHMA], title: 'GRSG Priority Habitat Management Areas<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(PHMA + IHMA [ID])<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(BLM/USFS 2015)' });
+              cbxLayers.push({ layers: [pBase_Eco, pBase_Eco], title: 'Ecosystem Resilience & Resistance (R&R)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Chambers et al. 2014, 2016)' });
+              cbxLayers.push({ layers: [pBase_RRP, pBase_RRP], title: 'GRSG Pop’l’n Index (High/Low (80% threshold)) + R&R<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Chambers et al. 2017 )' });
+              cbxLayers.push({ layers: [pBase_RRB, pBase_RRB], title: 'GRSG Breeding Habitat Dist. + R&R<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Chambers et al. 2017)' });
+              cbxLayers.push({ layers: [pBase_Breed, pBase_Breed], title: 'Breeding Habitat Distribution<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Doherty et al. 2017)' });
+              cbxLayers.push({ layers: [pBase_PI, plabels2], title: 'GRSG Pop’l’n Index (Relative Abundance)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Doherty et al. 2017)' });
               cbxLayers.push({ layers: [CED_PP_poly, CED_PP_poly], title: 'CED Plans and Projects (area)' });
               cbxLayers.push({ layers: [CED_PP_point, CED_PP_point], title: 'CED Plans and Projects (point)' });
               cbxLayers.push({ layers: [CED_PP_line, CED_PP_line], title: 'CED Plans and Projects (line)' });
-              cbxLayers.push({ layers: [pBase_Pop, plabels1], title: 'GRSG Population Areas' });
+              cbxLayers.push({ layers: [pBase_Pop, plabels1], title: 'GRSG Populations' });
               cbxLayers.push({ layers: [pBase_MZ, plabels2], title: 'WAFWA Management Zones' });
 
               arrayLayers = [pBase_PAC, pBase_SMA, pBase_GHMA, pBase_PHMA, pBase_Eco, pBase_RRP, pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop, plabels1, plabels2, CED_PP_poly, CED_PP_line, CED_PP_point, this.gCED_PP_point4FeatureTable];

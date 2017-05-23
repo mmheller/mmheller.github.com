@@ -519,8 +519,16 @@ Date:        Oct 2014-->
 
             <div data-dojo-type="dijit/layout/AccordionContainer">
                 <div data-dojo-type="dijit/layout/ContentPane" id="legendPane"
-                     data-dojo-props="title:'Legend'">
-                    <div id="legendDiv"></div>
+                     data-dojo-props="title:'Legend and Layer Choices'">
+
+                    <center><h2>Layer Visibility</h2></center>
+                    <form id="toggleForm" style="width:650px; padding: 2px 2px;">
+                        <div id="toggle"></div>
+                    </form>
+                    <br />
+                    <h2>Note: some layers have been simplified for web speed performance</h2>
+                    
+                    <div id="legendDiv" style="width:650px; padding: 2px 2px;"></div>
                 </div>
                 <div data-dojo-type="dijit/layout/ContentPane"
                      data-dojo-props="title:'Search Query Tools', selected:true" style="overflow-x: hidden !important; overflow-y: scroll"
@@ -599,12 +607,7 @@ Date:        Oct 2014-->
                 <center><h2>Search Locations</h2></center>
                 <div id="search"></div>
 
-                <center><h2>Layer Visibility</h2></center>
-                <form id="toggleForm">
-                    <div id="toggle" style="padding: 2px 2px;"></div>
-                </form>
-                <br />
-                <h2>Note: some layers have been simplified for web speed performance</h2>
+
                 <input id="btn_query_QS" type="button" value="Run Search/Filter" disabled=true style="visibility: hidden;" />
                 <!--</form>-->
             </div>
@@ -626,13 +629,6 @@ Date:        Oct 2014-->
                         <p>CED Front Page Map - Version 2.0</p>
                     </div>
                 </div>
-
-                <!--     <div data-dojo-type="dijit/layout/ContentPane" id="disclaimer"
-                         data-dojo-props="title:'Disclaimer'">
-                         <div id="Div3">
-                              <p>Disclaimer Placehoder</p>
-                         </div>
-                     </div>-->
 
             </div>
         </div>
