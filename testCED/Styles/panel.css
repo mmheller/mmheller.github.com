@@ -35,16 +35,42 @@
 	box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
 	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=135, Color='#000000')";
 }
+
+
+/*#panelMain {
+	width: 100%;
+
+	height: 184px;
+	overflow: hidden;
+	float: Right;
+	line-height: 30px;
+	font-weight: normal;
+    margin-right: 5px;
+}*/
+
+
 .panelTitle {
 	position: absolute;
+    width: 100%;
 	height: 84px;
-	right: 15px;
-	top: 15px;
+	/*right: 15px;*/
+	top: 0px;
 	color: #FFFFFF;
 	font-size: 35px;
 	font-weight: normal;
 	line-height: 40px;
 	padding: 0px;
+	text-align: right;
+	font-family: Arial;
+}
+
+.tablequickStats{
+	height: 140px;
+	color: #FFFFFF;
+	font-size: 13px;
+	font-weight: normal;
+	line-height: 16px;
+	padding: 10px;
 	text-align: right;
 	font-family: Arial;
 }
@@ -64,22 +90,20 @@
 	font-family: Arial;
 }
 
+#toggleForm{
+    font-size: 13px;
+}
+
+#legendDiv_2_2{
+    font-size: 13px;
+}
+
 #panelStat {
 	width: 290px;
 	height: 150px;
 	overflow: hidden;
 	float: Right;
 	line-height: 16px;
-	font-weight: normal;
-    margin-right: 5px;
-}
-
-#panelMain {
-	width: 575px;
-	height: 34px;
-	overflow: hidden;
-	float: Right;
-	line-height: 30px;
 	font-weight: normal;
     margin-right: 5px;
 }
@@ -94,8 +118,8 @@
 .panelTitleDraft {
 	position: absolute;
 	height: 33px;
-	right: 15px;
-	top: 15px;
+	/*right: 15px;*/
+	/*top: 15px;*/
 	color: #FF0000;
 	font-size: 28px;
 	font-weight: normal;
@@ -129,7 +153,19 @@
 	border-left: 1px solid #fff;
 }
     /* ################################## */
-    #rightPane {width: 20%;}
+    #leftPane {width: 300px;}
+
+
+    #topPane{
+        height:84px;
+	    -moz-box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+	    -webkit-box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+	    box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+	    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=135, Color='#000000')";
+    }
+
+
+    /*#leftPane {width: 20%;}*/
     #legendPane {border: solid #97DCF2 1px;}
 
     #search {
@@ -220,16 +256,45 @@
      .tundra .dijitAccordionTitle 
      {
          /*background: url("images/titleBar1.png") repeat-x scroll left bottom rgb(151, 118, 123);*/
-         border-top: 2px solid rgb(127, 105, 127);
+         border-top: 0px solid rgb(127, 105, 127);
          color:#5C5C2E;
          font-family: Arial;
      }
      
+     /*.tundra .dijitTabContainerTop-dijitContentPane, .tundra .dijitTabContainerLeft-dijitContentPane, .tundra .dijitTabContainerBottom-dijitContentPane, .tundra .dijitTabContainerRight-dijitContentPane, .tundra .dijitAccordionContainer-dijitContentPane {
+         padding: 0px;
+     }*/
+
+     .dijitAccordionContainer
+     {
+         height:calc(100% - 165px);
+     }
      
+
+
+        .palette3Icon {
+            background-image: url(../images/palette3.png);
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 18px;
+            height: 18px;
+        }
+
+
+        
+        .Find32Icon {
+            background-image: url(../images/Find32.png);
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 18px;
+            height: 18px;
+        }
+
+
      /* BASEMAPS */
     .panelBasemaps {
 	    position: absolute;
-	    top: 105px;
+	    top: 45px;
 	    right: 15px;
 	    width: 140px;
 	    height: 30px;

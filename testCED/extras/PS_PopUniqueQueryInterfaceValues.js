@@ -197,12 +197,13 @@ define([
                             var tt = texts[i];
                             if (this.divTag4Results.id == "ddlEntry") {
                                 var strDTextTemp = tt.toString();
-                                var strDText = strDTextTemp.replace("1", "Planned").replace("2", "In Progress").replace("3", "Completed");
-                                this.divTag4Results.options.add(new Option(strDText, iValue));
-                                if ((strTempValue == strDText) & (strdivTagSourceID != "")) {
-                                    this.divTag4Results.selectedIndex = i
-                                }
-                            } else {
+                                //var strDText = strDTextTemp.replace("1", "Planned").replace("2", "In Progress").replace("3", "Completed");
+                                //this.divTag4Results.options.add(new Option(strDText, iValue));
+                                //if ((strTempValue == strDText) & (strdivTagSourceID != "")) {
+                                //    this.divTag4Results.selectedIndex = i
+                                //}
+                            }
+                            //} else {
                                 //                                if (this.strFieldNameValue == "ST_ID") {
                                 //                                    iValue = iValue.toString();
                                 //                                }
@@ -211,7 +212,7 @@ define([
                                 if ((strTempValue == tt) & (strdivTagSourceID != "")) {
                                     this.divTag4Results.selectedIndex = i + 1
                                 }
-                            }
+                            //}
                         }
                     }
                 }
@@ -234,15 +235,15 @@ define([
 
             switch (this.strFieldNameText) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'
                 case "TypeAct":
+                    this.qry_SetUniqueValuesOf("Prj_Status_Desc", "Project_Status", document.getElementById("ddlEntry"), this.strQuery1);
+                    break;
+                case "Prj_Status_Desc":
                     this.qry_SetUniqueValuesOf("Implementing_Party", "IP_ID", document.getElementById("ddlImpParty"), this.strQuery1);
                     break;
                 case "Implementing_Party":
                     this.qry_SetUniqueValuesOf("Office", "FO_ID", document.getElementById("ddlOffice"), this.strQuery1);
                     break;
                 case "Office":
-                    this.qry_SetUniqueValuesOf("Entry_Type", "Entry_Type", document.getElementById("ddlEntry"), this.strQuery1);
-                    break;
-                case "Entry_Type":
                     this.qry_SetUniqueValuesOf("Activity", "ACT_ID", document.getElementById("ddlActivity"), this.strQuery1);
                     break;
                 case "Activity":   // this project_ID query needs to happen here to make sure the query for the related tables works

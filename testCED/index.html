@@ -56,6 +56,7 @@ Date:        Oct 2014-->
         "esri/tasks/RelationshipQuery", "esri/symbols/SimpleMarkerSymbol", "dojo/_base/Color", "esri/dijit/Scalebar",
         "esri/dijit/Geocoder", "extras/PS_Identify", "extras/CK_AutoCompleteSearchAndZoom", "extras/PS_PopUniqueQueryInterfaceValues",
         "esri/geometry/webMercatorUtils", "esri/dijit/BasemapGallery", "dojo/mouse", "dojo/query", "esri/tasks/FindTask", "esri/tasks/FindParameters",
+        "dijit/registry",
         "esri/arcgis/utils",
         "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
         "dijit/layout/AccordionContainer", "dojo/domReady!"
@@ -66,7 +67,7 @@ Date:        Oct 2014-->
                 PS_MeasSiteSearch_SetVisableQueryDef, MH_Zoom2FeatureLayer, MH_Setup, MH_FeatureCount, MH_Query4Summary,
                 RelationshipQuery, SimpleMarkerSymbol,
                 Color, Scalebar, Geocoder, PS_Identify, CK_AutoCompleteSearchAndZoom, PS_PopUniqueQueryInterfaceValues,
-                webMercatorUtils, BasemapGallery, mouse, query, FindTask, FindParameters) {
+                webMercatorUtils, BasemapGallery, mouse, query, FindTask, FindParameters, registry) {
 
         esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
 
@@ -156,6 +157,15 @@ Date:        Oct 2014-->
 
         //https://conservationefforts.org/grsgmap/?IP=11,14,16&TA=3&ST=183,985,1992,4512,9901,12665,15561,19432
         if ((strA_TypeAct) || (strA_entry_type) || (strA_activity) || (strA_Subactivity) || (strA_implementing_party) || (strA_State) || (strA_POPArea) || (strA_Managementunit || strA_office)) {
+            var botContainer = registry.byId("bot");
+
+            if (botContainer.containerNode.style.height == "") {
+                var bc = registry.byId('content');
+                var newSize = 150;
+                dojo.style(botContainer.domNode, "height", 15 + "%");
+                bc.resize();
+            }
+
             RunQueryArgs(strA_TypeAct, strA_entry_type, strA_activity, strA_Subactivity, strA_implementing_party, strA_State, strA_POPArea, strA_Managementunit, strA_office);
         } else {
             document.getElementById("btn_TextSummary").disabled = true;
@@ -231,7 +241,8 @@ Date:        Oct 2014-->
             }
             if (strA_entry_type) {
                 if (strQuery !== "") { strQuery += " and "; }
-                strQuery += "(entry_type in (" + strA_entry_type + "))";
+                strQuery += "(Project_Status in (" + strA_entry_type + "))";
+                //strQuery += "(entry_type in (" + strA_entry_type + "))";
             }
             if (strA_activity) {  //            if ((strActivity !== "All") & (strActivity != 99)) {
                 if (strQuery !== "") { strQuery += " and "; }
@@ -296,6 +307,17 @@ Date:        Oct 2014-->
         }
 
         function ddlMatrix_Change(divTagSource) {
+            var botContainer = registry.byId("bot");
+
+            if (botContainer.containerNode.style.height == ""){
+                var bc = registry.byId('content');
+                var newSize = 150;
+                dojo.style(botContainer.domNode, "height", 15 + "%");
+                bc.resize();
+            }
+
+
+
             document.getElementById("ImgResultsLoading").style.visibility = "visible";
             disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
@@ -344,7 +366,7 @@ Date:        Oct 2014-->
             }
             if (strddlEntry !== "99") {
                 if (strQuery !== "") { strQuery += " and "; }
-                strQuery += "entry_type = " + strddlEntry + "";
+                strQuery += "Project_Status = " + strddlEntry + "";
                 app.strQueryLabelText += "Entry Type = " + document.getElementById("ddlEntry").options[document.getElementById("ddlEntry").selectedIndex].text + ", ";
             }
             if (strActivity !== "99") {  //            if ((strActivity !== "All") & (strActivity != 99)) {
@@ -512,32 +534,45 @@ Date:        Oct 2014-->
     <![endif]-->
 
     <div id="content" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline', gutters:false"
-         style="width: 100%; height: 100%; margin: 0; background-color:rgb(127, 105, 127); font-family: Arial;">
-        <div id="rightPane"
-             data-dojo-type="dijit/layout/ContentPane"
-             data-dojo-props="region:'left'" style="background-color:rgb(151, 118, 123);">
+         style="width: 100%; height: 100%; margin: 0; background-color:rgb(151, 118, 123); font-family: Arial;">
 
-            <div data-dojo-type="dijit/layout/AccordionContainer">
-                <div data-dojo-type="dijit/layout/ContentPane" id="legendPane"
-                     data-dojo-props="title:'Legend and Layer Choices'">
+        <!--<div id="content" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline', gutters:false"
+             style="width: 100%; height: 100%; margin: 0; background-color:rgb(127, 105, 127); font-family: Arial;">-->
 
-                    <center><h2>Layer Visibility</h2></center>
-                    <form id="toggleForm" style="width:650px; padding: 2px 2px;">
-                        <div id="toggle"></div>
-                    </form>
-                    <br />
-                    <h2>Note: some layers have been simplified for web speed performance</h2>
-                    
-                    <div id="legendDiv" style="width:650px; padding: 2px 2px;"></div>
-                </div>
-                <div data-dojo-type="dijit/layout/ContentPane"
-                     data-dojo-props="title:'Search Query Tools', selected:true" style="overflow-x: hidden !important; overflow-y: scroll"
+
+            <div id="topPane" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top', splitter:false">
+
+
+
+            </div>
+
+
+            <div id="leftPane"
+                 data-dojo-type="dijit/layout/ContentPane"
+                 data-dojo-props="region:'left'" style="background-color:rgb(151, 118, 123);">
+
+                <div data-dojo-type="dijit/layout/AccordionContainer">
+                    <div data-dojo-type="dijit/layout/ContentPane" id="legendPane"
+                         data-dojo-props='title:"Legend and Layer Options", iconClass:"palette3Icon"'>
+                        <!--data-dojo-props='title:"Legend and Layer Options"'>-->
+
+                        <center><h2>Layer Visibility</h2></center>
+                        <form id="toggleForm" style="width:650px; padding: 2px 2px;">
+                            <div id="toggle"></div>
+                        </form>
+                        <br />
+                        <!--<h2>Note: some layers have been simplified for web speed performance</h2>-->
+                        <h2>Note:Some layers simplified for performance</h2>
+                            <div id="legendDiv" style="width:650px; padding: 2px 2px;"></div>
+                    </div>
+                    <div data-dojo-type="dijit/layout/ContentPane"
+                         data-dojo-props="title:'Search Query Tools', iconClass:'Find32Icon', selected:true" style="overflow-x: hidden !important; overflow-y: scroll"
                 <br />
                 <form id="dropdownForm">
 
                     <!--<center><h2>Filter/Query Data<img id="ImgResultsLoading" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="height:15px" /></h2></center>-->
                     <center><h2>Filter/Query Data<img id="ImgResultsLoading" src="images/loading.gif" style="height:15px" /></h2></center>
-                    
+
                     <font size="2"><u>Project or Plan:</u></font><br />
                     <select id="ddlMatrix" class="selectClass" disabled>
                         <option value="All">All</option>
@@ -592,7 +627,7 @@ Date:        Oct 2014-->
                 <div id="txtQueryResults" style="font-size:12px;"></div>
                 </br>
 
-                <center><h2>Search Projects <br />and Plans</h2></center>
+                <center><h2>Search Projects and Plans</h2></center>
                 <div id="autocompleteSearch">
                     <input id="loc" class="textbox" type="text" /><br />
                     &nbsp;
@@ -604,7 +639,7 @@ Date:        Oct 2014-->
                         &nbsp;
                     </div>-->
 
-                <center><h2>Search Locations</h2></center>
+                <center><h2>Go to Locations</h2></center>
                 <div id="search"></div>
 
 
@@ -612,7 +647,7 @@ Date:        Oct 2014-->
                 <!--</form>-->
             </div>
 
-                <div data-dojo-type="dijit/layout/ContentPane" id="prjinfopane"
+                    <!--<div data-dojo-type="dijit/layout/ContentPane" id="prjinfopane"
                      data-dojo-props="title:'Project Background'">
                     <div id="Div2">
                         <p>The Conservation Efforts Database is a partnership between the US Fish and Wildlife Service and the US Geological Survey. The goal of the Conservation Efforts Database is to efficiently and effectively collect and analyze ongoing conservation efforts for unlisted, candidate, and listed species alike. Understanding the distribution and type of conservation actions happening across the landscape will allow visualization and quantification of the extent to which threats are being addressed. Currently, this database contains only information on the Greater sage-grouse. However, it could also be useful beyond Greater sage-grouse conservation and may act as a template for tracking conservation actions across the landscape for other candidate, sensitive, or listed species. The spatially explicit, web-based Conservation Efforts Database is capable of (1) allowing multiple-users to enter data from different locations, (2) uploading and storing documents, (3) linking conservation actions to one or more threats (one-to-many relationships), (4) reporting functions that would allow summaries of the conservation actions at multiple scales (e.g., management zones, populations, or priority areas for conservation), and (5) accounting for actions at multiple scales from small easements to state-wide planning efforts.</p>
@@ -628,72 +663,62 @@ Date:        Oct 2014-->
                         <hr />
                         <p>CED Front Page Map - Version 2.0</p>
                     </div>
+                </div>-->
+
+                </div>
+
+                <div class="tablequickStats">
+                    <table>
+                        <tr>
+                            <td class="HTMLTable_styleRightJ_Compact"><b><u>Quick Summary</u></b></td>
+                            <td class="HTMLTable_styleMiddle_Compact"> </td>
+                            <td class="HTMLTable_styleLeftJ_Compact"> </td>
+                        </tr>
+                        <tr>
+                            <td class="HTMLTable_styleRightJ_Compact"><b>Total # of Spatial Projects</b></td>
+                            <td class="HTMLTable_styleMiddle_Compact"> </td>
+                            <td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalProjectsQ"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="HTMLTable_styleRightJ_Compact"><b>Total # of Non-Spatial Projects</b></td>
+                            <td class="HTMLTable_styleMiddle_Compact"> </td>
+                            <td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalNonProjectsQ"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="HTMLTable_styleRightJ_Compact"><b>Total # of Non-Spatial Plans</b></td>
+                            <td class="HTMLTable_styleMiddle_Compact"> </td>
+                            <td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalPlansQ"></div></td>
+                        </tr>
+                        <tr>
+                            <td class="HTMLTable_styleRightJ_Compact"><b>Total Acres</b></td>
+                            <td class="HTMLTable_styleMiddle_Compact"> </td>
+                            <td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalAcresQ"></div></td>
+                        </tr>
+                    </table>
+
+                    <div id="dFPMaxLastDataProviderEdit"></div>
+                    <div id="dFPMaxLastPubProc"></div>
+
+                    <div class="divOpenStats" onmouseover="" style="cursor: pointer;"><b><u><I><font size="3px" color="white">Click</font> <font size="3px" color="blue">here</font> <font size="3px" color="white">for summary report...</font></I></u></b></div>
                 </div>
 
             </div>
+            <div id="map"
+                 data-dojo-type="dijit/layout/ContentPane"
+                 data-dojo-props="region:'center'"
+                 style="overflow:hidden; background-color:rgb(151, 118, 123);">
+                <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
+                <img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
+                <!--<img id="loadingImg" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="position:fixed; right:40%; top:50%; z-index:100;" />-->
+            </div>
+
+        <!--<div id="bot" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true" style="height:15%; display: none">-->
+            <div id="bot" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true">
+                <div id="myTableNode"></div>
+            </div>
         </div>
-        <div id="map"
-             data-dojo-type="dijit/layout/ContentPane"
-             data-dojo-props="region:'center'"
-             style="overflow:hidden; background-color:rgb(151, 118, 123);">
-            <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
-            <img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
-            <!--<img id="loadingImg" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="position:fixed; right:40%; top:50%; z-index:100;" />-->
-        </div>
-        <div id="bot" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true" style="height:15%">
-              <div id="myTableNode"></div>
-        </div>
-    </div>
 
     <div class="panelTitle bg rounded shadow">
-        <!-- Panel Title -->
-        <div id="panelMain">
-
-        </div>
-    </div>
-
-    <div class="panelStats bg rounded shadow">
-        <!-- Panel Title -->
-        <div id="panelStat">
-            <table>
-                <tr>
-                    <!--<td><u>Quick Summary</u></td>   <td><body link="white"><a href="CEDPSummary.html" target="_blank">      More...</a></body></td>-->
-                    <td class="HTMLTable_styleRightJ_Compact"><b><u>Quick Summary</u></b></td>
-                    <td class="HTMLTable_styleMiddle_Compact"> </td>
-                    <td class="HTMLTable_styleLeftJ_Compact"> </td>
-                </tr>
-
-                <!--<tr>
-                    <td colspan="3"><div class="divOpenStats" onmouseover="" style="cursor: pointer;"><font size="2px" color="white"><u><I>Click for summary report...</I></u></font></div></td>
-                </tr>-->
-
-                <tr>
-                    <td class="HTMLTable_styleRightJ_Compact"><b>Total # of Spatial Projects</b></td>
-                    <td class="HTMLTable_styleMiddle_Compact"> </td>
-                    <td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalProjectsQ"></div></td>
-                </tr>
-                <tr>
-                    <td class="HTMLTable_styleRightJ_Compact"><b>Total # of Non-Spatial Projects</b></td>
-                    <td class="HTMLTable_styleMiddle_Compact"> </td>
-                    <td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalNonProjectsQ"></div></td>
-                </tr>
-                <tr>
-                    <td class="HTMLTable_styleRightJ_Compact"><b>Total # of Non-Spatial Plans</b></td>
-                    <td class="HTMLTable_styleMiddle_Compact"> </td>
-                    <td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalPlansQ"></div></td>
-                </tr>
-                <tr>
-                    <td class="HTMLTable_styleRightJ_Compact"><b>Total Acres</b></td>
-                    <td class="HTMLTable_styleMiddle_Compact"> </td>
-                    <td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalAcresQ"></div></td>
-                </tr>
-            </table>
-            
-            <div id="dFPMaxLastDataProviderEdit"></div>
-            <div id="dFPMaxLastPubProc"></div>
-
-            <div class="divOpenStats" onmouseover="" style="cursor: pointer;"><b><u><I><font size="3px" color="white">Click</font> <font size="3px" color="blue">here</font> <font size="3px" color="white">for summary report...</font></I></u></b></div>
-        </div>
     </div>
 
 
@@ -705,34 +730,39 @@ Date:        Oct 2014-->
             <div id="basemapGallery"></div>
         </div>
     </div>
-    <div class="panelTitleDraft bg rounded shadow">
+    
+    <!--Take this DRAFT text content out for django static-->
+    <!--<div class="panelTitleDraft bg rounded shadow">
         <div id="panelMainDraft">
             Draft Website / Under Construction
         </div>
+    </div>-->
+
+
+
+    <div style="position:absolute; top:10px; right:20px;" >
+        <a href="https://conservationefforts.org/sgce/about/#AC" target="_blank" style="color: #ffffff;font-family: Arial">Contact Us</a>
     </div>
-        <!--<a href="http://lccnetwork.org" target="_blank"> <img id="theImage1" border="0" src="{% static 'ced_main/images/ced_main/lcc_logo_centered_white_small.png' %}"
-            style="position:absolute; top:33px; right:18px;" height="38" /></a>
-        <a href="http://www.usgs.gov" target="_blank"><img id="theImage2" border="0" src="{% static 'ced_main/images/ced_main/USGS_117x31.png' %}"
-            style="position:absolute; top:40px; right:97px;" height="26"  /></a>
-        <a href="http://www.fws.gov" target="_blank"> <img id="theImage3" border="0" src="{% static 'ced_main/images/ced_main/USFWS_150x31.png' %}"
-            style="position:absolute; top:40px; right:200px;" height="26" /></a>&nbsp;&nbsp;
-        <a href="http://conservationefforts.org/welcome/" target="_blank"> <img id="theImage4" border="0" src="{% static 'ced_main/images/ced_main/CEDlogo_white_180x31.png' %}"
-            style="position:absolute; top:35px; right:355px;" height="40" /></a>-->
 
+    <div style="position:absolute; top:10px; right:130px;">
+        <a href="https://conservationefforts.org/sgce/about/" target="_blank" style="color: #ffffff;font-family: Arial">Project Background</a>
+    </div>
 
-    <a href="http://lccnetwork.org" target="_blank">
-        <img id="theImage1" border="0" src="https://conservationefforts.org/static/ced_main/images/ced_main/lcc_logo_centered_white_small.png"
-             style="position:absolute; top:33px; right:18px;" height="38" />    </a>
-    <a href="http://www.usgs.gov" target="_blank">
-        <img id="theImage2" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USGS_117x31.png"
-             style="position:absolute; top:40px; right:97px;" height="26" />    </a>
-    <a href="http://www.fws.gov" target="_blank">
-        <img id="theImage3" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USFWS_150x31.png"
-             style="position:absolute; top:40px; right:200px;" height="26" /></a>&nbsp;&nbsp;
     <a href="http://conservationefforts.org/welcome/" target="_blank">
         <img id="theImage4" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/CEDlogo_white_180x31.png"
-             style="position:absolute; top:35px; right:355px;" height="40" />    </a>
-
+             style="position:absolute; top:20px; left:18px;" height="45" />
+    </a>
+    <a href="http://www.fws.gov" target="_blank">
+        <img id="theImage3" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USFWS_150x31.png"
+             style="position:absolute; top:25px; left:325px;" height="35" />
+    </a>
+    <a href="http://www.usgs.gov" target="_blank">
+        <img id="theImage2" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USGS_117x31.png"
+             style="position:absolute; top:25px; left:505px;" height="35" />    </a>
+    <a href="http://lccnetwork.org" target="_blank">
+        <img id="theImage1" border="0" src="https://conservationefforts.org/static/ced_main/images/ced_main/lcc_logo_centered_white_small.png"
+             style="position:absolute; top:9px; left:650px;" width="120" />
+    </a>
 
 </body>
 
