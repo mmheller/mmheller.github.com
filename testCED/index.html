@@ -211,6 +211,11 @@ Date:        Oct 2014-->
 
         function executeIdeintifyQueries(e) {
             app.map.graphics.clear();
+
+            CED_PP_point.clearSelection();  
+            CED_PP_line.clearSelection();  
+            CED_PP_poly.clearSelection();  
+
             var strMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].text;  //get dropdown menu selection
             var strManagUnit = document.getElementById("ddlManagUnit").options[document.getElementById("ddlManagUnit").selectedIndex].value;  //get dropdown menu selection
             app.PSQS = new PS_ReturnQuerySt({ strURL: app.strTheme1_URL, strMatrix: strMatrix, strManagUnit: strManagUnit, SIDs: null, iNonSpatialTableIndex: null }); // instantiate the Seat Geek Search class
@@ -324,6 +329,10 @@ Date:        Oct 2014-->
 
             app.map.infoWindow.hide();
             app.map.graphics.clear();
+            CED_PP_point.clearSelection();  
+            CED_PP_line.clearSelection();  
+            CED_PP_poly.clearSelection();  
+
             document.getElementById("txtQueryResults").innerHTML = "";
             var strddlMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].value;
             var strddlEntry = document.getElementById("ddlEntry").options[document.getElementById("ddlEntry").selectedIndex].value;
@@ -423,6 +432,10 @@ Date:        Oct 2014-->
             document.getElementById("ImgResultsLoading").style.visibility = "visible";
             app.map.infoWindow.hide();
             app.map.graphics.clear();
+            CED_PP_point.clearSelection();  
+            CED_PP_line.clearSelection();  
+            CED_PP_poly.clearSelection();  
+
             document.getElementById("btn_TextSummary").disabled = true;
 
             CED_PP_poly.show();
@@ -708,6 +721,7 @@ Date:        Oct 2014-->
                  data-dojo-props="region:'center'"
                  style="overflow:hidden; background-color:rgb(151, 118, 123);">
                 <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
+                <div id="txt_Version" style="position:absolute; right:15px; bottom:20px; color:#404040; z-index:50; font-size:11px">CED Interactive Map Version 2.0.0</div>
                 <img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
                 <!--<img id="loadingImg" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="position:fixed; right:40%; top:50%; z-index:100;" />-->
             </div>

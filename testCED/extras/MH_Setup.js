@@ -47,6 +47,9 @@ define([
   "esri/urlUtils",
   "esri/layers/FeatureLayer",
   "esri/dijit/FeatureTable",
+  "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol", "esri/symbols/SimpleFillSymbol", "esri/graphicsUtils",
+  "esri/tasks/query",
+  "dojo/promise/all",
   "esri/layers/ArcGISDynamicMapServiceLayer",
   "dijit/form/CheckBox",
   "esri/dijit/Legend",
@@ -64,7 +67,9 @@ define([
   "esri/layers/LabelLayer",
   "esri/symbols/TextSymbol"
   ], function (
-            declare, lang, esriRequest, all, urlUtils, FeatureLayer, FeatureTable, ArcGISDynamicMapServiceLayer, CheckBox, Legend, Scalebar, Geocoder, dom, domClass,
+            declare, lang, esriRequest, all, urlUtils, FeatureLayer, FeatureTable,
+            SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, graphicsUtils, Query, All,
+            ArcGISDynamicMapServiceLayer, CheckBox, Legend, Scalebar, Geocoder, dom, domClass,
             mouse, on, BasemapGallery, Map, PS_Identify, Color, SimpleRenderer, LabelLayer, TextSymbol
 ) {
 
@@ -97,6 +102,8 @@ define([
               var legendLayers = [];
               CED_PP_point = new FeatureLayer(app.strTheme1_URL + "0", {id: "0", mode: FeatureLayer.MODE_ONDEMAND, visible: true});
               CED_PP_point.setDefinitionExpression("((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))");
+              var PSelectionSymbolPoint = new SimpleMarkerSymbol().setColor(new Color([0, 255, 255, 0.4]))
+              CED_PP_point.setSelectionSymbol(PSelectionSymbolPoint);
 
               this.gCED_PP_point4FeatureTable = new FeatureLayer(app.strTheme1_URL + "0", {
                   id: "00", mode: FeatureLayer.MODE_ONDEMAND, visible: false,
@@ -105,7 +112,13 @@ define([
               });
 
               CED_PP_line = new FeatureLayer(app.strTheme1_URL + "1", { id: "1", mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+              pSeletionSymbolLine = new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([0, 255, 255]), 3)
+              CED_PP_line.setSelectionSymbol(pSeletionSymbolLine);
+
               CED_PP_poly = new FeatureLayer(app.strTheme1_URL + "2", { id: "2", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: true });
+              pSeletionSymbolPoly = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([255, 255, 255]), 3), new Color([0, 255, 255, 0.4]));
+              CED_PP_poly.setSelectionSymbol(pSeletionSymbolPoly);
+
 
               var strBase_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/"
               var strlabelField1 = "POPULATION";
@@ -263,12 +276,10 @@ define([
                   var pGrid = this.grid;
                   var arrayColWidths = [55, 145, 380, 380, 360, 230, 290, 150, 150, 150, 80, 80, 60];
                   var iTotalWidth = 0;
-
                   dojo.forEach(arrayColWidths, function (iWidth) {
                       iTotalWidth += iWidth;
                   });
                   pGrid.width = iTotalWidth;
-
                   var iWidthIndex = 1;
                   dojo.forEach(arrayColWidths, function (iWidth) {
                       pGrid.resizeColumnWidth(iWidthIndex, iWidth);
@@ -277,6 +288,107 @@ define([
                   });
                   pGrid.bodyNode.scrollWidth = iTotalWidth;
               });
+
+
+
+              on(this.gFeatureTable, "row-select", function (evt) {  //resize the column widths
+                  app.map.graphics.clear();
+                  CED_PP_point.clearSelection();
+                  CED_PP_line.clearSelection();
+                  CED_PP_poly.clearSelection();
+
+                  var pGrid = this.grid;
+                  var arrayPrjIDs = [];
+                  var strProjectType = "";
+                  var iProjectid;
+
+                  for (var irowID in pGrid.selection) {  //run through selected records in the attribute table that meet a criteria
+                      var pRow = pGrid.row(irowID);
+
+                      strProjectType = pRow.data.TypeAct;
+                      if (strProjectType == "Spatial Project") {
+                          //strSourceGeom = pRow.data.SourceFeatureType;
+                          iProjectid = pRow.data.Project_ID;
+                          arrayPrjIDs.push(iProjectid);
+                      }
+                  }
+
+                  if (arrayPrjIDs != []) {    //if some records selected in the attribute table then query 
+                      var strQuery2 = ""
+                      for (var i = 0; i < arrayPrjIDs.length; i++) {
+                          strQuery2 += arrayPrjIDs[i] + ",";
+                      }
+                      var strQuery1 = "Project_ID in (" + strQuery2.slice(0, -1) + ")";
+
+                      var promises = []
+
+                      var pSelQueryPoint = new Query();
+                      pSelQueryPoint.returnGeometry = false;
+                      pSelQueryPoint.outFields = ["*"];
+                      pSelQueryPoint.where = strQuery1 + " and ((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))";
+                      promises.push(CED_PP_point.selectFeatures(pSelQueryPoint, FeatureLayer.SELECTION_NEW));
+
+                      var pSelQuery = new Query();
+                      pSelQuery.returnGeometry = false;
+                      pSelQuery.outFields = ["*"];
+                      pSelQuery.where = strQuery1;
+                      promises.push(CED_PP_poly.selectFeatures(pSelQuery, FeatureLayer.SELECTION_NEW));
+                      promises.push(CED_PP_line.selectFeatures(pSelQuery, FeatureLayer.SELECTION_NEW));
+                      var allPromises = new All(promises);
+                      allPromises.then(function (r) {
+                          showResults(r);
+                      });
+
+
+                      function showResults(results) {
+                          var pUnionedExtent;
+                          if (results[0].length > 0) {
+                              pUnionedExtent = graphicsUtils.graphicsExtent(CED_PP_point.getSelectedFeatures());
+                          }
+                          if (results[1].length > 0) {
+                              if (pUnionedExtent) {
+                                  if (pUnionedExtent.xmax == pUnionedExtent.xmin) {  //if extent is derived from a point must expand otherwise union will not work properly
+                                      var pXtemp = pUnionedExtent.xmax
+                                      var pYtemp = pUnionedExtent.ymax
+
+                                      pUnionedExtent.xmax = pXtemp + 10000;
+                                      pUnionedExtent.xmin = pXtemp - 10000;
+                                      pUnionedExtent.ymax = pYtemp + 10000;
+                                      pUnionedExtent.ymin = pYtemp - 10000;
+                                  }
+
+                                  pUnionedExtent = pUnionedExtent.union(graphicsUtils.graphicsExtent(CED_PP_poly.getSelectedFeatures()));
+                              } else {
+                                  pUnionedExtent = graphicsUtils.graphicsExtent(CED_PP_poly.getSelectedFeatures());
+                              }
+                          }
+                          if (results[2].length > 0) {
+                              if (pUnionedExtent) {
+                                  if (pUnionedExtent.xmax == pUnionedExtent.xmin) {  //if extent is derived from a point must expand otherwise union will not work properly
+                                      var pXtemp = pUnionedExtent.xmax
+                                      var pYtemp = pUnionedExtent.ymax
+
+                                      pUnionedExtent.xmax = pXtemp + 10000;
+                                      pUnionedExtent.xmin = pXtemp - 10000;
+                                      pUnionedExtent.ymax = pYtemp + 10000;
+                                      pUnionedExtent.ymin = pYtemp - 10000;
+                                  }
+                                  pUnionedExtent = pUnionedExtent.union(graphicsUtils.graphicsExtent(CED_PP_line.getSelectedFeatures()));
+                              } else {
+                                  pUnionedExtent = graphicsUtils.graphicsExtent(CED_PP_line.getSelectedFeatures());
+                              }
+                          }
+
+                          app.map.setExtent(pUnionedExtent, true);
+                      };
+                  }
+                  else {
+                      alert("Effort selected is a non-spatial record, select a spatial record for map highlighting");
+                  }
+              });
+
+
+
               return arrayLayers;
           },
 
@@ -343,6 +455,10 @@ define([
                       //var psqs_strQueryString = "objectid  > 0";
                       app.map.infoWindow.hide();            //var strquery4id = "Contaminant LIKE '%Mercury%'";
                       app.map.graphics.clear();
+                      CED_PP_point.clearSelection();
+                      CED_PP_line.clearSelection();
+                      CED_PP_poly.clearSelection();
+
                       app.pPS_Identify = new PS_Identify({ pLayer1: CED_PP_point, pLayer2: CED_PP_line, pLayer3: CED_PP_poly, pMap: app.map,
                           strQueryString4Measurements: "Project_ID = " + strValue3, strURL: app.strTheme1_URL, pInfoWindow: app.infoWindow, mSR: pSR
                       }); // instantiate the ID Search class    

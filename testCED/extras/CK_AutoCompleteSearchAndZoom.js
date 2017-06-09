@@ -107,6 +107,10 @@ define([
             var fixedCoords2 = fixedCoords.replace(/],\[4/g, ",4");
             fixedCoords2 = eval("[[[" + fixedCoords2 + "]]]")
             map.graphics.clear();
+            CED_PP_point.clearSelection();
+            CED_PP_line.clearSelection();
+            CED_PP_poly.clearSelection();
+
             PolyPost = {
                 "geometry": { "rings": fixedCoords2, "spatialReference": { "wkid": 102206} }, "symbol": {
                     "color": [0, 0, 0, 64], "outline": { "color": [82, 246, 248, 255], "width": 2, "type": "esriSLS", "style": "esriSLSSolid" },

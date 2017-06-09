@@ -273,6 +273,10 @@ define([
 
         showFeature: function (pFeature, strTheme) {
             this.pMap.graphics.clear();
+            CED_PP_point.clearSelection();
+            CED_PP_line.clearSelection();
+            CED_PP_poly.clearSelection();
+
             var attr = pFeature.attributes;
 
             if (strTheme == "Point") {
@@ -281,7 +285,7 @@ define([
             else if (strTheme == "Line") {
                 pFeature.setSymbol(new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([0, 255, 255]), 3));
             }
-            else { pFeature.setSymbol(new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_NULL, new Color([255, 0, 0]), 2), new Color([0, 255, 255, 0.2]))); }
+            else { pFeature.setSymbol(new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([0, 255, 255]), 3), new Color([0, 255, 255, 0.4]))); }
 
 
             var strGISTotalAcres = "n/a";
