@@ -161,7 +161,37 @@ define([
                     });
                     //values.sort();
 
-                    if (this.strFieldNameText != "Project_ID") {
+
+                    if (this.strFieldNameText == "Activity") {
+                        var all = [];
+                        for (var i = 0; i < values.length; i++) {
+                            all.push({ 'T': texts[i], 'V': values[i] });
+                        }
+                        if (this.strFieldNameText == "ST_ID") {
+                            var temp = "";
+                        }
+                        all.sort(sortFunction);
+                        texts = [];
+                        values = [];
+                        arrayOfNot2ShowActivityValues = ["Non-regulatory Conservation Strategies", "Regulatory Mechanisms, Plans, Policy",
+                                                       "Restoration:  Infrastructure Removal and Modification", "Restoration:  Livestock & Rangeland Management",
+                                                        "Restoration: Habitat Reclamation Efforts", "Restoration: Habitat Restoration", "Wildfire: Interagency Pre-suppression Planning Efforts"];
+                        for (var i = 0; i < all.length; i++) {
+                            blnShow = true;
+
+                            dojo.forEach(arrayOfNot2ShowActivityValues, function (arrayOfNot2ShowActivityValue) {
+                                if ((arrayOfNot2ShowActivityValue == all[i].T) | (arrayOfNot2ShowActivityValue == all[i].V)) {
+                                    blnShow = false;
+                                }
+                            });
+
+                            if (blnShow) {
+                                texts.push(all[i].T);
+                                values.push(all[i].V);
+                            }
+                        }
+                    }
+                    else if (this.strFieldNameText != "Project_ID") {
                         var all = [];
                         for (var i = 0; i < values.length; i++) {
                             all.push({ 'T': texts[i], 'V': values[i] });
