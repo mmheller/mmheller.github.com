@@ -21,6 +21,32 @@
             }, 
             {
                 "isOrganization": true, 
+                "name": "US Geological Survey", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:swaste@usgs.gov"
+                    }
+                ], 
+                "contactId": "G559", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Stephen Waste", 
+                "memberOfOrganization": [
+                    "G559"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:swaste@usgs.gov"
+                    }
+                ], 
+                "contactId": "559", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
                 "name": "Great Northern LCC", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
@@ -44,32 +70,6 @@
                 ], 
                 "contactId": "237", 
                 "contactType": "LCC"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "Center for Large Landscape Conservation", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:melly@largelandscapes.org"
-                    }
-                ], 
-                "contactId": "G578", 
-                "contactType": "NGO"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Melly Reuling", 
-                "memberOfOrganization": [
-                    "G578"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mailto:melly@largelandscapes.org"
-                    }
-                ], 
-                "contactId": "578", 
-                "contactType": "NGO"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -96,20 +96,20 @@
                     {
                         "party": [
                             {
-                                "contactId": "578"
+                                "contactId": "559"
                             }
                         ], 
                         "role": "principalInvestigator"
                     }
                 ], 
-                "abstract": "Increased network capacity is a priority identified by the GNLCC and the RMPF Leadership Team to build on the organizational structure of LCC Partner Forums.  Partner Forum organizations are intentionally inclusive collections of key decision-makers and stake-holders in the region who facilitate the flow of information and ideas, the delineation of shared priorities, and the advancement of projects leading to mutually beneficial outcomes. The ability of a Partner Forum to provide these services is directly related to the efficacy of its network. As the Partner Forum network improves, it successfully applies the outcomes of its work across the Rocky Mountain region and the greater GNLCC area.  \n\nThe importance of building Partner Forum capacity is also demonstrated by the GNLCC in its Strategic Conservation Framework, a document that guides the projects, processes, and evolution of the GNLCC. In the section regarding next steps for successfully implementing the overall strategy, the very first measure is building organizational capacity by supporting the partner forums to work collaboratively and effectively to effect landscape conservation at the broadest scale (Chambers etal, 2013)). Thus, improved network capacity is a foundational requirement not just for the Partner Forums, but for the GNLCC as a whole.\n\nFY2015\nand FY2016 Objectives:\n1. Expand the network to include more engaged decision-makers and stakeholders  \n2. Increase the connectedness of the network, such that interaction among members expands\n3. Establish multiple channels to efficiently and effectively transfer information among members\n4. Understand the opportunities, needs and gaps of the RMPF", 
+                "abstract": "The Great Northern Landscape Conservation Cooperative (GLNCC) has convened the Columbia Basin Partner Forum (CBPF) to help facilitate collaboration among conservation practitioners and partnerships that share landscape conservation challenges in an eco-geographic context.  Through a loosely structured process, field-level managers, scientists, and conservation constituents will identify priority conservation information, scientific needs, and implementation opportunities within the scope of the Great Northern LCC Strategic Conservation Framework. The CBPF will also provide a means to engage the partnership network (a more diverse and directly knowledgeable constituency) on specific conservation needs that will inform and support an adaptive management approach to the on the ground application of landscape conservation.\n\nFY2014\nObjectives:\n \tPlay a catalytic role by sponsoring and facilitating information sharing and coordination amongst the members of the forum in regards to their on-going efforts (e.g., using common definitions for shared problems, identifying data gaps and research priorities, reducing redundancy among programs).\n \tGuide and prioritize a portion of the GLNCC annual project funding to support actions that can glue the Columbia Basin partners programs together by generating synergy that amplifies their benefits. \n \tSecure participation of liaisons from the existing fora within the Columbia River Basin that either address single landscape scale stressors, such as the Columbia Basin River Toxics Reduction Task Force; or processes relevant to all of the landscape scale stressors, such as the Pacific Northwest Aquatic Monitoring Partnership (PNAMP).\n\nFY2015\nand FY2016 Objectives:\n \tFacilitate information sharing and collaboration across partne.\n \tIdentify existing regional conservation programs and cross-reference them with GNLCC targets and stressors within the Columbia Basin.\n \tDevelop a list of key indicators of landscape-scale ecological integrity and climate change resiliency in the Basin.", 
                 "citation": {
-                    "title": "Increasing the Capacity of the GNLCC Rocky Mountain Partners Forum", 
+                    "title": "Facilitation Needs for GLNCC Columbia Basin Partner Forum", 
                     "onlineResource": [
                         {
                             "description": "Webpage with details on this project", 
                             "protocol": "HTTP", 
-                            "uri": "http://greatnorthernlcc.org/gnlcc_projects/prj_report.html?PRJ_ID=386", 
+                            "uri": "http://greatnorthernlcc.org/gnlcc_projects/prj_report.html?PRJ_ID=376", 
                             "name": "Project Report Page"
                         }
                     ], 
@@ -124,6 +124,26 @@
                                 }
                             ], 
                             "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G559", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "559", 
+                                    "organizationMembers": [
+                                        "G559"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -144,45 +164,25 @@
                                 }
                             ], 
                             "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G578", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "578", 
-                                    "organizationMembers": [
-                                        "G578"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
                         }
                     ], 
                     "alternateTitle": [
-                        "Reuling2016"
+                        "Waste2016"
                     ], 
                     "date": [
                         {
-                            "date": "2015-10-01", 
+                            "date": "2014-10-01", 
                             "dateType": "date type"
                         }
                     ], 
                     "identifier": [
                         {
-                            "identifier": "386", 
+                            "identifier": "376", 
                             "namespace": "lcc:gn"
                         }, 
                         {
-                            "identifier": "5582f04fe4b023124e8f4486?view=folder", 
-                            "namespace": "urn:sbid"
+                            "identifier": "5582e4f0e4b023124e8f4256", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ]
                 }, 
@@ -191,16 +191,16 @@
                     "characterSet": "UTF-8", 
                     "language": "eng"
                 }, 
-                "purpose": "Conservation Planning Vulnerability Assessment  Federal resource managers State agencies Regional & county planners", 
+                "purpose": "Conservation Planning Informing Conservation Delivery  State agencies Tribes Federal resource managers", 
                 "extent": [
                     {
                         "geographicExtent": [
                             {
                                 "boundingBox": {
-                                    "northLatitude": 54.02240186566354, 
-                                    "westLongitude": -122.1863899178149, 
-                                    "southLatitude": 42.222659986457764, 
-                                    "eastLongitude": -108.64801007642124
+                                    "northLatitude": 52.904269159857094, 
+                                    "westLongitude": -121.52480552055081, 
+                                    "southLatitude": 42.33289454525308, 
+                                    "eastLongitude": -109.80370481099514
                                 }, 
                                 "geographicElement": [
                                     {
@@ -208,220 +208,292 @@
                                         "coordinates": [
                                             [
                                                 [
-                                                    -121.43654996304966, 
-                                                    53.932479988568545
+                                                    -121.37109329491021, 
+                                                    48.871776907457814
                                                 ], 
                                                 [
-                                                    -121.08896278943683, 
-                                                    53.94592152000499
+                                                    -121.18505991343487, 
+                                                    48.95194247891212
                                                 ], 
                                                 [
-                                                    -120.60004911119182, 
-                                                    53.99493619518768
+                                                    -121.15497221974479, 
+                                                    49.00044444003729
                                                 ], 
                                                 [
-                                                    -120.38327899884735, 
-                                                    54.02017270392587
+                                                    -121.04900976154819, 
+                                                    49.160339969458384
                                                 ], 
                                                 [
-                                                    -120.0013169947733, 
-                                                    54.02240186566354
+                                                    -121.02746722401058, 
+                                                    49.306054495767285
                                                 ], 
                                                 [
-                                                    -119.4317950105633, 
-                                                    53.86788906769717
+                                                    -120.96898283455444, 
+                                                    49.68364576799386
                                                 ], 
                                                 [
-                                                    -118.29509402045711, 
-                                                    53.43367482439537
+                                                    -120.77063840233554, 
+                                                    49.893421639826315
                                                 ], 
                                                 [
-                                                    -117.36220322090409, 
-                                                    52.97584048369495
+                                                    -120.297642391173, 
+                                                    50.06002078552969
                                                 ], 
                                                 [
-                                                    -116.75133883734466, 
-                                                    52.526506054012344
+                                                    -120.21153281205792, 
+                                                    50.1617721895108
                                                 ], 
                                                 [
-                                                    -115.71239918199522, 
-                                                    51.690964607996584
+                                                    -119.46605116460549, 
+                                                    50.792889074163334
                                                 ], 
                                                 [
-                                                    -115.5214439346969, 
-                                                    51.483319345318215
+                                                    -119.47745855315901, 
+                                                    50.9887616501568
                                                 ], 
                                                 [
-                                                    -115.28454531937253, 
-                                                    51.04553895886068
+                                                    -119.66469720958042, 
+                                                    52.1855727247304
                                                 ], 
                                                 [
-                                                    -114.35143741197265, 
-                                                    50.141692121972916
+                                                    -119.78117426779083, 
+                                                    52.538365689957736
                                                 ], 
                                                 [
-                                                    -113.95954001508672, 
-                                                    49.69392006658819
+                                                    -119.6491534141476, 
+                                                    52.79289160664218
                                                 ], 
                                                 [
-                                                    -112.62134980171388, 
-                                                    48.0258700192628
+                                                    -118.92527828562037, 
+                                                    52.904269159857094
                                                 ], 
                                                 [
-                                                    -112.00004983742697, 
-                                                    47.33058991847321
+                                                    -118.61519896231849, 
+                                                    52.89326805300693
                                                 ], 
                                                 [
-                                                    -110.94427497618057, 
-                                                    46.73916397326064
+                                                    -118.12819675139892, 
+                                                    52.6953397890936
                                                 ], 
                                                 [
-                                                    -110.33263447212103, 
-                                                    46.44533809294592
+                                                    -117.11014733190044, 
+                                                    52.15332208378644
                                                 ], 
                                                 [
-                                                    -110.04164006866948, 
-                                                    46.05930999848814
+                                                    -116.1960826760973, 
+                                                    51.699923909730046
                                                 ], 
                                                 [
-                                                    -109.75991007781121, 
-                                                    45.68172991851475
+                                                    -115.48101364994744, 
+                                                    50.84265807633482
                                                 ], 
                                                 [
-                                                    -109.10343328884579, 
-                                                    45.00589722602867
+                                                    -114.73204841104831, 
+                                                    50.21356926129091
                                                 ], 
                                                 [
-                                                    -109.11301997807843, 
-                                                    44.64669995208465
+                                                    -114.37356553001348, 
+                                                    49.254306467681246
                                                 ], 
                                                 [
-                                                    -108.75397022522819, 
-                                                    43.83282991673828
+                                                    -113.63203478437343, 
+                                                    48.59922797910493
                                                 ], 
                                                 [
-                                                    -108.64801007642124, 
-                                                    42.63802996928815
+                                                    -113.27592539388723, 
+                                                    48.260188919209334
                                                 ], 
                                                 [
-                                                    -108.9836299885632, 
-                                                    42.47559997601695
+                                                    -113.06594054023901, 
+                                                    47.79929797387441
                                                 ], 
                                                 [
-                                                    -109.63320305843885, 
-                                                    42.36084117815631
+                                                    -112.93615950888284, 
+                                                    47.33896455199557
                                                 ], 
                                                 [
-                                                    -110.3930699164027, 
-                                                    42.234019964351006
+                                                    -112.85673897157199, 
+                                                    46.682884335219214
                                                 ], 
                                                 [
-                                                    -110.84923991920175, 
-                                                    42.222659986457764
+                                                    -112.96006970921447, 
+                                                    46.02725867072364
                                                 ], 
                                                 [
-                                                    -111.7036200678009, 
-                                                    42.64783991497537
+                                                    -113.16937805425479, 
+                                                    45.66258035895993
                                                 ], 
                                                 [
-                                                    -112.10805005563854, 
-                                                    42.98993999980666
+                                                    -113.20985786751656, 
+                                                    45.422515198245115
                                                 ], 
                                                 [
-                                                    -113.08296777418688, 
-                                                    43.35241765481097
+                                                    -113.04899622006812, 
+                                                    45.215793576337866
                                                 ], 
                                                 [
-                                                    -113.61335996321482, 
-                                                    43.40249999961399
+                                                    -112.60052187497169, 
+                                                    44.674609556495
                                                 ], 
                                                 [
-                                                    -114.5026399424221, 
-                                                    43.42636003361474
+                                                    -112.00154479273434, 
+                                                    44.628860017168556
                                                 ], 
                                                 [
-                                                    -115.469363508466, 
-                                                    43.47750414824264
+                                                    -111.6339244470001, 
+                                                    44.65927834639829
                                                 ], 
                                                 [
-                                                    -115.9423710397106, 
-                                                    43.695772042661474
+                                                    -111.17805751540351, 
+                                                    44.68687933062153
                                                 ], 
                                                 [
-                                                    -117.51147284431708, 
-                                                    44.12294413333584
+                                                    -110.87613043291256, 
+                                                    44.587407659561265
                                                 ], 
                                                 [
-                                                    -118.24083347338954, 
-                                                    44.52867035507906
+                                                    -110.5111505995327, 
+                                                    44.35151327080516
                                                 ], 
                                                 [
-                                                    -118.44622586176189, 
-                                                    44.68217401278641
+                                                    -109.8319997132305, 
+                                                    43.89232660196078
                                                 ], 
                                                 [
-                                                    -118.66374642265936, 
-                                                    44.99390112645549
+                                                    -109.80370481099514, 
+                                                    43.6971273585851
                                                 ], 
                                                 [
-                                                    -118.64427992716276, 
-                                                    45.50536002573832
+                                                    -110.04266133098892, 
+                                                    43.292831355277606
                                                 ], 
                                                 [
-                                                    -117.83637996124935, 
-                                                    46.24769994452358
+                                                    -110.43677039501779, 
+                                                    42.647470839099476
                                                 ], 
                                                 [
-                                                    -117.04056591568062, 
-                                                    46.79385216288759
+                                                    -110.88441257634214, 
+                                                    42.51130260277857
                                                 ], 
                                                 [
-                                                    -117.14734997761975, 
-                                                    47.35967985865944
+                                                    -111.39609277137235, 
+                                                    42.606394453545846
                                                 ], 
                                                 [
-                                                    -117.30682001988157, 
-                                                    48.090869968666745
+                                                    -111.85852506193514, 
+                                                    42.72650034302229
                                                 ], 
                                                 [
-                                                    -117.93233002998265, 
-                                                    48.843230000924606
+                                                    -112.73346898246939, 
+                                                    42.40693801433372
                                                 ], 
                                                 [
-                                                    -118.70548998963505, 
-                                                    49.63896997800408
+                                                    -113.81429630094816, 
+                                                    42.33289454525308
                                                 ], 
                                                 [
-                                                    -118.87862006006925, 
-                                                    50.32081007405401
+                                                    -114.75208794605356, 
+                                                    42.371276779517785
                                                 ], 
                                                 [
-                                                    -119.26033995216419, 
-                                                    50.797759937360865
+                                                    -115.57392939837172, 
+                                                    42.57550386390497
                                                 ], 
                                                 [
-                                                    -119.91531007329105, 
-                                                    51.35133005885485
+                                                    -116.19222900551003, 
+                                                    42.66668016635541
                                                 ], 
                                                 [
-                                                    -120.71810000253761, 
-                                                    51.81934004436655
+                                                    -116.65484063728451, 
+                                                    42.6920724175132
                                                 ], 
                                                 [
-                                                    -121.25751002308316, 
-                                                    52.24775997037003
+                                                    -116.75888167014652, 
+                                                    42.69757761408238
                                                 ], 
                                                 [
-                                                    -122.1863899178149, 
-                                                    53.402149958335585
+                                                    -117.02748163227056, 
+                                                    42.71692800989316
                                                 ], 
                                                 [
-                                                    -121.99900997411997, 
-                                                    53.782089936776785
+                                                    -117.48528355385025, 
+                                                    42.79991158734663
                                                 ], 
                                                 [
-                                                    -121.43654996304966, 
-                                                    53.932479988568545
+                                                    -118.14081921116264, 
+                                                    42.884326529918106
+                                                ], 
+                                                [
+                                                    -118.94381728100359, 
+                                                    43.097957521365544
+                                                ], 
+                                                [
+                                                    -119.33696356257744, 
+                                                    43.2443183304869
+                                                ], 
+                                                [
+                                                    -119.52172238851428, 
+                                                    43.43168820546338
+                                                ], 
+                                                [
+                                                    -119.87998640772848, 
+                                                    43.57499449365321
+                                                ], 
+                                                [
+                                                    -120.57792401641177, 
+                                                    43.711566935511236
+                                                ], 
+                                                [
+                                                    -120.96697744985738, 
+                                                    43.86666262688456
+                                                ], 
+                                                [
+                                                    -121.23230720386033, 
+                                                    44.257853406126515
+                                                ], 
+                                                [
+                                                    -121.29838808159542, 
+                                                    44.426524532259435
+                                                ], 
+                                                [
+                                                    -121.32419807948777, 
+                                                    45.06733313070427
+                                                ], 
+                                                [
+                                                    -121.09760691433952, 
+                                                    46.167594111683705
+                                                ], 
+                                                [
+                                                    -121.12190706596702, 
+                                                    46.378835109350234
+                                                ], 
+                                                [
+                                                    -121.06244948261242, 
+                                                    47.05696308305314
+                                                ], 
+                                                [
+                                                    -121.09149856888781, 
+                                                    47.755699085130864
+                                                ], 
+                                                [
+                                                    -121.30447779786107, 
+                                                    48.1178724670072
+                                                ], 
+                                                [
+                                                    -121.43092339673933, 
+                                                    48.32960248498747
+                                                ], 
+                                                [
+                                                    -121.48333389900833, 
+                                                    48.44718540693144
+                                                ], 
+                                                [
+                                                    -121.52480552055081, 
+                                                    48.677694553359714
+                                                ], 
+                                                [
+                                                    -121.37109329491021, 
+                                                    48.871776907457814
                                                 ]
                                             ]
                                         ]
@@ -434,7 +506,7 @@
                 ], 
                 "timePeriod": {
                     "endDateTime": "2018-09-30", 
-                    "startDateTime": "2015-10-01"
+                    "startDateTime": "2014-10-01"
                 }, 
                 "resourceUsage": [
                     {
@@ -453,6 +525,22 @@
                 ], 
                 "keyword": [
                     {
+                        "keywordType": "Great Northern LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Partner Forum"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Columbia Basin"
+                            }
+                        ]
+                    }, 
+                    {
                         "keywordType": "Great Northern LCC Conservation Targets", 
                         "keyword": [
                             {
@@ -464,7 +552,7 @@
                         "keywordType": "Great Northern LCC Conservation Targets", 
                         "keyword": [
                             {
-                                "keyword": "Bull Trout"
+                                "keyword": "Connectivity"
                             }
                         ]
                     }, 
@@ -472,7 +560,7 @@
                         "keywordType": "Great Northern LCC Conservation Targets", 
                         "keyword": [
                             {
-                                "keyword": "Cutthroat Trout"
+                                "keyword": "Riverine"
                             }
                         ]
                     }, 
@@ -480,7 +568,31 @@
                         "keywordType": "Great Northern LCC Conservation Targets", 
                         "keyword": [
                             {
-                                "keyword": "Rivers & Riparian Corridors"
+                                "keyword": "Sage Shrub/Grassland"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Conservation Targets", 
+                        "keyword": [
+                            {
+                                "keyword": "Salmon"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Conservation Targets", 
+                        "keyword": [
+                            {
+                                "keyword": "Watershed Uplands"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Conservation Targets", 
+                        "keyword": [
+                            {
+                                "keyword": "Wetlands"
                             }
                         ]
                     }, 
@@ -488,7 +600,15 @@
                         "keywordType": "Great Northern LCC Ecotypic Areas", 
                         "keyword": [
                             {
-                                "keyword": "Rocky Mountain"
+                                "keyword": "Columbia Basin"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Goals", 
+                        "keyword": [
+                            {
+                                "keyword": "Goal 2: Conserve landscape connectivity"
                             }
                         ]
                     }, 
@@ -513,6 +633,14 @@
                         "keyword": [
                             {
                                 "keyword": "Climate Change"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Stressors", 
+                        "keyword": [
+                            {
+                                "keyword": "Invasive Species"
                             }
                         ]
                     }, 
@@ -645,9 +773,18 @@
             "metadataInfo": {
                 "metadataOnlineResource": [
                     {
-                        "uri": "https://www.sciencebase.gov/catalog/item/5582f04fe4b023124e8f4486?view=folder"
+                        "uri": "https://www.sciencebase.gov/catalog/folder/5582e4f0e4b023124e8f4256"
                     }
                 ], 
+                "parentMetadata": {
+                    "identifier": [
+                        {
+                            "identifier": "529e1574e4b0516126f68e8a", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ], 
+                    "title": "ScienceBase Parent"
+                }, 
                 "metadataContact": [
                     {
                         "party": [
@@ -668,7 +805,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-09-08", 
+                        "date": "2017-09-20", 
                         "dateType": "creation"
                     }
                 ]
@@ -684,7 +821,7 @@
                     "initiativeType": "n/a", 
                     "associationType": "produced", 
                     "metadataCitation": {
-                        "title": "5582f07be4b023124e8f4497"
+                        "title": "5582ea44e4b023124e8f4341"
                     }, 
                     "resourceCitation": {
                         "title": "FY15 Budget"
@@ -700,26 +837,58 @@
                     "initiativeType": "n/a", 
                     "associationType": "produced", 
                     "metadataCitation": {
-                        "title": "55b6b7cae4b09a3b01b5f845"
+                        "title": "5582ea04e4b023124e8f4339"
                     }, 
                     "resourceCitation": {
-                        "title": "Proposal"
+                        "title": "FY15 Proposal"
                     }
                 }, 
                 {
                     "resourceType": [
                         {
-                            "type": "Applications and Tools", 
-                            "name": "Tools: Decision Support"
+                            "type": "Training/Outreach/Workshop", 
+                            "name": "Workshop"
                         }
                     ], 
                     "initiativeType": "n/a", 
                     "associationType": "produced", 
                     "metadataCitation": {
-                        "title": "58a1f76ce4b0c82512856668"
+                        "title": "55b2a70fe4b09a3b01b5d907"
                     }, 
                     "resourceCitation": {
-                        "title": "Cold Water / Salmonid Decision Support Framework"
+                        "title": "Workshops"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Report", 
+                            "name": "Report"
+                        }
+                    ], 
+                    "initiativeType": "n/a", 
+                    "associationType": "produced", 
+                    "metadataCitation": {
+                        "title": "5661e856e4b06a3ea36c5ef1"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Quarterly summaries"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Contractual Document", 
+                            "name": "Proposal"
+                        }
+                    ], 
+                    "initiativeType": "n/a", 
+                    "associationType": "produced", 
+                    "metadataCitation": {
+                        "title": "55b6bae9e4b09a3b01b5f865"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Proposal"
                     }
                 }
             ], 
@@ -741,7 +910,7 @@
                                     "unitsOfDistribution": "unknown", 
                                     "onlineOption": [
                                         {
-                                            "uri": "https://www.sciencebase.gov/catalog/item/5582f04fe4b023124e8f4486?view=folder"
+                                            "uri": "https://www.sciencebase.gov/catalog/folder/5582e4f0e4b023124e8f4256"
                                         }
                                     ]
                                 }
