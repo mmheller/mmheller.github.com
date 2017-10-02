@@ -1,0 +1,906 @@
+[
+    {
+        "metadataRepository": [
+            {
+                "metadataStandard": "mdJSON", 
+                "citiation": {
+                    "title": "LCC Network Science Catalog"
+                }, 
+                "repository": "ScienceBase"
+            }
+        ], 
+        "contact": [
+            {
+                "memberOfOrganization": [], 
+                "contactId": "388", 
+                "isOrganization": true, 
+                "name": "US Geological Survey", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "473", 
+                "isOrganization": true, 
+                "name": "Oregon Dept of Fish & Wildlife", 
+                "contactType": "State"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Washington Dept of Fish & Wildlife", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:george.wilhere@dfw.wa.gov"
+                    }
+                ], 
+                "contactId": "G231", 
+                "contactType": "State"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "George Wilhere", 
+                "memberOfOrganization": [
+                    "G231"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:george.wilhere@dfw.wa.gov"
+                    }
+                ], 
+                "contactId": "231", 
+                "contactType": "State"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "John Pierce", 
+                "memberOfOrganization": [
+                    "G231"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:john.pierce@dfw.wa.gov"
+                    }
+                ], 
+                "contactId": "456", 
+                "contactType": "State"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "US Forest Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:disaak@fs.fed.us"
+                    }
+                ], 
+                "contactId": "G195", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Daniel Isaak", 
+                "memberOfOrganization": [
+                    "G195"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:disaak@fs.fed.us"
+                    }
+                ], 
+                "contactId": "195", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G231"
+                ], 
+                "contactId": "472", 
+                "isOrganization": false, 
+                "name": "Tim Quinn", 
+                "contactType": "State"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Great Northern LCC", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:matthew_heller@fws.gov"
+                    }
+                ], 
+                "contactId": "G237", 
+                "contactType": "LCC"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Matt Heller", 
+                "memberOfOrganization": [
+                    "G237"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:matthew_heller@fws.gov"
+                    }
+                ], 
+                "contactId": "237", 
+                "contactType": "LCC"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }
+        ], 
+        "metadata": {
+            "resourceInfo": {
+                "status": [
+                    "Completed"
+                ], 
+                "pointOfContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "G237"
+                            }
+                        ], 
+                        "role": "pointOfContact"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "231"
+                            }
+                        ], 
+                        "role": "principalInvestigator"
+                    }
+                ], 
+                "abstract": "The Western Governors Association has sponsored an assessment of crucial habitats which will be used for the evaluation of landscape-scale energy, land use, and transportation projects.  At present, this assessment does not incorporate ecological integrity or stream-network connectivity into its assessment of aquatic habitats.  This proposal will address in both Oregon and Washington states the need to incorporate ecological integrity and stream network connectivity into the Western Governors assessment of aquatic crucial habitats.\n\nFY2012\nObjectives:\n\nTo incorporate ecological integrity and stream-network connectivity into the Western Governors assessment of aquatic crucial habitats for Oregon and Washington. The resulting products will be part of the state-based and regional-level CHAT decision support systems.\nDevelop conceptual models of aquatic crucial habitat\nCompare and evaluate ecological integrity assessments\nCreate mock stream temperature spatial data\nDesign and assemble prototype model of crucial habitat\nDesign alternative models of aquatic crucial habitat\nAssemble and evaluate alternative models of aquatic crucial habitat", 
+                "citation": {
+                    "title": "Incorporating ecological integrity and stream-network connectivity into the Western Governors assessment of aquatic crucial habitats in Washington and Oregon", 
+                    "onlineResource": [
+                        {
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://greatnorthernlcc.org/gnlcc_projects/prj_report.html?PRJ_ID=326", 
+                            "name": "Project Report Page"
+                        }
+                    ], 
+                    "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "388", 
+                                    "organizationMembers": [
+                                        "388"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "473", 
+                                    "organizationMembers": [
+                                        "473"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G231", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "231", 
+                                    "organizationMembers": [
+                                        "G231"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "456", 
+                                    "organizationMembers": [
+                                        "G231"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G195", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "195", 
+                                    "organizationMembers": [
+                                        "G195"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "472", 
+                                    "organizationMembers": [
+                                        "G231"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G237", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "237", 
+                                    "organizationMembers": [
+                                        "G237"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }
+                    ], 
+                    "alternateTitle": [
+                        "Wilhere2012"
+                    ], 
+                    "date": [
+                        {
+                            "date": "2012-01-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "326", 
+                            "namespace": "lcc:gn"
+                        }, 
+                        {
+                            "identifier": "530cfdcce4b08f991722dcd9", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ]
+                }, 
+                "defaultResourceLocale": {
+                    "country": "USA", 
+                    "characterSet": "UTF-8", 
+                    "language": "eng"
+                }, 
+                "purpose": "Population & Habitat Evaluation/Projection Traditional Ecological Knowledge  State agencies Federal resource managers Regional & county planners", 
+                "extent": null, 
+                "timePeriod": {
+                    "endDateTime": "2014-12-31", 
+                    "startDateTime": "2012-01-01"
+                }, 
+                "resourceUsage": [
+                    {
+                        "specificUsage": "Project information", 
+                        "userContactInfo": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "G237"
+                                    }
+                                ], 
+                                "role": "administrator"
+                            }
+                        ]
+                    }
+                ], 
+                "keyword": [
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Project Category", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/52dee7c5e4b0dee2a6cd6b18"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "5da1d3b7-375b-58ae-a134-2ee0c94c395f"
+                                }
+                            ], 
+                            "title": "Project Category - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Population & Habitat Evaluation/Projection"
+                            }, 
+                            {
+                                "keyword": "Traditional Ecological Knowledge"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC End User Type", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/54760ef9e4b0f62cb5dc41a0"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "425f4a7c-dca2-56d8-947e-6f6bd1033d70"
+                                }
+                            ], 
+                            "title": "End User Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "State agencies"
+                            }, 
+                            {
+                                "keyword": "Federal resource managers"
+                            }, 
+                            {
+                                "keyword": "Regional & county planners"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Oregon"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Washington"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "California"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Idaho"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Oregon"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Washington"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "CA-1"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " CA-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " ID-1"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " OR-1"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " OR-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " OR-3"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " OR-4"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " OR-5"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-1"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-3"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-4"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-5"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-6"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-7"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-8"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-9"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Conservation Targets", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_Great Northern LCC Conservation Targets"
+                                }
+                            ], 
+                            "title": "Custom Great Northern LCC Conservation Targets thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Aquatic Connectivity"
+                            }, 
+                            {
+                                "keyword": "Riparian Areas"
+                            }, 
+                            {
+                                "keyword": "Riverine"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Ecotypic Areas", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_Great Northern LCC Ecotypic Areas"
+                                }
+                            ], 
+                            "title": "Custom Great Northern LCC Ecotypic Areas thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Columbia Basin"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Goals", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_Great Northern LCC Goals"
+                                }
+                            ], 
+                            "title": "Custom Great Northern LCC Goals thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Goal 3: Maintain hydrologic regimes"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Stressors", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_Great Northern LCC Stressors"
+                                }
+                            ], 
+                            "title": "Custom Great Northern LCC Stressors thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Climate Change"
+                            }, 
+                            {
+                                "keyword": "Land Use Change"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "States", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_States"
+                                }
+                            ], 
+                            "title": "Custom States thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "British Columbia"
+                            }, 
+                            {
+                                "keyword": "California"
+                            }, 
+                            {
+                                "keyword": "Idaho"
+                            }, 
+                            {
+                                "keyword": "Nevada"
+                            }, 
+                            {
+                                "keyword": "Oregon"
+                            }, 
+                            {
+                                "keyword": "Washington"
+                            }
+                        ]
+                    }
+                ], 
+                "resourceType": [
+                    {
+                        "type": "LCCResourceType", 
+                        "name": "Project"
+                    }
+                ], 
+                "resourceMaintenance": [
+                    {
+                        "frequency": "as needed", 
+                        "contact": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "G237"
+                                    }
+                                ], 
+                                "role": "custodian"
+                            }
+                        ]
+                    }
+                ], 
+                "shortAbstract": ""
+            }, 
+            "funding": [
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "560", 
+                            "currency": "USD", 
+                            "amount": 75000, 
+                            "recipientId": "388", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2016-08-31", 
+                        "periodName": [
+                            "FY2015"
+                        ], 
+                        "startDateTime": "2015-08-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "560", 
+                            "currency": "USD", 
+                            "amount": 13834, 
+                            "recipientId": "388", 
+                            "matching": true
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2016-08-31", 
+                        "periodName": [
+                            "FY2015"
+                        ], 
+                        "startDateTime": "2015-08-01"
+                    }
+                }
+            ], 
+            "metadataInfo": {
+                "metadataOnlineResource": [
+                    {
+                        "uri": "https://www.sciencebase.gov/catalog/folder/530cfdcce4b08f991722dcd9"
+                    }
+                ], 
+                "parentMetadata": {
+                    "identifier": [
+                        {
+                            "identifier": "529e1574e4b0516126f68e8a", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ], 
+                    "title": "ScienceBase Parent"
+                }, 
+                "metadataIdentifier": {
+                    "identifier": "530cfdcce4b08f991722dcd9", 
+                    "namespace": "gov.sciencebase.catalog"
+                }, 
+                "metadataContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "G237"
+                            }
+                        ], 
+                        "role": "author"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "G237"
+                            }
+                        ], 
+                        "role": "custodian"
+                    }
+                ], 
+                "metadataDate": [
+                    {
+                        "date": "2017-10-02", 
+                        "dateType": "creation"
+                    }
+                ]
+            }, 
+            "associatedResource": [
+                {
+                    "resourceType": [
+                        {
+                            "type": "Report"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "55ad517ce4b066a24924216d", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Mid-project annual report"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Mid-project annual report"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Datasets/Database"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "55ad5359e4b066a249242175", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Crucial habitat assessments for alternative models"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Crucial habitat assessments for alternative models"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Report"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "54f8acdee4b02419550d9ac3", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Full report describing methods and results"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Full report describing methods and results"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Contractual Document"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "54e36ad8e4b08de9379b5103", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "2012 Proposal"
+                    }, 
+                    "resourceCitation": {
+                        "title": "2012 Proposal"
+                    }
+                }
+            ], 
+            "resourceDistribution": [
+                {
+                    "distributor": [
+                        {
+                            "contact": {
+                                "party": [
+                                    {
+                                        "contactId": "G237"
+                                    }
+                                ], 
+                                "role": "distributor"
+                            }, 
+                            "transferOption": [
+                                {
+                                    "transferSize": 99999, 
+                                    "unitsOfDistribution": "unknown", 
+                                    "onlineOption": [
+                                        {
+                                            "uri": "https://www.sciencebase.gov/catalog/folder/530cfdcce4b08f991722dcd9"
+                                        }
+                                    ]
+                                }
+                            ], 
+                            "orderProcess": [
+                                {
+                                    "orderingInstructions": "Download products as needed from the Sciencebase.gov URL provided", 
+                                    "fees": "00USD"
+                                }
+                            ]
+                        }
+                    ], 
+                    "description": "GNLCC projet page includes project information and downloadable products on Scinecebase.gov"
+                }
+            ]
+        }, 
+        "schema": {
+            "version": "2.1.2", 
+            "name": "mdJson"
+        }
+    }
+]

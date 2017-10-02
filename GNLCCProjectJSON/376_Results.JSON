@@ -4,16 +4,14 @@
             {
                 "metadataStandard": "mdJSON", 
                 "citiation": {
-                    "title": "LCC Network Scinece Catalog"
+                    "title": "LCC Network Science Catalog"
                 }, 
-                "repository": "scienceBase"
+                "repository": "ScienceBase"
             }
         ], 
         "contact": [
             {
-                "memberOfOrganization": [
-                    "388"
-                ], 
+                "memberOfOrganization": [], 
                 "contactId": "388", 
                 "isOrganization": true, 
                 "name": "US Geological Survey", 
@@ -88,7 +86,7 @@
                     {
                         "party": [
                             {
-                                "contactId": "237"
+                                "contactId": "G237"
                             }
                         ], 
                         "role": "pointOfContact"
@@ -515,7 +513,7 @@
                             {
                                 "party": [
                                     {
-                                        "contactId": "237"
+                                        "contactId": "G237"
                                     }
                                 ], 
                                 "role": "administrator"
@@ -524,6 +522,73 @@
                     }
                 ], 
                 "keyword": [
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Project Category", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/52dee7c5e4b0dee2a6cd6b18"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "5da1d3b7-375b-58ae-a134-2ee0c94c395f"
+                                }
+                            ], 
+                            "title": "Project Category - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Conservation Planning"
+                            }, 
+                            {
+                                "keyword": "Informing Conservation Delivery"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC End User Type", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/54760ef9e4b0f62cb5dc41a0"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "425f4a7c-dca2-56d8-947e-6f6bd1033d70"
+                                }
+                            ], 
+                            "title": "End User Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "State agencies"
+                            }, 
+                            {
+                                "keyword": "Tribes"
+                            }, 
+                            {
+                                "keyword": "Federal resource managers"
+                            }
+                        ]
+                    }, 
                     {
                         "keywordType": "Great Northern LCC Keywords", 
                         "keyword": [
@@ -542,55 +607,33 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Conservation Targets", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_Great Northern LCC Conservation Targets"
+                                }
+                            ], 
+                            "title": "Custom Great Northern LCC Conservation Targets thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Aquatic Connectivity"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Conservation Targets", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Connectivity"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Conservation Targets", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Riverine"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Conservation Targets", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Sage Shrub/Grassland"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Conservation Targets", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Salmon"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Conservation Targets", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Watershed Uplands"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Conservation Targets", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Wetlands"
                             }
@@ -598,6 +641,14 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Ecotypic Areas", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_Great Northern LCC Ecotypic Areas"
+                                }
+                            ], 
+                            "title": "Custom Great Northern LCC Ecotypic Areas thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Columbia Basin"
@@ -606,23 +657,21 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Goals", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_Great Northern LCC Goals"
+                                }
+                            ], 
+                            "title": "Custom Great Northern LCC Goals thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Goal 2: Conserve landscape connectivity"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Goals", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Goal 3: Maintain hydrologic regimes"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Goals", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Goal 4: Promote landscape-scale disturbances"
                             }
@@ -630,23 +679,21 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Stressors", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_Great Northern LCC Stressors"
+                                }
+                            ], 
+                            "title": "Custom Great Northern LCC Stressors thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Climate Change"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Stressors", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Invasive Species"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Stressors", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Land Use Change"
                             }
@@ -654,55 +701,33 @@
                     }, 
                     {
                         "keywordType": "States", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_States"
+                                }
+                            ], 
+                            "title": "Custom States thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Alberta"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "States", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "British Columbia"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "States", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Idaho"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "States", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Montana"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "States", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Oregon"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "States", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Washington"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "States", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Wyoming"
                             }
@@ -722,7 +747,7 @@
                             {
                                 "party": [
                                     {
-                                        "contactId": "237"
+                                        "contactId": "G237"
                                     }
                                 ], 
                                 "role": "custodian"
@@ -785,11 +810,15 @@
                     ], 
                     "title": "ScienceBase Parent"
                 }, 
+                "metadataIdentifier": {
+                    "identifier": "5582e4f0e4b023124e8f4256", 
+                    "namespace": "gov.sciencebase.catalog"
+                }, 
                 "metadataContact": [
                     {
                         "party": [
                             {
-                                "contactId": "237"
+                                "contactId": "G237"
                             }
                         ], 
                         "role": "author"
@@ -797,7 +826,7 @@
                     {
                         "party": [
                             {
-                                "contactId": "237"
+                                "contactId": "G237"
                             }
                         ], 
                         "role": "custodian"
@@ -805,7 +834,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-09-20", 
+                        "date": "2017-10-02", 
                         "dateType": "creation"
                     }
                 ]
@@ -814,14 +843,18 @@
                 {
                     "resourceType": [
                         {
-                            "type": "Contractual Document", 
-                            "name": "Budget"
+                            "type": "Contractual Document"
                         }
                     ], 
-                    "initiativeType": "n/a", 
-                    "associationType": "produced", 
+                    "associationType": "product", 
                     "metadataCitation": {
-                        "title": "5582ea44e4b023124e8f4341"
+                        "identifier": [
+                            {
+                                "identifier": "5582ea44e4b023124e8f4341", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "FY15 Budget"
                     }, 
                     "resourceCitation": {
                         "title": "FY15 Budget"
@@ -830,14 +863,18 @@
                 {
                     "resourceType": [
                         {
-                            "type": "Contractual Document", 
-                            "name": "Proposal"
+                            "type": "Contractual Document"
                         }
                     ], 
-                    "initiativeType": "n/a", 
-                    "associationType": "produced", 
+                    "associationType": "product", 
                     "metadataCitation": {
-                        "title": "5582ea04e4b023124e8f4339"
+                        "identifier": [
+                            {
+                                "identifier": "5582ea04e4b023124e8f4339", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "FY15 Proposal"
                     }, 
                     "resourceCitation": {
                         "title": "FY15 Proposal"
@@ -846,14 +883,18 @@
                 {
                     "resourceType": [
                         {
-                            "type": "Training/Outreach/Workshop", 
-                            "name": "Workshop"
+                            "type": "Training/Outreach/Workshop"
                         }
                     ], 
-                    "initiativeType": "n/a", 
-                    "associationType": "produced", 
+                    "associationType": "product", 
                     "metadataCitation": {
-                        "title": "55b2a70fe4b09a3b01b5d907"
+                        "identifier": [
+                            {
+                                "identifier": "55b2a70fe4b09a3b01b5d907", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Workshops"
                     }, 
                     "resourceCitation": {
                         "title": "Workshops"
@@ -862,14 +903,18 @@
                 {
                     "resourceType": [
                         {
-                            "type": "Report", 
-                            "name": "Report"
+                            "type": "Report"
                         }
                     ], 
-                    "initiativeType": "n/a", 
-                    "associationType": "produced", 
+                    "associationType": "product", 
                     "metadataCitation": {
-                        "title": "5661e856e4b06a3ea36c5ef1"
+                        "identifier": [
+                            {
+                                "identifier": "5661e856e4b06a3ea36c5ef1", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Quarterly summaries"
                     }, 
                     "resourceCitation": {
                         "title": "Quarterly summaries"
@@ -878,14 +923,18 @@
                 {
                     "resourceType": [
                         {
-                            "type": "Contractual Document", 
-                            "name": "Proposal"
+                            "type": "Contractual Document"
                         }
                     ], 
-                    "initiativeType": "n/a", 
-                    "associationType": "produced", 
+                    "associationType": "product", 
                     "metadataCitation": {
-                        "title": "55b6bae9e4b09a3b01b5f865"
+                        "identifier": [
+                            {
+                                "identifier": "55b6bae9e4b09a3b01b5f865", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Proposal"
                     }, 
                     "resourceCitation": {
                         "title": "Proposal"
@@ -899,7 +948,7 @@
                             "contact": {
                                 "party": [
                                     {
-                                        "contactId": "237"
+                                        "contactId": "G237"
                                     }
                                 ], 
                                 "role": "distributor"

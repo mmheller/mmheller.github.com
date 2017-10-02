@@ -4,88 +4,70 @@
             {
                 "metadataStandard": "mdJSON", 
                 "citiation": {
-                    "title": "LCC Network Scinece Catalog"
+                    "title": "LCC Network Science Catalog"
                 }, 
-                "repository": "scienceBase"
+                "repository": "ScienceBase"
             }
         ], 
         "contact": [
             {
-                "memberOfOrganization": [
-                    "355"
-                ], 
+                "memberOfOrganization": [], 
                 "contactId": "355", 
                 "isOrganization": true, 
                 "name": "Vital Ground Foundation", 
                 "contactType": "Unknown"
             }, 
             {
-                "memberOfOrganization": [
-                    "349"
-                ], 
+                "memberOfOrganization": [], 
                 "contactId": "349", 
                 "isOrganization": true, 
                 "name": "Montana Fish, Wildlife & Parks", 
                 "contactType": "State"
             }, 
             {
-                "memberOfOrganization": [
-                    "350"
-                ], 
+                "memberOfOrganization": [], 
                 "contactId": "350", 
                 "isOrganization": true, 
                 "name": "Idaho Dept of Fish & Game", 
                 "contactType": "State"
             }, 
             {
-                "memberOfOrganization": [
-                    "351"
-                ], 
+                "memberOfOrganization": [], 
                 "contactId": "351", 
                 "isOrganization": true, 
                 "name": "US Forest Service", 
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [
-                    "352"
-                ], 
+                "memberOfOrganization": [], 
                 "contactId": "352", 
                 "isOrganization": true, 
                 "name": "British Columbia Ministry of Environment", 
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [
-                    "347"
-                ], 
+                "memberOfOrganization": [], 
                 "contactId": "347", 
                 "isOrganization": true, 
                 "name": "Montana Dept of Transportation", 
                 "contactType": "State"
             }, 
             {
-                "memberOfOrganization": [
-                    "353"
-                ], 
+                "memberOfOrganization": [], 
                 "contactId": "353", 
                 "isOrganization": true, 
                 "name": "Idaho Transportation Dept", 
                 "contactType": "State"
             }, 
             {
-                "memberOfOrganization": [
-                    "354"
-                ], 
+                "memberOfOrganization": [], 
                 "contactId": "354", 
                 "isOrganization": true, 
                 "name": "The Nature Conservancy", 
                 "contactType": "NGO"
             }, 
             {
-                "memberOfOrganization": [
-                    "388"
-                ], 
+                "memberOfOrganization": [], 
                 "contactId": "388", 
                 "isOrganization": true, 
                 "name": "US Geological Survey", 
@@ -204,7 +186,7 @@
                     {
                         "party": [
                             {
-                                "contactId": "237"
+                                "contactId": "G237"
                             }
                         ], 
                         "role": "pointOfContact"
@@ -1081,7 +1063,7 @@
                             {
                                 "party": [
                                     {
-                                        "contactId": "237"
+                                        "contactId": "G237"
                                     }
                                 ], 
                                 "role": "administrator"
@@ -1090,6 +1072,76 @@
                     }
                 ], 
                 "keyword": [
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Project Category", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/52dee7c5e4b0dee2a6cd6b18"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "5da1d3b7-375b-58ae-a134-2ee0c94c395f"
+                                }
+                            ], 
+                            "title": "Project Category - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Population & Habitat Evaluation/Projection"
+                            }, 
+                            {
+                                "keyword": "Data Acquisition and Development"
+                            }, 
+                            {
+                                "keyword": "Informing Conservation Delivery"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC End User Type", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/54760ef9e4b0f62cb5dc41a0"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "425f4a7c-dca2-56d8-947e-6f6bd1033d70"
+                                }
+                            ], 
+                            "title": "End User Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Federal resource managers"
+                            }, 
+                            {
+                                "keyword": "State agencies"
+                            }, 
+                            {
+                                "keyword": "Regional & county planners"
+                            }
+                        ]
+                    }, 
                     {
                         "keywordType": "Great Northern LCC Keywords", 
                         "keyword": [
@@ -1172,23 +1224,21 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Conservation Targets", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_Great Northern LCC Conservation Targets"
+                                }
+                            ], 
+                            "title": "Custom Great Northern LCC Conservation Targets thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Grizzly Bear"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Conservation Targets", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Sub-Alpine"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Conservation Targets", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Woodland"
                             }
@@ -1196,6 +1246,14 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Ecotypic Areas", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_Great Northern LCC Ecotypic Areas"
+                                }
+                            ], 
+                            "title": "Custom Great Northern LCC Ecotypic Areas thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Rocky Mountain"
@@ -1204,6 +1262,14 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Goals", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_Great Northern LCC Goals"
+                                }
+                            ], 
+                            "title": "Custom Great Northern LCC Goals thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Goal 2: Conserve landscape connectivity"
@@ -1212,6 +1278,14 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Stressors", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_Great Northern LCC Stressors"
+                                }
+                            ], 
+                            "title": "Custom Great Northern LCC Stressors thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Land Use Change"
@@ -1220,31 +1294,24 @@
                     }, 
                     {
                         "keywordType": "States", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_States"
+                                }
+                            ], 
+                            "title": "Custom States thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "British Columbia"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "States", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Idaho"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "States", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Montana"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "States", 
-                        "keyword": [
+                            }, 
                             {
                                 "keyword": "Washington"
                             }
@@ -1264,7 +1331,7 @@
                             {
                                 "party": [
                                     {
-                                        "contactId": "237"
+                                        "contactId": "G237"
                                     }
                                 ], 
                                 "role": "custodian"
@@ -1327,11 +1394,15 @@
                     ], 
                     "title": "ScienceBase Parent"
                 }, 
+                "metadataIdentifier": {
+                    "identifier": "530cf360e4b08f991722dc96", 
+                    "namespace": "gov.sciencebase.catalog"
+                }, 
                 "metadataContact": [
                     {
                         "party": [
                             {
-                                "contactId": "237"
+                                "contactId": "G237"
                             }
                         ], 
                         "role": "author"
@@ -1339,7 +1410,7 @@
                     {
                         "party": [
                             {
-                                "contactId": "237"
+                                "contactId": "G237"
                             }
                         ], 
                         "role": "custodian"
@@ -1347,7 +1418,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-09-20", 
+                        "date": "2017-10-02", 
                         "dateType": "creation"
                     }
                 ]
@@ -1356,14 +1427,18 @@
                 {
                     "resourceType": [
                         {
-                            "type": "Report", 
-                            "name": "Report"
+                            "type": "Report"
                         }
                     ], 
-                    "initiativeType": "n/a", 
-                    "associationType": "produced", 
+                    "associationType": "product", 
                     "metadataCitation": {
-                        "title": "55a7f81be4b0183d66e45fc2"
+                        "identifier": [
+                            {
+                                "identifier": "55a7f81be4b0183d66e45fc2", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Report of the grizzly bear habitat modeling process"
                     }, 
                     "resourceCitation": {
                         "title": "Report of the grizzly bear habitat modeling process"
@@ -1372,14 +1447,18 @@
                 {
                     "resourceType": [
                         {
-                            "type": "Report", 
-                            "name": "Report"
+                            "type": "Report"
                         }
                     ], 
-                    "initiativeType": "n/a", 
-                    "associationType": "produced", 
+                    "associationType": "product", 
                     "metadataCitation": {
-                        "title": "55a7f81be4b0183d66e45fc2"
+                        "identifier": [
+                            {
+                                "identifier": "55a7f81be4b0183d66e45fc2", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Report of the grizzly bear habitat modeling process"
                     }, 
                     "resourceCitation": {
                         "title": "Report of the grizzly bear habitat modeling process"
@@ -1388,14 +1467,18 @@
                 {
                     "resourceType": [
                         {
-                            "type": "Report", 
-                            "name": "Report"
+                            "type": "Report"
                         }
                     ], 
-                    "initiativeType": "n/a", 
-                    "associationType": "produced", 
+                    "associationType": "product", 
                     "metadataCitation": {
-                        "title": "55a7f81be4b0183d66e45fc2"
+                        "identifier": [
+                            {
+                                "identifier": "55a7f81be4b0183d66e45fc2", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Report of the black bear habitat modeling process"
                     }, 
                     "resourceCitation": {
                         "title": "Report of the black bear habitat modeling process"
@@ -1404,14 +1487,18 @@
                 {
                     "resourceType": [
                         {
-                            "type": "Contractual Document", 
-                            "name": "Statement of Work"
+                            "type": "Contractual Document"
                         }
                     ], 
-                    "initiativeType": "n/a", 
-                    "associationType": "produced", 
+                    "associationType": "product", 
                     "metadataCitation": {
-                        "title": "55b15660e4b09a3b01b53184"
+                        "identifier": [
+                            {
+                                "identifier": "55b15660e4b09a3b01b53184", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "SOW"
                     }, 
                     "resourceCitation": {
                         "title": "SOW"
@@ -1420,14 +1507,18 @@
                 {
                     "resourceType": [
                         {
-                            "type": "Report", 
-                            "name": "Report"
+                            "type": "Report"
                         }
                     ], 
-                    "initiativeType": "n/a", 
-                    "associationType": "produced", 
+                    "associationType": "product", 
                     "metadataCitation": {
-                        "title": "55a7f81be4b0183d66e45fc2"
+                        "identifier": [
+                            {
+                                "identifier": "55a7f81be4b0183d66e45fc2", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Genetic-based parent-offspring analysis"
                     }, 
                     "resourceCitation": {
                         "title": "Genetic-based parent-offspring analysis"
@@ -1436,14 +1527,18 @@
                 {
                     "resourceType": [
                         {
-                            "type": "Report", 
-                            "name": "Report"
+                            "type": "Report"
                         }
                     ], 
-                    "initiativeType": "n/a", 
-                    "associationType": "produced", 
+                    "associationType": "product", 
                     "metadataCitation": {
-                        "title": "55a7f81be4b0183d66e45fc2"
+                        "identifier": [
+                            {
+                                "identifier": "55a7f81be4b0183d66e45fc2", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Report of the black bear habitat modeling process"
                     }, 
                     "resourceCitation": {
                         "title": "Report of the black bear habitat modeling process"
@@ -1452,14 +1547,18 @@
                 {
                     "resourceType": [
                         {
-                            "type": "Report", 
-                            "name": "Report"
+                            "type": "Report"
                         }
                     ], 
-                    "initiativeType": "n/a", 
-                    "associationType": "produced", 
+                    "associationType": "product", 
                     "metadataCitation": {
-                        "title": "55a7f81be4b0183d66e45fc2"
+                        "identifier": [
+                            {
+                                "identifier": "55a7f81be4b0183d66e45fc2", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Genetic-based parent-offspring analysis"
                     }, 
                     "resourceCitation": {
                         "title": "Genetic-based parent-offspring analysis"
@@ -1468,14 +1567,18 @@
                 {
                     "resourceType": [
                         {
-                            "type": "Contractual Document", 
-                            "name": "Proposal"
+                            "type": "Contractual Document"
                         }
                     ], 
-                    "initiativeType": "n/a", 
-                    "associationType": "produced", 
+                    "associationType": "product", 
                     "metadataCitation": {
-                        "title": "55ad7bcde4b066a24924219c"
+                        "identifier": [
+                            {
+                                "identifier": "55ad7bcde4b066a24924219c", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Proposal"
                     }, 
                     "resourceCitation": {
                         "title": "Proposal"
@@ -1484,14 +1587,18 @@
                 {
                     "resourceType": [
                         {
-                            "type": "Contractual Document", 
-                            "name": "Proposal"
+                            "type": "Contractual Document"
                         }
                     ], 
-                    "initiativeType": "n/a", 
-                    "associationType": "produced", 
+                    "associationType": "product", 
                     "metadataCitation": {
-                        "title": "55ad7cdce4b066a2492421a2"
+                        "identifier": [
+                            {
+                                "identifier": "55ad7cdce4b066a2492421a2", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Proposal"
                     }, 
                     "resourceCitation": {
                         "title": "Proposal"
@@ -1505,7 +1612,7 @@
                             "contact": {
                                 "party": [
                                     {
-                                        "contactId": "237"
+                                        "contactId": "G237"
                                     }
                                 ], 
                                 "role": "distributor"

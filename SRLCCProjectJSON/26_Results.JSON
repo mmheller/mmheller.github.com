@@ -1,0 +1,841 @@
+[
+    {
+        "metadataRepository": [
+            {
+                "metadataStandard": "mdJSON", 
+                "citiation": {
+                    "title": "LCC Network Science Catalog"
+                }, 
+                "repository": "ScienceBase"
+            }
+        ], 
+        "contact": [
+            {
+                "isOrganization": true, 
+                "name": "U.S. Department of Agriculture", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:robert_parmenter@nps.gov"
+                    }
+                ], 
+                "contactId": "G73", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Robert Parmenter", 
+                "memberOfOrganization": [
+                    "G73"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:robert_parmenter@nps.gov"
+                    }
+                ], 
+                "contactId": "73", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }
+        ], 
+        "metadata": {
+            "resourceInfo": {
+                "status": [
+                    "In Progress"
+                ], 
+                "pointOfContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "14"
+                            }
+                        ], 
+                        "role": "pointOfContact"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "73"
+                            }
+                        ], 
+                        "role": "principalInvestigator"
+                    }
+                ], 
+                "abstract": "The overall project goal is to understand and model the watershed impacts of forest restoration actions (thinning, prescribed fire) and climate change on the hydrologic function, particularly with respect to (1) changes in soil moisture and water yield during snowmelt, (2) inter-annual and directional changes in stream water quality, and (3) the resulting impacts on watershed management for wildlife species threatened by disturbance and climate change.\n\nSpecifically, we will:\n\n1. use known relationships of forest structure on snow-water equivalent (SWE) values and processes of sublimation (ablation), infiltration and run-off in the Jemez Mountains of northern New Mexico to model forest-stand restoration prescriptions, with the goal of maximizing soil moisture and stream water yield;\n\n2. identify forest management strategies that optimize the timing of stream flow (spring run-off versus summer baseflow) to balance water yield augmentation with maintaining water quality parameters such as temperature and dissolved oxygen which are susceptible to impairment during low flow periods; and\n\n3. incorporate these model results into conservation management plans for fisheries (including the Rio Grande chub, sucker and cutthroat trout), riparian restoration actions (replanting of riparian woody shrubs and trees, stream geomorphology reconstructions), and terrestrial wildlife species threatened by long-term changes in habitat and climate (e.g., the Jemez Mountains Salamander, New Mexico Meadow Jumping Mouse).", 
+                "citation": {
+                    "title": "Watershed Disturbance and Restoration Impacts on Hydrologic Function Relative to Increased Snowmelt Water Yields, Stream Water Quality, and Species Conservation in the Jemez Mountains, New Mexico: Model Calibration and Validation on a Landscape Scale", 
+                    "onlineResource": [
+                        {
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "https://southernrockieslcc.org/sites/all/modules/custom/rockies_pts/pts/GNLCC_PTS4_SRLCC/prj_report.html?PRJ_ID=26", 
+                            "name": "Project Report Page"
+                        }
+                    ], 
+                    "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G73", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "73", 
+                                    "organizationMembers": [
+                                        "G73"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }
+                    ], 
+                    "alternateTitle": [
+                        "Parmenter2013"
+                    ], 
+                    "date": [
+                        {
+                            "date": "2013-10-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "26", 
+                            "namespace": "lcc:sr"
+                        }, 
+                        {
+                            "identifier": "53173b63e4b0cd4cd83be243", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ]
+                }, 
+                "defaultResourceLocale": {
+                    "country": "USA", 
+                    "characterSet": "UTF-8", 
+                    "language": "eng"
+                }, 
+                "purpose": "Decision Support Informing Conservation Delivery Data Acquisition and Development Federal resource managers State agencies Tribes", 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 36.00848388700003, 
+                                    "westLongitude": -106.62139892599998, 
+                                    "southLatitude": 35.82751464800003, 
+                                    "eastLongitude": -106.39959716799999
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -106.55340576199995, 
+                                                    36.00848388700007
+                                                ], 
+                                                [
+                                                    -106.55151367199994, 
+                                                    36.00708007800006
+                                                ], 
+                                                [
+                                                    -106.54919433599997, 
+                                                    36.00689697300004
+                                                ], 
+                                                [
+                                                    -106.53527831999997, 
+                                                    36.001281738000046
+                                                ], 
+                                                [
+                                                    -106.52587890599995, 
+                                                    35.999328613000046
+                                                ], 
+                                                [
+                                                    -106.49871826199995, 
+                                                    36.00488281200006
+                                                ], 
+                                                [
+                                                    -106.49139404299996, 
+                                                    35.998107910000044
+                                                ], 
+                                                [
+                                                    -106.48748779299996, 
+                                                    36.00830078100006
+                                                ], 
+                                                [
+                                                    -106.44458007799994, 
+                                                    36.00830078100006
+                                                ], 
+                                                [
+                                                    -106.44812011699997, 
+                                                    35.99908447300004
+                                                ], 
+                                                [
+                                                    -106.43731689499998, 
+                                                    35.99407959000007
+                                                ], 
+                                                [
+                                                    -106.44500732399996, 
+                                                    35.991516113000046
+                                                ], 
+                                                [
+                                                    -106.44799804699994, 
+                                                    35.98712158200004
+                                                ], 
+                                                [
+                                                    -106.44628906299994, 
+                                                    35.98413085900006
+                                                ], 
+                                                [
+                                                    -106.44592285199997, 
+                                                    35.978698730000076
+                                                ], 
+                                                [
+                                                    -106.42590331999997, 
+                                                    35.96392822300004
+                                                ], 
+                                                [
+                                                    -106.41271972699997, 
+                                                    35.96032714800003
+                                                ], 
+                                                [
+                                                    -106.40740966799996, 
+                                                    35.95507812500006
+                                                ], 
+                                                [
+                                                    -106.39971923799999, 
+                                                    35.95269775400004
+                                                ], 
+                                                [
+                                                    -106.39959716799996, 
+                                                    35.902526855000076
+                                                ], 
+                                                [
+                                                    -106.40539550799997, 
+                                                    35.90289306600005
+                                                ], 
+                                                [
+                                                    -106.40570068399995, 
+                                                    35.90032959000007
+                                                ], 
+                                                [
+                                                    -106.40472412099996, 
+                                                    35.893310547000056
+                                                ], 
+                                                [
+                                                    -106.40069580099998, 
+                                                    35.88592529300007
+                                                ], 
+                                                [
+                                                    -106.39971923799999, 
+                                                    35.885681152000075
+                                                ], 
+                                                [
+                                                    -106.39978027299998, 
+                                                    35.86309814500004
+                                                ], 
+                                                [
+                                                    -106.41290283199999, 
+                                                    35.86950683600003
+                                                ], 
+                                                [
+                                                    -106.43762206999997, 
+                                                    35.84649658200004
+                                                ], 
+                                                [
+                                                    -106.45288085899995, 
+                                                    35.84613037100007
+                                                ], 
+                                                [
+                                                    -106.45611572299998, 
+                                                    35.84429931600005
+                                                ], 
+                                                [
+                                                    -106.45788574199997, 
+                                                    35.83789062500006
+                                                ], 
+                                                [
+                                                    -106.46099853499999, 
+                                                    35.836120605000076
+                                                ], 
+                                                [
+                                                    -106.46209716799996, 
+                                                    35.83447265600006
+                                                ], 
+                                                [
+                                                    -106.46258544899996, 
+                                                    35.83172607400007
+                                                ], 
+                                                [
+                                                    -106.45538330099998, 
+                                                    35.83172607400007
+                                                ], 
+                                                [
+                                                    -106.45172119099999, 
+                                                    35.82788085900006
+                                                ], 
+                                                [
+                                                    -106.48620605499997, 
+                                                    35.82769775400004
+                                                ], 
+                                                [
+                                                    -106.48498535199997, 
+                                                    35.82971191400003
+                                                ], 
+                                                [
+                                                    -106.48718261699997, 
+                                                    35.83148193400007
+                                                ], 
+                                                [
+                                                    -106.49188232399996, 
+                                                    35.828308105000076
+                                                ], 
+                                                [
+                                                    -106.49749755899995, 
+                                                    35.82769775400004
+                                                ], 
+                                                [
+                                                    -106.57348632799994, 
+                                                    35.82769775400004
+                                                ], 
+                                                [
+                                                    -106.57617187499994, 
+                                                    35.82910156200006
+                                                ], 
+                                                [
+                                                    -106.57940673799999, 
+                                                    35.82769775400004
+                                                ], 
+                                                [
+                                                    -106.59069824199997, 
+                                                    35.82769775400004
+                                                ], 
+                                                [
+                                                    -106.60168456999997, 
+                                                    35.82910156200006
+                                                ], 
+                                                [
+                                                    -106.60180664099994, 
+                                                    35.82769775400004
+                                                ], 
+                                                [
+                                                    -106.60388183599997, 
+                                                    35.82751464800003
+                                                ], 
+                                                [
+                                                    -106.62139892599998, 
+                                                    35.82751464800003
+                                                ], 
+                                                [
+                                                    -106.62139892599998, 
+                                                    35.87811279300007
+                                                ], 
+                                                [
+                                                    -106.61999511699997, 
+                                                    35.87811279300007
+                                                ], 
+                                                [
+                                                    -106.62048339799998, 
+                                                    35.88488769500003
+                                                ], 
+                                                [
+                                                    -106.62139892599998, 
+                                                    35.88488769500003
+                                                ], 
+                                                [
+                                                    -106.62139892599998, 
+                                                    35.89111328100006
+                                                ], 
+                                                [
+                                                    -106.61846923799999, 
+                                                    35.891906738000046
+                                                ], 
+                                                [
+                                                    -106.61889648399995, 
+                                                    35.893493652000075
+                                                ], 
+                                                [
+                                                    -106.62139892599998, 
+                                                    35.893493652000075
+                                                ], 
+                                                [
+                                                    -106.62139892599998, 
+                                                    36.00830078100006
+                                                ], 
+                                                [
+                                                    -106.55340576199995, 
+                                                    36.00848388700007
+                                                ]
+                                            ], 
+                                            [
+                                                [
+                                                    -106.61889648399995, 
+                                                    35.90747070300006
+                                                ], 
+                                                [
+                                                    -106.61871337899998, 
+                                                    35.90588378900003
+                                                ], 
+                                                [
+                                                    -106.61419677699996, 
+                                                    35.906127930000025
+                                                ], 
+                                                [
+                                                    -106.61407470699999, 
+                                                    35.90972900400004
+                                                ], 
+                                                [
+                                                    -106.61840820299994, 
+                                                    35.909484863000046
+                                                ], 
+                                                [
+                                                    -106.61889648399995, 
+                                                    35.90747070300006
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
+                "timePeriod": {
+                    "endDateTime": "2016-09-30", 
+                    "startDateTime": "2013-10-01"
+                }, 
+                "resourceUsage": [
+                    {
+                        "specificUsage": "Project information", 
+                        "userContactInfo": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "14"
+                                    }
+                                ], 
+                                "role": "administrator"
+                            }
+                        ]
+                    }
+                ], 
+                "keyword": [
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Project Category", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/52dee7c5e4b0dee2a6cd6b18"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "5da1d3b7-375b-58ae-a134-2ee0c94c395f"
+                                }
+                            ], 
+                            "title": "Project Category - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Decision Support"
+                            }, 
+                            {
+                                "keyword": "Informing Conservation Delivery"
+                            }, 
+                            {
+                                "keyword": "Data Acquisition and Development"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC End User Type", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/54760ef9e4b0f62cb5dc41a0"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "425f4a7c-dca2-56d8-947e-6f6bd1033d70"
+                                }
+                            ], 
+                            "title": "End User Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Federal resource managers"
+                            }, 
+                            {
+                                "keyword": "State agencies"
+                            }, 
+                            {
+                                "keyword": "Tribes"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "water"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " forest restoration"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " forest thinning"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " prescribed fire"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " forest structure"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " snowmelt"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " soil moisture"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " stream water yield"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " streamflows"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " watershed management"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " climate change"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " LCC"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Upper Rio Grande"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Valles Caldera"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Jemez Mountains"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " New Mexico"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "NM-03"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Conservation Targets", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_Southern Rockies LCC Conservation Targets"
+                                }
+                            ], 
+                            "title": "Custom Southern Rockies LCC Conservation Targets thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Streamflows"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Ecotypic Areas", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_Southern Rockies LCC Ecotypic Areas"
+                                }
+                            ], 
+                            "title": "Custom Southern Rockies LCC Ecotypic Areas thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Upper Rio Grande"
+                            }
+                        ]
+                    }
+                ], 
+                "resourceType": [
+                    {
+                        "type": "LCCResourceType", 
+                        "name": "Project"
+                    }
+                ], 
+                "resourceMaintenance": [
+                    {
+                        "frequency": "as needed", 
+                        "contact": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "14"
+                                    }
+                                ], 
+                                "role": "custodian"
+                            }
+                        ]
+                    }
+                ], 
+                "shortAbstract": ""
+            }, 
+            "funding": [
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "560", 
+                            "currency": "USD", 
+                            "amount": 75000, 
+                            "recipientId": "388", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2016-08-31", 
+                        "periodName": [
+                            "FY2015"
+                        ], 
+                        "startDateTime": "2015-08-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "560", 
+                            "currency": "USD", 
+                            "amount": 13834, 
+                            "recipientId": "388", 
+                            "matching": true
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2016-08-31", 
+                        "periodName": [
+                            "FY2015"
+                        ], 
+                        "startDateTime": "2015-08-01"
+                    }
+                }
+            ], 
+            "metadataInfo": {
+                "metadataOnlineResource": [
+                    {
+                        "uri": "https://www.sciencebase.gov/catalog/item/53173b63e4b0cd4cd83be243"
+                    }
+                ], 
+                "parentMetadata": {
+                    "identifier": [
+                        {
+                            "identifier": "53166b6ee4b099ddeebb6da9", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ], 
+                    "title": "ScienceBase Parent"
+                }, 
+                "metadataIdentifier": {
+                    "identifier": "53173b63e4b0cd4cd83be243", 
+                    "namespace": "gov.sciencebase.catalog"
+                }, 
+                "metadataContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "14"
+                            }
+                        ], 
+                        "role": "author"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "14"
+                            }
+                        ], 
+                        "role": "custodian"
+                    }
+                ], 
+                "metadataDate": [
+                    {
+                        "date": "2017-10-02", 
+                        "dateType": "creation"
+                    }
+                ]
+            }, 
+            "associatedResource": [
+                {
+                    "resourceType": [
+                        {
+                            "type": "Contractual Document"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "54ecf2b8e4b02d776a6847c8", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Proposal: Disturbance and Restoration Impacts on Hydrologic Function in the Jemez Mountains, New Mexico: Model Calibration and Validation on a Landscape Scale"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Proposal: Disturbance and Restoration Impacts on Hydrologic Function in the Jemez Mountains, New Mexico: Model Calibration and Validation on a Landscape Scale"
+                    }
+                }
+            ], 
+            "resourceDistribution": [
+                {
+                    "distributor": [
+                        {
+                            "contact": {
+                                "party": [
+                                    {
+                                        "contactId": "14"
+                                    }
+                                ], 
+                                "role": "distributor"
+                            }, 
+                            "transferOption": [
+                                {
+                                    "transferSize": 99999, 
+                                    "unitsOfDistribution": "unknown", 
+                                    "onlineOption": [
+                                        {
+                                            "uri": "https://www.sciencebase.gov/catalog/item/53173b63e4b0cd4cd83be243"
+                                        }
+                                    ]
+                                }
+                            ], 
+                            "orderProcess": [
+                                {
+                                    "orderingInstructions": "Download products as needed from the Sciencebase.gov URL provided", 
+                                    "fees": "00USD"
+                                }
+                            ]
+                        }
+                    ], 
+                    "description": "GNLCC projet page includes project information and downloadable products on Scinecebase.gov"
+                }
+            ]
+        }, 
+        "schema": {
+            "version": "2.1.2", 
+            "name": "mdJson"
+        }
+    }
+]

@@ -1,0 +1,695 @@
+[
+    {
+        "metadataRepository": [
+            {
+                "metadataStandard": "mdJSON", 
+                "citiation": {
+                    "title": "LCC Network Science Catalog"
+                }, 
+                "repository": "ScienceBase"
+            }
+        ], 
+        "contact": [
+            {
+                "isOrganization": true, 
+                "name": "Arizona State University", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:Heather.L.Bateman@asu.edu"
+                    }
+                ], 
+                "contactId": "55", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Northern Arizona University", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:matthew.johnson@nau.edu"
+                    }
+                ], 
+                "contactId": "G56", 
+                "contactType": "Research"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Matthew Johnson", 
+                "memberOfOrganization": [
+                    "G56"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:matthew.johnson@nau.edu"
+                    }
+                ], 
+                "contactId": "56", 
+                "contactType": "Research"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }
+        ], 
+        "metadata": {
+            "resourceInfo": {
+                "status": [
+                    "Completed"
+                ], 
+                "pointOfContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "14"
+                            }
+                        ], 
+                        "role": "pointOfContact"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "55"
+                            }
+                        ], 
+                        "role": "principalInvestigator"
+                    }
+                ], 
+                "abstract": "Resource managers must often balance the management goals of protecting wildlife species and habitats with control of non-native and invasive plants. This project will determine if the introduction of the biocontrol agent (tamarisk leaf beetle, Diorhabda spp.) as an insect consumer and defoliator of saltcedar influences wildlife populations and communities via alterations to food resources and/or habitat. By taking advantage of an unprecedented natural experiment and two years of pre-biocontrol monitoring, the researchers will track changes in amphibian and reptile (herpetofauna), and avian communities as biocontrol enters a system dominated by a non-native plant species.\n\nThe investigators predict that the introduction and proliferation of the biocontrol beetle will affect wildlife groups because this insect is known to be eaten by several wildlife species and because it causes defoliation of its host plant, thereby altering the physical habitat. This work expands upon preliminary research by the investigators which focused on relating wildlife populations and communities to habitat structure in a non-native plant ecosystem prior to the establishment of biocontrol. Our results can help to inform decisions made by natural resource managers by providing guidance on how wildlife species respond (either positively or negatively) to management actions such as biocontrol in riparian habitats.", 
+                "citation": {
+                    "title": "Effects of Bio-control and Restoration on Wildlife in Southwestern Riparian Habitats", 
+                    "onlineResource": [
+                        {
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "https://southernrockieslcc.org/sites/all/modules/custom/rockies_pts/pts/GNLCC_PTS4_SRLCC/prj_report.html?PRJ_ID=15", 
+                            "name": "Project Report Page"
+                        }
+                    ], 
+                    "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "55", 
+                                    "organizationMembers": [
+                                        "55"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G56", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "56", 
+                                    "organizationMembers": [
+                                        "G56"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }
+                    ], 
+                    "alternateTitle": [
+                        "Bateman2012"
+                    ], 
+                    "date": [
+                        {
+                            "date": "2013-03-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "15", 
+                            "namespace": "lcc:sr"
+                        }, 
+                        {
+                            "identifier": "53166cf1e4b099ddeebb6dab", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ]
+                }, 
+                "defaultResourceLocale": {
+                    "country": "USA", 
+                    "characterSet": "UTF-8", 
+                    "language": "eng"
+                }, 
+                "purpose": "Decision Support Informing Conservation Delivery  Federal resource managers State agencies Tribes", 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 36.8889022162788, 
+                                    "westLongitude": -114.32130479210089, 
+                                    "southLatitude": 36.66616560404147, 
+                                    "eastLongitude": -113.91011886363026
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -114.17929115468154, 
+                                                    36.726673064715655
+                                                ], 
+                                                [
+                                                    -114.2779282421173, 
+                                                    36.66616560404147
+                                                ], 
+                                                [
+                                                    -114.32130479210089, 
+                                                    36.6980927979054
+                                                ], 
+                                                [
+                                                    -114.24168208340859, 
+                                                    36.743816119694635
+                                                ], 
+                                                [
+                                                    -114.12878421177817, 
+                                                    36.80331089171562
+                                                ], 
+                                                [
+                                                    -114.05094410186412, 
+                                                    36.82662024206627
+                                                ], 
+                                                [
+                                                    -113.94636502124237, 
+                                                    36.8889022162788
+                                                ], 
+                                                [
+                                                    -113.91011886363026, 
+                                                    36.880347395890375
+                                                ], 
+                                                [
+                                                    -113.9796401841805, 
+                                                    36.80426243317464
+                                                ], 
+                                                [
+                                                    -114.03490071998779, 
+                                                    36.7866570102536
+                                                ], 
+                                                [
+                                                    -114.17929115468154, 
+                                                    36.726673064715655
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
+                "timePeriod": {
+                    "endDateTime": "2015-02-28", 
+                    "startDateTime": "2013-03-01"
+                }, 
+                "resourceUsage": [
+                    {
+                        "specificUsage": "Project information", 
+                        "userContactInfo": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "14"
+                                    }
+                                ], 
+                                "role": "administrator"
+                            }
+                        ]
+                    }
+                ], 
+                "keyword": [
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Project Category", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/52dee7c5e4b0dee2a6cd6b18"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "5da1d3b7-375b-58ae-a134-2ee0c94c395f"
+                                }
+                            ], 
+                            "title": "Project Category - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Decision Support"
+                            }, 
+                            {
+                                "keyword": "Informing Conservation Delivery"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC End User Type", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/54760ef9e4b0f62cb5dc41a0"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "425f4a7c-dca2-56d8-947e-6f6bd1033d70"
+                                }
+                            ], 
+                            "title": "End User Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Federal resource managers"
+                            }, 
+                            {
+                                "keyword": "State agencies"
+                            }, 
+                            {
+                                "keyword": "Tribes"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "riparian"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " tamarisk"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " tamarisk beetle"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " invasive species"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " birds"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " reptiles"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " amphibians"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " restoration"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " LCC"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Southwest Riparian"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Arizona"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Nevada"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Utah"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "AZ-04"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " NV-04"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "UT-02"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Conservation Targets", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_Southern Rockies LCC Conservation Targets"
+                                }
+                            ], 
+                            "title": "Custom Southern Rockies LCC Conservation Targets thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Streamflows"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Ecotypic Areas", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_Southern Rockies LCC Ecotypic Areas"
+                                }
+                            ], 
+                            "title": "Custom Southern Rockies LCC Ecotypic Areas thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Colorado Plateau"
+                            }
+                        ]
+                    }
+                ], 
+                "resourceType": [
+                    {
+                        "type": "LCCResourceType", 
+                        "name": "Project"
+                    }
+                ], 
+                "resourceMaintenance": [
+                    {
+                        "frequency": "as needed", 
+                        "contact": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "14"
+                                    }
+                                ], 
+                                "role": "custodian"
+                            }
+                        ]
+                    }
+                ], 
+                "shortAbstract": ""
+            }, 
+            "funding": [
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "560", 
+                            "currency": "USD", 
+                            "amount": 75000, 
+                            "recipientId": "388", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2016-08-31", 
+                        "periodName": [
+                            "FY2015"
+                        ], 
+                        "startDateTime": "2015-08-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "560", 
+                            "currency": "USD", 
+                            "amount": 13834, 
+                            "recipientId": "388", 
+                            "matching": true
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2016-08-31", 
+                        "periodName": [
+                            "FY2015"
+                        ], 
+                        "startDateTime": "2015-08-01"
+                    }
+                }
+            ], 
+            "metadataInfo": {
+                "metadataOnlineResource": [
+                    {
+                        "uri": "https://www.sciencebase.gov/catalog/item/53166cf1e4b099ddeebb6dab"
+                    }
+                ], 
+                "parentMetadata": {
+                    "identifier": [
+                        {
+                            "identifier": "53166b6ee4b099ddeebb6da9", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ], 
+                    "title": "ScienceBase Parent"
+                }, 
+                "metadataIdentifier": {
+                    "identifier": "53166cf1e4b099ddeebb6dab", 
+                    "namespace": "gov.sciencebase.catalog"
+                }, 
+                "metadataContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "14"
+                            }
+                        ], 
+                        "role": "author"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "14"
+                            }
+                        ], 
+                        "role": "custodian"
+                    }
+                ], 
+                "metadataDate": [
+                    {
+                        "date": "2017-10-02", 
+                        "dateType": "creation"
+                    }
+                ]
+            }, 
+            "associatedResource": [
+                {
+                    "resourceType": [
+                        {
+                            "type": "Contractual Document"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "54ecef17e4b02d776a6847ae", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Proposal: Effects of Biocontrol and Restoration on Wildlife in Southwestern Riparian Habitats"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Proposal: Effects of Biocontrol and Restoration on Wildlife in Southwestern Riparian Habitats"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Presentation"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "564f38f3e4b064dd1d0955ba", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Presentation: Effects of saltcedar biocontrol and restoration on native herpetofauna along the Virgin River, USA"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Presentation: Effects of saltcedar biocontrol and restoration on native herpetofauna along the Virgin River, USA"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Methodology/Protocol"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "564f581ae4b064dd1d095660", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Publication: The effects of riparian restoration following saltcedar\r (Tamarix spp.) biocontrol on habitat and herpetofauna along a desert stream"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Publication: The effects of riparian restoration following saltcedar\r (Tamarix spp.) biocontrol on habitat and herpetofauna along a desert stream"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Report"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "564f5469e4b064dd1d095655", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Final Report: Effects of Biocontrol and Restoration on Wildlife in Southwestern Riparian Habitats"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Final Report: Effects of Biocontrol and Restoration on Wildlife in Southwestern Riparian Habitats"
+                    }
+                }
+            ], 
+            "resourceDistribution": [
+                {
+                    "distributor": [
+                        {
+                            "contact": {
+                                "party": [
+                                    {
+                                        "contactId": "14"
+                                    }
+                                ], 
+                                "role": "distributor"
+                            }, 
+                            "transferOption": [
+                                {
+                                    "transferSize": 99999, 
+                                    "unitsOfDistribution": "unknown", 
+                                    "onlineOption": [
+                                        {
+                                            "uri": "https://www.sciencebase.gov/catalog/item/53166cf1e4b099ddeebb6dab"
+                                        }
+                                    ]
+                                }
+                            ], 
+                            "orderProcess": [
+                                {
+                                    "orderingInstructions": "Download products as needed from the Sciencebase.gov URL provided", 
+                                    "fees": "00USD"
+                                }
+                            ]
+                        }
+                    ], 
+                    "description": "GNLCC projet page includes project information and downloadable products on Scinecebase.gov"
+                }
+            ]
+        }, 
+        "schema": {
+            "version": "2.1.2", 
+            "name": "mdJson"
+        }
+    }
+]
