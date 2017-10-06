@@ -11,6 +11,60 @@
         ], 
         "contact": [
             {
+                "memberOfOrganization": [
+                    "c6007b64-4fbf-4a2d-ab79-8dc56bbdf0a2"
+                ], 
+                "contactType": "lcc", 
+                "phone": [
+                    {
+                        "phoneNumber": "(775) 861-6492", 
+                        "phoneName": "John Tull, Science Coordinator", 
+                        "service": [
+                            "voice", 
+                            "message"
+                        ]
+                    }
+                ], 
+                "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9", 
+                "address": [
+                    {
+                        "postalCode": "89509", 
+                        "city": "Reno", 
+                        "addressType": [
+                            "mailing", 
+                            "physical"
+                        ], 
+                        "country": "USA", 
+                        "adminstrativeArea": "NV"
+                    }
+                ], 
+                "hoursOfService": [], 
+                "electronicMailAddress": [
+                    "john_tull@fws.gov"
+                ], 
+                "isOrganization": true, 
+                "name": "Great Basin Landscape Conservation Cooperative", 
+                "onlineResource": [
+                    {
+                        "function": "information", 
+                        "name": "Great Basin LCC Website", 
+                        "uri": "https://greatbasinlcc.org/"
+                    }
+                ], 
+                "logoGraphic": [
+                    {
+                        "fileType": ".jpg", 
+                        "fileName": "Great Basin LCC Logo", 
+                        "fileUri": [
+                            {
+                                "name": "Great Basin LCC Logo", 
+                                "uri": "https://lccnetwork.org/sites/default/files/styles/large/public/lcc/GBLCC_logo_2016_0.jpg?itok=hAGkhAIf"
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "US Forest Service", 
                 "memberOfOrganization": [], 
@@ -72,7 +126,7 @@
                     {
                         "party": [
                             {
-                                "contactId": "G682"
+                                "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
                             }
                         ], 
                         "role": "pointOfContact"
@@ -167,7 +221,46 @@
                     "language": "eng"
                 }, 
                 "purpose": "Informing Conservation Delivery Decision Support Conservation Design Federal resource managers Academics & scientific researchers ", 
-                "extent": null, 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 54.99951171900008, 
+                                    "westLongitude": -129.99847412099996, 
+                                    "southLatitude": 29.996276855000076, 
+                                    "eastLongitude": -99.99627685499996
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -129.99847412099996, 
+                                                    29.996276855000076
+                                                ], 
+                                                [
+                                                    -129.99847412099996, 
+                                                    54.99951171900008
+                                                ], 
+                                                [
+                                                    -99.99627685499996, 
+                                                    54.99951171900008
+                                                ], 
+                                                [
+                                                    -99.99627685499996, 
+                                                    29.996276855000076
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
                 "timePeriod": {
                     "endDateTime": "2015-05-01", 
                     "startDateTime": "2013-05-01"
@@ -179,7 +272,7 @@
                             {
                                 "party": [
                                     {
-                                        "contactId": "G682"
+                                        "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
                                     }
                                 ], 
                                 "role": "administrator"
@@ -341,7 +434,7 @@
                             {
                                 "party": [
                                     {
-                                        "contactId": "G682"
+                                        "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
                                     }
                                 ], 
                                 "role": "custodian"
@@ -412,7 +505,7 @@
                     {
                         "party": [
                             {
-                                "contactId": "G682"
+                                "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
                             }
                         ], 
                         "role": "author"
@@ -420,7 +513,7 @@
                     {
                         "party": [
                             {
-                                "contactId": "G682"
+                                "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
                             }
                         ], 
                         "role": "custodian"
@@ -428,12 +521,12 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-03", 
+                        "date": "2017-10-05", 
                         "dateType": "creation"
                     }
                 ]
             }, 
-            "associatedResource": "", 
+            "associatedResource": [], 
             "resourceDistribution": [
                 {
                     "distributor": [
@@ -441,7 +534,7 @@
                             "contact": {
                                 "party": [
                                     {
-                                        "contactId": "G682"
+                                        "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
                                     }
                                 ], 
                                 "role": "distributor"
