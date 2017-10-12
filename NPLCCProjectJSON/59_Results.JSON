@@ -44,27 +44,15 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "BC Ministry of Environment", 
+                "name": "University of British Columbia", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:Peter.Tschaplinski@gov.bc.ca"
+                        "uri": "mailto:dan.moore@ubc.ca"
                     }
                 ], 
-                "contactId": "247", 
-                "contactType": "Province"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "Pacific Biological Station", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:Kim.Hyatt@dfo-mpo.gc.ca"
-                    }
-                ], 
-                "contactId": "242", 
-                "contactType": "Province"
+                "contactId": "248", 
+                "contactType": "Academic"
             }, 
             {
                 "isOrganization": true, 
@@ -80,15 +68,79 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "University of British Columbia", 
+                "name": "Pacific Biological Station", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:dan.moore@ubc.ca"
+                        "uri": "mailto:Kim.Hyatt@dfo-mpo.gc.ca"
                     }
                 ], 
-                "contactId": "248", 
-                "contactType": "Academic"
+                "contactId": "242", 
+                "contactType": "Province"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "BC Ministry of Environment", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:Peter.Tschaplinski@gov.bc.ca"
+                    }
+                ], 
+                "contactId": "247", 
+                "contactType": "Province"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "BC Ministry of Forests, Land & Natural Resource Operations", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:Lars.ReeseHansen@gov.bc.ca"
+                    }
+                ], 
+                "contactId": "G240", 
+                "contactType": "Province"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Lars Reese-Hansen", 
+                "memberOfOrganization": [
+                    "G240"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:Lars.ReeseHansen@gov.bc.ca"
+                    }
+                ], 
+                "contactId": "240", 
+                "contactType": "Province"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Pacific Climate Impacts Consortium, Victoria BC", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mschnorb@uvic.ca"
+                    }
+                ], 
+                "contactId": "G243", 
+                "contactType": "Consortium"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Markus Schnorbus", 
+                "memberOfOrganization": [
+                    "G243"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:mschnorb@uvic.ca"
+                    }
+                ], 
+                "contactId": "243", 
+                "contactType": "Consortium"
             }, 
             {
                 "isOrganization": true, 
@@ -158,58 +210,6 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "Pacific Climate Impacts Consortium, Victoria BC", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mschnorb@uvic.ca"
-                    }
-                ], 
-                "contactId": "G243", 
-                "contactType": "Consortium"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Markus Schnorbus", 
-                "memberOfOrganization": [
-                    "G243"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mailto:mschnorb@uvic.ca"
-                    }
-                ], 
-                "contactId": "243", 
-                "contactType": "Consortium"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "BC Ministry of Forests, Land & Natural Resource Operations", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:Lars.ReeseHansen@gov.bc.ca"
-                    }
-                ], 
-                "contactId": "G240", 
-                "contactType": "Province"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Lars Reese-Hansen", 
-                "memberOfOrganization": [
-                    "G240"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mailto:Lars.ReeseHansen@gov.bc.ca"
-                    }
-                ], 
-                "contactId": "240", 
-                "contactType": "Province"
-            }, 
-            {
-                "isOrganization": true, 
                 "name": "US Forest Service", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
@@ -268,7 +268,653 @@
                 "contactType": "Federal"
             }
         ], 
-        "metadata": null, 
+        "metadata": {
+            "resourceInfo": {
+                "status": [
+                    "onGoing"
+                ], 
+                "pointOfContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "pointOfContact"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "89"
+                            }
+                        ], 
+                        "role": "principalInvestigator"
+                    }
+                ], 
+                "abstract": "Stream temperature data will be acquired from federal and provincial government agencies, as well as other data holders in British Columbia to eventually be housed in an interagency database. Spatial statistical models for river networks like those used for NorWeST will be used with existing and readily available stream temperature data to develop a consistent set of high-resolution predictions for all streams and reaches within two pilot areas: an interior location represented by the Nicola River watershed in the Great Norther LCC and a coastal location represented by the Somass River watershed within the North Pacific LCC. Work in these proposed pilot areas would include processing of spatial data and applying existing technical protocols for stream temperature modelling to facilitate future expansion of the approach across the GNLCC and NPLCC in British Columbia. An ultimate goal is to provide a consistent set of international stream temperature scenarios for planning and vulnerability assessments for aquatic species.", 
+                "citation": {
+                    "title": "Towards developing an interagency stream temperature database and high-resolution stream temperature model for British Columbia with a focus on pilot watersheds in the NPLCC and GNLCC", 
+                    "onlineResource": [
+                        {
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=59", 
+                            "name": "Project Report Page"
+                        }
+                    ], 
+                    "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "248", 
+                                    "organizationMembers": [
+                                        "248"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "241", 
+                                    "organizationMembers": [
+                                        "241"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "242", 
+                                    "organizationMembers": [
+                                        "242"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "247", 
+                                    "organizationMembers": [
+                                        "247"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G240", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "240", 
+                                    "organizationMembers": [
+                                        "G240"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G243", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "243", 
+                                    "organizationMembers": [
+                                        "G243"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G246", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Administrative Contact/Program Officer"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "246", 
+                                    "organizationMembers": [
+                                        "G246"
+                                    ]
+                                }
+                            ], 
+                            "role": "Administrative Contact/Program Officer"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G245", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "245", 
+                                    "organizationMembers": [
+                                        "G245"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "244", 
+                                    "organizationMembers": [
+                                        "G245"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G89", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "89", 
+                                    "organizationMembers": [
+                                        "G89"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G237", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "237", 
+                                    "organizationMembers": [
+                                        "G237"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }
+                    ], 
+                    "alternateTitle": [
+                        "Isaak2015"
+                    ], 
+                    "date": [
+                        {
+                            "date": "2013-11-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "59", 
+                            "namespace": "lcc:np"
+                        }, 
+                        {
+                            "identifier": "5609d408e4b058f706e535a3", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ]
+                }, 
+                "defaultResourceLocale": {
+                    "country": "USA", 
+                    "characterSet": "UTF-8", 
+                    "language": "eng"
+                }, 
+                "purpose": "Data Management and Integration Data Acquisition and Development Conservation Planning Academics & scientific researchers Federal resource managers Conservation NGOs", 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 60.000122070000046, 
+                                    "westLongitude": -139.05700683599997, 
+                                    "southLatitude": 48.31011962900004, 
+                                    "eastLongitude": -114.06909179699997
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -139.05700683599997, 
+                                                    48.31011962900004
+                                                ], 
+                                                [
+                                                    -139.05700683599997, 
+                                                    60.000122070000046
+                                                ], 
+                                                [
+                                                    -114.06909179699997, 
+                                                    60.000122070000046
+                                                ], 
+                                                [
+                                                    -114.06909179699997, 
+                                                    48.31011962900004
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
+                "timePeriod": {
+                    "endDateTime": "2014-12-31", 
+                    "startDateTime": "2013-11-01"
+                }, 
+                "resourceUsage": [
+                    {
+                        "specificUsage": "Project information", 
+                        "userContactInfo": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "administrator"
+                            }
+                        ]
+                    }
+                ], 
+                "keyword": [
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Project Category", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/52dee7c5e4b0dee2a6cd6b18"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "5da1d3b7-375b-58ae-a134-2ee0c94c395f"
+                                }
+                            ], 
+                            "title": "Project Category - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Data Management and Integration"
+                            }, 
+                            {
+                                "keyword": "Data Acquisition and Development"
+                            }, 
+                            {
+                                "keyword": "Conservation Planning"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC End User Type", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/54760ef9e4b0f62cb5dc41a0"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "425f4a7c-dca2-56d8-947e-6f6bd1033d70"
+                                }
+                            ], 
+                            "title": "End User Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Academics & scientific researchers"
+                            }, 
+                            {
+                                "keyword": "Federal resource managers"
+                            }, 
+                            {
+                                "keyword": "Conservation NGOs"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "stream temperature"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "British Columbia"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "OR-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-5"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "WA-4"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "WA-8"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "ID-1"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "MT-0"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "ID-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Conservation Targets", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_North Pacific Conservation Targets"
+                                }
+                            ], 
+                            "title": "Custom North Pacific Conservation Targets thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Anadromous fish"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Ecotypic Areas", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_North Pacific Ecotypic Areas"
+                                }
+                            ], 
+                            "title": "Custom North Pacific Ecotypic Areas thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "NPLCC"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Goals", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_North Pacific Goals"
+                                }
+                            ], 
+                            "title": "Custom North Pacific Goals thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Priority D. Hydrologic regime changes on anadromous fish"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Stressors", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_North Pacific Stressors"
+                                }
+                            ], 
+                            "title": "Custom North Pacific Stressors thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Climate Change"
+                            }, 
+                            {
+                                "keyword": "Hydrologic regime shift"
+                            }
+                        ]
+                    }
+                ], 
+                "resourceType": [
+                    {
+                        "type": "project"
+                    }
+                ], 
+                "resourceMaintenance": [
+                    {
+                        "frequency": "as needed", 
+                        "contact": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "custodian"
+                            }
+                        ]
+                    }
+                ], 
+                "shortAbstract": ""
+            }, 
+            "funding": [
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "560", 
+                            "currency": "USD", 
+                            "amount": 75000, 
+                            "recipientId": "388", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2016-08-31", 
+                        "periodName": [
+                            "FY2015"
+                        ], 
+                        "startDateTime": "2015-08-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "560", 
+                            "currency": "USD", 
+                            "amount": 13834, 
+                            "recipientId": "388", 
+                            "matching": true
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2016-08-31", 
+                        "periodName": [
+                            "FY2015"
+                        ], 
+                        "startDateTime": "2015-08-01"
+                    }
+                }
+            ], 
+            "metadataInfo": {
+                "metadataOnlineResource": [
+                    {
+                        "uri": "https://www.sciencebase.gov/catalog/item/5609d408e4b058f706e535a3"
+                    }
+                ], 
+                "parentMetadata": {
+                    "identifier": [
+                        {
+                            "identifier": "551c3a8ee4b0323842783aee", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ], 
+                    "title": "ScienceBase Parent"
+                }, 
+                "metadataIdentifier": {
+                    "identifier": "5609d408e4b058f706e535a3", 
+                    "namespace": "gov.sciencebase.catalog"
+                }, 
+                "metadataContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "author"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "custodian"
+                    }
+                ], 
+                "metadataDate": [
+                    {
+                        "date": "2017-10-12", 
+                        "dateType": "creation"
+                    }
+                ]
+            }, 
+            "associatedResource": [], 
+            "resourceDistribution": [
+                {
+                    "distributor": [
+                        {
+                            "contact": {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "distributor"
+                            }, 
+                            "transferOption": [
+                                {
+                                    "transferSize": 99999, 
+                                    "unitsOfDistribution": "unknown", 
+                                    "onlineOption": [
+                                        {
+                                            "uri": "https://www.sciencebase.gov/catalog/item/5609d408e4b058f706e535a3"
+                                        }
+                                    ]
+                                }
+                            ], 
+                            "orderProcess": [
+                                {
+                                    "orderingInstructions": "Download products as needed from the Sciencebase.gov URL provided", 
+                                    "fees": "00USD"
+                                }
+                            ]
+                        }
+                    ], 
+                    "description": "GNLCC projet page includes project information and downloadable products on Scinecebase.gov"
+                }
+            ]
+        }, 
         "schema": {
             "version": "2.1.2", 
             "name": "mdJson"

@@ -43,11 +43,23 @@
                 ]
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "82", 
                 "isOrganization": true, 
-                "name": "Western Washington Univ.", 
+                "name": "University of Washington", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:alan.hamlet.1@nd.edu"
+                    }
+                ], 
+                "contactId": "94", 
                 "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "33", 
+                "isOrganization": true, 
+                "name": "National Park Service", 
+                "contactType": "Federal"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -58,21 +70,9 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "33", 
+                "contactId": "82", 
                 "isOrganization": true, 
-                "name": "National Park Service", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "University of Washington", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:alan.hamlet.1@nd.edu"
-                    }
-                ], 
-                "contactId": "94", 
+                "name": "Western Washington Univ.", 
                 "contactType": "Academic"
             }, 
             {
@@ -112,7 +112,7 @@
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "Completed"
+                    "completed"
                 ], 
                 "pointOfContact": [
                     {
@@ -147,9 +147,20 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "82", 
+                                    "contactId": "94", 
                                     "organizationMembers": [
-                                        "82"
+                                        "94"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "33", 
+                                    "organizationMembers": [
+                                        "33"
                                     ]
                                 }
                             ], 
@@ -169,24 +180,13 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "33", 
+                                    "contactId": "82", 
                                     "organizationMembers": [
-                                        "33"
+                                        "82"
                                     ]
                                 }
                             ], 
                             "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "94", 
-                                    "organizationMembers": [
-                                        "94"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -259,6 +259,14 @@
                                                     40.66031948333203
                                                 ], 
                                                 [
+                                                    -122.60947938077449, 
+                                                    40.67849656308039
+                                                ], 
+                                                [
+                                                    -122.61510912989746, 
+                                                    40.67854222526403
+                                                ], 
+                                                [
                                                     -123.03551236917237, 
                                                     40.68195202858997
                                                 ], 
@@ -269,6 +277,10 @@
                                                 [
                                                     -122.82160061447668, 
                                                     44.53208312849293
+                                                ], 
+                                                [
+                                                    -122.61806640530568, 
+                                                    45.60218774370917
                                                 ], 
                                                 [
                                                     -122.56490650829355, 
@@ -295,8 +307,92 @@
                                                     48.32402974412507
                                                 ], 
                                                 [
+                                                    -124.45443694543586, 
+                                                    48.30805875569492
+                                                ], 
+                                                [
+                                                    -124.39584331998583, 
+                                                    48.29930916676755
+                                                ], 
+                                                [
+                                                    -123.26170077501389, 
+                                                    48.12965591194495
+                                                ], 
+                                                [
+                                                    -123.22403688025423, 
+                                                    48.1240122295122
+                                                ], 
+                                                [
+                                                    -123.0557004463998, 
+                                                    48.098780558756985
+                                                ], 
+                                                [
+                                                    -123.00880675083208, 
+                                                    48.09174953280128
+                                                ], 
+                                                [
+                                                    -122.92685734962853, 
+                                                    48.0794601087587
+                                                ], 
+                                                [
+                                                    -122.92340250273573, 
+                                                    48.07894194393591
+                                                ], 
+                                                [
+                                                    -122.91173482370995, 
+                                                    48.07719196030901
+                                                ], 
+                                                [
+                                                    -122.85788422345829, 
+                                                    48.06911437697378
+                                                ], 
+                                                [
+                                                    -122.7798242911228, 
+                                                    48.057403146668875
+                                                ], 
+                                                [
+                                                    -122.77937196876161, 
+                                                    48.05733527748928
+                                                ], 
+                                                [
+                                                    -122.60880635215139, 
+                                                    48.03173623149556
+                                                ], 
+                                                [
+                                                    -122.56319188847172, 
+                                                    48.02488810823728
+                                                ], 
+                                                [
+                                                    -122.36674446905809, 
+                                                    47.99538495336513
+                                                ], 
+                                                [
+                                                    -122.23353590158953, 
+                                                    47.97536962409315
+                                                ], 
+                                                [
+                                                    -122.22824676660265, 
+                                                    47.97457474189491
+                                                ], 
+                                                [
+                                                    -121.68986282344298, 
+                                                    47.89359922925285
+                                                ], 
+                                                [
+                                                    -121.0921302735823, 
+                                                    47.80354883498067
+                                                ], 
+                                                [
                                                     -121.0675242248753, 
                                                     47.79983850088879
+                                                ], 
+                                                [
+                                                    -120.96787247541269, 
+                                                    46.83778938283483
+                                                ], 
+                                                [
+                                                    -120.84913360856089, 
+                                                    45.668569548394224
                                                 ], 
                                                 [
                                                     -120.65396149858196, 
@@ -492,8 +588,7 @@
                 ], 
                 "resourceType": [
                     {
-                        "type": "LCCResourceType", 
-                        "name": "Project"
+                        "type": "project"
                     }
                 ], 
                 "resourceMaintenance": [
@@ -590,7 +685,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-05", 
+                        "date": "2017-10-12", 
                         "dateType": "creation"
                     }
                 ]

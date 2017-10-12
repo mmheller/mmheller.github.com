@@ -44,13 +44,6 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "36", 
-                "isOrganization": true, 
-                "name": "NOAA National Estuarine Research Reserve Science Collaborative", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "70", 
                 "isOrganization": true, 
                 "name": "USFWS Humboldt Bay NWR", 
@@ -70,6 +63,13 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "71", 
+                "isOrganization": true, 
+                "name": "USFWS Region 8", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "59", 
                 "isOrganization": true, 
                 "name": "Univ. California Davis", 
@@ -77,9 +77,9 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "71", 
+                "contactId": "36", 
                 "isOrganization": true, 
-                "name": "USFWS Region 8", 
+                "name": "NOAA National Estuarine Research Reserve Science Collaborative", 
                 "contactType": "Federal"
             }, 
             {
@@ -145,7 +145,7 @@
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "Completed"
+                    "completed"
                 ], 
                 "pointOfContact": [
                     {
@@ -180,17 +180,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "36", 
-                                    "organizationMembers": [
-                                        "36"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "70", 
                                     "organizationMembers": [
                                         "70"
@@ -213,6 +202,17 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "71", 
+                                    "organizationMembers": [
+                                        "71"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "59", 
                                     "organizationMembers": [
                                         "59"
@@ -224,9 +224,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "71", 
+                                    "contactId": "36", 
                                     "organizationMembers": [
-                                        "71"
+                                        "36"
                                     ]
                                 }
                             ], 
@@ -814,8 +814,7 @@
                 ], 
                 "resourceType": [
                     {
-                        "type": "LCCResourceType", 
-                        "name": "Project"
+                        "type": "project"
                     }
                 ], 
                 "resourceMaintenance": [
@@ -912,7 +911,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-05", 
+                        "date": "2017-10-12", 
                         "dateType": "creation"
                     }
                 ]
