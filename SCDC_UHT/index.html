@@ -341,9 +341,17 @@
             var nvLC = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58ff6580e4b006455f2d62b1/MapServer", { opacity: 0 });
             
             //Feature layer for CHAT data queries
-            var nvCHATFL = new esri.layers.FeatureLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55c3e7dce4b033ef52106cc0/MapServer/0", {opacity: 0	,
-                mode: FeatureLayer.MODE_SELECTION, outFields: ["ch_rank", "hex_id", "ter_soc", "ter_seri", "wet_rip", "ls_cond"],
+            var nvCHATFL = new esri.layers.FeatureLayer("https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/dataviewertest_2015_0617_AGOL/FeatureServer/0", {
+                opacity: 0,
+                mode: FeatureLayer.MODE_SELECTION, outFields: ["CH_Rank", "Hex_ID", "Ter_SOC", "Ter_SERI", "Wet_Rip", "LS_Cond"],
             });		
+
+            //var nvCHATFL = new esri.layers.FeatureLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55c3e7dce4b033ef52106cc0/MapServer/0", {
+            //    opacity: 0,
+            //    mode: FeatureLayer.MODE_SELECTION, outFields: ["ch_rank", "hex_id", "ter_soc", "ter_seri", "wet_rip", "ls_cond"],
+            //});
+
+
             nvCHATFL.setSelectionSymbol(selectSymbol);
 	
             map.addLayers([nvLC, nvWetRip, nvSERI, nvSOC, nvCHAT, nvCHATFL]);
@@ -515,7 +523,7 @@
                     //var minMapScale = 11111111111111111111 //temporarily a high number to get some values
 
                     //Respond if map scale is too large to display CHAT data
-                    if (scale > minMapScale) {
+                    if ((scale > minMapScale) & (minMapScale != 0)) {
                         map.infoWindow.resize(300, 55);
                         map.infoWindow.setTitle("<b>Data Not Available At This Scale</b>");
                         map.infoWindow.setContent("Zoom in to select data.");
@@ -530,7 +538,7 @@
                         nvCHATFL.selectFeatures(qCHAT, FeatureLayer.SELECTION_NEW, function(results) {						
                             if (results.length > 0) {
                                 map.infoWindow.show(evt.mapPoint);
-                                //createChart(results);  temporarily disable
+                                createChart(results);
                             }
                             else {
                                 map.infoWindow.hide()
@@ -592,18 +600,24 @@
                         dojo.forEach(results, function (feature) {
                             var attr = feature.attributes;
                             var strhex_id = "n/a";
-                            if (attr.hex_id != undefined && attr.hex_id != null) {
-                                hex_id = attr.hex_id;
+                            if (attr.Hex_ID != undefined && attr.Hex_ID != null) {
+                                hex_id = attr.Hex_ID;
                                 arrayHexs.push(hex_id);
                             }
+                            //if (attr.hex_id != undefined && attr.hex_id != null) {
+                            //    hex_id = attr.hex_id;
+                            //    arrayHexs.push(hex_id);
+                            //}
                         });
                     }
                 }
                 strWhere = "hex_id in (" + arrayHexs.join() + ")";
 
-                var pQueryTask = new esri.tasks.QueryTask("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55c3e7dce4b033ef52106cc0/MapServer/2");
+                //var pQueryTask = new esri.tasks.QueryTask("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55c3e7dce4b033ef52106cc0/MapServer/2");
+                var pQueryTask = new esri.tasks.QueryTask("https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/dataviewertest_2015_0617_AGOL/FeatureServer/2");
                 var pQuery = new esri.tasks.Query();
-                pQuery.outFields = ["hex_id", "occurrencename", "taxonomicclass", "occurtypecrit", "sourcedataset", "sourcegeometry", "lastsourcedate", "lastsourceid", "federallistingstatus", "statelistingstatus", "sgcnindicator", "supplemental", "abundancetype", "abundance"];
+                //pQuery.outFields = ["hex_id", "occurrencename", "taxonomicclass", "occurtypecrit", "sourcedataset", "sourcegeometry", "lastsourcedate", "lastsourceid", "federallistingstatus", "statelistingstatus", "sgcnindicator", "supplemental", "abundancetype", "abundance"];
+                pQuery.outFields = ["Hex_ID", "OccurrenceName", "TaxonomicClass", "OccurTypeCrit", "SourceDataset", "SourceGeometry", "LastSourceDate", "LastSourceID", "FederalListingStatus", "StateListingStatus", "SGCNIndicator", "Supplemental", "AbundanceType", "Abundance"];
                 pQuery.returnGeometry = false;
                 pQuery.where = strWhere;
                 pQueryTask.execute(pQuery, qryNonSpatialResults, err);
@@ -629,21 +643,40 @@
                 // Create a new constructor by mixing in the components // Allow row selection for the grid
                 //columns for the grid 
                 var columns = [
-                  { 'field': 'hex_id', 'label': 'hex_id' },
-                  { 'field': 'occurrencename', 'label': 'occurrencename'},
-                { 'field': 'taxonomicclass', 'label': "taxonomicclass" },
-                { 'field': 'occurtypecrit', 'label': "occurtypecrit" },
-                { 'field': 'sourcedataset', 'label': "sourcedataset" },
-                { 'field': 'sourcegeometry', 'label': "sourcegeometry" },
-                { 'field': 'lastsourcedate', 'label': "lastsourcedate" },
-                { 'field': 'lastsourceid', 'label': "lastsourceid" },
-                { 'field': 'federallistingstatus', 'label': "federallistingstatus"},
-                { 'field': 'statelistingstatus', 'label': "statelistingstatus"},
-                { 'field': 'abundance', 'label': 'abundance' },
-                { 'field': 'abundancetype', 'label': 'abundancetype' },
-                { 'field': 'supplemental', 'label': 'supplemental' },
-                { 'field': 'sgcnindicator', 'label': 'sgcnindicator', width: "30%" }
+                  { 'field': 'Hex_ID', 'label': 'Hex_ID' },
+                  { 'field': 'OccurrenceName', 'label': 'OccurrenceName' },
+                { 'field': 'TaxonomicClass', 'label': "TaxonomicClass" },
+                { 'field': 'OccurTypeCrit', 'label': "OccurTypeCrit" },
+                { 'field': 'SourceDataset', 'label': "SourceDataset" },
+                { 'field': 'SourceGeometry', 'label': "SourceGeometry" },
+                { 'field': 'LastSourceDate', 'label': "LastSourceDate" },
+                { 'field': 'LastSourceID', 'label': "LastSourceID" },
+                { 'field': 'FederalListingStatus', 'label': "FederalListingStatus" },
+                { 'field': 'StateListingStatus', 'label': "StateListingStatus" },
+                { 'field': 'Abundance', 'label': 'Abundance' },
+                { 'field': 'AbundanceType', 'label': 'AbundanceType' },
+                { 'field': 'Supplemental', 'label': 'Supplemental' },
+                { 'field': 'SGCNIndicator', 'label': 'SGCNIndicator', width: "30%" }
               ];
+
+
+                //var columns = [
+                //  { 'field': 'hex_id', 'label': 'hex_id' },
+                //  { 'field': 'occurrencename', 'label': 'occurrencename' },
+                //{ 'field': 'taxonomicclass', 'label': "taxonomicclass" },
+                //{ 'field': 'occurtypecrit', 'label': "occurtypecrit" },
+                //{ 'field': 'sourcedataset', 'label': "sourcedataset" },
+                //{ 'field': 'sourcegeometry', 'label': "sourcegeometry" },
+                //{ 'field': 'lastsourcedate', 'label': "lastsourcedate" },
+                //{ 'field': 'lastsourceid', 'label': "lastsourceid" },
+                //{ 'field': 'federallistingstatus', 'label': "federallistingstatus" },
+                //{ 'field': 'statelistingstatus', 'label': "statelistingstatus" },
+                //{ 'field': 'abundance', 'label': 'abundance' },
+                //{ 'field': 'abundancetype', 'label': 'abundancetype' },
+                //{ 'field': 'supplemental', 'label': 'supplemental' },
+                //{ 'field': 'sgcnindicator', 'label': 'sgcnindicator', width: "30%" }
+                //];
+
 
                 app.pGrid = new (declare([Grid, Selection]))({
                   // use Infinity so that all data is available in the grid
@@ -659,21 +692,41 @@
               app.data = array.map(resultFeatures, function (feature) {
                   return {
                       // property names used here match those used when creating the dgrid
-                      "hex_id": feature.attributes['hex_id'],
-                      "occurrencename": feature.attributes['occurrencename'],
-                      "taxonomicclass": feature.attributes['taxonomicclass'],
-                      "occurtypecrit": feature.attributes['occurtypecrit'],
-                      "sourcedataset": feature.attributes['sourcedataset'],
-                      "sourcegeometry": feature.attributes['sourcegeometry'],
-                      "lastsourcedate": feature.attributes['lastsourcedate'],
-                      "lastsourceid": feature.attributes['lastsourceid'],
-                      "federallistingstatus": feature.attributes['federallistingstatus'],
-                      "statelistingstatus": feature.attributes['statelistingstatus'],
-                      "abundance": feature.attributes['abundance'],
-                      "abundancetype": feature.attributes['abundancetype'],
-                      "supplemental": feature.attributes['abundancetype'],
-                      "sgcnindicator": feature.attributes['sgcnindicator']
+                      "Hex_ID": feature.attributes['Hex_ID'],
+                      "OccurrenceName": feature.attributes['OccurrenceName'],
+                      "TaxonomicClass": feature.attributes['TaxonomicClass'],
+                      "OccurTypeCrit": feature.attributes['OccurTypeCrit'],
+                      "SourceDataset": feature.attributes['SourceDataset'],
+                      "SourceGeometry": feature.attributes['SourceGeometry'],
+                      "LastSourceDate": feature.attributes['LastSourceDate'],
+                      "LastSourceID": feature.attributes['LastSourceID'],
+                      "FederalListingStatus": feature.attributes['FederalListingStatus'],
+                      "StateListingStatus": feature.attributes['StateListingStatus'],
+                      "Abundance": feature.attributes['Abundance'],
+                      "AbundanceType": feature.attributes['AbundanceType'],
+                      "Supplemental": feature.attributes['Supplemental'],
+                      "SGCNIndicator": feature.attributes['SGCNIndicator']
                   };
+
+                  //return {
+                  //    // property names used here match those used when creating the dgrid
+                  //    "hex_id": feature.attributes['hex_id'],
+                  //    "occurrencename": feature.attributes['occurrencename'],
+                  //    "taxonomicclass": feature.attributes['taxonomicclass'],
+                  //    "occurtypecrit": feature.attributes['occurtypecrit'],
+                  //    "sourcedataset": feature.attributes['sourcedataset'],
+                  //    "sourcegeometry": feature.attributes['sourcegeometry'],
+                  //    "lastsourcedate": feature.attributes['lastsourcedate'],
+                  //    "lastsourceid": feature.attributes['lastsourceid'],
+                  //    "federallistingstatus": feature.attributes['federallistingstatus'],
+                  //    "statelistingstatus": feature.attributes['statelistingstatus'],
+                  //    "abundance": feature.attributes['abundance'],
+                  //    "abundancetype": feature.attributes['abundancetype'],
+                  //    "supplemental": feature.attributes['abundancetype'],
+                  //    "sgcnindicator": feature.attributes['sgcnindicator']
+                  //};
+
+
               });
               //var memStore = new Memory({ data: data });
               app.memStore = new Memory({ data: app.data });
@@ -754,8 +807,8 @@
 				{x: 4, y: (7 - SOC), fill: "#A80000", tooltip: "Terrestrial Species of Concern Rank: " + SOC}
 			]);
 		
-			//new Highlight(chart, "default");
-			//new ChrtTooltip(chart, "default", {});
+			new Highlight(chart, "default");
+			new ChrtTooltip(chart, "default", {});
 			
 			chart.render();
 		}
