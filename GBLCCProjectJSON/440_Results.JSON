@@ -65,22 +65,50 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "Walker River Paiute Tribe", 
                 "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:execsecretary@wrpt.us"
+                    }
+                ], 
+                "contactId": "G816", 
+                "contactType": "Native/Tribal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Misty Benner", 
+                "memberOfOrganization": [
+                    "G816"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:execsecretary@wrpt.us"
+                    }
+                ], 
+                "contactId": "816", 
+                "contactType": "Native/Tribal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Marlene Begay", 
+                "memberOfOrganization": [
+                    "G816"
+                ], 
                 "onlineResource": [
                     {
                         "uri": "mailto:marleneb@wrpt.us"
                     }
                 ], 
                 "contactId": "799", 
-                "contactType": "Native/Tribal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "816", 
-                "isOrganization": true, 
-                "name": "Walker River Paiute Tribe", 
                 "contactType": "Native/Tribal"
             }, 
             {
@@ -129,24 +157,44 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "799", 
+                                    "contactId": "560", 
                                     "organizationMembers": [
-                                        "799"
+                                        "560"
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G816", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
                                 {
                                     "contactId": "816", 
                                     "organizationMembers": [
-                                        "816"
+                                        "G816"
                                     ]
                                 }
                             ], 
                             "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "799", 
+                                    "organizationMembers": [
+                                        "G816"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
                         }
                     ], 
                     "alternateTitle": [
@@ -1767,7 +1815,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

@@ -65,12 +65,40 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "771", 
+                "isOrganization": true, 
+                "name": "Western Association of Fish and Wildlife Agencies", 
+                "contactType": "State"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "Montana State University", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
                         "uri": "mailto:kgoodwin@montana.edu"
+                    }
+                ], 
+                "contactId": "G789", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Kim Goodwin", 
+                "memberOfOrganization": [
+                    "G789"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:kgoodwin@montana.edu"
                     }
                 ], 
                 "contactId": "789", 
@@ -122,9 +150,40 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "771", 
+                                    "organizationMembers": [
+                                        "771"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G789", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "789", 
                                     "organizationMembers": [
-                                        "789"
+                                        "G789"
                                     ]
                                 }
                             ], 
@@ -1419,7 +1478,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

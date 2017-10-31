@@ -66,23 +66,9 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "873", 
+                "contactId": "560", 
                 "isOrganization": true, 
-                "name": "Bureau of Land Management", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "849", 
-                "isOrganization": true, 
-                "name": "Bureau of Land Management", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "870", 
-                "isOrganization": true, 
-                "name": "Bureau of Land Management", 
+                "name": "US Fish & Wildife Service", 
                 "contactType": "Federal"
             }, 
             {
@@ -91,59 +77,51 @@
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:jchambers@fs.fed.us"
+                        "uri": "mailto:scushman@fs.fed.us"
                     }
                 ], 
-                "contactId": "792", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "G575", 
-                "isOrganization": true, 
-                "name": "US Forest Service", 
                 "contactType": "Federal"
             }, 
             {
+                "isOrganization": false, 
+                "name": "Sam Cushman", 
                 "memberOfOrganization": [
                     "G575"
                 ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:scushman@fs.fed.us"
+                    }
+                ], 
                 "contactId": "575", 
-                "isOrganization": false, 
-                "name": "Sam Cushman", 
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "G837", 
                 "isOrganization": true, 
                 "name": "Northern Arizona University", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:Christina.Vojta@nau.edu"
+                    }
+                ], 
+                "contactId": "G837", 
                 "contactType": "Academic"
             }, 
             {
+                "isOrganization": false, 
+                "name": "Christina Vojta", 
                 "memberOfOrganization": [
                     "G837"
                 ], 
-                "contactId": "837", 
-                "isOrganization": false, 
-                "name": "Christina Vojta", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G858", 
-                "isOrganization": true, 
-                "name": "Nevada Department of Wildlife", 
-                "contactType": "State"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G858"
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:Christina.Vojta@nau.edu"
+                    }
                 ], 
-                "contactId": "858", 
-                "isOrganization": false, 
-                "name": "Lee Turner", 
-                "contactType": "State"
+                "contactId": "837", 
+                "contactType": "Academic"
             }, 
             {
                 "isOrganization": true, 
@@ -172,13 +150,124 @@
                 "contactType": "Federal"
             }, 
             {
+                "isOrganization": false, 
+                "name": "Jeanne Chambers", 
                 "memberOfOrganization": [
-                    ""
+                    "G575"
                 ], 
-                "contactId": "821", 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:jchambers@fs.fed.us"
+                    }
+                ], 
+                "contactId": "792", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Bureau of Land Management", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:rnaeve@blm.gov"
+                    }
+                ], 
+                "contactId": "G870", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Robin Naeve", 
+                "memberOfOrganization": [
+                    "G870"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:rnaeve@blm.gov"
+                    }
+                ], 
+                "contactId": "870", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Donald Major", 
+                "memberOfOrganization": [
+                    "G870"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:dmajor@blm.gov"
+                    }
+                ], 
+                "contactId": "873", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Nevada Department of Wildlife", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:leeturner@ndow.org"
+                    }
+                ], 
+                "contactId": "G858", 
+                "contactType": "State"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Lee Turner", 
+                "memberOfOrganization": [
+                    "G858"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:leeturner@ndow.org"
+                    }
+                ], 
+                "contactId": "858", 
+                "contactType": "State"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "University of Massachusetts, Amherst", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:kathyzeller@gmail.com"
+                    }
+                ], 
+                "contactId": "G821", 
+                "contactType": "Academic"
+            }, 
+            {
                 "isOrganization": false, 
                 "name": "Kathy Zeller", 
+                "memberOfOrganization": [
+                    "G821"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:kathyzeller@gmail.com"
+                    }
+                ], 
+                "contactId": "821", 
                 "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Josh Wilson", 
+                "memberOfOrganization": [
+                    "G870"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:jwilson@blm.gov"
+                    }
+                ], 
+                "contactId": "849", 
+                "contactType": "Federal"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -191,7 +280,7 @@
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "completed"
+                    "onGoing"
                 ], 
                 "pointOfContact": [
                     {
@@ -226,42 +315,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "873", 
+                                    "contactId": "560", 
                                     "organizationMembers": [
-                                        "873"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "849", 
-                                    "organizationMembers": [
-                                        "849"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "870", 
-                                    "organizationMembers": [
-                                        "870"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "792", 
-                                    "organizationMembers": [
-                                        "792"
+                                        "560"
                                     ]
                                 }
                             ], 
@@ -310,26 +366,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G858", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "858", 
-                                    "organizationMembers": [
-                                        "G858"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G230", 
                                     "organizationMembers": []
                                 }
@@ -350,13 +386,95 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "792", 
+                                    "organizationMembers": [
+                                        "G575"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G870", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "870", 
+                                    "organizationMembers": [
+                                        "G870"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "873", 
+                                    "organizationMembers": [
+                                        "G870"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G858", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "858", 
+                                    "organizationMembers": [
+                                        "G858"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G821", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "821", 
                                     "organizationMembers": [
-                                        ""
+                                        "G821"
                                     ]
                                 }
                             ], 
                             "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "849", 
+                                    "organizationMembers": [
+                                        "G870"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }
                     ], 
                     "alternateTitle": [
@@ -2192,7 +2310,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

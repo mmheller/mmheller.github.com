@@ -65,9 +65,122 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "University of Nevada, Reno", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:pweisberg@cabnr.unr.edu"
+                    }
+                ], 
+                "contactId": "G802", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Peter Weisberg", 
+                "memberOfOrganization": [
+                    "G802"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:pweisberg@cabnr.unr.edu"
+                    }
+                ], 
+                "contactId": "802", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Western Carolina University", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:jmiller@wcu.edu"
+                    }
+                ], 
+                "contactId": "G811", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Jerry Miller", 
+                "memberOfOrganization": [
+                    "G811"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:jmiller@wcu.edu"
+                    }
+                ], 
+                "contactId": "811", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Desert Research Institute", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:Rosemary.Carroll@dri.edu"
+                    }
+                ], 
+                "contactId": "G844", 
+                "contactType": "Research"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Rosemary Carroll", 
+                "memberOfOrganization": [
+                    "G844"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:Rosemary.Carroll@dri.edu"
+                    }
+                ], 
+                "contactId": "844", 
+                "contactType": "Research"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "US Forest Service", 
                 "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:keirith.snyder@ars.usda.gov"
+                    }
+                ], 
+                "contactId": "G779", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Keirith Snyder", 
+                "memberOfOrganization": [
+                    "G779"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:keirith.snyder@ars.usda.gov"
+                    }
+                ], 
+                "contactId": "779", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Jeanne Chambers", 
+                "memberOfOrganization": [
+                    "G779"
+                ], 
                 "onlineResource": [
                     {
                         "uri": "mailto:jchambers@fs.fed.us"
@@ -75,66 +188,6 @@
                 ], 
                 "contactId": "792", 
                 "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "US Forest Service", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:Keirith.Snyder@ARS.USDA.GOV"
-                    }
-                ], 
-                "contactId": "779", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G811", 
-                "isOrganization": true, 
-                "name": "Western Carolina University", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G811"
-                ], 
-                "contactId": "811", 
-                "isOrganization": false, 
-                "name": "Jerry Miller", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G802", 
-                "isOrganization": true, 
-                "name": "University of Nevada, Reno", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G802"
-                ], 
-                "contactId": "802", 
-                "isOrganization": false, 
-                "name": "Peter Weisberg", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G844", 
-                "isOrganization": true, 
-                "name": "Desert Research Institute", 
-                "contactType": "Research"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G844"
-                ], 
-                "contactId": "844", 
-                "isOrganization": false, 
-                "name": "Rosemary Carroll", 
-                "contactType": "Research"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -147,7 +200,7 @@
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "completed"
+                    "onGoing"
                 ], 
                 "pointOfContact": [
                     {
@@ -182,40 +235,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "792", 
+                                    "contactId": "560", 
                                     "organizationMembers": [
-                                        "792"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "779", 
-                                    "organizationMembers": [
-                                        "779"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G811", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "811", 
-                                    "organizationMembers": [
-                                        "G811"
+                                        "560"
                                     ]
                                 }
                             ], 
@@ -244,6 +266,26 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G811", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "811", 
+                                    "organizationMembers": [
+                                        "G811"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G844", 
                                     "organizationMembers": []
                                 }
@@ -260,6 +302,37 @@
                                 }
                             ], 
                             "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G779", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "779", 
+                                    "organizationMembers": [
+                                        "G779"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "792", 
+                                    "organizationMembers": [
+                                        "G779"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
                         }
                     ], 
                     "alternateTitle": [
@@ -2415,7 +2488,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

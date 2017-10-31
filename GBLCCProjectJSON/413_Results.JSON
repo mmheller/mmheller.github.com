@@ -65,6 +65,13 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "US Forest Service", 
                 "memberOfOrganization": [], 
@@ -73,39 +80,73 @@
                         "uri": "mailto:smeyer@fs.fed.us"
                     }
                 ], 
+                "contactId": "G777", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Susan Meyer", 
+                "memberOfOrganization": [
+                    "G777"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:smeyer@fs.fed.us"
+                    }
+                ], 
                 "contactId": "777", 
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "G838", 
                 "isOrganization": true, 
                 "name": "Brigham Young University", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:phil_allen@byu.edu"
+                    }
+                ], 
+                "contactId": "G838", 
                 "contactType": "Academic"
             }, 
             {
+                "isOrganization": false, 
+                "name": "Phil Allen", 
                 "memberOfOrganization": [
                     "G838"
                 ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:phil_allen@byu.edu"
+                    }
+                ], 
                 "contactId": "838", 
-                "isOrganization": false, 
-                "name": "Phil Allen", 
                 "contactType": "Academic"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "G822", 
                 "isOrganization": true, 
                 "name": "Gonzaga University", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:beckstead@gonzaga.edu"
+                    }
+                ], 
+                "contactId": "G822", 
                 "contactType": "Academic"
             }, 
             {
+                "isOrganization": false, 
+                "name": "Julie Beckstead", 
                 "memberOfOrganization": [
                     "G822"
                 ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:beckstead@gonzaga.edu"
+                    }
+                ], 
                 "contactId": "822", 
-                "isOrganization": false, 
-                "name": "Julie Beckstead", 
                 "contactType": "Academic"
             }, 
             {
@@ -154,9 +195,29 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G777", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "777", 
                                     "organizationMembers": [
-                                        "777"
+                                        "G777"
                                     ]
                                 }
                             ], 
@@ -1935,7 +1996,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

@@ -65,12 +65,33 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "University of Nevada - Reno", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
                         "uri": "mailto:jsedinger@cabnr.unr.edu"
+                    }
+                ], 
+                "contactId": "G775", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Jim Sedinger", 
+                "memberOfOrganization": [
+                    "G775"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:jsedinger@cabnr.unr.edu"
                     }
                 ], 
                 "contactId": "775", 
@@ -87,7 +108,7 @@
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "completed"
+                    "onGoing"
                 ], 
                 "pointOfContact": [
                     {
@@ -122,9 +143,29 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G775", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "775", 
                                     "organizationMembers": [
-                                        "775"
+                                        "G775"
                                     ]
                                 }
                             ], 
@@ -1688,7 +1729,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

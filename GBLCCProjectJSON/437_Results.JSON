@@ -65,12 +65,40 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "912", 
+                "isOrganization": true, 
+                "name": "Intertribal Council of Nevada", 
+                "contactType": "Native/Tribal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "Desert Research Institute", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
                         "uri": "mailto:tamara.wall@dri.edu"
+                    }
+                ], 
+                "contactId": "G797", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Tamara Wall", 
+                "memberOfOrganization": [
+                    "G797"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:tamara.wall@dri.edu"
                     }
                 ], 
                 "contactId": "797", 
@@ -122,9 +150,40 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "912", 
+                                    "organizationMembers": [
+                                        "912"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G797", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "797", 
                                     "organizationMembers": [
-                                        "797"
+                                        "G797"
                                     ]
                                 }
                             ], 
@@ -156,7 +215,7 @@
                     "characterSet": "UTF-8", 
                     "language": "eng"
                 }, 
-                "purpose": "Traditional Ecological Knowledge Conservation Planning  Federal resource managers State agencies Regional & county planners", 
+                "purpose": "Traditional Ecological Knowledge Conservation Planning  Federal resource managers State agencies Tribes", 
                 "extent": [
                     {
                         "geographicExtent": [
@@ -1700,7 +1759,7 @@
                                 "keyword": "State agencies"
                             }, 
                             {
-                                "keyword": "Regional & county planners"
+                                "keyword": "Tribes"
                             }
                         ]
                     }, 
@@ -1892,7 +1951,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

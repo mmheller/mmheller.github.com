@@ -65,6 +65,13 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "Desert Research Institute", 
                 "memberOfOrganization": [], 
@@ -73,17 +80,74 @@
                         "uri": "mailto:tamara.wall@dri.edu"
                     }
                 ], 
+                "contactId": "G797", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Tamara Wall", 
+                "memberOfOrganization": [
+                    "G797"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:tamara.wall@dri.edu"
+                    }
+                ], 
                 "contactId": "797", 
                 "contactType": "Academic"
             }, 
             {
-                "memberOfOrganization": [
-                    ""
+                "isOrganization": true, 
+                "name": "Geodesign Technologies", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:info@geodesigntech.com"
+                    }
                 ], 
-                "contactId": "824", 
+                "contactId": "G824", 
+                "contactType": "Private"
+            }, 
+            {
                 "isOrganization": false, 
                 "name": "Michael Flaxman", 
+                "memberOfOrganization": [
+                    "G824"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:info@geodesigntech.com"
+                    }
+                ], 
+                "contactId": "824", 
                 "contactType": "Private"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Western Regional Climate Center, Desert Research Institute", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:tim.brown@dri.edu"
+                    }
+                ], 
+                "contactId": "G773", 
+                "contactType": "NGO"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Tim Brown", 
+                "memberOfOrganization": [
+                    "G773"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:tim.brown@dri.edu"
+                    }
+                ], 
+                "contactId": "773", 
+                "contactType": "NGO"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -96,7 +160,7 @@
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "completed"
+                    "onGoing"
                 ], 
                 "pointOfContact": [
                     {
@@ -110,7 +174,7 @@
                     {
                         "party": [
                             {
-                                "contactId": "None"
+                                "contactId": "773"
                             }
                         ], 
                         "role": "principalInvestigator"
@@ -131,9 +195,29 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G797", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "797", 
                                     "organizationMembers": [
-                                        "797"
+                                        "G797"
                                     ]
                                 }
                             ], 
@@ -142,17 +226,46 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G824", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "824", 
                                     "organizationMembers": [
-                                        ""
+                                        "G824"
                                     ]
                                 }
                             ], 
                             "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G773", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "773", 
+                                    "organizationMembers": [
+                                        "G773"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
                         }
                     ], 
                     "alternateTitle": [
-                        "2015"
+                        "Brown2015"
                     ], 
                     "date": [
                         {
@@ -1856,7 +1969,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

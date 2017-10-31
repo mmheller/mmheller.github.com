@@ -65,9 +65,122 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "US Geological Survey", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mgermino@usgs.gov"
+                    }
+                ], 
+                "contactId": "G782", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Matt Germino", 
+                "memberOfOrganization": [
+                    "G782"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:mgermino@usgs.gov"
+                    }
+                ], 
+                "contactId": "782", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "US Forest Service", 
                 "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:nancylshaw@fs.fed.us"
+                    }
+                ], 
+                "contactId": "G804", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Nancy Shaw", 
+                "memberOfOrganization": [
+                    "G804"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:nancylshaw@fs.fed.us"
+                    }
+                ], 
+                "contactId": "804", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "University of Idaho", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:beth@uidaho.edu"
+                    }
+                ], 
+                "contactId": "G863", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Beth Newingham", 
+                "memberOfOrganization": [
+                    "G863"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:beth@uidaho.edu"
+                    }
+                ], 
+                "contactId": "863", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Bureau of Land Management", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:ahalford@blm.gov"
+                    }
+                ], 
+                "contactId": "G817", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Anne Halford", 
+                "memberOfOrganization": [
+                    "G817"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:ahalford@blm.gov"
+                    }
+                ], 
+                "contactId": "817", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Bryce Richardson", 
+                "memberOfOrganization": [
+                    "G804"
+                ], 
                 "onlineResource": [
                     {
                         "uri": "mailto:brichardson02@fs.fed.us"
@@ -77,54 +190,17 @@
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "804", 
-                "isOrganization": true, 
-                "name": "US Forest Service", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "817", 
-                "isOrganization": true, 
-                "name": "Bureau of Land Management", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "863", 
-                "isOrganization": true, 
-                "name": "University of Idaho", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G855", 
-                "isOrganization": true, 
-                "name": "US Geological Survey", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G855"
-                ], 
-                "contactId": "855", 
                 "isOrganization": false, 
                 "name": "Douglas Shinneman", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Matt Germino", 
                 "memberOfOrganization": [
-                    "G855"
+                    "G782"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mgermino@usgs.gov"
+                        "uri": "mailto:dshinneman@usgs.gov"
                     }
                 ], 
-                "contactId": "782", 
+                "contactId": "855", 
                 "contactType": "Federal"
             }, 
             {
@@ -173,10 +249,39 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "781", 
+                                    "contactId": "560", 
                                     "organizationMembers": [
-                                        "781"
+                                        "560"
                                     ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G782", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "782", 
+                                    "organizationMembers": [
+                                        "G782"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G804", 
+                                    "organizationMembers": []
                                 }
                             ], 
                             "role": "Collaborator"
@@ -186,7 +291,7 @@
                                 {
                                     "contactId": "804", 
                                     "organizationMembers": [
-                                        "804"
+                                        "G804"
                                     ]
                                 }
                             ], 
@@ -195,10 +300,8 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "817", 
-                                    "organizationMembers": [
-                                        "817"
-                                    ]
+                                    "contactId": "G863", 
+                                    "organizationMembers": []
                                 }
                             ], 
                             "role": "Collaborator"
@@ -208,7 +311,7 @@
                                 {
                                     "contactId": "863", 
                                     "organizationMembers": [
-                                        "863"
+                                        "G863"
                                     ]
                                 }
                             ], 
@@ -217,8 +320,30 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G855", 
+                                    "contactId": "G817", 
                                     "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "817", 
+                                    "organizationMembers": [
+                                        "G817"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "781", 
+                                    "organizationMembers": [
+                                        "G804"
+                                    ]
                                 }
                             ], 
                             "role": "Collaborator"
@@ -228,22 +353,11 @@
                                 {
                                     "contactId": "855", 
                                     "organizationMembers": [
-                                        "G855"
+                                        "G782"
                                     ]
                                 }
                             ], 
                             "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "782", 
-                                    "organizationMembers": [
-                                        "G855"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
                         }
                     ], 
                     "alternateTitle": [
@@ -1983,7 +2097,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

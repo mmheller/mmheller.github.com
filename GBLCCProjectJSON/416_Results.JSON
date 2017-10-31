@@ -66,19 +66,17 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G806", 
+                "contactId": "909", 
                 "isOrganization": true, 
-                "name": "Oregon State University", 
+                "name": "University of Oregon", 
                 "contactType": "Academic"
             }, 
             {
-                "memberOfOrganization": [
-                    "G806"
-                ], 
-                "contactId": "806", 
-                "isOrganization": false, 
-                "name": "Melanie Brown", 
-                "contactType": "Academic"
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
             }, 
             {
                 "isOrganization": true, 
@@ -105,6 +103,32 @@
                 ], 
                 "contactId": "780", 
                 "contactType": "NGO"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Oregon State University", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:melanie.brown@consbio.org"
+                    }
+                ], 
+                "contactId": "G806", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Melanie Brown", 
+                "memberOfOrganization": [
+                    "G806"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:melanie.brown@consbio.org"
+                    }
+                ], 
+                "contactId": "806", 
+                "contactType": "Academic"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -152,8 +176,10 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G806", 
-                                    "organizationMembers": []
+                                    "contactId": "909", 
+                                    "organizationMembers": [
+                                        "909"
+                                    ]
                                 }
                             ], 
                             "role": "Collaborator"
@@ -161,9 +187,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "806", 
+                                    "contactId": "560", 
                                     "organizationMembers": [
-                                        "G806"
+                                        "560"
                                     ]
                                 }
                             ], 
@@ -188,6 +214,26 @@
                                 }
                             ], 
                             "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G806", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "806", 
+                                    "organizationMembers": [
+                                        "G806"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }
                     ], 
                     "alternateTitle": [
@@ -1943,7 +1989,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

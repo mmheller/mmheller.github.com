@@ -66,16 +66,61 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "878", 
+                "contactId": "560", 
                 "isOrganization": true, 
-                "name": "US Forest Service", 
+                "name": "US Fish & Wildife Service", 
                 "contactType": "Federal"
             }, 
             {
+                "isOrganization": true, 
+                "name": "Oregon State University", 
                 "memberOfOrganization": [], 
-                "contactId": "845", 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:gosnellh@geo.oregonstate.edu"
+                    }
+                ], 
+                "contactId": "G832", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Hannah Gosnell", 
+                "memberOfOrganization": [
+                    "G832"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:gosnellh@geo.oregonstate.edu"
+                    }
+                ], 
+                "contactId": "832", 
+                "contactType": "Academic"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "US Forest Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:scharnley@fs.fed.us"
+                    }
+                ], 
+                "contactId": "G878", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Susan Charnley", 
+                "memberOfOrganization": [
+                    "G878"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:scharnley@fs.fed.us"
+                    }
+                ], 
+                "contactId": "878", 
                 "contactType": "Federal"
             }, 
             {
@@ -131,20 +176,18 @@
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "G832", 
-                "isOrganization": true, 
-                "name": "Oregon State University", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G832"
-                ], 
-                "contactId": "832", 
                 "isOrganization": false, 
-                "name": "Hannah Gosnell", 
-                "contactType": "Academic"
+                "name": "Gordon Grant", 
+                "memberOfOrganization": [
+                    "G878"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:ggrant@fs.fed.us"
+                    }
+                ], 
+                "contactId": "845", 
+                "contactType": "Federal"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -157,7 +200,7 @@
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "completed"
+                    "onGoing"
                 ], 
                 "pointOfContact": [
                     {
@@ -192,9 +235,29 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "878", 
+                                    "contactId": "560", 
                                     "organizationMembers": [
-                                        "878"
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G832", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "832", 
+                                    "organizationMembers": [
+                                        "G832"
                                     ]
                                 }
                             ], 
@@ -203,9 +266,18 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "845", 
+                                    "contactId": "G878", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "878", 
                                     "organizationMembers": [
-                                        "845"
+                                        "G878"
                                     ]
                                 }
                             ], 
@@ -254,18 +326,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G832", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "832", 
+                                    "contactId": "845", 
                                     "organizationMembers": [
-                                        "G832"
+                                        "G878"
                                     ]
                                 }
                             ], 
@@ -297,7 +360,7 @@
                     "characterSet": "UTF-8", 
                     "language": "eng"
                 }, 
-                "purpose": "Monitoring Population & Habitat Evaluation/Projection Conservation Planning Federal resource managers Other ", 
+                "purpose": "Monitoring Population & Habitat Evaluation/Projection Conservation Planning Federal resource managers State agencies ", 
                 "extent": [
                     {
                         "geographicExtent": [
@@ -1841,7 +1904,7 @@
                                 "keyword": "Federal resource managers"
                             }, 
                             {
-                                "keyword": "Other"
+                                "keyword": "State agencies"
                             }
                         ]
                     }, 
@@ -2009,7 +2072,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

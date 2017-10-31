@@ -66,38 +66,10 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "818", 
+                "contactId": "560", 
                 "isOrganization": true, 
-                "name": "University of Washington", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "856", 
-                "isOrganization": true, 
-                "name": "University of Washington", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "864", 
-                "isOrganization": true, 
-                "name": "University of Washington", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "834", 
-                "isOrganization": true, 
-                "name": "University of Washington", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "847", 
-                "isOrganization": true, 
-                "name": "University of Washington", 
-                "contactType": "Academic"
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
             }, 
             {
                 "isOrganization": true, 
@@ -105,24 +77,94 @@
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mkrosby@u.washington.edu"
+                        "uri": "mailto:hmorg@uw.edu"
                     }
                 ], 
-                "contactId": "G235", 
+                "contactId": "G847", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Harriet Morgan", 
+                "memberOfOrganization": [
+                    "G847"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:hmorg@uw.edu"
+                    }
+                ], 
+                "contactId": "847", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Lara Binder", 
+                "memberOfOrganization": [
+                    "G847"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:lwb123@uw.edu"
+                    }
+                ], 
+                "contactId": "818", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Guillaume Mauger", 
+                "memberOfOrganization": [
+                    "G847"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:gmauger@uw.edu"
+                    }
+                ], 
+                "contactId": "834", 
                 "contactType": "Academic"
             }, 
             {
                 "isOrganization": false, 
                 "name": "Meade Krosby", 
                 "memberOfOrganization": [
-                    "G235"
+                    "G847"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mailto:mkrosby@u.washington.edu"
+                        "uri": "mailto:mkrosby@u.washington.edu"
                     }
                 ], 
                 "contactId": "235", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Robert Norheim", 
+                "memberOfOrganization": [
+                    "G847"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:norheim@uw.edu"
+                    }
+                ], 
+                "contactId": "856", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Amy Snover", 
+                "memberOfOrganization": [
+                    "G847"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:aksnover@uw.edu"
+                    }
+                ], 
+                "contactId": "864", 
                 "contactType": "Academic"
             }, 
             {
@@ -136,7 +178,7 @@
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "completed"
+                    "onGoing"
                 ], 
                 "pointOfContact": [
                     {
@@ -171,31 +213,40 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G847", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "847", 
+                                    "organizationMembers": [
+                                        "G847"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "818", 
                                     "organizationMembers": [
-                                        "818"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "856", 
-                                    "organizationMembers": [
-                                        "856"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "864", 
-                                    "organizationMembers": [
-                                        "864"
+                                        "G847"
                                     ]
                                 }
                             ], 
@@ -206,42 +257,44 @@
                                 {
                                     "contactId": "834", 
                                     "organizationMembers": [
-                                        "834"
+                                        "G847"
                                     ]
                                 }
                             ], 
                             "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "847", 
-                                    "organizationMembers": [
-                                        "847"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G235", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
                                 {
                                     "contactId": "235", 
                                     "organizationMembers": [
-                                        "G235"
+                                        "G847"
                                     ]
                                 }
                             ], 
                             "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "856", 
+                                    "organizationMembers": [
+                                        "G847"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "864", 
+                                    "organizationMembers": [
+                                        "G847"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }
                     ], 
                     "alternateTitle": [
@@ -2034,62 +2087,6 @@
                         "keywordType": "Great Basin LCC Keywords", 
                         "keyword": [
                             {
-                                "keyword": " Washington"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Basin LCC Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " Oregon"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Basin LCC Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " California"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Basin LCC Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " Nevada"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Basin LCC Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " Utah"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Basin LCC Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " Idaho"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Basin LCC Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " Montana"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Basin LCC Keywords", 
-                        "keyword": [
-                            {
                                 "keyword": " projections"
                             }
                         ]
@@ -2162,7 +2159,7 @@
                         "keywordType": "Federal Congressional Districts", 
                         "keyword": [
                             {
-                                "keyword": "WA1-WA10"
+                                "keyword": "WA1"
                             }
                         ]
                     }, 
@@ -2170,7 +2167,111 @@
                         "keywordType": "Federal Congressional Districts", 
                         "keyword": [
                             {
-                                "keyword": " OR1-OR5"
+                                "keyword": " WA2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA3"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA4"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA5"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA6"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA7"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA8"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA9"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA10"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " OR1"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " OR2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " OR3"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " OR4"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " OR5"
                             }
                         ]
                     }, 
@@ -2362,7 +2463,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

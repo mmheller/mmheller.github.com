@@ -66,25 +66,61 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "682", 
+                "contactId": "560", 
                 "isOrganization": true, 
-                "name": "Great Basin LCC", 
+                "name": "US Fish & Wildife Service", 
                 "contactType": "Federal"
             }, 
             {
+                "isOrganization": true, 
+                "name": "Great Basin LCC", 
                 "memberOfOrganization": [], 
-                "contactId": "G874", 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:todd_hopkins@fws.gov"
+                    }
+                ], 
+                "contactId": "G682", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Todd Hopkins", 
+                "memberOfOrganization": [
+                    "G682"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:todd_hopkins@fws.gov"
+                    }
+                ], 
+                "contactId": "682", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "Great Basin Institute", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:jkeir@thegreatbasininstitute.org"
+                    }
+                ], 
+                "contactId": "G874", 
                 "contactType": "NGO"
             }, 
             {
+                "isOrganization": false, 
+                "name": "Jerry Keir", 
                 "memberOfOrganization": [
                     "G874"
                 ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:jkeir@thegreatbasininstitute.org"
+                    }
+                ], 
                 "contactId": "874", 
-                "isOrganization": false, 
-                "name": "Jerry Keir", 
                 "contactType": "NGO"
             }, 
             {
@@ -98,7 +134,7 @@
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "completed"
+                    "onGoing"
                 ], 
                 "pointOfContact": [
                     {
@@ -118,7 +154,7 @@
                         "role": "principalInvestigator"
                     }
                 ], 
-                "abstract": "FY2015\nThis project assesses the efficacy of ACK55, a naturally occurring bacterium that decreases invasive annual grasses by up to 70% on test sites.  Working with the USDA, USFWS and the Great Basin Institute, researchers plan to treat ten, 1-acre plots on private lands within sage-grouse Biologically Significant Areas to determine the efficacy of ACK55 in warm and dry soils.", 
+                "abstract": "FY2015\nThis project assesses the efficacy of ACK55, a naturally occurring bacterium that decreases invasive annual grasses by up to 70% on test sites.  Working with the USDA, USFWS and the Great Basin Institute, researchers plan to treat ten, 1-acre plots on private lands within sage-grouse Biologically Significant Areas to determine the efficacy of ACK55 in warm and dry soils.\n\nFY2016\nThis project assesses the efficacy of ACK55, a naturally occurring bacterium that decreases invasive annual grasses by up to 70% on test sites.  Working with the USDA, USFWS and the Great Basin Institute, researchers plan to treat ten, 1-acre plots on private lands within sage-grouse Biologically Significant Areas to determine the efficacy of ACK55 in warm and dry soils.\n\nFY2017\nThis project assesses the efficacy of ACK55, a naturally occurring bacterium that decreases invasive annual grasses by up to 70% on test sites.  Working with the USDA, USFWS and the Great Basin Institute, researchers plan to treat ten, 1-acre plots on private lands within sage-grouse Biologically Significant Areas to determine the efficacy of ACK55 in warm and dry soils.", 
                 "citation": {
                     "title": "Assessment of ACK55 as a Biocontrol of Invasive Annual Grasses in Nevada", 
                     "onlineResource": [
@@ -133,9 +169,29 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G682", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "682", 
                                     "organizationMembers": [
-                                        "682"
+                                        "G682"
                                     ]
                                 }
                             ], 
@@ -1886,7 +1942,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

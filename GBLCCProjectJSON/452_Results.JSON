@@ -66,16 +66,61 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "682", 
+                "contactId": "560", 
                 "isOrganization": true, 
-                "name": "Great Basin LCC", 
+                "name": "US Fish & Wildife Service", 
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "887", 
                 "isOrganization": true, 
-                "name": "Northwest Climate Science Center", 
+                "name": "US Forest Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:bvhorne@fs.fed.us"
+                    }
+                ], 
+                "contactId": "G887", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Beatrice Van Horne", 
+                "memberOfOrganization": [
+                    "G887"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:bvhorne@fs.fed.us"
+                    }
+                ], 
+                "contactId": "887", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Great Basin LCC", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:todd_hopkins@fws.gov"
+                    }
+                ], 
+                "contactId": "G682", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Todd Hopkins", 
+                "memberOfOrganization": [
+                    "G682"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:todd_hopkins@fws.gov"
+                    }
+                ], 
+                "contactId": "682", 
                 "contactType": "Federal"
             }, 
             {
@@ -124,10 +169,19 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "682", 
+                                    "contactId": "560", 
                                     "organizationMembers": [
-                                        "682"
+                                        "560"
                                     ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G887", 
+                                    "organizationMembers": []
                                 }
                             ], 
                             "role": "Principal Investigator"
@@ -137,7 +191,27 @@
                                 {
                                     "contactId": "887", 
                                     "organizationMembers": [
-                                        "887"
+                                        "G887"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G682", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "682", 
+                                    "organizationMembers": [
+                                        "G682"
                                     ]
                                 }
                             ], 
@@ -1649,7 +1723,16 @@
                         ]
                     }
                 ], 
-                "keyword": [], 
+                "keyword": [
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Sagebrush"
+                            }
+                        ]
+                    }
+                ], 
                 "resourceType": [
                     {
                         "type": "project"
@@ -1749,7 +1832,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

@@ -65,15 +65,10 @@
                 ]
             }, 
             {
-                "isOrganization": true, 
-                "name": "US Forest Service", 
                 "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:ffkilkenny@fs.fed.us"
-                    }
-                ], 
-                "contactId": "800", 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
                 "contactType": "Federal"
             }, 
             {
@@ -85,8 +80,64 @@
                         "uri": "mailto:ealeger@gmail.com"
                     }
                 ], 
+                "contactId": "G796", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Elizabeth Leger", 
+                "memberOfOrganization": [
+                    "G796"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:ealeger@gmail.com"
+                    }
+                ], 
                 "contactId": "796", 
                 "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "US Forest Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:ffkilkenny@fs.fed.us"
+                    }
+                ], 
+                "contactId": "G800", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Francis Kilkenny", 
+                "memberOfOrganization": [
+                    "G800"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:ffkilkenny@fs.fed.us"
+                    }
+                ], 
+                "contactId": "800", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G913", 
+                "isOrganization": true, 
+                "name": "Institute for Applied Ecology", 
+                "contactType": "NGO"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G913"
+                ], 
+                "contactId": "913", 
+                "isOrganization": false, 
+                "name": "Institute for Applied Ecology Unknown", 
+                "contactType": "NGO"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -99,7 +150,7 @@
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "completed"
+                    "onGoing"
                 ], 
                 "pointOfContact": [
                     {
@@ -134,9 +185,49 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G796", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "796", 
+                                    "organizationMembers": [
+                                        "G796"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G800", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "800", 
                                     "organizationMembers": [
-                                        "800"
+                                        "G800"
                                     ]
                                 }
                             ], 
@@ -145,9 +236,18 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "796", 
+                                    "contactId": "G913", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "913", 
                                     "organizationMembers": [
-                                        "796"
+                                        "G913"
                                     ]
                                 }
                             ], 
@@ -1886,7 +1986,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

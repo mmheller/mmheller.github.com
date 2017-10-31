@@ -66,70 +66,10 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "871", 
-                "isOrganization": true, 
-                "name": "University of Montana", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "860", 
-                "isOrganization": true, 
-                "name": "National Park Service", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "830", 
+                "contactId": "560", 
                 "isOrganization": true, 
                 "name": "US Fish & Wildife Service", 
                 "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "843", 
-                "isOrganization": true, 
-                "name": "US Forest Service", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "852", 
-                "isOrganization": true, 
-                "name": "Bureau of Land Management", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G809", 
-                "isOrganization": true, 
-                "name": "University of Nevada, Reno", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G809"
-                ], 
-                "contactId": "809", 
-                "isOrganization": false, 
-                "name": "Thomas Albright", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G867", 
-                "isOrganization": true, 
-                "name": "Mount Holyoke College", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G867"
-                ], 
-                "contactId": "867", 
-                "isOrganization": false, 
-                "name": "Thomas Milette", 
-                "contactType": "Academic"
             }, 
             {
                 "isOrganization": true, 
@@ -156,6 +96,188 @@
                 ], 
                 "contactId": "801", 
                 "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:gail_collins@fws.gov"
+                    }
+                ], 
+                "contactId": "G830", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Gail Collins", 
+                "memberOfOrganization": [
+                    "G830"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:gail_collins@fws.gov"
+                    }
+                ], 
+                "contactId": "830", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Mount Holyoke College", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:tmillett@mtholyoke.edu"
+                    }
+                ], 
+                "contactId": "G867", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Thomas Milette", 
+                "memberOfOrganization": [
+                    "G867"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:tmillett@mtholyoke.edu"
+                    }
+                ], 
+                "contactId": "867", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "University of Nevada, Reno", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:talbright@unr.edu"
+                    }
+                ], 
+                "contactId": "G809", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Thomas Albright", 
+                "memberOfOrganization": [
+                    "G809"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:talbright@unr.edu"
+                    }
+                ], 
+                "contactId": "809", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "US Forest Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:rmazur@fs.fed.us"
+                    }
+                ], 
+                "contactId": "G843", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Rachel Mazur", 
+                "memberOfOrganization": [
+                    "G843"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:rmazur@fs.fed.us"
+                    }
+                ], 
+                "contactId": "843", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "National Park Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:Tom_Rodhouse@nps.gov"
+                    }
+                ], 
+                "contactId": "G860", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Thomas Rodhouse", 
+                "memberOfOrganization": [
+                    "G860"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:Tom_Rodhouse@nps.gov"
+                    }
+                ], 
+                "contactId": "860", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Bureau of Land Management", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:jaxtell@blm.gov"
+                    }
+                ], 
+                "contactId": "G852", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "John Axtell", 
+                "memberOfOrganization": [
+                    "G852"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:jaxtell@blm.gov"
+                    }
+                ], 
+                "contactId": "852", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "University of Montana", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:solomon.dobrowski@cfc.umt.edu"
+                    }
+                ], 
+                "contactId": "G871", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Solomon Dobrowski", 
+                "memberOfOrganization": [
+                    "G871"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:solomon.dobrowski@cfc.umt.edu"
+                    }
+                ], 
+                "contactId": "871", 
+                "contactType": "Academic"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -188,7 +310,7 @@
                         "role": "principalInvestigator"
                     }
                 ], 
-                "abstract": "FY2013\nThe proposed funding would allow retrieval of 4 years of data from over 200 temperature sensors nested within 28 sites across ~40 million hectares (i.e., ~100M ac) of the hydrographic Great Basin. The sensors span all major aspects and up to 700 m of elevation within sites, and occur in numerous management jurisdictions in 18 mountain ranges plus other areas not in ranges. Given the paucity of high-elevation climate stations in a region dominated by mountains, the effort will help: a) quantify the variability of climate at micro-, meso-, and macroscales across the Basin (e.g., lapse rates, effect of aspect, existence of microclimatic refugia), and across diel, seasonal, and interannual periods; b) inform management and conservation efforts, in terms of helping calibrate and refine the climatic 'stage' upon which all biological 'actors' and efforts hinge (Beier and Brost 2010); e.g., PRISM dataset); and c) feed into other bioclimatic and wildlife studies seeking to describe climate and biotic responses to it.", 
+                "abstract": "FY2013\nThe proposed funding would allow retrieval of 4 years of data from over 200 temperature sensors nested within 28 sites across ~40 million hectares (i.e., ~100M ac) of the hydrographic Great Basin. The sensors span all major aspects and up to 700 m of elevation within sites, and occur in numerous management jurisdictions in 18 mountain ranges plus other areas not in ranges. Given the paucity of high-elevation climate stations in a region dominated by mountains, the effort will help: a) quantify the variability of climate at micro-, meso-, and macroscales across the Basin (e.g., lapse rates, effect of aspect, existence of microclimatic refugia), and across diel, seasonal, and interannual periods; b) inform management and conservation efforts, in terms of helping calibrate and refine the climatic 'stage' upon which all biological 'actors' and efforts hinge (Beier and Brost 2010); e.g., PRISM dataset); and c) feed into other bioclimatic and wildlife studies seeking to describe climate and biotic responses to it.\n\nFY2017\nProject contributes to retrieval of 4 years of data from over 200 temperature sensors nested within 28 sites across ~40 million hectares (i.e., ~100M ac) of the hydrographic Great Basin. The sensors span all major aspects and up to 700 m of elevation within sites, and occur in numerous management jurisdictions in 18 mountain ranges plus other areas not in ranges. Given the paucity of high-elevation climate stations in a region dominated by mountains, the effort will help: a) quantify the variability of climate at micro-, meso-, and macroscales across the Basin (e.g., lapse rates, effect of aspect, existence of microclimatic refugia), and across diel, seasonal, and interannual periods; b) inform management and conservation efforts, in terms of helping calibrate and refine the climatic stage upon which all biological actors and efforts hinge (Beier and Brost 2010); e.g., PRISM dataset); and c) feed into other bioclimatic and wildlife studies seeking to describe climate and biotic responses to it. Retrieval activities are required in summer of 2017 before the units' batteries expire. Once the batteries expire, the units lose all data logged to date.\n\nFWS funds were used for the direct purchase of project hardware.", 
                 "citation": {
                     "title": "Characterization of Montane Ecosystems, Their Microclimates, and Wildlife Distribution and Abundance Across the Hydrographic Great Basin", 
                     "onlineResource": [
@@ -203,9 +325,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "871", 
+                                    "contactId": "560", 
                                     "organizationMembers": [
-                                        "871"
+                                        "560"
                                     ]
                                 }
                             ], 
@@ -214,10 +336,28 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "860", 
+                                    "contactId": "G801", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "801", 
                                     "organizationMembers": [
-                                        "860"
+                                        "G801"
                                     ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G830", 
+                                    "organizationMembers": []
                                 }
                             ], 
                             "role": "Collaborator"
@@ -227,49 +367,7 @@
                                 {
                                     "contactId": "830", 
                                     "organizationMembers": [
-                                        "830"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "843", 
-                                    "organizationMembers": [
-                                        "843"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "852", 
-                                    "organizationMembers": [
-                                        "852"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G809", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "809", 
-                                    "organizationMembers": [
-                                        "G809"
+                                        "G830"
                                     ]
                                 }
                             ], 
@@ -298,26 +396,106 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G801", 
+                                    "contactId": "G809", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "801", 
+                                    "contactId": "809", 
                                     "organizationMembers": [
-                                        "G801"
+                                        "G809"
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G843", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "843", 
+                                    "organizationMembers": [
+                                        "G843"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G860", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "860", 
+                                    "organizationMembers": [
+                                        "G860"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G852", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "852", 
+                                    "organizationMembers": [
+                                        "G852"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G871", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "871", 
+                                    "organizationMembers": [
+                                        "G871"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }
                     ], 
                     "alternateTitle": [
-                        "Beever2013"
+                        "Beever2017"
                     ], 
                     "date": [
                         {
@@ -1912,7 +2090,31 @@
                         "keywordType": "Great Basin LCC Keywords", 
                         "keyword": [
                             {
-                                "keyword": " Montane"
+                                "keyword": " montane"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " talus"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " alpine"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " mountain"
                             }
                         ]
                     }, 
@@ -2040,7 +2242,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

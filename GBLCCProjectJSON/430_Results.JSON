@@ -66,10 +66,10 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "825", 
+                "contactId": "560", 
                 "isOrganization": true, 
-                "name": "Great Basin LCC", 
-                "contactType": "LCC"
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
             }, 
             {
                 "isOrganization": true, 
@@ -99,6 +99,22 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "G825", 
+                "isOrganization": true, 
+                "name": "Great Basin LCC", 
+                "contactType": "LCC"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G825"
+                ], 
+                "contactId": "825", 
+                "isOrganization": false, 
+                "name": "Levi Old", 
+                "contactType": "LCC"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "560", 
                 "isOrganization": true, 
                 "name": "US Fish & Wildife Service", 
@@ -108,7 +124,7 @@
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "completed"
+                    "onGoing"
                 ], 
                 "pointOfContact": [
                     {
@@ -143,13 +159,13 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "825", 
+                                    "contactId": "560", 
                                     "organizationMembers": [
-                                        "825"
+                                        "560"
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -166,6 +182,26 @@
                                     "contactId": "232", 
                                     "organizationMembers": [
                                         "G232"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G825", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "825", 
+                                    "organizationMembers": [
+                                        "G825"
                                     ]
                                 }
                             ], 
@@ -2220,7 +2256,7 @@
                         "keywordType": "Great Basin LCC Location Keywords", 
                         "keyword": [
                             {
-                                "keyword": " Sheldon-Hard NWR"
+                                "keyword": " Sheldon-Hart NWR"
                             }
                         ]
                     }
@@ -2324,7 +2360,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

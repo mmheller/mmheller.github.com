@@ -65,31 +65,62 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "US Forest Service", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:Keirith.Snyder@ARS.USDA.GOV"
+                        "uri": "mailto:keirith.snyder@ars.usda.gov"
+                    }
+                ], 
+                "contactId": "G779", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Keirith Snyder", 
+                "memberOfOrganization": [
+                    "G779"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:keirith.snyder@ars.usda.gov"
                     }
                 ], 
                 "contactId": "779", 
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "G875", 
                 "isOrganization": true, 
                 "name": "University of Nevada, Reno", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:tstringham@cabnr.unr.edu"
+                    }
+                ], 
+                "contactId": "G875", 
                 "contactType": "Academic"
             }, 
             {
+                "isOrganization": false, 
+                "name": "Tamzen Stringham", 
                 "memberOfOrganization": [
                     "G875"
                 ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:tstringham@cabnr.unr.edu"
+                    }
+                ], 
                 "contactId": "875", 
-                "isOrganization": false, 
-                "name": "Tamzen Stringham", 
                 "contactType": "Academic"
             }, 
             {
@@ -138,9 +169,29 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G779", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "779", 
                                     "organizationMembers": [
-                                        "779"
+                                        "G779"
                                     ]
                                 }
                             ], 
@@ -599,7 +650,7 @@
                         "keywordType": "Great Basin LCC Location Keywords", 
                         "keyword": [
                             {
-                                "keyword": " Desatoya Mounatins"
+                                "keyword": " Desatoya Mountains"
                             }
                         ]
                     }
@@ -703,7 +754,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

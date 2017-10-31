@@ -65,43 +65,50 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "US Geological Survey", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mgermino@usgs.gov"
+                        "uri": "mailto:dpilliod@usgs.gov"
                     }
                 ], 
-                "contactId": "G782", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Matt Germino", 
-                "memberOfOrganization": [
-                    "G782"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mailto:mgermino@usgs.gov"
-                    }
-                ], 
-                "contactId": "782", 
+                "contactId": "G230", 
                 "contactType": "Federal"
             }, 
             {
                 "isOrganization": false, 
                 "name": "David Pilliod", 
                 "memberOfOrganization": [
-                    "G782"
+                    "G230"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:dpilliod@usgs.gov"
+                        "uri": "mailto:mailto:dpilliod@usgs.gov"
                     }
                 ], 
                 "contactId": "230", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Matt Germino", 
+                "memberOfOrganization": [
+                    "G230"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mgermino@usgs.gov"
+                    }
+                ], 
+                "contactId": "782", 
                 "contactType": "Federal"
             }, 
             {
@@ -135,7 +142,7 @@
                         "role": "principalInvestigator"
                     }
                 ], 
-                "abstract": "", 
+                "abstract": "FY2013\nThe loss of big sagebrush (Artemisia tridentata Nutt.) on sites disturbed by fire has motivated many restoration seeding and planting efforts. However, the resulting sagebrush establishment is often lower than desired, especially in dry areas. Sagebrush establishment may be increased by addressing factors such as seed source and condition or management of the plant community. The research team assessed initial establishment of seeded sagebrush and four populations of small outplants (from different geographies, climates, and cytotypes) and small sagebrush outplants in an early seral community where mowing, herbicide, and seeding of other native plants had been experimentally applied. No emergence of seeded sagebrush was detected. Mowing the site before planting seedlings led to greater initial survival probabilities for sagebrush outplants, except where seeding also occurred, and these effects were related to corresponding changes in bare soil exposure. Initial survival probabilities were &gt; 30% greater for the local population of big sagebrush relative to populations imported to the site from typical seed transfer distances of 320800 km. Overcoming the high first-year mortality of outplanted or seeded sagebrush is one of the most challenging aspects of postfire restoration and rehabilitation, and further evaluation of the impacts of herb treatments and sagebrush seed sources across different site types and years is needed.\n\nFunding for this project was provided by the Great Basin Landscape Conservation Cooperative, Joint Fire Science Program and Great Basin Native Plant Program.", 
                 "citation": {
                     "title": "Restoring Big Sagebrush", 
                     "onlineResource": [
@@ -150,33 +157,44 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G782", 
-                                    "organizationMembers": []
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "782", 
-                                    "organizationMembers": [
-                                        "G782"
-                                    ]
+                                    "contactId": "G230", 
+                                    "organizationMembers": []
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
                                 {
                                     "contactId": "230", 
                                     "organizationMembers": [
-                                        "G782"
+                                        "G230"
                                     ]
                                 }
                             ], 
                             "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "782", 
+                                    "organizationMembers": [
+                                        "G230"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
                         }
                     ], 
                     "alternateTitle": [
@@ -1684,7 +1702,16 @@
                         ]
                     }
                 ], 
-                "keyword": [], 
+                "keyword": [
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Sagebrush"
+                            }
+                        ]
+                    }
+                ], 
                 "resourceType": [
                     {
                         "type": "project"
@@ -1784,7 +1811,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

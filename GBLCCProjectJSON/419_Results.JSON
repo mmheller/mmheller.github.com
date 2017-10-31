@@ -66,24 +66,36 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "842", 
+                "contactId": "560", 
                 "isOrganization": true, 
-                "name": "Bureau of Land Management", 
+                "name": "US Fish & Wildife Service", 
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "805", 
                 "isOrganization": true, 
-                "name": "University of Idaho", 
-                "contactType": "Academic"
+                "name": "Bureau of Land Management", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:pmakela@blm.gov"
+                    }
+                ], 
+                "contactId": "G842", 
+                "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "829", 
-                "isOrganization": true, 
-                "name": "Idaho Dept of Fish & Game", 
-                "contactType": "State"
+                "isOrganization": false, 
+                "name": "Paul Makela", 
+                "memberOfOrganization": [
+                    "G842"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:pmakela@blm.gov"
+                    }
+                ], 
+                "contactId": "842", 
+                "contactType": "Federal"
             }, 
             {
                 "isOrganization": true, 
@@ -94,7 +106,61 @@
                         "uri": "mailto:cconway@uidaho.edu"
                     }
                 ], 
+                "contactId": "G783", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Courtney Conway", 
+                "memberOfOrganization": [
+                    "G783"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:cconway@uidaho.edu"
+                    }
+                ], 
                 "contactId": "783", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Idaho Dept of Fish & Game", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:shane.roberts@idfg.idaho.gov"
+                    }
+                ], 
+                "contactId": "G829", 
+                "contactType": "State"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Shane Roberts", 
+                "memberOfOrganization": [
+                    "G829"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:shane.roberts@idfg.idaho.gov"
+                    }
+                ], 
+                "contactId": "829", 
+                "contactType": "State"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Karen Launchbaugh", 
+                "memberOfOrganization": [
+                    "G783"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:klaunchb@uidaho.edu"
+                    }
+                ], 
+                "contactId": "805", 
                 "contactType": "Academic"
             }, 
             {
@@ -108,7 +174,7 @@
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "completed"
+                    "onGoing"
                 ], 
                 "pointOfContact": [
                     {
@@ -143,9 +209,69 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G842", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "842", 
                                     "organizationMembers": [
-                                        "842"
+                                        "G842"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G783", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "783", 
+                                    "organizationMembers": [
+                                        "G783"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G829", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "829", 
+                                    "organizationMembers": [
+                                        "G829"
                                     ]
                                 }
                             ], 
@@ -156,33 +282,11 @@
                                 {
                                     "contactId": "805", 
                                     "organizationMembers": [
-                                        "805"
+                                        "G783"
                                     ]
                                 }
                             ], 
                             "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "829", 
-                                    "organizationMembers": [
-                                        "829"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "783", 
-                                    "organizationMembers": [
-                                        "783"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
                         }
                     ], 
                     "alternateTitle": [
@@ -1935,7 +2039,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

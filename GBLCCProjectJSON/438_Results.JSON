@@ -65,12 +65,40 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "389", 
+                "isOrganization": true, 
+                "name": "Bureau of Land Management", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "Western Association of Fish & Wildlife Agencies", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
                         "uri": "mailto:ken.e.mayer@gmail.com"
+                    }
+                ], 
+                "contactId": "G798", 
+                "contactType": "State"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Kenneth Mayer", 
+                "memberOfOrganization": [
+                    "G798"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:ken.e.mayer@gmail.com"
                     }
                 ], 
                 "contactId": "798", 
@@ -122,9 +150,40 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "389", 
+                                    "organizationMembers": [
+                                        "389"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G798", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "798", 
                                     "organizationMembers": [
-                                        "798"
+                                        "G798"
                                     ]
                                 }
                             ], 
@@ -1577,7 +1636,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

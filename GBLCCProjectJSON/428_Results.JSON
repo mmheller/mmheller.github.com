@@ -65,6 +65,39 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:gail_collins@fws.gov"
+                    }
+                ], 
+                "contactId": "G830", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Gail Collins", 
+                "memberOfOrganization": [
+                    "G830"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:gail_collins@fws.gov"
+                    }
+                ], 
+                "contactId": "830", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "University of Nevada - Reno", 
                 "memberOfOrganization": [], 
@@ -73,62 +106,113 @@
                         "uri": "mailto:kshoemaker@cabnr.unr.edu"
                     }
                 ], 
+                "contactId": "G791", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Kevin Shoemaker", 
+                "memberOfOrganization": [
+                    "G791"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:kshoemaker@cabnr.unr.edu"
+                    }
+                ], 
                 "contactId": "791", 
                 "contactType": "Academic"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "830", 
-                "isOrganization": true, 
-                "name": "US Fish & Wildife Service", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "846", 
-                "isOrganization": true, 
-                "name": "National Park Service", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G862", 
                 "isOrganization": true, 
                 "name": "University of Nevada, Reno", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G862"
-                ], 
-                "contactId": "862", 
-                "isOrganization": false, 
-                "name": "Chris Feldman", 
-                "contactType": "Academic"
-            }, 
-            {
                 "memberOfOrganization": [], 
-                "contactId": "G815", 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mforister@unr.edu"
+                    }
+                ], 
+                "contactId": "G854", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Matt Forister", 
+                "memberOfOrganization": [
+                    "G854"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:mforister@unr.edu"
+                    }
+                ], 
+                "contactId": "854", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "National Park Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:Bryan_Hamilton@nps.gov"
+                    }
+                ], 
+                "contactId": "G846", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Bryan Hamilton", 
+                "memberOfOrganization": [
+                    "G846"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:Bryan_Hamilton@nps.gov"
+                    }
+                ], 
+                "contactId": "846", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "Nevada Department of Wildlife", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:jasonw@ndow.org"
+                    }
+                ], 
+                "contactId": "G815", 
                 "contactType": "State"
             }, 
             {
+                "isOrganization": false, 
+                "name": "Jason Williams", 
                 "memberOfOrganization": [
                     "G815"
                 ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:jasonw@ndow.org"
+                    }
+                ], 
                 "contactId": "815", 
-                "isOrganization": false, 
-                "name": "Jason Williams", 
                 "contactType": "State"
             }, 
             {
-                "memberOfOrganization": [
-                    "G862"
-                ], 
-                "contactId": "854", 
                 "isOrganization": false, 
-                "name": "Matt Forister", 
+                "name": "Chris Feldman", 
+                "memberOfOrganization": [
+                    "G854"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:ophis@unr.edu"
+                    }
+                ], 
+                "contactId": "862", 
                 "contactType": "Academic"
             }, 
             {
@@ -142,7 +226,7 @@
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "completed"
+                    "onGoing"
                 ], 
                 "pointOfContact": [
                     {
@@ -177,9 +261,49 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G830", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "830", 
+                                    "organizationMembers": [
+                                        "G830"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G791", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "791", 
                                     "organizationMembers": [
-                                        "791"
+                                        "G791"
                                     ]
                                 }
                             ], 
@@ -188,10 +312,28 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "830", 
+                                    "contactId": "G854", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "854", 
                                     "organizationMembers": [
-                                        "830"
+                                        "G854"
                                     ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G846", 
+                                    "organizationMembers": []
                                 }
                             ], 
                             "role": "Collaborator"
@@ -201,27 +343,7 @@
                                 {
                                     "contactId": "846", 
                                     "organizationMembers": [
-                                        "846"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G862", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "862", 
-                                    "organizationMembers": [
-                                        "G862"
+                                        "G846"
                                     ]
                                 }
                             ], 
@@ -250,9 +372,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "854", 
+                                    "contactId": "862", 
                                     "organizationMembers": [
-                                        "G862"
+                                        "G854"
                                     ]
                                 }
                             ], 
@@ -2387,7 +2509,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

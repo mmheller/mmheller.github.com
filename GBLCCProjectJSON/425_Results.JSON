@@ -65,6 +65,20 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "911", 
+                "isOrganization": true, 
+                "name": "Desert LCC", 
+                "contactType": "LCC"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "Desert Research Institute", 
                 "memberOfOrganization": [], 
@@ -73,23 +87,35 @@
                         "uri": "mailto:don.sada@dri.edu"
                     }
                 ], 
+                "contactId": "G788", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Don Sada", 
+                "memberOfOrganization": [
+                    "G788"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:don.sada@dri.edu"
+                    }
+                ], 
                 "contactId": "788", 
                 "contactType": "Academic"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "G807", 
-                "isOrganization": true, 
-                "name": "Desert Research Institute", 
-                "contactType": "Research"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G807"
-                ], 
-                "contactId": "807", 
                 "isOrganization": false, 
                 "name": "Alexandra Lutz", 
+                "memberOfOrganization": [
+                    "G788"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:alex.lutz@dri.edu"
+                    }
+                ], 
+                "contactId": "807", 
                 "contactType": "Research"
             }, 
             {
@@ -138,9 +164,40 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "911", 
+                                    "organizationMembers": [
+                                        "911"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G788", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "788", 
                                     "organizationMembers": [
-                                        "788"
+                                        "G788"
                                     ]
                                 }
                             ], 
@@ -149,18 +206,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G807", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "807", 
                                     "organizationMembers": [
-                                        "G807"
+                                        "G788"
                                     ]
                                 }
                             ], 
@@ -1836,7 +1884,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

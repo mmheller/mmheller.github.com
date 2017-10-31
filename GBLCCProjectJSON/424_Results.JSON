@@ -65,6 +65,13 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "Utah State University", 
                 "memberOfOrganization": [], 
@@ -73,62 +80,167 @@
                         "uri": "mailto:peter.adler@usu.edu"
                     }
                 ], 
+                "contactId": "G787", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Peter Adler", 
+                "memberOfOrganization": [
+                    "G787"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:peter.adler@usu.edu"
+                    }
+                ], 
                 "contactId": "787", 
                 "contactType": "Academic"
             }, 
             {
+                "isOrganization": true, 
+                "name": "US Forest Service", 
                 "memberOfOrganization": [], 
-                "contactId": "869", 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mmanning@fs.fed.us"
+                    }
+                ], 
+                "contactId": "G865", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Mary Manning", 
+                "memberOfOrganization": [
+                    "G865"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:mmanning@fs.fed.us"
+                    }
+                ], 
+                "contactId": "865", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "University of Massachusets, Amherst", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:bbradley@eco.umass.edu"
+                    }
+                ], 
+                "contactId": "G848", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Bethany Bradley", 
+                "memberOfOrganization": [
+                    "G848"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:bbradley@eco.umass.edu"
+                    }
+                ], 
+                "contactId": "848", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Montana State University", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:benjamin.poulter@montana.edu"
+                    }
+                ], 
+                "contactId": "G819", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Benjamin Poulter", 
+                "memberOfOrganization": [
+                    "G819"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:benjamin.poulter@montana.edu"
+                    }
+                ], 
+                "contactId": "819", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G869", 
                 "isOrganization": true, 
                 "name": "Bureau of Land Management", 
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "865", 
-                "isOrganization": true, 
-                "name": "US Forest Service", 
+                "memberOfOrganization": [
+                    "G869"
+                ], 
+                "contactId": "869", 
+                "isOrganization": false, 
+                "name": "Robert Means", 
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "819", 
-                "isOrganization": true, 
-                "name": "Montana State University", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G835", 
                 "isOrganization": true, 
                 "name": "US Geological Survey", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:aldridgec@usgs.gov"
+                    }
+                ], 
+                "contactId": "G835", 
                 "contactType": "Federal"
             }, 
             {
+                "isOrganization": false, 
+                "name": "Cameron Aldridge", 
                 "memberOfOrganization": [
                     "G835"
                 ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:aldridgec@usgs.gov"
+                    }
+                ], 
                 "contactId": "835", 
-                "isOrganization": false, 
-                "name": "Cameron Aldridge", 
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [
-                    ""
+                "isOrganization": true, 
+                "name": "University of Colorado", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:jennifer.balch@colorado.edu"
+                    }
                 ], 
-                "contactId": "848", 
-                "isOrganization": false, 
-                "name": "Bethany Bradley", 
+                "contactId": "G857", 
                 "contactType": "Academic"
             }, 
             {
-                "memberOfOrganization": [
-                    ""
-                ], 
-                "contactId": "857", 
                 "isOrganization": false, 
                 "name": "Jennifer Balch", 
+                "memberOfOrganization": [
+                    "G857"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:jennifer.balch@colorado.edu"
+                    }
+                ], 
+                "contactId": "857", 
                 "contactType": "Academic"
             }, 
             {
@@ -177,9 +289,29 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G787", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "787", 
                                     "organizationMembers": [
-                                        "787"
+                                        "G787"
                                     ]
                                 }
                             ], 
@@ -188,10 +320,8 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "869", 
-                                    "organizationMembers": [
-                                        "869"
-                                    ]
+                                    "contactId": "G865", 
+                                    "organizationMembers": []
                                 }
                             ], 
                             "role": "Collaborator"
@@ -201,7 +331,7 @@
                                 {
                                     "contactId": "865", 
                                     "organizationMembers": [
-                                        "865"
+                                        "G865"
                                     ]
                                 }
                             ], 
@@ -210,13 +340,62 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "819", 
+                                    "contactId": "G848", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "848", 
                                     "organizationMembers": [
-                                        "819"
+                                        "G848"
                                     ]
                                 }
                             ], 
                             "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G819", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "819", 
+                                    "organizationMembers": [
+                                        "G819"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G869", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "869", 
+                                    "organizationMembers": [
+                                        "G869"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -241,20 +420,18 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "848", 
-                                    "organizationMembers": [
-                                        ""
-                                    ]
+                                    "contactId": "G857", 
+                                    "organizationMembers": []
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
                                 {
                                     "contactId": "857", 
                                     "organizationMembers": [
-                                        ""
+                                        "G857"
                                     ]
                                 }
                             ], 
@@ -565,7 +742,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

@@ -65,6 +65,53 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "University of Nevada, Reno", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:pweisberg@cabnr.unr.edu"
+                    }
+                ], 
+                "contactId": "G802", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Peter Weisberg", 
+                "memberOfOrganization": [
+                    "G802"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:pweisberg@cabnr.unr.edu"
+                    }
+                ], 
+                "contactId": "802", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Owen Baughman", 
+                "memberOfOrganization": [
+                    "G802"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:owbaughman@gmail.com"
+                    }
+                ], 
+                "contactId": "827", 
+                "contactType": "Academic"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "University of Nevada - Reno", 
                 "memberOfOrganization": [], 
@@ -73,32 +120,21 @@
                         "uri": "mailto:ealeger@gmail.com"
                     }
                 ], 
+                "contactId": "G796", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Elizabeth Leger", 
+                "memberOfOrganization": [
+                    "G796"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:ealeger@gmail.com"
+                    }
+                ], 
                 "contactId": "796", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G827", 
-                "isOrganization": true, 
-                "name": "University of Nevada, Reno", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G827"
-                ], 
-                "contactId": "827", 
-                "isOrganization": false, 
-                "name": "Owen Baughman", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G827"
-                ], 
-                "contactId": "802", 
-                "isOrganization": false, 
-                "name": "Peter Weisberg", 
                 "contactType": "Academic"
             }, 
             {
@@ -147,30 +183,19 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "796", 
+                                    "contactId": "560", 
                                     "organizationMembers": [
-                                        "796"
+                                        "560"
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "G827", 
+                                    "contactId": "G802", 
                                     "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "827", 
-                                    "organizationMembers": [
-                                        "G827"
-                                    ]
                                 }
                             ], 
                             "role": "Principal Investigator"
@@ -180,7 +205,38 @@
                                 {
                                     "contactId": "802", 
                                     "organizationMembers": [
-                                        "G827"
+                                        "G802"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "827", 
+                                    "organizationMembers": [
+                                        "G802"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G796", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "796", 
+                                    "organizationMembers": [
+                                        "G796"
                                     ]
                                 }
                             ], 
@@ -533,7 +589,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

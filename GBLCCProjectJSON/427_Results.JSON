@@ -65,6 +65,39 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "University of Nevada, Reno", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:pweisberg@cabnr.unr.edu"
+                    }
+                ], 
+                "contactId": "G802", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Peter Weisberg", 
+                "memberOfOrganization": [
+                    "G802"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:pweisberg@cabnr.unr.edu"
+                    }
+                ], 
+                "contactId": "802", 
+                "contactType": "Academic"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "University of Nevada - Reno", 
                 "memberOfOrganization": [], 
@@ -73,35 +106,35 @@
                         "uri": "mailto:jsedinger@cabnr.unr.edu"
                     }
                 ], 
+                "contactId": "G775", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Jim Sedinger", 
+                "memberOfOrganization": [
+                    "G775"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:jsedinger@cabnr.unr.edu"
+                    }
+                ], 
                 "contactId": "775", 
                 "contactType": "Academic"
             }, 
             {
-                "isOrganization": true, 
-                "name": "University of Nevada - Reno", 
-                "memberOfOrganization": [], 
+                "isOrganization": false, 
+                "name": "Marjorie Matocq", 
+                "memberOfOrganization": [
+                    "G775"
+                ], 
                 "onlineResource": [
                     {
                         "uri": "mailto:mmatocq@cabnr.unr.edu"
                     }
                 ], 
                 "contactId": "790", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G802", 
-                "isOrganization": true, 
-                "name": "University of Nevada, Reno", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G802"
-                ], 
-                "contactId": "802", 
-                "isOrganization": false, 
-                "name": "Peter Weisberg", 
                 "contactType": "Academic"
             }, 
             {
@@ -115,7 +148,7 @@
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "completed"
+                    "onGoing"
                 ], 
                 "pointOfContact": [
                     {
@@ -150,24 +183,13 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "775", 
+                                    "contactId": "560", 
                                     "organizationMembers": [
-                                        "775"
+                                        "560"
                                     ]
                                 }
                             ], 
                             "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "790", 
-                                    "organizationMembers": [
-                                        "790"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -188,6 +210,37 @@
                                 }
                             ], 
                             "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G775", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "775", 
+                                    "organizationMembers": [
+                                        "G775"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "790", 
+                                    "organizationMembers": [
+                                        "G775"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
                         }
                     ], 
                     "alternateTitle": [
@@ -1946,7 +1999,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

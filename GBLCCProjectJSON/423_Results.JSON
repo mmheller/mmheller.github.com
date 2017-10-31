@@ -66,49 +66,97 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G808", 
+                "contactId": "389", 
                 "isOrganization": true, 
-                "name": "Great Basin Bird Observatory", 
-                "contactType": "Research"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G808"
-                ], 
-                "contactId": "808", 
-                "isOrganization": false, 
-                "name": "John Boone", 
-                "contactType": "Research"
+                "name": "Bureau of Land Management", 
+                "contactType": "Federal"
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G879", 
+                "contactId": "351", 
                 "isOrganization": true, 
-                "name": "US Geological Survey", 
+                "name": "US Forest Service", 
                 "contactType": "Federal"
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "910", 
+                "isOrganization": true, 
+                "name": "Nevada Department of Wildlife", 
+                "contactType": "State"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "US Geological Survey", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:jon_bart@usgs.org"
+                    }
+                ], 
+                "contactId": "G879", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Jonathan Bart", 
                 "memberOfOrganization": [
                     "G879"
                 ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:jon_bart@usgs.org"
+                    }
+                ], 
                 "contactId": "879", 
-                "isOrganization": false, 
-                "name": "Jonathan Bart", 
                 "contactType": "Federal"
             }, 
             {
-                "isOrganization": false, 
-                "name": "Elizabeth Ammon", 
-                "memberOfOrganization": [
-                    "G808"
-                ], 
+                "isOrganization": true, 
+                "name": "Great Basin Bird Observatory", 
+                "memberOfOrganization": [], 
                 "onlineResource": [
                     {
                         "uri": "mailto:ammon@gbbo.org"
                     }
                 ], 
+                "contactId": "G786", 
+                "contactType": "NGO"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Elizabeth Ammon", 
+                "memberOfOrganization": [
+                    "G786"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:ammon@gbbo.org"
+                    }
+                ], 
                 "contactId": "786", 
                 "contactType": "NGO"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "John Boone", 
+                "memberOfOrganization": [
+                    "G786"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:boone@gbbo.org"
+                    }
+                ], 
+                "contactId": "808", 
+                "contactType": "Research"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -121,7 +169,7 @@
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "completed"
+                    "onGoing"
                 ], 
                 "pointOfContact": [
                     {
@@ -156,22 +204,46 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G808", 
-                                    "organizationMembers": []
+                                    "contactId": "389", 
+                                    "organizationMembers": [
+                                        "389"
+                                    ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "808", 
+                                    "contactId": "351", 
                                     "organizationMembers": [
-                                        "G808"
+                                        "351"
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "910", 
+                                    "organizationMembers": [
+                                        "910"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -196,9 +268,29 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G786", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "786", 
                                     "organizationMembers": [
-                                        "G808"
+                                        "G786"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "808", 
+                                    "organizationMembers": [
+                                        "G786"
                                     ]
                                 }
                             ], 
@@ -1298,7 +1390,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

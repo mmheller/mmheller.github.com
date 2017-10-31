@@ -65,30 +65,37 @@
                 ]
             }, 
             {
-                "isOrganization": true, 
-                "name": "US Geological Survey", 
                 "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mgermino@usgs.gov"
-                    }
-                ], 
-                "contactId": "G782", 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
                 "contactType": "Federal"
             }, 
             {
+                "isOrganization": true, 
+                "name": "Western Regional Climate Center, Desert Research Institute", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:tim.brown@dri.edu"
+                    }
+                ], 
+                "contactId": "G773", 
+                "contactType": "NGO"
+            }, 
+            {
                 "isOrganization": false, 
-                "name": "Matt Germino", 
+                "name": "Tim Brown", 
                 "memberOfOrganization": [
-                    "G782"
+                    "G773"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mailto:mgermino@usgs.gov"
+                        "uri": "mailto:mailto:tim.brown@dri.edu"
                     }
                 ], 
-                "contactId": "782", 
-                "contactType": "Federal"
+                "contactId": "773", 
+                "contactType": "NGO"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -101,7 +108,7 @@
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "completed"
+                    "onGoing"
                 ], 
                 "pointOfContact": [
                     {
@@ -115,20 +122,20 @@
                     {
                         "party": [
                             {
-                                "contactId": "782"
+                                "contactId": "773"
                             }
                         ], 
                         "role": "principalInvestigator"
                     }
                 ], 
-                "abstract": "", 
+                "abstract": "FY2015\nThe Great Basin Region, which covers much of Nevada, and portions of California, Oregon, Idaho, and Utah, managers are already confronting a changing climate and are beginning to make management decisions despite uncertainty in how climate change effects will manifest in the region. To support decision making, the Great Basin Landscape Conservation Cooperative (LCC) and the National Oceanic and Atmospheric Administration (NOAA) Regional Integrated Science Assessment Program (RISA) funded this project to explore how two scenario planning approaches might be used effectively with existing management planning processes and data sources and how to begin prioritizing adaptation strategies. The two approaches used in this project are Adaptation for Conservation Targets (ACT) and Strategic Scenario Planning (SSP).", 
                 "citation": {
-                    "title": "Evaluation of Weed-Suppressive Bacteria for Control of Exotic Annual Grasses", 
+                    "title": "Planning for the future of the Great Basin: Using spatially-based planning to inform climate resiliency planning and adaptation strategies", 
                     "onlineResource": [
                         {
                             "description": "Webpage with details on this project", 
                             "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=447", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=431", 
                             "name": "Project Report Page"
                         }
                     ], 
@@ -136,7 +143,18 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G782", 
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G773", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -145,9 +163,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "782", 
+                                    "contactId": "773", 
                                     "organizationMembers": [
-                                        "G782"
+                                        "G773"
                                     ]
                                 }
                             ], 
@@ -155,21 +173,21 @@
                         }
                     ], 
                     "alternateTitle": [
-                        "Germino"
+                        "Brown2015"
                     ], 
                     "date": [
                         {
-                            "date": "2017-01-01", 
+                            "date": "2015-10-01", 
                             "dateType": "date type"
                         }
                     ], 
                     "identifier": [
                         {
-                            "identifier": "447", 
+                            "identifier": "431", 
                             "namespace": "lcc:gb"
                         }, 
                         {
-                            "identifier": "59cd6eb3e4b00fa06feff0dd", 
+                            "identifier": "55fc8394e4b05d6c4e502b20", 
                             "namespace": "gov.sciencebase.catalog"
                         }
                     ]
@@ -179,7 +197,7 @@
                     "characterSet": "UTF-8", 
                     "language": "eng"
                 }, 
-                "purpose": "     ", 
+                "purpose": "Conservation Planning Population & Habitat Evaluation/Projection  Federal resource managers State agencies Conservation NGOs", 
                 "extent": [
                     {
                         "geographicExtent": [
@@ -1641,8 +1659,8 @@
                     }
                 ], 
                 "timePeriod": {
-                    "endDateTime": "2017-01-01", 
-                    "startDateTime": "2017-01-01"
+                    "endDateTime": "2017-10-01", 
+                    "startDateTime": "2015-10-01"
                 }, 
                 "resourceUsage": [
                     {
@@ -1659,7 +1677,131 @@
                         ]
                     }
                 ], 
-                "keyword": [], 
+                "keyword": [
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Project Category", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/52dee7c5e4b0dee2a6cd6b18"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "5da1d3b7-375b-58ae-a134-2ee0c94c395f"
+                                }
+                            ], 
+                            "title": "Project Category - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Conservation Planning"
+                            }, 
+                            {
+                                "keyword": "Population & Habitat Evaluation/Projection"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC End User Type", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/54760ef9e4b0f62cb5dc41a0"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "425f4a7c-dca2-56d8-947e-6f6bd1033d70"
+                                }
+                            ], 
+                            "title": "End User Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Federal resource managers"
+                            }, 
+                            {
+                                "keyword": "State agencies"
+                            }, 
+                            {
+                                "keyword": "Conservation NGOs"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "spatial analysis"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " geospatial"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " conservation planning"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " climate"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " adaptation"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " alternative futures"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Great Basin"
+                            }
+                        ]
+                    }
+                ], 
                 "resourceType": [
                     {
                         "type": "project"
@@ -1723,7 +1865,7 @@
             "metadataInfo": {
                 "metadataOnlineResource": [
                     {
-                        "uri": "https://www.sciencebase.gov/catalog/item/59cd6eb3e4b00fa06feff0dd"
+                        "uri": "https://www.sciencebase.gov/catalog/item/55fc8394e4b05d6c4e502b20"
                     }
                 ], 
                 "parentMetadata": {
@@ -1736,7 +1878,7 @@
                     "title": "ScienceBase Parent"
                 }, 
                 "metadataIdentifier": {
-                    "identifier": "59cd6eb3e4b00fa06feff0dd", 
+                    "identifier": "55fc8394e4b05d6c4e502b20", 
                     "namespace": "gov.sciencebase.catalog"
                 }, 
                 "metadataContact": [
@@ -1759,7 +1901,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]
@@ -1783,7 +1925,7 @@
                                     "unitsOfDistribution": "unknown", 
                                     "onlineOption": [
                                         {
-                                            "uri": "https://www.sciencebase.gov/catalog/item/59cd6eb3e4b00fa06feff0dd"
+                                            "uri": "https://www.sciencebase.gov/catalog/item/55fc8394e4b05d6c4e502b20"
                                         }
                                     ]
                                 }

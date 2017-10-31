@@ -66,34 +66,56 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G836", 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "Oregon State University", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:drsamzs@yahoo.com"
+                    }
+                ], 
+                "contactId": "G820", 
                 "contactType": "Academic"
             }, 
             {
-                "memberOfOrganization": [
-                    "G836"
-                ], 
-                "contactId": "836", 
-                "isOrganization": false, 
-                "name": "Elizabeth Marino", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G836"
-                ], 
-                "contactId": "820", 
                 "isOrganization": false, 
                 "name": "Samantha Chisholm Hatfield", 
+                "memberOfOrganization": [
+                    "G820"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:drsamzs@yahoo.com"
+                    }
+                ], 
+                "contactId": "820", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Elizabeth Marino", 
+                "memberOfOrganization": [
+                    "G820"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:elizabeth.marino@osucascades.edu"
+                    }
+                ], 
+                "contactId": "836", 
                 "contactType": "Academic"
             }, 
             {
                 "isOrganization": false, 
                 "name": "Philip Mote", 
                 "memberOfOrganization": [
-                    "G836"
+                    "G820"
                 ], 
                 "onlineResource": [
                     {
@@ -149,8 +171,10 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G836", 
-                                    "organizationMembers": []
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
                                 }
                             ], 
                             "role": "Collaborator"
@@ -158,10 +182,8 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "836", 
-                                    "organizationMembers": [
-                                        "G836"
-                                    ]
+                                    "contactId": "G820", 
+                                    "organizationMembers": []
                                 }
                             ], 
                             "role": "Collaborator"
@@ -171,7 +193,18 @@
                                 {
                                     "contactId": "820", 
                                     "organizationMembers": [
-                                        "G836"
+                                        "G820"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "836", 
+                                    "organizationMembers": [
+                                        "G820"
                                     ]
                                 }
                             ], 
@@ -182,7 +215,7 @@
                                 {
                                     "contactId": "795", 
                                     "organizationMembers": [
-                                        "G836"
+                                        "G820"
                                     ]
                                 }
                             ], 
@@ -661,6 +694,14 @@
                                 "keyword": " Nevada"
                             }
                         ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Utah"
+                            }
+                        ]
                     }
                 ], 
                 "resourceType": [
@@ -762,7 +803,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

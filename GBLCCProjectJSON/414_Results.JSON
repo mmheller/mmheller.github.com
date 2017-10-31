@@ -65,12 +65,47 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "907", 
+                "isOrganization": true, 
+                "name": "Desert Research Institute", 
+                "contactType": "Research"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "900", 
+                "isOrganization": true, 
+                "name": "Northern Arizona University", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "Institute for Tribal Environmental Professionals", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
                         "uri": "mailto:susan.rose@nau.edu"
+                    }
+                ], 
+                "contactId": "G778", 
+                "contactType": "NGO"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Susan Wotkyns", 
+                "memberOfOrganization": [
+                    "G778"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:susan.rose@nau.edu"
                     }
                 ], 
                 "contactId": "778", 
@@ -122,9 +157,51 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "907", 
+                                    "organizationMembers": [
+                                        "907"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "900", 
+                                    "organizationMembers": [
+                                        "900"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G778", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "778", 
                                     "organizationMembers": [
-                                        "778"
+                                        "G778"
                                     ]
                                 }
                             ], 
@@ -538,7 +615,7 @@
                     }
                 ], 
                 "timePeriod": {
-                    "endDateTime": "", 
+                    "endDateTime": "2016-07-01", 
                     "startDateTime": "2014-09-01"
                 }, 
                 "resourceUsage": [
@@ -817,7 +894,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]

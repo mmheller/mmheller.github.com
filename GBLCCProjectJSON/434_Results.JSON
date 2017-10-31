@@ -65,16 +65,11 @@
                 ]
             }, 
             {
-                "isOrganization": true, 
-                "name": "University of Idaho", 
                 "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:traceyj@uidaho.edu"
-                    }
-                ], 
-                "contactId": "794", 
-                "contactType": "Academic"
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
             }, 
             {
                 "isOrganization": true, 
@@ -103,21 +98,57 @@
                 "contactType": "Federal"
             }, 
             {
+                "isOrganization": false, 
+                "name": "Todd Katzner", 
                 "memberOfOrganization": [
                     "G230"
                 ], 
-                "contactId": "855", 
-                "isOrganization": false, 
-                "name": "Douglas Shinneman", 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:tkatzner@usgs.gov"
+                    }
+                ], 
+                "contactId": "851", 
                 "contactType": "Federal"
             }, 
             {
+                "isOrganization": true, 
+                "name": "University of Idaho", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:traceyj@uidaho.edu"
+                    }
+                ], 
+                "contactId": "G794", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Tracey Johnson", 
+                "memberOfOrganization": [
+                    "G794"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:traceyj@uidaho.edu"
+                    }
+                ], 
+                "contactId": "794", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Douglas Shinneman", 
                 "memberOfOrganization": [
                     "G230"
                 ], 
-                "contactId": "851", 
-                "isOrganization": false, 
-                "name": "Todd Katzner", 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:dshinneman@usgs.gov"
+                    }
+                ], 
+                "contactId": "855", 
                 "contactType": "Federal"
             }, 
             {
@@ -131,7 +162,7 @@
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "completed"
+                    "onGoing"
                 ], 
                 "pointOfContact": [
                     {
@@ -166,13 +197,13 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "794", 
+                                    "contactId": "560", 
                                     "organizationMembers": [
-                                        "794"
+                                        "560"
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -197,7 +228,7 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "855", 
+                                    "contactId": "851", 
                                     "organizationMembers": [
                                         "G230"
                                     ]
@@ -208,7 +239,27 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "851", 
+                                    "contactId": "G794", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "794", 
+                                    "organizationMembers": [
+                                        "G794"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "855", 
                                     "organizationMembers": [
                                         "G230"
                                     ]
@@ -1994,7 +2045,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-10-18", 
+                        "date": "2017-10-31", 
                         "dateType": "creation"
                     }
                 ]
