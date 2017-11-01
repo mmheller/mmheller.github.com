@@ -44,10 +44,10 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "72", 
+                "contactId": "60", 
                 "isOrganization": true, 
-                "name": "US Geological Survey", 
-                "contactType": "Federal"
+                "name": "Univ. of Idaho", 
+                "contactType": "Academic"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -58,17 +58,10 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "34", 
+                "contactId": "72", 
                 "isOrganization": true, 
-                "name": "National Wildlife Federation", 
-                "contactType": "Nonprofit"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "60", 
-                "isOrganization": true, 
-                "name": "Univ. of Idaho", 
-                "contactType": "Academic"
+                "name": "US Geological Survey", 
+                "contactType": "Federal"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -79,9 +72,42 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "34", 
+                "isOrganization": true, 
+                "name": "National Wildlife Federation", 
+                "contactType": "Nonprofit"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "33", 
                 "isOrganization": true, 
                 "name": "National Park Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "US Fish and Wildlife Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mary_mahaffy@fws.gov"
+                    }
+                ], 
+                "contactId": "G180", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Mary Mahaffy", 
+                "memberOfOrganization": [
+                    "G180"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:mary_mahaffy@fws.gov"
+                    }
+                ], 
+                "contactId": "180", 
                 "contactType": "Federal"
             }, 
             {
@@ -111,7 +137,579 @@
                 "contactType": "Academic"
             }
         ], 
-        "metadata": null, 
+        "metadata": {
+            "resourceInfo": {
+                "status": [
+                    "completed"
+                ], 
+                "pointOfContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "pointOfContact"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "100"
+                            }
+                        ], 
+                        "role": "principalInvestigator"
+                    }
+                ], 
+                "abstract": "This project applied the results of an on-going climate change vulnerability assessment to the management of two complex landscapes. The vulnerability assessment project team worked with managers, land-owners, and conservation practitioners to explore 1) how downscaled climate datasets, modeled vegetation changes, and information on estimated species sensitivities could be used to develop climate change adaptation strategies, and 2) how model results and datasets could be made more useful for informing the management of species and landscapes. To accomplish these two goals, datasets and model outputs for two landscapes were prepared, 1) the British Columbia Park system, specifically the midcoast region, and 2) the National Wildlife Refuge system in the Willamette Valley, OR. Additionally, workshops were held with stakeholders in both regions.", 
+                "citation": {
+                    "title": "Applying Vulnerability Assessment Tools to Plan for Climate Adaptation:  Case Studies in the North Pacific LCC", 
+                    "onlineResource": [
+                        {
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=15", 
+                            "name": "Project Report Page"
+                        }
+                    ], 
+                    "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "60", 
+                                    "organizationMembers": [
+                                        "60"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "126", 
+                                    "organizationMembers": [
+                                        "126"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "72", 
+                                    "organizationMembers": [
+                                        "72"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "55", 
+                                    "organizationMembers": [
+                                        "55"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "34", 
+                                    "organizationMembers": [
+                                        "34"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "33", 
+                                    "organizationMembers": [
+                                        "33"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G180", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "180", 
+                                    "organizationMembers": [
+                                        "G180"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G100", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "100", 
+                                    "organizationMembers": [
+                                        "G100"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }
+                    ], 
+                    "alternateTitle": [
+                        "Lawler2011"
+                    ], 
+                    "date": [
+                        {
+                            "date": "2011-09-20", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "15", 
+                            "namespace": "lcc:np"
+                        }, 
+                        {
+                            "identifier": "527c3581e4b0050d7e26b7dd", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ]
+                }, 
+                "defaultResourceLocale": {
+                    "country": "USA", 
+                    "characterSet": "UTF-8", 
+                    "language": "eng"
+                }, 
+                "purpose": "Vulnerability Assessment Conservation Planning Decision Support Academics & scientific researchers State agencies Federal resource managers", 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 60.00012207000006, 
+                                    "westLongitude": -139.05700683599997, 
+                                    "southLatitude": 43.38012695300006, 
+                                    "eastLongitude": -114.06909179699997
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -139.05700683599997, 
+                                                    43.38012695300006
+                                                ], 
+                                                [
+                                                    -139.05700683599997, 
+                                                    60.00012207000006
+                                                ], 
+                                                [
+                                                    -114.06909179699997, 
+                                                    60.00012207000006
+                                                ], 
+                                                [
+                                                    -114.06909179699997, 
+                                                    43.38012695300006
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
+                "timePeriod": {
+                    "endDateTime": "2014-03-31", 
+                    "startDateTime": "2011-09-20"
+                }, 
+                "resourceUsage": [
+                    {
+                        "specificUsage": "Project information", 
+                        "userContactInfo": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "administrator"
+                            }
+                        ]
+                    }
+                ], 
+                "keyword": [
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Project Category", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/52dee7c5e4b0dee2a6cd6b18"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "5da1d3b7-375b-58ae-a134-2ee0c94c395f"
+                                }
+                            ], 
+                            "title": "Project Category - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Vulnerability Assessment"
+                            }, 
+                            {
+                                "keyword": "Conservation Planning"
+                            }, 
+                            {
+                                "keyword": "Decision Support"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC End User Type", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/54760ef9e4b0f62cb5dc41a0"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "425f4a7c-dca2-56d8-947e-6f6bd1033d70"
+                                }
+                            ], 
+                            "title": "End User Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Academics & scientific researchers"
+                            }, 
+                            {
+                                "keyword": "State agencies"
+                            }, 
+                            {
+                                "keyword": "Federal resource managers"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "climate change"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " adaptation strategies"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " vegetation changes"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " species sensitivities"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "NPLCC"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " B.C."
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " OR"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Willamette Basin"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "OR-4"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Goals", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_North Pacific Goals"
+                                }
+                            ], 
+                            "title": "Custom North Pacific Goals thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Multiple priority topics"
+                            }, 
+                            {
+                                "keyword": "Priority B. Changes in air temperature and precipitation on forests"
+                            }
+                        ]
+                    }
+                ], 
+                "resourceType": [
+                    {
+                        "type": "project"
+                    }
+                ], 
+                "resourceMaintenance": [
+                    {
+                        "frequency": "as needed", 
+                        "contact": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "custodian"
+                            }
+                        ]
+                    }
+                ], 
+                "shortAbstract": ""
+            }, 
+            "funding": [
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "180", 
+                            "currency": "USD", 
+                            "amount": 72915.0, 
+                            "recipientId": "100", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2011-09-30", 
+                        "periodName": [
+                            "FY2011"
+                        ], 
+                        "startDateTime": "2010-10-01"
+                    }
+                }
+            ], 
+            "metadataInfo": {
+                "metadataOnlineResource": [
+                    {
+                        "uri": "https://www.sciencebase.gov/catalog/item/527c3581e4b0050d7e26b7dd?community=North+Pacific+Landscape+Conservation+Cooperative"
+                    }
+                ], 
+                "parentMetadata": {
+                    "identifier": [
+                        {
+                            "identifier": "52694a4ce4b0584cbe91689c", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ], 
+                    "title": "ScienceBase Parent"
+                }, 
+                "metadataIdentifier": {
+                    "identifier": "527c3581e4b0050d7e26b7dd", 
+                    "namespace": "gov.sciencebase.catalog"
+                }, 
+                "metadataContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "author"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "custodian"
+                    }
+                ], 
+                "metadataDate": [
+                    {
+                        "date": "2017-11-01", 
+                        "dateType": "creation"
+                    }
+                ]
+            }, 
+            "associatedResource": [
+                {
+                    "resourceType": [
+                        {
+                            "type": "Report"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "55889caee4b0b6d21dd6197a", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Climate Adaptation Planning for British Columbia Provincial Parks:"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Climate Adaptation Planning for British Columbia Provincial Parks:"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Training/Outreach/Workshop"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "https://www.sciencebase.gov/catalog/55889fcbe4b0b6d21dd61982", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Willamette Valley Climate Change Adaptation Workshop"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Willamette Valley Climate Change Adaptation Workshop"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Report"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5588a1f3e4b0b6d21dd6198a", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Applying Vulnerability Assessment Tools to Plan for Climate Adaptation: Case studies in the North Pacific LCC"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Applying Vulnerability Assessment Tools to Plan for Climate Adaptation: Case studies in the North Pacific LCC"
+                    }
+                }
+            ], 
+            "resourceDistribution": [
+                {
+                    "distributor": [
+                        {
+                            "contact": {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "distributor"
+                            }, 
+                            "transferOption": [
+                                {
+                                    "transferSize": 99999, 
+                                    "unitsOfDistribution": "unknown", 
+                                    "onlineOption": [
+                                        {
+                                            "uri": "https://www.sciencebase.gov/catalog/item/527c3581e4b0050d7e26b7dd?community=North+Pacific+Landscape+Conservation+Cooperative"
+                                        }
+                                    ]
+                                }
+                            ], 
+                            "orderProcess": [
+                                {
+                                    "orderingInstructions": "Download products as needed from the Sciencebase.gov URL provided", 
+                                    "fees": "00USD"
+                                }
+                            ]
+                        }
+                    ], 
+                    "description": "GNLCC projet page includes project information and downloadable products on Scinecebase.gov"
+                }
+            ]
+        }, 
         "schema": {
             "version": "2.1.2", 
             "name": "mdJson"

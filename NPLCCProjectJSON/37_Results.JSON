@@ -43,6 +43,13 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "9", 
+                "isOrganization": true, 
+                "name": "California", 
+                "contactType": "State"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "Society for Conservation Biology-Humboldt State University Chapter", 
                 "memberOfOrganization": [], 
@@ -53,6 +60,32 @@
                 ], 
                 "contactId": "53", 
                 "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "US Fish and Wildlife Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mary_mahaffy@fws.gov"
+                    }
+                ], 
+                "contactId": "G180", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Mary Mahaffy", 
+                "memberOfOrganization": [
+                    "G180"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:mary_mahaffy@fws.gov"
+                    }
+                ], 
+                "contactId": "180", 
+                "contactType": "Federal"
             }, 
             {
                 "isOrganization": true, 
@@ -97,7 +130,658 @@
                 "contactType": "Nonprofit"
             }
         ], 
-        "metadata": null, 
+        "metadata": {
+            "resourceInfo": {
+                "status": [
+                    "completed"
+                ], 
+                "pointOfContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "pointOfContact"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "93"
+                            }
+                        ], 
+                        "role": "principalInvestigator"
+                    }
+                ], 
+                "abstract": "This project used sound science and best management practices in the  development and preparation of a coast redwoods for climate change workshop and related field trip involving multiple partners and others. The main purpose of the workshop was information exchange and shared knowledge on how best to manage coast redwoods for projected climate changes.", 
+                "citation": {
+                    "title": "Managing Coast Redwoods for Resilience and Adaptation in Changing Climate", 
+                    "onlineResource": [
+                        {
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=37", 
+                            "name": "Project Report Page"
+                        }
+                    ], 
+                    "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "9", 
+                                    "organizationMembers": [
+                                        "9"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "53", 
+                                    "organizationMembers": [
+                                        "53"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G180", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "180", 
+                                    "organizationMembers": [
+                                        "G180"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G93", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "93", 
+                                    "organizationMembers": [
+                                        "G93"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G294", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "294", 
+                                    "organizationMembers": [
+                                        "G294"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }
+                    ], 
+                    "alternateTitle": [
+                        "DellaSala2013"
+                    ], 
+                    "date": [
+                        {
+                            "date": "2013-08-04", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "37", 
+                            "namespace": "lcc:np"
+                        }, 
+                        {
+                            "identifier": "53fce6a2e4b0413fd75eabbb", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ]
+                }, 
+                "defaultResourceLocale": {
+                    "country": "USA", 
+                    "characterSet": "UTF-8", 
+                    "language": "eng"
+                }, 
+                "purpose": "Vulnerability Assessment Conservation Planning Conservation Design Academics & scientific researchers Federal resource managers State agencies", 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 41.97176401326997, 
+                                    "westLongitude": -124.48827876361558, 
+                                    "southLatitude": 36.65822506675371, 
+                                    "eastLongitude": -121.57907889756079
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -124.29575818384114, 
+                                                    41.96116060160799
+                                                ], 
+                                                [
+                                                    -123.83228271478549, 
+                                                    41.97176401326997
+                                                ], 
+                                                [
+                                                    -123.85367389080334, 
+                                                    40.638096356747944
+                                                ], 
+                                                [
+                                                    -123.34028567898537, 
+                                                    39.33241744214189
+                                                ], 
+                                                [
+                                                    -122.38481317358128, 
+                                                    38.1590481343416
+                                                ], 
+                                                [
+                                                    -121.57907889756079, 
+                                                    36.686820154189874
+                                                ], 
+                                                [
+                                                    -121.99264162385413, 
+                                                    36.65822506675371
+                                                ], 
+                                                [
+                                                    -123.74671801345549, 
+                                                    38.995179818699285
+                                                ], 
+                                                [
+                                                    -123.88932584882272, 
+                                                    39.651568393893896
+                                                ], 
+                                                [
+                                                    -124.27436700891987, 
+                                                    40.056631309091905
+                                                ], 
+                                                [
+                                                    -124.48827876361558, 
+                                                    40.470150419954486
+                                                ], 
+                                                [
+                                                    -124.21732387433434, 
+                                                    41.2574371020512
+                                                ], 
+                                                [
+                                                    -124.29575818384114, 
+                                                    41.96116060160799
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
+                "timePeriod": {
+                    "endDateTime": "2014-12-30", 
+                    "startDateTime": "2013-08-04"
+                }, 
+                "resourceUsage": [
+                    {
+                        "specificUsage": "Project information", 
+                        "userContactInfo": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "administrator"
+                            }
+                        ]
+                    }
+                ], 
+                "keyword": [
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Project Category", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/52dee7c5e4b0dee2a6cd6b18"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "5da1d3b7-375b-58ae-a134-2ee0c94c395f"
+                                }
+                            ], 
+                            "title": "Project Category - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Vulnerability Assessment"
+                            }, 
+                            {
+                                "keyword": "Conservation Planning"
+                            }, 
+                            {
+                                "keyword": "Conservation Design"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC End User Type", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/54760ef9e4b0f62cb5dc41a0"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "425f4a7c-dca2-56d8-947e-6f6bd1033d70"
+                                }
+                            ], 
+                            "title": "End User Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Academics & scientific researchers"
+                            }, 
+                            {
+                                "keyword": "Federal resource managers"
+                            }, 
+                            {
+                                "keyword": "State agencies"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Coastal Redwoods"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Adaptation"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Climate Change"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Pacific Coastal Rainforest"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Northern California Coastal Forest"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "California"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " NPLCC"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " California Coast"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Oregon"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Santa Cruz County"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "CA-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "CA-12"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "CA-14"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "CA-18"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "CA-17"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Goals", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_North Pacific Goals"
+                                }
+                            ], 
+                            "title": "Custom North Pacific Goals thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Priority B. Changes in air temperature and precipitation on forests"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Stressors", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_North Pacific Stressors"
+                                }
+                            ], 
+                            "title": "Custom North Pacific Stressors thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Change in air temperature and precipitation"
+                            }, 
+                            {
+                                "keyword": "Climate Change"
+                            }, 
+                            {
+                                "keyword": "Disease, pest, and invasive species"
+                            }
+                        ]
+                    }
+                ], 
+                "resourceType": [
+                    {
+                        "type": "project"
+                    }
+                ], 
+                "resourceMaintenance": [
+                    {
+                        "frequency": "as needed", 
+                        "contact": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "custodian"
+                            }
+                        ]
+                    }
+                ], 
+                "shortAbstract": ""
+            }, 
+            "funding": [
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "180", 
+                            "currency": "USD", 
+                            "amount": 24383.0, 
+                            "recipientId": "93", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2013-09-30", 
+                        "periodName": [
+                            "FY2013"
+                        ], 
+                        "startDateTime": "2012-10-01"
+                    }
+                }
+            ], 
+            "metadataInfo": {
+                "metadataOnlineResource": [
+                    {
+                        "uri": "https://www.sciencebase.gov/catalog/item/53fce6a2e4b0413fd75eabbb"
+                    }
+                ], 
+                "parentMetadata": {
+                    "identifier": [
+                        {
+                            "identifier": "52961746e4b0becc369c8ca7", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ], 
+                    "title": "ScienceBase Parent"
+                }, 
+                "metadataIdentifier": {
+                    "identifier": "53fce6a2e4b0413fd75eabbb", 
+                    "namespace": "gov.sciencebase.catalog"
+                }, 
+                "metadataContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "author"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "custodian"
+                    }
+                ], 
+                "metadataDate": [
+                    {
+                        "date": "2017-11-01", 
+                        "dateType": "creation"
+                    }
+                ]
+            }, 
+            "associatedResource": [
+                {
+                    "resourceType": [
+                        {
+                            "type": "Report"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "54cbeba6e4b01fabb3001d8f", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Redwoods Workshop Summary Draft Report"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Redwoods Workshop Summary Draft Report"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Report"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "54cbea50e4b01fabb3001d82", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "GeoInstitue Final Report"
+                    }, 
+                    "resourceCitation": {
+                        "title": "GeoInstitue Final Report"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Training/Outreach/Workshop"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5577517ae4b032353cbb1857", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "NPLCC webinar - presentation"
+                    }, 
+                    "resourceCitation": {
+                        "title": "NPLCC webinar - presentation"
+                    }
+                }
+            ], 
+            "resourceDistribution": [
+                {
+                    "distributor": [
+                        {
+                            "contact": {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "distributor"
+                            }, 
+                            "transferOption": [
+                                {
+                                    "transferSize": 99999, 
+                                    "unitsOfDistribution": "unknown", 
+                                    "onlineOption": [
+                                        {
+                                            "uri": "https://www.sciencebase.gov/catalog/item/53fce6a2e4b0413fd75eabbb"
+                                        }
+                                    ]
+                                }
+                            ], 
+                            "orderProcess": [
+                                {
+                                    "orderingInstructions": "Download products as needed from the Sciencebase.gov URL provided", 
+                                    "fees": "00USD"
+                                }
+                            ]
+                        }
+                    ], 
+                    "description": "GNLCC projet page includes project information and downloadable products on Scinecebase.gov"
+                }
+            ]
+        }, 
         "schema": {
             "version": "2.1.2", 
             "name": "mdJson"

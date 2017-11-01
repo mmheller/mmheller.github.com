@@ -44,6 +44,32 @@
             }, 
             {
                 "isOrganization": true, 
+                "name": "Conservation Northwest", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:jwatkins@conservationnw.org"
+                    }
+                ], 
+                "contactId": "G106", 
+                "contactType": "Nonprofit"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Jen Watkins", 
+                "memberOfOrganization": [
+                    "G106"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:jwatkins@conservationnw.org"
+                    }
+                ], 
+                "contactId": "106", 
+                "contactType": "Nonprofit"
+            }, 
+            {
+                "isOrganization": true, 
                 "name": "US Forest Service", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
@@ -70,32 +96,799 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "Conservation Northwest", 
+                "name": "US Fish and Wildlife Service", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:jwatkins@conservationnw.org"
+                        "uri": "mailto:mary_mahaffy@fws.gov"
                     }
                 ], 
-                "contactId": "G106", 
-                "contactType": "Nonprofit"
+                "contactId": "G180", 
+                "contactType": "Federal"
             }, 
             {
                 "isOrganization": false, 
-                "name": "Jen Watkins", 
+                "name": "Mary Mahaffy", 
                 "memberOfOrganization": [
-                    "G106"
+                    "G180"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mailto:jwatkins@conservationnw.org"
+                        "uri": "mailto:mailto:mary_mahaffy@fws.gov"
                     }
                 ], 
-                "contactId": "106", 
-                "contactType": "Nonprofit"
+                "contactId": "180", 
+                "contactType": "Federal"
             }
         ], 
-        "metadata": null, 
+        "metadata": {
+            "resourceInfo": {
+                "status": [
+                    "onGoing"
+                ], 
+                "pointOfContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "pointOfContact"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "106"
+                            }
+                        ], 
+                        "role": "principalInvestigator"
+                    }
+                ], 
+                "abstract": "2016 WildLinks\nEach year our partner forum hosts a fall WildLinks conference to bring our network of practitioners and\nmanagers together to further coordination around adaptation and resilience for the species and\necosystems of Cascadia with specific objectives. This fall, WildLinks will specifically focus on furthering\ncollaborative planning around a few of our partner forums priority topics including:\n Digesting the results from our first phase of work on spatial priorities conducted in 2016, and\nchart a pathway forward for continuing this work;\n Initiate transboundary conservation planning from science gaps to recommendations and\nmonitoring suggestions for two of our priority topics: Terrestrial habitat connectivity and Canada\nlynx.\n Facilitate side meetings and work sessions on timely topics in Cascadia.\n2016 eDNA aquatics pilot project in two Cascadia watersheds\nThe Cascadia Partner Forum requests funding to support a pilot project effort with our partners to:\n Produce reliable and precise estimates on the distribution of priority aquatic associated species in\nthese two watersheds and simultaneously lay the groundwork for detecting nonnative species\npresence to inform management, monitoring, and conservation investments. Both watersheds\nwill include detection of bull trout (a strong climate indicator species associated with cold water\nrefugia systems, and a priority species of the Cascadia Partner Forum) as well as one additional\nhigh priority species for local managers to inform their ongoing work.\n Build a transboundary community in Cascadia to coordinate the planning and implementation of\neDNA-based surveys and sample analyses that can be coupled with species occupancy models\nfor both of the watersheds, serving as a pilot that can be scaled up to a larger spatial extent in\nthe future. In British Columbia, conduct scoping efforts to identify laboratory needs for samples\ncollected in watersheds on that side of the border if efforts scaled up.\n Provide momentum for expanding range-wide species assessments using eDNA sampling,\nalready underway across the entire interior Columbia River basin in the U.S., to the rest of\nwestern North America.\n\nFY2016\ntest", 
+                "citation": {
+                    "title": "Furthering adaptation coordination and planning for species and ecosystems in the transboundary Cascadia landscape, and assessing contribution of eDNA to monitoring priority species and climate indicators in two Cascadia watersheds.", 
+                    "onlineResource": [
+                        {
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=66", 
+                            "name": "Project Report Page"
+                        }
+                    ], 
+                    "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G106", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "106", 
+                                    "organizationMembers": [
+                                        "G106"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G89", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "89", 
+                                    "organizationMembers": [
+                                        "G89"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G180", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "180", 
+                                    "organizationMembers": [
+                                        "G180"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }
+                    ], 
+                    "alternateTitle": [
+                        "Watkins2016"
+                    ], 
+                    "date": [
+                        {
+                            "date": "2016-09-12", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "66", 
+                            "namespace": "lcc:np"
+                        }, 
+                        {
+                            "identifier": "597bc285e4b0a38ca2756674", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ]
+                }, 
+                "defaultResourceLocale": {
+                    "country": "USA", 
+                    "characterSet": "UTF-8", 
+                    "language": "eng"
+                }, 
+                "purpose": "Traditional Ecological Knowledge Vulnerability Assessment Socio-economics/Ecosystem Services Tribes Federal resource managers State agencies", 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 51.289299394687134, 
+                                    "westLongitude": -123.38356872281346, 
+                                    "southLatitude": 46.697674355714526, 
+                                    "eastLongitude": -118.66770529932272
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -121.2362942033188, 
+                                                    46.80742927528561
+                                                ], 
+                                                [
+                                                    -122.20540472806113, 
+                                                    46.697674355714526
+                                                ], 
+                                                [
+                                                    -122.37485915103505, 
+                                                    47.33042909210861
+                                                ], 
+                                                [
+                                                    -122.37503268203734, 
+                                                    47.331073227774475
+                                                ], 
+                                                [
+                                                    -122.4874175215543, 
+                                                    47.74658862528022
+                                                ], 
+                                                [
+                                                    -122.48814731499655, 
+                                                    47.749276098646455
+                                                ], 
+                                                [
+                                                    -122.49746328641311, 
+                                                    47.78357009135307
+                                                ], 
+                                                [
+                                                    -122.49973140914067, 
+                                                    47.791916087875734
+                                                ], 
+                                                [
+                                                    -122.50631066775944, 
+                                                    47.81611816911113
+                                                ], 
+                                                [
+                                                    -122.53126139725566, 
+                                                    47.90779802862497
+                                                ], 
+                                                [
+                                                    -122.54851253179216, 
+                                                    47.97109142899086
+                                                ], 
+                                                [
+                                                    -122.56319188847172, 
+                                                    48.02488810823728
+                                                ], 
+                                                [
+                                                    -122.61289662168053, 
+                                                    48.20662882505712
+                                                ], 
+                                                [
+                                                    -122.63537397459186, 
+                                                    48.28860412953282
+                                                ], 
+                                                [
+                                                    -122.66510921057376, 
+                                                    48.39684721384752
+                                                ], 
+                                                [
+                                                    -122.66896904995089, 
+                                                    48.41088106083997
+                                                ], 
+                                                [
+                                                    -122.67443542510931, 
+                                                    48.430749428807985
+                                                ], 
+                                                [
+                                                    -122.67511592361, 
+                                                    48.43322225903634
+                                                ], 
+                                                [
+                                                    -122.69245711118329, 
+                                                    48.49619697091052
+                                                ], 
+                                                [
+                                                    -122.81462078531742, 
+                                                    48.93762307817581
+                                                ], 
+                                                [
+                                                    -122.81483019190911, 
+                                                    48.9383764217031
+                                                ], 
+                                                [
+                                                    -122.81743646312103, 
+                                                    48.94775159174468
+                                                ], 
+                                                [
+                                                    -122.81796065618784, 
+                                                    48.94963698565441
+                                                ], 
+                                                [
+                                                    -122.81833727092301, 
+                                                    48.95099153190509
+                                                ], 
+                                                [
+                                                    -123.3273487803612, 
+                                                    50.74821836420431
+                                                ], 
+                                                [
+                                                    -123.38356872281346, 
+                                                    50.9426312110285
+                                                ], 
+                                                [
+                                                    -119.58690174128651, 
+                                                    51.289299394687134
+                                                ], 
+                                                [
+                                                    -119.07527456462259, 
+                                                    48.999891633688165
+                                                ], 
+                                                [
+                                                    -118.66770529932272, 
+                                                    47.09724929462751
+                                                ], 
+                                                [
+                                                    -120.96787247541269, 
+                                                    46.83778938283483
+                                                ], 
+                                                [
+                                                    -121.23492103596564, 
+                                                    46.807584632703865
+                                                ], 
+                                                [
+                                                    -121.2362942033188, 
+                                                    46.80742927528561
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
+                "timePeriod": {
+                    "endDateTime": "2018-09-12", 
+                    "startDateTime": "2016-09-12"
+                }, 
+                "resourceUsage": [
+                    {
+                        "specificUsage": "Project information", 
+                        "userContactInfo": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "administrator"
+                            }
+                        ]
+                    }
+                ], 
+                "keyword": [
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Project Category", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/52dee7c5e4b0dee2a6cd6b18"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "5da1d3b7-375b-58ae-a134-2ee0c94c395f"
+                                }
+                            ], 
+                            "title": "Project Category - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Traditional Ecological Knowledge"
+                            }, 
+                            {
+                                "keyword": "Vulnerability Assessment"
+                            }, 
+                            {
+                                "keyword": "Socio-economics/Ecosystem Services"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC End User Type", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/54760ef9e4b0f62cb5dc41a0"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "425f4a7c-dca2-56d8-947e-6f6bd1033d70"
+                                }
+                            ], 
+                            "title": "End User Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Tribes"
+                            }, 
+                            {
+                                "keyword": "Federal resource managers"
+                            }, 
+                            {
+                                "keyword": "State agencies"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "environment"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " NPLCC"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " North Pacific Landscape Conservation Cooperative"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " biota"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Tribes"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Native Americans"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " First Nations"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " TEK"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Traditional Ecological Knowledge"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Society"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Washington"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "WA-1"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-3"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-4"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-5"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-6"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-7"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-8"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-9"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Conservation Targets", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_North Pacific Conservation Targets"
+                                }
+                            ], 
+                            "title": "Custom North Pacific Conservation Targets thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Anadromous fish"
+                            }, 
+                            {
+                                "keyword": "Steelhead"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Ecotypic Areas", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_North Pacific Ecotypic Areas"
+                                }
+                            ], 
+                            "title": "Custom North Pacific Ecotypic Areas thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "NPLCC"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Goals", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_North Pacific Goals"
+                                }
+                            ], 
+                            "title": "Custom North Pacific Goals thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Goal 3: Maintain hydrologic regimes\nthat support native or desirable aquatic\nplant and animal communities in still and\nmoving water systems."
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Stressors", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_North Pacific Stressors"
+                                }
+                            ], 
+                            "title": "Custom North Pacific Stressors thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Hydrologic regime shift"
+                            }
+                        ]
+                    }
+                ], 
+                "resourceType": [
+                    {
+                        "type": "project"
+                    }
+                ], 
+                "resourceMaintenance": [
+                    {
+                        "frequency": "as needed", 
+                        "contact": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "custodian"
+                            }
+                        ]
+                    }
+                ], 
+                "shortAbstract": ""
+            }, 
+            "funding": [
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "180", 
+                            "currency": "USD", 
+                            "amount": 18000.0, 
+                            "recipientId": "106", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2016-09-30", 
+                        "periodName": [
+                            "FY2016"
+                        ], 
+                        "startDateTime": "2015-10-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "180", 
+                            "currency": "USD", 
+                            "amount": 15000.0, 
+                            "recipientId": "106", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2016-09-30", 
+                        "periodName": [
+                            "FY2016"
+                        ], 
+                        "startDateTime": "2015-10-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "180", 
+                            "currency": "USD", 
+                            "amount": 14000.0, 
+                            "recipientId": "106", 
+                            "matching": true
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2016-09-30", 
+                        "periodName": [
+                            "FY2016"
+                        ], 
+                        "startDateTime": "2015-10-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "180", 
+                            "currency": "USD", 
+                            "amount": 17980.0, 
+                            "recipientId": "106", 
+                            "matching": true
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2016-09-30", 
+                        "periodName": [
+                            "FY2016"
+                        ], 
+                        "startDateTime": "2015-10-01"
+                    }
+                }
+            ], 
+            "metadataInfo": {
+                "metadataOnlineResource": [
+                    {
+                        "uri": "https://www.sciencebase.gov/catalog/item/597bc285e4b0a38ca2756674"
+                    }
+                ], 
+                "parentMetadata": {
+                    "identifier": [
+                        {
+                            "identifier": "5977c6f3e4b0ec1a4888e558", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ], 
+                    "title": "ScienceBase Parent"
+                }, 
+                "metadataIdentifier": {
+                    "identifier": "597bc285e4b0a38ca2756674", 
+                    "namespace": "gov.sciencebase.catalog"
+                }, 
+                "metadataContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "author"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "custodian"
+                    }
+                ], 
+                "metadataDate": [
+                    {
+                        "date": "2017-11-01", 
+                        "dateType": "creation"
+                    }
+                ]
+            }, 
+            "associatedResource": [], 
+            "resourceDistribution": [
+                {
+                    "distributor": [
+                        {
+                            "contact": {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "distributor"
+                            }, 
+                            "transferOption": [
+                                {
+                                    "transferSize": 99999, 
+                                    "unitsOfDistribution": "unknown", 
+                                    "onlineOption": [
+                                        {
+                                            "uri": "https://www.sciencebase.gov/catalog/item/597bc285e4b0a38ca2756674"
+                                        }
+                                    ]
+                                }
+                            ], 
+                            "orderProcess": [
+                                {
+                                    "orderingInstructions": "Download products as needed from the Sciencebase.gov URL provided", 
+                                    "fees": "00USD"
+                                }
+                            ]
+                        }
+                    ], 
+                    "description": "GNLCC projet page includes project information and downloadable products on Scinecebase.gov"
+                }
+            ]
+        }, 
         "schema": {
             "version": "2.1.2", 
             "name": "mdJson"

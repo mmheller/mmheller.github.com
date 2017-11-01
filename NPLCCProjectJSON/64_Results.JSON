@@ -43,22 +43,6 @@
                 ]
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "G238", 
-                "isOrganization": true, 
-                "name": "California Sea Grant", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G238"
-                ], 
-                "contactId": "238", 
-                "isOrganization": false, 
-                "name": "Joe Tyburczy", 
-                "contactType": "Academic"
-            }, 
-            {
                 "isOrganization": true, 
                 "name": "Coastal Ecosystems Institute of Northern California", 
                 "memberOfOrganization": [], 
@@ -83,9 +67,570 @@
                 ], 
                 "contactId": "237", 
                 "contactType": "Nonprofit"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G238", 
+                "isOrganization": true, 
+                "name": "California Sea Grant", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G238"
+                ], 
+                "contactId": "238", 
+                "isOrganization": false, 
+                "name": "Joe Tyburczy", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "US Fish and Wildlife Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mary_mahaffy@fws.gov"
+                    }
+                ], 
+                "contactId": "G180", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Mary Mahaffy", 
+                "memberOfOrganization": [
+                    "G180"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:mary_mahaffy@fws.gov"
+                    }
+                ], 
+                "contactId": "180", 
+                "contactType": "Federal"
             }
         ], 
-        "metadata": null, 
+        "metadata": {
+            "resourceInfo": {
+                "status": [
+                    "onGoing"
+                ], 
+                "pointOfContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "pointOfContact"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "237"
+                            }
+                        ], 
+                        "role": "principalInvestigator"
+                    }
+                ], 
+                "abstract": "The Humboldt Bay-Eel River region may experience the highest rate of relative sea level rise increase along the West Coast. The Project will engage stakeholders to discuss community and science needs for planning and implementing adaptation measures to sea level rise. The Project is a critical step in developing an ecosystem based-management (EBM) approach to guide the protection, management, enhancement, adaptation, restoration, and possible redistribution of Humboldt Bay-Eel River Delta habitats under future climate scenarios. This process will be informed by the best-available science, the needs of Humboldt Bay-Eel River Delta agricultural producers, and other community members.", 
+                "citation": {
+                    "title": "Developing Shared Strategies for Sea-level Rise Adaptation in Working Lands of Humboldt Bay and the Eel River Delta", 
+                    "onlineResource": [
+                        {
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=64", 
+                            "name": "Project Report Page"
+                        }
+                    ], 
+                    "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G237", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "237", 
+                                    "organizationMembers": [
+                                        "G237"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G238", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "238", 
+                                    "organizationMembers": [
+                                        "G238"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G180", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "180", 
+                                    "organizationMembers": [
+                                        "G180"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }
+                    ], 
+                    "alternateTitle": [
+                        "Demers2015"
+                    ], 
+                    "date": [
+                        {
+                            "date": "2015-08-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "64", 
+                            "namespace": "lcc:np"
+                        }, 
+                        {
+                            "identifier": "5609c775e4b058f706e5359d", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ]
+                }, 
+                "defaultResourceLocale": {
+                    "country": "USA", 
+                    "characterSet": "UTF-8", 
+                    "language": "eng"
+                }, 
+                "purpose": "Conservation Planning Socio-economics/Ecosystem Services Population & Habitat Evaluation/Projection Academics & scientific researchers Federal resource managers Regional & county planners", 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 40.92006615246292, 
+                                    "westLongitude": -124.35455902602006, 
+                                    "southLatitude": 40.55628616855496, 
+                                    "eastLongitude": -124.03538589052708
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -124.34640329809655, 
+                                                    40.58685239865977
+                                                ], 
+                                                [
+                                                    -124.14234176787494, 
+                                                    40.92006615246292
+                                                ], 
+                                                [
+                                                    -124.13090169970357, 
+                                                    40.91877710922363
+                                                ], 
+                                                [
+                                                    -124.06866105291694, 
+                                                    40.907493199893786
+                                                ], 
+                                                [
+                                                    -124.03538589052708, 
+                                                    40.86975999466918
+                                                ], 
+                                                [
+                                                    -124.03538589052708, 
+                                                    40.806823511656255
+                                                ], 
+                                                [
+                                                    -124.0757914447401, 
+                                                    40.66094141470242
+                                                ], 
+                                                [
+                                                    -124.12808098422855, 
+                                                    40.59961166433817
+                                                ], 
+                                                [
+                                                    -124.19700810573434, 
+                                                    40.57073111746252
+                                                ], 
+                                                [
+                                                    -124.24454405122228, 
+                                                    40.55628616855496
+                                                ], 
+                                                [
+                                                    -124.30871757763101, 
+                                                    40.55628616855496
+                                                ], 
+                                                [
+                                                    -124.35455902602006, 
+                                                    40.5655360112618
+                                                ], 
+                                                [
+                                                    -124.34640329809655, 
+                                                    40.58685239865977
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
+                "timePeriod": {
+                    "endDateTime": "2018-09-28", 
+                    "startDateTime": "2015-08-01"
+                }, 
+                "resourceUsage": [
+                    {
+                        "specificUsage": "Project information", 
+                        "userContactInfo": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "administrator"
+                            }
+                        ]
+                    }
+                ], 
+                "keyword": [
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Project Category", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/52dee7c5e4b0dee2a6cd6b18"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "5da1d3b7-375b-58ae-a134-2ee0c94c395f"
+                                }
+                            ], 
+                            "title": "Project Category - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Conservation Planning"
+                            }, 
+                            {
+                                "keyword": "Socio-economics/Ecosystem Services"
+                            }, 
+                            {
+                                "keyword": "Population & Habitat Evaluation/Projection"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC End User Type", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/54760ef9e4b0f62cb5dc41a0"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "425f4a7c-dca2-56d8-947e-6f6bd1033d70"
+                                }
+                            ], 
+                            "title": "End User Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Academics & scientific researchers"
+                            }, 
+                            {
+                                "keyword": "Federal resource managers"
+                            }, 
+                            {
+                                "keyword": "Regional & county planners"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "sea-level rise"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " climate change"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " ecosystem-based management"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Northern California"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Eel River Delta"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Humboldt Bay"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "CA-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Goals", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_North Pacific Goals"
+                                }
+                            ], 
+                            "title": "Custom North Pacific Goals thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Priority C. Effects of changes in sea levels"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Stressors", 
+                        "thesaurus": {
+                            "identifier": [
+                                {
+                                    "identifier": "custom_North Pacific Stressors"
+                                }
+                            ], 
+                            "title": "Custom North Pacific Stressors thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Changes in sea level and coastal storms"
+                            }, 
+                            {
+                                "keyword": "Climate Change"
+                            }
+                        ]
+                    }
+                ], 
+                "resourceType": [
+                    {
+                        "type": "project"
+                    }
+                ], 
+                "resourceMaintenance": [
+                    {
+                        "frequency": "as needed", 
+                        "contact": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "custodian"
+                            }
+                        ]
+                    }
+                ], 
+                "shortAbstract": ""
+            }, 
+            "funding": [
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "180", 
+                            "currency": "USD", 
+                            "amount": 24500.0, 
+                            "recipientId": "237", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2015-09-30", 
+                        "periodName": [
+                            "FY2015"
+                        ], 
+                        "startDateTime": "2014-10-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "237", 
+                            "currency": "USD", 
+                            "amount": 53500.0, 
+                            "recipientId": "237", 
+                            "matching": true
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2015-09-30", 
+                        "periodName": [
+                            "FY2015"
+                        ], 
+                        "startDateTime": "2014-10-01"
+                    }
+                }
+            ], 
+            "metadataInfo": {
+                "metadataOnlineResource": [
+                    {
+                        "uri": "https://www.sciencebase.gov/catalog/item/5609c775e4b058f706e5359d"
+                    }
+                ], 
+                "parentMetadata": {
+                    "identifier": [
+                        {
+                            "identifier": "551c3a8ee4b0323842783aee", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ], 
+                    "title": "ScienceBase Parent"
+                }, 
+                "metadataIdentifier": {
+                    "identifier": "5609c775e4b058f706e5359d", 
+                    "namespace": "gov.sciencebase.catalog"
+                }, 
+                "metadataContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "author"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "custodian"
+                    }
+                ], 
+                "metadataDate": [
+                    {
+                        "date": "2017-11-01", 
+                        "dateType": "creation"
+                    }
+                ]
+            }, 
+            "associatedResource": [], 
+            "resourceDistribution": [
+                {
+                    "distributor": [
+                        {
+                            "contact": {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "distributor"
+                            }, 
+                            "transferOption": [
+                                {
+                                    "transferSize": 99999, 
+                                    "unitsOfDistribution": "unknown", 
+                                    "onlineOption": [
+                                        {
+                                            "uri": "https://www.sciencebase.gov/catalog/item/5609c775e4b058f706e5359d"
+                                        }
+                                    ]
+                                }
+                            ], 
+                            "orderProcess": [
+                                {
+                                    "orderingInstructions": "Download products as needed from the Sciencebase.gov URL provided", 
+                                    "fees": "00USD"
+                                }
+                            ]
+                        }
+                    ], 
+                    "description": "GNLCC projet page includes project information and downloadable products on Scinecebase.gov"
+                }
+            ]
+        }, 
         "schema": {
             "version": "2.1.2", 
             "name": "mdJson"
