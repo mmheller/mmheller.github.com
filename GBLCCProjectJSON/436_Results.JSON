@@ -3,10 +3,10 @@
         "metadataRepository": [
             {
                 "metadataStandard": "mdJSON", 
-                "citiation": {
+                "citation": {
                     "title": "LCC Network Science Catalog"
                 }, 
-                "repository": "ScienceBase"
+                "repository": "LCCScienceCatalog"
             }
         ], 
         "contact": [
@@ -65,43 +65,73 @@
                 ]
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "389", 
+                "isOrganization": true, 
+                "name": "Bureau of Land Management", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G894", 
+                "isOrganization": true, 
+                "name": "Must Resolve", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G894"
+                ], 
+                "contactId": "894", 
+                "isOrganization": false, 
+                "name": "Must Resolve Must Resolve", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "University of Nevada, Reno", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:pweisberg@cabnr.unr.edu"
+                        "uri": "mailto:owbaughman@gmail.com"
                     }
                 ], 
-                "contactId": "G802", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Peter Weisberg", 
-                "memberOfOrganization": [
-                    "G802"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mailto:pweisberg@cabnr.unr.edu"
-                    }
-                ], 
-                "contactId": "802", 
+                "contactId": "G827", 
                 "contactType": "Academic"
             }, 
             {
                 "isOrganization": false, 
                 "name": "Owen Baughman", 
                 "memberOfOrganization": [
-                    "G802"
+                    "G827"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:owbaughman@gmail.com"
+                        "uri": "mailto:mailto:owbaughman@gmail.com"
                     }
                 ], 
                 "contactId": "827", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Peter Weisberg", 
+                "memberOfOrganization": [
+                    "G827"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:pweisberg@cabnr.unr.edu"
+                    }
+                ], 
+                "contactId": "802", 
                 "contactType": "Academic"
             }, 
             {
@@ -131,7 +161,601 @@
                 "contactType": "Academic"
             }
         ], 
-        "metadata": null, 
+        "metadata": {
+            "resourceInfo": {
+                "status": [
+                    "completed"
+                ], 
+                "pointOfContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
+                            }
+                        ], 
+                        "role": "pointOfContact"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "796"
+                            }
+                        ], 
+                        "role": "principalInvestigator"
+                    }
+                ], 
+                "abstract": "FY2013\nCheatgrass die-offs are unexplained instances of stand failure observed in areas of Nevada and Utah, where cheatgrass fails to grow even though it has been a dominant component of plant communities in the past. The goals of this project are to 1) provide information on the size and extent of historic (1985 - 2012) die-offs in the Winnemucca area using satellite imagery, and 2) determine if die-offs are restoration opportunities by planting and monitoring local and commercially available native grasses in die-off areas. Support is requested to fund monitoring of the restoration project through a second growing season and to develop predictive spatial models of die-off from analysis of satellite imagery and GIS models, which will result in enhanced predictive capacity for locating die-offs at local management scales, and information on species and seed sources that can be used to restore die-offs.", 
+                "citation": {
+                    "title": "Understanding the Causes and Consequences of Cheatgrass Die-offs in the Great Basin", 
+                    "onlineResource": [
+                        {
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=436", 
+                            "name": "Project Report Page"
+                        }
+                    ], 
+                    "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "389", 
+                                    "organizationMembers": [
+                                        "389"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G894", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "894", 
+                                    "organizationMembers": [
+                                        "G894"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G827", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "827", 
+                                    "organizationMembers": [
+                                        "G827"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "802", 
+                                    "organizationMembers": [
+                                        "G827"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G796", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "796", 
+                                    "organizationMembers": [
+                                        "G796"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }
+                    ], 
+                    "alternateTitle": [
+                        "Leger2013"
+                    ], 
+                    "date": [
+                        {
+                            "date": "2013-05-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "436", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "55e0d060e4b05561fa1ef469", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ]
+                }, 
+                "defaultResourceLocale": {
+                    "country": "USA", 
+                    "characterSet": "UTF-8", 
+                    "language": "eng"
+                }, 
+                "purpose": "Monitoring Population & Habitat Evaluation/Projection Decision Support Academics & scientific researchers Federal resource managers State agencies", 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 42.035785174973036, 
+                                    "westLongitude": -119.37188990072387, 
+                                    "southLatitude": 39.88090777371702, 
+                                    "eastLongitude": -116.16806681085393
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -116.16806681085393, 
+                                                    42.035785174973036
+                                                ], 
+                                                [
+                                                    -117.3399786167617, 
+                                                    39.886678629567974
+                                                ], 
+                                                [
+                                                    -119.37188990072387, 
+                                                    39.88090777371702
+                                                ], 
+                                                [
+                                                    -118.6991535574148, 
+                                                    42.03028038560244
+                                                ], 
+                                                [
+                                                    -116.16806681085393, 
+                                                    42.035785174973036
+                                                ]
+                                            ], 
+                                            [
+                                                [
+                                                    -117.60225062923129, 
+                                                    41.3435917598318
+                                                ], 
+                                                [
+                                                    -117.60198888908519, 
+                                                    41.343362016737764
+                                                ], 
+                                                [
+                                                    -117.60142634435978, 
+                                                    41.34369461838651
+                                                ], 
+                                                [
+                                                    -117.60112688473124, 
+                                                    41.34343465467264
+                                                ], 
+                                                [
+                                                    -117.60143099110172, 
+                                                    41.343701462610106
+                                                ], 
+                                                [
+                                                    -117.60166521705253, 
+                                                    41.34391024380901
+                                                ], 
+                                                [
+                                                    -117.60225062923129, 
+                                                    41.3435917598318
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
+                "timePeriod": {
+                    "endDateTime": "2014-06-01", 
+                    "startDateTime": "2013-05-01"
+                }, 
+                "resourceUsage": [
+                    {
+                        "specificUsage": "Project information", 
+                        "userContactInfo": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
+                                    }
+                                ], 
+                                "role": "administrator"
+                            }
+                        ]
+                    }
+                ], 
+                "keyword": [
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Project Category", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/52dee7c5e4b0dee2a6cd6b18"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "5da1d3b7-375b-58ae-a134-2ee0c94c395f"
+                                }
+                            ], 
+                            "title": "Project Category - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Monitoring"
+                            }, 
+                            {
+                                "keyword": "Population & Habitat Evaluation/Projection"
+                            }, 
+                            {
+                                "keyword": "Decision Support"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC End User Type", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/54760ef9e4b0f62cb5dc41a0"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "425f4a7c-dca2-56d8-947e-6f6bd1033d70"
+                                }
+                            ], 
+                            "title": "End User Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Academics & scientific researchers"
+                            }, 
+                            {
+                                "keyword": "Federal resource managers"
+                            }, 
+                            {
+                                "keyword": "State agencies"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Cheatgrass"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " restoration"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " fungistasis"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " invasives"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Great Basin"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Nevada"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " California"
+                            }
+                        ]
+                    }
+                ], 
+                "resourceType": [
+                    {
+                        "type": "project"
+                    }
+                ], 
+                "resourceMaintenance": [
+                    {
+                        "frequency": "as needed", 
+                        "contact": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
+                                    }
+                                ], 
+                                "role": "custodian"
+                            }
+                        ]
+                    }
+                ], 
+                "shortAbstract": ""
+            }, 
+            "funding": [
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "389", 
+                            "currency": "USD", 
+                            "amount": 428000.0, 
+                            "recipientId": "796", 
+                            "matching": true
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2013-09-30", 
+                        "periodName": [
+                            "FY2013"
+                        ], 
+                        "startDateTime": "2012-10-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "894", 
+                            "currency": "USD", 
+                            "amount": 189268.0, 
+                            "recipientId": "796", 
+                            "matching": true
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2013-09-30", 
+                        "periodName": [
+                            "FY2013"
+                        ], 
+                        "startDateTime": "2012-10-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "560", 
+                            "currency": "USD", 
+                            "amount": 48222.0, 
+                            "recipientId": "796", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2013-09-30", 
+                        "periodName": [
+                            "FY2013"
+                        ], 
+                        "startDateTime": "2012-10-01"
+                    }
+                }
+            ], 
+            "metadataInfo": {
+                "metadataOnlineResource": [
+                    {
+                        "uri": "https://www.sciencebase.gov/catalog/item/55e0d060e4b05561fa1ef469"
+                    }
+                ], 
+                "parentMetadata": {
+                    "identifier": [
+                        {
+                            "identifier": "53500a48e4b02cd8cc40286a", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ], 
+                    "title": "ScienceBase Parent"
+                }, 
+                "metadataIdentifier": {
+                    "identifier": "55e0d060e4b05561fa1ef469", 
+                    "namespace": "gov.sciencebase.catalog"
+                }, 
+                "metadataContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
+                            }
+                        ], 
+                        "role": "author"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
+                            }
+                        ], 
+                        "role": "custodian"
+                    }
+                ], 
+                "metadataDate": [
+                    {
+                        "date": "2017-11-02", 
+                        "dateType": "creation"
+                    }
+                ]
+            }, 
+            "associatedResource": [
+                {
+                    "resourceType": [
+                        {
+                            "type": "Report"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "59cd80dce4b00fa06feff160", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Development of remote sensing indicators for mapping episodic die-off of an invasive annual grass (Bromus tectorum) from the Landsat archive"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Development of remote sensing indicators for mapping episodic die-off of an invasive annual grass (Bromus tectorum) from the Landsat archive"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Publication"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "59cd45c7e4b00fa06fefec39", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Cheatgrass die-offs as an opportunity for restoration in the Great Basin, USA: Will local or commercial native plants succeed where exotic invaders fail?"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Cheatgrass die-offs as an opportunity for restoration in the Great Basin, USA: Will local or commercial native plants succeed where exotic invaders fail?"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Publication"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "59cd45abe4b00fa06fefec2b", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Cheatgrass Die-offs: A unique Restoration Opportunity In Northern Nevada"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Cheatgrass Die-offs: A unique Restoration Opportunity In Northern Nevada"
+                    }
+                }
+            ], 
+            "resourceDistribution": [
+                {
+                    "distributor": [
+                        {
+                            "contact": {
+                                "party": [
+                                    {
+                                        "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
+                                    }
+                                ], 
+                                "role": "distributor"
+                            }, 
+                            "transferOption": [
+                                {
+                                    "transferSize": 99999, 
+                                    "unitsOfDistribution": "unknown", 
+                                    "onlineOption": [
+                                        {
+                                            "uri": "https://www.sciencebase.gov/catalog/item/55e0d060e4b05561fa1ef469"
+                                        }
+                                    ]
+                                }
+                            ], 
+                            "orderProcess": [
+                                {
+                                    "orderingInstructions": "Download products as needed from the Sciencebase.gov URL provided", 
+                                    "fees": "00USD"
+                                }
+                            ]
+                        }
+                    ], 
+                    "description": "GNLCC projet page includes project information and downloadable products on Scinecebase.gov"
+                }
+            ]
+        }, 
         "schema": {
             "version": "2.1.2", 
             "name": "mdJson"

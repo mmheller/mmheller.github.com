@@ -3,10 +3,10 @@
         "metadataRepository": [
             {
                 "metadataStandard": "mdJSON", 
-                "citiation": {
+                "citation": {
                     "title": "LCC Network Science Catalog"
                 }, 
-                "repository": "ScienceBase"
+                "repository": "LCCScienceCatalog"
             }
         ], 
         "contact": [
@@ -66,17 +66,24 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "907", 
-                "isOrganization": true, 
-                "name": "Desert Research Institute", 
-                "contactType": "Research"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "900", 
                 "isOrganization": true, 
                 "name": "Northern Arizona University", 
                 "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "389", 
+                "isOrganization": true, 
+                "name": "Bureau of Land Management", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "907", 
+                "isOrganization": true, 
+                "name": "Desert Research Institute", 
+                "contactType": "Research"
             }, 
             {
                 "isOrganization": true, 
@@ -105,7 +112,804 @@
                 "contactType": "NGO"
             }
         ], 
-        "metadata": null, 
+        "metadata": {
+            "resourceInfo": {
+                "status": [
+                    "completed"
+                ], 
+                "pointOfContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
+                            }
+                        ], 
+                        "role": "pointOfContact"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "778"
+                            }
+                        ], 
+                        "role": "principalInvestigator"
+                    }
+                ], 
+                "abstract": "FY2014\nWorkshops that provide tribal representatives with an introduction to planning for climate change impacts.", 
+                "citation": {
+                    "title": "Climate Change Adaptation Training for Tribes", 
+                    "onlineResource": [
+                        {
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=414", 
+                            "name": "Project Report Page"
+                        }
+                    ], 
+                    "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "900", 
+                                    "organizationMembers": [
+                                        "900"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "389", 
+                                    "organizationMembers": [
+                                        "389"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "907", 
+                                    "organizationMembers": [
+                                        "907"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G778", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "778", 
+                                    "organizationMembers": [
+                                        "G778"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }
+                    ], 
+                    "alternateTitle": [
+                        "Wotkyns2014"
+                    ], 
+                    "date": [
+                        {
+                            "date": "2014-09-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "414", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "594bf047e4b062508e38511c", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ]
+                }, 
+                "defaultResourceLocale": {
+                    "country": "USA", 
+                    "characterSet": "UTF-8", 
+                    "language": "eng"
+                }, 
+                "purpose": "Conservation Planning Vulnerability Assessment Capacity Tribes  ", 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 43.07406183032381, 
+                                    "westLongitude": -119.88622881017803, 
+                                    "southLatitude": 37.35396667062654, 
+                                    "eastLongitude": -112.3642494792673
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -118.39565022054809, 
+                                                    37.37573839082291
+                                                ], 
+                                                [
+                                                    -118.39564998971878, 
+                                                    37.37571562981241
+                                                ], 
+                                                [
+                                                    -118.39553148052764, 
+                                                    37.375736140385435
+                                                ], 
+                                                [
+                                                    -118.39565022054809, 
+                                                    37.37573839082291
+                                                ], 
+                                                [
+                                                    -118.39568470951679, 
+                                                    37.37926680071101
+                                                ], 
+                                                [
+                                                    -118.38592288992538, 
+                                                    37.37951418994855
+                                                ], 
+                                                [
+                                                    -118.38585360988121, 
+                                                    37.377987970599484
+                                                ], 
+                                                [
+                                                    -118.38503434020126, 
+                                                    37.37687994038162
+                                                ], 
+                                                [
+                                                    -118.3859151607075, 
+                                                    37.376054559841855
+                                                ], 
+                                                [
+                                                    -118.38603053972167, 
+                                                    37.36872811969298
+                                                ], 
+                                                [
+                                                    -118.38853348932385, 
+                                                    37.36877564037317
+                                                ], 
+                                                [
+                                                    -118.38822323993307, 
+                                                    37.36556062974961
+                                                ], 
+                                                [
+                                                    -118.3857469502933, 
+                                                    37.365604650169104
+                                                ], 
+                                                [
+                                                    -118.38557995982018, 
+                                                    37.36159578081902
+                                                ], 
+                                                [
+                                                    -118.38033753020999, 
+                                                    37.361541589724304
+                                                ], 
+                                                [
+                                                    -118.3802788496721, 
+                                                    37.35876379081222
+                                                ], 
+                                                [
+                                                    -118.38590311975172, 
+                                                    37.35884800013869
+                                                ], 
+                                                [
+                                                    -118.38583385889764, 
+                                                    37.35732179003615
+                                                ], 
+                                                [
+                                                    -118.39140690899606, 
+                                                    37.35808758073359
+                                                ], 
+                                                [
+                                                    -118.39133158078545, 
+                                                    37.35396667062654
+                                                ], 
+                                                [
+                                                    -118.3953355398926, 
+                                                    37.35404252078864
+                                                ], 
+                                                [
+                                                    -118.39519660038887, 
+                                                    37.35656619931221
+                                                ], 
+                                                [
+                                                    -118.39902909005714, 
+                                                    37.356479361168645
+                                                ], 
+                                                [
+                                                    -118.39895562931592, 
+                                                    37.35879945076672
+                                                ], 
+                                                [
+                                                    -118.40166867964257, 
+                                                    37.35871414140647
+                                                ], 
+                                                [
+                                                    -118.40110697928088, 
+                                                    37.36063809036172
+                                                ], 
+                                                [
+                                                    -118.4042674996187, 
+                                                    37.36037910024009
+                                                ], 
+                                                [
+                                                    -118.40365272057902, 
+                                                    37.36211999095045
+                                                ], 
+                                                [
+                                                    -118.40718313912237, 
+                                                    37.36227757092116
+                                                ], 
+                                                [
+                                                    -118.40704022946423, 
+                                                    37.3630714608735
+                                                ], 
+                                                [
+                                                    -118.40565706023888, 
+                                                    37.36302263969048
+                                                ], 
+                                                [
+                                                    -118.40563479041961, 
+                                                    37.36466091030425
+                                                ], 
+                                                [
+                                                    -118.40405338049048, 
+                                                    37.36435798005049
+                                                ], 
+                                                [
+                                                    -118.40421280020097, 
+                                                    37.36490722124372
+                                                ], 
+                                                [
+                                                    -118.4035671695361, 
+                                                    37.364826759822996
+                                                ], 
+                                                [
+                                                    -118.40384508034424, 
+                                                    37.36535547110609
+                                                ], 
+                                                [
+                                                    -118.40592492969807, 
+                                                    37.364802930473466
+                                                ], 
+                                                [
+                                                    -118.40549037954855, 
+                                                    37.37016601012231
+                                                ], 
+                                                [
+                                                    -118.4115097701846, 
+                                                    37.369892400155635
+                                                ], 
+                                                [
+                                                    -118.41155184033337, 
+                                                    37.37603828094577
+                                                ], 
+                                                [
+                                                    -118.39565022054809, 
+                                                    37.37573839082291
+                                                ]
+                                            ], 
+                                            [
+                                                [
+                                                    -119.78064701034165, 
+                                                    39.5195222295669
+                                                ], 
+                                                [
+                                                    -119.78142405964188, 
+                                                    39.51970362065931
+                                                ], 
+                                                [
+                                                    -119.78067191084739, 
+                                                    39.51935564987825
+                                                ], 
+                                                [
+                                                    -119.78064701034165, 
+                                                    39.5195222295669
+                                                ], 
+                                                [
+                                                    -119.74399866912533, 
+                                                    39.51096102082115
+                                                ], 
+                                                [
+                                                    -119.74232129013038, 
+                                                    39.4914625212547
+                                                ], 
+                                                [
+                                                    -119.74284140996461, 
+                                                    39.466741760186686
+                                                ], 
+                                                [
+                                                    -119.77277631987549, 
+                                                    39.44784994093621
+                                                ], 
+                                                [
+                                                    -119.79008179963556, 
+                                                    39.44377567065988
+                                                ], 
+                                                [
+                                                    -119.79006688016707, 
+                                                    39.46599332092945
+                                                ], 
+                                                [
+                                                    -119.79781858936597, 
+                                                    39.47425951927494
+                                                ], 
+                                                [
+                                                    -119.83704036043135, 
+                                                    39.47251845046544
+                                                ], 
+                                                [
+                                                    -119.86928626975045, 
+                                                    39.48313311061027
+                                                ], 
+                                                [
+                                                    -119.87879277019812, 
+                                                    39.4968770706114
+                                                ], 
+                                                [
+                                                    -119.88133382911558, 
+                                                    39.51091085061377
+                                                ], 
+                                                [
+                                                    -119.88622881017803, 
+                                                    39.53031760007398
+                                                ], 
+                                                [
+                                                    -119.87942182885405, 
+                                                    39.54120598964942
+                                                ], 
+                                                [
+                                                    -119.84548709941146, 
+                                                    39.541519189873256
+                                                ], 
+                                                [
+                                                    -119.80805246037065, 
+                                                    39.542935509606785
+                                                ], 
+                                                [
+                                                    -119.79283792950945, 
+                                                    39.54759933016547
+                                                ], 
+                                                [
+                                                    -119.77614470995336, 
+                                                    39.5496285400479
+                                                ], 
+                                                [
+                                                    -119.78064701034165, 
+                                                    39.5195222295669
+                                                ]
+                                            ], 
+                                            [
+                                                [
+                                                    -112.39146552973872, 
+                                                    43.05423797053265
+                                                ], 
+                                                [
+                                                    -112.39485938012453, 
+                                                    43.02223253070683
+                                                ], 
+                                                [
+                                                    -112.39464165051892, 
+                                                    43.022737009958135
+                                                ], 
+                                                [
+                                                    -112.37195049977622, 
+                                                    43.02205224009027
+                                                ], 
+                                                [
+                                                    -112.3642494792673, 
+                                                    43.01433749973147
+                                                ], 
+                                                [
+                                                    -112.38286159983939, 
+                                                    43.01310853082547
+                                                ], 
+                                                [
+                                                    -112.39740368929407, 
+                                                    43.00852514049697
+                                                ], 
+                                                [
+                                                    -112.40710940036725, 
+                                                    43.00307304015246
+                                                ], 
+                                                [
+                                                    -112.4122880300732, 
+                                                    42.99959005978752
+                                                ], 
+                                                [
+                                                    -112.43281548998156, 
+                                                    42.955511310543166
+                                                ], 
+                                                [
+                                                    -112.50288174917686, 
+                                                    42.954887410561184
+                                                ], 
+                                                [
+                                                    -112.50020490999194, 
+                                                    42.981064410176394
+                                                ], 
+                                                [
+                                                    -112.5151465304328, 
+                                                    42.98120933085193
+                                                ], 
+                                                [
+                                                    -112.51396374023494, 
+                                                    42.99643553055683
+                                                ], 
+                                                [
+                                                    -112.50410812992648, 
+                                                    43.00119532058258
+                                                ], 
+                                                [
+                                                    -112.4982882706645, 
+                                                    43.004758130046866
+                                                ], 
+                                                [
+                                                    -112.49212848865778, 
+                                                    43.0126712499838
+                                                ], 
+                                                [
+                                                    -112.49038658053536, 
+                                                    43.01814565010255
+                                                ], 
+                                                [
+                                                    -112.48843293998299, 
+                                                    43.02268724994839
+                                                ], 
+                                                [
+                                                    -112.47814942971182, 
+                                                    43.025579790489225
+                                                ], 
+                                                [
+                                                    -112.4673310199514, 
+                                                    43.02757684057515
+                                                ], 
+                                                [
+                                                    -112.45696482892572, 
+                                                    43.07406183032381
+                                                ], 
+                                                [
+                                                    -112.40278858006268, 
+                                                    43.070626319926106
+                                                ], 
+                                                [
+                                                    -112.4071731109005, 
+                                                    43.05478498935293
+                                                ], 
+                                                [
+                                                    -112.39146552973872, 
+                                                    43.05423797053265
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
+                "timePeriod": {
+                    "endDateTime": "", 
+                    "startDateTime": "2014-09-01"
+                }, 
+                "resourceUsage": [
+                    {
+                        "specificUsage": "Project information", 
+                        "userContactInfo": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
+                                    }
+                                ], 
+                                "role": "administrator"
+                            }
+                        ]
+                    }
+                ], 
+                "keyword": [
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Project Category", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/52dee7c5e4b0dee2a6cd6b18"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "5da1d3b7-375b-58ae-a134-2ee0c94c395f"
+                                }
+                            ], 
+                            "title": "Project Category - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Conservation Planning"
+                            }, 
+                            {
+                                "keyword": "Vulnerability Assessment"
+                            }, 
+                            {
+                                "keyword": "Capacity"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC End User Type", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/54760ef9e4b0f62cb5dc41a0"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "425f4a7c-dca2-56d8-947e-6f6bd1033d70"
+                                }
+                            ], 
+                            "title": "End User Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Tribes"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Training"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " vulnerability assessment"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " tribes"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " climate change"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " workshop"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Great Basin"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Idaho"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Nevada"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " California"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Bishop"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Fort Hall"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Basin LCC Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Reno"
+                            }
+                        ]
+                    }
+                ], 
+                "resourceType": [
+                    {
+                        "type": "project"
+                    }
+                ], 
+                "resourceMaintenance": [
+                    {
+                        "frequency": "as needed", 
+                        "contact": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
+                                    }
+                                ], 
+                                "role": "custodian"
+                            }
+                        ]
+                    }
+                ], 
+                "shortAbstract": ""
+            }, 
+            "funding": [
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "389", 
+                            "currency": "USD", 
+                            "amount": 90000.0, 
+                            "recipientId": "778", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2014-09-30", 
+                        "periodName": [
+                            "FY2014"
+                        ], 
+                        "startDateTime": "2013-10-01"
+                    }
+                }
+            ], 
+            "metadataInfo": {
+                "metadataOnlineResource": [
+                    {
+                        "uri": "https://www.sciencebase.gov/catalog/item/594bf047e4b062508e38511c"
+                    }
+                ], 
+                "parentMetadata": {
+                    "identifier": [
+                        {
+                            "identifier": "53500a48e4b02cd8cc40286a", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ], 
+                    "title": "ScienceBase Parent"
+                }, 
+                "metadataIdentifier": {
+                    "identifier": "594bf047e4b062508e38511c", 
+                    "namespace": "gov.sciencebase.catalog"
+                }, 
+                "metadataContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
+                            }
+                        ], 
+                        "role": "author"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
+                            }
+                        ], 
+                        "role": "custodian"
+                    }
+                ], 
+                "metadataDate": [
+                    {
+                        "date": "2017-11-02", 
+                        "dateType": "creation"
+                    }
+                ]
+            }, 
+            "associatedResource": [], 
+            "resourceDistribution": [
+                {
+                    "distributor": [
+                        {
+                            "contact": {
+                                "party": [
+                                    {
+                                        "contactId": "6a0cb0c0-7677-4721-9372-ee4d2cd25cd9"
+                                    }
+                                ], 
+                                "role": "distributor"
+                            }, 
+                            "transferOption": [
+                                {
+                                    "transferSize": 99999, 
+                                    "unitsOfDistribution": "unknown", 
+                                    "onlineOption": [
+                                        {
+                                            "uri": "https://www.sciencebase.gov/catalog/item/594bf047e4b062508e38511c"
+                                        }
+                                    ]
+                                }
+                            ], 
+                            "orderProcess": [
+                                {
+                                    "orderingInstructions": "Download products as needed from the Sciencebase.gov URL provided", 
+                                    "fees": "00USD"
+                                }
+                            ]
+                        }
+                    ], 
+                    "description": "GNLCC projet page includes project information and downloadable products on Scinecebase.gov"
+                }
+            ]
+        }, 
         "schema": {
             "version": "2.1.2", 
             "name": "mdJson"
