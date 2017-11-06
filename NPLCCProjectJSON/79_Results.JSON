@@ -1,0 +1,1822 @@
+[
+    {
+        "metadataRepository": [
+            {
+                "metadataStandard": "mdJSON", 
+                "citation": {
+                    "title": "LCC Network Science Catalog"
+                }, 
+                "repository": "LCCScienceCatalog"
+            }
+        ], 
+        "contact": [
+            {
+                "memberOfOrganization": [
+                    "c6007b64-4fbf-4a2d-ab79-8dc56bbdf0a2"
+                ], 
+                "contactType": "lcc", 
+                "phone": [], 
+                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111", 
+                "address": [], 
+                "hoursOfService": [], 
+                "electronicMailAddress": [
+                    "john_mankowski@fws.gov"
+                ], 
+                "isOrganization": true, 
+                "name": "North Pacific Landscape Conservation Cooperative", 
+                "onlineResource": [
+                    {
+                        "uri": "http://www.northpacificlcc.org/", 
+                        "name": "North Pacific LCC Website"
+                    }
+                ], 
+                "logoGraphic": [
+                    {
+                        "fileName": "NPLCC logo", 
+                        "fileUri": [
+                            {
+                                "name": "NPLCC_logo_100.png", 
+                                "uri": "data:image/png;base64,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"
+                            }
+                        ]
+                    }
+                ]
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "69", 
+                "isOrganization": true, 
+                "name": "US Fish and Wildlife Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Conservation Biology Institute", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:stritt@consbio.org"
+                    }
+                ], 
+                "contactId": "G103", 
+                "contactType": "Nonprofit"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "James Strittholt", 
+                "memberOfOrganization": [
+                    "G103"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:stritt@consbio.org"
+                    }
+                ], 
+                "contactId": "103", 
+                "contactType": "Nonprofit"
+            }
+        ], 
+        "metadata": {
+            "resourceInfo": {
+                "status": [
+                    "completed"
+                ], 
+                "pointOfContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "pointOfContact"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "103"
+                            }
+                        ], 
+                        "role": "principalInvestigator"
+                    }
+                ], 
+                "abstract": "The Lower Columbia River and adjacent coastal regions of Oregon and Washington contain a rich diversity of natural and cultural resources managed by a complex array of tribal sovereign nations, federal/state/local agencies, non-government conservation organizations, landowners, stakeholders and others. But our region lacks a current, comprehensive, landscape-scale blueprint that can be used to drive and align conservation efforts to achieve landscape-scale goals in response to stressors, such as climate change, energy development, and land/water use practices.\n\nIn response to this need, the North Pacific Landscape Conservation Cooperative and US Fish and Wildlife Service Region 1 has initiated a Landscape Conservation Design initiative for the Lower Columbia River and adjacent coastal shorelines of Oregon and Washington  Pacific Northwest Coast Landscape Conservation Design. This partner-driven, multi-stakeholder effort is an integrated, collaborative, and holistic process that is grounded in the interdisciplinary science of landscape ecology, the mission-oriented science of conservation biology, and the art of design. The process results in a science-based, spatially-explicit product that identifies targets of interest to partners, articulates measurable objectives; assesses current and projected landscape patterns and processes; and identifies a desired future condition, conservation and development trade-offs, and implementation strategies.", 
+                "citation": {
+                    "title": "PNW Coast Blueprint Connectivity", 
+                    "onlineResource": [
+                        {
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=79", 
+                            "name": "Project Report Page"
+                        }
+                    ], 
+                    "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "69", 
+                                    "organizationMembers": [
+                                        "69"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G103", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "103", 
+                                    "organizationMembers": [
+                                        "G103"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }
+                    ], 
+                    "alternateTitle": [
+                        "Strittholt2017"
+                    ], 
+                    "date": [
+                        {
+                            "date": "2017-09-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "79", 
+                            "namespace": "lcc:np"
+                        }, 
+                        {
+                            "identifier": "5989079fe4b05ba66ea01120", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ]
+                }, 
+                "defaultResourceLocale": {
+                    "country": "USA", 
+                    "characterSet": "UTF-8", 
+                    "language": "eng"
+                }, 
+                "purpose": "Conservation Design Conservation Planning Decision Support Regional & county planners Federal resource managers State agencies", 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 48.38592529300005, 
+                                    "westLongitude": -124.73309326199995, 
+                                    "southLatitude": 42.42047119100005, 
+                                    "eastLongitude": -121.26977539099995
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -124.72637939499998, 
+                                                    48.38592529300007
+                                                ], 
+                                                [
+                                                    -124.59259033199999, 
+                                                    48.35388183600003
+                                                ], 
+                                                [
+                                                    -124.56872558599997, 
+                                                    48.301696777000075
+                                                ], 
+                                                [
+                                                    -124.59661865199996, 
+                                                    48.28167724600007
+                                                ], 
+                                                [
+                                                    -124.48590087899998, 
+                                                    48.23608398400006
+                                                ], 
+                                                [
+                                                    -124.46179199199997, 
+                                                    48.20251464800003
+                                                ], 
+                                                [
+                                                    -124.48278808599997, 
+                                                    48.16149902300003
+                                                ], 
+                                                [
+                                                    -124.42797851599994, 
+                                                    48.15747070300006
+                                                ], 
+                                                [
+                                                    -124.44537353499999, 
+                                                    48.12689209000007
+                                                ], 
+                                                [
+                                                    -124.37609863299997, 
+                                                    48.08673095700004
+                                                ], 
+                                                [
+                                                    -124.31280517599998, 
+                                                    48.10192871100003
+                                                ], 
+                                                [
+                                                    -124.30902099599996, 
+                                                    48.13470459000007
+                                                ], 
+                                                [
+                                                    -124.24279785199997, 
+                                                    48.12091064500004
+                                                ], 
+                                                [
+                                                    -124.20581054699994, 
+                                                    48.14147949200003
+                                                ], 
+                                                [
+                                                    -124.08398437499994, 
+                                                    48.12152099600007
+                                                ], 
+                                                [
+                                                    -124.08361816399997, 
+                                                    48.081909180000025
+                                                ], 
+                                                [
+                                                    -123.95379638699995, 
+                                                    48.091308594000054
+                                                ], 
+                                                [
+                                                    -123.95300292999997, 
+                                                    48.058471680000025
+                                                ], 
+                                                [
+                                                    -123.88140869099999, 
+                                                    48.02728271500007
+                                                ], 
+                                                [
+                                                    -123.73071289099994, 
+                                                    48.01171875000006
+                                                ], 
+                                                [
+                                                    -123.75787353499999, 
+                                                    47.97149658200004
+                                                ], 
+                                                [
+                                                    -123.692382813, 
+                                                    47.93011474600007
+                                                ], 
+                                                [
+                                                    -123.71771240199996, 
+                                                    47.90667724600007
+                                                ], 
+                                                [
+                                                    -123.57250976599994, 
+                                                    47.85308837900004
+                                                ], 
+                                                [
+                                                    -123.59777831999997, 
+                                                    47.750915527000075
+                                                ], 
+                                                [
+                                                    -123.53912353499999, 
+                                                    47.69750976600005
+                                                ], 
+                                                [
+                                                    -123.42321777299998, 
+                                                    47.666076660000044
+                                                ], 
+                                                [
+                                                    -123.33160400399998, 
+                                                    47.72131347700008
+                                                ], 
+                                                [
+                                                    -123.31622314499998, 
+                                                    47.68530273400006
+                                                ], 
+                                                [
+                                                    -123.35937499999994, 
+                                                    47.67431640600006
+                                                ], 
+                                                [
+                                                    -123.38848876999998, 
+                                                    47.588073730000076
+                                                ], 
+                                                [
+                                                    -123.49780273399995, 
+                                                    47.54949951200007
+                                                ], 
+                                                [
+                                                    -123.52270507799994, 
+                                                    47.50610351600005
+                                                ], 
+                                                [
+                                                    -123.49060058599997, 
+                                                    47.490295410000044
+                                                ], 
+                                                [
+                                                    -123.497070313, 
+                                                    47.41967773400006
+                                                ], 
+                                                [
+                                                    -123.37438964799998, 
+                                                    47.41333007800006
+                                                ], 
+                                                [
+                                                    -123.43518066399997, 
+                                                    47.374328613000046
+                                                ], 
+                                                [
+                                                    -123.36846923799999, 
+                                                    47.316284180000025
+                                                ], 
+                                                [
+                                                    -123.30609130899995, 
+                                                    47.30767822300004
+                                                ], 
+                                                [
+                                                    -123.24078369099999, 
+                                                    47.23272705100004
+                                                ], 
+                                                [
+                                                    -123.30261230499997, 
+                                                    47.152526855000076
+                                                ], 
+                                                [
+                                                    -123.23052978499999, 
+                                                    47.14788818400007
+                                                ], 
+                                                [
+                                                    -123.20581054699994, 
+                                                    47.12872314500004
+                                                ], 
+                                                [
+                                                    -123.24108886699997, 
+                                                    47.081909180000025
+                                                ], 
+                                                [
+                                                    -123.18548583999996, 
+                                                    47.08428955100004
+                                                ], 
+                                                [
+                                                    -123.16998290999999, 
+                                                    47.03869628900003
+                                                ], 
+                                                [
+                                                    -123.05932617199994, 
+                                                    47.01892089800003
+                                                ], 
+                                                [
+                                                    -123.03637695299994, 
+                                                    46.98168945300006
+                                                ], 
+                                                [
+                                                    -122.96289062499994, 
+                                                    47.04028320300006
+                                                ], 
+                                                [
+                                                    -122.91589355499997, 
+                                                    47.04132080100004
+                                                ], 
+                                                [
+                                                    -122.92437744099999, 
+                                                    46.992919922000056
+                                                ], 
+                                                [
+                                                    -122.76739501999998, 
+                                                    46.84411621100003
+                                                ], 
+                                                [
+                                                    -122.56768798799999, 
+                                                    46.80212402300003
+                                                ], 
+                                                [
+                                                    -122.516601563, 
+                                                    46.75012207000003
+                                                ], 
+                                                [
+                                                    -122.43341064499998, 
+                                                    46.72229003900003
+                                                ], 
+                                                [
+                                                    -122.44012451199995, 
+                                                    46.67730712900004
+                                                ], 
+                                                [
+                                                    -122.36889648399995, 
+                                                    46.69030761700003
+                                                ], 
+                                                [
+                                                    -122.36590576199995, 
+                                                    46.65667724600007
+                                                ], 
+                                                [
+                                                    -122.32812499999994, 
+                                                    46.654479980000076
+                                                ], 
+                                                [
+                                                    -122.25531005899995, 
+                                                    46.67907714800003
+                                                ], 
+                                                [
+                                                    -122.16369628899997, 
+                                                    46.65411377000004
+                                                ], 
+                                                [
+                                                    -122.17059326199995, 
+                                                    46.62231445300006
+                                                ], 
+                                                [
+                                                    -121.99877929699994, 
+                                                    46.59692382800006
+                                                ], 
+                                                [
+                                                    -121.97998046899994, 
+                                                    46.65551757800006
+                                                ], 
+                                                [
+                                                    -121.84680175799997, 
+                                                    46.653076172000056
+                                                ], 
+                                                [
+                                                    -121.82250976599994, 
+                                                    46.69348144500003
+                                                ], 
+                                                [
+                                                    -121.84130859399994, 
+                                                    46.71350097700008
+                                                ], 
+                                                [
+                                                    -121.77697753899997, 
+                                                    46.71527099600007
+                                                ], 
+                                                [
+                                                    -121.73248290999999, 
+                                                    46.757873535000044
+                                                ], 
+                                                [
+                                                    -121.71020507799994, 
+                                                    46.798889160000044
+                                                ], 
+                                                [
+                                                    -121.75378417999997, 
+                                                    46.850891113000046
+                                                ], 
+                                                [
+                                                    -121.49591064499998, 
+                                                    46.86309814500004
+                                                ], 
+                                                [
+                                                    -121.42932128899997, 
+                                                    46.73907470700004
+                                                ], 
+                                                [
+                                                    -121.35290527299998, 
+                                                    46.71228027300003
+                                                ], 
+                                                [
+                                                    -121.41320800799997, 
+                                                    46.67590332000003
+                                                ], 
+                                                [
+                                                    -121.38708496099997, 
+                                                    46.61968994100005
+                                                ], 
+                                                [
+                                                    -121.45629882799994, 
+                                                    46.51452636700003
+                                                ], 
+                                                [
+                                                    -121.42297363299997, 
+                                                    46.49267578100006
+                                                ], 
+                                                [
+                                                    -121.38928222699997, 
+                                                    46.393493652000075
+                                                ], 
+                                                [
+                                                    -121.47399902299998, 
+                                                    46.39489746100003
+                                                ], 
+                                                [
+                                                    -121.51312255899995, 
+                                                    46.35412597700008
+                                                ], 
+                                                [
+                                                    -121.46679687499994, 
+                                                    46.285888672000056
+                                                ], 
+                                                [
+                                                    -121.47027587899998, 
+                                                    46.219482422000056
+                                                ], 
+                                                [
+                                                    -121.76538085899995, 
+                                                    46.13531494100005
+                                                ], 
+                                                [
+                                                    -121.74481201199995, 
+                                                    46.09710693400007
+                                                ], 
+                                                [
+                                                    -121.78118896499996, 
+                                                    46.03887939500004
+                                                ], 
+                                                [
+                                                    -121.74920654299996, 
+                                                    46.01611328100006
+                                                ], 
+                                                [
+                                                    -121.63909912099996, 
+                                                    46.023315430000025
+                                                ], 
+                                                [
+                                                    -121.62561035199997, 
+                                                    45.996276855000076
+                                                ], 
+                                                [
+                                                    -121.66058349599996, 
+                                                    45.91772460900006
+                                                ], 
+                                                [
+                                                    -121.57122802699996, 
+                                                    45.917114258000026
+                                                ], 
+                                                [
+                                                    -121.57220458999996, 
+                                                    45.87011718700006
+                                                ], 
+                                                [
+                                                    -121.61749267599998, 
+                                                    45.826904297000056
+                                                ], 
+                                                [
+                                                    -121.58459472699997, 
+                                                    45.755920410000044
+                                                ], 
+                                                [
+                                                    -121.48199462899998, 
+                                                    45.77893066400003
+                                                ], 
+                                                [
+                                                    -121.442382813, 
+                                                    45.75708007800006
+                                                ], 
+                                                [
+                                                    -121.41809081999997, 
+                                                    45.81549072300004
+                                                ], 
+                                                [
+                                                    -121.34100341799996, 
+                                                    45.81988525400004
+                                                ], 
+                                                [
+                                                    -121.29260253899997, 
+                                                    45.69610595700004
+                                                ], 
+                                                [
+                                                    -121.30737304699994, 
+                                                    45.668701172000056
+                                                ], 
+                                                [
+                                                    -121.26977539099994, 
+                                                    45.65570068400007
+                                                ], 
+                                                [
+                                                    -121.37799072299998, 
+                                                    45.55371093700006
+                                                ], 
+                                                [
+                                                    -121.52087402299998, 
+                                                    45.48730468700006
+                                                ], 
+                                                [
+                                                    -121.52630615199996, 
+                                                    45.343078613000046
+                                                ], 
+                                                [
+                                                    -121.58947753899997, 
+                                                    45.286071777000075
+                                                ], 
+                                                [
+                                                    -121.68090820299994, 
+                                                    45.33129882800006
+                                                ], 
+                                                [
+                                                    -121.69891357399996, 
+                                                    45.37091064500004
+                                                ], 
+                                                [
+                                                    -121.68249511699997, 
+                                                    45.22888183600003
+                                                ], 
+                                                [
+                                                    -121.74829101599994, 
+                                                    45.192687988000046
+                                                ], 
+                                                [
+                                                    -121.65118408199999, 
+                                                    45.08929443400007
+                                                ], 
+                                                [
+                                                    -121.80609130899995, 
+                                                    45.01110839800003
+                                                ], 
+                                                [
+                                                    -121.79510497999996, 
+                                                    44.93750000000006
+                                                ], 
+                                                [
+                                                    -121.71160888699995, 
+                                                    44.90368652300003
+                                                ], 
+                                                [
+                                                    -121.75347900399998, 
+                                                    44.823730469000054
+                                                ], 
+                                                [
+                                                    -121.92382812499994, 
+                                                    44.806701660000044
+                                                ], 
+                                                [
+                                                    -121.99450683599997, 
+                                                    44.820495605000076
+                                                ], 
+                                                [
+                                                    -122.01348876999998, 
+                                                    44.849487305000025
+                                                ], 
+                                                [
+                                                    -122.07769775399998, 
+                                                    44.81048584000007
+                                                ], 
+                                                [
+                                                    -122.14428710899995, 
+                                                    44.81011962900004
+                                                ], 
+                                                [
+                                                    -122.13549804699994, 
+                                                    44.86450195300006
+                                                ], 
+                                                [
+                                                    -122.20867919899996, 
+                                                    44.86407470700004
+                                                ], 
+                                                [
+                                                    -122.25500488299997, 
+                                                    44.89929199200003
+                                                ], 
+                                                [
+                                                    -122.20172119099999, 
+                                                    44.99591064500004
+                                                ], 
+                                                [
+                                                    -122.24908447299998, 
+                                                    45.02008056600005
+                                                ], 
+                                                [
+                                                    -122.22900390599995, 
+                                                    45.05511474600007
+                                                ], 
+                                                [
+                                                    -122.28918456999997, 
+                                                    45.10308837900004
+                                                ], 
+                                                [
+                                                    -122.33789062499994, 
+                                                    45.20092773400006
+                                                ], 
+                                                [
+                                                    -122.50280761699997, 
+                                                    45.25189209000007
+                                                ], 
+                                                [
+                                                    -122.52148437499994, 
+                                                    45.309326172000056
+                                                ], 
+                                                [
+                                                    -122.61279296899994, 
+                                                    45.34027099600007
+                                                ], 
+                                                [
+                                                    -122.67041015599995, 
+                                                    45.40051269500003
+                                                ], 
+                                                [
+                                                    -122.75579833999996, 
+                                                    45.39508056600005
+                                                ], 
+                                                [
+                                                    -122.69470214799998, 
+                                                    45.490295410000044
+                                                ], 
+                                                [
+                                                    -122.87841796899994, 
+                                                    45.622924805000025
+                                                ], 
+                                                [
+                                                    -122.91638183599997, 
+                                                    45.69848632800006
+                                                ], 
+                                                [
+                                                    -123.00061035199997, 
+                                                    45.73272705100004
+                                                ], 
+                                                [
+                                                    -123.03411865199996, 
+                                                    45.78869628900003
+                                                ], 
+                                                [
+                                                    -123.23260497999996, 
+                                                    45.75207519500003
+                                                ], 
+                                                [
+                                                    -123.26379394499997, 
+                                                    45.70648193400007
+                                                ], 
+                                                [
+                                                    -123.33599853499999, 
+                                                    45.68029785200008
+                                                ], 
+                                                [
+                                                    -123.40429687499994, 
+                                                    45.68670654300007
+                                                ], 
+                                                [
+                                                    -123.38690185499996, 
+                                                    45.62707519500003
+                                                ], 
+                                                [
+                                                    -123.34210205099998, 
+                                                    45.62969970700004
+                                                ], 
+                                                [
+                                                    -123.29339599599996, 
+                                                    45.58929443400007
+                                                ], 
+                                                [
+                                                    -123.36376953099995, 
+                                                    45.57189941400003
+                                                ], 
+                                                [
+                                                    -123.40832519499997, 
+                                                    45.50488281200006
+                                                ], 
+                                                [
+                                                    -123.41229247999996, 
+                                                    45.467895508000026
+                                                ], 
+                                                [
+                                                    -123.35211181599999, 
+                                                    45.44952392600004
+                                                ], 
+                                                [
+                                                    -123.34197997999996, 
+                                                    45.41333007800006
+                                                ], 
+                                                [
+                                                    -123.41351318399995, 
+                                                    45.41333007800006
+                                                ], 
+                                                [
+                                                    -123.45617675799997, 
+                                                    45.37091064500004
+                                                ], 
+                                                [
+                                                    -123.37561035199997, 
+                                                    45.27447509800004
+                                                ], 
+                                                [
+                                                    -123.47119140599995, 
+                                                    45.28149414100005
+                                                ], 
+                                                [
+                                                    -123.55249023399995, 
+                                                    45.192687988000046
+                                                ], 
+                                                [
+                                                    -123.57672119099999, 
+                                                    45.21551513700007
+                                                ], 
+                                                [
+                                                    -123.64648437499994, 
+                                                    45.17871093700006
+                                                ], 
+                                                [
+                                                    -123.70452880899995, 
+                                                    45.20587158200004
+                                                ], 
+                                                [
+                                                    -123.75738525399998, 
+                                                    45.136901855000076
+                                                ], 
+                                                [
+                                                    -123.69738769499997, 
+                                                    45.059875488000046
+                                                ], 
+                                                [
+                                                    -123.70947265599995, 
+                                                    44.998107910000044
+                                                ], 
+                                                [
+                                                    -123.75421142599998, 
+                                                    44.99090576200007
+                                                ], 
+                                                [
+                                                    -123.75549316399997, 
+                                                    44.964721680000025
+                                                ], 
+                                                [
+                                                    -123.64501953099995, 
+                                                    44.97387695300006
+                                                ], 
+                                                [
+                                                    -123.57238769499997, 
+                                                    44.92547607400007
+                                                ], 
+                                                [
+                                                    -123.64410400399998, 
+                                                    44.87207031200006
+                                                ], 
+                                                [
+                                                    -123.56140136699997, 
+                                                    44.83032226600005
+                                                ], 
+                                                [
+                                                    -123.64111328099995, 
+                                                    44.81311035200008
+                                                ], 
+                                                [
+                                                    -123.65399169899996, 
+                                                    44.76812744100005
+                                                ], 
+                                                [
+                                                    -123.57672119099999, 
+                                                    44.73767089800003
+                                                ], 
+                                                [
+                                                    -123.57360839799998, 
+                                                    44.64410400400004
+                                                ], 
+                                                [
+                                                    -123.60479736299999, 
+                                                    44.61950683600003
+                                                ], 
+                                                [
+                                                    -123.66271972699997, 
+                                                    44.63647460900006
+                                                ], 
+                                                [
+                                                    -123.65490722699997, 
+                                                    44.59887695300006
+                                                ], 
+                                                [
+                                                    -123.58837890599995, 
+                                                    44.51232910200008
+                                                ], 
+                                                [
+                                                    -123.48388671899994, 
+                                                    44.45312500000006
+                                                ], 
+                                                [
+                                                    -123.48669433599997, 
+                                                    44.41009521500007
+                                                ], 
+                                                [
+                                                    -123.43768310499996, 
+                                                    44.33947753900003
+                                                ], 
+                                                [
+                                                    -123.44860839799998, 
+                                                    44.27551269500003
+                                                ], 
+                                                [
+                                                    -123.42248535199997, 
+                                                    44.23687744100005
+                                                ], 
+                                                [
+                                                    -123.48577880899995, 
+                                                    44.21173095700004
+                                                ], 
+                                                [
+                                                    -123.49639892599998, 
+                                                    44.15551757800006
+                                                ], 
+                                                [
+                                                    -123.54742431599999, 
+                                                    44.12707519500003
+                                                ], 
+                                                [
+                                                    -123.55358886699997, 
+                                                    44.06530761700003
+                                                ], 
+                                                [
+                                                    -123.48217773399995, 
+                                                    44.04772949200003
+                                                ], 
+                                                [
+                                                    -123.41168212899998, 
+                                                    43.976074219000054
+                                                ], 
+                                                [
+                                                    -123.35620117199994, 
+                                                    43.97351074200003
+                                                ], 
+                                                [
+                                                    -123.30419921899994, 
+                                                    43.90991210900006
+                                                ], 
+                                                [
+                                                    -123.32269287099996, 
+                                                    43.89031982400007
+                                                ], 
+                                                [
+                                                    -123.12982177699996, 
+                                                    43.873107910000044
+                                                ], 
+                                                [
+                                                    -123.16326904299996, 
+                                                    43.84228515600006
+                                                ], 
+                                                [
+                                                    -123.13952636699997, 
+                                                    43.768676758000026
+                                                ], 
+                                                [
+                                                    -123.10290527299998, 
+                                                    43.759094238000046
+                                                ], 
+                                                [
+                                                    -123.15948486299999, 
+                                                    43.73590087900004
+                                                ], 
+                                                [
+                                                    -123.10260009799998, 
+                                                    43.58728027300003
+                                                ], 
+                                                [
+                                                    -123.12091064499998, 
+                                                    43.52709960900006
+                                                ], 
+                                                [
+                                                    -122.73199462899998, 
+                                                    43.51409912100007
+                                                ], 
+                                                [
+                                                    -122.60351562499994, 
+                                                    43.59210205100004
+                                                ], 
+                                                [
+                                                    -122.51507568399995, 
+                                                    43.53692627000004
+                                                ], 
+                                                [
+                                                    -122.49591064499998, 
+                                                    43.51007080100004
+                                                ], 
+                                                [
+                                                    -122.51629638699995, 
+                                                    43.48211669900007
+                                                ], 
+                                                [
+                                                    -122.44958496099997, 
+                                                    43.442321777000075
+                                                ], 
+                                                [
+                                                    -122.47851562499994, 
+                                                    43.40472412100007
+                                                ], 
+                                                [
+                                                    -122.41900634799998, 
+                                                    43.38012695300006
+                                                ], 
+                                                [
+                                                    -122.42852783199999, 
+                                                    43.34088134800004
+                                                ], 
+                                                [
+                                                    -122.51220703099995, 
+                                                    43.29711914100005
+                                                ], 
+                                                [
+                                                    -122.48657226599994, 
+                                                    43.257690430000025
+                                                ], 
+                                                [
+                                                    -122.49768066399997, 
+                                                    43.18792724600007
+                                                ], 
+                                                [
+                                                    -122.428710938, 
+                                                    43.12988281200006
+                                                ], 
+                                                [
+                                                    -122.41979980499997, 
+                                                    43.07910156200006
+                                                ], 
+                                                [
+                                                    -122.45898437499994, 
+                                                    43.05688476600005
+                                                ], 
+                                                [
+                                                    -122.49060058599997, 
+                                                    42.95367431600005
+                                                ], 
+                                                [
+                                                    -122.71588134799998, 
+                                                    42.87792968700006
+                                                ], 
+                                                [
+                                                    -122.81079101599994, 
+                                                    42.77307128900003
+                                                ], 
+                                                [
+                                                    -122.91821289099994, 
+                                                    42.78027343700006
+                                                ], 
+                                                [
+                                                    -122.991210938, 
+                                                    42.72332763700007
+                                                ], 
+                                                [
+                                                    -123.10278320299994, 
+                                                    42.76287841800007
+                                                ], 
+                                                [
+                                                    -123.23138427699996, 
+                                                    42.70007324200003
+                                                ], 
+                                                [
+                                                    -123.28790283199999, 
+                                                    42.73571777300003
+                                                ], 
+                                                [
+                                                    -123.47070312499994, 
+                                                    42.699279785000044
+                                                ], 
+                                                [
+                                                    -123.63598632799994, 
+                                                    42.72528076200007
+                                                ], 
+                                                [
+                                                    -123.70751953099995, 
+                                                    42.78332519500003
+                                                ], 
+                                                [
+                                                    -123.78289794899996, 
+                                                    42.79931640600006
+                                                ], 
+                                                [
+                                                    -123.91040039099994, 
+                                                    42.77307128900003
+                                                ], 
+                                                [
+                                                    -124.016601563, 
+                                                    42.68408203100006
+                                                ], 
+                                                [
+                                                    -124.13311767599998, 
+                                                    42.66271972700008
+                                                ], 
+                                                [
+                                                    -124.225585938, 
+                                                    42.68408203100006
+                                                ], 
+                                                [
+                                                    -124.28710937499994, 
+                                                    42.63952636700003
+                                                ], 
+                                                [
+                                                    -124.27447509799998, 
+                                                    42.600891113000046
+                                                ], 
+                                                [
+                                                    -124.31549072299998, 
+                                                    42.56048584000007
+                                                ], 
+                                                [
+                                                    -124.31439208999996, 
+                                                    42.52227783200004
+                                                ], 
+                                                [
+                                                    -124.35620117199994, 
+                                                    42.49407959000007
+                                                ], 
+                                                [
+                                                    -124.39489746099997, 
+                                                    42.50671386700003
+                                                ], 
+                                                [
+                                                    -124.43298339799998, 
+                                                    42.42047119100005
+                                                ], 
+                                                [
+                                                    -124.39007568399995, 
+                                                    42.56988525400004
+                                                ], 
+                                                [
+                                                    -124.40118408199999, 
+                                                    42.62731933600003
+                                                ], 
+                                                [
+                                                    -124.47381591799996, 
+                                                    42.73272705100004
+                                                ], 
+                                                [
+                                                    -124.51367187499994, 
+                                                    42.735473633000026
+                                                ], 
+                                                [
+                                                    -124.56701660199997, 
+                                                    42.83630371100003
+                                                ], 
+                                                [
+                                                    -124.46429443399995, 
+                                                    42.98852539100005
+                                                ], 
+                                                [
+                                                    -124.38189697299998, 
+                                                    43.27050781200006
+                                                ], 
+                                                [
+                                                    -124.40209960899995, 
+                                                    43.30688476600005
+                                                ], 
+                                                [
+                                                    -124.27490234399994, 
+                                                    43.458496094000054
+                                                ], 
+                                                [
+                                                    -124.16717529299996, 
+                                                    43.798706055000025
+                                                ], 
+                                                [
+                                                    -124.05999755899995, 
+                                                    44.65551757800006
+                                                ], 
+                                                [
+                                                    -124.08209228499999, 
+                                                    44.676696777000075
+                                                ], 
+                                                [
+                                                    -124.05859374999994, 
+                                                    44.733886719000054
+                                                ], 
+                                                [
+                                                    -124.07409667999997, 
+                                                    44.79791259800004
+                                                ], 
+                                                [
+                                                    -123.97088622999996, 
+                                                    45.16168212900004
+                                                ], 
+                                                [
+                                                    -123.96411132799994, 
+                                                    45.31707763700007
+                                                ], 
+                                                [
+                                                    -124.00830078099995, 
+                                                    45.33911132800006
+                                                ], 
+                                                [
+                                                    -123.97320556599999, 
+                                                    45.35528564500004
+                                                ], 
+                                                [
+                                                    -123.97869872999996, 
+                                                    45.486511230000076
+                                                ], 
+                                                [
+                                                    -123.94769287099996, 
+                                                    45.56372070300006
+                                                ], 
+                                                [
+                                                    -123.93432617199994, 
+                                                    45.499877930000025
+                                                ], 
+                                                [
+                                                    -123.90197753899997, 
+                                                    45.48010253900003
+                                                ], 
+                                                [
+                                                    -123.86828613299997, 
+                                                    45.50152587900004
+                                                ], 
+                                                [
+                                                    -123.89520263699995, 
+                                                    45.56231689500004
+                                                ], 
+                                                [
+                                                    -123.95629882799994, 
+                                                    45.56988525400004
+                                                ], 
+                                                [
+                                                    -123.93890380899995, 
+                                                    45.70550537100007
+                                                ], 
+                                                [
+                                                    -123.98309326199995, 
+                                                    45.76788330100004
+                                                ], 
+                                                [
+                                                    -123.96270751999998, 
+                                                    45.87011718700006
+                                                ], 
+                                                [
+                                                    -123.99621581999997, 
+                                                    45.94628906200006
+                                                ], 
+                                                [
+                                                    -123.93737792999997, 
+                                                    45.98089599600007
+                                                ], 
+                                                [
+                                                    -123.94177246099997, 
+                                                    46.09667968700006
+                                                ], 
+                                                [
+                                                    -124.01202392599998, 
+                                                    46.22369384800004
+                                                ], 
+                                                [
+                                                    -124.09136962899998, 
+                                                    46.261901855000076
+                                                ], 
+                                                [
+                                                    -124.05798339799998, 
+                                                    46.38647460900006
+                                                ], 
+                                                [
+                                                    -124.05749511699997, 
+                                                    46.64611816400003
+                                                ], 
+                                                [
+                                                    -124.12750244099999, 
+                                                    46.886901855000076
+                                                ], 
+                                                [
+                                                    -124.18011474599996, 
+                                                    46.92633056600005
+                                                ], 
+                                                [
+                                                    -124.18310546899994, 
+                                                    47.134094238000046
+                                                ], 
+                                                [
+                                                    -124.23718261699997, 
+                                                    47.28570556600005
+                                                ], 
+                                                [
+                                                    -124.32098388699995, 
+                                                    47.35510253900003
+                                                ], 
+                                                [
+                                                    -124.42510986299999, 
+                                                    47.73852539100005
+                                                ], 
+                                                [
+                                                    -124.48089599599996, 
+                                                    47.76770019500003
+                                                ], 
+                                                [
+                                                    -124.49230956999997, 
+                                                    47.81951904300007
+                                                ], 
+                                                [
+                                                    -124.61248779299996, 
+                                                    47.87231445300006
+                                                ], 
+                                                [
+                                                    -124.67669677699996, 
+                                                    47.96710205100004
+                                                ], 
+                                                [
+                                                    -124.68701171899994, 
+                                                    48.09869384800004
+                                                ], 
+                                                [
+                                                    -124.73309326199995, 
+                                                    48.16387939500004
+                                                ], 
+                                                [
+                                                    -124.69598388699995, 
+                                                    48.19891357400007
+                                                ], 
+                                                [
+                                                    -124.70587158199999, 
+                                                    48.23992919900007
+                                                ], 
+                                                [
+                                                    -124.65789794899996, 
+                                                    48.325500488000046
+                                                ], 
+                                                [
+                                                    -124.72637939499998, 
+                                                    48.38592529300007
+                                                ]
+                                            ], 
+                                            [
+                                                [
+                                                    -124.16711425799997, 
+                                                    42.75811767600004
+                                                ], 
+                                                [
+                                                    -124.16729736299999, 
+                                                    42.758728027000075
+                                                ], 
+                                                [
+                                                    -124.16772460899995, 
+                                                    42.75848388700007
+                                                ], 
+                                                [
+                                                    -124.16711425799997, 
+                                                    42.75811767600004
+                                                ]
+                                            ], 
+                                            [
+                                                [
+                                                    -124.16589355499997, 
+                                                    42.75427246100003
+                                                ], 
+                                                [
+                                                    -124.16668701199995, 
+                                                    42.75750732400007
+                                                ], 
+                                                [
+                                                    -124.16638183599997, 
+                                                    42.75512695300006
+                                                ], 
+                                                [
+                                                    -124.16589355499997, 
+                                                    42.75427246100003
+                                                ]
+                                            ], 
+                                            [
+                                                [
+                                                    -124.16290283199999, 
+                                                    42.75067138700007
+                                                ], 
+                                                [
+                                                    -124.16271972699997, 
+                                                    42.75067138700007
+                                                ], 
+                                                [
+                                                    -124.16339111299999, 
+                                                    42.750915527000075
+                                                ], 
+                                                [
+                                                    -124.16290283199999, 
+                                                    42.75067138700007
+                                                ]
+                                            ], 
+                                            [
+                                                [
+                                                    -124.15069580099998, 
+                                                    42.74212646500007
+                                                ], 
+                                                [
+                                                    -124.15069580099998, 
+                                                    42.74188232400007
+                                                ], 
+                                                [
+                                                    -124.15057372999996, 
+                                                    42.742919922000056
+                                                ], 
+                                                [
+                                                    -124.15069580099998, 
+                                                    42.74212646500007
+                                                ]
+                                            ], 
+                                            [
+                                                [
+                                                    -124.14282226599994, 
+                                                    42.732482910000044
+                                                ], 
+                                                [
+                                                    -124.14239501999998, 
+                                                    42.733886719000054
+                                                ], 
+                                                [
+                                                    -124.14520263699995, 
+                                                    42.73809814500004
+                                                ], 
+                                                [
+                                                    -124.14282226599994, 
+                                                    42.732482910000044
+                                                ]
+                                            ], 
+                                            [
+                                                [
+                                                    -124.14270019499997, 
+                                                    42.728698730000076
+                                                ], 
+                                                [
+                                                    -124.14312744099999, 
+                                                    42.73071289100005
+                                                ], 
+                                                [
+                                                    -124.14312744099999, 
+                                                    42.72930908200004
+                                                ], 
+                                                [
+                                                    -124.14270019499997, 
+                                                    42.728698730000076
+                                                ]
+                                            ], 
+                                            [
+                                                [
+                                                    -124.13800048799999, 
+                                                    42.71551513700007
+                                                ], 
+                                                [
+                                                    -124.13940429699994, 
+                                                    42.725708008000026
+                                                ], 
+                                                [
+                                                    -124.13970947299998, 
+                                                    42.71887207000003
+                                                ], 
+                                                [
+                                                    -124.13800048799999, 
+                                                    42.71551513700007
+                                                ]
+                                            ], 
+                                            [
+                                                [
+                                                    -124.14099121099997, 
+                                                    42.69769287100007
+                                                ], 
+                                                [
+                                                    -124.14898681599999, 
+                                                    42.67810058600003
+                                                ], 
+                                                [
+                                                    -124.13739013699995, 
+                                                    42.71392822300004
+                                                ], 
+                                                [
+                                                    -124.14099121099997, 
+                                                    42.69769287100007
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
+                "timePeriod": {
+                    "endDateTime": "2019-09-30", 
+                    "startDateTime": "2017-09-01"
+                }, 
+                "resourceUsage": [
+                    {
+                        "specificUsage": "Project information", 
+                        "userContactInfo": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "administrator"
+                            }
+                        ]
+                    }
+                ], 
+                "keyword": [
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Project Category", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/52dee7c5e4b0dee2a6cd6b18"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "5da1d3b7-375b-58ae-a134-2ee0c94c395f"
+                                }
+                            ], 
+                            "title": "Project Category - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Conservation Design"
+                            }, 
+                            {
+                                "keyword": "Conservation Planning"
+                            }, 
+                            {
+                                "keyword": "Decision Support"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC End User Type", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/54760ef9e4b0f62cb5dc41a0"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "425f4a7c-dca2-56d8-947e-6f6bd1033d70"
+                                }
+                            ], 
+                            "title": "End User Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Regional & county planners"
+                            }, 
+                            {
+                                "keyword": "Federal resource managers"
+                            }, 
+                            {
+                                "keyword": "State agencies"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Connectivity"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Landscape Conservation Design"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": "Pacific Coastal Ecoregion"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Northwest Coast"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Oregon"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "keyword": [
+                            {
+                                "keyword": " Washington"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": "OR-1"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " OR-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " OR-3"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " OR-4"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " OR-5"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-1"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-3"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-4"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-6"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "keyword": [
+                            {
+                                "keyword": " WA-8"
+                            }
+                        ]
+                    }
+                ], 
+                "resourceType": [
+                    {
+                        "type": "project"
+                    }
+                ], 
+                "resourceMaintenance": [
+                    {
+                        "frequency": "as needed", 
+                        "contact": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "custodian"
+                            }
+                        ]
+                    }
+                ], 
+                "shortAbstract": ""
+            }, 
+            "funding": [
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "69", 
+                            "currency": "USD", 
+                            "amount": 50000.0, 
+                            "recipientId": "103", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2017-09-30", 
+                        "periodName": [
+                            "FY2017"
+                        ], 
+                        "startDateTime": "2016-10-01"
+                    }
+                }
+            ], 
+            "metadataInfo": {
+                "metadataOnlineResource": [
+                    {
+                        "uri": "https://www.sciencebase.gov/catalog/item/5989079fe4b05ba66ea01120"
+                    }
+                ], 
+                "parentMetadata": {
+                    "identifier": [
+                        {
+                            "identifier": "5977c705e4b0ec1a4888e55b", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ], 
+                    "title": "ScienceBase Parent"
+                }, 
+                "metadataIdentifier": {
+                    "identifier": "5989079fe4b05ba66ea01120", 
+                    "namespace": "gov.sciencebase.catalog"
+                }, 
+                "metadataContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "author"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                            }
+                        ], 
+                        "role": "custodian"
+                    }
+                ], 
+                "metadataDate": [
+                    {
+                        "date": "2017-11-06", 
+                        "dateType": "creation"
+                    }
+                ]
+            }, 
+            "associatedResource": [], 
+            "resourceDistribution": [
+                {
+                    "distributor": [
+                        {
+                            "contact": {
+                                "party": [
+                                    {
+                                        "contactId": "684717e8-4925-4ac0-9777-5ed27a273111"
+                                    }
+                                ], 
+                                "role": "distributor"
+                            }, 
+                            "transferOption": [
+                                {
+                                    "transferSize": 99999, 
+                                    "unitsOfDistribution": "unknown", 
+                                    "onlineOption": [
+                                        {
+                                            "uri": "https://www.sciencebase.gov/catalog/item/5989079fe4b05ba66ea01120"
+                                        }
+                                    ]
+                                }
+                            ], 
+                            "orderProcess": [
+                                {
+                                    "orderingInstructions": "Download products as needed from the Sciencebase.gov URL provided", 
+                                    "fees": "00USD"
+                                }
+                            ]
+                        }
+                    ], 
+                    "description": "GNLCC projet page includes project information and downloadable products on Scinecebase.gov"
+                }
+            ]
+        }, 
+        "schema": {
+            "version": "2.1.2", 
+            "name": "mdJson"
+        }
+    }
+]
