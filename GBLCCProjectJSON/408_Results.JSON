@@ -98,6 +98,22 @@
                 "contactType": "NGO"
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "G893", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G893"
+                ], 
+                "contactId": "893", 
+                "isOrganization": false, 
+                "name": "Susan Abele", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "Great Basin LCC", 
                 "memberOfOrganization": [], 
@@ -121,22 +137,6 @@
                     }
                 ], 
                 "contactId": "682", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G893", 
-                "isOrganization": true, 
-                "name": "US Fish & Wildife Service", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G893"
-                ], 
-                "contactId": "893", 
-                "isOrganization": false, 
-                "name": "Susan Abele", 
                 "contactType": "Federal"
             }
         ], 
@@ -165,7 +165,7 @@
                 ], 
                 "abstract": "FY2015\nThis project assesses the efficacy of ACK55, a naturally occurring bacterium that decreases invasive annual grasses by up to 70% on test sites.  Working with the USDA, USFWS and the Great Basin Institute, researchers plan to treat ten, 1-acre plots on private lands within sage-grouse Biologically Significant Areas to determine the efficacy of ACK55 in warm and dry soils.\n\nFY2016\nThis project assesses the efficacy of ACK55, a naturally occurring bacterium that decreases invasive annual grasses by up to 70% on test sites.  Working with the USDA, USFWS and the Great Basin Institute, researchers plan to treat ten, 1-acre plots on private lands within sage-grouse Biologically Significant Areas to determine the efficacy of ACK55 in warm and dry soils.\n\nFY2017\nThis project assesses the efficacy of ACK55, a naturally occurring bacterium that decreases invasive annual grasses by up to 70% on test sites.  Working with the USDA, USFWS and the Great Basin Institute, researchers plan to treat ten, 1-acre plots on private lands within sage-grouse Biologically Significant Areas to determine the efficacy of ACK55 in warm and dry soils.", 
                 "citation": {
-                    "title": "Assessment of ACK55 as a Biocontrol of Invasive Annual Grasses in Nevada", 
+                    "title": "Keir 2015 - Assessment of ACK55 as a Biocontrol of Invasive Annual Grasses in Nevada", 
                     "onlineResource": [
                         {
                             "description": "Webpage with details on this project", 
@@ -209,26 +209,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G682", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "682", 
-                                    "organizationMembers": [
-                                        "G682"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G893", 
                                     "organizationMembers": []
                                 }
@@ -245,6 +225,26 @@
                                 }
                             ], 
                             "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G682", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "682", 
+                                    "organizationMembers": [
+                                        "G682"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
                         }
                     ], 
                     "alternateTitle": [
@@ -2007,7 +2007,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-02", 
+                        "date": "2017-11-09", 
                         "dateType": "creation"
                     }
                 ]

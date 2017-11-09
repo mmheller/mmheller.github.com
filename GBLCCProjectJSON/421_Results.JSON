@@ -66,6 +66,13 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "905", 
+                "isOrganization": true, 
+                "name": "Southwest Climate Science Center", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "901", 
                 "isOrganization": true, 
                 "name": "University of Massachusetts", 
@@ -87,16 +94,9 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "905", 
-                "isOrganization": true, 
-                "name": "Southwest Climate Science Center", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "903", 
                 "isOrganization": true, 
-                "name": "", 
+                "name": "American Museum of Natural History", 
                 "contactType": "NGO"
             }, 
             {
@@ -112,6 +112,58 @@
                 "isOrganization": true, 
                 "name": "US Fish & Wildife Service", 
                 "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "High Desert Ecological Research Institute", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:dobkin@hderi.org"
+                    }
+                ], 
+                "contactId": "G861", 
+                "contactType": "Research"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "David Dobkin", 
+                "memberOfOrganization": [
+                    "G861"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:dobkin@hderi.org"
+                    }
+                ], 
+                "contactId": "861", 
+                "contactType": "Research"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Desert Research Institute", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:Britta.Daudert@dri.edu"
+                    }
+                ], 
+                "contactId": "G876", 
+                "contactType": "Research"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Britta Daudert", 
+                "memberOfOrganization": [
+                    "G876"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:Britta.Daudert@dri.edu"
+                    }
+                ], 
+                "contactId": "876", 
+                "contactType": "Research"
             }, 
             {
                 "isOrganization": true, 
@@ -167,32 +219,6 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "High Desert Ecological Research Institute", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:dobkin@hderi.org"
-                    }
-                ], 
-                "contactId": "G861", 
-                "contactType": "Research"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "David Dobkin", 
-                "memberOfOrganization": [
-                    "G861"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mailto:dobkin@hderi.org"
-                    }
-                ], 
-                "contactId": "861", 
-                "contactType": "Research"
-            }, 
-            {
-                "isOrganization": true, 
                 "name": "College of William and Mary", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
@@ -215,58 +241,6 @@
                     }
                 ], 
                 "contactId": "831", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "US Forest Service", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:cflather@fs.fed.us"
-                    }
-                ], 
-                "contactId": "G810", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Curtis Flather", 
-                "memberOfOrganization": [
-                    "G810"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mailto:cflather@fs.fed.us"
-                    }
-                ], 
-                "contactId": "810", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "University of California - Davis", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:efleishman@ucdavis.edu"
-                    }
-                ], 
-                "contactId": "G784", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Erica Fleishman", 
-                "memberOfOrganization": [
-                    "G784"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mailto:efleishman@ucdavis.edu"
-                    }
-                ], 
-                "contactId": "784", 
                 "contactType": "Academic"
             }, 
             {
@@ -297,29 +271,55 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "Desert Research Institute", 
+                "name": "University of California - Davis", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:Britta.Daudert@dri.edu"
+                        "uri": "mailto:efleishman@ucdavis.edu"
                     }
                 ], 
-                "contactId": "G876", 
-                "contactType": "Research"
+                "contactId": "G784", 
+                "contactType": "Academic"
             }, 
             {
                 "isOrganization": false, 
-                "name": "Britta Daudert", 
+                "name": "Erica Fleishman", 
                 "memberOfOrganization": [
-                    "G876"
+                    "G784"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mailto:Britta.Daudert@dri.edu"
+                        "uri": "mailto:mailto:efleishman@ucdavis.edu"
                     }
                 ], 
-                "contactId": "876", 
-                "contactType": "Research"
+                "contactId": "784", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "US Forest Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:cflather@fs.fed.us"
+                    }
+                ], 
+                "contactId": "G810", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Curtis Flather", 
+                "memberOfOrganization": [
+                    "G810"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:cflather@fs.fed.us"
+                    }
+                ], 
+                "contactId": "810", 
+                "contactType": "Federal"
             }
         ], 
         "metadata": {
@@ -347,7 +347,7 @@
                 ], 
                 "abstract": "FY2015\nThis effort complements a project, supported by the Joint Fire Science Program, to explore relations among cheatgrass-driven fire, climate, and sensitive-status birds across the Great Basin. With support from the NW and SW Climate Science Centers and the GB CESU, we aim to engage managers at local, state, and regional levels, and to involve both field-level and director-level personnel, during all stages of the proposed project. Our methods of engagement are intended to save managers time and decrease some of the uncertainty in planning and decision-making rather than to create additional pressures on managers time. We will conduct field visits, workshops, and interactive briefings to build trust and increase the likelihood of informing management actions during the project period and beyond. In most cases, we will visit with managers at their local or regional offices or hubs rather than hosting all-hands meetings in major cities.    With support from the JFSP, we will model current and future (to 2050) spatial interactions among cheatgrass cover and biomass, precipitation, and fire across the Great Basin and model current and future cover of sagebrush and herbaceous vegetation. Furthermore, we will examine how projected changes in fire regimes and fire and fuels treatments may affect habitat quality for and probability of occupancy of sensitive-status breeding birds. Additionally, we will use statistical change-point analyses to detect any abrupt, nonlinear temporal changesthresholdsin projected vegetation cover, habitat quality, and occupancy", 
                 "citation": {
-                    "title": "Engagement of Managers and Researchers on Relations among Cheatgrass-driven Fire, Climate, and Sensitive-status Birds across the Great Basin", 
+                    "title": "Fleishman 2016 - Engagement of Managers and Researchers on Relations among Cheatgrass-driven Fire, Climate, and Sensitive-status Birds across the Great Basin", 
                     "onlineResource": [
                         {
                             "description": "Webpage with details on this project", 
@@ -357,6 +357,17 @@
                         }
                     ], 
                     "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "905", 
+                                    "organizationMembers": [
+                                        "905"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
                         {
                             "party": [
                                 {
@@ -385,17 +396,6 @@
                                     "contactId": "904", 
                                     "organizationMembers": [
                                         "904"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "905", 
-                                    "organizationMembers": [
-                                        "905"
                                     ]
                                 }
                             ], 
@@ -433,6 +433,46 @@
                                 }
                             ], 
                             "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G861", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "861", 
+                                    "organizationMembers": [
+                                        "G861"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G876", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "876", 
+                                    "organizationMembers": [
+                                        "G876"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -477,31 +517,11 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G861", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "861", 
-                                    "organizationMembers": [
-                                        "G861"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G831", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -509,46 +529,6 @@
                                     "contactId": "831", 
                                     "organizationMembers": [
                                         "G831"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G810", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "810", 
-                                    "organizationMembers": [
-                                        "G810"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G784", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "784", 
-                                    "organizationMembers": [
-                                        "G784"
                                     ]
                                 }
                             ], 
@@ -561,7 +541,7 @@
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Collaborator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
@@ -572,27 +552,47 @@
                                     ]
                                 }
                             ], 
-                            "role": "Collaborator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "G876", 
+                                    "contactId": "G784", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Collaborator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "876", 
+                                    "contactId": "784", 
                                     "organizationMembers": [
-                                        "G876"
+                                        "G784"
                                     ]
                                 }
                             ], 
-                            "role": "Collaborator"
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G810", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "810", 
+                                    "organizationMembers": [
+                                        "G810"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
                         }
                     ], 
                     "alternateTitle": [
@@ -2481,7 +2481,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-02", 
+                        "date": "2017-11-09", 
                         "dateType": "creation"
                     }
                 ]

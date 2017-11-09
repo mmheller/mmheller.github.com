@@ -66,16 +66,16 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "389", 
+                "contactId": "560", 
                 "isOrganization": true, 
-                "name": "Bureau of Land Management", 
+                "name": "US Fish & Wildife Service", 
                 "contactType": "Federal"
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "560", 
+                "contactId": "389", 
                 "isOrganization": true, 
-                "name": "US Fish & Wildife Service", 
+                "name": "Bureau of Land Management", 
                 "contactType": "Federal"
             }, 
             {
@@ -103,6 +103,49 @@
                 ], 
                 "contactId": "793", 
                 "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G967", 
+                "isOrganization": true, 
+                "name": "SWCA Consultants", 
+                "contactType": "Private"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G967"
+                ], 
+                "contactId": "967", 
+                "isOrganization": false, 
+                "name": "Rick Griffin", 
+                "contactType": "Private"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G967"
+                ], 
+                "contactId": "966", 
+                "isOrganization": false, 
+                "name": "Tim O'Neil", 
+                "contactType": "Private"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G967"
+                ], 
+                "contactId": "965", 
+                "isOrganization": false, 
+                "name": "Nick Jones", 
+                "contactType": "Private"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G967"
+                ], 
+                "contactId": "964", 
+                "isOrganization": false, 
+                "name": "Chris Moller", 
+                "contactType": "Private"
             }
         ], 
         "metadata": {
@@ -130,7 +173,7 @@
                 ], 
                 "abstract": "FY2014\nThe purpose of this project is to develop a series of high resolution (1:24,000 scale) digital wetland maps and associated data to support conservation planning in Nevada.\n\nFY2015\nThe purpose of this project is to develop a series of high resolution (1:24,000 scale) digital wetland maps and associated data to support conservation planning in Nevada.", 
                 "citation": {
-                    "title": "Strategic High-resolution Wetland Mapping in Greater Sage-grouse Biologically Significant Areas of Nevada", 
+                    "title": "Blok 2014 - Strategic High-resolution Wetland Mapping in Greater Sage-grouse Biologically Significant Areas of Nevada", 
                     "onlineResource": [
                         {
                             "description": "Webpage with details on this project", 
@@ -140,17 +183,6 @@
                         }
                     ], 
                     "responsibleParty": [
-                        {
-                            "party": [
-                                {
-                                    "contactId": "389", 
-                                    "organizationMembers": [
-                                        "389"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
                         {
                             "party": [
                                 {
@@ -165,11 +197,22 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "389", 
+                                    "organizationMembers": [
+                                        "389"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G793", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
@@ -180,7 +223,60 @@
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G967", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "967", 
+                                    "organizationMembers": [
+                                        "G967"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "966", 
+                                    "organizationMembers": [
+                                        "G967"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "965", 
+                                    "organizationMembers": [
+                                        "G967"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "964", 
+                                    "organizationMembers": [
+                                        "G967"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }
                     ], 
                     "alternateTitle": [
@@ -1829,7 +1925,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-02", 
+                        "date": "2017-11-09", 
                         "dateType": "creation"
                     }
                 ]

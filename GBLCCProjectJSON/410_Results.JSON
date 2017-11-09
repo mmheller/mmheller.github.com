@@ -66,10 +66,47 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "950", 
+                "isOrganization": true, 
+                "name": "University of Nevada - Reno", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "952", 
+                "isOrganization": true, 
+                "name": "University of Nevada - Reno", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "953", 
+                "isOrganization": true, 
+                "name": "University of Nevada - Reno", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "389", 
                 "isOrganization": true, 
                 "name": "Bureau of Land Management", 
                 "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G951", 
+                "isOrganization": true, 
+                "name": "Nevada Department of Wildlife", 
+                "contactType": "State"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G951"
+                ], 
+                "contactId": "951", 
+                "isOrganization": false, 
+                "name": "Shawn Espinosa", 
+                "contactType": "State"
             }, 
             {
                 "isOrganization": true, 
@@ -137,9 +174,9 @@
                         "role": "principalInvestigator"
                     }
                 ], 
-                "abstract": "FY2014\nThis project takes advantage of historical patterns of grazing by both feral horses and livestock and new data to assess sage-grouse population dynamics and habitats under all combinations of grazing by nonnative ungulates. The project team will: 1)Use historical sage-grouse data collected from Hart Mountain before and immediately after livestock were removed in the early 1990s, and historical data from Sheldon before the irruption of feral horses in the mid 2000s.  2)Add data from Hart Mountain (no nonnative ungulates for 20 years), Sheldon (no livestock but substantial feral horse impacts), and BLM land south of Sheldon NWR (grazed by both feral horses and livestock).", 
+                "abstract": "FY2014\nThis projects main goals are to assess the effects of grazing by feral horses and livestock on Greater Sage-grouse demography and habitats. The Sheldon-Hart Mountain National Wildlife Refuge Complex and adjacent lands managed by the Bureau of Land Management provide the unique opportunity to assess sage-grouse populations free of feral horses and livestock grazing, populations that only have feral horses, as well as populations that coincide with both livestock grazing and feral horses. The project team will: \n\n1)Use historical sage-grouse data collected from Hart Mountain before and immediately after livestock were removed in the early 1990s, and historical data from Sheldon before the irruption of feral horses in the mid 2000s.  \n\n2)Add data from Hart Mountain (no nonnative ungulates for 20 years), Sheldon (no livestock but substantial feral horse impacts), and BLM land south of Sheldon NWR (grazed by both feral horses and livestock).", 
                 "citation": {
-                    "title": "Assessment of Impacts of Feral Horses and Livestock Grazing on Sage-grouse and their Habitats: Long-term trends in sage-grouse demography and habitats on the Sheldon-Hart Mountain NWRC and adjacent lands", 
+                    "title": "Sedinger 2014 - Assessment of Impacts of Feral Horses and Livestock Grazing on Sage-grouse and their Habitats: Long-term trends in sage-grouse demography and habitats on the Sheldon-Hart Mountain NWRC and adjacent lands", 
                     "onlineResource": [
                         {
                             "description": "Webpage with details on this project", 
@@ -149,6 +186,39 @@
                         }
                     ], 
                     "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "950", 
+                                    "organizationMembers": [
+                                        "950"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "952", 
+                                    "organizationMembers": [
+                                        "952"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "953", 
+                                    "organizationMembers": [
+                                        "953"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
                         {
                             "party": [
                                 {
@@ -163,11 +233,31 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G951", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "951", 
+                                    "organizationMembers": [
+                                        "G951"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G775", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -178,7 +268,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -1758,7 +1848,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-02", 
+                        "date": "2017-11-09", 
                         "dateType": "creation"
                     }
                 ]

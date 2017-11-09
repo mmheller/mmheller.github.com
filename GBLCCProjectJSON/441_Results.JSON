@@ -66,16 +66,16 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "351", 
+                "contactId": "560", 
                 "isOrganization": true, 
-                "name": "US Forest Service", 
+                "name": "US Fish & Wildife Service", 
                 "contactType": "Federal"
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "560", 
+                "contactId": "351", 
                 "isOrganization": true, 
-                "name": "US Fish & Wildife Service", 
+                "name": "US Forest Service", 
                 "contactType": "Federal"
             }, 
             {
@@ -112,6 +112,22 @@
                 "contactType": "Academic"
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "G913", 
+                "isOrganization": true, 
+                "name": "Institute for Applied Ecology", 
+                "contactType": "NGO"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G913"
+                ], 
+                "contactId": "913", 
+                "isOrganization": false, 
+                "name": "Institute for Applied Ecology Unknown", 
+                "contactType": "NGO"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "US Forest Service", 
                 "memberOfOrganization": [], 
@@ -136,22 +152,6 @@
                 ], 
                 "contactId": "800", 
                 "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G913", 
-                "isOrganization": true, 
-                "name": "Institute for Applied Ecology", 
-                "contactType": "NGO"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G913"
-                ], 
-                "contactId": "913", 
-                "isOrganization": false, 
-                "name": "Institute for Applied Ecology Unknown", 
-                "contactType": "NGO"
             }
         ], 
         "metadata": {
@@ -179,7 +179,7 @@
                 ], 
                 "abstract": "FY2016\nReview the existing literature, summarizing what is known about the scale and prevalence of local adaptation in the Great Basin and review current practices for determining seed transfer zones, describing benefits and limitations of different approaches. Through these two reviews, we will identify gaps in knowledge and opportunities for addressing these gaps, and determine best-practices for the construction of high quality seed transfer guidelines in a rapid and efficient manner. We propose to bring together a wide group of partners to achieve these goals, with two working group meetings proposed for this project. Deliverables include two peer-reviewed publications (existing knowledge, recommendation of best practices), presentations of results at the annual Great Basin Consortium and Great Basin Native Plant Project conferences, and a document identifying priorities for future joint projects aimed at increasing success of restoration in these arid, invaded systems of the Great Basin.", 
                 "citation": {
-                    "title": "What Do We Know About Seed Transfer in the Great Basin? A Synthesis of Existing Knowledge and Identification of Knowledge Gaps", 
+                    "title": "Kilkenny 2016 - What Do We Know About Seed Transfer in the Great Basin? A Synthesis of Existing Knowledge and Identification of Knowledge Gaps", 
                     "onlineResource": [
                         {
                             "description": "Webpage with details on this project", 
@@ -192,9 +192,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "351", 
+                                    "contactId": "560", 
                                     "organizationMembers": [
-                                        "351"
+                                        "560"
                                     ]
                                 }
                             ], 
@@ -203,9 +203,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "560", 
+                                    "contactId": "351", 
                                     "organizationMembers": [
-                                        "560"
+                                        "351"
                                     ]
                                 }
                             ], 
@@ -229,7 +229,7 @@
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -240,27 +240,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G800", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "800", 
-                                    "organizationMembers": [
-                                        "G800"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -281,6 +261,26 @@
                                 }
                             ], 
                             "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G800", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "800", 
+                                    "organizationMembers": [
+                                        "G800"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
                         }
                     ], 
                     "alternateTitle": [
@@ -2033,7 +2033,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-02", 
+                        "date": "2017-11-09", 
                         "dateType": "creation"
                     }
                 ]

@@ -98,6 +98,31 @@
                 "contactType": "Private"
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "G975", 
+                "isOrganization": true, 
+                "name": "University of Arizona", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G975"
+                ], 
+                "contactId": "975", 
+                "isOrganization": false, 
+                "name": "Holly Hartman", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G975"
+                ], 
+                "contactId": "973", 
+                "isOrganization": false, 
+                "name": "Gregg Garfin", 
+                "contactType": "Academic"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "Western Regional Climate Center, Desert Research Institute", 
                 "memberOfOrganization": [], 
@@ -148,6 +173,15 @@
                 ], 
                 "contactId": "797", 
                 "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G975"
+                ], 
+                "contactId": "974", 
+                "isOrganization": false, 
+                "name": "Julie Brugger", 
+                "contactType": "Academic"
             }
         ], 
         "metadata": {
@@ -175,7 +209,7 @@
                 ], 
                 "abstract": "FY2015\nThe Great Basin Region, which covers much of Nevada, and portions of California, Oregon, Idaho, and Utah, managers are already confronting a changing climate and are beginning to make management decisions despite uncertainty in how climate change effects will manifest in the region. To support decision making, the Great Basin Landscape Conservation Cooperative (LCC) and the National Oceanic and Atmospheric Administration (NOAA) Regional Integrated Science Assessment Program (RISA) funded this project to explore how two scenario planning approaches might be used effectively with existing management planning processes and data sources and how to begin prioritizing adaptation strategies. The two approaches used in this project are Adaptation for Conservation Targets (ACT) and Strategic Scenario Planning (SSP).", 
                 "citation": {
-                    "title": "Scenario Planning in the Great Basin Region: Considering climate change impacts and management strategies for the future.", 
+                    "title": "Brown 2015  - Scenario Planning in the Great Basin Region: Considering climate change impacts and management strategies for the future.", 
                     "onlineResource": [
                         {
                             "description": "Webpage with details on this project", 
@@ -219,11 +253,42 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G975", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "975", 
+                                    "organizationMembers": [
+                                        "G975"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "973", 
+                                    "organizationMembers": [
+                                        "G975"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G773", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -234,7 +299,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -255,6 +320,17 @@
                                 }
                             ], 
                             "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "974", 
+                                    "organizationMembers": [
+                                        "G975"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }
                     ], 
                     "alternateTitle": [
@@ -1944,7 +2020,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-02", 
+                        "date": "2017-11-09", 
                         "dateType": "creation"
                     }
                 ]

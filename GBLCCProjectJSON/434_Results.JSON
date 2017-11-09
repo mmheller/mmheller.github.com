@@ -77,38 +77,38 @@
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:dshinneman@usgs.gov"
+                        "uri": "mailto:tkatzner@usgs.gov"
                     }
                 ], 
-                "contactId": "G855", 
+                "contactId": "G851", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Todd Katzner", 
+                "memberOfOrganization": [
+                    "G851"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:tkatzner@usgs.gov"
+                    }
+                ], 
+                "contactId": "851", 
                 "contactType": "Federal"
             }, 
             {
                 "isOrganization": false, 
                 "name": "Douglas Shinneman", 
                 "memberOfOrganization": [
-                    "G855"
+                    "G851"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mailto:dshinneman@usgs.gov"
+                        "uri": "mailto:dshinneman@usgs.gov"
                     }
                 ], 
                 "contactId": "855", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "David Pilliod", 
-                "memberOfOrganization": [
-                    "G855"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:dpilliod@usgs.gov"
-                    }
-                ], 
-                "contactId": "230", 
                 "contactType": "Federal"
             }, 
             {
@@ -139,16 +139,16 @@
             }, 
             {
                 "isOrganization": false, 
-                "name": "Todd Katzner", 
+                "name": "David Pilliod", 
                 "memberOfOrganization": [
-                    "G855"
+                    "G851"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:tkatzner@usgs.gov"
+                        "uri": "mailto:dpilliod@usgs.gov"
                     }
                 ], 
-                "contactId": "851", 
+                "contactId": "230", 
                 "contactType": "Federal"
             }
         ], 
@@ -177,7 +177,7 @@
                 ], 
                 "abstract": "FY2015\nStudy the wildlife impacts of the Bruneau-Owyhee Sage-grouse Habitat (BOSH) project. (The removal of approximately 600,000 acres of western juniper across a landscape of ~1.5 million acres over the next generation in an attempt to reverse sage-grouse habitat loss caused by woodland encroachment.) Monitor the effects of the BOSH project on wildlife by understanding effects of habitat treatments conducted in support of greater sage-grouse on other wildlife critical to inform federal management plans. Collect and analyze data on wildlife and habitat responses at multiple control levels and in predetermined areas. Methods are described in the full proposal submitted and collection of data will occur for at least one year before juniper removal, and up to three years after removal.", 
                 "citation": {
-                    "title": "Understanding Effects of Juniper Removal in Support of Greater Sage-grouse on Sagebrush Steppe Bird and Small Mammal Communities at Multiple Spatial Scales", 
+                    "title": "Johnson 2015 - Understanding Effects of Juniper Removal in Support of Greater Sage-grouse on Sagebrush Steppe Bird and Small Mammal Communities at Multiple Spatial Scales", 
                     "onlineResource": [
                         {
                             "description": "Webpage with details on this project", 
@@ -201,8 +201,19 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G855", 
+                                    "contactId": "G851", 
                                     "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "851", 
+                                    "organizationMembers": [
+                                        "G851"
+                                    ]
                                 }
                             ], 
                             "role": "Collaborator"
@@ -212,18 +223,7 @@
                                 {
                                     "contactId": "855", 
                                     "organizationMembers": [
-                                        "G855"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "230", 
-                                    "organizationMembers": [
-                                        "G855"
+                                        "G851"
                                     ]
                                 }
                             ], 
@@ -252,9 +252,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "851", 
+                                    "contactId": "230", 
                                     "organizationMembers": [
-                                        "G855"
+                                        "G851"
                                     ]
                                 }
                             ], 
@@ -2020,7 +2020,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-02", 
+                        "date": "2017-11-09", 
                         "dateType": "creation"
                     }
                 ]

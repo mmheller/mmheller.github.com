@@ -66,6 +66,41 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "983", 
+                "isOrganization": true, 
+                "name": "University of Nevada - Reno", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "935", 
+                "isOrganization": true, 
+                "name": "US Forest Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "934", 
+                "isOrganization": true, 
+                "name": "University of Nevada - Reno", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "932", 
+                "isOrganization": true, 
+                "name": "Bureau of Land Management", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "931", 
+                "isOrganization": true, 
+                "name": "Brigham Young University", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "560", 
                 "isOrganization": true, 
                 "name": "US Fish & Wildife Service", 
@@ -92,6 +127,32 @@
                 "contactId": "894", 
                 "isOrganization": false, 
                 "name": "Must Resolve Must Resolve", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "US Forest Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:smeyer@fs.fed.us"
+                    }
+                ], 
+                "contactId": "G777", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Susan Meyer", 
+                "memberOfOrganization": [
+                    "G777"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:smeyer@fs.fed.us"
+                    }
+                ], 
+                "contactId": "777", 
                 "contactType": "Federal"
             }, 
             {
@@ -159,6 +220,22 @@
                 ], 
                 "contactId": "796", 
                 "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G524", 
+                "isOrganization": true, 
+                "name": "Trout Unlimited", 
+                "contactType": "NGO"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G524"
+                ], 
+                "contactId": "524", 
+                "isOrganization": false, 
+                "name": "Jack Williams", 
+                "contactType": "NGO"
             }
         ], 
         "metadata": {
@@ -184,9 +261,9 @@
                         "role": "principalInvestigator"
                     }
                 ], 
-                "abstract": "FY2013\nCheatgrass die-offs are unexplained instances of stand failure observed in areas of Nevada and Utah, where cheatgrass fails to grow even though it has been a dominant component of plant communities in the past. The goals of this project are to 1) provide information on the size and extent of historic (1985 - 2012) die-offs in the Winnemucca area using satellite imagery, and 2) determine if die-offs are restoration opportunities by planting and monitoring local and commercially available native grasses in die-off areas. Support is requested to fund monitoring of the restoration project through a second growing season and to develop predictive spatial models of die-off from analysis of satellite imagery and GIS models, which will result in enhanced predictive capacity for locating die-offs at local management scales, and information on species and seed sources that can be used to restore die-offs.", 
+                "abstract": "FY2013\nCheatgrass die-offs are unexplained instances of stand failure observed in areas of Nevada and Utah, where cheatgrass fails to grow even though it has been a dominant component of plant communities in the past. The goals of this project are to:\n\n1) provide information on the size and extent of historic (1985 - 2012) die-offs in the Winnemucca area using satellite imagery, and \n2) determine if die-offs are restoration opportunities by planting and monitoring local and commercially available native grasses in die-off areas. \n\nSupport is requested to fund monitoring of the restoration project through a second growing season and to develop predictive spatial models of die-off from analysis of satellite imagery and GIS models, which will result in enhanced predictive capacity for locating die-offs at local management scales, and information on species and seed sources that can be used to restore die-offs.", 
                 "citation": {
-                    "title": "Understanding the Causes and Consequences of Cheatgrass Die-offs in the Great Basin", 
+                    "title": "Leger 2013 - Understanding the Causes and Consequences of Cheatgrass Die-offs in the Great Basin", 
                     "onlineResource": [
                         {
                             "description": "Webpage with details on this project", 
@@ -196,6 +273,61 @@
                         }
                     ], 
                     "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "983", 
+                                    "organizationMembers": [
+                                        "983"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "935", 
+                                    "organizationMembers": [
+                                        "935"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "934", 
+                                    "organizationMembers": [
+                                        "934"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "932", 
+                                    "organizationMembers": [
+                                        "932"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "931", 
+                                    "organizationMembers": [
+                                        "931"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
                         {
                             "party": [
                                 {
@@ -241,6 +373,26 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G777", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "777", 
+                                    "organizationMembers": [
+                                        "G777"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G827", 
                                     "organizationMembers": []
                                 }
@@ -276,7 +428,7 @@
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
@@ -287,7 +439,27 @@
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G524", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "524", 
+                                    "organizationMembers": [
+                                        "G524"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }
                     ], 
                     "alternateTitle": [
@@ -654,7 +826,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-02", 
+                        "date": "2017-11-09", 
                         "dateType": "creation"
                     }
                 ]

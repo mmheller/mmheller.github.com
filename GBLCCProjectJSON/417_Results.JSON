@@ -66,10 +66,24 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "560", 
+                "contactId": "938", 
                 "isOrganization": true, 
-                "name": "US Fish & Wildife Service", 
+                "name": "US Forest Service", 
                 "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "940", 
+                "isOrganization": true, 
+                "name": "US Forest Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "936", 
+                "isOrganization": true, 
+                "name": "Brigham Young University", 
+                "contactType": "Academic"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -79,30 +93,93 @@
                 "contactType": "Federal"
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "US Forest Service", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:brichardson02@fs.fed.us"
+                        "uri": "mailto:nancylshaw@fs.fed.us"
                     }
                 ], 
-                "contactId": "G781", 
+                "contactId": "G804", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Nancy Shaw", 
+                "memberOfOrganization": [
+                    "G804"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:nancylshaw@fs.fed.us"
+                    }
+                ], 
+                "contactId": "804", 
                 "contactType": "Federal"
             }, 
             {
                 "isOrganization": false, 
                 "name": "Bryce Richardson", 
                 "memberOfOrganization": [
-                    "G781"
+                    "G804"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mailto:brichardson02@fs.fed.us"
+                        "uri": "mailto:brichardson02@fs.fed.us"
                     }
                 ], 
                 "contactId": "781", 
                 "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "The Wildernes Society", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:anne_carlson@tws.org"
+                    }
+                ], 
+                "contactId": "G199", 
+                "contactType": "NGO"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Anne Carlson", 
+                "memberOfOrganization": [
+                    "G199"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:anne_carlson@tws.org"
+                    }
+                ], 
+                "contactId": "199", 
+                "contactType": "NGO"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G941", 
+                "isOrganization": true, 
+                "name": "Chicago Botanic Garden", 
+                "contactType": "NGO"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G941"
+                ], 
+                "contactId": "941", 
+                "isOrganization": false, 
+                "name": "Shannon Still", 
+                "contactType": "NGO"
             }, 
             {
                 "isOrganization": true, 
@@ -128,20 +205,6 @@
                     }
                 ], 
                 "contactId": "782", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Nancy Shaw", 
-                "memberOfOrganization": [
-                    "G781"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:nancylshaw@fs.fed.us"
-                    }
-                ], 
-                "contactId": "804", 
                 "contactType": "Federal"
             }
         ], 
@@ -170,7 +233,7 @@
                 ], 
                 "abstract": "FY2013\nShrub-dominated ecosystems of the Great Basin are being threatened by disturbances, typically wildfire followed by encroachment of invasive plants (e.g., cheat grass). To mitigate these threats and future changes in the climate to big sagebrush (Artemisia tridentata), restorationists require a knowledge base and tools to inform them of the most appropriate seed sources to plant to greatly enhance the success of restoration under contemporary and future climates. We propose to develop climate-responsive seed transfer zones based on associating plant quantitative traits and ecophysiological data from common gardens to the climate of the seed source.", 
                 "citation": {
-                    "title": "Development of Tools and Technology to Improve the Success and Planning of Restoration of Big Sagebrush Ecosystems", 
+                    "title": "Richardson 2013 - Development of Tools and Technology to Improve the Success and Planning of Restoration of Big Sagebrush Ecosystems", 
                     "onlineResource": [
                         {
                             "description": "Webpage with details on this project", 
@@ -183,13 +246,35 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "560", 
+                                    "contactId": "938", 
                                     "organizationMembers": [
-                                        "560"
+                                        "938"
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "940", 
+                                    "organizationMembers": [
+                                        "940"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "936", 
+                                    "organizationMembers": [
+                                        "936"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -205,8 +290,10 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G781", 
-                                    "organizationMembers": []
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
                                 }
                             ], 
                             "role": "Fiscal Agent"
@@ -214,13 +301,73 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "781", 
+                                    "contactId": "G804", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "804", 
                                     "organizationMembers": [
-                                        "G781"
+                                        "G804"
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "781", 
+                                    "organizationMembers": [
+                                        "G804"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G199", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "199", 
+                                    "organizationMembers": [
+                                        "G199"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G941", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "941", 
+                                    "organizationMembers": [
+                                        "G941"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -237,17 +384,6 @@
                                     "contactId": "782", 
                                     "organizationMembers": [
                                         "G782"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "804", 
-                                    "organizationMembers": [
-                                        "G781"
                                     ]
                                 }
                             ], 
@@ -579,7 +715,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-02", 
+                        "date": "2017-11-09", 
                         "dateType": "creation"
                     }
                 ]

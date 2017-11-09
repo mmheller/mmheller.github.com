@@ -66,6 +66,20 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "389", 
+                "isOrganization": true, 
+                "name": "Bureau of Land Management", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "898", 
+                "isOrganization": true, 
+                "name": "Gonzaga University", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "897", 
                 "isOrganization": true, 
                 "name": "Brigham Young University", 
@@ -80,49 +94,9 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "898", 
-                "isOrganization": true, 
-                "name": "Gonzaga University", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "560", 
                 "isOrganization": true, 
                 "name": "US Fish & Wildife Service", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "389", 
-                "isOrganization": true, 
-                "name": "Bureau of Land Management", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "US Forest Service", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:smeyer@fs.fed.us"
-                    }
-                ], 
-                "contactId": "G777", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Susan Meyer", 
-                "memberOfOrganization": [
-                    "G777"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mailto:smeyer@fs.fed.us"
-                    }
-                ], 
-                "contactId": "777", 
                 "contactType": "Federal"
             }, 
             {
@@ -176,6 +150,32 @@
                 ], 
                 "contactId": "822", 
                 "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "US Forest Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:smeyer@fs.fed.us"
+                    }
+                ], 
+                "contactId": "G777", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Susan Meyer", 
+                "memberOfOrganization": [
+                    "G777"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:smeyer@fs.fed.us"
+                    }
+                ], 
+                "contactId": "777", 
+                "contactType": "Federal"
             }
         ], 
         "metadata": {
@@ -201,9 +201,9 @@
                         "role": "principalInvestigator"
                     }
                 ], 
-                "abstract": "FY2014\nCheatgrass (Bromus tectorum) is an invasive annual grass that dominates millions of acres in the Great Basin. Cheatgrass stands often exhibit establishment failure ('die-off') over sometimes large areas. These areas may suffer increased erosion, but may also represent restoration opportunities. Die-offs are usually transient (one-year) phenomena, but often occur repeatedly in the same areas. Several soilborne fungal pathogens that attack cheatgrass are implicated as die-off causal agents. They apparently interact with soil microbes, host plants, weather variability, and each other to generate observed patterns of die-off and recovery. We propose to test the hypothesis that soil fungistasis (suppression of fungal pathogens by soil microbes in carbohydrate-limited soil) and its alleviation through natural carbohydrate augmentation (e.g., cheatgrass litter, leakage from cheatgrass roots) are the principal processes mediating patterns of die-off and recovery in die-off-prone areas. We will use laboratory, greenhouse, and field manipulative experiments to examine the effect of soil carbohydrates on cheatgrass disease incidence. Adding a high-carbohydrate amendment could potentially trigger a die-off, creating a restoration opportunity. The known effect of such amendments on cheatgrass competition through nitrogen limitation may be less important than their ability to \"wake up\" pathogens that can reduce or prevent cheatgrass stand establishment.", 
+                "abstract": "FY2014\nThis project proposes to test the hypothesis that soil fungistasis (suppression of fungal pathogens by soil microbes in carbohydrate-limited soil) and its alleviation through natural carbohydrate augmentation (e.g., cheatgrass litter, leakage from cheatgrass roots) are the principal processes mediating patterns of cheatgrass die-off and recovery in die-off-prone areas.\n\nThe project team will use laboratory, greenhouse, and field manipulative experiments to examine the effect of soil carbohydrates on cheatgrass disease incidence.", 
                 "citation": {
-                    "title": "Cheatgrass Stand Failure in the Great Basin: Fungal Pathogens, Carbon Dynamics, and Fungistasis", 
+                    "title": "Meyer 2014 - Cheatgrass Stand Failure in the Great Basin: Fungal Pathogens, Carbon Dynamics, and Fungistasis", 
                     "onlineResource": [
                         {
                             "description": "Webpage with details on this project", 
@@ -213,6 +213,28 @@
                         }
                     ], 
                     "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "389", 
+                                    "organizationMembers": [
+                                        "389"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "898", 
+                                    "organizationMembers": [
+                                        "898"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
                         {
                             "party": [
                                 {
@@ -238,51 +260,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "898", 
-                                    "organizationMembers": [
-                                        "898"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "560", 
                                     "organizationMembers": [
                                         "560"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "389", 
-                                    "organizationMembers": [
-                                        "389"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G777", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "777", 
-                                    "organizationMembers": [
-                                        "G777"
                                     ]
                                 }
                             ], 
@@ -315,7 +295,7 @@
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -326,7 +306,27 @@
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G777", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "777", 
+                                    "organizationMembers": [
+                                        "G777"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
                         }
                     ], 
                     "alternateTitle": [
@@ -2133,7 +2133,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-02", 
+                        "date": "2017-11-09", 
                         "dateType": "creation"
                     }
                 ]

@@ -66,9 +66,16 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "351", 
+                "contactId": "910", 
                 "isOrganization": true, 
-                "name": "US Forest Service", 
+                "name": "Nevada Department of Wildlife", 
+                "contactType": "State"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
                 "contactType": "Federal"
             }, 
             {
@@ -80,17 +87,10 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "560", 
+                "contactId": "351", 
                 "isOrganization": true, 
-                "name": "US Fish & Wildife Service", 
+                "name": "US Forest Service", 
                 "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "910", 
-                "isOrganization": true, 
-                "name": "Nevada Department of Wildlife", 
-                "contactType": "State"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -107,32 +107,6 @@
                 "isOrganization": false, 
                 "name": "Must Resolve Must Resolve", 
                 "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "Great Basin Bird Observatory", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:ammon@gbbo.org"
-                    }
-                ], 
-                "contactId": "G786", 
-                "contactType": "NGO"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Elizabeth Ammon", 
-                "memberOfOrganization": [
-                    "G786"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mailto:ammon@gbbo.org"
-                    }
-                ], 
-                "contactId": "786", 
-                "contactType": "NGO"
             }, 
             {
                 "isOrganization": true, 
@@ -161,18 +135,44 @@
                 "contactType": "Federal"
             }, 
             {
-                "isOrganization": false, 
-                "name": "John Boone", 
-                "memberOfOrganization": [
-                    "G786"
-                ], 
+                "isOrganization": true, 
+                "name": "Great Basin Bird Observatory", 
+                "memberOfOrganization": [], 
                 "onlineResource": [
                     {
                         "uri": "mailto:boone@gbbo.org"
                     }
                 ], 
+                "contactId": "G808", 
+                "contactType": "Research"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "John Boone", 
+                "memberOfOrganization": [
+                    "G808"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:boone@gbbo.org"
+                    }
+                ], 
                 "contactId": "808", 
                 "contactType": "Research"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Elizabeth Ammon", 
+                "memberOfOrganization": [
+                    "G808"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:ammon@gbbo.org"
+                    }
+                ], 
+                "contactId": "786", 
+                "contactType": "NGO"
             }
         ], 
         "metadata": {
@@ -198,9 +198,9 @@
                         "role": "principalInvestigator"
                     }
                 ], 
-                "abstract": "FY2013\nThe proposed project's objective is to provide a scientific review of (1) current priority species management practices in Nevada, (2) status of our combined scientific knowledge of priority species' needs and gaps in that knowledge, and (3) adequacy of current monitoring programs of priority species. The project builds on recent, well-researched species conservation plans for Nevada (GBBO 2010, NWPT 2012), and it will leverage funds that are already obligated to research on scientifically based disturbance buffer recommendations and to evaluate GBBO's statewide landbird monitoring program, the Nevada Bird Count. The outcome of the proposed work will be an online open-source compendium document that summarizes the current knowledge on the value of different species management practices, important gaps in knowledge about priority species, and current status of monitoring coverage.", 
+                "abstract": "FY2013\nThe proposed project's objective is to provide a scientific review of \n\n(1) current priority species management practices in Nevada, \n(2) status of our combined scientific knowledge of priority species' needs and gaps in that knowledge, and\n(3) adequacy of current monitoring programs of priority species. \n\nThe project builds on recent, well-researched species conservation plans for Nevada (GBBO 2010, NWPT 2012), and it will leverage funds that are already obligated to research on scientifically based disturbance buffer recommendations and to evaluate GBBO's statewide landbird monitoring program, the Nevada Bird Count. \n\nThe outcome of the proposed work will be an online open-source compendium document that summarizes the current knowledge on the value of different species management practices, important gaps in knowledge about priority species, and current status of monitoring coverage.", 
                 "citation": {
-                    "title": "Evaluating Species Management Guidance and Monitoring Programs for the Great Basin in Nevada", 
+                    "title": "Ammon 2013 - Evaluating Species Management Guidance and Monitoring Programs for the Great Basin in Nevada", 
                     "onlineResource": [
                         {
                             "description": "Webpage with details on this project", 
@@ -213,20 +213,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "351", 
+                                    "contactId": "910", 
                                     "organizationMembers": [
-                                        "351"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "389", 
-                                    "organizationMembers": [
-                                        "389"
+                                        "910"
                                     ]
                                 }
                             ], 
@@ -246,9 +235,20 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "910", 
+                                    "contactId": "389", 
                                     "organizationMembers": [
-                                        "910"
+                                        "389"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "351", 
+                                    "organizationMembers": [
+                                        "351"
                                     ]
                                 }
                             ], 
@@ -277,26 +277,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G786", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "786", 
-                                    "organizationMembers": [
-                                        "G786"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G879", 
                                     "organizationMembers": []
                                 }
@@ -317,9 +297,29 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G808", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "808", 
                                     "organizationMembers": [
-                                        "G786"
+                                        "G808"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "786", 
+                                    "organizationMembers": [
+                                        "G808"
                                     ]
                                 }
                             ], 
@@ -1419,7 +1419,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-02", 
+                        "date": "2017-11-09", 
                         "dateType": "creation"
                     }
                 ]

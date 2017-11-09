@@ -72,6 +72,36 @@
                 "contactType": "Federal"
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "G825", 
+                "isOrganization": true, 
+                "name": "Great Basin LCC", 
+                "contactType": "LCC"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G825"
+                ], 
+                "contactId": "825", 
+                "isOrganization": false, 
+                "name": "Levi Old", 
+                "contactType": "LCC"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Todd Hopkins", 
+                "memberOfOrganization": [
+                    "G825"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:todd_hopkins@fws.gov"
+                    }
+                ], 
+                "contactId": "682", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "US Fish & Wildife Service", 
                 "memberOfOrganization": [], 
@@ -96,22 +126,6 @@
                 ], 
                 "contactId": "232", 
                 "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G825", 
-                "isOrganization": true, 
-                "name": "Great Basin LCC", 
-                "contactType": "LCC"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G825"
-                ], 
-                "contactId": "825", 
-                "isOrganization": false, 
-                "name": "Levi Old", 
-                "contactType": "LCC"
             }
         ], 
         "metadata": {
@@ -139,7 +153,7 @@
                 ], 
                 "abstract": "FY2015\nThe Northwestern Great Basin ecoregion is one of the most intact ecosystems in the west. It is also a biological hotspot for migratory birds, greater sage-grouse and a stronghold for pronghorn antelope. However, altered fire regimes, invasive species, water scarcity, development, and climate change threaten the integrity of this landscape. Several efforts are ongoing for individual species, specific threats or sub-geographies, and over 60 existing plans and assessments have been identified for the region. This project will pull the pieces together to create a holistic view of shared priorities on the landscape.", 
                 "citation": {
-                    "title": "Northwest Basin and Range Synthesis Project", 
+                    "title": "Miewald 2015 - Northwest Basin and Range Synthesis Project", 
                     "onlineResource": [
                         {
                             "description": "Webpage with details on this project", 
@@ -155,26 +169,6 @@
                                     "contactId": "906", 
                                     "organizationMembers": [
                                         "906"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G232", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "232", 
-                                    "organizationMembers": [
-                                        "G232"
                                     ]
                                 }
                             ], 
@@ -199,6 +193,37 @@
                                 }
                             ], 
                             "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "682", 
+                                    "organizationMembers": [
+                                        "G825"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G232", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "232", 
+                                    "organizationMembers": [
+                                        "G232"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
                         }
                     ], 
                     "alternateTitle": [
@@ -2353,7 +2378,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-02", 
+                        "date": "2017-11-09", 
                         "dateType": "creation"
                     }
                 ]

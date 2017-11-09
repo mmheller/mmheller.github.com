@@ -72,6 +72,22 @@
                 "contactType": "Federal"
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "G894", 
+                "isOrganization": true, 
+                "name": "Must Resolve", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G894"
+                ], 
+                "contactId": "894", 
+                "isOrganization": false, 
+                "name": "Must Resolve Must Resolve", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "US Forest Service", 
                 "memberOfOrganization": [], 
@@ -96,74 +112,6 @@
                 ], 
                 "contactId": "779", 
                 "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G894", 
-                "isOrganization": true, 
-                "name": "Must Resolve", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G894"
-                ], 
-                "contactId": "894", 
-                "isOrganization": false, 
-                "name": "Must Resolve Must Resolve", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "Desert Research Institute", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:Rosemary.Carroll@dri.edu"
-                    }
-                ], 
-                "contactId": "G844", 
-                "contactType": "Research"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Rosemary Carroll", 
-                "memberOfOrganization": [
-                    "G844"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mailto:Rosemary.Carroll@dri.edu"
-                    }
-                ], 
-                "contactId": "844", 
-                "contactType": "Research"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "Western Carolina University", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:jmiller@wcu.edu"
-                    }
-                ], 
-                "contactId": "G811", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Jerry Miller", 
-                "memberOfOrganization": [
-                    "G811"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mailto:jmiller@wcu.edu"
-                    }
-                ], 
-                "contactId": "811", 
-                "contactType": "Academic"
             }, 
             {
                 "isOrganization": false, 
@@ -204,6 +152,58 @@
                 ], 
                 "contactId": "802", 
                 "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Western Carolina University", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:jmiller@wcu.edu"
+                    }
+                ], 
+                "contactId": "G811", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Jerry Miller", 
+                "memberOfOrganization": [
+                    "G811"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:jmiller@wcu.edu"
+                    }
+                ], 
+                "contactId": "811", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Desert Research Institute", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:Rosemary.Carroll@dri.edu"
+                    }
+                ], 
+                "contactId": "G844", 
+                "contactType": "Research"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Rosemary Carroll", 
+                "memberOfOrganization": [
+                    "G844"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mailto:Rosemary.Carroll@dri.edu"
+                    }
+                ], 
+                "contactId": "844", 
+                "contactType": "Research"
             }
         ], 
         "metadata": {
@@ -231,7 +231,7 @@
                 ], 
                 "abstract": "FY2016\nThis project will develop a strategic approach for conservation of wet meadows and riparian ecosystems and the species they support that focuses on threats caused by natural and anthropogenic disturbance. It uses information on (1) the factors that affect wet meadow and riparian ecosystem resilience to both natural and human-caused disturbances at the scale of the watershed and meadow or riparian ecosystem, and (2) the distributions and population abundances of at risk species to determine focal areas for management. Maps of the relative resilience of watersheds and wet meadows are overlaid with data on at risk species and the predominant threats to facilitate this process. Decision matrices are developed based on the characteristics of watersheds, wet meadows, and riparian areas that allow managers to (1) evaluate their relative resilience to disturbance and capacity to support at risk species, and (2) determine appropriate management strategies. A process for rapidly assessing meadow ecosystem resilience is developed, and the approach is shared with managers through field tours and workshops.", 
                 "citation": {
-                    "title": "A Multi-scale Resilience-based Framework for Restoring and Conserving Great Basin Wet Meadows and Riparian Ecosystems", 
+                    "title": "Chambers 2016 - A Multi-scale Resilience-based Framework for Restoring and Conserving Great Basin Wet Meadows and Riparian Ecosystems", 
                     "onlineResource": [
                         {
                             "description": "Webpage with details on this project", 
@@ -251,26 +251,6 @@
                                 }
                             ], 
                             "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G779", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "779", 
-                                    "organizationMembers": [
-                                        "G779"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -295,7 +275,7 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G844", 
+                                    "contactId": "G779", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -304,29 +284,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "844", 
+                                    "contactId": "779", 
                                     "organizationMembers": [
-                                        "G844"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G811", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "811", 
-                                    "organizationMembers": [
-                                        "G811"
+                                        "G779"
                                     ]
                                 }
                             ], 
@@ -358,6 +318,46 @@
                                     "contactId": "802", 
                                     "organizationMembers": [
                                         "G802"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G811", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "811", 
+                                    "organizationMembers": [
+                                        "G811"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G844", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "844", 
+                                    "organizationMembers": [
+                                        "G844"
                                     ]
                                 }
                             ], 
@@ -2517,7 +2517,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-02", 
+                        "date": "2017-11-09", 
                         "dateType": "creation"
                     }
                 ]
