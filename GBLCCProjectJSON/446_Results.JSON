@@ -98,52 +98,10 @@
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mailto:dshinneman@usgs.gov"
+                        "uri": "mailto:dshinneman@usgs.gov"
                     }
                 ], 
                 "contactId": "915", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Robert Arkle", 
-                "memberOfOrganization": [
-                    "G915"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:rarkle@usgs.gov"
-                    }
-                ], 
-                "contactId": "925", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Susan McIlroy", 
-                "memberOfOrganization": [
-                    "G915"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:smcilroy@usgs.gov"
-                    }
-                ], 
-                "contactId": "926", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Martha Brabec", 
-                "memberOfOrganization": [
-                    "G915"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mbrabec@usgs.gov"
-                    }
-                ], 
-                "contactId": "924", 
                 "contactType": "Federal"
             }, 
             {
@@ -162,6 +120,34 @@
             }, 
             {
                 "isOrganization": false, 
+                "name": "Martha Brabec", 
+                "memberOfOrganization": [
+                    "G915"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mbrabec@usgs.gov"
+                    }
+                ], 
+                "contactId": "924", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Susan McIlroy", 
+                "memberOfOrganization": [
+                    "G915"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:smcilroy@usgs.gov"
+                    }
+                ], 
+                "contactId": "926", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
                 "name": "David Pilliod", 
                 "memberOfOrganization": [
                     "G915"
@@ -172,6 +158,20 @@
                     }
                 ], 
                 "contactId": "230", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Robert Arkle", 
+                "memberOfOrganization": [
+                    "G915"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:rarkle@usgs.gov"
+                    }
+                ], 
+                "contactId": "925", 
                 "contactType": "Federal"
             }
         ], 
@@ -255,7 +255,18 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "925", 
+                                    "contactId": "782", 
+                                    "organizationMembers": [
+                                        "G915"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "924", 
                                     "organizationMembers": [
                                         "G915"
                                     ]
@@ -277,7 +288,7 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "924", 
+                                    "contactId": "230", 
                                     "organizationMembers": [
                                         "G915"
                                     ]
@@ -288,18 +299,7 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "782", 
-                                    "organizationMembers": [
-                                        "G915"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "230", 
+                                    "contactId": "925", 
                                     "organizationMembers": [
                                         "G915"
                                     ]
@@ -1816,6 +1816,35 @@
                 "keyword": [
                     {
                         "fullPath": true, 
+                        "keywordType": "LCC Deliverable", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/5307baa3e4b0dcc7bdc913a9"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "fa455d4a-5d87-56bc-b074-9a967beff904"
+                                }
+                            ], 
+                            "title": "Deliverable Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Publication"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
                         "keywordType": "LCC Project Category", 
                         "thesaurus": {
                             "date": [
@@ -1975,7 +2004,7 @@
                             "sourceId": "389", 
                             "currency": "USD", 
                             "amount": 16750.0, 
-                            "recipientId": "782", 
+                            "recipientId": "G915", 
                             "matching": false
                         }
                     ], 
@@ -2027,7 +2056,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-09", 
+                        "date": "2017-11-28", 
                         "dateType": "creation"
                     }
                 ]

@@ -66,20 +66,6 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "946", 
-                "isOrganization": true, 
-                "name": "US Department of Agriculture", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "947", 
-                "isOrganization": true, 
-                "name": "Environmental Protection Agency of Aosta Valley", 
-                "contactType": "Unknown"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "560", 
                 "isOrganization": true, 
                 "name": "US Fish & Wildife Service", 
@@ -87,10 +73,35 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "948", 
+                "contactId": "G946", 
                 "isOrganization": true, 
-                "name": "University of Nevada - Reno", 
-                "contactType": "Academic"
+                "name": "US Department of Agriculture", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G946"
+                ], 
+                "contactId": "946", 
+                "isOrganization": false, 
+                "name": "Bryce Wehan", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G947", 
+                "isOrganization": true, 
+                "name": "Environmental Protection Agency of Aosta Valley", 
+                "contactType": "Unknown"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G947"
+                ], 
+                "contactId": "947", 
+                "isOrganization": false, 
+                "name": "Gianluca Filippa", 
+                "contactType": "Unknown"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -144,7 +155,7 @@
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mailto:tstringham@cabnr.unr.edu"
+                        "uri": "mailto:tstringham@cabnr.unr.edu"
                     }
                 ], 
                 "contactId": "875", 
@@ -170,7 +181,7 @@
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mailto:Rosemary.Carroll@dri.edu"
+                        "uri": "mailto:Rosemary.Carroll@dri.edu"
                     }
                 ], 
                 "contactId": "844", 
@@ -210,7 +221,7 @@
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mailto:keirith.snyder@ars.usda.gov"
+                        "uri": "mailto:keirith.snyder@ars.usda.gov"
                     }
                 ], 
                 "contactId": "779", 
@@ -229,6 +240,22 @@
                 ], 
                 "contactId": "850", 
                 "contactType": "Research"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G948", 
+                "isOrganization": true, 
+                "name": "University of Nevada - Reno", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G948"
+                ], 
+                "contactId": "948", 
+                "isOrganization": false, 
+                "name": "Devon Snyder", 
+                "contactType": "Academic"
             }
         ], 
         "metadata": {
@@ -269,28 +296,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "946", 
-                                    "organizationMembers": [
-                                        "946"
-                                    ]
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "947", 
-                                    "organizationMembers": [
-                                        "947"
-                                    ]
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "560", 
                                     "organizationMembers": [
                                         "560"
@@ -302,9 +307,38 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "948", 
+                                    "contactId": "G946", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "946", 
                                     "organizationMembers": [
-                                        "948"
+                                        "G946"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G947", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "947", 
+                                    "organizationMembers": [
+                                        "G947"
                                     ]
                                 }
                             ], 
@@ -427,6 +461,26 @@
                                     "contactId": "850", 
                                     "organizationMembers": [
                                         "G844"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G948", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "948", 
+                                    "organizationMembers": [
+                                        "G948"
                                     ]
                                 }
                             ], 
@@ -729,6 +783,41 @@
                 "keyword": [
                     {
                         "fullPath": true, 
+                        "keywordType": "LCC Deliverable", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/5307baa3e4b0dcc7bdc913a9"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "fa455d4a-5d87-56bc-b074-9a967beff904"
+                                }
+                            ], 
+                            "title": "Deliverable Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Publication"
+                            }, 
+                            {
+                                "keyword": "Training/Outreach/Workshop"
+                            }, 
+                            {
+                                "keyword": "Publication"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
                         "keywordType": "LCC Project Category", 
                         "thesaurus": {
                             "date": [
@@ -899,7 +988,7 @@
                             "sourceId": "560", 
                             "currency": "USD", 
                             "amount": 77422.0, 
-                            "recipientId": "779", 
+                            "recipientId": "G779", 
                             "matching": false
                         }
                     ], 
@@ -917,7 +1006,7 @@
                             "sourceId": "894", 
                             "currency": "USD", 
                             "amount": 83560.0, 
-                            "recipientId": "779", 
+                            "recipientId": "G779", 
                             "matching": true
                         }
                     ], 
@@ -969,7 +1058,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-09", 
+                        "date": "2017-11-28", 
                         "dateType": "creation"
                     }
                 ]

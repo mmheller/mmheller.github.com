@@ -66,27 +66,6 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "962", 
-                "isOrganization": true, 
-                "name": "Bureau of Land Management", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "960", 
-                "isOrganization": true, 
-                "name": "US Department of Agriculture", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "959", 
-                "isOrganization": true, 
-                "name": "US Forest Service", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "771", 
                 "isOrganization": true, 
                 "name": "Western Association of Fish and Wildlife Agencies", 
@@ -98,48 +77,6 @@
                 "isOrganization": true, 
                 "name": "US Fish & Wildife Service", 
                 "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G963", 
-                "isOrganization": true, 
-                "name": "University of Wyoming", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G963"
-                ], 
-                "contactId": "963", 
-                "isOrganization": false, 
-                "name": "Brian Mealor", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "Brigham Young University", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:william@stat.byu.edu"
-                    }
-                ], 
-                "contactId": "G828", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "William Christensen", 
-                "memberOfOrganization": [
-                    "G828"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mailto:william@stat.byu.edu"
-                    }
-                ], 
-                "contactId": "828", 
-                "contactType": "Academic"
             }, 
             {
                 "isOrganization": true, 
@@ -161,10 +98,84 @@
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mailto:kgoodwin@montana.edu"
+                        "uri": "mailto:kgoodwin@montana.edu"
                     }
                 ], 
                 "contactId": "789", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G962", 
+                "isOrganization": true, 
+                "name": "Bureau of Land Management", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G962"
+                ], 
+                "contactId": "962", 
+                "isOrganization": false, 
+                "name": "Mike Pellant", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G960", 
+                "isOrganization": true, 
+                "name": "US Department of Agriculture", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G960"
+                ], 
+                "contactId": "960", 
+                "isOrganization": false, 
+                "name": "Chad Boyd", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Brigham Young University", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:william@stat.byu.edu"
+                    }
+                ], 
+                "contactId": "G828", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "William Christensen", 
+                "memberOfOrganization": [
+                    "G828"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:william@stat.byu.edu"
+                    }
+                ], 
+                "contactId": "828", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G963", 
+                "isOrganization": true, 
+                "name": "University of Wyoming", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G963"
+                ], 
+                "contactId": "963", 
+                "isOrganization": false, 
+                "name": "Brian Mealor", 
                 "contactType": "Academic"
             }, 
             {
@@ -187,10 +198,26 @@
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mailto:todd_hopkins@fws.gov"
+                        "uri": "mailto:todd_hopkins@fws.gov"
                     }
                 ], 
                 "contactId": "682", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G959", 
+                "isOrganization": true, 
+                "name": "US Forest Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G959"
+                ], 
+                "contactId": "959", 
+                "isOrganization": false, 
+                "name": "Michael Ielmini", 
                 "contactType": "Federal"
             }
         ], 
@@ -232,39 +259,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "962", 
-                                    "organizationMembers": [
-                                        "962"
-                                    ]
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "960", 
-                                    "organizationMembers": [
-                                        "960"
-                                    ]
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "959", 
-                                    "organizationMembers": [
-                                        "959"
-                                    ]
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "771", 
                                     "organizationMembers": [
                                         "771"
@@ -287,7 +281,27 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G963", 
+                                    "contactId": "G789", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "789", 
+                                    "organizationMembers": [
+                                        "G789"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G962", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -296,9 +310,29 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "963", 
+                                    "contactId": "962", 
                                     "organizationMembers": [
-                                        "G963"
+                                        "G962"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G960", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "960", 
+                                    "organizationMembers": [
+                                        "G960"
                                     ]
                                 }
                             ], 
@@ -327,22 +361,22 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G789", 
+                                    "contactId": "G963", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Contributor"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "789", 
+                                    "contactId": "963", 
                                     "organizationMembers": [
-                                        "G789"
+                                        "G963"
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Contributor"
                         }, 
                         {
                             "party": [
@@ -359,6 +393,26 @@
                                     "contactId": "682", 
                                     "organizationMembers": [
                                         "G682"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G959", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "959", 
+                                    "organizationMembers": [
+                                        "G959"
                                     ]
                                 }
                             ], 
@@ -1403,6 +1457,35 @@
                 "keyword": [
                     {
                         "fullPath": true, 
+                        "keywordType": "LCC Deliverable", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/5307baa3e4b0dcc7bdc913a9"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "fa455d4a-5d87-56bc-b074-9a967beff904"
+                                }
+                            ], 
+                            "title": "Deliverable Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Publication"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
                         "keywordType": "LCC Project Category", 
                         "thesaurus": {
                             "date": [
@@ -1583,7 +1666,7 @@
                             "sourceId": "560", 
                             "currency": "USD", 
                             "amount": 38840.0, 
-                            "recipientId": "789", 
+                            "recipientId": "G789", 
                             "matching": false
                         }
                     ], 
@@ -1635,7 +1718,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-09", 
+                        "date": "2017-11-28", 
                         "dateType": "creation"
                     }
                 ]

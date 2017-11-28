@@ -66,17 +66,17 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "911", 
-                "isOrganization": true, 
-                "name": "Desert LCC", 
-                "contactType": "LCC"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "389", 
                 "isOrganization": true, 
                 "name": "Bureau of Land Management", 
                 "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "911", 
+                "isOrganization": true, 
+                "name": "Desert LCC", 
+                "contactType": "LCC"
             }, 
             {
                 "isOrganization": true, 
@@ -84,31 +84,17 @@
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:don.sada@dri.edu"
+                        "uri": "mailto:alex.lutz@dri.edu"
                     }
                 ], 
-                "contactId": "G788", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Don Sada", 
-                "memberOfOrganization": [
-                    "G788"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mailto:don.sada@dri.edu"
-                    }
-                ], 
-                "contactId": "788", 
-                "contactType": "Academic"
+                "contactId": "G807", 
+                "contactType": "Research"
             }, 
             {
                 "isOrganization": false, 
                 "name": "Alexandra Lutz", 
                 "memberOfOrganization": [
-                    "G788"
+                    "G807"
                 ], 
                 "onlineResource": [
                     {
@@ -117,6 +103,20 @@
                 ], 
                 "contactId": "807", 
                 "contactType": "Research"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Don Sada", 
+                "memberOfOrganization": [
+                    "G807"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:don.sada@dri.edu"
+                    }
+                ], 
+                "contactId": "788", 
+                "contactType": "Academic"
             }
         ], 
         "metadata": {
@@ -157,17 +157,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "911", 
-                                    "organizationMembers": [
-                                        "911"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "389", 
                                     "organizationMembers": [
                                         "389"
@@ -179,33 +168,44 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G788", 
-                                    "organizationMembers": []
+                                    "contactId": "911", 
+                                    "organizationMembers": [
+                                        "911"
+                                    ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "788", 
-                                    "organizationMembers": [
-                                        "G788"
-                                    ]
+                                    "contactId": "G807", 
+                                    "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
                                 {
                                     "contactId": "807", 
                                     "organizationMembers": [
-                                        "G788"
+                                        "G807"
                                     ]
                                 }
                             ], 
                             "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "788", 
+                                    "organizationMembers": [
+                                        "G807"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
                         }
                     ], 
                     "alternateTitle": [
@@ -1616,6 +1616,35 @@
                 "keyword": [
                     {
                         "fullPath": true, 
+                        "keywordType": "LCC Deliverable", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/5307baa3e4b0dcc7bdc913a9"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "fa455d4a-5d87-56bc-b074-9a967beff904"
+                                }
+                            ], 
+                            "title": "Deliverable Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Report"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
                         "keywordType": "LCC Project Category", 
                         "thesaurus": {
                             "date": [
@@ -1807,7 +1836,7 @@
                             "sourceId": "389", 
                             "currency": "USD", 
                             "amount": 67700.0, 
-                            "recipientId": "788", 
+                            "recipientId": "G807", 
                             "matching": false
                         }
                     ], 
@@ -1859,7 +1888,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-09", 
+                        "date": "2017-11-28", 
                         "dateType": "creation"
                     }
                 ]

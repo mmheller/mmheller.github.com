@@ -62,7 +62,7 @@
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mailto:mary_mahaffy@fws.gov"
+                        "uri": "mailto:mary_mahaffy@fws.gov"
                     }
                 ], 
                 "contactId": "180", 
@@ -104,7 +104,7 @@
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mailto:osp@2uw.edu"
+                        "uri": "mailto:osp@2uw.edu"
                     }
                 ], 
                 "contactId": "112", 
@@ -233,46 +233,7 @@
                     "language": "eng"
                 }, 
                 "purpose": "Vulnerability Assessment Conservation Planning Data Acquisition and Development Academics & scientific researchers Federal resource managers State agencies", 
-                "extent": [
-                    {
-                        "geographicExtent": [
-                            {
-                                "boundingBox": {
-                                    "northLatitude": 50.20471191400007, 
-                                    "westLongitude": -124.76428222699997, 
-                                    "southLatitude": 41.94989013700007, 
-                                    "eastLongitude": -107.47821044899996
-                                }, 
-                                "geographicElement": [
-                                    {
-                                        "type": "Polygon", 
-                                        "coordinates": [
-                                            [
-                                                [
-                                                    -124.76428222699997, 
-                                                    41.94989013700007
-                                                ], 
-                                                [
-                                                    -124.76428222699997, 
-                                                    50.20471191400007
-                                                ], 
-                                                [
-                                                    -107.47821044899996, 
-                                                    50.20471191400007
-                                                ], 
-                                                [
-                                                    -107.47821044899996, 
-                                                    41.94989013700007
-                                                ]
-                                            ]
-                                        ]
-                                    }
-                                ]
-                            }
-                        ], 
-                        "description": "Project Boundary"
-                    }
-                ], 
+                "extent": null, 
                 "timePeriod": {
                     "endDateTime": "2014-03-31", 
                     "startDateTime": "2012-09-01"
@@ -293,6 +254,41 @@
                     }
                 ], 
                 "keyword": [
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Deliverable", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/5307baa3e4b0dcc7bdc913a9"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "fa455d4a-5d87-56bc-b074-9a967beff904"
+                                }
+                            ], 
+                            "title": "Deliverable Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Map"
+                            }, 
+                            {
+                                "keyword": "Report"
+                            }, 
+                            {
+                                "keyword": "Datasets/Database"
+                            }
+                        ]
+                    }, 
                     {
                         "fullPath": true, 
                         "keywordType": "LCC Project Category", 
@@ -508,7 +504,7 @@
                             "sourceId": "180", 
                             "currency": "USD", 
                             "amount": 20000.0, 
-                            "recipientId": "112", 
+                            "recipientId": "G112", 
                             "matching": false
                         }
                     ], 
@@ -560,7 +556,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-06", 
+                        "date": "2017-11-28", 
                         "dateType": "creation"
                     }
                 ]
@@ -644,6 +640,26 @@
                     }, 
                     "resourceCitation": {
                         "title": "Valley- Bottom Attributes and Conditions Report"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Training/Outreach/Workshop"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "59e0dc09e4b05fe04ccfffa0", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "NPLCC Riparian Webinar"
+                    }, 
+                    "resourceCitation": {
+                        "title": "NPLCC Riparian Webinar"
                     }
                 }
             ], 

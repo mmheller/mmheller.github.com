@@ -66,31 +66,26 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "950", 
-                "isOrganization": true, 
-                "name": "University of Nevada - Reno", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "952", 
-                "isOrganization": true, 
-                "name": "University of Nevada - Reno", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "953", 
-                "isOrganization": true, 
-                "name": "University of Nevada - Reno", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "389", 
                 "isOrganization": true, 
                 "name": "Bureau of Land Management", 
                 "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G950", 
+                "isOrganization": true, 
+                "name": "University of Nevada - Reno", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G950"
+                ], 
+                "contactId": "950", 
+                "isOrganization": false, 
+                "name": "Phillip Street", 
+                "contactType": "Academic"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -109,29 +104,35 @@
                 "contactType": "State"
             }, 
             {
-                "isOrganization": true, 
-                "name": "University of Nevada - Reno", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:jsedinger@cabnr.unr.edu"
-                    }
+                "memberOfOrganization": [
+                    "G950"
                 ], 
-                "contactId": "G775", 
+                "contactId": "952", 
+                "isOrganization": false, 
+                "name": "Tessa Behnke", 
                 "contactType": "Academic"
             }, 
             {
                 "isOrganization": false, 
                 "name": "Jim Sedinger", 
                 "memberOfOrganization": [
-                    "G775"
+                    "G950"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mailto:jsedinger@cabnr.unr.edu"
+                        "uri": "mailto:jsedinger@cabnr.unr.edu"
                     }
                 ], 
                 "contactId": "775", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G950"
+                ], 
+                "contactId": "953", 
+                "isOrganization": false, 
+                "name": "Levi Jaster", 
                 "contactType": "Academic"
             }, 
             {
@@ -189,39 +190,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "950", 
-                                    "organizationMembers": [
-                                        "950"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "952", 
-                                    "organizationMembers": [
-                                        "952"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "953", 
-                                    "organizationMembers": [
-                                        "953"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "389", 
                                     "organizationMembers": [
                                         "389"
@@ -229,6 +197,26 @@
                                 }
                             ], 
                             "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G950", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "950", 
+                                    "organizationMembers": [
+                                        "G950"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -253,8 +241,21 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G775", 
-                                    "organizationMembers": []
+                                    "contactId": "952", 
+                                    "organizationMembers": [
+                                        "G950"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "775", 
+                                    "organizationMembers": [
+                                        "G950"
+                                    ]
                                 }
                             ], 
                             "role": "Principal Investigator"
@@ -262,13 +263,13 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "775", 
+                                    "contactId": "953", 
                                     "organizationMembers": [
-                                        "G775"
+                                        "G950"
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -1587,6 +1588,41 @@
                 "keyword": [
                     {
                         "fullPath": true, 
+                        "keywordType": "LCC Deliverable", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/5307baa3e4b0dcc7bdc913a9"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "fa455d4a-5d87-56bc-b074-9a967beff904"
+                                }
+                            ], 
+                            "title": "Deliverable Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Publication"
+                            }, 
+                            {
+                                "keyword": "Presentation"
+                            }, 
+                            {
+                                "keyword": "Datasets/Database"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
                         "keywordType": "LCC Project Category", 
                         "thesaurus": {
                             "date": [
@@ -1778,7 +1814,7 @@
                             "sourceId": "389", 
                             "currency": "USD", 
                             "amount": 35485.0, 
-                            "recipientId": "775", 
+                            "recipientId": "G950", 
                             "matching": false
                         }
                     ], 
@@ -1796,7 +1832,7 @@
                             "sourceId": "894", 
                             "currency": "USD", 
                             "amount": 280000.0, 
-                            "recipientId": "775", 
+                            "recipientId": "G950", 
                             "matching": true
                         }
                     ], 
@@ -1848,7 +1884,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-09", 
+                        "date": "2017-11-28", 
                         "dateType": "creation"
                     }
                 ]
