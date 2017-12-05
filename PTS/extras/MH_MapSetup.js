@@ -127,14 +127,14 @@ define([
               pHumanMod = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/5527fe7fe4b026915857c948/MapServer", { "opacity": 0.5, id: "HumanMod", visible: false });
 
               pRefugesLayer = new FeatureLayer(strBase_URL + "2", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "USFWS Refuges", visible: false });
-              pUSNativeLayer = new FeatureLayer("http://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_TribalIndianLands_01/MapServer/0", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "US Native Lands", visible: false });
+              pUSNativeLayer = new FeatureLayer("https://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_TribalIndianLands_01/MapServer/0", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "US Native Lands", visible: false });
 
 
               pCANNationalParks = new ArcGISDynamicMapServiceLayer("http://maps.natureserve.org/landscope1/rest/services/CAN/PRO_CAN_NationalParks/MapServer", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "Can National Parks", visible: false });
 
               pNPSLayer = new ArcGISDynamicMapServiceLayer("https://mapservices.nps.gov/arcgis/rest/services/LandResourcesDivisionTractAndBoundaryService/MapServer", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "US National Park Service", visible: false });
               pUSFSLayer = new ArcGISDynamicMapServiceLayer("https://apps.fs.fed.us/arcx/rest/services/EDW/EDW_BasicOwnership_01/MapServer", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: "US Forest Service Land (Zoom in to View)", visible: false });
-              pBLMLayer = new ArcGISDynamicMapServiceLayer("http://maps4.arcgisonline.com/ArcGIS/rest/services/DOI/SMA-BLM_Federal_Lands/MapServer", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "BLM Land", visible: false });
+              pBLMLayer = new ArcGISDynamicMapServiceLayer("https://maps4.arcgisonline.com/ArcGIS/rest/services/DOI/SMA-BLM_Federal_Lands/MapServer", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "BLM Land", visible: false });
 
               var strlabelField2 = "area_names";
               pLCCNetworkLayer = new FeatureLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55b943ade4b09a3b01b65d78/MapServer/0", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: "LCC Network", outFields: [strlabelField2], visible: false });
