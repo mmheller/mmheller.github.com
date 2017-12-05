@@ -390,6 +390,13 @@ define([
                           var blnAdd2Dropdown;
                           for (var i in featAttrs) { attrNames.push(i); }
 
+                          if ((attrNames.length > 1) & (attrNames.indexOf("genericstat") > -1)) { //put the genericstat field last in the array to properly build the array of fields
+                              var i_G_index = attrNames.indexOf("genericstat");
+                              attrNames.splice(i_G_index, 1);
+                              attrNames.push("genericstat")
+                          }
+
+
                           dojo.forEach(resultFeatures, function (feature) {//Loop through the QueryTask results and populate an array with the unique values
 
                               blnAdd2Dropdown = false;
