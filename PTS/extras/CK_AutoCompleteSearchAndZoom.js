@@ -7,8 +7,9 @@ define([
   "esri/request",
   "esri/tasks/FindTask",
    "esri/tasks/FindParameters",
+         "esri/tasks/query",
 ], function (
-  declare, lang, esriRequest, FindTask, FindParameters
+  declare, lang, esriRequest, FindTask, FindParameters, query
 ) {
 
     return declare([], {
@@ -30,30 +31,43 @@ define([
             this.strURL = options.strURL || null;
         },
 
-        ExecutePTSFind: function (strSearchValue) {
+        ExecutePTSFind: function (strSearchValue) { //had to revamp to a regular query due to AGOL not supporting find operations
             app.gQuery.ClearDivs();
-            var pFindask = new esri.tasks.FindTask(this.strURL);
-
-            var params = new FindParameters();
-            params.layerIds = [0];
+            //var pFindask = new esri.tasks.FindTask(this.strURL);
+            var pQryFT = new esri.tasks.Query();
+            var pQryTaskFT = new esri.tasks.QueryTask(this.strURL + "/0");
             
-            params.searchFields = ["ProjectID", "Prj_Title", "PI_Org", "Partner_Organizaitons", "Subject_Keywords", "Location_Keywords", "LeadName_LastFirst"];
-            params.searchText = strSearchValue;
-            params.returnGeometry = false;
-            pFindask.execute(params, this.showResultsFromFind);
+            pQryFT.where = "ProjectID like '%" + strSearchValue + "%'" +
+                                 " or Prj_Title like '%" + strSearchValue + "%'" +
+                                 " or PI_Org like '%" + strSearchValue + "%'" +
+                                 " or Partner_Organizaitons like '%" + strSearchValue + "%'" +
+                                 " or Subject_Keywords like '%" + strSearchValue + "%'" +
+                                 " or Location_Keywords like '%" + strSearchValue + "%'" +
+                                 " or LeadName_LastFirst like '%" + strSearchValue + "%'"
+
+            //params.layerIds = [0];
+            //params.searchFields = ["ProjectID", "Prj_Title", "PI_Org", "Partner_Organizaitons", "Subject_Keywords", "Location_Keywords", "LeadName_LastFirst"];
+            //pQryFT.outfields = ["ProjectID", "Prj_Title", "PI_Org", "Partner_Organizaitons", "Subject_Keywords", "Location_Keywords", "LeadName_LastFirst"];
+            //pQryFT.outfields = ["*"];
+            pQryFT.outFields = ["ProjectID"];
+            pQryFT.outFields = ["ProjectID", "Prj_Title", "PI_Org", "Partner_Organizaitons", "Subject_Keywords", "Location_Keywords", "LeadName_LastFirst"];
+
+            //params.searchText = strSearchValue;
+            pQryFT.returnGeometry = false;
+            pQryTaskFT.execute(pQryFT, this.showResultsFromFind);
         },
 
-        showResultsFromFind: function (resultFeatures) {
-            if ((resultFeatures != null) && (resultFeatures != undefined)) {
-                if (resultFeatures.length > 0) {
+        showResultsFromFind: function (results) {
+            if ((results != null) && (results != undefined)) {
+                if (results.features.length > 0) {
                     var tempValue;
                     var arrayValues = [];
                     var testVals = {};
 
-                    dojo.forEach(resultFeatures, function (pfeatureItem) {  //Loop through the QueryTask results and populate an array with the unique values
-                        tempValue = pfeatureItem.feature.attributes.ProjectID;
+                    dojo.forEach(results.features, function (pfeatureItem) {  //Loop through the QueryTask results and populate an array with the unique values
+                        tempValue = pfeatureItem.attributes.ProjectID;
                         if (tempValue == undefined) {
-                            tempValue = pfeatureItem.feature.attributes.projectid;
+                            tempValue = pfeatureItem.attributes.projectid;
                         }
                         if (!testVals[tempValue]) {
                             testVals[tempValue] = true;
@@ -77,8 +91,7 @@ define([
                 // do nothing
             }
         },
-
-
+        
         zoomToPoint: function (pointx, pointy, option, dblZoom) {
             require(["esri/graphic", "esri/geometry/Point", "esri/SpatialReference"
             ], function (Graphic, Point, SpatialReference) {

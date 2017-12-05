@@ -110,7 +110,7 @@ define([
 
 //              var legendLayers = [];
               pPTS_Projects = new FeatureLayer(app.strTheme1_URL + "0", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: 0, visible: true });
-              var strBase_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/546cfb04e4b0fc7976bf1d83/MapServer/"
+              var strBase_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/546cfb04e4b0fc7976bf1d83/MapServer/";
               var strlabelField1 = "area_names";
               pBase_LCC = new FeatureLayer(strBase_URL + "11", { mode: FeatureLayer.MODE_ONDEMAND, id: "LCC", outFields: [strlabelField1], visible: true });
               var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
@@ -134,7 +134,7 @@ define([
 
               pNPSLayer = new ArcGISDynamicMapServiceLayer("https://mapservices.nps.gov/arcgis/rest/services/LandResourcesDivisionTractAndBoundaryService/MapServer", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "US National Park Service", visible: false });
               pUSFSLayer = new ArcGISDynamicMapServiceLayer("https://apps.fs.fed.us/arcx/rest/services/EDW/EDW_BasicOwnership_01/MapServer", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: "US Forest Service Land (Zoom in to View)", visible: false });
-              pBLMLayer = new ArcGISDynamicMapServiceLayer("http://www.geocommunicator.gov/ArcGIS/rest/services/SMA/MapServer", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "BLM Land", visible: false });
+              pBLMLayer = new ArcGISDynamicMapServiceLayer("http://maps4.arcgisonline.com/ArcGIS/rest/services/DOI/SMA-BLM_Federal_Lands/MapServer", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "BLM Land", visible: false });
 
               var strlabelField2 = "area_names";
               pLCCNetworkLayer = new FeatureLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55b943ade4b09a3b01b65d78/MapServer/0", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: "LCC Network", outFields: [strlabelField2], visible: false });
@@ -278,22 +278,34 @@ define([
 
               $('#loc').autocomplete({
                   source: function (request, response) {
+                      var strURL4Search = app.strTheme1_URL + "0/query" +
+                                       "?where=ProjectID+like+%27%25" + request.term + "%25%27" +
+                                       "+or+Prj_Title+like+%27%25" + request.term + "%25%27" +
+                                       "+or+PI_Org+like+%27%25" + request.term + "%25%27" +
+                                       "+or+Partner_Organizaitons+like+%27%25" + request.term + "%25%27" +
+                                       "+or+Subject_Keywords+like+%27%25" + request.term + "%25%27" +
+                                       "+or+Location_Keywords+like+%27%25" + request.term + "%25%27" +
+                                       "+or+LeadName_LastFirst+like+%27%25" + request.term + "%25%27" +
+                                       "&f=pjson&returnGeometry=false&outFields=ProjectID%2C+Prj_Title%2C+PI_Org%2C+LeadName_LastFirst";
+                      
                       $.ajax({
                           // this is for use with a proxy page url: app.strPxURL  "?" + app.strTheme1_URL + "find"  "?searchFields=ProjectID,Prj_Title,PI_Org,Partner_Organizaitons,Subject_Keywords,Location_Keywords,LeadName_LastFirst&SearchText=" + request.term + "&layers=0&f=pjson&returnGeometry=true",
-                          url: app.strTheme1_URL + "find" +
-                                    "?searchFields=ProjectID,Prj_Title,PI_Org,Partner_Organizaitons,Subject_Keywords,Location_Keywords,LeadName_LastFirst" +
-                                    "&SearchText=" + request.term +
-                                    "&layers=0,9&f=pjson&returnGeometry=true",
+                          //the following no longer works due to AGOL not exposing the "find" supported operation
+                          //url: app.strTheme1_URL + "find" +  
+                          //          "?searchFields=ProjectID,Prj_Title,PI_Org,Partner_Organizaitons,Subject_Keywords,Location_Keywords,LeadName_LastFirst" +
+                          //          "&SearchText=" + request.term +
+                          //          "&layers=0,9&f=pjson&returnGeometry=true",
+                          url: strURL4Search,
                           dataType: "jsonp",
                           data: {},                        //data: { where: strSearchField + " LIKE '%" + request.term.replace(/\'/g, '\'\'').toUpperCase() + "%'", outFields: strSearchField, returnGeometry: true, f: "pjson" },                        
                           success: function (data) {
-                              if (data.results) {                           //                            if (data.features) {
-                                  response($.map(data.results.slice(0, 19), function (item) {      //only display first 10
+                              //if (data.results) {                           //                            if (data.features) {
+                              if (data.features) {                           //                            if (data.features) {
+                                  response($.map(data.features.slice(0, 19), function (item) {      //only display first 10
                                       return { label: item.attributes.Prj_Title + " ID:" + item.attributes.ProjectID +
                                         " (PI:" + item.attributes.LeadName_LastFirst + ")",
-                                          value2: item.attributes.ProjectID, value3: item.attributes.ProjectID, value4: item.layerName
+                                          value2: item.attributes.ProjectID, value3: item.attributes.ProjectID
                                       }
-
                                   }));
                               }
                           },
@@ -326,6 +338,8 @@ define([
 
   }
 );
+
+
 
 
 

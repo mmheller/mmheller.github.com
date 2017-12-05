@@ -59,16 +59,17 @@ define([
               this.m_query4SummaryMap = strQuery;
               arrayQuery.push(["0", strQuery, "ProjectID", "count", "", "page_collapsible1", 'Results ({0} projects)', "", ""]);
               arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "sum", "", "dTotalAllocatedbyLCC", '<b>GNLCC Funds Allocated:</b> {0}', "currency", ""]);
+              //#
               arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", '<b>GNLCC Funds Allocated by Year:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both-currency", "desc"]);
-
+              //#
               arrayQuery.push(["7", strQuery, "InKindamount", "sum", "Fund_Year", "dTotalInKindMatchbyYear", '<b>In-Kind or Match Funding by Year:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}     ', "show both-currency", "desc"]);
+              arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "sum", "", "dTotalInKindMatch", '<b>In-Kind or Match Funding:</b> {0} ', "currency", ""]);//#
 
-              arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "sum", "", "dTotalInKindMatch", '<b>In-Kind or Match Funding:</b> {0} ', "currency", ""]);
               arrayQuery.push(["7", strQuery, "ProjectID", "count", "orgname", "dNumberofInKindOrgs", '<b>Organizations Providing In-Kind or Match Funding:</b> {0} ', "countOfGroupBy", ""]);
               arrayQuery.push(["1", strQuery, "ProjectID", "count", "CommonName", "dTotalNumberofConsvTargets", '<b>Conservation Targets:</b> {0} ', "countOfGroupBy", ""]);
               //              arrayQuery.push(["6", strQuery, "ProjectID", "count", "Fund_Year", "dYearsFunded", 'Fund Years: \n<br>  {0} ', "default"]);
               arrayQuery.push(["9", strQuery, "ProjectID", "count", "contactID", "dNumberOfProjectContacts", '<b>Contacts:</b> {0} ', "countOfGroupBy", ""]);
-              arrayQuery.push(["2", strQuery, "ProjectID", "count", "NationalLCCDelivType", "dDeliverabletype", '<b>Deliverable Types:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
+              arrayQuery.push(["2", strQuery, "ProjectID", "count", "NationalLCCDelivType", "dDeliverabletype", '<b>Deliverable Types:</b>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", "asc"]);
               arrayQuery.push(["2", strQuery, "ProjectID", "count", "", "dNumberofDeliverables", '<b>Deliverables:</b> {0} ', "default", ""]);
               arrayQuery.push(["0", strQuery, "ProjectID", "count", "PrjStatus", "dPrjStatus", '<b>Project Status:</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0} ', "show both", ""]);
               arrayQuery.push(["5", strQuery, "ProjectID", "count", "dest_orgname", "dNumberOfFundingRecipients", '<b>Funding Recipient Organizations:</b> {0} ', "countOfGroupBy", ""]);
@@ -184,6 +185,13 @@ define([
                           var attrNames = [];
                           var blnAdd2Dropdown;
                           for (var i in featAttrs) { attrNames.push(i); }
+
+                          if ((attrNames.length > 1) & (attrNames.indexOf("genericstat") > -1)) { //put the genericstat field last in the array to properly build the array of fields
+                              var i_G_index = attrNames.indexOf("genericstat");
+                              attrNames.splice(i_G_index, 1);
+                              attrNames.push("genericstat")
+                          }
+
 
                           dojo.forEach(resultFeatures, function (feature) {//Loop through the QueryTask results and populate an array with the unique values
 

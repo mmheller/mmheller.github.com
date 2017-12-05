@@ -14,7 +14,8 @@ define([
 
 
           GetMasterAGSMapservicURL: function () {
-              return "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer/";
+              return "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/GNLCC_PTS/FeatureServer/";
+              //return "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer/";
           },
 
           Return_InitialQueryDefs: function () {
