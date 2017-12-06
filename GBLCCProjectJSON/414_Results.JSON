@@ -66,13 +66,6 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "900", 
-                "isOrganization": true, 
-                "name": "Northern Arizona University", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "907", 
                 "isOrganization": true, 
                 "name": "Desert Research Institute", 
@@ -84,6 +77,13 @@
                 "isOrganization": true, 
                 "name": "Bureau of Land Management", 
                 "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "900", 
+                "isOrganization": true, 
+                "name": "Northern Arizona University", 
+                "contactType": "Academic"
             }, 
             {
                 "isOrganization": true, 
@@ -150,17 +150,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "900", 
-                                    "organizationMembers": [
-                                        "900"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "907", 
                                     "organizationMembers": [
                                         "907"
@@ -179,6 +168,17 @@
                                 }
                             ], 
                             "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "900", 
+                                    "organizationMembers": [
+                                        "900"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -901,7 +901,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-28", 
+                        "date": "2017-12-06", 
                         "dateType": "creation"
                     }
                 ]

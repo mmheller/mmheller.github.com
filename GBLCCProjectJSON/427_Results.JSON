@@ -73,42 +73,42 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "389", 
-                "isOrganization": true, 
-                "name": "Bureau of Land Management", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "560", 
                 "isOrganization": true, 
                 "name": "US Fish & Wildife Service", 
                 "contactType": "Federal"
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "389", 
                 "isOrganization": true, 
-                "name": "University of Nevada, Reno", 
+                "name": "Bureau of Land Management", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "University of Nevada - Reno", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:pweisberg@cabnr.unr.edu"
+                        "uri": "mailto:mmatocq@cabnr.unr.edu"
                     }
                 ], 
-                "contactId": "G802", 
+                "contactId": "G790", 
                 "contactType": "Academic"
             }, 
             {
                 "isOrganization": false, 
-                "name": "Peter Weisberg", 
+                "name": "Marjorie Matocq", 
                 "memberOfOrganization": [
-                    "G802"
+                    "G790"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:pweisberg@cabnr.unr.edu"
+                        "uri": "mailto:mmatocq@cabnr.unr.edu"
                     }
                 ], 
-                "contactId": "802", 
+                "contactId": "790", 
                 "contactType": "Academic"
             }, 
             {
@@ -144,32 +144,6 @@
                 "contactType": "Federal"
             }, 
             {
-                "isOrganization": true, 
-                "name": "University of Nevada - Reno", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mmatocq@cabnr.unr.edu"
-                    }
-                ], 
-                "contactId": "G790", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Marjorie Matocq", 
-                "memberOfOrganization": [
-                    "G790"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mmatocq@cabnr.unr.edu"
-                    }
-                ], 
-                "contactId": "790", 
-                "contactType": "Academic"
-            }, 
-            {
                 "isOrganization": false, 
                 "name": "Jim Sedinger", 
                 "memberOfOrganization": [
@@ -181,6 +155,32 @@
                     }
                 ], 
                 "contactId": "775", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "University of Nevada, Reno", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:pweisberg@cabnr.unr.edu"
+                    }
+                ], 
+                "contactId": "G802", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Peter Weisberg", 
+                "memberOfOrganization": [
+                    "G802"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:pweisberg@cabnr.unr.edu"
+                    }
+                ], 
+                "contactId": "802", 
                 "contactType": "Academic"
             }
         ], 
@@ -233,17 +233,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "389", 
-                                    "organizationMembers": [
-                                        "389"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "560", 
                                     "organizationMembers": [
                                         "560"
@@ -255,22 +244,33 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G802", 
-                                    "organizationMembers": []
+                                    "contactId": "389", 
+                                    "organizationMembers": [
+                                        "389"
+                                    ]
                                 }
                             ], 
-                            "role": "Collaborator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "802", 
+                                    "contactId": "G790", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "790", 
                                     "organizationMembers": [
-                                        "G802"
+                                        "G790"
                                     ]
                                 }
                             ], 
-                            "role": "Collaborator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
@@ -315,29 +315,29 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G790", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "790", 
+                                    "contactId": "775", 
                                     "organizationMembers": [
                                         "G790"
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "775", 
+                                    "contactId": "G802", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "802", 
                                     "organizationMembers": [
-                                        "G790"
+                                        "G802"
                                     ]
                                 }
                             ], 
@@ -1340,6 +1340,24 @@
                 {
                     "allocation": [
                         {
+                            "sourceId": "910", 
+                            "currency": "USD", 
+                            "amount": 159160.52, 
+                            "recipientId": "G790", 
+                            "matching": true
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2014-09-30", 
+                        "periodName": [
+                            "FY2014"
+                        ], 
+                        "startDateTime": "2013-10-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
                             "sourceId": "389", 
                             "currency": "USD", 
                             "amount": 92882.0, 
@@ -1361,24 +1379,6 @@
                             "sourceId": "894", 
                             "currency": "USD", 
                             "amount": 81953.0, 
-                            "recipientId": "G790", 
-                            "matching": true
-                        }
-                    ], 
-                    "timePeriod": {
-                        "endDateTime": "2014-09-30", 
-                        "periodName": [
-                            "FY2014"
-                        ], 
-                        "startDateTime": "2013-10-01"
-                    }
-                }, 
-                {
-                    "allocation": [
-                        {
-                            "sourceId": "910", 
-                            "currency": "USD", 
-                            "amount": 159160.52, 
                             "recipientId": "G790", 
                             "matching": true
                         }
@@ -1449,7 +1449,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-28", 
+                        "date": "2017-12-06", 
                         "dateType": "creation"
                     }
                 ]
