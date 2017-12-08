@@ -1,0 +1,367 @@
+html, body, #map {
+padding:0;
+margin:0;
+height:100%;
+width: 100%;
+}
+
+body {
+overflow: hidden;
+}
+
+h4 {
+padding: 10px 0px 10px 3px;
+margin: 0px;
+cursor: help;
+}
+
+.claro .dijitContentPane {
+padding: 0px;
+}
+
+#bcMain {
+width: 100%;
+height: 100%;
+}
+
+#navBar {
+top: 0px;
+position: absolute;
+padding: 0px;
+z-index: 10;
+background: url("images/headerbar.png");
+background-repeat: repeat-x;
+width: 100%;
+height: 98px;
+box-shadow: 0px 5px 10px #717171;
+}
+
+	#ndowLogo {
+	border-style: none;
+    border-color: inherit;
+    border-width: 0px;
+top: 35px;
+	left: 5px;
+	position: absolute;
+	box-shadow: 3px 3px 7px #717171;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+    margin-bottom: 0px;
+}
+
+	#mainNav {
+	top: 62px;
+	left: 444px;
+	position: absolute;
+	display: inline-block;
+	text-align: left;
+	font-family: arial;
+	white-space: nowrap;
+	}
+		#mainNav a {
+		padding: 15px;
+		margin-right: 25px;
+		color: #ccbda6;
+		text-decoration: none;
+		font-weight: bold;
+		}
+
+		#mainNav  a:hover {
+		cursor: pointer;
+		color: #4b352c;
+		background-color: #ccbda6;
+		}
+		
+		.active {
+		color: #4b352c ! important;
+		background-color: #ccbda6;
+		}
+		
+		.subMenu {
+		z-index: 20;
+		margin: 0px;
+		padding: 0px;
+		overflow: hidden;
+		font-family: arial;
+		color: #ccbda6;
+		background-color: #4b352c;
+		border-radius: 0px 0px 3px 3px;
+		box-shadow: 3px 3px 7px #717171;
+		}
+			.subMenu ul {
+			margin: 0px;
+			padding: 0px;
+			}
+			
+		.listnostyle {
+			list-style-type: none ! important;
+			}
+			
+		#submenuTools {
+		visibility: hidden;
+		position: absolute;
+		top: 96px;
+		left: 220px;
+		}		
+			#submenuTools li {
+			float: left;
+			}
+			
+			#submenuTools a {
+			display: block;
+			width: 100px;
+			padding: 5px 5px 5px 0px;
+			text-align: center;
+			}
+			
+			#submenuTools a:hover {
+			cursor: pointer;
+			color: #4b352c;
+			background-color: #ccbda6;
+			}
+			
+			.toolsIcon {
+			padding-right: 5px;
+			vertical-align: text-bottom;
+			}
+			
+		#submenuGlossary {
+		visibility: hidden;
+		position: absolute;
+		top: 96px;
+		left: 334px;
+		}
+			#submenuGlossary ul {
+			list-style-type: square;
+			list-style-position: inside;
+			}
+			
+			#submenuGlossary li {
+			padding: 5px;			
+			}
+			
+			#sranks {
+			padding-left: 20px;
+			}			
+
+	#baseMaps {
+	top: 50px;
+	right: 100px;
+	position: absolute;
+	cursor: pointer;
+	padding: 9px;
+	}
+		#baseMapGallery {
+		width: 260px;
+		padding: 10px;
+		top: 110px;
+		right: 95px;
+		position: absolute;
+		z-index: 20;
+		font-family: arial;
+		font-weight: bold;
+		background-color: rgba(255, 255, 255, 0.85);
+		border: 0px;
+		border-radius: 3px;
+		box-shadow: 3px 3px 7px #717171;
+		cursor: default;
+		visibility: hidden;
+		}
+			.arrow {
+			border-style: solid;
+			position: absolute;
+			border-color: transparent transparent rgba(255, 255, 255, .85) transparent;
+			border-width: 10px 10px 10px 10px;
+			right: 20px;
+			top: -20px;
+			}
+
+			#baseMapGallery img  {
+			width: 100px;
+			height: 67px;
+			border: 1px solid white;
+			margin: 1px;
+			box-shadow: 0px 0px 7px #717171;
+			cursor: pointer;
+			}
+				#baseMapGallery img:hover {
+				border: 1px solid yellow;
+				box-shadow: 0px 0px 7px yellow;
+				}
+				
+				.thumbActive {
+				border: 1px solid red ! important;
+				box-shadow: 0px 0px 7px red ! important;
+				}
+
+			.thumbLabel {
+			padding-left: 15px;
+			}
+		
+	#wafwaLogo {
+	top: 35px;
+	right: 30px;
+	position: absolute;
+	box-shadow: 3px 3px 7px #717171;
+	}
+
+#map_zoom_slider {
+right: 20px;
+}
+
+#legendArea {
+top: 120px;
+left: 0px;
+position: absolute;
+z-index: 20;
+padding: 0px 15px 15px 0px;
+background-color: rgba(0, 0, 0, 0.25);
+border-radius: 0px 3px 3px 0px;
+box-shadow: 3px 3px 7px #717171;
+font-family: arial;
+}
+	#infoCHAT {
+	top: 5px;
+	right: 5px;
+	position: absolute;
+	cursor: help;
+	}
+		
+	.legendDiv {
+	height: 100px;
+	width: 216px;
+	padding: 0px;
+	margin: 15px 0px 0px 0px;	
+	background-color: rgba(255, 255, 255, 0.85);
+	border: 0px;
+	border-radius: 0px 3px 3px 0px;
+	box-shadow: 3px 3px 7px #717171;
+	cursor: default;
+	}
+		.inlineLegend {
+		padding: 0px;
+		margin: 0px;
+		width: 100%;
+		display: inline;
+		list-style-type: none;
+		color: white;
+		text-align: center;
+		vertical-align: middle;
+		font-weight: bold;
+		font-size: smaller;
+		cursor: help;
+		}	
+			.inlineLegend li {
+			float: left;
+			}
+
+		.legendItem {
+		line-height: 20px;
+		padding: 0px;
+		margin: 0px;
+		display: inline;
+		width: 36px;
+		height: 20px;
+		text-shadow: 0px 0px 5px black;
+		}
+		
+		.legendLabels {
+		display: inline-block;
+		width: 213px;
+		color: #717171;
+		font-size: 12px;
+		padding-left: 3px;
+		}
+		
+		.pullRight {
+		padding-left: 65px;
+		}
+
+		.sliderDiv {
+		width: 150px;
+		height: 20px;
+		position: relative;
+		top: 10px;
+		}
+		
+		.legendDiv input {
+		position: relative;
+		bottom: 16px;
+		left: 194px;
+		}
+		
+		.legendDiv label {
+		font-size: 12px;
+		color: black;
+		position: relative;
+		left: 127px;
+		bottom: 19px;
+		}
+
+		.legendHideLayer {		
+		font-size: 12px;
+		color: black;
+		cursor: pointer;
+		}
+
+		.legendHideLayer:hover {
+		color: #007FE6;
+		}
+		
+		#legendCHAT {
+		color: #000070;
+		}
+		
+		#legendSOC {
+		color: #730000;
+		}
+		
+		#legendSERI {
+		color: #9C6100;
+		height: 125px;
+		}
+		
+		#legendWetRip {
+		color: #4C5C00;
+		}
+		
+		#legendLC {
+		color: #CCB500;
+		}
+
+#infoWinDiv {
+height: 163px;
+width: 292px;
+}
+	.infowindow .window .top .right .user .layout {
+	margin: 0px 0px 0px 0px;
+	padding-right: 0px;
+	overflow: hidden;
+	}
+	
+#chartArea {
+height: 25%;
+width: 100%;
+font-family: arial;
+padding: 0px;
+position: absolute;
+bottom: 0;
+z-index: -10;
+text-align: center;
+text-shadow: 0px 0px 10px white, 0px 0px 10px white, 0px 0px 10px white;
+}
+	.charts {
+	height: 100%;
+	width: 19.5%;
+	display: inline-block;
+	}
+
+.dijitTooltip {
+font-size: smaller;
+font-family: arial;
+}
+	.legendToolTip {
+	width: 400px;
+	padding: 3px;
+	text-align: justify;
+	}
