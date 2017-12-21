@@ -22,7 +22,7 @@
 		<span id="mainNav">
 			<a id="toolsNav">TOOLS</a>
 			<a id="glossaryNav">GLOSSARY</a>
-			<a href="http://www.ndow.org/Nevada_Wildlife/Maps_and_Data/NVCHAT/FAQs" target="_blank" class="ndowNav">FAQs</a>
+			<!--<a href="http://www.ndow.org/Nevada_Wildlife/Maps_and_Data/NVCHAT/FAQs" target="_blank" class="ndowNav">FAQs</a>-->
 		</span>
 		<img id="baseMaps" src="images/basemaps.png" alt="Basemaps">
 		<a href="http://www.wafwachat.org" target="_blank"><img id="wafwaLogo" src="images/wafwachatlogo.png" alt="WAFWA CHAT Logo" title="Western Association of Fish and Wildlife Agencies' CHAT"></a>
@@ -104,8 +104,8 @@
             <input type="checkbox" id="toggleCHAT" checked></input>
 			<label for="showLayer">Display</label>
 		</div>
-		
-		<div id="legendSOC" class="legendDiv">
+
+		<!--<div id="legendSOC" class="legendDiv">
 			<h4 id="legendHeadSOC">Species of Concern</h4>
 			<ul class="inlineLegend">
 				<li class="legendItem" id="legendSOC1" style="background-color: #730000">1</li>
@@ -122,28 +122,46 @@
 			<div id="sliderDivSOC" class="sliderDiv"><a id="sliderSOC"></a></div>
 			<input type="checkbox" id="toggleSOC"></input>
 			<label for="showLayer">Display</label>
+		</div>-->
+
+        <!--<div id="legendSERI" class="legendDiv">
+            <h4 id="legendHeadSERI">Species of Economic and Recreational Importance</h4>
+            <ul class="inlineLegend">
+                <li class="legendItem" id="legendSERI1" style="background-color: #9C6100">1</li>
+                <li class="legendItem" id="legendSERI2" style="background-color: #D99800">2</li>
+                <li class="legendItem" id="legendSERI3" style="background-color: #FFAA00">3</li>
+                <li class="legendItem" id="legendSERI4" style="background-color: #FFD37F">4</li>
+                <li class="legendItem" id="legendSERI5" style="background-color: #FFEBAF">5</li>
+                <li class="legendItem" id="legendSERI6" style="background-color: #FFF2D4">6</li>
+            </ul>
+            <span class="legendLabels">
+                <span>Most Crucial</span>
+                <span class="pullRight">Least Crucial</span>
+            </span>
+            <div id="sliderDivSERI" class="sliderDiv"><a id="sliderSERI"></a></div>
+            <input type="checkbox" id="toggleSERI"></input>
+            <label for="showLayer">Display</label>
+        </div>-->
+
+        <div id="legendSOC" class="legendTallDiv">
+            <h4 id="legendHeadSOC">Status: PADUS/GAP USGS</h4>
+            <img src="images/GAP_Status.JPG" alt="GAP_Status" width="280">
+            <input type="checkbox" id="toggleSOC"></input>
+            <label for="showLayer">Display</label>
+            <div id="sliderDivSOC" class="sliderDiv"><a id="sliderSOC"></a></div>
+        </div>
+
+		<div id="legendSERI" class="legendTallDiv">
+			<h4 id="legendHeadSERI">Fed/Tribal/Other: PADUS/GAP USGS</h4>
+            <img src="images/GAP_FedTribOther.JPG" alt="GAP_Status" width="150">
+            <br />
+            <input type="checkbox" id="toggleSERI"></input>
+            <label for="showLayer">Display</label>
+            <div id="sliderDivSERI" class="sliderDiv"><a id="sliderSERI"></a></div>
 		</div>
+
 		
-		<div id="legendSERI" class="legendDiv">
-			<h4 id="legendHeadSERI">Species of Economic and Recreational Importance</h4>
-			<ul class="inlineLegend">
-				<li class="legendItem" id="legendSERI1" style="background-color: #9C6100">1</li>
-				<li class="legendItem" id="legendSERI2" style="background-color: #D99800">2</li>
-				<li class="legendItem" id="legendSERI3" style="background-color: #FFAA00">3</li>
-				<li class="legendItem" id="legendSERI4" style="background-color: #FFD37F">4</li>
-				<li class="legendItem" id="legendSERI5" style="background-color: #FFEBAF">5</li>
-				<li class="legendItem" id="legendSERI6" style="background-color: #FFF2D4">6</li>
-			</ul>
-			<span class="legendLabels">
-				<span>Most Crucial</span>
-				<span class="pullRight">Least Crucial</span>
-			</span>
-			<div id="sliderDivSERI" class="sliderDiv"><a id="sliderSERI"></a></div>
-			<input type="checkbox" id="toggleSERI"></input>
-			<label for="showLayer">Display</label>
-		</div>
-		
-		<div id="legendWetRip" class="legendDiv">
+		<!--<div id="legendWetRip" class="legendDiv">
 			<h4 id="legendHeadWetRip">Wetland/Riparian Habitat</h4>
 			<ul class="inlineLegend">
 				<li class="legendItem" id="legendWetRip1" style="background-color: #4C5C00">1</li>
@@ -179,7 +197,7 @@
 			<div id="sliderDivLC" class="sliderDiv"><a id="sliderLC"></a></div>
 			<input type="checkbox" id="toggleLC"></input>
 			<label for="showLayer">Display</label>
-		</div>
+		</div>-->
 	</div>
 	
 	<div id="baseMapGallery">
@@ -333,13 +351,18 @@
             ////Tiled map service for CHAT data
             var nvCHAT = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58b99206e4b090ec658d7e71/MapServer", { opacity: 0.5 } );
             //Tiled map service for SOC data
-            var nvSOC = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58ff662de4b006455f2d62b7/MapServer", { opacity: 0 });
+            //var nvSOC = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58ff662de4b006455f2d62b7/MapServer", { opacity: 0 });
+            var nvSOC = new ArcGISDynamicMapServiceLayer("https://gis1.usgs.gov/arcgis/rest/services/PADUS1_4/GAP_Status_Code/MapServer", { opacity: 0 });
+   
+
             //Tiled map service for SERI data
-            var nvSERI = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58ff6612e4b006455f2d62b5/MapServer", { opacity: 0 });
-            //Tiled map service for Wetland/Riparian data
-            var nvWetRip = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58ff66f9e4b006455f2d62be/MapServer", { opacity: 0 });
-            //Tiled map service for Landscape Condition data
-            var nvLC = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58ff6580e4b006455f2d62b1/MapServer", { opacity: 0 });
+            //var nvSERI = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58ff6612e4b006455f2d62b5/MapServer", { opacity: 0 });
+            var nvSERI = new ArcGISDynamicMapServiceLayer("https://gis1.usgs.gov/arcgis/rest/services/PADUS1_4/Fed_Tribal_Other/MapServer", { opacity: 0 });
+            
+            ////Tiled map service for Wetland/Riparian data
+            //var nvWetRip = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58ff66f9e4b006455f2d62be/MapServer", { opacity: 0 });
+            ////Tiled map service for Landscape Condition data
+            //var nvLC = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58ff6580e4b006455f2d62b1/MapServer", { opacity: 0 });
             
             //Feature layer for CHAT data queries
             var nvCHATFL = new esri.layers.FeatureLayer("https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/UTH_AGOL/FeatureServer/0", {
@@ -349,7 +372,8 @@
 
             nvCHATFL.setSelectionSymbol(selectSymbol);
 	
-            map.addLayers([nvLC, nvWetRip, nvSERI, nvSOC, nvCHAT, nvCHATFL]);
+            //map.addLayers([nvLC, nvWetRip, nvSERI, nvSOC, nvCHAT, nvCHATFL]);
+            map.addLayers([nvSERI, nvSOC, nvCHAT, nvCHATFL]);
 		
             //Set custom mouse cursor when over Nevada data layers
             nvCHATFL.on("mouse-over", function () {
@@ -364,7 +388,7 @@
             
 
             var sliderCHAT = new HorizontalSlider({value: 50,minimum: 1,maximum: 100,intermediateChanges: true,showButtons: false,onChange: function (value) {nvCHAT.setOpacity(value / 100);}}, "sliderCHAT");
-            document.getElementById("sliderDivSOC").style.visibility = "visible";
+            document.getElementById("sliderDivCHAT").style.visibility = "visible";
 
             var sliderSOC = new HorizontalSlider({value: 50,minimum: 1,maximum: 100,intermediateChanges: true,showButtons: false,onChange: function (value) {nvSOC.setOpacity(value / 100);}}, "sliderSOC");
             document.getElementById("sliderDivSOC").style.visibility = "hidden";
@@ -372,18 +396,18 @@
             var sliderSERI = new HorizontalSlider({value: 50,minimum: 1,maximum: 100,intermediateChanges: true,showButtons: false,onChange: function (value) {nvSERI.setOpacity(value / 100);}}, "sliderSERI");
             document.getElementById("sliderDivSERI").style.visibility = "hidden";
 
-            var sliderWetRip = new HorizontalSlider({value: 50,minimum: 1,maximum: 100,intermediateChanges: true,showButtons: false,onChange: function (value) {nvWetRip.setOpacity(value / 100);}}, "sliderWetRip");
-            document.getElementById("sliderDivWetRip").style.visibility = "hidden";
+            //var sliderWetRip = new HorizontalSlider({value: 50,minimum: 1,maximum: 100,intermediateChanges: true,showButtons: false,onChange: function (value) {nvWetRip.setOpacity(value / 100);}}, "sliderWetRip");
+            //document.getElementById("sliderDivWetRip").style.visibility = "hidden";
 
-            var sliderLC = new HorizontalSlider({value: 50,minimum: 1,maximum: 100,intermediateChanges: true,showButtons: false,onChange: function (value) {nvLC.setOpacity(value / 100);}}, "sliderLC");
-            document.getElementById("sliderDivLC").style.visibility = "hidden";
+            //var sliderLC = new HorizontalSlider({value: 50,minimum: 1,maximum: 100,intermediateChanges: true,showButtons: false,onChange: function (value) {nvLC.setOpacity(value / 100);}}, "sliderLC");
+            //document.getElementById("sliderDivLC").style.visibility = "hidden";
 
             //Show/hide layers on legend click event
             document.getElementById("toggleCHAT").onclick = function() {layerToggle(nvCHAT, document.getElementById("sliderDivCHAT"));}
             document.getElementById("toggleSOC").onclick = function () {layerToggle(nvSOC, document.getElementById("sliderDivSOC"));}
             document.getElementById("toggleSERI").onclick = function () {layerToggle(nvSERI, document.getElementById("sliderDivSERI"));}
-            document.getElementById("toggleWetRip").onclick = function () {layerToggle(nvWetRip, document.getElementById("sliderDivWetRip"));}
-            document.getElementById("toggleLC").onclick = function () {layerToggle(nvLC, document.getElementById("sliderDivLC"));}
+            //document.getElementById("toggleWetRip").onclick = function () {layerToggle(nvWetRip, document.getElementById("sliderDivWetRip"));}
+            //document.getElementById("toggleLC").onclick = function () {layerToggle(nvLC, document.getElementById("sliderDivLC"));}
             
             //Function to show/hide data layers on legend click event
             function layerToggle(layer, sliderElement) {
@@ -572,7 +596,6 @@
                     var tbStatus = "on";
 
                     map.graphics.add(new Graphic(evtGraph.geometry, symbol));
-				
                     var qCHAT = new Query();
                     qCHAT.geometry = evtGraph.geometry;
 				
@@ -681,31 +704,11 @@
                       "Src_Geom": feature.attributes['Src_Geom']
                   };
 
-                  //return {
-                  //    // property names used here match those used when creating the dgrid
-                  //    "hex_id": feature.attributes['hex_id'],
-                  //    "occurrencename": feature.attributes['occurrencename'],
-                  //    "taxonomicclass": feature.attributes['taxonomicclass'],
-                  //    "occurtypecrit": feature.attributes['occurtypecrit'],
-                  //    "sourcedataset": feature.attributes['sourcedataset'],
-                  //    "sourcegeometry": feature.attributes['sourcegeometry'],
-                  //    "lastsourcedate": feature.attributes['lastsourcedate'],
-                  //    "lastsourceid": feature.attributes['lastsourceid'],
-                  //    "federallistingstatus": feature.attributes['federallistingstatus'],
-                  //    "statelistingstatus": feature.attributes['statelistingstatus'],
-                  //    "abundance": feature.attributes['abundance'],
-                  //    "abundancetype": feature.attributes['abundancetype'],
-                  //    "supplemental": feature.attributes['abundancetype'],
-                  //    "sgcnindicator": feature.attributes['sgcnindicator']
-                  //};
-
-
               });
-              //var memStore = new Memory({ data: data });
               app.memStore = new Memory({ data: app.data });
               app.pGrid.set("store", app.memStore);
-              ////display the results in the grid
-              app.pGrid.refresh();
+
+              app.pGrid.refresh();              ////display the results in the grid
           }
 
 		//Function to create chart content based on single map click query

@@ -238,6 +238,21 @@ font-family: arial;
 	box-shadow: 3px 3px 7px #717171;
 	cursor: default;
 	}
+
+
+
+	.legendTallDiv {
+	height: 130px;
+	width: 290px;
+	padding: 0px;
+	margin: 15px 0px 0px 0px;	
+	background-color: rgba(255, 255, 255, 0.85);
+	border: 0px;
+	border-radius: 0px 3px 3px 0px;
+	box-shadow: 3px 3px 7px #717171;
+	cursor: default;
+	}
+
 		.inlineLegend {
 		padding: 0px;
 		margin: 0px;
@@ -283,6 +298,23 @@ font-family: arial;
 		position: relative;
 		top: 10px;
 		}
+
+        		
+
+		.legendTallDiv input {
+		position: relative;
+		bottom: 7px;
+		left: 265px;
+		}
+		
+		.legendTallDiv label {
+		font-size: 12px;
+		color: black;
+		position: relative;
+		left: 200px;
+		bottom: 10px;
+		}
+
 		
 		.legendDiv input {
 		position: relative;
