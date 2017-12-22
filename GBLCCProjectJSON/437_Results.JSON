@@ -30,11 +30,11 @@
                     {
                         "postalCode": "89509", 
                         "city": "Reno", 
+                        "country": "USA", 
                         "addressType": [
                             "mailing", 
                             "physical"
                         ], 
-                        "country": "USA", 
                         "adminstrativeArea": "NV"
                     }
                 ], 
@@ -66,10 +66,10 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "907", 
+                "contactId": "389", 
                 "isOrganization": true, 
-                "name": "Desert Research Institute", 
-                "contactType": "Research"
+                "name": "Bureau of Land Management", 
+                "contactType": "Federal"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -80,10 +80,10 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "389", 
+                "contactId": "907", 
                 "isOrganization": true, 
-                "name": "Bureau of Land Management", 
-                "contactType": "Federal"
+                "name": "Desert Research Institute", 
+                "contactType": "Research"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -144,22 +144,29 @@
                 ], 
                 "abstract": "FY2014\nOne of the primary challenges facing public land managers in the Great Basin is identifying adaptation strategies to increase resiliency to climate change in an area that is already struggling with profound environmental challenges. Recent efforts to understand how the Great Basin weathered past droughts and climate variability may offer insight into approaches that could work in future decades. One approach to gather this information is to understand Traditional Ecological Knowledge (TEK). Gathering this information is challenging and requires an acknowledgment that much of this information is highly sensitive and proprietary. Translating this information into actionable management plans is even more challenging. \n\nThis pilot project uses a method of naive interviewing with tribal youths to gather narrative \"micro stories\" from elders and key tribal members and then answering a series of carefully constructed questions that allow participants to apply context and meaning to their stories. These questions can then be analyzed quantitatively using correlational statistics to identify key themes and patterns across the narrative dataset. This approach has several advantages including: \n\n1) it uses tribal members to gather the data and\n2) and provides a link between the generations to raise awareness about environmental concerns and TEK.", 
                 "citation": {
-                    "title": "Wall 2014 - Using Narrative Stories to Understand Traditional Ecological Knowledge in the Great Basin", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=437", 
-                            "name": "Project Report Page"
+                            "date": "2015-01-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "437", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "594c348be4b062508e38568f", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
                         {
                             "party": [
                                 {
-                                    "contactId": "907", 
+                                    "contactId": "389", 
                                     "organizationMembers": [
-                                        "907"
+                                        "389"
                                     ]
                                 }
                             ], 
@@ -179,9 +186,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "389", 
+                                    "contactId": "907", 
                                     "organizationMembers": [
-                                        "389"
+                                        "907"
                                     ]
                                 }
                             ], 
@@ -219,25 +226,15 @@
                             "role": "Principal Investigator"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Wall2014"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2015-01-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=437", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "437", 
-                            "namespace": "lcc:gb"
-                        }, 
-                        {
-                            "identifier": "594c348be4b062508e38568f", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Using Narrative Stories to Understand Traditional Ecological Knowledge in the Great Basin"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -553,7 +550,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-12-06", 
+                        "date": "2017-12-22", 
                         "dateType": "creation"
                     }
                 ]

@@ -30,11 +30,11 @@
                     {
                         "postalCode": "89509", 
                         "city": "Reno", 
+                        "country": "USA", 
                         "addressType": [
                             "mailing", 
                             "physical"
                         ], 
-                        "country": "USA", 
                         "adminstrativeArea": "NV"
                     }
                 ], 
@@ -80,6 +80,46 @@
             }, 
             {
                 "isOrganization": true, 
+                "name": "Brigham Young University", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:bruce_roundy@byu.edu"
+                    }
+                ], 
+                "contactId": "G359", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Bruce Roundy", 
+                "memberOfOrganization": [
+                    "G359"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:bruce_roundy@byu.edu"
+                    }
+                ], 
+                "contactId": "359", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "William Christensen", 
+                "memberOfOrganization": [
+                    "G359"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:william@stat.byu.edu"
+                    }
+                ], 
+                "contactId": "828", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
                 "name": "US Forest Service", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
@@ -106,60 +146,6 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "Brigham Young University", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:ncline@byu.edu"
-                    }
-                ], 
-                "contactId": "G803", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Nathan Cline", 
-                "memberOfOrganization": [
-                    "G803"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:ncline@byu.edu"
-                    }
-                ], 
-                "contactId": "803", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "William Christensen", 
-                "memberOfOrganization": [
-                    "G803"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:william@stat.byu.edu"
-                    }
-                ], 
-                "contactId": "828", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Bruce Roundy", 
-                "memberOfOrganization": [
-                    "G803"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:bruce_roundy@byu.edu"
-                    }
-                ], 
-                "contactId": "359", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": true, 
                 "name": "Oregon State University", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
@@ -182,6 +168,20 @@
                     }
                 ], 
                 "contactId": "177", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Nathan Cline", 
+                "memberOfOrganization": [
+                    "G359"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:ncline@byu.edu"
+                    }
+                ], 
+                "contactId": "803", 
                 "contactType": "Academic"
             }
         ], 
@@ -210,13 +210,20 @@
                 ], 
                 "abstract": "FY2014\nAvoiding cheatgrass dominance following tree-reduction treatments on woodland-encroached sagebrush communities is a priority for managers in the Great Basin. Perennial herbaceous and weedy annual cover have been related to site resilience after treatment and associated with soil climate regimes and site physical characteristics. Additional investigation of site characteristics associated with vegetation response will allow us to better decide which sites to treat and whether seeding is needed or not in conjunction with tree reduction treatments. Site-level planning also requires an understanding of how climate change may influence vegetation response to treatments. \n\nWe propose to associate site-measured soil climate and other soil variables, and geospatially-derived site environmental characteristics with perennial herbaceous and cheatgrass cover in treated and untreated Great Basin wooded shrublands. We will use vegetation and soil data already collected in SageSTEP and tree shredding studies. We will develop models to indicate potential vegetation response to tree reduction treatments both for current and projected climate conditions for a wide range of sites. We will develop ranges of key attributes associated with less to more resilient sites. We will publish a guide on the SageSTEP website on how to use our models and findings as decision support tools.", 
                 "citation": {
-                    "title": "Roundy 2014 - Using Soil Climate and Geospatial Environmental Characteristics to Determine Plant Community Resilience to Fire and Fire Surrogate Treatments", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=439", 
-                            "name": "Project Report Page"
+                            "date": "2015-01-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "439", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "594c37fce4b062508e385732", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -245,6 +252,37 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G359", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "359", 
+                                    "organizationMembers": [
+                                        "G359"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "828", 
+                                    "organizationMembers": [
+                                        "G359"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G841", 
                                     "organizationMembers": []
                                 }
@@ -265,48 +303,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G803", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "803", 
-                                    "organizationMembers": [
-                                        "G803"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "828", 
-                                    "organizationMembers": [
-                                        "G803"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "359", 
-                                    "organizationMembers": [
-                                        "G803"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G177", 
                                     "organizationMembers": []
                                 }
@@ -323,27 +319,28 @@
                                 }
                             ], 
                             "role": "Collaborator"
-                        }
-                    ], 
-                    "alternateTitle": [
-                        "Roundy2014"
-                    ], 
-                    "date": [
-                        {
-                            "date": "2015-01-01", 
-                            "dateType": "date type"
-                        }
-                    ], 
-                    "identifier": [
-                        {
-                            "identifier": "439", 
-                            "namespace": "lcc:gb"
                         }, 
                         {
-                            "identifier": "594c37fce4b062508e385732", 
-                            "namespace": "gov.sciencebase.catalog"
+                            "party": [
+                                {
+                                    "contactId": "803", 
+                                    "organizationMembers": [
+                                        "G359"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }
-                    ]
+                    ], 
+                    "onlineResource": [
+                        {
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=439", 
+                            "name": "Project Report Page"
+                        }
+                    ], 
+                    "title": "Using Soil Climate and Geospatial Environmental Characteristics to Determine Plant Community Resilience to Fire and Fire Surrogate Treatments"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -589,7 +586,7 @@
                             "sourceId": "389", 
                             "currency": "USD", 
                             "amount": 68649.0, 
-                            "recipientId": "G803", 
+                            "recipientId": "G359", 
                             "matching": false
                         }
                     ], 
@@ -607,7 +604,7 @@
                             "sourceId": "897", 
                             "currency": "USD", 
                             "amount": 31799.0, 
-                            "recipientId": "G803", 
+                            "recipientId": "G359", 
                             "matching": true
                         }
                     ], 
@@ -659,7 +656,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-12-06", 
+                        "date": "2017-12-22", 
                         "dateType": "creation"
                     }
                 ]

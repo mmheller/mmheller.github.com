@@ -30,11 +30,11 @@
                     {
                         "postalCode": "89509", 
                         "city": "Reno", 
+                        "country": "USA", 
                         "addressType": [
                             "mailing", 
                             "physical"
                         ], 
-                        "country": "USA", 
                         "adminstrativeArea": "NV"
                     }
                 ], 
@@ -77,31 +77,17 @@
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:dpilliod@usgs.gov"
+                        "uri": "mailto:mgermino@usgs.gov"
                     }
                 ], 
-                "contactId": "G230", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "David Pilliod", 
-                "memberOfOrganization": [
-                    "G230"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:dpilliod@usgs.gov"
-                    }
-                ], 
-                "contactId": "230", 
+                "contactId": "G782", 
                 "contactType": "Federal"
             }, 
             {
                 "isOrganization": false, 
                 "name": "Matt Germino", 
                 "memberOfOrganization": [
-                    "G230"
+                    "G782"
                 ], 
                 "onlineResource": [
                     {
@@ -109,6 +95,20 @@
                     }
                 ], 
                 "contactId": "782", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "David Pilliod", 
+                "memberOfOrganization": [
+                    "G782"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:dpilliod@usgs.gov"
+                    }
+                ], 
+                "contactId": "230", 
                 "contactType": "Federal"
             }
         ], 
@@ -137,62 +137,6 @@
                 ], 
                 "abstract": "FY2017\nThis study addresses the need to develop treatments, soil amendments, and other site-preparation techniques that enhance germination, establishment, and development of healthy sagebrush communities. This study addressed the following objectives: (1) Determine whether seeded sagebrush established more frequently in fertile islands compared to burned shrub interspaces and locations where sagebrush was absent prior to the fire; (2) Determine whether the soil characteristics of sites and fertile islands within those sites influence sagebrush establishment patterns; and (3) Consider whether fertile island soil characteristics could be reporduced by manipulation post-fire soils in areas that had no pre-fire sagebrush. In the summer and fall of 2017 we will sample 10-20 locations that burned in 2016 in the Great Basin. All study sites must have supported mature sagebrush prior to the fire and been seeded with sagebrush seed after the fire. Stakeholders include the Bureau of Land Management, state natural resource agencies, and private landowners. The expected outcomes include information about post-fire restoration strategies for increasing sagebrush establishment following fire in the Great Basin. Assessments across ecological site conditions and soil types will increase inference and provide useful information about soil characteristics that facilitate or limit the formation (or importance) of fertile islands for restoration. Products will be delivered in the form of scientific journal articles, management briefs, presentations, and webinars. Data and metadata will be published and available.", 
                 "citation": {
-                    "title": "Pilliod 2017 - Microsite Soil Characteristics Influence Sagebrush Restoration Success", 
-                    "onlineResource": [
-                        {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=443", 
-                            "name": "Project Report Page"
-                        }
-                    ], 
-                    "responsibleParty": [
-                        {
-                            "party": [
-                                {
-                                    "contactId": "389", 
-                                    "organizationMembers": [
-                                        "389"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G230", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "230", 
-                                    "organizationMembers": [
-                                        "G230"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "782", 
-                                    "organizationMembers": [
-                                        "G230"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }
-                    ], 
-                    "alternateTitle": [
-                        "Pilliod2017"
-                    ], 
                     "date": [
                         {
                             "date": "2017-08-01", 
@@ -208,7 +152,60 @@
                             "identifier": "59fa5c74e4b0531197aff888", 
                             "namespace": "gov.sciencebase.catalog"
                         }
-                    ]
+                    ], 
+                    "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "389", 
+                                    "organizationMembers": [
+                                        "389"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G782", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "782", 
+                                    "organizationMembers": [
+                                        "G782"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "230", 
+                                    "organizationMembers": [
+                                        "G782"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }
+                    ], 
+                    "onlineResource": [
+                        {
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=443", 
+                            "name": "Project Report Page"
+                        }
+                    ], 
+                    "title": "Microsite Soil Characteristics Influence Sagebrush Restoration Success"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -449,7 +446,7 @@
                             "sourceId": "389", 
                             "currency": "USD", 
                             "amount": 39439.0, 
-                            "recipientId": "G230", 
+                            "recipientId": "G782", 
                             "matching": false
                         }
                     ], 
@@ -501,7 +498,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-12-06", 
+                        "date": "2017-12-22", 
                         "dateType": "creation"
                     }
                 ]

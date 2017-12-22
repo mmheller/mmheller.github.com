@@ -30,11 +30,11 @@
                     {
                         "postalCode": "89509", 
                         "city": "Reno", 
+                        "country": "USA", 
                         "addressType": [
                             "mailing", 
                             "physical"
                         ], 
-                        "country": "USA", 
                         "adminstrativeArea": "NV"
                     }
                 ], 
@@ -91,41 +91,25 @@
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mmatocq@cabnr.unr.edu"
+                        "uri": "mailto:jsedinger@cabnr.unr.edu"
                     }
                 ], 
-                "contactId": "G790", 
+                "contactId": "G775", 
                 "contactType": "Academic"
             }, 
             {
                 "isOrganization": false, 
-                "name": "Marjorie Matocq", 
+                "name": "Jim Sedinger", 
                 "memberOfOrganization": [
-                    "G790"
+                    "G775"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mmatocq@cabnr.unr.edu"
+                        "uri": "mailto:jsedinger@cabnr.unr.edu"
                     }
                 ], 
-                "contactId": "790", 
+                "contactId": "775", 
                 "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G949", 
-                "isOrganization": true, 
-                "name": "US Fish & Wildife Service", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G949"
-                ], 
-                "contactId": "949", 
-                "isOrganization": false, 
-                "name": "John Kasbohm", 
-                "contactType": "Federal"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -144,18 +128,20 @@
                 "contactType": "Federal"
             }, 
             {
-                "isOrganization": false, 
-                "name": "Jim Sedinger", 
+                "memberOfOrganization": [], 
+                "contactId": "G949", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
                 "memberOfOrganization": [
-                    "G790"
+                    "G949"
                 ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:jsedinger@cabnr.unr.edu"
-                    }
-                ], 
-                "contactId": "775", 
-                "contactType": "Academic"
+                "contactId": "949", 
+                "isOrganization": false, 
+                "name": "John Kasbohm", 
+                "contactType": "Federal"
             }, 
             {
                 "isOrganization": true, 
@@ -181,6 +167,20 @@
                     }
                 ], 
                 "contactId": "802", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Marjorie Matocq", 
+                "memberOfOrganization": [
+                    "G775"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mmatocq@cabnr.unr.edu"
+                    }
+                ], 
+                "contactId": "790", 
                 "contactType": "Academic"
             }
         ], 
@@ -209,13 +209,20 @@
                 ], 
                 "abstract": "FY2014\nLand management agencies seek to understand how organisms use the landscape in order to develop management strategies that maintain healthy, resilient communities that have the ecological and evolutionary potential to respond to climate change. An ideal approach to understanding how organisms move through the landscape is by inferring ongoing and historic movements from patterns of genetic continuity that characterize regional sets of populations. From patterns of genetic connectivity we can infer the habitat and landscape characteristics that facilitate animal movement and species range shifts over both short and long timescales. Knowing the spatial distribution of critical linkages or corridors allows conservation prioritization of these functionally significant areas. In this project, we will quantify functional landscape connectivity of the pygmy rabbit, a sensitive, sagebrush ecosystem obligate, through integration of landscape genomic data with statistical modeling of habitat quality and connectedness. Further, we will use these models to forecast the distribution and landscape connectivity of this species under various climate change scenarios, and to identify those critical areas with greatest potential to facilitate distributional shifts in response to climate change. We will further refine the predictive capabilities of these models by creating a management-oriented simulation model to predict spatial and genetic response of populations to climate change or other stressors such as disturbance and energy development, revealing particular areas of sensitivity for regional persistence of pygmy rabbits and the sagebrush ecosystems on which they rely.\n\nFY2015\nLand management agencies seek to understand how organisms use the landscape in order to develop management strategies that maintain healthy, resilient communities that have the ecological and evolutionary potential to respond to climate change. An ideal approach to understanding how organisms move through the landscape is by inferring ongoing and historic movements from patterns of genetic continuity that characterize regional sets of populations. From patterns of genetic connectivity we can infer the habitat and landscape characteristics that facilitate animal movement and species range shifts over both short and long timescales. Knowing the spatial distribution of critical linkages or corridors allows conservation prioritization of these functionally significant areas. In this project, we will quantify functional landscape connectivity of the pygmy rabbit, a sensitive, sagebrush ecosystem obligate, through integration of landscape genomic data with statistical modeling of habitat quality and connectedness. Further, we will use these models to forecast the distribution and landscape connectivity of this species under various climate change scenarios, and to identify those critical areas with greatest potential to facilitate distributional shifts in response to climate change. We will further refine the predictive capabilities of these models by creating a management-oriented simulation model to predict spatial and genetic response of populations to climate change or other stressors such as disturbance and energy development, revealing particular areas of sensitivity for regional persistence of pygmy rabbits and the sagebrush ecosystems on which they rely.", 
                 "citation": {
-                    "title": "Matocq 2014 - Landscape Connectivity of a Sagebrush Obligate: Functional Continuity of Habitat for the Pygmy Rabbit", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=427", 
-                            "name": "Project Report Page"
+                            "date": "2015-01-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "427", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "594c1e2ee4b062508e3854da", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -255,7 +262,27 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G790", 
+                                    "contactId": "G775", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "775", 
+                                    "organizationMembers": [
+                                        "G775"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G894", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -264,9 +291,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "790", 
+                                    "contactId": "894", 
                                     "organizationMembers": [
-                                        "G790"
+                                        "G894"
                                     ]
                                 }
                             ], 
@@ -295,37 +322,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G894", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "894", 
-                                    "organizationMembers": [
-                                        "G894"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "775", 
-                                    "organizationMembers": [
-                                        "G790"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G802", 
                                     "organizationMembers": []
                                 }
@@ -342,27 +338,28 @@
                                 }
                             ], 
                             "role": "Collaborator"
-                        }
-                    ], 
-                    "alternateTitle": [
-                        "Matocq2014"
-                    ], 
-                    "date": [
-                        {
-                            "date": "2015-01-01", 
-                            "dateType": "date type"
-                        }
-                    ], 
-                    "identifier": [
-                        {
-                            "identifier": "427", 
-                            "namespace": "lcc:gb"
                         }, 
                         {
-                            "identifier": "594c1e2ee4b062508e3854da", 
-                            "namespace": "gov.sciencebase.catalog"
+                            "party": [
+                                {
+                                    "contactId": "790", 
+                                    "organizationMembers": [
+                                        "G775"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
                         }
-                    ]
+                    ], 
+                    "onlineResource": [
+                        {
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=427", 
+                            "name": "Project Report Page"
+                        }
+                    ], 
+                    "title": "Landscape Connectivity of a Sagebrush Obligate: Functional Continuity of Habitat for the Pygmy Rabbit"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -495,7 +492,7 @@
                                                 ], 
                                                 [
                                                     -109.14176893910351, 
-                                                    42.53063705827602
+                                                    42.530637058276014
                                                 ], 
                                                 [
                                                     -108.69968464606572, 
@@ -555,7 +552,7 @@
                                                 ], 
                                                 [
                                                     -107.70618338481958, 
-                                                    40.734222594836
+                                                    40.734222594836005
                                                 ], 
                                                 [
                                                     -108.12449970566169, 
@@ -879,7 +876,7 @@
                                                 ], 
                                                 [
                                                     -115.22034874676855, 
-                                                    43.52975201864097
+                                                    43.52975201864096
                                                 ], 
                                                 [
                                                     -115.12052326124389, 
@@ -1017,7 +1014,7 @@
                                                 ], 
                                                 [
                                                     -118.45881426186655, 
-                                                    47.359486892691194
+                                                    47.35948689269119
                                                 ], 
                                                 [
                                                     -119.1433318774411, 
@@ -1089,7 +1086,7 @@
                                                 ], 
                                                 [
                                                     -119.77080635843012, 
-                                                    47.99957244646149
+                                                    47.999572446461485
                                                 ], 
                                                 [
                                                     -119.23840376841697, 
@@ -1343,7 +1340,7 @@
                             "sourceId": "910", 
                             "currency": "USD", 
                             "amount": 159160.52, 
-                            "recipientId": "G790", 
+                            "recipientId": "G775", 
                             "matching": true
                         }
                     ], 
@@ -1361,7 +1358,7 @@
                             "sourceId": "389", 
                             "currency": "USD", 
                             "amount": 92882.0, 
-                            "recipientId": "G790", 
+                            "recipientId": "G775", 
                             "matching": false
                         }
                     ], 
@@ -1379,7 +1376,7 @@
                             "sourceId": "894", 
                             "currency": "USD", 
                             "amount": 81953.0, 
-                            "recipientId": "G790", 
+                            "recipientId": "G775", 
                             "matching": true
                         }
                     ], 
@@ -1397,7 +1394,7 @@
                             "sourceId": "560", 
                             "currency": "USD", 
                             "amount": 0.0, 
-                            "recipientId": "G790", 
+                            "recipientId": "G775", 
                             "matching": true
                         }
                     ], 
@@ -1449,7 +1446,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-12-06", 
+                        "date": "2017-12-22", 
                         "dateType": "creation"
                     }
                 ]

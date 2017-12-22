@@ -30,11 +30,11 @@
                     {
                         "postalCode": "89509", 
                         "city": "Reno", 
+                        "country": "USA", 
                         "addressType": [
                             "mailing", 
                             "physical"
                         ], 
-                        "country": "USA", 
                         "adminstrativeArea": "NV"
                     }
                 ], 
@@ -130,13 +130,20 @@
                 ], 
                 "abstract": "FY2017\nRemoval of livestock grazing is a common prescription to promote ecosystem recovery after wildfire (and subsequent emergency site rehabilitation efforts). Ecosystem recovery is typically considered from a terrestrial perspective, but wildfire and grazing can strongly influence aquatic ecosystems as well, especially smaller and fragmented stream networks, which are prevalent in the Great Basin (Minshall et al. 1989[1]; Dunham et al. 2003[2]; Luce et al. 2012[3]). Understanding these influences is essential for managing fire and grazing. Examples include identifying timeframes for resuming livestock grazing following wildfire, and the interactions between livestock grazing, fuels, and recovery of stream-side or riparian vegetation in the region.", 
                 "citation": {
-                    "title": "Dunham 2017 - Wildfire, grazing and availability of water in sage steppe ecosystems", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=444", 
-                            "name": "Project Report Page"
+                            "date": "2017-09-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "444", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "59f4af6fe4b063d5d307d82c", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -183,25 +190,15 @@
                             "role": "Fiscal Agent"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Dunham2017"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2017-09-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=444", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "444", 
-                            "namespace": "lcc:gb"
-                        }, 
-                        {
-                            "identifier": "59f4af6fe4b063d5d307d82c", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Wildfire, grazing and availability of water in sage steppe ecosystems"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -493,7 +490,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-12-06", 
+                        "date": "2017-12-22", 
                         "dateType": "creation"
                     }
                 ]

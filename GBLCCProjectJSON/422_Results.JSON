@@ -30,11 +30,11 @@
                     {
                         "postalCode": "89509", 
                         "city": "Reno", 
+                        "country": "USA", 
                         "addressType": [
                             "mailing", 
                             "physical"
                         ], 
-                        "country": "USA", 
                         "adminstrativeArea": "NV"
                     }
                 ], 
@@ -72,20 +72,30 @@
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "G971", 
                 "isOrganization": true, 
-                "name": "University of Idaho", 
-                "contactType": "Academic"
+                "name": "US Forest Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:ggrant@fs.fed.us"
+                    }
+                ], 
+                "contactId": "G845", 
+                "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [
-                    "G971"
-                ], 
-                "contactId": "971", 
                 "isOrganization": false, 
-                "name": "Richard Allen", 
-                "contactType": "Academic"
+                "name": "Gordon Grant", 
+                "memberOfOrganization": [
+                    "G845"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:ggrant@fs.fed.us"
+                    }
+                ], 
+                "contactId": "845", 
+                "contactType": "Federal"
             }, 
             {
                 "isOrganization": true, 
@@ -114,32 +124,6 @@
                 "contactType": "Federal"
             }, 
             {
-                "isOrganization": true, 
-                "name": "Desert Research Institute", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:Justin.Huntington@dri.edu"
-                    }
-                ], 
-                "contactId": "G785", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Justin Huntington", 
-                "memberOfOrganization": [
-                    "G785"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:Justin.Huntington@dri.edu"
-                    }
-                ], 
-                "contactId": "785", 
-                "contactType": "Academic"
-            }, 
-            {
                 "memberOfOrganization": [], 
                 "contactId": "G945", 
                 "isOrganization": true, 
@@ -156,8 +140,15 @@
                 "contactType": "Federal"
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "G968", 
+                "isOrganization": true, 
+                "name": "Desert Research Institute", 
+                "contactType": "Research"
+            }, 
+            {
                 "memberOfOrganization": [
-                    "G785"
+                    "G968"
                 ], 
                 "contactId": "968", 
                 "isOrganization": false, 
@@ -181,34 +172,8 @@
                 "contactType": "Private"
             }, 
             {
-                "isOrganization": true, 
-                "name": "US Forest Service", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:scharnley@fs.fed.us"
-                    }
-                ], 
-                "contactId": "G878", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Susan Charnley", 
                 "memberOfOrganization": [
-                    "G878"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:scharnley@fs.fed.us"
-                    }
-                ], 
-                "contactId": "878", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G785"
+                    "G968"
                 ], 
                 "contactId": "970", 
                 "isOrganization": false, 
@@ -217,17 +182,47 @@
             }, 
             {
                 "isOrganization": false, 
-                "name": "Gordon Grant", 
+                "name": "Charles Morton", 
                 "memberOfOrganization": [
-                    "G878"
+                    "G968"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:ggrant@fs.fed.us"
+                        "uri": "mailto:Charles.Morton@dri.edu"
                     }
                 ], 
-                "contactId": "845", 
-                "contactType": "Federal"
+                "contactId": "850", 
+                "contactType": "Research"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G971", 
+                "isOrganization": true, 
+                "name": "University of Idaho", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G971"
+                ], 
+                "contactId": "971", 
+                "isOrganization": false, 
+                "name": "Richard Allen", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Rosemary Carroll", 
+                "memberOfOrganization": [
+                    "G968"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:Rosemary.Carroll@dri.edu"
+                    }
+                ], 
+                "contactId": "844", 
+                "contactType": "Research"
             }, 
             {
                 "isOrganization": true, 
@@ -257,9 +252,23 @@
             }, 
             {
                 "isOrganization": false, 
+                "name": "Justin Huntington", 
+                "memberOfOrganization": [
+                    "G968"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:Justin.Huntington@dri.edu"
+                    }
+                ], 
+                "contactId": "785", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
                 "name": "Keirith Snyder", 
                 "memberOfOrganization": [
-                    "G878"
+                    "G845"
                 ], 
                 "onlineResource": [
                     {
@@ -285,31 +294,17 @@
             }, 
             {
                 "isOrganization": false, 
-                "name": "Rosemary Carroll", 
+                "name": "Susan Charnley", 
                 "memberOfOrganization": [
-                    "G785"
+                    "G845"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:Rosemary.Carroll@dri.edu"
+                        "uri": "mailto:scharnley@fs.fed.us"
                     }
                 ], 
-                "contactId": "844", 
-                "contactType": "Research"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Charles Morton", 
-                "memberOfOrganization": [
-                    "G785"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:Charles.Morton@dri.edu"
-                    }
-                ], 
-                "contactId": "850", 
-                "contactType": "Research"
+                "contactId": "878", 
+                "contactType": "Federal"
             }
         ], 
         "metadata": {
@@ -337,13 +332,20 @@
                 ], 
                 "abstract": "FY2015\nCollaborators are investigating the effect of low rise dams water supply, ecosystem functions and health, and habitat for a wide range of organisms, including sage grouse. They are assessing the economic cost and attitudes of ranchers and managers towards both low-rise dams and proposed re-introductions of beavers. Remote sensing is used to identify locations of incised streams across the Great Basin.", 
                 "citation": {
-                    "title": "Huntington 2015 - Evaluating Riparian and Meadow Vegetation Change Relative to Climate, Restoration and Land Management", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=422", 
-                            "name": "Project Report Page"
+                            "date": "2015-05-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "422", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "594c10cce4b062508e3853fe", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -361,22 +363,22 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G971", 
+                                    "contactId": "G845", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Contributor"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "971", 
+                                    "contactId": "845", 
                                     "organizationMembers": [
-                                        "G971"
+                                        "G845"
                                     ]
                                 }
                             ], 
-                            "role": "Contributor"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -401,26 +403,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G785", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "785", 
-                                    "organizationMembers": [
-                                        "G785"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G945", 
                                     "organizationMembers": []
                                 }
@@ -441,9 +423,18 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G968", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "968", 
                                     "organizationMembers": [
-                                        "G785"
+                                        "G968"
                                     ]
                                 }
                             ], 
@@ -472,29 +463,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G878", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "878", 
-                                    "organizationMembers": [
-                                        "G878"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "970", 
                                     "organizationMembers": [
-                                        "G785"
+                                        "G968"
                                     ]
                                 }
                             ], 
@@ -503,13 +474,44 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "845", 
+                                    "contactId": "850", 
                                     "organizationMembers": [
-                                        "G878"
+                                        "G968"
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G971", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "971", 
+                                    "organizationMembers": [
+                                        "G971"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "844", 
+                                    "organizationMembers": [
+                                        "G968"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
                         }, 
                         {
                             "party": [
@@ -534,9 +536,20 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "785", 
+                                    "organizationMembers": [
+                                        "G968"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "779", 
                                     "organizationMembers": [
-                                        "G878"
+                                        "G845"
                                     ]
                                 }
                             ], 
@@ -556,45 +569,24 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "844", 
+                                    "contactId": "878", 
                                     "organizationMembers": [
-                                        "G785"
+                                        "G845"
                                     ]
                                 }
                             ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "850", 
-                                    "organizationMembers": [
-                                        "G785"
-                                    ]
-                                }
-                            ], 
-                            "role": "Contributor"
+                            "role": "Principal Investigator"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Huntington2015"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2015-05-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=422", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "422", 
-                            "namespace": "lcc:gb"
-                        }, 
-                        {
-                            "identifier": "594c10cce4b062508e3853fe", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Evaluating Riparian and Meadow Vegetation Change Relative to Climate, Restoration and Land Management"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -813,7 +805,7 @@
                             "sourceId": "389", 
                             "currency": "USD", 
                             "amount": 51236.0, 
-                            "recipientId": "G785", 
+                            "recipientId": "G968", 
                             "matching": false
                         }
                     ], 
@@ -865,7 +857,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-12-06", 
+                        "date": "2017-12-22", 
                         "dateType": "creation"
                     }
                 ]

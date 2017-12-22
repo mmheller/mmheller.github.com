@@ -30,11 +30,11 @@
                     {
                         "postalCode": "89509", 
                         "city": "Reno", 
+                        "country": "USA", 
                         "addressType": [
                             "mailing", 
                             "physical"
                         ], 
-                        "country": "USA", 
                         "adminstrativeArea": "NV"
                     }
                 ], 
@@ -73,6 +73,13 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "389", 
                 "isOrganization": true, 
                 "name": "Bureau of Land Management", 
@@ -86,11 +93,30 @@
                 "contactType": "State"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "560", 
                 "isOrganization": true, 
-                "name": "US Fish & Wildife Service", 
-                "contactType": "Federal"
+                "name": "University of Nevada, Reno", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:owbaughman@gmail.com"
+                    }
+                ], 
+                "contactId": "G827", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Owen Baughman", 
+                "memberOfOrganization": [
+                    "G827"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:owbaughman@gmail.com"
+                    }
+                ], 
+                "contactId": "827", 
+                "contactType": "Academic"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -163,32 +189,6 @@
                 "contactId": "931", 
                 "isOrganization": false, 
                 "name": "Zachary Aanderud", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "University of Nevada, Reno", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:owbaughman@gmail.com"
-                    }
-                ], 
-                "contactId": "G827", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Owen Baughman", 
-                "memberOfOrganization": [
-                    "G827"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:owbaughman@gmail.com"
-                    }
-                ], 
-                "contactId": "827", 
                 "contactType": "Academic"
             }, 
             {
@@ -275,13 +275,20 @@
                 ], 
                 "abstract": "FY2013\nCheatgrass die-offs are unexplained instances of stand failure observed in areas of Nevada and Utah, where cheatgrass fails to grow even though it has been a dominant component of plant communities in the past. The goals of this project are to:\n\n1) provide information on the size and extent of historic (1985 - 2012) die-offs in the Winnemucca area using satellite imagery, and \n2) determine if die-offs are restoration opportunities by planting and monitoring local and commercially available native grasses in die-off areas. \n\nSupport is requested to fund monitoring of the restoration project through a second growing season and to develop predictive spatial models of die-off from analysis of satellite imagery and GIS models, which will result in enhanced predictive capacity for locating die-offs at local management scales, and information on species and seed sources that can be used to restore die-offs.", 
                 "citation": {
-                    "title": "Leger 2013 - Understanding the Causes and Consequences of Cheatgrass Die-offs in the Great Basin", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=436", 
-                            "name": "Project Report Page"
+                            "date": "2013-05-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "436", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "55e0d060e4b05561fa1ef469", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -291,6 +298,17 @@
                                     "contactId": "908", 
                                     "organizationMembers": [
                                         "908"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
                                     ]
                                 }
                             ], 
@@ -321,13 +339,22 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "560", 
+                                    "contactId": "G827", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "827", 
                                     "organizationMembers": [
-                                        "560"
+                                        "G827"
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -423,26 +450,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G827", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "827", 
-                                    "organizationMembers": [
-                                        "G827"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "802", 
                                     "organizationMembers": [
                                         "G827"
@@ -494,25 +501,15 @@
                             "role": "Collaborator"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Leger2013"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2013-05-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=436", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "436", 
-                            "namespace": "lcc:gb"
-                        }, 
-                        {
-                            "identifier": "55e0d060e4b05561fa1ef469", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Understanding the Causes and Consequences of Cheatgrass Die-offs in the Great Basin"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -549,7 +546,7 @@
                                                 ], 
                                                 [
                                                     -118.6991535574148, 
-                                                    42.03028038560244
+                                                    42.030280385602445
                                                 ], 
                                                 [
                                                     -116.16806681085393, 
@@ -911,7 +908,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-12-06", 
+                        "date": "2017-12-22", 
                         "dateType": "creation"
                     }
                 ]

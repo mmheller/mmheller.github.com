@@ -30,11 +30,11 @@
                     {
                         "postalCode": "89509", 
                         "city": "Reno", 
+                        "country": "USA", 
                         "addressType": [
                             "mailing", 
                             "physical"
                         ], 
-                        "country": "USA", 
                         "adminstrativeArea": "NV"
                     }
                 ], 
@@ -73,19 +73,19 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G1039", 
+                "contactId": "G1037", 
                 "isOrganization": true, 
-                "name": "Teton Research Institute", 
-                "contactType": "Academic"
+                "name": "US Forest Service", 
+                "contactType": "Federal"
             }, 
             {
                 "memberOfOrganization": [
-                    "G1039"
+                    "G1037"
                 ], 
-                "contactId": "1039", 
+                "contactId": "1037", 
                 "isOrganization": false, 
-                "name": "Kevin Krasnow", 
-                "contactType": "Academic"
+                "name": "Cheri Howell", 
+                "contactType": "Federal"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -136,46 +136,20 @@
                 "contactType": "Academic"
             }, 
             {
-                "isOrganization": true, 
-                "name": "University of Nevada, Reno", 
                 "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:pweisberg@cabnr.unr.edu"
-                    }
-                ], 
-                "contactId": "G802", 
+                "contactId": "G1048", 
+                "isOrganization": true, 
+                "name": "University of Idaho", 
                 "contactType": "Academic"
             }, 
             {
-                "isOrganization": false, 
-                "name": "Peter Weisberg", 
                 "memberOfOrganization": [
-                    "G802"
+                    "G1048"
                 ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:pweisberg@cabnr.unr.edu"
-                    }
-                ], 
-                "contactId": "802", 
+                "contactId": "1048", 
+                "isOrganization": false, 
+                "name": "Eva Strand", 
                 "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G1080", 
-                "isOrganization": true, 
-                "name": "US Geological Survey", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G1080"
-                ], 
-                "contactId": "1080", 
-                "isOrganization": false, 
-                "name": "Susan Earnst", 
-                "contactType": "Federal"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -195,27 +169,18 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G1048", 
+                "contactId": "G1039", 
                 "isOrganization": true, 
-                "name": "University of Idaho", 
+                "name": "Teton Research Institute", 
                 "contactType": "Academic"
             }, 
             {
                 "memberOfOrganization": [
-                    "G1048"
+                    "G1039"
                 ], 
-                "contactId": "1048", 
+                "contactId": "1039", 
                 "isOrganization": false, 
-                "name": "Eva Strand", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G1079"
-                ], 
-                "contactId": "983", 
-                "isOrganization": false, 
-                "name": "Tom Dilts", 
+                "name": "Kevin Krasnow", 
                 "contactType": "Academic"
             }, 
             {
@@ -235,10 +200,22 @@
                 "contactType": "NGO"
             }, 
             {
+                "isOrganization": true, 
+                "name": "US Geological Survey", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:smcilroy@usgs.gov"
+                    }
+                ], 
+                "contactId": "G926", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": false, 
                 "name": "Susan McIlroy", 
                 "memberOfOrganization": [
-                    "G1080"
+                    "G926"
                 ], 
                 "onlineResource": [
                     {
@@ -249,10 +226,19 @@
                 "contactType": "Federal"
             }, 
             {
+                "memberOfOrganization": [
+                    "G1079"
+                ], 
+                "contactId": "983", 
+                "isOrganization": false, 
+                "name": "Tom Dilts", 
+                "contactType": "Academic"
+            }, 
+            {
                 "isOrganization": false, 
                 "name": "Doug Shinneman", 
                 "memberOfOrganization": [
-                    "G1080"
+                    "G926"
                 ], 
                 "onlineResource": [
                     {
@@ -289,19 +275,38 @@
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "G1037", 
                 "isOrganization": true, 
-                "name": "US Forest Service", 
-                "contactType": "Federal"
+                "name": "University of Nevada, Reno", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:pweisberg@cabnr.unr.edu"
+                    }
+                ], 
+                "contactId": "G802", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Peter Weisberg", 
+                "memberOfOrganization": [
+                    "G802"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:pweisberg@cabnr.unr.edu"
+                    }
+                ], 
+                "contactId": "802", 
+                "contactType": "Academic"
             }, 
             {
                 "memberOfOrganization": [
-                    "G1037"
+                    "G926"
                 ], 
-                "contactId": "1037", 
+                "contactId": "1080", 
                 "isOrganization": false, 
-                "name": "Cheri Howell", 
+                "name": "Susan Earnst", 
                 "contactType": "Federal"
             }
         ], 
@@ -330,13 +335,20 @@
                 ], 
                 "abstract": "FY2011\nAspen populations are in decline across western North America due to altered fire regimes, herbivory, drought, pathogens, and competition with conifers. Aspen stands typically support higher avian biodiversity than surrounding habitats, and maintaining current distributions of several avian species is likely tied to persistence of aspen on the landscape. We are examining effects of climate change on aspen and associated avian communities in isolated mountain ranges of the northern Great Basin, by coupling empirical models of avian-habitat relationships with spatially-explicit landscape simulations of vegetation and disturbance dynamics (using LANDIS-II) under various climate change scenarios. We are addressing the following questions: 1) What are the current successional, structural, and distribution patterns of aspen on the landscape, and how do these patterns affect bird abundance? 2) How will fire and climate change affect aspen condition and distribution? and 3) What are the implications for the long-term persistence of associated avian communities? The results from our field investigations will provide information not currently available for the northern Great Basin and, when combined with our modeled future projections, will help land managers develop conservation and restoration strategies for both bird and aspen communities. Indeed, much outreach has already occurred, and the project has already helped managers develop strategies through a host of webinars, presentations, and articles.", 
                 "citation": {
-                    "title": "Shinneman 2011 - Quantifying vulnerability of quaking aspen woodlands and associate bird communities to global climate change in the northern Great Basin", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=445", 
-                            "name": "Project Report Page"
+                            "date": "2010-05-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "445", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "59f4b0a5e4b063d5d307d830", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -354,7 +366,7 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G1039", 
+                                    "contactId": "G1037", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -363,9 +375,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "1039", 
+                                    "contactId": "1037", 
                                     "organizationMembers": [
-                                        "G1039"
+                                        "G1037"
                                     ]
                                 }
                             ], 
@@ -434,7 +446,7 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G802", 
+                                    "contactId": "G1048", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -443,29 +455,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "802", 
+                                    "contactId": "1048", 
                                     "organizationMembers": [
-                                        "G802"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G1080", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "1080", 
-                                    "organizationMembers": [
-                                        "G1080"
+                                        "G1048"
                                     ]
                                 }
                             ], 
@@ -494,7 +486,7 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G1048", 
+                                    "contactId": "G1039", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -503,20 +495,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "1048", 
+                                    "contactId": "1039", 
                                     "organizationMembers": [
-                                        "G1048"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "983", 
-                                    "organizationMembers": [
-                                        "G1079"
+                                        "G1039"
                                     ]
                                 }
                             ], 
@@ -545,9 +526,29 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G926", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "926", 
                                     "organizationMembers": [
-                                        "G1080"
+                                        "G926"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "983", 
+                                    "organizationMembers": [
+                                        "G1079"
                                     ]
                                 }
                             ], 
@@ -558,7 +559,7 @@
                                 {
                                     "contactId": "915", 
                                     "organizationMembers": [
-                                        "G1080"
+                                        "G926"
                                     ]
                                 }
                             ], 
@@ -587,7 +588,7 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G1037", 
+                                    "contactId": "G802", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -596,34 +597,35 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "1037", 
+                                    "contactId": "802", 
                                     "organizationMembers": [
-                                        "G1037"
+                                        "G802"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "1080", 
+                                    "organizationMembers": [
+                                        "G926"
                                     ]
                                 }
                             ], 
                             "role": "Collaborator"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Shinneman2011"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2010-05-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=445", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "445", 
-                            "namespace": "lcc:gb"
-                        }, 
-                        {
-                            "identifier": "59f4b0a5e4b063d5d307d830", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Quantifying vulnerability of quaking aspen woodlands and associate bird communities to global climate change in the northern Great Basin"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -848,7 +850,7 @@
                             "sourceId": "388", 
                             "currency": "USD", 
                             "amount": 20408.0, 
-                            "recipientId": "G1080", 
+                            "recipientId": "G926", 
                             "matching": false
                         }
                     ], 
@@ -900,12 +902,113 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-12-06", 
+                        "date": "2017-12-22", 
                         "dateType": "creation"
                     }
                 ]
             }, 
-            "associatedResource": [], 
+            "associatedResource": [
+                {
+                    "resourceType": [
+                        {
+                            "type": "Publication"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5a29cf0de4b03852baff8e4e", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Management of Aspen in a Changing Environment"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Management of Aspen in a Changing Environment"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Publication"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5a29cee0e4b03852baff8e49", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Fire regimes of quaking aspen in the Mountain West"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Fire regimes of quaking aspen in the Mountain West"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Presentation"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5a29cefbe4b03852baff8e4c", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Quaking Aspen Management: A Presentation by the Western Aspen Alliance"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Quaking Aspen Management: A Presentation by the Western Aspen Alliance"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Publication"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5a29cf28e4b03852baff8e50", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Fire modulates climate change response of simulated aspen distribution across topoclimatic gradients in a semi-arid montane landscape"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Fire modulates climate change response of simulated aspen distribution across topoclimatic gradients in a semi-arid montane landscape"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Publication"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5a29cf3de4b03852baff8e52", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "The Role of Fire in Aspen Ecology and Restoration"
+                    }, 
+                    "resourceCitation": {
+                        "title": "The Role of Fire in Aspen Ecology and Restoration"
+                    }
+                }
+            ], 
             "resourceDistribution": [
                 {
                     "distributor": [

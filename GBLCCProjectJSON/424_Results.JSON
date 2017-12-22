@@ -30,11 +30,11 @@
                     {
                         "postalCode": "89509", 
                         "city": "Reno", 
+                        "country": "USA", 
                         "addressType": [
                             "mailing", 
                             "physical"
                         ], 
-                        "country": "USA", 
                         "adminstrativeArea": "NV"
                     }
                 ], 
@@ -80,28 +80,28 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "US Forest Service", 
+                "name": "US Geological Survey", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mmanning@fs.fed.us"
+                        "uri": "mailto:aldridgec@usgs.gov"
                     }
                 ], 
-                "contactId": "G865", 
+                "contactId": "G835", 
                 "contactType": "Federal"
             }, 
             {
                 "isOrganization": false, 
-                "name": "Mary Manning", 
+                "name": "Cameron Aldridge", 
                 "memberOfOrganization": [
-                    "G865"
+                    "G835"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mmanning@fs.fed.us"
+                        "uri": "mailto:aldridgec@usgs.gov"
                     }
                 ], 
-                "contactId": "865", 
+                "contactId": "835", 
                 "contactType": "Federal"
             }, 
             {
@@ -185,6 +185,32 @@
                 "contactType": "Federal"
             }, 
             {
+                "isOrganization": true, 
+                "name": "US Forest Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mmanning@fs.fed.us"
+                    }
+                ], 
+                "contactId": "G865", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Mary Manning", 
+                "memberOfOrganization": [
+                    "G865"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mmanning@fs.fed.us"
+                    }
+                ], 
+                "contactId": "865", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": false, 
                 "name": "Bethany Bradley", 
                 "memberOfOrganization": [
@@ -197,32 +223,6 @@
                 ], 
                 "contactId": "848", 
                 "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "US Geological Survey", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:aldridgec@usgs.gov"
-                    }
-                ], 
-                "contactId": "G835", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Cameron Aldridge", 
-                "memberOfOrganization": [
-                    "G835"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:aldridgec@usgs.gov"
-                    }
-                ], 
-                "contactId": "835", 
-                "contactType": "Federal"
             }, 
             {
                 "isOrganization": false, 
@@ -304,13 +304,20 @@
                 ], 
                 "abstract": "FY2014\nAlthough the future of sage grouse depends on the future of sagebrush, we have limited ability to anticipate impacts of climate change on sagebrush populations. Current efforts to forecast sagebrush habitat typically rely on species distribution models (SDMs), which suffer from a variety of well-known weaknesses. However, by integrating SDMs with complementary research approaches, such as historical data analysis and mechanistic models, we can provide increased confidence in projections of habitat change. Our goal is to forecast the effect of climate change on the distribution and abundance of big sagebrush in order to inform conservation planning, and sage grouse management in particular, across the Intermountain West. The novelty of our work will be the synthesis of models based on spatial, temporal, and mechanistic relationships between climate and sagebrush cover. The project will culminate in a working group meeting bringing together land managers and researchers to draft management recommendations. We will take advantage of mechanisms already in place to efficiently disseminate this report to management agencies.", 
                 "citation": {
-                    "title": "Adler 2014 - Forecasting Changes in Sagebrush Distribution and Abundance Under Climate Change: Integration of Spatial, Temporal, and Mechanistic Models", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=424", 
-                            "name": "Project Report Page"
+                            "date": "2015-01-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "424", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "594c1411e4b062508e38543d", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -339,22 +346,22 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G865", 
+                                    "contactId": "G835", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Collaborator"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "865", 
+                                    "contactId": "835", 
                                     "organizationMembers": [
-                                        "G865"
+                                        "G835"
                                     ]
                                 }
                             ], 
-                            "role": "Collaborator"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -459,29 +466,29 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "848", 
-                                    "organizationMembers": [
-                                        "G955"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G835", 
+                                    "contactId": "G865", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "835", 
+                                    "contactId": "865", 
                                     "organizationMembers": [
-                                        "G835"
+                                        "G865"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "848", 
+                                    "organizationMembers": [
+                                        "G955"
                                     ]
                                 }
                             ], 
@@ -530,25 +537,15 @@
                             "role": "Collaborator"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Adler2014"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2015-01-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=424", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "424", 
-                            "namespace": "lcc:gb"
-                        }, 
-                        {
-                            "identifier": "594c1411e4b062508e38543d", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Forecasting Changes in Sagebrush Distribution and Abundance Under Climate Change: Integration of Spatial, Temporal, and Mechanistic Models"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -861,7 +858,7 @@
                                                 ], 
                                                 [
                                                     -119.95035539654275, 
-                                                    38.7803129780029
+                                                    38.780312978002904
                                                 ], 
                                                 [
                                                     -120.60397464645355, 
@@ -1185,7 +1182,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-12-06", 
+                        "date": "2017-12-22", 
                         "dateType": "creation"
                     }
                 ]

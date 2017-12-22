@@ -30,11 +30,11 @@
                     {
                         "postalCode": "89509", 
                         "city": "Reno", 
+                        "country": "USA", 
                         "addressType": [
                             "mailing", 
                             "physical"
                         ], 
-                        "country": "USA", 
                         "adminstrativeArea": "NV"
                     }
                 ], 
@@ -66,16 +66,56 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "282", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "351", 
                 "isOrganization": true, 
                 "name": "US Forest Service", 
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "282", 
                 "isOrganization": true, 
-                "name": "US Fish & Wildife Service", 
+                "name": "US Forest Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:keirith.snyder@ars.usda.gov"
+                    }
+                ], 
+                "contactId": "G779", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Keirith Snyder", 
+                "memberOfOrganization": [
+                    "G779"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:keirith.snyder@ars.usda.gov"
+                    }
+                ], 
+                "contactId": "779", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Jeanne Chambers", 
+                "memberOfOrganization": [
+                    "G779"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:jchambers@fs.fed.us"
+                    }
+                ], 
+                "contactId": "792", 
                 "contactType": "Federal"
             }, 
             {
@@ -132,46 +172,6 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "US Forest Service", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:jchambers@fs.fed.us"
-                    }
-                ], 
-                "contactId": "G792", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Jeanne Chambers", 
-                "memberOfOrganization": [
-                    "G792"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:jchambers@fs.fed.us"
-                    }
-                ], 
-                "contactId": "792", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Keirith Snyder", 
-                "memberOfOrganization": [
-                    "G792"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:keirith.snyder@ars.usda.gov"
-                    }
-                ], 
-                "contactId": "779", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": true, 
                 "name": "Desert Research Institute", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
@@ -222,16 +222,34 @@
                 ], 
                 "abstract": "FY2016\nThis project will develop a strategic approach for conservation of wet meadows and riparian ecosystems and the species they support that focuses on threats caused by natural and anthropogenic disturbance. It uses information on (1) the factors that affect wet meadow and riparian ecosystem resilience to both natural and human-caused disturbances at the scale of the watershed and meadow or riparian ecosystem, and (2) the distributions and population abundances of at risk species to determine focal areas for management. Maps of the relative resilience of watersheds and wet meadows are overlaid with data on at risk species and the predominant threats to facilitate this process. Decision matrices are developed based on the characteristics of watersheds, wet meadows, and riparian areas that allow managers to (1) evaluate their relative resilience to disturbance and capacity to support at risk species, and (2) determine appropriate management strategies. A process for rapidly assessing meadow ecosystem resilience is developed, and the approach is shared with managers through field tours and workshops.", 
                 "citation": {
-                    "title": "Chambers 2016 - A Multi-scale Resilience-based Framework for Restoring and Conserving Great Basin Wet Meadows and Riparian Ecosystems", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=429", 
-                            "name": "Project Report Page"
+                            "date": "2016-10-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "429", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "594c20a4e4b062508e385505", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "282", 
+                                    "organizationMembers": [
+                                        "282"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
                         {
                             "party": [
                                 {
@@ -246,9 +264,29 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "282", 
+                                    "contactId": "G779", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "779", 
                                     "organizationMembers": [
-                                        "282"
+                                        "G779"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "792", 
+                                    "organizationMembers": [
+                                        "G779"
                                     ]
                                 }
                             ], 
@@ -297,37 +335,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G792", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "792", 
-                                    "organizationMembers": [
-                                        "G792"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "779", 
-                                    "organizationMembers": [
-                                        "G792"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G844", 
                                     "organizationMembers": []
                                 }
@@ -346,25 +353,15 @@
                             "role": "Collaborator"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Chambers2016"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2016-10-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=429", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "429", 
-                            "namespace": "lcc:gb"
-                        }, 
-                        {
-                            "identifier": "594c20a4e4b062508e385505", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "A Multi-scale Resilience-based Framework for Restoring and Conserving Great Basin Wet Meadows and Riparian Ecosystems"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -613,7 +610,7 @@
                             "sourceId": "282", 
                             "currency": "USD", 
                             "amount": 99999.0, 
-                            "recipientId": "G792", 
+                            "recipientId": "G779", 
                             "matching": false
                         }
                     ], 
@@ -631,7 +628,7 @@
                             "sourceId": "351", 
                             "currency": "USD", 
                             "amount": 106808.0, 
-                            "recipientId": "G792", 
+                            "recipientId": "G779", 
                             "matching": true
                         }
                     ], 
@@ -683,7 +680,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-12-06", 
+                        "date": "2017-12-22", 
                         "dateType": "creation"
                     }
                 ]

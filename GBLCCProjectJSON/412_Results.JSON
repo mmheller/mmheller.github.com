@@ -30,11 +30,11 @@
                     {
                         "postalCode": "89509", 
                         "city": "Reno", 
+                        "country": "USA", 
                         "addressType": [
                             "mailing", 
                             "physical"
                         ], 
-                        "country": "USA", 
                         "adminstrativeArea": "NV"
                     }
                 ], 
@@ -682,13 +682,20 @@
                 ], 
                 "abstract": "FY2013\nThis project retrieves four years of data from over 200 temperature sensors nested within 28 sites across ~40 million hectares of the hydrographic Great Basin. The sensors span all major aspects and up to 700 m of elevation within sites, and occur in numerous management jurisdictions in 18 mountain ranges plus other areas not in ranges.\n\nThis project:\n\n- Quantifies the variability of climate at micro-, meso-, and macroscales across the Basin, and across diel, seasonal, and interannual periods.\n\n- Informs management and conservation efforts, in terms of helping calibrate and refine the climatic stage upon which all biological actors and efforts hinge (Beier and Brost 2010).\n\n- Feeds into other bioclimatic and wildlife studies seeking to describe climate and biotic responses to it.\n\nFY2017\nProject contributes to retrieval of 4 years of data from over 200 temperature sensors nested within 28 sites across ~40 million hectares (i.e., ~100M ac) of the hydrographic Great Basin. The sensors span all major aspects and up to 700 m of elevation within sites, and occur in numerous management jurisdictions in 18 mountain ranges plus other areas not in ranges. Given the paucity of high-elevation climate stations in a region dominated by mountains, the effort will help: a) quantify the variability of climate at micro-, meso-, and macroscales across the Basin (e.g., lapse rates, effect of aspect, existence of microclimatic refugia), and across diel, seasonal, and interannual periods; b) inform management and conservation efforts, in terms of helping calibrate and refine the climatic stage upon which all biological actors and efforts hinge (Beier and Brost 2010); e.g., PRISM dataset); and c) feed into other bioclimatic and wildlife studies seeking to describe climate and biotic responses to it. Retrieval activities are required in summer of 2017 before the units' batteries expire. Once the batteries expire, the units lose all data logged to date.\n\nFWS funds were used for the direct purchase of project hardware.", 
                 "citation": {
-                    "title": "Beever 2013 - Characterization of Montane Ecosystems, Their Microclimates, and Wildlife Distribution and Abundance Across the Hydrographic Great Basin", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=412", 
-                            "name": "Project Report Page"
+                            "date": "2013-05-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "412", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "53500abde4b02cd8cc402870", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -1373,25 +1380,15 @@
                             "role": "Contributor"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Beever2017"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2013-05-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=412", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "412", 
-                            "namespace": "lcc:gb"
-                        }, 
-                        {
-                            "identifier": "53500abde4b02cd8cc402870", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Characterization of Montane Ecosystems, Their Microclimates, and Wildlife Distribution and Abundance Across the Hydrographic Great Basin"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -1733,7 +1730,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-12-06", 
+                        "date": "2017-12-22", 
                         "dateType": "creation"
                     }
                 ]

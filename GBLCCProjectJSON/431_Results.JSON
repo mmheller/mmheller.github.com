@@ -30,11 +30,11 @@
                     {
                         "postalCode": "89509", 
                         "city": "Reno", 
+                        "country": "USA", 
                         "addressType": [
                             "mailing", 
                             "physical"
                         ], 
-                        "country": "USA", 
                         "adminstrativeArea": "NV"
                     }
                 ], 
@@ -66,16 +66,16 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "389", 
+                "contactId": "560", 
                 "isOrganization": true, 
-                "name": "Bureau of Land Management", 
+                "name": "US Fish & Wildife Service", 
                 "contactType": "Federal"
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "560", 
+                "contactId": "389", 
                 "isOrganization": true, 
-                "name": "US Fish & Wildife Service", 
+                "name": "Bureau of Land Management", 
                 "contactType": "Federal"
             }, 
             {
@@ -156,27 +156,23 @@
                 ], 
                 "abstract": "FY2015\nThe Great Basin Region, which covers much of Nevada, and portions of California, Oregon, Idaho, and Utah, managers are already confronting a changing climate and are beginning to make management decisions despite uncertainty in how climate change effects will manifest in the region. To support decision making, the Great Basin Landscape Conservation Cooperative (LCC) and the National Oceanic and Atmospheric Administration (NOAA) Regional Integrated Science Assessment Program (RISA) funded this project to explore how two scenario planning approaches might be used effectively with existing management planning processes and data sources and how to begin prioritizing adaptation strategies. The two approaches used in this project are Adaptation for Conservation Targets (ACT) and Strategic Scenario Planning (SSP).", 
                 "citation": {
-                    "title": "Brown 2015 - Planning for the future of the Great Basin: Using spatially-based planning to inform climate resiliency planning and adaptation strategies", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=431", 
-                            "name": "Project Report Page"
+                            "date": "2015-10-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "431", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "55fc8394e4b05d6c4e502b20", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
-                        {
-                            "party": [
-                                {
-                                    "contactId": "389", 
-                                    "organizationMembers": [
-                                        "389"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
                         {
                             "party": [
                                 {
@@ -191,11 +187,22 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "389", 
+                                    "organizationMembers": [
+                                        "389"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G773", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
@@ -206,7 +213,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
@@ -229,25 +236,15 @@
                             "role": "Fiscal Agent"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Brown2015"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2015-10-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=431", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "431", 
-                            "namespace": "lcc:gb"
-                        }, 
-                        {
-                            "identifier": "55fc8394e4b05d6c4e502b20", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Planning for the future of the Great Basin: Using spatially-based planning to inform climate resiliency planning and adaptation strategies"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -534,7 +531,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-12-06", 
+                        "date": "2017-12-22", 
                         "dateType": "creation"
                     }
                 ]

@@ -30,11 +30,11 @@
                     {
                         "postalCode": "89509", 
                         "city": "Reno", 
+                        "country": "USA", 
                         "addressType": [
                             "mailing", 
                             "physical"
                         ], 
-                        "country": "USA", 
                         "adminstrativeArea": "NV"
                     }
                 ], 
@@ -77,31 +77,17 @@
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:elizabeth.marino@osucascades.edu"
+                        "uri": "mailto:drsamzs@yahoo.com"
                     }
                 ], 
-                "contactId": "G836", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Elizabeth Marino", 
-                "memberOfOrganization": [
-                    "G836"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:elizabeth.marino@osucascades.edu"
-                    }
-                ], 
-                "contactId": "836", 
+                "contactId": "G820", 
                 "contactType": "Academic"
             }, 
             {
                 "isOrganization": false, 
                 "name": "Samantha Chisholm Hatfield", 
                 "memberOfOrganization": [
-                    "G836"
+                    "G820"
                 ], 
                 "onlineResource": [
                     {
@@ -113,9 +99,23 @@
             }, 
             {
                 "isOrganization": false, 
+                "name": "Elizabeth Marino", 
+                "memberOfOrganization": [
+                    "G820"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:elizabeth.marino@osucascades.edu"
+                    }
+                ], 
+                "contactId": "836", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
                 "name": "Philip Mote", 
                 "memberOfOrganization": [
-                    "G836"
+                    "G820"
                 ], 
                 "onlineResource": [
                     {
@@ -151,13 +151,20 @@
                 ], 
                 "abstract": "FY2014\nThis project will explore tribal cultural relationships and practices connected to resources and other aspects of nature that are potentially affected by climate change. Tribes are disproportionately affected by climate change because their economies, traditions, and even identity are heavily reliant on place-based natural resources, and changes in these resources may result in associated shifts and adaptations in tribal cultural traditions. Dr. Samantha Chisholm Hatfield, an enrolled member of the Confederated Tribes of Siletz and a cultural anthropologist, will interview elders with two tribes in the Great Basin in order to learn how a changing environment has affected aspects of tribal culture. Observations by tribal elders should lead to better understanding of how the nuances and dimensions of tribal culture in the Great Basin are affected by climate change, what contributes to vulnerability to a changing climate, and the adaptive capacity of these communities to ecological shifts. This project leverages a similar project just being completed, which was funded by the Northwest Climate Science Center, in which Dr. Chisholm Hatfield interviewed elders of three Northwest tribes. She described their primary cultural responses to climate change, which led to some surprising findings.", 
                 "citation": {
-                    "title": "Mote 2014 - Understanding Native Cultural Dimensions of Climate Change in the Great Basin", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=435", 
-                            "name": "Project Report Page"
+                            "date": "2015-01-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "435", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "594c3278e4b062508e385671", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -175,19 +182,8 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G836", 
+                                    "contactId": "G820", 
                                     "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "836", 
-                                    "organizationMembers": [
-                                        "G836"
-                                    ]
                                 }
                             ], 
                             "role": "Collaborator"
@@ -197,7 +193,18 @@
                                 {
                                     "contactId": "820", 
                                     "organizationMembers": [
-                                        "G836"
+                                        "G820"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "836", 
+                                    "organizationMembers": [
+                                        "G820"
                                     ]
                                 }
                             ], 
@@ -208,32 +215,22 @@
                                 {
                                     "contactId": "795", 
                                     "organizationMembers": [
-                                        "G836"
+                                        "G820"
                                     ]
                                 }
                             ], 
                             "role": "Fiscal Agent"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Mote2014"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2015-01-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=435", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "435", 
-                            "namespace": "lcc:gb"
-                        }, 
-                        {
-                            "identifier": "594c3278e4b062508e385671", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Understanding Native Cultural Dimensions of Climate Change in the Great Basin"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -246,7 +243,7 @@
                         "geographicExtent": [
                             {
                                 "boundingBox": {
-                                    "northLatitude": 38.973421000459595, 
+                                    "northLatitude": 38.97342100045959, 
                                     "westLongitude": -115.72684499972904, 
                                     "southLatitude": 37.1242140633392, 
                                     "eastLongitude": -113.71541695623696
@@ -410,7 +407,7 @@
                                                 ], 
                                                 [
                                                     -115.71184399968293, 
-                                                    38.93113400021545
+                                                    38.931134000215444
                                                 ], 
                                                 [
                                                     -115.70730500017646, 
@@ -498,7 +495,7 @@
                                                 ], 
                                                 [
                                                     -115.72684499972904, 
-                                                    38.960993000161025
+                                                    38.96099300016102
                                                 ], 
                                                 [
                                                     -115.72138899927874, 
@@ -514,7 +511,7 @@
                                                 ], 
                                                 [
                                                     -115.71600800025932, 
-                                                    38.973421000459595
+                                                    38.97342100045959
                                                 ], 
                                                 [
                                                     -115.71134699951457, 
@@ -758,7 +755,7 @@
                             "sourceId": "389", 
                             "currency": "USD", 
                             "amount": 50000.0, 
-                            "recipientId": "G836", 
+                            "recipientId": "G820", 
                             "matching": false
                         }
                     ], 
@@ -810,7 +807,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-12-06", 
+                        "date": "2017-12-22", 
                         "dateType": "creation"
                     }
                 ]

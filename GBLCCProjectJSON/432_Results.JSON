@@ -30,11 +30,11 @@
                     {
                         "postalCode": "89509", 
                         "city": "Reno", 
+                        "country": "USA", 
                         "addressType": [
                             "mailing", 
                             "physical"
                         ], 
-                        "country": "USA", 
                         "adminstrativeArea": "NV"
                     }
                 ], 
@@ -70,58 +70,6 @@
                 "isOrganization": true, 
                 "name": "Bureau of Land Management", 
                 "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "Western Regional Climate Center, Desert Research Institute", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:tim.brown@dri.edu"
-                    }
-                ], 
-                "contactId": "G773", 
-                "contactType": "NGO"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Tim Brown", 
-                "memberOfOrganization": [
-                    "G773"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:tim.brown@dri.edu"
-                    }
-                ], 
-                "contactId": "773", 
-                "contactType": "NGO"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "Desert Research Institute", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:tamara.wall@dri.edu"
-                    }
-                ], 
-                "contactId": "G797", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Tamara Wall", 
-                "memberOfOrganization": [
-                    "G797"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:tamara.wall@dri.edu"
-                    }
-                ], 
-                "contactId": "797", 
-                "contactType": "Academic"
             }, 
             {
                 "isOrganization": true, 
@@ -169,18 +117,70 @@
                 "memberOfOrganization": [
                     "G973"
                 ], 
+                "contactId": "975", 
+                "isOrganization": false, 
+                "name": "Holly Hartman", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Western Regional Climate Center, Desert Research Institute", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:tim.brown@dri.edu"
+                    }
+                ], 
+                "contactId": "G773", 
+                "contactType": "NGO"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Tim Brown", 
+                "memberOfOrganization": [
+                    "G773"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:tim.brown@dri.edu"
+                    }
+                ], 
+                "contactId": "773", 
+                "contactType": "NGO"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G973"
+                ], 
                 "contactId": "974", 
                 "isOrganization": false, 
                 "name": "Julie Brugger", 
                 "contactType": "Academic"
             }, 
             {
-                "memberOfOrganization": [
-                    "G973"
+                "isOrganization": true, 
+                "name": "Desert Research Institute", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:tamara.wall@dri.edu"
+                    }
                 ], 
-                "contactId": "975", 
+                "contactId": "G797", 
+                "contactType": "Academic"
+            }, 
+            {
                 "isOrganization": false, 
-                "name": "Holly Hartman", 
+                "name": "Tamara Wall", 
+                "memberOfOrganization": [
+                    "G797"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:tamara.wall@dri.edu"
+                    }
+                ], 
+                "contactId": "797", 
                 "contactType": "Academic"
             }
         ], 
@@ -209,13 +209,20 @@
                 ], 
                 "abstract": "FY2015\nThe Great Basin Region, which covers much of Nevada, and portions of California, Oregon, Idaho, and Utah, managers are already confronting a changing climate and are beginning to make management decisions despite uncertainty in how climate change effects will manifest in the region. To support decision making, the Great Basin Landscape Conservation Cooperative (LCC) and the National Oceanic and Atmospheric Administration (NOAA) Regional Integrated Science Assessment Program (RISA) funded this project to explore how two scenario planning approaches might be used effectively with existing management planning processes and data sources and how to begin prioritizing adaptation strategies. The two approaches used in this project are Adaptation for Conservation Targets (ACT) and Strategic Scenario Planning (SSP).", 
                 "citation": {
-                    "title": "Brown 2015  - Scenario Planning in the Great Basin Region: Considering climate change impacts and management strategies for the future.", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=432", 
-                            "name": "Project Report Page"
+                            "date": "2015-10-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "432", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "594c2c3ae4b062508e3855dc", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -229,46 +236,6 @@
                                 }
                             ], 
                             "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G773", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "773", 
-                                    "organizationMembers": [
-                                        "G773"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G797", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "797", 
-                                    "organizationMembers": [
-                                        "G797"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -313,6 +280,37 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "975", 
+                                    "organizationMembers": [
+                                        "G973"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G773", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "773", 
+                                    "organizationMembers": [
+                                        "G773"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "974", 
                                     "organizationMembers": [
                                         "G973"
@@ -324,34 +322,33 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "975", 
+                                    "contactId": "G797", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "797", 
                                     "organizationMembers": [
-                                        "G973"
+                                        "G797"
                                     ]
                                 }
                             ], 
-                            "role": "Collaborator"
+                            "role": "Principal Investigator"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Brown2015"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2015-10-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=432", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "432", 
-                            "namespace": "lcc:gb"
-                        }, 
-                        {
-                            "identifier": "594c2c3ae4b062508e3855dc", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Scenario Planning in the Great Basin Region: Considering climate change impacts and management strategies for the future."
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -596,7 +593,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-12-06", 
+                        "date": "2017-12-22", 
                         "dateType": "creation"
                     }
                 ]

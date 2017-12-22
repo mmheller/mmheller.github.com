@@ -30,11 +30,11 @@
                     {
                         "postalCode": "89509", 
                         "city": "Reno", 
+                        "country": "USA", 
                         "addressType": [
                             "mailing", 
                             "physical"
                         ], 
-                        "country": "USA", 
                         "adminstrativeArea": "NV"
                     }
                 ], 
@@ -172,13 +172,20 @@
                 ], 
                 "abstract": "FY2015\nResearchers conducted interviews with sagebrush land managers from Oregon, Idaho and Utah to identify the most relevant variables, threats and management strategies relevant to their specific sagebrush management areas. Managers were also asked to assess a series of web-based climate tools, providing feedback about what features of the tools were most intuitive, interesting and useful, or complicated, unnecessary, and in need of revision. Results from the first phase of the project suggested several directions to improve existing climate tools.", 
                 "citation": {
-                    "title": "Bachelet 2015 - Developing Usable Climate Tools for Land Managers", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=416", 
-                            "name": "Project Report Page"
+                            "date": "2015-03-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "416", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "594bf8c0e4b062508e385272", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -265,25 +272,15 @@
                             "role": "Collaborator"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Bachelet2015"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2015-03-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=416", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "416", 
-                            "namespace": "lcc:gb"
-                        }, 
-                        {
-                            "identifier": "594bf8c0e4b062508e385272", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Developing Usable Climate Tools for Land Managers"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -576,7 +573,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-12-06", 
+                        "date": "2017-12-22", 
                         "dateType": "creation"
                     }
                 ]

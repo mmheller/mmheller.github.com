@@ -30,11 +30,11 @@
                     {
                         "postalCode": "89509", 
                         "city": "Reno", 
+                        "country": "USA", 
                         "addressType": [
                             "mailing", 
                             "physical"
                         ], 
-                        "country": "USA", 
                         "adminstrativeArea": "NV"
                     }
                 ], 
@@ -66,13 +66,6 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "351", 
-                "isOrganization": true, 
-                "name": "US Forest Service", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "560", 
                 "isOrganization": true, 
                 "name": "US Fish & Wildife Service", 
@@ -83,6 +76,13 @@
                 "contactId": "282", 
                 "isOrganization": true, 
                 "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "351", 
+                "isOrganization": true, 
+                "name": "US Forest Service", 
                 "contactType": "Federal"
             }, 
             {
@@ -179,27 +179,23 @@
                 ], 
                 "abstract": "FY2016\nReview the existing literature, summarizing what is known about the scale and prevalence of local adaptation in the Great Basin and review current practices for determining seed transfer zones, describing benefits and limitations of different approaches. Through these two reviews, we will identify gaps in knowledge and opportunities for addressing these gaps, and determine best-practices for the construction of high quality seed transfer guidelines in a rapid and efficient manner. We propose to bring together a wide group of partners to achieve these goals, with two working group meetings proposed for this project. Deliverables include two peer-reviewed publications (existing knowledge, recommendation of best practices), presentations of results at the annual Great Basin Consortium and Great Basin Native Plant Project conferences, and a document identifying priorities for future joint projects aimed at increasing success of restoration in these arid, invaded systems of the Great Basin.", 
                 "citation": {
-                    "title": "Kilkenny 2016 - What Do We Know About Seed Transfer in the Great Basin? A Synthesis of Existing Knowledge and Identification of Knowledge Gaps", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=441", 
-                            "name": "Project Report Page"
+                            "date": "2016-10-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "441", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "594c3c0ce4b062508e38577f", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
-                        {
-                            "party": [
-                                {
-                                    "contactId": "351", 
-                                    "organizationMembers": [
-                                        "351"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
                         {
                             "party": [
                                 {
@@ -225,11 +221,22 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "351", 
+                                    "organizationMembers": [
+                                        "351"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G796", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -240,7 +247,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -249,7 +256,7 @@
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -260,7 +267,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -283,25 +290,15 @@
                             "role": "Collaborator"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Kilkenny2016"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2016-10-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=441", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "441", 
-                            "namespace": "lcc:gb"
-                        }, 
-                        {
-                            "identifier": "594c3c0ce4b062508e38577f", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "What Do We Know About Seed Transfer in the Great Basin? A Synthesis of Existing Knowledge and Identification of Knowledge Gaps"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -574,7 +571,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-12-06", 
+                        "date": "2017-12-22", 
                         "dateType": "creation"
                     }
                 ]

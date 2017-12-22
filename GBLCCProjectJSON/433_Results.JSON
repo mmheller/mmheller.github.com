@@ -30,11 +30,11 @@
                     {
                         "postalCode": "89509", 
                         "city": "Reno", 
+                        "country": "USA", 
                         "addressType": [
                             "mailing", 
                             "physical"
                         ], 
-                        "country": "USA", 
                         "adminstrativeArea": "NV"
                     }
                 ], 
@@ -66,13 +66,6 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "389", 
-                "isOrganization": true, 
-                "name": "Bureau of Land Management", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "560", 
                 "isOrganization": true, 
                 "name": "US Fish & Wildife Service", 
@@ -80,14 +73,39 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G964", 
+                "contactId": "389", 
+                "isOrganization": true, 
+                "name": "Bureau of Land Management", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G965", 
                 "isOrganization": true, 
                 "name": "SWCA Consultants", 
                 "contactType": "Private"
             }, 
             {
                 "memberOfOrganization": [
-                    "G964"
+                    "G965"
+                ], 
+                "contactId": "965", 
+                "isOrganization": false, 
+                "name": "Nick Jones", 
+                "contactType": "Private"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G965"
+                ], 
+                "contactId": "966", 
+                "isOrganization": false, 
+                "name": "Tim O'Neil", 
+                "contactType": "Private"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G965"
                 ], 
                 "contactId": "964", 
                 "isOrganization": false, 
@@ -122,29 +140,11 @@
             }, 
             {
                 "memberOfOrganization": [
-                    "G964"
+                    "G965"
                 ], 
                 "contactId": "967", 
                 "isOrganization": false, 
                 "name": "Rick Griffin", 
-                "contactType": "Private"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G964"
-                ], 
-                "contactId": "966", 
-                "isOrganization": false, 
-                "name": "Tim O'Neil", 
-                "contactType": "Private"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G964"
-                ], 
-                "contactId": "965", 
-                "isOrganization": false, 
-                "name": "Nick Jones", 
                 "contactType": "Private"
             }
         ], 
@@ -173,27 +173,23 @@
                 ], 
                 "abstract": "FY2014\nThe purpose of this project is to develop a series of high resolution (1:24,000 scale) digital wetland maps and associated data to support conservation planning in Nevada.\n\nFY2015\nThe purpose of this project is to develop a series of high resolution (1:24,000 scale) digital wetland maps and associated data to support conservation planning in Nevada.", 
                 "citation": {
-                    "title": "Blok 2014 - Strategic High-resolution Wetland Mapping in Greater Sage-grouse Biologically Significant Areas of Nevada", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=433", 
-                            "name": "Project Report Page"
+                            "date": "2014-10-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "433", 
+                            "namespace": "lcc:gb"
+                        }, 
+                        {
+                            "identifier": "594c2f55e4b062508e38562d", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
-                        {
-                            "party": [
-                                {
-                                    "contactId": "389", 
-                                    "organizationMembers": [
-                                        "389"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
                         {
                             "party": [
                                 {
@@ -208,8 +204,41 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G964", 
+                                    "contactId": "389", 
+                                    "organizationMembers": [
+                                        "389"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G965", 
                                     "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "965", 
+                                    "organizationMembers": [
+                                        "G965"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "966", 
+                                    "organizationMembers": [
+                                        "G965"
+                                    ]
                                 }
                             ], 
                             "role": "Collaborator"
@@ -219,7 +248,7 @@
                                 {
                                     "contactId": "964", 
                                     "organizationMembers": [
-                                        "G964"
+                                        "G965"
                                     ]
                                 }
                             ], 
@@ -250,54 +279,22 @@
                                 {
                                     "contactId": "967", 
                                     "organizationMembers": [
-                                        "G964"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "966", 
-                                    "organizationMembers": [
-                                        "G964"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "965", 
-                                    "organizationMembers": [
-                                        "G964"
+                                        "G965"
                                     ]
                                 }
                             ], 
                             "role": "Collaborator"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Blok2015"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2014-10-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=433", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "433", 
-                            "namespace": "lcc:gb"
-                        }, 
-                        {
-                            "identifier": "594c2f55e4b062508e38562d", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Strategic High-resolution Wetland Mapping in Greater Sage-grouse Biologically Significant Areas of Nevada"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -623,7 +620,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-12-06", 
+                        "date": "2017-12-22", 
                         "dateType": "creation"
                     }
                 ]
