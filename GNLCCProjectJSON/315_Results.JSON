@@ -158,13 +158,20 @@
                 ], 
                 "abstract": "LC MAP, the Landscape Conservation Management and Analysis Portal, allows GNLCC partners to discover, use, develop, manage, and distribute datasets that address LCC priority issues. In FY11, this effort will extend LCMAP to allow users to generate dynamic interactive map viewers, modeled output, and web services for use in ArcExplorer and other client tools. In addition, the project will build the LCMAP Phenology Service, adding ESRI image services to the application suite and allowing GIS analysts and modelers access to a full suite of phenology data for use in ArcMap and other client tools.\n\nThe set of data development and presentation tools planned will allow GIS analysts in the GNLCC community to work with multiple themes inside the GNLCC geospatial portal. Users will be able to work with phenology imagery layers, define presentation options, and deliver on-line viewers that can be used by the GNLCC community at large and, ultimately, the public.\n\nFY2011\nObjectives:\n \n1. Engineer a set of spatial tools to allow GNLCC GIS analysts to manage visualization options and data packaging for the GNLCC project geodatabase; \n2. Expose the NASA multi-year phenology imagery layers to ArcMap and ArcExplorer users in a format that allows for analysis of the data on local computers; \n3. Present project geodatabase and visualization packages to other community viewers and decision support systems; \n4. Provide metadata development tools for these combined map services, allowing users to track the origin of the visualizations, and to test the data behind the analysis; and, \n5. Document methods and approach for application to other projects.", 
                 "citation": {
-                    "title": "Great Northern Landscape Conservation Cooperative Geospatial Data Portal Extension: Implementing a GNLCC Spatial Toolkit and Phenology Server", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://greatnorthernlcc.org/gnlcc_projects/prj_report.html?PRJ_ID=315", 
-                            "name": "Project Report Page"
+                            "date": "2011-01-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "315", 
+                            "namespace": "lcc:gn"
+                        }, 
+                        {
+                            "identifier": "52f29cdbe4b0a6f0bd498cd9", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -233,25 +240,15 @@
                             "role": "Collaborator"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Kern2011"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2011-01-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://greatnorthernlcc.org/gnlcc_projects/prj_report.html?PRJ_ID=315", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "315", 
-                            "namespace": "lcc:gn"
-                        }, 
-                        {
-                            "identifier": "52f29cdbe4b0a6f0bd498cd9", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Great Northern Landscape Conservation Cooperative Geospatial Data Portal Extension: Implementing a GNLCC Spatial Toolkit and Phenology Server"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -2143,9 +2140,6 @@
                                 "keyword": "Applications and Tools"
                             }, 
                             {
-                                "keyword": "Applications and Tools"
-                            }, 
-                            {
                                 "keyword": "Datasets/Database"
                             }
                         ]
@@ -2175,10 +2169,10 @@
                         }, 
                         "keyword": [
                             {
-                                "keyword": "Data Management and Integration"
+                                "keyword": "Decision Support"
                             }, 
                             {
-                                "keyword": "Decision Support"
+                                "keyword": "Data Management and Integration"
                             }
                         ]
                     }, 
@@ -2219,14 +2213,20 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": "GNLCC"
+                                "keyword": " Wyoming"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Colorado"
@@ -2235,30 +2235,9 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " Idaho"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Location Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " Montana"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Location Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " Oregon"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " Utah"
@@ -2267,6 +2246,9 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " Washington"
@@ -2275,22 +2257,53 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": " Wyoming"
+                                "keyword": " Oregon"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "GNLCC"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " Montana"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " Idaho"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": "CO-2"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " CO-3"
@@ -2299,6 +2312,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " ID-1"
@@ -2307,22 +2323,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " ID-2"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " MT-1"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " OR-2"
@@ -2331,14 +2334,20 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": " UT-1"
+                                "keyword": " MT-1"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " WA-1"
@@ -2347,22 +2356,31 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": " WA-2"
+                                "keyword": "CO-2"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": " WA-3"
+                                "keyword": " UT-1"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " WA-4"
@@ -2371,6 +2389,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " WA-5"
@@ -2379,6 +2400,42 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " WA-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " WA-3"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " ID-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " WA-8"
@@ -2387,6 +2444,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " WY-1"
@@ -2396,11 +2456,6 @@
                     {
                         "keywordType": "Great Northern LCC Conservation Targets", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Conservation Targets"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Conservation Targets thesaurus"
                         }, 
                         "keyword": [
@@ -2412,11 +2467,6 @@
                     {
                         "keywordType": "Great Northern LCC Ecotypic Areas", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Ecotypic Areas"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Ecotypic Areas thesaurus"
                         }, 
                         "keyword": [
@@ -2437,11 +2487,6 @@
                     {
                         "keywordType": "Great Northern LCC Goals", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Goals"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Goals thesaurus"
                         }, 
                         "keyword": [
@@ -2462,11 +2507,6 @@
                     {
                         "keywordType": "Great Northern LCC Stressors", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Stressors"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Stressors thesaurus"
                         }, 
                         "keyword": [
@@ -2478,11 +2518,6 @@
                     {
                         "keywordType": "States", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_States"
-                                }
-                            ], 
                             "title": "Custom States thesaurus"
                         }, 
                         "keyword": [
@@ -2615,7 +2650,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-28", 
+                        "date": "2018-01-04", 
                         "dateType": "creation"
                     }
                 ]

@@ -267,13 +267,20 @@
                 ], 
                 "abstract": "Defenders staff, contractors and Great Northern Landscape Conservation Cooperative partners will build a portal on the Conservation Registry to visualize landscape scale plans and conservation projects that address the priorities of the program. The portal will integrate with GN LCCs existing project management tool, LC Map, to spatially display plans within the geographic area of the LCC, provide information about the plans, and link to planning documents. services and/or data imports will be programmed to facilitate efficient transfer of project data from LC Map and other agencies and organizations into the Registry.\n\nFY2012\nObjectives:\n\n Coordination with Heart of the Rockies (HotR) staff to identify focal area, target data and scale of project and content and functionality needs of Conservation Registry (CR) portal\n Outreach and coordination with the selected agency (TBA): identify agency needs and requirements; develop MOUs, policy coordination; evaluate of available data; create update schedule between agency and CR\n Development of technical infrastructure: Create a portal in the CR; database interpretation, crosswalking, etc.; data harvest and quality control\n Create workplan documentation\n Test the concept: demonstrate broader application: demonstrate expansion of pilot project; show success of pilot project; address policy and technical limitations, security issues; identify technical needs and requirements; recommend next steps", 
                 "citation": {
-                    "title": "Using the Conservation Registry as a visualization tool for the Great Northern\nLandscape Conservation Cooperative", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://greatnorthernlcc.org/gnlcc_projects/prj_report.html?PRJ_ID=328", 
-                            "name": "Project Report Page"
+                            "date": "2012-08-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "328", 
+                            "namespace": "lcc:gn"
+                        }, 
+                        {
+                            "identifier": "530cff68e4b08f991722dcdb", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -420,25 +427,15 @@
                             "role": "Collaborator"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Vickerman2012"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2012-08-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://greatnorthernlcc.org/gnlcc_projects/prj_report.html?PRJ_ID=328", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "328", 
-                            "namespace": "lcc:gn"
-                        }, 
-                        {
-                            "identifier": "530cff68e4b08f991722dcdb", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Using the Conservation Registry as a visualization tool for the Great Northern\nLandscape Conservation Cooperative"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -1982,31 +1979,18 @@
                         }, 
                         "keyword": [
                             {
-                                "keyword": "Conservation NGOs"
+                                "keyword": "Academics & scientific researchers"
                             }, 
                             {
-                                "keyword": "Academics & scientific researchers"
+                                "keyword": "Conservation NGOs"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": "High Divide"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Location Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": "Crown of the Continent"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Greater Yellowstone Ecosystem (GYE)"
@@ -2015,22 +1999,9 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": "Idaho"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Location Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " Montana"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " Oregon"
@@ -2039,6 +2010,20 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "High Divide"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " Wyoming"
@@ -2046,23 +2031,43 @@
                         ]
                     }, 
                     {
-                        "keywordType": "Federal Congressional Districts", 
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": "ID-1"
+                                "keyword": "Crown of the Continent"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " Montana"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Idaho"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " ID-2"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " MT-1"
@@ -2071,6 +2076,20 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " WY-1"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " OR-2"
@@ -2079,20 +2098,29 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": " WY-1"
+                                "keyword": "ID-1"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " ID-2"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Great Northern LCC Conservation Targets", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Conservation Targets"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Conservation Targets thesaurus"
                         }, 
                         "keyword": [
@@ -2104,11 +2132,6 @@
                     {
                         "keywordType": "Great Northern LCC Ecotypic Areas", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Ecotypic Areas"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Ecotypic Areas thesaurus"
                         }, 
                         "keyword": [
@@ -2120,11 +2143,6 @@
                     {
                         "keywordType": "Great Northern LCC Goals", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Goals"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Goals thesaurus"
                         }, 
                         "keyword": [
@@ -2136,11 +2154,6 @@
                     {
                         "keywordType": "Great Northern LCC Stressors", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Stressors"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Stressors thesaurus"
                         }, 
                         "keyword": [
@@ -2152,11 +2165,6 @@
                     {
                         "keywordType": "States", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_States"
-                                }
-                            ], 
                             "title": "Custom States thesaurus"
                         }, 
                         "keyword": [
@@ -2265,7 +2273,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-28", 
+                        "date": "2018-01-04", 
                         "dateType": "creation"
                     }
                 ]

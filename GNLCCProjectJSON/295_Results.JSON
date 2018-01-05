@@ -123,13 +123,20 @@
                 ], 
                 "abstract": "(NWI) protocols to provide complete NWI coverage for the state of Idaho. Where hard copy maps are unavailable, habitat will be interpreted and digital data will be completed by contractors/cooperators.\n\nMain goal is to develop digital data compliant with NWI protocol for wetlands and riparian habitats in Montana and Idaho. Existing hard copy maps will be digitized according to standard NWI protocols to provide complete NWI coverage for the state of Idaho. Where hard copy maps are unavailable, habitat will be interpreted and digital data will be completed by contractors/cooperators.", 
                 "citation": {
-                    "title": "National Wetlands Inventory for Idaho", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://greatnorthernlcc.org/gnlcc_projects/prj_report.html?PRJ_ID=295", 
-                            "name": "Project Report Page"
+                            "date": "2010-09-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "295", 
+                            "namespace": "lcc:gn"
+                        }, 
+                        {
+                            "identifier": "530cf3e0e4b08f991722dc9a", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -165,25 +172,15 @@
                             "role": "Principal Investigator"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Bon2010"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2010-09-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://greatnorthernlcc.org/gnlcc_projects/prj_report.html?PRJ_ID=295", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "295", 
-                            "namespace": "lcc:gn"
-                        }, 
-                        {
-                            "identifier": "530cf3e0e4b08f991722dc9a", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "National Wetlands Inventory for Idaho"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -1747,15 +1744,18 @@
                                 "keyword": "Academics & scientific researchers"
                             }, 
                             {
-                                "keyword": "Federal resource managers"
+                                "keyword": "Other"
                             }, 
                             {
-                                "keyword": "Other"
+                                "keyword": "Federal resource managers"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Great Northern LCC Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "NWI"
@@ -1764,6 +1764,20 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " Wyoming"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Portions of Idaho"
@@ -1772,30 +1786,9 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": "Idaho"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Location Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " Montana"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Location Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " Oregon"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " Utah"
@@ -1804,6 +1797,9 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " Washington"
@@ -1812,14 +1808,42 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": " Wyoming"
+                                "keyword": " Oregon"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " Montana"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Idaho"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "ID-1"
@@ -1828,22 +1852,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " ID-2"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " MT-1"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " OR-2"
@@ -1852,6 +1863,31 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " MT-1"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " ID-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " UT-1"
@@ -1860,6 +1896,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " WA-5"
@@ -1868,6 +1907,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " WY-1"
@@ -1877,11 +1919,6 @@
                     {
                         "keywordType": "Great Northern LCC Conservation Targets", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Conservation Targets"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Conservation Targets thesaurus"
                         }, 
                         "keyword": [
@@ -1893,11 +1930,6 @@
                     {
                         "keywordType": "Great Northern LCC Ecotypic Areas", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Ecotypic Areas"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Ecotypic Areas thesaurus"
                         }, 
                         "keyword": [
@@ -1909,11 +1941,6 @@
                     {
                         "keywordType": "Great Northern LCC Goals", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Goals"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Goals thesaurus"
                         }, 
                         "keyword": [
@@ -1928,11 +1955,6 @@
                     {
                         "keywordType": "Great Northern LCC Stressors", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Stressors"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Stressors thesaurus"
                         }, 
                         "keyword": [
@@ -1947,11 +1969,6 @@
                     {
                         "keywordType": "States", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_States"
-                                }
-                            ], 
                             "title": "Custom States thesaurus"
                         }, 
                         "keyword": [
@@ -2057,7 +2074,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-28", 
+                        "date": "2018-01-04", 
                         "dateType": "creation"
                     }
                 ]

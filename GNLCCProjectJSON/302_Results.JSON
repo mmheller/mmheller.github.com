@@ -163,13 +163,20 @@
                 ], 
                 "abstract": "WGFD has a quantity of GPS-based animal movement data available for processing. In order to fully integrate this data into existing statewide migration route data layers and/or to use it to develop modeled migration corridor data layers, it must be reviewed, organized appropriately, analyzed, modeled and finally structured to allow seamless integration. The objective of this proposal is to review and examine the data, organize it meaningfully, and present it initially in combination with existing migration routes in order to represent generalized big game migration corridors across the landscapes of Wyoming. This is anticipated as a \"first look\" product, and serve as a basis for future work to more fully analyze and model the data. This initial product will help fulfill the representation of Tier 1 Category 4 in Wyoming's DSS/CHAT (specifically named WISDOM, the Wyoming Interagency Spatial Database and Online Management System).\n\nFY2010\nObjectives:\n-Data integration needsidentify and prioritize geospatial data best suited for seamless integration across state (ID and MT) lines\n-Geospatial data compatibility potentialexamine the underlying tabular data formats, attributes, etc and assess the potential compatibility between like data layers\n-Data generalization protocolsconsider how data can be generalized to meet the needs of pilot DSSs as well as to facilitate seamless integration across state lines\n\nFY2012\nObjectives:\n\nWGFD has a quantity of GPS-based animal movement data available for processing. In order to fully integrate this data into existing statewide migration route data layers and/or to use it to develop modeled migration corridor data layers, it must be reviewed, organized appropriately, analyzed, modeled and finally structured to allow seamless integration. The objective of this proposal is to review and examine the data, organize it meaningfully, and present it initially in combination with existing migration routes in order to represent generalized big game migration corridors across the landscapes of Wyoming. This is anticipated as a \"first look\" product, and serve as a basis for future work to more fully analyze and model the data. This initial product will help fulfill the representation of Tier 1 Category 4 in Wyoming's DSS/CHAT (specifically named WISDOM, the Wyoming Interagency Spatial Database and Online Management System).", 
                 "citation": {
-                    "title": "State of Wyoming Geospatial Data Management, Information Sharing and Preparation for Decision Support System Development - Migration Corridors", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://greatnorthernlcc.org/gnlcc_projects/prj_report.html?PRJ_ID=302", 
-                            "name": "Project Report Page"
+                            "date": "2010-09-16", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "302", 
+                            "namespace": "lcc:gn"
+                        }, 
+                        {
+                            "identifier": "52002ee6e4b0ad2d97189da0", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -236,25 +243,15 @@
                             "role": "Fiscal Agent"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Nordyke2012"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2010-09-16", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://greatnorthernlcc.org/gnlcc_projects/prj_report.html?PRJ_ID=302", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "302", 
-                            "namespace": "lcc:gn"
-                        }, 
-                        {
-                            "identifier": "52002ee6e4b0ad2d97189da0", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "State of Wyoming Geospatial Data Management, Information Sharing and Preparation for Decision Support System Development - Migration Corridors"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -1987,13 +1984,13 @@
                         }, 
                         "keyword": [
                             {
+                                "keyword": "Report"
+                            }, 
+                            {
                                 "keyword": "Map"
                             }, 
                             {
                                 "keyword": "Datasets/Database"
-                            }, 
-                            {
-                                "keyword": "Report"
                             }
                         ]
                     }, 
@@ -2022,13 +2019,13 @@
                         }, 
                         "keyword": [
                             {
-                                "keyword": "Data Management and Integration"
+                                "keyword": "Data Acquisition and Development"
                             }, 
                             {
                                 "keyword": "Population & Habitat Evaluation/Projection"
                             }, 
                             {
-                                "keyword": "Data Acquisition and Development"
+                                "keyword": "Data Management and Integration"
                             }
                         ]
                     }, 
@@ -2060,15 +2057,18 @@
                                 "keyword": "State agencies"
                             }, 
                             {
-                                "keyword": "Interested public"
+                                "keyword": "Federal resource managers"
                             }, 
                             {
-                                "keyword": "Federal resource managers"
+                                "keyword": "Interested public"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Great Northern LCC Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Data Management"
@@ -2077,14 +2077,20 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": "Wyoming"
+                                "keyword": " Wyoming"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Colorado"
@@ -2093,22 +2099,20 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": " Idaho"
+                                "keyword": "Wyoming"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " Montana"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " Utah"
@@ -2117,22 +2121,31 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": " Wyoming"
+                                "keyword": " Montana"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " Idaho"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": "CO-2"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " CO-3"
@@ -2141,6 +2154,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " ID-2"
@@ -2149,6 +2165,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " MT-1"
@@ -2157,6 +2176,20 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "CO-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " UT-1"
@@ -2165,6 +2198,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " WY-1"
@@ -2174,11 +2210,6 @@
                     {
                         "keywordType": "Great Northern LCC Conservation Targets", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Conservation Targets"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Conservation Targets thesaurus"
                         }, 
                         "keyword": [
@@ -2202,11 +2233,6 @@
                     {
                         "keywordType": "Great Northern LCC Ecotypic Areas", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Ecotypic Areas"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Ecotypic Areas thesaurus"
                         }, 
                         "keyword": [
@@ -2221,11 +2247,6 @@
                     {
                         "keywordType": "Great Northern LCC Goals", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Goals"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Goals thesaurus"
                         }, 
                         "keyword": [
@@ -2237,11 +2258,6 @@
                     {
                         "keywordType": "Great Northern LCC Stressors", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Stressors"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Stressors thesaurus"
                         }, 
                         "keyword": [
@@ -2253,11 +2269,6 @@
                     {
                         "keywordType": "States", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_States"
-                                }
-                            ], 
                             "title": "Custom States thesaurus"
                         }, 
                         "keyword": [
@@ -2375,7 +2386,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-28", 
+                        "date": "2018-01-04", 
                         "dateType": "creation"
                     }
                 ]

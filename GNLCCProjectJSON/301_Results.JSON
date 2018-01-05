@@ -196,13 +196,20 @@
                 ], 
                 "abstract": "The results of this proposed project would provide the first comprehensive identification of fisher distribution in the northern Rocky Mountains, which may serve as a baseline for identifying population trends and changes in distribution over time.\n\nA species distribution model will be constructed, using field data collected to date, that relates fisher presence observations to environmental variables (i.e., spring snow cover, minimum spring temperatures, annual rainfall, topographic position, elevation, and others).  These environmental predictors will provide an indication of the contemporary distribution and environmental requirements of the species in the northern Rocky Mountains.  Down-scaled global climate models will be used to predict how the species habitat distribution may change over time.", 
                 "citation": {
-                    "title": "Distribution model for Fishers in the northern US Rocky Mountains", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://greatnorthernlcc.org/gnlcc_projects/prj_report.html?PRJ_ID=301", 
-                            "name": "Project Report Page"
+                            "date": "2010-01-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "301", 
+                            "namespace": "lcc:gn"
+                        }, 
+                        {
+                            "identifier": "530cf46fe4b08f991722dca1", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -331,25 +338,15 @@
                             "role": "Principal Investigator"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Schwartz2010"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2010-01-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://greatnorthernlcc.org/gnlcc_projects/prj_report.html?PRJ_ID=301", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "301", 
-                            "namespace": "lcc:gn"
-                        }, 
-                        {
-                            "identifier": "530cf46fe4b08f991722dca1", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Distribution model for Fishers in the northern US Rocky Mountains"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -1638,10 +1635,10 @@
                         }, 
                         "keyword": [
                             {
-                                "keyword": "Datasets/Database"
+                                "keyword": "Applications and Tools"
                             }, 
                             {
-                                "keyword": "Applications and Tools"
+                                "keyword": "Datasets/Database"
                             }, 
                             {
                                 "keyword": "Publication"
@@ -1676,10 +1673,10 @@
                                 "keyword": "Data Acquisition and Development"
                             }, 
                             {
-                                "keyword": "Informing Conservation Delivery"
+                                "keyword": "Population & Habitat Evaluation/Projection"
                             }, 
                             {
-                                "keyword": "Population & Habitat Evaluation/Projection"
+                                "keyword": "Informing Conservation Delivery"
                             }
                         ]
                     }, 
@@ -1708,18 +1705,21 @@
                         }, 
                         "keyword": [
                             {
+                                "keyword": "Tribes"
+                            }, 
+                            {
                                 "keyword": "Federal resource managers"
                             }, 
                             {
                                 "keyword": "State agencies"
-                            }, 
-                            {
-                                "keyword": "Tribes"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Great Northern LCC Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Fishers"
@@ -1728,6 +1728,20 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " Wyoming"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Northern US Rocky Mountains"
@@ -1736,30 +1750,9 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": "Idaho"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Location Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " Montana"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Location Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " Oregon"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " Washington"
@@ -1768,14 +1761,42 @@
                     }, 
                     {
                         "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": " Wyoming"
+                                "keyword": " Oregon"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " Montana"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Great Northern LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Great Northern LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Idaho"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "ID-1"
@@ -1784,22 +1805,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " ID-2"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " MT-1"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " OR-2"
@@ -1808,6 +1816,31 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " MT-1"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " ID-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " WA-5"
@@ -1816,6 +1849,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " WY-1"
@@ -1825,11 +1861,6 @@
                     {
                         "keywordType": "Great Northern LCC Conservation Targets", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Conservation Targets"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Conservation Targets thesaurus"
                         }, 
                         "keyword": [
@@ -1844,11 +1875,6 @@
                     {
                         "keywordType": "Great Northern LCC Ecotypic Areas", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Ecotypic Areas"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Ecotypic Areas thesaurus"
                         }, 
                         "keyword": [
@@ -1860,11 +1886,6 @@
                     {
                         "keywordType": "Great Northern LCC Goals", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Goals"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Goals thesaurus"
                         }, 
                         "keyword": [
@@ -1876,11 +1897,6 @@
                     {
                         "keywordType": "Great Northern LCC Stressors", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Great Northern LCC Stressors"
-                                }
-                            ], 
                             "title": "Custom Great Northern LCC Stressors thesaurus"
                         }, 
                         "keyword": [
@@ -1892,11 +1908,6 @@
                     {
                         "keywordType": "States", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_States"
-                                }
-                            ], 
                             "title": "Custom States thesaurus"
                         }, 
                         "keyword": [
@@ -2023,7 +2034,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-28", 
+                        "date": "2018-01-04", 
                         "dateType": "creation"
                     }
                 ]
