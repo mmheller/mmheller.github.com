@@ -120,13 +120,20 @@
                 ], 
                 "abstract": "The University of Oregon Environmental Studies Program (UO ENVS) is proposing to work with the North Pacific Landscape Conservation Cooperative in support of the Pacific Northwest Tribal Climate Change Project, which is aimed at building an understanding of the impacts that climate change may have on American Indian and Alaska Native tribal culture and sovereignty. This agreement will focus on supporting the Pacific Northwest Tribal Climate Change Project and developing resources that foster partnerships, knowledge exchange and outreach opportunities between tribes, climate scientists and other climate change partners in the region.\n\nThis PNW Tribal Climate Change Project is aimed at building an understanding of the needs, lessons learned, and opportunities that American Indian and Alaska Native tribes have in planning for the effects of climate change and reducing greenhouse gas emissions. Through this effort knowledge, tools and skills to help tribes address climate change will be shared through presentations, publications and other resources. We are also building awareness among non-tribal communities, organizations, research institutions and agencies about issues, challenges, and opportunities that tribes face in the context of climate change.", 
                 "citation": {
-                    "title": "Tribal Climate Change Partnership: Climate Science Connections Database", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=61", 
-                            "name": "Project Report Page"
+                            "date": "2015-06-06", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "61", 
+                            "namespace": "lcc:np"
+                        }, 
+                        {
+                            "identifier": "55dc8fa2e4b0518e354d1aa1", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -171,25 +178,15 @@
                             "role": "Fiscal Agent"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Lynn2015"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2015-06-06", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=61", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "61", 
-                            "namespace": "lcc:np"
-                        }, 
-                        {
-                            "identifier": "55dc8fa2e4b0518e354d1aa1", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Tribal Climate Change Partnership: Climate Science Connections Database"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -197,7 +194,46 @@
                     "language": "eng"
                 }, 
                 "purpose": "Traditional Ecological Knowledge Conservation Planning Data Acquisition and Development Tribes Academics & scientific researchers Conservation NGOs", 
-                "extent": null, 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 70.91333007800003, 
+                                    "westLongitude": -178.22460937499997, 
+                                    "southLatitude": 32.77087402300003, 
+                                    "eastLongitude": -114.46899414099997
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -178.22460937499997, 
+                                                    32.77087402300003
+                                                ], 
+                                                [
+                                                    -178.22460937499997, 
+                                                    70.91333007800003
+                                                ], 
+                                                [
+                                                    -114.46899414099997, 
+                                                    70.91333007800003
+                                                ], 
+                                                [
+                                                    -114.46899414099997, 
+                                                    32.77087402300003
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
                 "timePeriod": {
                     "endDateTime": "2016-12-29", 
                     "startDateTime": "2015-06-06"
@@ -281,10 +317,10 @@
                                 "keyword": "Traditional Ecological Knowledge"
                             }, 
                             {
-                                "keyword": "Conservation Planning"
+                                "keyword": "Data Acquisition and Development"
                             }, 
                             {
-                                "keyword": "Data Acquisition and Development"
+                                "keyword": "Conservation Planning"
                             }
                         ]
                     }, 
@@ -325,6 +361,9 @@
                     }, 
                     {
                         "keywordType": "Alaska Coastal Rainforest Center Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Alaska Coastal Rainforest Center Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "climate change"
@@ -333,6 +372,9 @@
                     }, 
                     {
                         "keywordType": "Alaska Coastal Rainforest Center Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Alaska Coastal Rainforest Center Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " tribal culture"
@@ -341,14 +383,20 @@
                     }, 
                     {
                         "keywordType": "Alaska Coastal Rainforest Center Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Alaska Coastal Rainforest Center Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": "Pacific Northwest"
+                                "keyword": " North Pacific LCC"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Alaska Coastal Rainforest Center Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Alaska Coastal Rainforest Center Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " Alaska"
@@ -357,46 +405,20 @@
                     }, 
                     {
                         "keywordType": "Alaska Coastal Rainforest Center Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Alaska Coastal Rainforest Center Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": " North Pacific LCC"
+                                "keyword": "Pacific Northwest"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": "CA-2"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " OR-1"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " OR-3"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " OR-4"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " OR-5"
@@ -405,54 +427,42 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": " WA-1"
+                                "keyword": " OR-4"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": " WA-2"
+                                "keyword": " OR-1"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": " WA-3"
+                                "keyword": " OR-3"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " WA-6"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " WA-7"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " WA-9"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " WA-10"
@@ -461,6 +471,20 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "CA-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " Ak-1"
@@ -468,13 +492,74 @@
                         ]
                     }, 
                     {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " WA-6"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " WA-7"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " WA-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " WA-3"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " WA-1"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " WA-9"
+                            }
+                        ]
+                    }, 
+                    {
                         "keywordType": "Alaska Coastal Rainforest Center Goals", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Alaska Coastal Rainforest Center Goals"
-                                }
-                            ], 
                             "title": "Custom Alaska Coastal Rainforest Center Goals thesaurus"
                         }, 
                         "keyword": [
@@ -486,11 +571,6 @@
                     {
                         "keywordType": "Alaska Coastal Rainforest Center Stressors", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_Alaska Coastal Rainforest Center Stressors"
-                                }
-                            ], 
                             "title": "Custom Alaska Coastal Rainforest Center Stressors thesaurus"
                         }, 
                         "keyword": [
@@ -581,7 +661,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-28", 
+                        "date": "2018-01-04", 
                         "dateType": "creation"
                     }
                 ]

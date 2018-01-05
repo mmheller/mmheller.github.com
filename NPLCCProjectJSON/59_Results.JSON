@@ -293,13 +293,20 @@
                 ], 
                 "abstract": "Stream temperature data will be acquired from federal and provincial government agencies, as well as other data holders in British Columbia to eventually be housed in an interagency database. Spatial statistical models for river networks like those used for NorWeST will be used with existing and readily available stream temperature data to develop a consistent set of high-resolution predictions for all streams and reaches within two pilot areas: an interior location represented by the Nicola River watershed in the Great Norther LCC and a coastal location represented by the Somass River watershed within the North Pacific LCC. Work in these proposed pilot areas would include processing of spatial data and applying existing technical protocols for stream temperature modelling to facilitate future expansion of the approach across the GNLCC and NPLCC in British Columbia. An ultimate goal is to provide a consistent set of international stream temperature scenarios for planning and vulnerability assessments for aquatic species.", 
                 "citation": {
-                    "title": "Towards developing an interagency stream temperature database and high-resolution stream temperature model for British Columbia with a focus on pilot watersheds in the NPLCC and GNLCC", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=59", 
-                            "name": "Project Report Page"
+                            "date": "", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "59", 
+                            "namespace": "lcc:np"
+                        }, 
+                        {
+                            "identifier": "5609d408e4b058f706e535a3", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -490,25 +497,15 @@
                             "role": "Principal Investigator"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Isaak2015"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=59", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "59", 
-                            "namespace": "lcc:np"
-                        }, 
-                        {
-                            "identifier": "5609d408e4b058f706e535a3", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Towards developing an interagency stream temperature database and high-resolution stream temperature model for British Columbia with a focus on pilot watersheds in the NPLCC and GNLCC"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -516,7 +513,46 @@
                     "language": "eng"
                 }, 
                 "purpose": "Data Management and Integration Data Acquisition and Development Conservation Planning Academics & scientific researchers Federal resource managers Conservation NGOs", 
-                "extent": null, 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 60.000122070000046, 
+                                    "westLongitude": -139.05670166, 
+                                    "southLatitude": 48.31011962900004, 
+                                    "eastLongitude": -119.99999999999999
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -139.05670166, 
+                                                    48.31011962900004
+                                                ], 
+                                                [
+                                                    -139.05670166, 
+                                                    60.000122070000046
+                                                ], 
+                                                [
+                                                    -119.99999999999999, 
+                                                    60.000122070000046
+                                                ], 
+                                                [
+                                                    -119.99999999999999, 
+                                                    48.31011962900004
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
                 "timePeriod": {
                     "endDateTime": "", 
                     "startDateTime": ""
@@ -562,10 +598,10 @@
                         }, 
                         "keyword": [
                             {
-                                "keyword": "Datasets/Database"
+                                "keyword": "Map"
                             }, 
                             {
-                                "keyword": "Map"
+                                "keyword": "Datasets/Database"
                             }, 
                             {
                                 "keyword": "Training/Outreach/Workshop"
@@ -597,13 +633,13 @@
                         }, 
                         "keyword": [
                             {
-                                "keyword": "Data Management and Integration"
-                            }, 
-                            {
                                 "keyword": "Data Acquisition and Development"
                             }, 
                             {
                                 "keyword": "Conservation Planning"
+                            }, 
+                            {
+                                "keyword": "Data Management and Integration"
                             }
                         ]
                     }, 
@@ -635,15 +671,18 @@
                                 "keyword": "Academics & scientific researchers"
                             }, 
                             {
-                                "keyword": "Federal resource managers"
+                                "keyword": "Conservation NGOs"
                             }, 
                             {
-                                "keyword": "Conservation NGOs"
+                                "keyword": "Federal resource managers"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "stream temperature"
@@ -652,6 +691,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "British Columbia"
@@ -660,38 +702,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": "OR-2"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " WA-5"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": "WA-4"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": "WA-8"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "ID-1"
@@ -700,6 +713,20 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "OR-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "MT-0"
@@ -708,6 +735,20 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "WA-4"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "ID-2"
@@ -715,13 +756,30 @@
                         ]
                     }, 
                     {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " WA-5"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "WA-8"
+                            }
+                        ]
+                    }, 
+                    {
                         "keywordType": "North Pacific Conservation Targets", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_North Pacific Conservation Targets"
-                                }
-                            ], 
                             "title": "Custom North Pacific Conservation Targets thesaurus"
                         }, 
                         "keyword": [
@@ -733,11 +791,6 @@
                     {
                         "keywordType": "North Pacific Ecotypic Areas", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_North Pacific Ecotypic Areas"
-                                }
-                            ], 
                             "title": "Custom North Pacific Ecotypic Areas thesaurus"
                         }, 
                         "keyword": [
@@ -749,11 +802,6 @@
                     {
                         "keywordType": "North Pacific Goals", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_North Pacific Goals"
-                                }
-                            ], 
                             "title": "Custom North Pacific Goals thesaurus"
                         }, 
                         "keyword": [
@@ -765,11 +813,6 @@
                     {
                         "keywordType": "North Pacific Stressors", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_North Pacific Stressors"
-                                }
-                            ], 
                             "title": "Custom North Pacific Stressors thesaurus"
                         }, 
                         "keyword": [
@@ -881,7 +924,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-28", 
+                        "date": "2018-01-04", 
                         "dateType": "creation"
                     }
                 ]

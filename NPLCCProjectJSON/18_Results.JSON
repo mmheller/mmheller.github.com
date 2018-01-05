@@ -157,13 +157,20 @@
                 ], 
                 "abstract": "WildLinks 2012 brought together transboundary scientists and managers to build on transboundary discussions started during Wildlinks 2010 and 2011 related to climate adaptation for species and habitats on both sides of the border.", 
                 "citation": {
-                    "title": "2012 Wildlinks Conference", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=18", 
-                            "name": "Project Report Page"
+                            "date": "2012-08-22", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "18", 
+                            "namespace": "lcc:np"
+                        }, 
+                        {
+                            "identifier": "598b7d9ee4b09fa1cb0eae08", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -261,25 +268,15 @@
                             "role": "Fiscal Agent"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Watkins2012"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2012-08-22", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=18", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "18", 
-                            "namespace": "lcc:np"
-                        }, 
-                        {
-                            "identifier": "598b7d9ee4b09fa1cb0eae08", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "2012 Wildlinks Conference"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -324,7 +321,7 @@
                                                 ], 
                                                 [
                                                     -122.48814731499655, 
-                                                    47.749276098646455
+                                                    47.74927609864645
                                                 ], 
                                                 [
                                                     -122.49746328641311, 
@@ -420,11 +417,11 @@
                                                 ], 
                                                 [
                                                     -120.96787247541269, 
-                                                    46.83778938283483
+                                                    46.83778938283482
                                                 ], 
                                                 [
                                                     -121.23492103596564, 
-                                                    46.807584632703865
+                                                    46.80758463270386
                                                 ], 
                                                 [
                                                     -121.2362942033188, 
@@ -513,10 +510,10 @@
                         }, 
                         "keyword": [
                             {
-                                "keyword": "Conservation Planning"
+                                "keyword": "Conservation Design"
                             }, 
                             {
-                                "keyword": "Conservation Design"
+                                "keyword": "Conservation Planning"
                             }
                         ]
                     }, 
@@ -545,18 +542,32 @@
                         }, 
                         "keyword": [
                             {
+                                "keyword": "Regional & county planners"
+                            }, 
+                            {
                                 "keyword": "Academics & scientific researchers"
                             }, 
                             {
                                 "keyword": "Federal resource managers"
-                            }, 
-                            {
-                                "keyword": "Regional & county planners"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " climate change"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Adaptation planning"
@@ -565,6 +576,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " corridors"
@@ -573,6 +587,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " habitat connectivity"
@@ -580,15 +597,10 @@
                         ]
                     }, 
                     {
-                        "keywordType": "North Pacific Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " climate change"
-                            }
-                        ]
-                    }, 
-                    {
                         "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "NPLCC"
@@ -597,14 +609,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Location Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " WA"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " B.C. North Cascades"
@@ -612,15 +619,21 @@
                         ]
                     }, 
                     {
-                        "keywordType": "Federal Congressional Districts", 
+                        "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": "WA-2"
+                                "keyword": " WA"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " WA-6"
@@ -628,13 +641,19 @@
                         ]
                     }, 
                     {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "WA-2"
+                            }
+                        ]
+                    }, 
+                    {
                         "keywordType": "North Pacific Goals", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_North Pacific Goals"
-                                }
-                            ], 
                             "title": "Custom North Pacific Goals thesaurus"
                         }, 
                         "keyword": [
@@ -725,7 +744,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-28", 
+                        "date": "2018-01-04", 
                         "dateType": "creation"
                     }
                 ]

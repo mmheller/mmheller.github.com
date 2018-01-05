@@ -136,13 +136,20 @@
                 ], 
                 "abstract": "The Humboldt Bay-Eel River region may experience the highest rate of relative sea level rise increase along the West Coast. The Project will engage stakeholders to discuss community and science needs for planning and implementing adaptation measures to sea level rise. The Project is a critical step in developing an ecosystem based-management (EBM) approach to guide the protection, management, enhancement, adaptation, restoration, and possible redistribution of Humboldt Bay-Eel River Delta habitats under future climate scenarios. This process will be informed by the best-available science, the needs of Humboldt Bay-Eel River Delta agricultural producers, and other community members.", 
                 "citation": {
-                    "title": "Developing Shared Strategies for Sea-level Rise Adaptation in Working Lands of Humboldt Bay and the Eel River Delta", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=64", 
-                            "name": "Project Report Page"
+                            "date": "2015-08-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "64", 
+                            "namespace": "lcc:np"
+                        }, 
+                        {
+                            "identifier": "5609c775e4b058f706e5359d", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -207,25 +214,15 @@
                             "role": "Fiscal Agent"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Demers2015"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2015-08-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=64", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "64", 
-                            "namespace": "lcc:np"
-                        }, 
-                        {
-                            "identifier": "5609c775e4b058f706e5359d", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Developing Shared Strategies for Sea-level Rise Adaptation in Working Lands of Humboldt Bay and the Eel River Delta"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -383,13 +380,13 @@
                         }, 
                         "keyword": [
                             {
-                                "keyword": "Conservation Planning"
+                                "keyword": "Population & Habitat Evaluation/Projection"
                             }, 
                             {
                                 "keyword": "Socio-economics/Ecosystem Services"
                             }, 
                             {
-                                "keyword": "Population & Habitat Evaluation/Projection"
+                                "keyword": "Conservation Planning"
                             }
                         ]
                     }, 
@@ -418,26 +415,21 @@
                         }, 
                         "keyword": [
                             {
+                                "keyword": "Regional & county planners"
+                            }, 
+                            {
                                 "keyword": "Academics & scientific researchers"
                             }, 
                             {
                                 "keyword": "Federal resource managers"
-                            }, 
-                            {
-                                "keyword": "Regional & county planners"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "North Pacific Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": "sea-level rise"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " climate change"
@@ -446,6 +438,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " ecosystem-based management"
@@ -453,15 +448,32 @@
                         ]
                     }, 
                     {
-                        "keywordType": "North Pacific Location Keywords", 
+                        "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": "Northern California"
+                                "keyword": "sea-level rise"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " Humboldt Bay"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " Eel River Delta"
@@ -470,14 +482,20 @@
                     }, 
                     {
                         "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": " Humboldt Bay"
+                                "keyword": "Northern California"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "CA-2"
@@ -487,11 +505,6 @@
                     {
                         "keywordType": "North Pacific Goals", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_North Pacific Goals"
-                                }
-                            ], 
                             "title": "Custom North Pacific Goals thesaurus"
                         }, 
                         "keyword": [
@@ -503,11 +516,6 @@
                     {
                         "keywordType": "North Pacific Stressors", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_North Pacific Stressors"
-                                }
-                            ], 
                             "title": "Custom North Pacific Stressors thesaurus"
                         }, 
                         "keyword": [
@@ -619,7 +627,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-28", 
+                        "date": "2018-01-04", 
                         "dateType": "creation"
                     }
                 ]

@@ -136,13 +136,20 @@
                 ], 
                 "abstract": "This project produced a base layer of riparian area and condition prioritized riparian areas likely to increase biological resilience to climate change. This project acted as a pilot for developing riparian area data layers for the WGA Crucial Habitat Assessment Tool.", 
                 "citation": {
-                    "title": "Mapping Pacific Northwest Riparian Areas: Measuring Current Condition And Prioritizing For Climate Change Adaptation", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=26", 
-                            "name": "Project Report Page"
+                            "date": "2012-09-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "26", 
+                            "namespace": "lcc:np"
+                        }, 
+                        {
+                            "identifier": "529cb2f3e4b00602d02da6b5", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -207,25 +214,15 @@
                             "role": "Fiscal Agent"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Krosby2012"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2012-09-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=26", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "26", 
-                            "namespace": "lcc:np"
-                        }, 
-                        {
-                            "identifier": "529cb2f3e4b00602d02da6b5", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Mapping Pacific Northwest Riparian Areas: Measuring Current Condition And Prioritizing For Climate Change Adaptation"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -233,7 +230,46 @@
                     "language": "eng"
                 }, 
                 "purpose": "Vulnerability Assessment Conservation Planning Data Acquisition and Development Academics & scientific researchers Federal resource managers State agencies", 
-                "extent": null, 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 49.09350585900006, 
+                                    "westLongitude": -124.76428222699997, 
+                                    "southLatitude": 41.94970703100006, 
+                                    "eastLongitude": -107.47521972699997
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -124.76428222699997, 
+                                                    41.94970703100006
+                                                ], 
+                                                [
+                                                    -124.76428222699997, 
+                                                    49.09350585900006
+                                                ], 
+                                                [
+                                                    -107.47521972699997, 
+                                                    49.09350585900006
+                                                ], 
+                                                [
+                                                    -107.47521972699997, 
+                                                    41.94970703100006
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
                 "timePeriod": {
                     "endDateTime": "2014-03-31", 
                     "startDateTime": "2012-09-01"
@@ -279,10 +315,10 @@
                         }, 
                         "keyword": [
                             {
-                                "keyword": "Map"
+                                "keyword": "Report"
                             }, 
                             {
-                                "keyword": "Report"
+                                "keyword": "Map"
                             }, 
                             {
                                 "keyword": "Datasets/Database"
@@ -314,13 +350,13 @@
                         }, 
                         "keyword": [
                             {
+                                "keyword": "Data Acquisition and Development"
+                            }, 
+                            {
                                 "keyword": "Vulnerability Assessment"
                             }, 
                             {
                                 "keyword": "Conservation Planning"
-                            }, 
-                            {
-                                "keyword": "Data Acquisition and Development"
                             }
                         ]
                     }, 
@@ -349,26 +385,21 @@
                         }, 
                         "keyword": [
                             {
+                                "keyword": "State agencies"
+                            }, 
+                            {
                                 "keyword": "Academics & scientific researchers"
                             }, 
                             {
                                 "keyword": "Federal resource managers"
-                            }, 
-                            {
-                                "keyword": "State agencies"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "North Pacific Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": "riparian areas"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " climate change"
@@ -377,6 +408,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " adaptation strategies"
@@ -385,6 +419,20 @@
                     }, 
                     {
                         "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "riparian areas"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " vegetation changes"
@@ -393,6 +441,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " species sensitivities"
@@ -401,6 +452,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Washington"
@@ -409,6 +463,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " Oregon"
@@ -417,6 +474,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "WA-6"
@@ -425,6 +485,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " WA-2"
@@ -433,6 +496,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " WA-1"
@@ -442,11 +508,6 @@
                     {
                         "keywordType": "North Pacific Goals", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_North Pacific Goals"
-                                }
-                            ], 
                             "title": "Custom North Pacific Goals thesaurus"
                         }, 
                         "keyword": [
@@ -458,11 +519,6 @@
                     {
                         "keywordType": "North Pacific Stressors", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_North Pacific Stressors"
-                                }
-                            ], 
                             "title": "Custom North Pacific Stressors thesaurus"
                         }, 
                         "keyword": [
@@ -556,7 +612,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-28", 
+                        "date": "2018-01-04", 
                         "dateType": "creation"
                     }
                 ]

@@ -162,13 +162,20 @@
                 ], 
                 "abstract": "This project applied the results of an on-going climate change vulnerability assessment to the management of two complex landscapes. The vulnerability assessment project team worked with managers, land-owners, and conservation practitioners to explore 1) how downscaled climate datasets, modeled vegetation changes, and information on estimated species sensitivities could be used to develop climate change adaptation strategies, and 2) how model results and datasets could be made more useful for informing the management of species and landscapes. To accomplish these two goals, datasets and model outputs for two landscapes were prepared, 1) the British Columbia Park system, specifically the midcoast region, and 2) the National Wildlife Refuge system in the Willamette Valley, OR. Additionally, workshops were held with stakeholders in both regions.", 
                 "citation": {
-                    "title": "Applying Vulnerability Assessment Tools to Plan for Climate Adaptation:  Case Studies in the North Pacific LCC", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=15", 
-                            "name": "Project Report Page"
+                            "date": "2011-09-20", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "15", 
+                            "namespace": "lcc:np"
+                        }, 
+                        {
+                            "identifier": "527c3581e4b0050d7e26b7dd", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -279,25 +286,15 @@
                             "role": "Principal Investigator"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Lawler2011"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2011-09-20", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=15", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "15", 
-                            "namespace": "lcc:np"
-                        }, 
-                        {
-                            "identifier": "527c3581e4b0050d7e26b7dd", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Applying Vulnerability Assessment Tools to Plan for Climate Adaptation:  Case Studies in the North Pacific LCC"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -305,7 +302,46 @@
                     "language": "eng"
                 }, 
                 "purpose": "Vulnerability Assessment Conservation Planning Decision Support Academics & scientific researchers State agencies Federal resource managers", 
-                "extent": null, 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 60.00012207000008, 
+                                    "westLongitude": -139.05670166, 
+                                    "southLatitude": 43.35607910200008, 
+                                    "eastLongitude": -119.99999999999999
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -139.05670166, 
+                                                    43.35607910200008
+                                                ], 
+                                                [
+                                                    -139.05670166, 
+                                                    60.00012207000008
+                                                ], 
+                                                [
+                                                    -119.99999999999999, 
+                                                    60.00012207000008
+                                                ], 
+                                                [
+                                                    -119.99999999999999, 
+                                                    43.35607910200008
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
                 "timePeriod": {
                     "endDateTime": "2014-03-31", 
                     "startDateTime": "2011-09-20"
@@ -351,13 +387,13 @@
                         }, 
                         "keyword": [
                             {
+                                "keyword": "Report"
+                            }, 
+                            {
                                 "keyword": "Datasets/Database"
                             }, 
                             {
                                 "keyword": "Training/Outreach/Workshop"
-                            }, 
-                            {
-                                "keyword": "Report"
                             }
                         ]
                     }, 
@@ -386,13 +422,13 @@
                         }, 
                         "keyword": [
                             {
+                                "keyword": "Decision Support"
+                            }, 
+                            {
                                 "keyword": "Vulnerability Assessment"
                             }, 
                             {
                                 "keyword": "Conservation Planning"
-                            }, 
-                            {
-                                "keyword": "Decision Support"
                             }
                         ]
                     }, 
@@ -424,23 +460,18 @@
                                 "keyword": "Academics & scientific researchers"
                             }, 
                             {
-                                "keyword": "State agencies"
+                                "keyword": "Federal resource managers"
                             }, 
                             {
-                                "keyword": "Federal resource managers"
+                                "keyword": "State agencies"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "North Pacific Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": "climate change"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " adaptation strategies"
@@ -449,6 +480,20 @@
                     }, 
                     {
                         "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "climate change"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " vegetation changes"
@@ -457,6 +502,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " species sensitivities"
@@ -465,6 +513,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "NPLCC"
@@ -473,6 +524,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " B.C."
@@ -481,6 +535,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " OR"
@@ -489,6 +546,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " Willamette Basin"
@@ -497,6 +557,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "OR-4"
@@ -506,11 +569,6 @@
                     {
                         "keywordType": "North Pacific Goals", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_North Pacific Goals"
-                                }
-                            ], 
                             "title": "Custom North Pacific Goals thesaurus"
                         }, 
                         "keyword": [
@@ -604,7 +662,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-28", 
+                        "date": "2018-01-04", 
                         "dateType": "creation"
                     }
                 ]

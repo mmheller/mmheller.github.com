@@ -134,13 +134,20 @@
                 ], 
                 "abstract": "This project integrated a map-based interface into the Alaska Department of Fish and Game's Community Subsistence Information System to provide for simple navigation, and representation of the availability of information by type, time series, and location.", 
                 "citation": {
-                    "title": "Spatial Representation of Subsistence Data in Alaska - A Mapping Interface of the Community Subsistence Information System", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=40", 
-                            "name": "Project Report Page"
+                            "date": "2013-09-04", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "40", 
+                            "namespace": "lcc:np"
+                        }, 
+                        {
+                            "identifier": "53fce6a4e4b0413fd75eabc1", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -207,25 +214,15 @@
                             "role": "Principal Investigator"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Koster2013"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2013-09-04", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=40", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "40", 
-                            "namespace": "lcc:np"
-                        }, 
-                        {
-                            "identifier": "53fce6a4e4b0413fd75eabc1", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Spatial Representation of Subsistence Data in Alaska - A Mapping Interface of the Community Subsistence Information System"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -233,7 +230,46 @@
                     "language": "eng"
                 }, 
                 "purpose": "Decision Support Data Management and Integration Conservation Planning Tribes Federal resource managers Conservation NGOs", 
-                "extent": null, 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 71.38690185500006, 
+                                    "westLongitude": -178.09057617199997, 
+                                    "southLatitude": 51.59667968700006, 
+                                    "eastLongitude": -130.01318359399997
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -178.09057617199997, 
+                                                    51.59667968700006
+                                                ], 
+                                                [
+                                                    -178.09057617199997, 
+                                                    71.38690185500006
+                                                ], 
+                                                [
+                                                    -130.01318359399997, 
+                                                    71.38690185500006
+                                                ], 
+                                                [
+                                                    -130.01318359399997, 
+                                                    51.59667968700006
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
                 "timePeriod": {
                     "endDateTime": "2015-03-31", 
                     "startDateTime": "2013-09-04"
@@ -282,10 +318,10 @@
                                 "keyword": "Map"
                             }, 
                             {
-                                "keyword": "Applications and Tools"
+                                "keyword": "Datasets/Database"
                             }, 
                             {
-                                "keyword": "Datasets/Database"
+                                "keyword": "Applications and Tools"
                             }
                         ]
                     }, 
@@ -314,13 +350,13 @@
                         }, 
                         "keyword": [
                             {
+                                "keyword": "Conservation Planning"
+                            }, 
+                            {
                                 "keyword": "Decision Support"
                             }, 
                             {
                                 "keyword": "Data Management and Integration"
-                            }, 
-                            {
-                                "keyword": "Conservation Planning"
                             }
                         ]
                     }, 
@@ -361,6 +397,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "Subsistence harvest"
@@ -369,14 +408,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " Community Subsistence information system"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " conservation planning"
@@ -384,15 +418,21 @@
                         ]
                     }, 
                     {
-                        "keywordType": "North Pacific Location Keywords", 
+                        "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": "Alaska"
+                                "keyword": " Community Subsistence information system"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " Arctic LCC"
@@ -401,6 +441,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " NPLCC"
@@ -409,6 +452,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " Alaska LCC"
@@ -416,7 +462,21 @@
                         ]
                     }, 
                     {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Alaska"
+                            }
+                        ]
+                    }, 
+                    {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "AK-1"
@@ -426,11 +486,6 @@
                     {
                         "keywordType": "North Pacific Goals", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_North Pacific Goals"
-                                }
-                            ], 
                             "title": "Custom North Pacific Goals thesaurus"
                         }, 
                         "keyword": [
@@ -521,7 +576,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-28", 
+                        "date": "2018-01-04", 
                         "dateType": "creation"
                     }
                 ]

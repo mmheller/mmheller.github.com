@@ -127,13 +127,20 @@
                 ], 
                 "abstract": "This project supported a bi-national workshop bringing together researchers and practitioners from across the range of the NPLCC. The workshop was hosted by Simon Fraser University in Greater Vancouver February 24-26, 2014 and furthered the work of the two previous workshops on transboundary data and analysis hosted by the Alaska Coastal Rainforest Center in Juneau.", 
                 "citation": {
-                    "title": "Workshop on Transboundary Analysis and Issues in the Temperate Rainforest", 
-                    "onlineResource": [
+                    "date": [
                         {
-                            "description": "Webpage with details on this project", 
-                            "protocol": "HTTP", 
-                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=29", 
-                            "name": "Project Report Page"
+                            "date": "2012-09-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "29", 
+                            "namespace": "lcc:np"
+                        }, 
+                        {
+                            "identifier": "529cc096e4b00602d02da8fb", 
+                            "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
@@ -189,25 +196,15 @@
                             "role": "Fiscal Agent"
                         }
                     ], 
-                    "alternateTitle": [
-                        "Tunnoch2012"
-                    ], 
-                    "date": [
+                    "onlineResource": [
                         {
-                            "date": "2012-09-01", 
-                            "dateType": "date type"
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "http://mmheller.github.io/GNLCC_PTS4_NPLCC/prj_report.html?PRJ_ID=29", 
+                            "name": "Project Report Page"
                         }
                     ], 
-                    "identifier": [
-                        {
-                            "identifier": "29", 
-                            "namespace": "lcc:np"
-                        }, 
-                        {
-                            "identifier": "529cc096e4b00602d02da8fb", 
-                            "namespace": "gov.sciencebase.catalog"
-                        }
-                    ]
+                    "title": "Workshop on Transboundary Analysis and Issues in the Temperate Rainforest"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -328,13 +325,13 @@
                         }, 
                         "keyword": [
                             {
-                                "keyword": "Training/Outreach/Workshop"
+                                "keyword": "Report"
                             }, 
                             {
                                 "keyword": "Datasets/Database"
                             }, 
                             {
-                                "keyword": "Report"
+                                "keyword": "Training/Outreach/Workshop"
                             }
                         ]
                     }, 
@@ -407,14 +404,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": "trans-boundary data"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " landscape data"
@@ -423,6 +415,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " GIS"
@@ -430,7 +425,21 @@
                         ]
                     }, 
                     {
+                        "keywordType": "North Pacific Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "trans-boundary data"
+                            }
+                        ]
+                    }, 
+                    {
                         "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": "British Columbia"
@@ -439,22 +448,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Location Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " US"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "North Pacific Location Keywords", 
-                        "keyword": [
-                            {
-                                "keyword": " Washington"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " Alaska"
@@ -463,6 +459,20 @@
                     }, 
                     {
                         "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " Washington"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " Oregon"
@@ -471,6 +481,9 @@
                     }, 
                     {
                         "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " California"
@@ -478,39 +491,21 @@
                         ]
                     }, 
                     {
-                        "keywordType": "Federal Congressional Districts", 
+                        "keywordType": "North Pacific Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom North Pacific Location Keywords Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": "CA-2"
+                                "keyword": " US"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " OR-1"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " OR-3"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " OR-4"
-                            }
-                        ]
-                    }, 
-                    {
-                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " OR-5"
@@ -519,30 +514,64 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": " WA-1"
+                                "keyword": " OR-4"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": " WA-2"
+                                "keyword": " OR-1"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
-                                "keyword": " WA-3"
+                                "keyword": " OR-3"
                             }
                         ]
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " WA-10"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "CA-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " WA-6"
@@ -551,6 +580,9 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " WA-7"
@@ -559,6 +591,42 @@
                     }, 
                     {
                         "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " WA-2"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " WA-3"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " WA-1"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
                         "keyword": [
                             {
                                 "keyword": " WA-9"
@@ -566,21 +634,8 @@
                         ]
                     }, 
                     {
-                        "keywordType": "Federal Congressional Districts", 
-                        "keyword": [
-                            {
-                                "keyword": " WA-10"
-                            }
-                        ]
-                    }, 
-                    {
                         "keywordType": "North Pacific Goals", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_North Pacific Goals"
-                                }
-                            ], 
                             "title": "Custom North Pacific Goals thesaurus"
                         }, 
                         "keyword": [
@@ -592,11 +647,6 @@
                     {
                         "keywordType": "North Pacific Stressors", 
                         "thesaurus": {
-                            "identifier": [
-                                {
-                                    "identifier": "custom_North Pacific Stressors"
-                                }
-                            ], 
                             "title": "Custom North Pacific Stressors thesaurus"
                         }, 
                         "keyword": [
@@ -690,7 +740,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2017-11-28", 
+                        "date": "2018-01-04", 
                         "dateType": "creation"
                     }
                 ]
