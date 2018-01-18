@@ -34,8 +34,11 @@
      
       var map;
       var editorWidget;
-      
+      var pSrcFeatureLayer;
+      var pFCol;
+
       require([
+        "esri/arcgis/Portal", "esri/arcgis/OAuthInfo", "esri/IdentityManager",
         "esri/config",
         "esri/InfoTemplate",
         "esri/map",
@@ -51,6 +54,7 @@
         "dijit/form/CheckBox",
         "dijit/Toolbar",
         "dojo/dom",
+        "dojo/dom-style", "dojo/dom-attr",
         "dojo/dom-class",
         "dojo/dom-construct",
         "dijit/registry",
@@ -67,35 +71,27 @@
         "dijit/layout/ContentPane",
         "dojo/domReady!"
       ],
-        function (
+        function (arcgisPortal, OAuthInfo, esriId,
         esriConfig, InfoTemplate, Map, Editorall, SnappingManager, request, scaleUtils, FeatureLayer,
         SimpleRenderer, PictureMarkerSymbol, SimpleFillSymbol, SimpleLineSymbol,
-        CheckBox, Toolbar, dom, domClass, domConstruct, registry, JSON, on, parser, sniff, arrayUtils, Color, lang, Polygon, Graphic
+        CheckBox, Toolbar, dom, domStyle, domAttr, domClass, domConstruct, registry, JSON, on, parser, sniff, arrayUtils, Color, lang, Polygon, Graphic
       ) {
             parser.parse();
-            var portalUrl = "https://www.arcgis.com";
             esriConfig.defaults.io.proxyUrl = "/proxy/";
-            //This sample requires a proxy page to handle communications with the ArcGIS Server services. You will need to replace the url below with the location of a proxy on your machine. See the 'Using the proxy page' help topic for details on setting up a proxy page. esri.config.defaults.io.proxyUrl = "/proxy/";
-            //This service is for development and testing purposes only. We recommend that you create your own geometry service for use within your applications. 
+            
             esri.config.defaults.geometryService = new esri.tasks.GeometryService("https://utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
             map = new esri.Map("map", {           basemap: "topo",          center: [-111, 45.5],          zoom: 10,          slider: true        });
             dojo.connect(map, "onLayersAddResult", initEditor);
 
-            var pSrcFeatureLayer = new esri.layers.FeatureLayer("https://utility.arcgis.com/usrsvcs/servers/e09a9437e03d4190a3f3a8f2e36190b4/rest/services/Development_Src_v2/FeatureServer/0", {
-                mode: esri.layers.FeatureLayer.MODE_ONDEMAND, "opacity": 0.6,  outFields: ['*']
-            });
-
-            map.addLayers([pSrcFeatureLayer]);
-
             var pEditButton = dojo.byId("btn_PolyEdit");
             on(pEditButton, "click", btn_PolyEdit_click);
-            
+
             var component = registry.byId("BorderContainer_Footprinttool"); //remedy for error Tried to register widget with id==BorderContainer_Footprinttool but that id is already registered
             if (component) {//if it exists
                 domConstruct.destroy(component);                //destroy it
             }
 
-            on(dom.byId("uploadForm"), "change", function (event) {
+            on(dom.byId("uploadForm"), "change", function (event) { //Shapefile loading
                 dom.byId('upload-status').innerHTML = '<p style="color:blue">Select shapefile as .zip file</p>';
                 var fileName = event.target.value.toLowerCase();
                 if (sniff("ie")) { //filename is full path in IE so extract the file name
@@ -110,6 +106,34 @@
                 }
             });
 
+            var portalUrl4Shapefile = "https://www.arcgis.com";
+            var strHFL_URL = "https://utility.arcgis.com/usrsvcs/servers/e09a9437e03d4190a3f3a8f2e36190b4/rest/services/Development_Src_v2/FeatureServer/0";
+            pSrcFeatureLayer = new esri.layers.FeatureLayer(strHFL_URL, {
+                mode: esri.layers.FeatureLayer.MODE_ONDEMAND, "opacity": 0.6,  outFields: ['*']
+            });
+            map.addLayers([pSrcFeatureLayer]);
+
+            //var portalUrl4Shapefile = "https://fws.maps.arcgis.com";
+            //var portalUrl4Shapefile = "https://www.arcgis.com";
+            //var strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/Development_Src_v2/FeatureServer/0";
+            //var info = new OAuthInfo({ appId: "jHualSvRS1V5nVMM", popup: false });
+            //esriId.registerOAuthInfos([info]);
+            //esriId.getCredential(info.portalUrl + "/sharing");                // user will be redirected to OAuth Sign In page
+            //esriId.checkSignInStatus(info.portalUrl + "/sharing").then(
+            //  function () {
+            //      pSrcFeatureLayer = new esri.layers.FeatureLayer(strHFL_URL, {mode: esri.layers.FeatureLayer.MODE_ONDEMAND, "opacity": 0.6, outFields: ['*']});
+            //      map.addLayers([pSrcFeatureLayer]);
+            //      console.log("adding layer");
+
+            //      if (pFCol) {
+            //          console.log("feature col exists");
+            //      } else {
+            //          console.log("does not exists");
+            //      }
+
+            //  }
+            //).otherwise(function () { });// Do nothing
+            
             function generateFeatureCollection(fileName) {
                 var name = fileName.split(".");
                 name = name[0].replace("c:\\fakepath\\", "");            //Chrome and IE add c:\fakepath to the value - we need to remove it, See this link for more info: http://davidwalsh.name/fakepath
@@ -133,9 +157,12 @@
                     'filetype': 'shapefile', 'publishParameters': JSON.stringify(params),
                     'f': 'json', 'callback.html': 'textarea'
                 };
+                
+                //esriId.destroyCredentials();//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+                //map.removeLayer(pSrcFeatureLayer);
 
                 request({            //use the rest generate operation to generate a feature collection from the zipped shapefile
-                    url: portalUrl + '/sharing/rest/content/features/generate',
+                    url: portalUrl4Shapefile + '/sharing/rest/content/features/generate',
                     content: myContent,
                     form: dom.byId('uploadForm'),
                     handleAs: 'json',
@@ -146,7 +173,11 @@
                         }
                         var layerName = response.featureCollection.layers[0].layerDefinition.name;
                         dom.byId('upload-status').innerHTML = '<b>Loaded: </b>' + layerName;
+
+
+                        pFCol = response.featureCollection;
                         addShapefileToMap(response.featureCollection);
+  
                     }),
                     error: lang.hitch(this, errorHandler)
                 });
@@ -189,10 +220,9 @@
                         pSrcFeatureLayer.applyEdits(pNewFeatures2Add, null, null, onsucess, onerror);
                     }
                 });
+
                 dom.byId('upload-status').innerHTML = "";
             }
-
-
 
         function onsucess(msg) {
             var bnlSuccessfull = msg[0].success;
@@ -204,7 +234,6 @@
         function errorHandler(error) {
             dom.byId('upload-status').innerHTML = "<p style='color:LightSalmon;margin-right:5px'><b>" + error.message + "</b></p>";
         }
-
 
       function btn_PolyEdit_click() {
           var dom = dojo.byId("tpick-surface-0");
@@ -231,7 +260,6 @@
             });
         });
 
-
         //dojo.connect(featureLayer, 'before-apply-edits', function (updates) {          //add a default value for newly added features   
         //    dojo.forEach(updates, function (updateM) {
         //        if (updateM.attributes['SBURL'] === null) {
@@ -240,8 +268,6 @@
         //        updateM.attributes["DateUpdated"] = Date.now();
         //    });
         //});
-
-
 
         var templatePicker = new esri.dijit.editing.TemplatePicker({
             featureLayers: [featureLayer],
@@ -272,6 +298,7 @@
   <body class="claro">    
     <div id="map" style="height:100%;"  ></div>
     <div class="panelTitle bg rounded shadow">
+<!--        <input id="btn_SignIn" type="button" value="Sign In" style='margin-right:5px' />-->
         <div>
             <h1>DRAFT CED Footprinter</h1>
             <h2>version 2.1.0</h2>
@@ -291,6 +318,8 @@
                 </label>
             </div>
             <span class="file-upload-status" style="opacity:1;margin-right:5px;" id="upload-status"></span>
+            <span class="file-upload-status" style="opacity:1;margin-right:5px;" id="userId"></span>
+            
             <!--<div id="fileInfo">&nbsp;</div>-->
         </form>
     </div>
