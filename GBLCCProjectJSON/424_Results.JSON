@@ -80,28 +80,28 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "US Geological Survey", 
+                "name": "US Forest Service", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:aldridgec@usgs.gov"
+                        "uri": "mailto:mmanning@fs.fed.us"
                     }
                 ], 
-                "contactId": "G835", 
+                "contactId": "G865", 
                 "contactType": "Federal"
             }, 
             {
                 "isOrganization": false, 
-                "name": "Cameron Aldridge", 
+                "name": "Mary Manning", 
                 "memberOfOrganization": [
-                    "G835"
+                    "G865"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:aldridgec@usgs.gov"
+                        "uri": "mailto:mmanning@fs.fed.us"
                     }
                 ], 
-                "contactId": "835", 
+                "contactId": "865", 
                 "contactType": "Federal"
             }, 
             {
@@ -186,29 +186,29 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "US Forest Service", 
+                "name": "University of Colorado", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mmanning@fs.fed.us"
+                        "uri": "mailto:jennifer.balch@colorado.edu"
                     }
                 ], 
-                "contactId": "G865", 
-                "contactType": "Federal"
+                "contactId": "G857", 
+                "contactType": "Academic"
             }, 
             {
                 "isOrganization": false, 
-                "name": "Mary Manning", 
+                "name": "Jennifer Balch", 
                 "memberOfOrganization": [
-                    "G865"
+                    "G857"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mmanning@fs.fed.us"
+                        "uri": "mailto:jennifer.balch@colorado.edu"
                     }
                 ], 
-                "contactId": "865", 
-                "contactType": "Federal"
+                "contactId": "857", 
+                "contactType": "Academic"
             }, 
             {
                 "isOrganization": false, 
@@ -223,6 +223,32 @@
                 ], 
                 "contactId": "848", 
                 "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "US Geological Survey", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:aldridgec@usgs.gov"
+                    }
+                ], 
+                "contactId": "G835", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Cameron Aldridge", 
+                "memberOfOrganization": [
+                    "G835"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:aldridgec@usgs.gov"
+                    }
+                ], 
+                "contactId": "835", 
+                "contactType": "Federal"
             }, 
             {
                 "isOrganization": false, 
@@ -250,32 +276,6 @@
                     }
                 ], 
                 "contactId": "787", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "University of Colorado", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:jennifer.balch@colorado.edu"
-                    }
-                ], 
-                "contactId": "G857", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Jennifer Balch", 
-                "memberOfOrganization": [
-                    "G857"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:jennifer.balch@colorado.edu"
-                    }
-                ], 
-                "contactId": "857", 
                 "contactType": "Academic"
             }
         ], 
@@ -346,22 +346,22 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G835", 
+                                    "contactId": "G865", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "835", 
+                                    "contactId": "865", 
                                     "organizationMembers": [
-                                        "G835"
+                                        "G865"
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -466,7 +466,7 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G865", 
+                                    "contactId": "G857", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -475,9 +475,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "865", 
+                                    "contactId": "857", 
                                     "organizationMembers": [
-                                        "G865"
+                                        "G857"
                                     ]
                                 }
                             ], 
@@ -489,6 +489,26 @@
                                     "contactId": "848", 
                                     "organizationMembers": [
                                         "G955"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G835", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "835", 
+                                    "organizationMembers": [
+                                        "G835"
                                     ]
                                 }
                             ], 
@@ -515,26 +535,6 @@
                                 }
                             ], 
                             "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G857", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "857", 
-                                    "organizationMembers": [
-                                        "G857"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
                         }
                     ], 
                     "onlineResource": [
@@ -1197,7 +1197,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-01-04", 
+                        "date": "2018-01-29", 
                         "dateType": "creation"
                     }
                 ]

@@ -84,31 +84,17 @@
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:keirith.snyder@ars.usda.gov"
+                        "uri": "mailto:jchambers@fs.fed.us"
                     }
                 ], 
-                "contactId": "G779", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Keirith Snyder", 
-                "memberOfOrganization": [
-                    "G779"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:keirith.snyder@ars.usda.gov"
-                    }
-                ], 
-                "contactId": "779", 
+                "contactId": "G792", 
                 "contactType": "Federal"
             }, 
             {
                 "isOrganization": false, 
                 "name": "Jeanne Chambers", 
                 "memberOfOrganization": [
-                    "G779"
+                    "G792"
                 ], 
                 "onlineResource": [
                     {
@@ -195,6 +181,20 @@
                 ], 
                 "contactId": "844", 
                 "contactType": "Research"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Keirith Snyder", 
+                "memberOfOrganization": [
+                    "G792"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:keirith.snyder@ars.usda.gov"
+                    }
+                ], 
+                "contactId": "779", 
+                "contactType": "Federal"
             }
         ], 
         "metadata": {
@@ -234,7 +234,7 @@
                             "namespace": "lcc:gb"
                         }, 
                         {
-                            "identifier": "594c20a4e4b062508e385505", 
+                            "identifier": "594c25dde4b062508e385546", 
                             "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
@@ -264,33 +264,22 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G779", 
+                                    "contactId": "G792", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "779", 
-                                    "organizationMembers": [
-                                        "G779"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
                                 {
                                     "contactId": "792", 
                                     "organizationMembers": [
-                                        "G779"
+                                        "G792"
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -347,6 +336,17 @@
                                     "contactId": "844", 
                                     "organizationMembers": [
                                         "G844"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "779", 
+                                    "organizationMembers": [
+                                        "G792"
                                     ]
                                 }
                             ], 
@@ -2494,7 +2494,7 @@
                             "sourceId": "282", 
                             "currency": "USD", 
                             "amount": 99999.0, 
-                            "recipientId": "G779", 
+                            "recipientId": "G792", 
                             "matching": false
                         }
                     ], 
@@ -2512,7 +2512,7 @@
                             "sourceId": "351", 
                             "currency": "USD", 
                             "amount": 106808.0, 
-                            "recipientId": "G779", 
+                            "recipientId": "G792", 
                             "matching": true
                         }
                     ], 
@@ -2528,7 +2528,7 @@
             "metadataInfo": {
                 "metadataOnlineResource": [
                     {
-                        "uri": "https://www.sciencebase.gov/catalog/item/594c20a4e4b062508e385505"
+                        "uri": "https://www.sciencebase.gov/catalog/item/594c25dde4b062508e385546"
                     }
                 ], 
                 "parentMetadata": {
@@ -2541,7 +2541,7 @@
                     "title": "ScienceBase Parent"
                 }, 
                 "metadataIdentifier": {
-                    "identifier": "594c20a4e4b062508e385505", 
+                    "identifier": "594c25dde4b062508e385546", 
                     "namespace": "gov.sciencebase.catalog"
                 }, 
                 "metadataContact": [
@@ -2564,7 +2564,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-01-04", 
+                        "date": "2018-01-29", 
                         "dateType": "creation"
                     }
                 ]
@@ -2588,7 +2588,7 @@
                                     "unitsOfDistribution": "unknown", 
                                     "onlineOption": [
                                         {
-                                            "uri": "https://www.sciencebase.gov/catalog/item/594c20a4e4b062508e385505"
+                                            "uri": "https://www.sciencebase.gov/catalog/item/594c25dde4b062508e385546"
                                         }
                                     ]
                                 }

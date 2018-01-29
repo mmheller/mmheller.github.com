@@ -89,22 +89,6 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G1084", 
-                "isOrganization": true, 
-                "name": "Clark University", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G1084"
-                ], 
-                "contactId": "1084", 
-                "isOrganization": false, 
-                "name": "Dominik Kulakowski", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "G1083", 
                 "isOrganization": true, 
                 "name": "Utah State University", 
@@ -169,6 +153,22 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "G1084", 
+                "isOrganization": true, 
+                "name": "Clark University", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1084"
+                ], 
+                "contactId": "1084", 
+                "isOrganization": false, 
+                "name": "Dominik Kulakowski", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "G1039", 
                 "isOrganization": true, 
                 "name": "Teton Research Institute", 
@@ -224,15 +224,6 @@
                 ], 
                 "contactId": "926", 
                 "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G1079"
-                ], 
-                "contactId": "983", 
-                "isOrganization": false, 
-                "name": "Tom Dilts", 
-                "contactType": "Academic"
             }, 
             {
                 "isOrganization": false, 
@@ -298,6 +289,15 @@
                     }
                 ], 
                 "contactId": "802", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1079"
+                ], 
+                "contactId": "983", 
+                "isOrganization": false, 
+                "name": "Tom Dilts", 
                 "contactType": "Academic"
             }, 
             {
@@ -386,26 +386,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G1084", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "1084", 
-                                    "organizationMembers": [
-                                        "G1084"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G1083", 
                                     "organizationMembers": []
                                 }
@@ -486,6 +466,26 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G1084", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "1084", 
+                                    "organizationMembers": [
+                                        "G1084"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G1039", 
                                     "organizationMembers": []
                                 }
@@ -546,17 +546,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "983", 
-                                    "organizationMembers": [
-                                        "G1079"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "915", 
                                     "organizationMembers": [
                                         "G926"
@@ -600,6 +589,17 @@
                                     "contactId": "802", 
                                     "organizationMembers": [
                                         "G802"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "983", 
+                                    "organizationMembers": [
+                                        "G1079"
                                     ]
                                 }
                             ], 
@@ -2597,7 +2597,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-01-04", 
+                        "date": "2018-01-29", 
                         "dateType": "creation"
                     }
                 ]
