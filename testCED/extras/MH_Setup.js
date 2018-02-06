@@ -414,21 +414,28 @@ define([
                       var strURL4Search = "";
                       if (!(isNaN(request.term))) {
                           strURL4Search = app.strTheme1_URL + "0/query" +
-                                       "?where=Project_Name+like+%27%25" + request.term + "%25%27+or+Project_ID+%3D+" + request.term + "&f=pjson&outFields=*&returnGeometry=true&outFields=Project_Name%2C+Project_ID%2C+SourceFeatureType%2C+TypeAct%2C+geometry";
+                                       "?where=Project_Name+like+%27%25" + request.term + "%25%27+or+Project_ID+%3D+" + request.term + "&f=pjson&returnGeometry=true&outFields=Project_Name%2C+Project_ID%2C+SourceFeatureType%2C+TypeAct";
+                          //strURL4Search = app.strTheme1_URL + "0/query" +
+                          //             "?where=Project_Name+like+%27%25" + request.term + "%25%27+or+Project_ID+%3D+" + request.term + "&f=pjson&outFields=*&returnGeometry=true&outFields=Project_Name%2C+Project_ID%2C+SourceFeatureType%2C+TypeAct%2C+geometry";
+
                       } else {
                           strURL4Search = app.strTheme1_URL + "0/query" +
-                                       "?where=Project_Name+like+'%25" + request.term + "%25'" + "&f=pjson&outFields=*&returnGeometry=true&outFields=Project_Name%2C+Project_ID%2C+SourceFeatureType%2C+TypeAct%2C+geometry";
+                                       "?where=Project_Name+like+'%25" + request.term + "%25'" + "&f=pjson&returnGeometry=true&outFields=Project_Name%2C+Project_ID%2C+SourceFeatureType%2C+TypeAct";
+                          //strURL4Search = app.strTheme1_URL + "0/query" +
+                          //             "?where=Project_Name+like+'%25" + request.term + "%25'" + "&f=pjson&outFields=*&returnGeometry=true&outFields=Project_Name%2C+Project_ID%2C+SourceFeatureType%2C+TypeAct%2C+geometry";
+
                       }
                       $.ajax({
                           //url: app.strTheme1_URL + "find" + "?searchFields=Project_Name,Project_ID&SearchText=" + request.term + "&layers=0&f=pjson&returnGeometry=true",
                           url: strURL4Search,
-
                           dataType: "jsonp",
                           data: {},                        //data: { where: strSearchField + " LIKE '%" + request.term.replace(/\'/g, '\'\'').toUpperCase() + "%'", outFields: strSearchField, returnGeometry: true, f: "pjson" },                        
                           success: function (data) {
                               //if (data.results) {                           //                            if (data.features) {
                               if (data.features) {                           //                            if (data.features) {
                                   response($.map(data.features.slice(0, 19), function (item) {      //only display first 10
+                                      var strtemp = item.geometry;
+
                                       return { label: item.attributes.Project_Name + " ID:" + item.attributes.Project_ID +
                                         " (Layer:" + item.attributes.SourceFeatureType.replace("poly", "area") + ",Type:" + item.attributes.TypeAct + ")",
                                           value2: item.geometry, value3: item.attributes.Project_ID, value4: "CED Projects and Plans (point)"

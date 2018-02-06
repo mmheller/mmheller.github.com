@@ -173,14 +173,17 @@ define([
                         all.sort(sortFunction);
                         texts = [];
                         values = [];
-                        arrayOfNot2ShowActivityValues = ["Fire-Related: Habitat Restoration and/or Pre-Suppression Efforts",
-                                                         "Habitat Restoration (Fire)",
-                                                         "Non-regulatory Conservation Strategies",
-                                                         "Regulatory Mechanisms, Plans, Policy",
-                                                         "Restoration:  Infrastructure Removal and Modification",
-                                                         "Restoration:  Livestock & Rangeland Management",
-                                                         "Restoration: Habitat Reclamation Efforts",
-                                                         "Wildfire: Interagency Pre-suppression Planning Efforts"];
+                        //arrayOfNot2ShowActivityValues = ["Fire-Related: Habitat Restoration and/or Pre-Suppression Efforts",
+                        //                                 "Habitat Restoration (Fire)",
+                        //                                 "Non-regulatory Conservation Strategies",
+                        //                                 "Regulatory Mechanisms, Plans, Policy",
+                        //                                 "Restoration:  Infrastructure Removal and Modification",
+                        //                                 "Restoration:  Livestock & Rangeland Management",
+                        //                                 "Restoration: Habitat Reclamation Efforts",
+                        //                                 "Wildfire: Interagency Pre-suppression Planning Efforts"];
+
+                        arrayOfNot2ShowActivityValues = [""];
+
                         for (var i = 0; i < all.length; i++) {
                             blnShow = true;
 
