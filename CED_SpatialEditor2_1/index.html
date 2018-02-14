@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Created By:  Matt Heller, U.S. Fish and Wildlife Service, Region 6 Science Applications
+Date:        February 2018-->
+
+<!--{% load staticfiles %}-->
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
@@ -7,298 +11,52 @@
    
     <link rel="stylesheet" href="https://js.arcgis.com/3.20/dijit/themes/claro/claro.css">
     <link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css" />
-    <link rel="stylesheet" type="text/css" href="Styles/panel.css" />
+    <link rel="stylesheet" type="text/css" href="Styles/panel2.css" />
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/images/grsgmap/Styles/panel2.css' %}" />-->
+    
+    <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>      
+    <!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/images/grsgmap/extras' %}"} };</script>-->
 
-    <style>
-      .dj_ie .infowindow .window .top .right .user .content { position: relative; }
-      .dj_ie .simpleInfoWindow .content {position: relative;}
-
-      html, body { height: 100%; width: 100%; margin: 0; padding: 0; overflow:hidden; }
-      #leftPane{
-        width:255px;
-        border:none;
-      }
-      #map{
-        padding:0;
-      }
-      #header{
-        font-weight:600;
-        font-size:14pt;
-        color:#666666;
-        padding-left:20px;
-      }
-    </style>
-          
     <script src="https://js.arcgis.com/3.23/"></script>
-    <script>
-     
-      var map;
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript">
+      //var map;
       var editorWidget;
       var pSrcFeatureLayer;
       var pFCol;
-
+      var app = {};
       require([
+        "extras/MH_Setup",
         "esri/arcgis/Portal", "esri/arcgis/OAuthInfo", "esri/IdentityManager",
         "esri/config",
-        "esri/InfoTemplate",
         "esri/map",
-        "esri/dijit/editing/Editor-all",
-        "esri/SnappingManager",
-        "esri/request",
-        "esri/geometry/scaleUtils",
-        "esri/layers/FeatureLayer",
-        "esri/renderers/SimpleRenderer",
-        "esri/symbols/PictureMarkerSymbol",
-        "esri/symbols/SimpleFillSymbol",
-        "esri/symbols/SimpleLineSymbol",
-        "dijit/form/CheckBox",
-        "dijit/Toolbar",
         "dojo/dom",
         "dojo/dom-style", "dojo/dom-attr",
         "dojo/dom-class",
         "dojo/dom-construct",
-        "dijit/registry",
         "dojo/json",
         "dojo/on",
         "dojo/parser",
-        "dojo/sniff",
-        "dojo/_base/array",
         "esri/Color",
         "dojo/_base/lang",
-        "esri/geometry/Polygon",
-        "esri/graphic",
         "dijit/layout/BorderContainer",
         "dijit/layout/ContentPane",
         "dojo/domReady!"
       ],
-        function (arcgisPortal, OAuthInfo, esriId,
-        esriConfig, InfoTemplate, Map, Editorall, SnappingManager, request, scaleUtils, FeatureLayer,
-        SimpleRenderer, PictureMarkerSymbol, SimpleFillSymbol, SimpleLineSymbol,
-        CheckBox, Toolbar, dom, domStyle, domAttr, domClass, domConstruct, registry, JSON, on, parser, sniff, arrayUtils, Color, lang, Polygon, Graphic
+        function (MH_Setup, arcgisPortal, OAuthInfo, esriId,
+        esriConfig, Map, dom, domStyle, domAttr, domClass, domConstruct, JSON, on, parser,  Color, lang
       ) {
             parser.parse();
             esriConfig.defaults.io.proxyUrl = "/proxy/";
-            
-            esri.config.defaults.geometryService = new esri.tasks.GeometryService("https://utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
-            map = new esri.Map("map", {           basemap: "topo",          center: [-111, 45.5],          zoom: 10,          slider: true        });
-            dojo.connect(map, "onLayersAddResult", initEditor);
 
-            var pEditButton = dojo.byId("btn_PolyEdit");
-            on(pEditButton, "click", btn_PolyEdit_click);
-
-            var component = registry.byId("BorderContainer_Footprinttool"); //remedy for error Tried to register widget with id==BorderContainer_Footprinttool but that id is already registered
-            if (component) {//if it exists
-                domConstruct.destroy(component);                //destroy it
-            }
-
-            on(dom.byId("uploadForm"), "change", function (event) { //Shapefile loading
-                dom.byId('upload-status').innerHTML = '<p style="color:blue">Select shapefile as .zip file</p>';
-                var fileName = event.target.value.toLowerCase();
-                if (sniff("ie")) { //filename is full path in IE so extract the file name
-                    var arr = fileName.split("\\");
-                    fileName = arr[arr.length - 1];
-                }
-                if (fileName.indexOf(".zip") !== -1) {//is file a zip - if not notify user
-                    generateFeatureCollection(fileName);
-                }
-                else {
-                    dom.byId('upload-status').innerHTML = '<p style="color:LightCoral;margin-right:5px"><b>Add shapefile as .zip file</b></p>';
-                }
-            });
-
-            var portalUrl4Shapefile = "https://www.arcgis.com";
-            var strHFL_URL = "https://utility.arcgis.com/usrsvcs/servers/e09a9437e03d4190a3f3a8f2e36190b4/rest/services/Development_Src_v2/FeatureServer/0";
-            pSrcFeatureLayer = new esri.layers.FeatureLayer(strHFL_URL, {
-                mode: esri.layers.FeatureLayer.MODE_ONDEMAND, "opacity": 0.6,  outFields: ['*']
-            });
-            map.addLayers([pSrcFeatureLayer]);
-
-            //var portalUrl4Shapefile = "https://fws.maps.arcgis.com";
-            //var portalUrl4Shapefile = "https://www.arcgis.com";
-            //var strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/Development_Src_v2/FeatureServer/0";
-            //var info = new OAuthInfo({ appId: "jHualSvRS1V5nVMM", popup: false });
-            //esriId.registerOAuthInfos([info]);
-            //esriId.getCredential(info.portalUrl + "/sharing");                // user will be redirected to OAuth Sign In page
-            //esriId.checkSignInStatus(info.portalUrl + "/sharing").then(
-            //  function () {
-            //      pSrcFeatureLayer = new esri.layers.FeatureLayer(strHFL_URL, {mode: esri.layers.FeatureLayer.MODE_ONDEMAND, "opacity": 0.6, outFields: ['*']});
-            //      map.addLayers([pSrcFeatureLayer]);
-            //      console.log("adding layer");
-
-            //      if (pFCol) {
-            //          console.log("feature col exists");
-            //      } else {
-            //          console.log("does not exists");
-            //      }
-
-            //  }
-            //).otherwise(function () { });// Do nothing
-            
-            function generateFeatureCollection(fileName) {
-                var name = fileName.split(".");
-                name = name[0].replace("c:\\fakepath\\", "");            //Chrome and IE add c:\fakepath to the value - we need to remove it, See this link for more info: http://davidwalsh.name/fakepath
-                dom.byId('upload-status').innerHTML = '<b>Loading… </b>' + name;
-
-                var params = { //Define the input params for generate see the rest doc for details,  http://www.arcgis.com/apidocs/rest/index.html?generate.html
-                    'name': name,
-                    'targetSR': map.spatialReference,
-                    'maxRecordCount': 1000,
-                    'enforceInputFileSizeLimit': true,
-                    'enforceOutputJsonSizeLimit': true
-                };
-                var extent = scaleUtils.getExtentForScale(map, 40000);//generalize features for display Here we generalize at 1:40,000 which is approx 10 meters, This should work well when using web mercator.
-                var resolution = extent.getWidth() / map.width;
-                params.generalize = true;
-                params.maxAllowableOffset = resolution;
-                params.reducePrecision = true;
-                params.numberOfDigitsAfterDecimal = 0;
-
-                var myContent = {
-                    'filetype': 'shapefile', 'publishParameters': JSON.stringify(params),
-                    'f': 'json', 'callback.html': 'textarea'
-                };
-                
-                //esriId.destroyCredentials();//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-                //map.removeLayer(pSrcFeatureLayer);
-
-                request({            //use the rest generate operation to generate a feature collection from the zipped shapefile
-                    url: portalUrl4Shapefile + '/sharing/rest/content/features/generate',
-                    content: myContent,
-                    form: dom.byId('uploadForm'),
-                    handleAs: 'json',
-                    load: lang.hitch(this, function (response) {
-                        if (response.error) {
-                            errorHandler(response.error);
-                            return;
-                        }
-                        var layerName = response.featureCollection.layers[0].layerDefinition.name;
-                        dom.byId('upload-status').innerHTML = '<b>Loaded: </b>' + layerName;
-
-
-                        pFCol = response.featureCollection;
-                        addShapefileToMap(response.featureCollection);
-  
-                    }),
-                    error: lang.hitch(this, errorHandler)
-                });
-            }
-
-            function addShapefileToMap(featureCollection) {            //add the shapefile to the map and zoom to the feature collection extent,If you want to persist the feature collection when you reload browser you could store the collection in local storage by serializing the layer using featureLayer.toJson()  see the 'Feature Collection in Local Storage' sample for an example of how to work with local storage.
-                var fullExtent;
-                var layers = [];
-                arrayUtils.forEach(featureCollection.layers, function (layer) {
-                    var featureLayer = new FeatureLayer(layer);
-                    fullExtent = fullExtent ? fullExtent.union(featureLayer.fullExtent) : featureLayer.fullExtent;
-                });
-                map.setExtent(fullExtent.expand(1.25), true);
-                dom.byId('upload-status').innerHTML = "";
-                add2HostedFeatuerLayerViaApplyEdits(featureCollection);
-            }
-
-            function add2HostedFeatuerLayerViaApplyEdits(featureCollection) {
-                var fullExtent;
-                var layers = [];
-                dom.byId('upload-status').innerHTML = "Uploading data to Hosted Featuer Layer";
-
-                arrayUtils.forEach(featureCollection.layers, function (pUpLoadedfeatureLayer) {
-                    var pFeatureSet = pUpLoadedfeatureLayer.featureSet;
-                    var pNewFeatures2Add = [];
-                    arrayUtils.forEach(pFeatureSet.features, function (pFeature) {
-                        var attr = {};
-                        attr["SBURL"] = "NOT YET DEFINED";
-                        attr["Project_ID"] = 9999;
-                        attr["DateCreated"] = Date.now();
-                        attr["DateUpdated"] = Date.now();
-                        var graphic = new Graphic(pFeature.geometry);
-                        graphic.setAttributes(attr);
-                        pNewFeatures2Add.push(graphic);
-                    });
-
-                    var capabilities = pSrcFeatureLayer.getEditCapabilities();
-                    if (capabilities.canUpdate) {
-                        console.log("This layer can be updated");
-                        pSrcFeatureLayer.applyEdits(pNewFeatures2Add, null, null, onsucess, onerror);
-                    }
-                });
-
-                dom.byId('upload-status').innerHTML = "";
-            }
-
-        function onsucess(msg) {
-            var bnlSuccessfull = msg[0].success;
-            dom.byId('upload-status').innerHTML = "<p style='color:GreenYellow;margin-right:5px'><b>Successful load of shapefile" + "</b></p>";
-        }
-        function onerror(msg) {
-            dom.byId('upload-status').innerHTML = "<p style='color:pink;margin-right:5px'><b>" + msg.message + "</b></p>";
-        }
-        function errorHandler(error) {
-            dom.byId('upload-status').innerHTML = "<p style='color:LightSalmon;margin-right:5px'><b>" + error.message + "</b></p>";
-        }
-
-      function btn_PolyEdit_click() {
-          var dom = dojo.byId("tpick-surface-0");
-          on.emit(dom, "click", { bubbles: true, cancelable: true});
-      }
-
-      function initEditor(results) {       //build the layer and field information for the layer, display the description field using a text area.
-        var layers = dojo.map(results, function(result) {
-          var fieldInfos= dojo.map(result.layer.fields,function(field){
-            return {'fieldName': field.name,'label':field.alias};
-          });
-          return {
-              featureLayer: result.layer, 'fieldInfos': fieldInfos, 'isEditable': false
-          };
+            app.pSup = new MH_Setup({}); // instantiate the class
+            app.pSup.Phase1();
         });
-        var featureLayer = results[0].layer;
-
-        dojo.connect(featureLayer, 'onBeforeApplyEdits', function (adds, deletes, updates) {          //add a default value for newly added features   
-            dojo.forEach(adds, function (add) {
-                add.attributes['SBURL'] = 'Unknown SB URL';
-                add.attributes['Project_ID'] = 9999;
-                add.attributes["DateCreated"] = Date.now();
-                add.attributes["DateUpdated"] = Date.now();
-            });
-        });
-
-        //dojo.connect(featureLayer, 'before-apply-edits', function (updates) {          //add a default value for newly added features   
-        //    dojo.forEach(updates, function (updateM) {
-        //        if (updateM.attributes['SBURL'] === null) {
-        //            updateM.attributes['SBURL'] = 'Unknown SB URL';
-        //        }
-        //        updateM.attributes["DateUpdated"] = Date.now();
-        //    });
-        //});
-
-        var templatePicker = new esri.dijit.editing.TemplatePicker({
-            featureLayers: [featureLayer],
-            style: "visibility:collapse; height:5px"
-        }, 'templatePickerDiv');
-        templatePicker.startup();
-
-        var settings = {
-          map: map,
-          templatePicker: templatePicker,
-          enableUndoRedo: true,
-          layerInfos: layers,
-          toolbarVisible: true,
-          createOptions: {polygonDrawTools: [ esri.dijit.editing.Editor.CREATE_TOOL_FREEHAND_POLYGON, esri.dijit.editing.Editor.CREATE_TOOL_AUTOCOMPLETE]},
-          toolbarOptions: { reshapeVisible: true, cutVisible: true, mergeVisible: true}
-        };
-        var params = {settings: settings};
-
-        editorWidget = new esri.dijit.editing.Editor(params,'editorDiv');
-        map.enableSnapping({ snapKey: dojo.keys.copyKey });       //Dojo.keys.copyKey maps to CTRL in Windows and CMD in Mac
-        editorWidget.startup();
-        map.infoWindow.resize(325, 500);
-      }
-  
-        });
-    </script>
+      </script>
   </head>
   <body class="claro">    
     <div id="map" style="height:100%;"  ></div>
     <div class="panelTitle bg rounded shadow">
-<!--        <input id="btn_SignIn" type="button" value="Sign In" style='margin-right:5px' />-->
         <div>
             <h1>DRAFT CED Footprinter</h1>
             <h2>version 2.1.0</h2>
@@ -319,8 +77,6 @@
             </div>
             <span class="file-upload-status" style="opacity:1;margin-right:5px;" id="upload-status"></span>
             <span class="file-upload-status" style="opacity:1;margin-right:5px;" id="userId"></span>
-            
-            <!--<div id="fileInfo">&nbsp;</div>-->
         </form>
     </div>
   </body>
