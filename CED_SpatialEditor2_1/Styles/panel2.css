@@ -41,7 +41,7 @@
 }
 .panelTitle {
 	position: absolute;
-	height: 220px;
+	height: 200px;
 	right: 15px;
 	top: 15px;
 	color: #FFFFFF;
@@ -88,4 +88,76 @@
         bottom:35px;
      }
      
-     
+ /* BASEMAPS */
+    .panelBasemaps {
+	    position: absolute;
+	    top: 295px;
+	    right: 15px;
+	    width: 140px;
+	    height: 30px;
+	    font-family: HelveticaNeueUltraLight;
+	    color: #ffffff;
+	    font-size: 14px;
+	    padding: 0px;
+	    overflow: hidden;
+    }
+
+    .panelBasemapsOn {
+	    height: 400px;
+    }
+
+    #basemapTitle {
+	    display: block;
+	    width: 140px;
+	    height: 30px;
+	    font-family: HelveticaNeue;
+	    text-align: center;
+	    line-height: 50px;
+	    cursor: pointer;
+	    padding: 0px;
+    }
+
+    #basemapContent {
+	    display: block;
+	    width: 140px;
+	    height: 350px;
+	    font-family: HelveticaNeue;
+	    text-align: center;
+	    cursor: pointer;
+	    overflow-y: auto;
+	    overflow-x: hidden;
+	    padding: 0px;
+    }    
+    
+    /* panelLayers2Toggle */
+    .panelLayers2Toggle {
+	    position: absolute;
+	    top: 220px;
+	    right: 15px;
+	    width: 170px;
+	    height: 60px;
+	    font-family: HelveticaNeueUltraLight;
+	    color: #ffffff;
+	    font-size: 14px;
+	    padding: 5px;
+	    overflow: hidden;
+    }
+
+    .panelLayers2ToggleOn {
+	    height: 400px;
+    }
+
+
+    /* nextButtonPanel */
+    .nextButtonPanel {
+	    position: absolute;
+	    bottom: 50px;
+	    right: 15px;
+	    width: 160px;
+	    height: 30px;
+	    font-family: HelveticaNeueUltraLight;
+	    color: #ffffff;
+	    font-size: 14px;
+	    padding: 25px;
+	    overflow: hidden;
+    }

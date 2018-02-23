@@ -55,29 +55,58 @@ Date:        February 2018-->
       </script>
   </head>
   <body class="claro">    
-    <div id="map" style="height:100%;"  ></div>
+    <div id="map" style="height:100%;"  >
+        <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
+        <div id="txt_Version" style="position:absolute; left:225px; bottom:1px; color:#404040; z-index:50; font-size:11px">CED Footprinter 2.1.0</div>
+        <img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
+        <!--<img id="loadingImg" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="position:fixed; right:40%; top:50%; z-index:100;" />-->
+    </div>
+
+
     <div class="panelTitle bg rounded shadow">
         <div>
             <h1>DRAFT CED Footprinter</h1>
-            <h2>version 2.1.0</h2>
+            <!--<h2>version 2.1.0</h2>-->
         </div>
 
         <div id="templatePickerDiv"></div>
         <input id="btn_PolyEdit" type="button" value="Start Drawing" style='margin-right:5px' />
         <div id="editorDiv"></div>
 
-        <div style='margin-top:15px'><hr></div>
+        <div style='margin-top:15px'><hr /></div>
 
         <form enctype="multipart/form-data" method="post" id="uploadForm">
             <div class="field" id="upload_Field" style='margin-top:15px'>
                 <label class="file-upload" id="upload_label">
                     <span style='margin-right:5px'><strong>Add Zipped-up Shapefile</strong></span>
-                    <input type="file" name="file" id="inFile"  style='margin-top:8px; width:100%'/>
+                    <input type="file" name="file" id="inFile" style='margin-top:8px; width:100%' />
                 </label>
             </div>
             <span class="file-upload-status" style="opacity:1;margin-right:5px;" id="upload-status"></span>
             <span class="file-upload-status" style="opacity:1;margin-right:5px;" id="userId"></span>
         </form>
     </div>
+
+    <div id="panelBasemaps" class="panelBasemaps bg rounded shadow"><!-- Panel Basemaps -->
+        <div id="basemapTitle"><img src="images/basemaps.png" height="30" title="Switch Base Map" /></div>
+        <!--<div id="basemapTitle"><img src="{% static 'ced_main/images/grsgmap/basemaps.png' %}" height="30" title="Switch Base Map" /></div>-->
+        <div id="basemapContent">
+            <div id="basemapGallery"></div>
+        </div>
+    </div>
+
+
+      <div id="panelLayers2Toggle" class="panelLayers2Toggle bg rounded shadow">
+          <!-- Panel Basemaps -->
+          <form id="toggleForm">
+              <div id="LayerToggleDiv" style="padding: 2px 2px"></div>
+          </form>
+      </div>
+
+      <div id="nextButtonPanel" class="nextButtonPanel bg rounded shadow">
+          <div id="nextButtonPanelDiv"></div>
+          <input id="btn_Next" type="button" value="Next (Edits Complted)" />
+      </div>
+
   </body>
 </html>

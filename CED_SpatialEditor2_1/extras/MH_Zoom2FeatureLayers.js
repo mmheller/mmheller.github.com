@@ -2,21 +2,17 @@
 define([
   "dojo/_base/declare",
   "dojo/_base/lang",
-  "esri/request",
   "dojo/promise/all",
-  "esri/layers/FeatureLayer",
   "esri/tasks/query",
-  "dojo/promise/all",
-  "esri/request", "dojo/_base/array", 
   "esri/geometry/Polygon",
+  "esri/geometry/Point",
   "dojo/dom",
   "dojo/dom-class",
   "dijit/registry",
-  "dojo/on",
-  "esri/map"
+  "dojo/on"
 ], function (
-            declare, lang, esriRequest, all, FeatureLayer, Query, All,
-            request, Polygon, dom, domClass, registry,  on, Map
+            declare, lang, all, Query, 
+            Polygon, Point, dom, domClass, registry, on
 ) {
 
     return declare([], {
