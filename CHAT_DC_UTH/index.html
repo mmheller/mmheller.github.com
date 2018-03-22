@@ -167,8 +167,9 @@
     <script type="text/javascript">
         var app = {};
         require([
-            "dojo/data/ItemFileReadStore",
-            "dojo/_base/array",
+        "esri/arcgis/Portal", "esri/arcgis/OAuthInfo", "esri/IdentityManager",
+        "dojo/data/ItemFileReadStore",
+        "dojo/_base/array",
         "dojo/store/Memory",
         "dgrid/OnDemandGrid",
         "dgrid/Selection",
@@ -208,7 +209,8 @@
 		"dojox/charting/action2d/MoveSlice",
         "dojox/charting/themes/Tufte",
 		"dojo/domReady!"
-        ], function(
+        ], function (
+            arcgisPortal, OAuthInfo, esriId,
             ItemFileReadStore,array, Memory, Grid, Selection,
 		Point,
         Map,
@@ -288,47 +290,56 @@
 		
             //Create map
             var map = new Map("map", {basemap: "streets",			center: [-112, 43],			zoom: 5,			sliderStyle: "large",			sliderPosition: "bottom-right",			infoWindow: infoWindow		});	
-		
+
+
             ////Tiled map service for CHAT data
             var nvCHAT = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58b99206e4b090ec658d7e71/MapServer", { opacity: 0.5 });
             //var nvCHAT = new ArcGISTiledMapServiceLayer("https://tiles.arcgis.com/tiles/QVENGdaPbd4LUkLV/arcgis/rest/services/UTH_createTPK_CHRank9/MapServer",
             //                                                { opacity: 0.5, resampling: true });
             var nvSOC = new ArcGISDynamicMapServiceLayer("https://gis1.usgs.gov/arcgis/rest/services/PADUS1_4/GAP_Status_Code/MapServer", { opacity: 0 });
             var nvSERI = new ArcGISDynamicMapServiceLayer("https://gis1.usgs.gov/arcgis/rest/services/PADUS1_4/Fed_Tribal_Other/MapServer", { opacity: 0 });
-            
             //Feature layer for CHAT data queries
             var nvCHATFL = new esri.layers.FeatureLayer("https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/UTH_AGOLv2/FeatureServer/0", {
                 opacity: 0,
-                mode: FeatureLayer.MODE_SELECTION, outFields: ["CH_Rank", "HexID", "Ter_SOC", "Ter_SERI", "Wet_Rip", "LS_Cond"],
-            });		
-
+                mode: FeatureLayer.MODE_SELECTION, outFields: ["CH_Rank", "HexID", "Ter_SOC", "Ter_SERI", "Wet_Rip", "LS_Cond"]
+            });
             nvCHATFL.setSelectionSymbol(selectSymbol);
-	
-            map.addLayers([nvSERI, nvSOC, nvCHAT, nvCHATFL]);
-		
-            //Set custom mouse cursor when over Nevada data layers
-            nvCHATFL.on("mouse-over", function () {
-                if (tbStatus === "off") {
-                    map.setMapCursor("url(images/target25.png) 12 12, auto");
-                }
-            });
-		
-            nvCHATFL.on("mouse-out", function () {
-                map.setMapCursor("default");
-            });
-            
 
-            var sliderCHAT = new HorizontalSlider({value: 50,minimum: 1,maximum: 100,intermediateChanges: true,showButtons: false,onChange: function (value) {nvCHAT.setOpacity(value / 100);}}, "sliderCHAT");
-            document.getElementById("sliderDivCHAT").style.visibility = "visible";
-            var sliderSOC = new HorizontalSlider({value: 50,minimum: 1,maximum: 100,intermediateChanges: true,showButtons: false,onChange: function (value) {nvSOC.setOpacity(value / 100);}}, "sliderSOC");
-            document.getElementById("sliderDivSOC").style.visibility = "hidden";
-            var sliderSERI = new HorizontalSlider({value: 50,minimum: 1,maximum: 100,intermediateChanges: true,showButtons: false,onChange: function (value) {nvSERI.setOpacity(value / 100);}}, "sliderSERI");
-            document.getElementById("sliderDivSERI").style.visibility = "hidden";
+            //var info = new OAuthInfo({ appId: "4y78XrGDoCd8wys2", popup: false });  //local
+            var info = new OAuthInfo({ appId: "TCPRYxjUM1mxEcYn", popup: false });  //Draft
+           
+            esriId.registerOAuthInfos([info]);
+            esriId.getCredential(info.portalUrl + "/sharing");                // user will be redirected to OAuth Sign In page
+            esriId.checkSignInStatus(info.portalUrl + "/sharing").then(
+              function () {
+                  map.addLayers([nvSERI, nvSOC, nvCHAT, nvCHATFL]);
 
-            //Show/hide layers on legend click event
-            document.getElementById("toggleCHAT").onclick = function() {layerToggle(nvCHAT, document.getElementById("sliderDivCHAT"));}
-            document.getElementById("toggleSOC").onclick = function () {layerToggle(nvSOC, document.getElementById("sliderDivSOC"));}
-            document.getElementById("toggleSERI").onclick = function () {layerToggle(nvSERI, document.getElementById("sliderDivSERI"));}
+                  //Set custom mouse cursor when over Nevada data layers
+                  nvCHATFL.on("mouse-over", function () {
+                      if (tbStatus === "off") {
+                          map.setMapCursor("url(images/target25.png) 12 12, auto");
+                      }
+                  });
+
+                  nvCHATFL.on("mouse-out", function () {
+                      map.setMapCursor("default");
+                  });
+
+                  var sliderCHAT = new HorizontalSlider({ value: 50, minimum: 1, maximum: 100, intermediateChanges: true, showButtons: false, onChange: function (value) { nvCHAT.setOpacity(value / 100); } }, "sliderCHAT");
+                  document.getElementById("sliderDivCHAT").style.visibility = "visible";
+                  var sliderSOC = new HorizontalSlider({ value: 50, minimum: 1, maximum: 100, intermediateChanges: true, showButtons: false, onChange: function (value) { nvSOC.setOpacity(value / 100); } }, "sliderSOC");
+                  document.getElementById("sliderDivSOC").style.visibility = "hidden";
+                  var sliderSERI = new HorizontalSlider({ value: 50, minimum: 1, maximum: 100, intermediateChanges: true, showButtons: false, onChange: function (value) { nvSERI.setOpacity(value / 100); } }, "sliderSERI");
+                  document.getElementById("sliderDivSERI").style.visibility = "hidden";
+
+                  //Show/hide layers on legend click event
+                  document.getElementById("toggleCHAT").onclick = function () { layerToggle(nvCHAT, document.getElementById("sliderDivCHAT")); }
+                  document.getElementById("toggleSOC").onclick = function () { layerToggle(nvSOC, document.getElementById("sliderDivSOC")); }
+                  document.getElementById("toggleSERI").onclick = function () { layerToggle(nvSERI, document.getElementById("sliderDivSERI")); }
+
+              }
+            ).otherwise(function () { });// Do nothing
+		
             
             //Function to show/hide data layers on legend click event
             function layerToggle(layer, sliderElement) {
