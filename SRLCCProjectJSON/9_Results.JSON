@@ -3,10 +3,10 @@
         "metadataRepository": [
             {
                 "metadataStandard": "mdJSON", 
-                "citiation": {
+                "citation": {
                     "title": "LCC Network Science Catalog"
                 }, 
-                "repository": "ScienceBase"
+                "repository": "LCCScienceCatalog"
             }
         ], 
         "contact": [
@@ -62,17 +62,29 @@
                 ]
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "43", 
                 "isOrganization": true, 
-                "name": "Kresge Foundation", 
-                "contactType": "Foundation"
+                "name": "Bureau of Reclamation", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:jrice@usbr.gov"
+                    }
+                ], 
+                "contactId": "10", 
+                "contactType": "LCC"
             }, 
             {
                 "memberOfOrganization": [], 
                 "contactId": "42", 
                 "isOrganization": true, 
                 "name": "Wilburforce Foundation", 
+                "contactType": "Foundation"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "43", 
+                "isOrganization": true, 
+                "name": "Kresge Foundation", 
                 "contactType": "Foundation"
             }, 
             {
@@ -95,14 +107,684 @@
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mailto:wendy@consbio.org"
+                        "uri": "mailto:wendy@consbio.org"
                     }
                 ], 
                 "contactId": "41", 
                 "contactType": "NGO"
             }
         ], 
-        "metadata": null, 
+        "metadata": {
+            "resourceInfo": {
+                "status": [
+                    "completed"
+                ], 
+                "pointOfContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "581fc1d4-2dbd-4995-8801-3c6e09d6bea8"
+                            }
+                        ], 
+                        "role": "pointOfContact"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "41"
+                            }
+                        ], 
+                        "role": "principalInvestigator"
+                    }
+                ], 
+                "abstract": "The Conservation Biology Institute is developing a tool that managers in all watersheds of the Southern Rockies Landscape Conservation Cooperative can use to project the effects of climate change on soil vulnerability conditions and help resource managers develop appropriate strategies to mitigate negative climate impacts.\n\nSpecifically, they will develop a spatially-explicit soil vulnerability index for the Southern Rockies Landscape Conservation Cooperative that can be used to forecast short-term response of plants to current drought conditions and test a vegetation model of plant response to drought.\n\nConservation Biology Institute will use the soil vulnerability index to compare historical and future simulations of vegetation die-off to provide managers with some indication of how future vegetation shifts may increase soil vulnerability and affect available water resources.\n\nFY2012\nThe Conservation Biology Institute is developing a tool that managers in all watersheds of the Southern Rockies Landscape Conservation Cooperative can use to project the effects of climate change on soil vulnerability conditions and help resource managers develop appropriate strategies to mitigate negative climate impacts.\n\nSpecifically, they will develop a spatially-explicit soil vulnerability index for the Southern Rockies Landscape Conservation Cooperative that can be used to forecast short-term response of plants to current drought conditions and test a vegetation model of plant response to drought.\n\nConservation Biology Institute will use the soil vulnerability index to compare historical and future simulations of vegetation die-off to provide managers with some indication of how future vegetation shifts may increase soil vulnerability and affect available water resources.", 
+                "citation": {
+                    "date": [
+                        {
+                            "date": "2011-09-01", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "9", 
+                            "namespace": "lcc:srC:\\Python27\\ArcGIS10.5\\python.exe"
+                        }, 
+                        {
+                            "identifier": "530f65ede4b0e7e46bd3007f", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ], 
+                    "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "10", 
+                                    "organizationMembers": [
+                                        "10"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "42", 
+                                    "organizationMembers": [
+                                        "42"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "43", 
+                                    "organizationMembers": [
+                                        "43"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G41", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "41", 
+                                    "organizationMembers": [
+                                        "G41"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }
+                    ], 
+                    "onlineResource": [
+                        {
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "https://southernrockieslcc.org/sites/all/modules/custom/rockies_pts/pts/GNLCC_PTS4_SRLCC/prj_report.html?PRJ_ID=9", 
+                            "name": "Project Report Page"
+                        }
+                    ], 
+                    "title": "Soil Vulnerability to Future Climate Change in the Southern Rockies LCC, with Implications for Vegetation Change and Water Cycle"
+                }, 
+                "defaultResourceLocale": {
+                    "country": "USA", 
+                    "characterSet": "UTF-8", 
+                    "language": "eng"
+                }, 
+                "purpose": "Vulnerability Assessment Conservation Planning  Federal resource managers State agencies Tribes", 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 44.19720857051596, 
+                                    "westLongitude": -117.12061740324147, 
+                                    "southLatitude": 31.25412377558067, 
+                                    "eastLongitude": -102.56541177507883
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -102.56541177507883, 
+                                                    32.52480522081034
+                                                ], 
+                                                [
+                                                    -114.07866847575049, 
+                                                    31.25412377558067
+                                                ], 
+                                                [
+                                                    -117.12061740324147, 
+                                                    42.71477961132361
+                                                ], 
+                                                [
+                                                    -103.70002682051195, 
+                                                    44.19720857051596
+                                                ], 
+                                                [
+                                                    -102.56541177507883, 
+                                                    32.52480522081034
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
+                "timePeriod": {
+                    "endDateTime": "2013-01-01", 
+                    "startDateTime": "2011-09-01"
+                }, 
+                "resourceUsage": [
+                    {
+                        "specificUsage": "Project information", 
+                        "userContactInfo": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "581fc1d4-2dbd-4995-8801-3c6e09d6bea8"
+                                    }
+                                ], 
+                                "role": "administrator"
+                            }
+                        ]
+                    }
+                ], 
+                "keyword": [
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Deliverable", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/5307baa3e4b0dcc7bdc913a9"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "fa455d4a-5d87-56bc-b074-9a967beff904"
+                                }
+                            ], 
+                            "title": "Deliverable Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Map"
+                            }, 
+                            {
+                                "keyword": "Datasets/Database"
+                            }, 
+                            {
+                                "keyword": "Applications and Tools"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Project Category", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/52dee7c5e4b0dee2a6cd6b18"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "5da1d3b7-375b-58ae-a134-2ee0c94c395f"
+                                }
+                            ], 
+                            "title": "Project Category - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Vulnerability Assessment"
+                            }, 
+                            {
+                                "keyword": "Conservation Planning"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC End User Type", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/54760ef9e4b0f62cb5dc41a0"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "425f4a7c-dca2-56d8-947e-6f6bd1033d70"
+                                }
+                            ], 
+                            "title": "End User Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Tribes"
+                            }, 
+                            {
+                                "keyword": "Federal resource managers"
+                            }, 
+                            {
+                                "keyword": "State agencies"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " GIS"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " climate change"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " vegetation change"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " water cycling"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " LCC"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "soil vulnerability"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " Wyoming"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "SRLCC"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " Arizona"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " Utah"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " New Mexico"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " Colorado"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " UT-02"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " UT-03"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " UT-01"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " CO-03"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "AZ-01"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " CO-02"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " CO-05"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " AZ-04"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " NM-02"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " NM-03"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Federal Congressional Districts", 
+                        "thesaurus": {
+                            "title": "Custom Federal Congressional Districts Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " NM-01"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Ecotypic Areas", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Ecotypic Areas thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Four Corners"
+                            }, 
+                            {
+                                "keyword": "Green River Basin"
+                            }, 
+                            {
+                                "keyword": "Upper Rio Grande"
+                            }
+                        ]
+                    }
+                ], 
+                "resourceType": [
+                    {
+                        "type": "project"
+                    }
+                ], 
+                "resourceMaintenance": [
+                    {
+                        "frequency": "as needed", 
+                        "contact": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "581fc1d4-2dbd-4995-8801-3c6e09d6bea8"
+                                    }
+                                ], 
+                                "role": "custodian"
+                            }
+                        ]
+                    }
+                ], 
+                "shortAbstract": ""
+            }, 
+            "funding": [
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "10", 
+                            "currency": "USD", 
+                            "amount": 200000.0, 
+                            "recipientId": "10", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2012-09-30", 
+                        "periodName": [
+                            "FY2012"
+                        ], 
+                        "startDateTime": "2011-10-01"
+                    }
+                }
+            ], 
+            "metadataInfo": {
+                "metadataOnlineResource": [
+                    {
+                        "uri": "https://www.sciencebase.gov/catalog/item/530f65ede4b0e7e46bd3007f"
+                    }
+                ], 
+                "parentMetadata": {
+                    "identifier": [
+                        {
+                            "identifier": "50cf3c6ee4b0fa1303b82c89", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ], 
+                    "title": "ScienceBase Parent"
+                }, 
+                "metadataIdentifier": {
+                    "identifier": "530f65ede4b0e7e46bd3007f", 
+                    "namespace": "gov.sciencebase.catalog"
+                }, 
+                "metadataContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "581fc1d4-2dbd-4995-8801-3c6e09d6bea8"
+                            }
+                        ], 
+                        "role": "author"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "581fc1d4-2dbd-4995-8801-3c6e09d6bea8"
+                            }
+                        ], 
+                        "role": "custodian"
+                    }
+                ], 
+                "metadataDate": [
+                    {
+                        "date": "2018-03-22", 
+                        "dateType": "creation"
+                    }
+                ]
+            }, 
+            "associatedResource": [], 
+            "resourceDistribution": [
+                {
+                    "distributor": [
+                        {
+                            "contact": {
+                                "party": [
+                                    {
+                                        "contactId": "581fc1d4-2dbd-4995-8801-3c6e09d6bea8"
+                                    }
+                                ], 
+                                "role": "distributor"
+                            }, 
+                            "transferOption": [
+                                {
+                                    "transferSize": 99999, 
+                                    "unitsOfDistribution": "unknown", 
+                                    "onlineOption": [
+                                        {
+                                            "uri": "https://www.sciencebase.gov/catalog/item/530f65ede4b0e7e46bd3007f"
+                                        }
+                                    ]
+                                }
+                            ], 
+                            "orderProcess": [
+                                {
+                                    "orderingInstructions": "Download products as needed from the Sciencebase.gov URL provided", 
+                                    "fees": "00USD"
+                                }
+                            ]
+                        }
+                    ], 
+                    "description": "GNLCC projet page includes project information and downloadable products on Scinecebase.gov"
+                }
+            ]
+        }, 
         "schema": {
             "version": "2.1.2", 
             "name": "mdJson"

@@ -63,6 +63,18 @@
             }, 
             {
                 "isOrganization": true, 
+                "name": "Bureau of Reclamation", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:jrice@usbr.gov"
+                    }
+                ], 
+                "contactId": "10", 
+                "contactType": "LCC"
+            }, 
+            {
+                "isOrganization": true, 
                 "name": "U.S. Fish and Wildlife Service", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
@@ -74,17 +86,34 @@
                 "contactType": "LCC"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "26", 
                 "isOrganization": true, 
-                "name": "Western Area Fish and Wildlife Agencies", 
-                "contactType": "State"
+                "name": "U.S. Forest Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:dfinch@fs.fed.us"
+                    }
+                ], 
+                "contactId": "61", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "U.S. Forest Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:meganfriggens@fs.fed.u"
+                    }
+                ], 
+                "contactId": "66", 
+                "contactType": "Federal"
             }
         ], 
         "metadata": {
             "resourceInfo": {
                 "status": [
-                    "onGoing"
+                    "completed"
                 ], 
                 "pointOfContact": [
                     {
@@ -98,31 +127,42 @@
                     {
                         "party": [
                             {
-                                "contactId": "None"
+                                "contactId": "66"
                             }
                         ], 
                         "role": "principalInvestigator"
                     }
                 ], 
-                "abstract": "Western Native Trout Initiative (WNTI) and Desert Fish Habitat Partnership (DFHP) are collaborating with the Southern Rockies Landscape Conservation Cooperative (SRLCC) in conducting a conservation assessment of the U.S. Rio Grande Valley to determine areas appropriate for the efficient implementation of habitat-related projects and identify priority watersheds to improve ecological condition, restore natural processes, and prevent the decline of intact and healthy systems. This will be accomplished through strategic conservation planning that includes multi-species concerns, broad landscapes benefits, a data-driven approach, persistence of all priority species populations, and human land use. Analogous conservation assessments have been completed for much of the Desert Landscape Conservation Cooperatives (DLCC) extent; however, the Rio Grande basin for the SRLCC, and beyond has not yet been completed. This assessment will focus on the U.S. Ro Grande basin but additional priority taxa and habitats can be easily incorporated into the assessment framework as needed. WNTI and DFHP are recognized as National Fish Habitat Partnerships by the National Fish Habitat Action Plan.  WNTI also is a venture of the Western Association of Fish and Wildlife Agencies (WAFWA).\n\nFY2017\nWestern Native Trout Initiative (WNTI) proposes to collaborate with the Southern Rockies Landscape Conservation Cooperative (SRLCC) in conducting a conservation assessment of the U.S. Rio Grande Valley to determine areas appropriate for the efficient implementation of habitat-related projects and identify priority watersheds to improve ecological condition, restore natural processes, and prevent the decline of intact and healthy systems. This will be accomplished through strategic conservation planning that includes multi-species concerns, broad landscapes benefits, a data-driven approach, persistence of all priority species populations, and human land use. Analogous conservation assessments have been completed for much of the Desert Landscape Conservation Cooperatives (DLCC) extent; however, the Rio Grande basin for the SRLCC, and beyond has not yet been completed. This assessment will focus on the U.S. Ro Grande basin but additional priority taxa and habitats can be easily incorporated into the assessment framework as needed.", 
+                "abstract": "Project Objectives\nConnect scientists/researchers to resource managers, review relevant science projects recently completed by the SRLCC and others, and discuss how resulting data and tools can be applied or incorporated into decision-making processes;\nFacilitate identification of landscape-scale resource stressors (climate and non-climate related) and managers most pressing needs and questions within each of the geographic areas;\nFacilitate identification of locally significant focal resources not currently prioritized by the SRLCC;\nFacilitate identification of key attributes of focal resources (both initial and newly identified) indicative desirable conditions;\nFacilitate identification of most significant direct threats to focal resources.\n\nFY2015\nProject Objectives\nConnect scientists/researchers to resource managers, review relevant science projects recently completed by the SRLCC and others, and discuss how resulting data and tools can be applied or incorporated into decision-making processes;\nFacilitate identification of landscape-scale resource stressors (climate and non-climate related) and managers most pressing needs and questions within each of the geographic areas;\nFacilitate identification of locally significant focal resources not currently prioritized by the SRLCC;\nFacilitate identification of key attributes of focal resources (both initial and newly identified) indicative desirable conditions;\nFacilitate identification of most significant direct threats to focal resources.", 
                 "citation": {
                     "date": [
                         {
-                            "date": "2017-02-22", 
+                            "date": "2015-09-01", 
                             "dateType": "date type"
                         }
                     ], 
                     "identifier": [
                         {
-                            "identifier": "39", 
+                            "identifier": "40", 
                             "namespace": "lcc:srC:\\Python27\\ArcGIS10.5\\python.exe"
                         }, 
                         {
-                            "identifier": "58ebfd38e4b0b4d95d3209fe", 
+                            "identifier": "5693e56ee4b09c7f9a21a41d", 
                             "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "10", 
+                                    "organizationMembers": [
+                                        "10"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
                         {
                             "party": [
                                 {
@@ -137,9 +177,20 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "26", 
+                                    "contactId": "61", 
                                     "organizationMembers": [
-                                        "26"
+                                        "61"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "66", 
+                                    "organizationMembers": [
+                                        "66"
                                     ]
                                 }
                             ], 
@@ -150,18 +201,18 @@
                         {
                             "description": "Webpage with details on this project", 
                             "protocol": "HTTP", 
-                            "uri": "https://southernrockieslcc.org/sites/all/modules/custom/rockies_pts/pts/GNLCC_PTS4_SRLCC/prj_report.html?PRJ_ID=39", 
+                            "uri": "https://southernrockieslcc.org/sites/all/modules/custom/rockies_pts/pts/GNLCC_PTS4_SRLCC/prj_report.html?PRJ_ID=40", 
                             "name": "Project Report Page"
                         }
                     ], 
-                    "title": "Conservation Assessment and Mapping Products for Ro Grande Fishes"
+                    "title": "Four Corners and Upper Rio Grande Adaption Forums"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
                     "characterSet": "UTF-8", 
                     "language": "eng"
                 }, 
-                "purpose": "Decision Support Informing Conservation Delivery  State agencies Federal resource managers Tribes", 
+                "purpose": "Vulnerability Assessment Population & Habitat Evaluation/Projection Decision Support Federal resource managers State agencies Tribes", 
                 "extent": [
                     {
                         "geographicExtent": [
@@ -1771,8 +1822,8 @@
                     }
                 ], 
                 "timePeriod": {
-                    "endDateTime": "2018-09-30", 
-                    "startDateTime": "2017-02-22"
+                    "endDateTime": "2018-06-30", 
+                    "startDateTime": "2015-09-01"
                 }, 
                 "resourceUsage": [
                     {
@@ -1815,10 +1866,13 @@
                         }, 
                         "keyword": [
                             {
+                                "keyword": "Population & Habitat Evaluation/Projection"
+                            }, 
+                            {
                                 "keyword": "Decision Support"
                             }, 
                             {
-                                "keyword": "Informing Conservation Delivery"
+                                "keyword": "Vulnerability Assessment"
                             }
                         ]
                     }, 
@@ -1850,10 +1904,10 @@
                                 "keyword": "Tribes"
                             }, 
                             {
-                                "keyword": "State agencies"
+                                "keyword": "Federal resource managers"
                             }, 
                             {
-                                "keyword": "Federal resource managers"
+                                "keyword": "State agencies"
                             }
                         ]
                     }, 
@@ -1864,7 +1918,7 @@
                         }, 
                         "keyword": [
                             {
-                                "keyword": " mapping"
+                                "keyword": " mule deer"
                             }
                         ]
                     }, 
@@ -1875,7 +1929,7 @@
                         }, 
                         "keyword": [
                             {
-                                "keyword": " fishes conservation assessment"
+                                "keyword": " riparian"
                             }
                         ]
                     }, 
@@ -1886,7 +1940,51 @@
                         }, 
                         "keyword": [
                             {
-                                "keyword": "Rio Grande"
+                                "keyword": " pinyon juniper"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " native fish"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " sagebrush"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "vulnerability assessment"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " adaptation planning"
                             }
                         ]
                     }, 
@@ -1897,7 +1995,40 @@
                         }, 
                         "keyword": [
                             {
-                                "keyword": "Rio Grande"
+                                "keyword": " Arizona"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " New Mexico"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Colorado"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Location Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Location Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " Utah"
                             }
                         ]
                     }
@@ -1928,20 +2059,20 @@
             "metadataInfo": {
                 "metadataOnlineResource": [
                     {
-                        "uri": "https://www.sciencebase.gov/catalog/item/58ebfd38e4b0b4d95d3209fe?community=Southern+Rockies+Landscape+Conservation+Cooperative"
+                        "uri": "https://www.sciencebase.gov/catalog/item/5693e56ee4b09c7f9a21a41d?community=Southern+Rockies+Landscape+Conservation+Cooperative"
                     }
                 ], 
                 "parentMetadata": {
                     "identifier": [
                         {
-                            "identifier": "58ebfcb3e4b0b4d95d3209fa", 
+                            "identifier": "56cde778e4b0b1892d9f0d07", 
                             "namespace": "gov.sciencebase.catalog"
                         }
                     ], 
                     "title": "ScienceBase Parent"
                 }, 
                 "metadataIdentifier": {
-                    "identifier": "58ebfd38e4b0b4d95d3209fe", 
+                    "identifier": "5693e56ee4b09c7f9a21a41d", 
                     "namespace": "gov.sciencebase.catalog"
                 }, 
                 "metadataContact": [
@@ -1988,7 +2119,7 @@
                                     "unitsOfDistribution": "unknown", 
                                     "onlineOption": [
                                         {
-                                            "uri": "https://www.sciencebase.gov/catalog/item/58ebfd38e4b0b4d95d3209fe?community=Southern+Rockies+Landscape+Conservation+Cooperative"
+                                            "uri": "https://www.sciencebase.gov/catalog/item/5693e56ee4b09c7f9a21a41d?community=Southern+Rockies+Landscape+Conservation+Cooperative"
                                         }
                                     ]
                                 }

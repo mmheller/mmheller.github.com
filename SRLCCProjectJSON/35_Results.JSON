@@ -3,10 +3,10 @@
         "metadataRepository": [
             {
                 "metadataStandard": "mdJSON", 
-                "citiation": {
+                "citation": {
                     "title": "LCC Network Science Catalog"
                 }, 
-                "repository": "ScienceBase"
+                "repository": "LCCScienceCatalog"
             }
         ], 
         "contact": [
@@ -62,14 +62,405 @@
                 ]
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "88", 
                 "isOrganization": true, 
-                "name": "Native Planning Institute", 
-                "contactType": "Private"
+                "name": "U.S. Fish and Wildlife Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:kevin_m_johnson@fws.gov"
+                    }
+                ], 
+                "contactId": "14", 
+                "contactType": "LCC"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Colorado Division of Parks and Wildlife", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:harry.crockett@state.co.us"
+                    }
+                ], 
+                "contactId": "23", 
+                "contactType": "State"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "26", 
+                "isOrganization": true, 
+                "name": "Western Area Fish and Wildlife Agencies", 
+                "contactType": "State"
             }
         ], 
-        "metadata": null, 
+        "metadata": {
+            "resourceInfo": {
+                "status": [
+                    "completed"
+                ], 
+                "pointOfContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "581fc1d4-2dbd-4995-8801-3c6e09d6bea8"
+                            }
+                        ], 
+                        "role": "pointOfContact"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "23"
+                            }
+                        ], 
+                        "role": "principalInvestigator"
+                    }
+                ], 
+                "abstract": "The Colorado River Cutthroat Trout (CRCT) conservation team identified a need to further develop a long-term approach to updating and maintaining the CRCT GIS-based database that was created using the Inland Cutthroat Trout Protocol (ICP).  The University of Wyoming Geographic Information Science Center was contracted to develop a multi-state, web-based database and a web-based application for viewing and editing the data to aid in conservation activities. Previously, Colorado, Utah and Wyoming all used separate, desktop databases that could not be shared with partnering agencies nor updated for all users simultaneously. The database and application is for CRCT as well as other cutthroat species (Greenback cutthroat trout and Rio Grande cutthroat trout). \n\nThe developed web application is composed of a data viewer and a password protected editor.  Base layers include: topographic rasters, aerial images and NHD streams and water bodies. Cutthroat spatial data includes: historic distribution, barriers, current distribution, and conservation populations.  The viewer includes a query tool to view database attributes associated with barriers, current distribution and conservation population.  The editor has stream reach editing tools that allow addition, deletion and adjusting of stream reaches and barriers and an online form to add, delete and modify attributes. Any edits conducted through the web tool will not be permanent until reviewed and validated by the database manager and Geographical Management Unit leaders on an annual basis.\n\nFY2013\nThe Colorado River Cutthroat Trout (CRCT) conservation team identified a need to further develop a long-term approach to updating and maintaining the CRCT GIS-based database that was created using the Inland Cutthroat Trout Protocol (ICP).  The University of Wyoming Geographic Information Science Center was contracted to develop a multi-state, web-based database and a web-based application for viewing and editing the data to aid in conservation activities. Previously, Colorado, Utah and Wyoming all used separate, desktop databases that could not be shared with partnering agencies nor updated for all users simultaneously. The database and application is for CRCT as well as other cutthroat species (Greenback cutthroat trout and Rio Grande cutthroat trout). \n\nThe developed web application is composed of a data viewer and a password protected editor.  Base layers include: topographic rasters, aerial images and NHD streams and water bodies. Cutthroat spatial data includes: historic distribution, barriers, current distribution, and conservation populations.  The viewer includes a query tool to view database attributes associated with barriers, current distribution and conservation population.  The editor has stream reach editing tools that allow addition, deletion and adjusting of stream reaches and barriers and an online form to add, delete and modify attributes. Any edits conducted through the web tool will not be permanent until reviewed and validated by the database manager and Geographical Management Unit leaders on an annual basis.", 
+                "citation": {
+                    "date": [
+                        {
+                            "date": "2013-01-11", 
+                            "dateType": "date type"
+                        }
+                    ], 
+                    "identifier": [
+                        {
+                            "identifier": "35", 
+                            "namespace": "lcc:srC:\\Python27\\ArcGIS10.5\\python.exe"
+                        }, 
+                        {
+                            "identifier": "56e9a0b0e4b0f59b85d819e3", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ], 
+                    "responsibleParty": [
+                        {
+                            "party": [
+                                {
+                                    "contactId": "14", 
+                                    "organizationMembers": [
+                                        "14"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "23", 
+                                    "organizationMembers": [
+                                        "23"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "26", 
+                                    "organizationMembers": [
+                                        "26"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }
+                    ], 
+                    "onlineResource": [
+                        {
+                            "description": "Webpage with details on this project", 
+                            "protocol": "HTTP", 
+                            "uri": "https://southernrockieslcc.org/sites/all/modules/custom/rockies_pts/pts/GNLCC_PTS4_SRLCC/prj_report.html?PRJ_ID=35", 
+                            "name": "Project Report Page"
+                        }
+                    ], 
+                    "title": "Inland Cutthroat Trout Protocol (ICP) Web-mapping Application: Native Cutthroat Trout Data Compilation and Internet Database Development"
+                }, 
+                "defaultResourceLocale": {
+                    "country": "USA", 
+                    "characterSet": "UTF-8", 
+                    "language": "eng"
+                }, 
+                "purpose": "Data Management and Integration Informing Conservation Delivery  State agencies Federal resource managers ", 
+                "extent": [
+                    {
+                        "geographicExtent": [
+                            {
+                                "boundingBox": {
+                                    "northLatitude": 39.00200521645203, 
+                                    "westLongitude": -114.0647730800914, 
+                                    "southLatitude": 36.99628868143806, 
+                                    "eastLongitude": -110.78479283923073
+                                }, 
+                                "geographicElement": [
+                                    {
+                                        "type": "Polygon", 
+                                        "coordinates": [
+                                            [
+                                                [
+                                                    -114.0647730800914, 
+                                                    36.99628868143806
+                                                ], 
+                                                [
+                                                    -114.0647730800914, 
+                                                    39.00200521645203
+                                                ], 
+                                                [
+                                                    -110.78479283923073, 
+                                                    39.00200521645203
+                                                ], 
+                                                [
+                                                    -110.78479283923073, 
+                                                    36.99628868143806
+                                                ], 
+                                                [
+                                                    -114.0647730800914, 
+                                                    36.99628868143806
+                                                ]
+                                            ]
+                                        ]
+                                    }
+                                ]
+                            }
+                        ], 
+                        "description": "Project Boundary"
+                    }
+                ], 
+                "timePeriod": {
+                    "endDateTime": "2015-10-07", 
+                    "startDateTime": "2013-01-11"
+                }, 
+                "resourceUsage": [
+                    {
+                        "specificUsage": "Project information", 
+                        "userContactInfo": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "581fc1d4-2dbd-4995-8801-3c6e09d6bea8"
+                                    }
+                                ], 
+                                "role": "administrator"
+                            }
+                        ]
+                    }
+                ], 
+                "keyword": [
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC Project Category", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/52dee7c5e4b0dee2a6cd6b18"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "5da1d3b7-375b-58ae-a134-2ee0c94c395f"
+                                }
+                            ], 
+                            "title": "Project Category - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Informing Conservation Delivery"
+                            }, 
+                            {
+                                "keyword": "Data Management and Integration"
+                            }
+                        ]
+                    }, 
+                    {
+                        "fullPath": true, 
+                        "keywordType": "LCC End User Type", 
+                        "thesaurus": {
+                            "date": [
+                                {
+                                    "date": "2017-09", 
+                                    "dateType": "revision"
+                                }
+                            ], 
+                            "edition": "2017", 
+                            "onlineResource": [
+                                {
+                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/54760ef9e4b0f62cb5dc41a0"
+                                }
+                            ], 
+                            "identifier": [
+                                {
+                                    "identifier": "425f4a7c-dca2-56d8-947e-6f6bd1033d70"
+                                }
+                            ], 
+                            "title": "End User Types - Landscape Conservation Cooperatives"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "State agencies"
+                            }, 
+                            {
+                                "keyword": "Federal resource managers"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " web-mapping"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": " database"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Keywords", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Keywords Thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Cutthroat trout"
+                            }
+                        ]
+                    }, 
+                    {
+                        "keywordType": "Southern Rockies LCC Conservation Targets", 
+                        "thesaurus": {
+                            "title": "Custom Southern Rockies LCC Conservation Targets thesaurus"
+                        }, 
+                        "keyword": [
+                            {
+                                "keyword": "Native Fish"
+                            }
+                        ]
+                    }
+                ], 
+                "resourceType": [
+                    {
+                        "type": "project"
+                    }
+                ], 
+                "resourceMaintenance": [
+                    {
+                        "frequency": "as needed", 
+                        "contact": [
+                            {
+                                "party": [
+                                    {
+                                        "contactId": "581fc1d4-2dbd-4995-8801-3c6e09d6bea8"
+                                    }
+                                ], 
+                                "role": "custodian"
+                            }
+                        ]
+                    }
+                ], 
+                "shortAbstract": ""
+            }, 
+            "funding": [], 
+            "metadataInfo": {
+                "metadataOnlineResource": [
+                    {
+                        "uri": "https://www.sciencebase.gov/catalog/item/56e9a0b0e4b0f59b85d819e3?community=Southern+Rockies+Landscape+Conservation+Cooperative"
+                    }
+                ], 
+                "parentMetadata": {
+                    "identifier": [
+                        {
+                            "identifier": "53166b6ee4b099ddeebb6da9", 
+                            "namespace": "gov.sciencebase.catalog"
+                        }
+                    ], 
+                    "title": "ScienceBase Parent"
+                }, 
+                "metadataIdentifier": {
+                    "identifier": "56e9a0b0e4b0f59b85d819e3", 
+                    "namespace": "gov.sciencebase.catalog"
+                }, 
+                "metadataContact": [
+                    {
+                        "party": [
+                            {
+                                "contactId": "581fc1d4-2dbd-4995-8801-3c6e09d6bea8"
+                            }
+                        ], 
+                        "role": "author"
+                    }, 
+                    {
+                        "party": [
+                            {
+                                "contactId": "581fc1d4-2dbd-4995-8801-3c6e09d6bea8"
+                            }
+                        ], 
+                        "role": "custodian"
+                    }
+                ], 
+                "metadataDate": [
+                    {
+                        "date": "2018-03-22", 
+                        "dateType": "creation"
+                    }
+                ]
+            }, 
+            "associatedResource": [], 
+            "resourceDistribution": [
+                {
+                    "distributor": [
+                        {
+                            "contact": {
+                                "party": [
+                                    {
+                                        "contactId": "581fc1d4-2dbd-4995-8801-3c6e09d6bea8"
+                                    }
+                                ], 
+                                "role": "distributor"
+                            }, 
+                            "transferOption": [
+                                {
+                                    "transferSize": 99999, 
+                                    "unitsOfDistribution": "unknown", 
+                                    "onlineOption": [
+                                        {
+                                            "uri": "https://www.sciencebase.gov/catalog/item/56e9a0b0e4b0f59b85d819e3?community=Southern+Rockies+Landscape+Conservation+Cooperative"
+                                        }
+                                    ]
+                                }
+                            ], 
+                            "orderProcess": [
+                                {
+                                    "orderingInstructions": "Download products as needed from the Sciencebase.gov URL provided", 
+                                    "fees": "00USD"
+                                }
+                            ]
+                        }
+                    ], 
+                    "description": "GNLCC projet page includes project information and downloadable products on Scinecebase.gov"
+                }
+            ]
+        }, 
         "schema": {
             "version": "2.1.2", 
             "name": "mdJson"
