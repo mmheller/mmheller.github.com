@@ -73,32 +73,6 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "US Geological Survey", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:dpilliod@usgs.gov"
-                    }
-                ], 
-                "contactId": "G230", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "David Pilliod", 
-                "memberOfOrganization": [
-                    "G230"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:dpilliod@usgs.gov"
-                    }
-                ], 
-                "contactId": "230", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": true, 
                 "name": "University of Idaho", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
@@ -124,10 +98,31 @@
                 "contactType": "Academic"
             }, 
             {
+                "memberOfOrganization": [
+                    "G794"
+                ], 
+                "contactId": "1096", 
+                "isOrganization": false, 
+                "name": "Aaron Young", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "US Geological Survey", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:tkatzner@usgs.gov"
+                    }
+                ], 
+                "contactId": "G851", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": false, 
                 "name": "Todd Katzner", 
                 "memberOfOrganization": [
-                    "G230"
+                    "G851"
                 ], 
                 "onlineResource": [
                     {
@@ -139,9 +134,23 @@
             }, 
             {
                 "isOrganization": false, 
+                "name": "David Pilliod", 
+                "memberOfOrganization": [
+                    "G851"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:dpilliod@usgs.gov"
+                    }
+                ], 
+                "contactId": "230", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
                 "name": "Douglas Shinneman", 
                 "memberOfOrganization": [
-                    "G230"
+                    "G851"
                 ], 
                 "onlineResource": [
                     {
@@ -208,31 +217,11 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G230", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "230", 
-                                    "organizationMembers": [
-                                        "G230"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G794", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -243,14 +232,45 @@
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "1096", 
+                                    "organizationMembers": [
+                                        "G794"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G851", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
                                 {
                                     "contactId": "851", 
                                     "organizationMembers": [
-                                        "G230"
+                                        "G851"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "230", 
+                                    "organizationMembers": [
+                                        "G851"
                                     ]
                                 }
                             ], 
@@ -261,7 +281,7 @@
                                 {
                                     "contactId": "855", 
                                     "organizationMembers": [
-                                        "G230"
+                                        "G851"
                                     ]
                                 }
                             ], 
@@ -420,12 +440,6 @@
                         "keyword": [
                             {
                                 "keyword": "Report"
-                            }, 
-                            {
-                                "keyword": "Presentation"
-                            }, 
-                            {
-                                "keyword": "Publication"
                             }
                         ]
                     }, 
@@ -721,12 +735,33 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-01-29", 
+                        "date": "2018-03-22", 
                         "dateType": "creation"
                     }
                 ]
             }, 
-            "associatedResource": [], 
+            "associatedResource": [
+                {
+                    "resourceType": [
+                        {
+                            "type": "Report"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5a9877d9e4b06990606ddf1f", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Progress Report: Multi-scale assessment of wildlife response after juniper removal in a sagebrush steppe landscape"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Progress Report: Multi-scale assessment of wildlife response after juniper removal in a sagebrush steppe landscape"
+                    }
+                }
+            ], 
             "resourceDistribution": [
                 {
                     "distributor": [

@@ -87,6 +87,32 @@
             }, 
             {
                 "isOrganization": true, 
+                "name": "University of Nevada, Reno", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:pweisberg@cabnr.unr.edu"
+                    }
+                ], 
+                "contactId": "G802", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Peter Weisberg", 
+                "memberOfOrganization": [
+                    "G802"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:pweisberg@cabnr.unr.edu"
+                    }
+                ], 
+                "contactId": "802", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
                 "name": "University of Nevada - Reno", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
@@ -112,22 +138,6 @@
                 "contactType": "Academic"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "G949", 
-                "isOrganization": true, 
-                "name": "US Fish & Wildife Service", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G949"
-                ], 
-                "contactId": "949", 
-                "isOrganization": false, 
-                "name": "John Kasbohm", 
-                "contactType": "Federal"
-            }, 
-            {
                 "isOrganization": false, 
                 "name": "Jim Sedinger", 
                 "memberOfOrganization": [
@@ -142,30 +152,20 @@
                 "contactType": "Academic"
             }, 
             {
-                "isOrganization": true, 
-                "name": "University of Nevada, Reno", 
                 "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:pweisberg@cabnr.unr.edu"
-                    }
-                ], 
-                "contactId": "G802", 
-                "contactType": "Academic"
+                "contactId": "G949", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
             }, 
             {
-                "isOrganization": false, 
-                "name": "Peter Weisberg", 
                 "memberOfOrganization": [
-                    "G802"
+                    "G949"
                 ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:pweisberg@cabnr.unr.edu"
-                    }
-                ], 
-                "contactId": "802", 
-                "contactType": "Academic"
+                "contactId": "949", 
+                "isOrganization": false, 
+                "name": "John Kasbohm", 
+                "contactType": "Federal"
             }
         ], 
         "metadata": {
@@ -246,6 +246,26 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G802", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "802", 
+                                    "organizationMembers": [
+                                        "G802"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G790", 
                                     "organizationMembers": []
                                 }
@@ -266,6 +286,17 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "775", 
+                                    "organizationMembers": [
+                                        "G790"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G949", 
                                     "organizationMembers": []
                                 }
@@ -282,37 +313,6 @@
                                 }
                             ], 
                             "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "775", 
-                                    "organizationMembers": [
-                                        "G790"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G802", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "802", 
-                                    "organizationMembers": [
-                                        "G802"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
                         }
                     ], 
                     "onlineResource": [
@@ -1114,9 +1114,6 @@
                         }, 
                         "keyword": [
                             {
-                                "keyword": "Datasets/Database"
-                            }, 
-                            {
                                 "keyword": "Publication"
                             }
                         ]
@@ -1419,7 +1416,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-01-29", 
+                        "date": "2018-03-22", 
                         "dateType": "creation"
                     }
                 ]
@@ -1435,54 +1432,14 @@
                     "metadataCitation": {
                         "identifier": [
                             {
-                                "identifier": "59fb5eeee4b0531197b163d5", 
+                                "identifier": "5a987968e4b06990606ddf48", 
                                 "namespace": "gov.sciencbase.catalog"
                             }
                         ], 
-                        "title": "Current and historic landscape features as potential barriers to gene flow in pygmy rabbits"
+                        "title": "Journal Article: Genetically distinct populations of the pygmy rabbit (Brachylagus idahoensis) in the Mono Basin of California"
                     }, 
                     "resourceCitation": {
-                        "title": "Current and historic landscape features as potential barriers to gene flow in pygmy rabbits"
-                    }
-                }, 
-                {
-                    "resourceType": [
-                        {
-                            "type": "Publication"
-                        }
-                    ], 
-                    "associationType": "product", 
-                    "metadataCitation": {
-                        "identifier": [
-                            {
-                                "identifier": "59fb5effe4b0531197b163d7", 
-                                "namespace": "gov.sciencbase.catalog"
-                            }
-                        ], 
-                        "title": "Habitat models at regional and landscape scales for pygmy rabbit"
-                    }, 
-                    "resourceCitation": {
-                        "title": "Habitat models at regional and landscape scales for pygmy rabbit"
-                    }
-                }, 
-                {
-                    "resourceType": [
-                        {
-                            "type": "Datasets/Database"
-                        }
-                    ], 
-                    "associationType": "product", 
-                    "metadataCitation": {
-                        "identifier": [
-                            {
-                                "identifier": "59fb5edbe4b0531197b163d3", 
-                                "namespace": "gov.sciencbase.catalog"
-                            }
-                        ], 
-                        "title": "Population genetic structure across the southern range of the pygmy rabbit"
-                    }, 
-                    "resourceCitation": {
-                        "title": "Population genetic structure across the southern range of the pygmy rabbit"
+                        "title": "Journal Article: Genetically distinct populations of the pygmy rabbit (Brachylagus idahoensis) in the Mono Basin of California"
                     }
                 }, 
                 {

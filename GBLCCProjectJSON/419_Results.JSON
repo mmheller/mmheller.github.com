@@ -73,48 +73,6 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "Idaho Dept of Fish & Game", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:shane.roberts@idfg.idaho.gov"
-                    }
-                ], 
-                "contactId": "G829", 
-                "contactType": "State"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Shane Roberts", 
-                "memberOfOrganization": [
-                    "G829"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:shane.roberts@idfg.idaho.gov"
-                    }
-                ], 
-                "contactId": "829", 
-                "contactType": "State"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G894", 
-                "isOrganization": true, 
-                "name": "Must Resolve", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G894"
-                ], 
-                "contactId": "894", 
-                "isOrganization": false, 
-                "name": "Must Resolve Must Resolve", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": true, 
                 "name": "Bureau of Land Management", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
@@ -140,22 +98,68 @@
                 "contactType": "Federal"
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "G1095", 
                 "isOrganization": true, 
                 "name": "University of Idaho", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1095"
+                ], 
+                "contactId": "1095", 
+                "isOrganization": false, 
+                "name": "Andrew Meyers", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G894", 
+                "isOrganization": true, 
+                "name": "Must Resolve", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G894"
+                ], 
+                "contactId": "894", 
+                "isOrganization": false, 
+                "name": "Must Resolve Must Resolve", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Idaho Dept of Fish & Game", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:klaunchb@uidaho.edu"
+                        "uri": "mailto:shane.roberts@idfg.idaho.gov"
                     }
                 ], 
-                "contactId": "G805", 
-                "contactType": "Academic"
+                "contactId": "G829", 
+                "contactType": "State"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Shane Roberts", 
+                "memberOfOrganization": [
+                    "G829"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:shane.roberts@idfg.idaho.gov"
+                    }
+                ], 
+                "contactId": "829", 
+                "contactType": "State"
             }, 
             {
                 "isOrganization": false, 
                 "name": "Karen Launchbaugh", 
                 "memberOfOrganization": [
-                    "G805"
+                    "G1095"
                 ], 
                 "onlineResource": [
                     {
@@ -169,7 +173,7 @@
                 "isOrganization": false, 
                 "name": "Courtney Conway", 
                 "memberOfOrganization": [
-                    "G805"
+                    "G1095"
                 ], 
                 "onlineResource": [
                     {
@@ -177,6 +181,24 @@
                     }
                 ], 
                 "contactId": "783", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G829"
+                ], 
+                "contactId": "741", 
+                "isOrganization": false, 
+                "name": "David Musil", 
+                "contactType": "State"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1095"
+                ], 
+                "contactId": "1094", 
+                "isOrganization": false, 
+                "name": "Anthony Locatelli", 
                 "contactType": "Academic"
             }
         ], 
@@ -236,7 +258,7 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G829", 
+                                    "contactId": "G842", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -245,9 +267,29 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "829", 
+                                    "contactId": "842", 
                                     "organizationMembers": [
-                                        "G829"
+                                        "G842"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G1095", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "1095", 
+                                    "organizationMembers": [
+                                        "G1095"
                                     ]
                                 }
                             ], 
@@ -276,7 +318,7 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G842", 
+                                    "contactId": "G829", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -285,19 +327,10 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "842", 
+                                    "contactId": "829", 
                                     "organizationMembers": [
-                                        "G842"
+                                        "G829"
                                     ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G805", 
-                                    "organizationMembers": []
                                 }
                             ], 
                             "role": "Collaborator"
@@ -307,7 +340,7 @@
                                 {
                                     "contactId": "805", 
                                     "organizationMembers": [
-                                        "G805"
+                                        "G1095"
                                     ]
                                 }
                             ], 
@@ -318,11 +351,33 @@
                                 {
                                     "contactId": "783", 
                                     "organizationMembers": [
-                                        "G805"
+                                        "G1095"
                                     ]
                                 }
                             ], 
                             "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "741", 
+                                    "organizationMembers": [
+                                        "G829"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "1094", 
+                                    "organizationMembers": [
+                                        "G1095"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }
                     ], 
                     "onlineResource": [
@@ -1615,41 +1670,6 @@
                 "keyword": [
                     {
                         "fullPath": true, 
-                        "keywordType": "LCC Deliverable", 
-                        "thesaurus": {
-                            "date": [
-                                {
-                                    "date": "2017-09", 
-                                    "dateType": "revision"
-                                }
-                            ], 
-                            "edition": "2017", 
-                            "onlineResource": [
-                                {
-                                    "uri": "https://www.sciencebase.gov/vocab/vocabulary/5307baa3e4b0dcc7bdc913a9"
-                                }
-                            ], 
-                            "identifier": [
-                                {
-                                    "identifier": "fa455d4a-5d87-56bc-b074-9a967beff904"
-                                }
-                            ], 
-                            "title": "Deliverable Types - Landscape Conservation Cooperatives"
-                        }, 
-                        "keyword": [
-                            {
-                                "keyword": "Datasets/Database"
-                            }, 
-                            {
-                                "keyword": "Publication"
-                            }, 
-                            {
-                                "keyword": "Training/Outreach/Workshop"
-                            }
-                        ]
-                    }, 
-                    {
-                        "fullPath": true, 
                         "keywordType": "LCC Project Category", 
                         "thesaurus": {
                             "date": [
@@ -1852,7 +1872,7 @@
                             "sourceId": "560", 
                             "currency": "USD", 
                             "amount": 100001.0, 
-                            "recipientId": "G805", 
+                            "recipientId": "G1095", 
                             "matching": false
                         }
                     ], 
@@ -1904,7 +1924,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-01-29", 
+                        "date": "2018-03-22", 
                         "dateType": "creation"
                     }
                 ]
@@ -1924,10 +1944,70 @@
                                 "namespace": "gov.sciencbase.catalog"
                             }
                         ], 
-                        "title": "Effects of grazing on sage-grouse and other shrub-steppe birds: A collaborative project to inform management of sage-steppe rangelands"
+                        "title": "Webinar: Effects of grazing on sage-grouse and other shrub-steppe birds: A collaborative project to inform management of sage-steppe rangelands"
                     }, 
                     "resourceCitation": {
-                        "title": "Effects of grazing on sage-grouse and other shrub-steppe birds: A collaborative project to inform management of sage-steppe rangelands"
+                        "title": "Webinar: Effects of grazing on sage-grouse and other shrub-steppe birds: A collaborative project to inform management of sage-steppe rangelands"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Report"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5a987a44e4b06990606ddf56?", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Progress Report: Grouse and Grazing 2015 Report"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Progress Report: Grouse and Grazing 2015 Report"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Report"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5a987a8fe4b06990606ddf5a", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Progress Report: Grouse and Grazing 2016 Report"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Progress Report: Grouse and Grazing 2016 Report"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Report"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5a987b1de4b06990606ddf67", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Progress Report: 2017 Progress Updates"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Progress Report: 2017 Progress Updates"
                     }
                 }
             ], 

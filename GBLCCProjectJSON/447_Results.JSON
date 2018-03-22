@@ -79,19 +79,29 @@
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "G944", 
                 "isOrganization": true, 
                 "name": "US Geological Survey", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mgermino@usgs.gov"
+                    }
+                ], 
+                "contactId": "G782", 
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [
-                    "G944"
-                ], 
-                "contactId": "944", 
                 "isOrganization": false, 
-                "name": "Brynne Lazarus", 
+                "name": "Matt Germino", 
+                "memberOfOrganization": [
+                    "G782"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mgermino@usgs.gov"
+                    }
+                ], 
+                "contactId": "782", 
                 "contactType": "Federal"
             }, 
             {
@@ -109,6 +119,15 @@
                 "isOrganization": false, 
                 "name": "Jane Mangold", 
                 "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G782"
+                ], 
+                "contactId": "944", 
+                "isOrganization": false, 
+                "name": "Brynne Lazarus", 
+                "contactType": "Federal"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -143,22 +162,8 @@
                 "contactType": "Federal"
             }, 
             {
-                "isOrganization": false, 
-                "name": "Matt Germino", 
                 "memberOfOrganization": [
-                    "G944"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mgermino@usgs.gov"
-                    }
-                ], 
-                "contactId": "782", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G944"
+                    "G782"
                 ], 
                 "contactId": "358", 
                 "isOrganization": false, 
@@ -217,7 +222,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Funding"
                         }, 
                         {
                             "party": [
@@ -233,22 +238,22 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G944", 
+                                    "contactId": "G782", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Contributor"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "944", 
+                                    "contactId": "782", 
                                     "organizationMembers": [
-                                        "G944"
+                                        "G782"
                                     ]
                                 }
                             ], 
-                            "role": "Contributor"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -265,6 +270,17 @@
                                     "contactId": "943", 
                                     "organizationMembers": [
                                         "G943"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "944", 
+                                    "organizationMembers": [
+                                        "G782"
                                     ]
                                 }
                             ], 
@@ -313,20 +329,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "782", 
-                                    "organizationMembers": [
-                                        "G944"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "358", 
                                     "organizationMembers": [
-                                        "G944"
+                                        "G782"
                                     ]
                                 }
                             ], 
@@ -2377,7 +2382,7 @@
                             "sourceId": "388", 
                             "currency": "USD", 
                             "amount": 53250.0, 
-                            "recipientId": "G944", 
+                            "recipientId": "G782", 
                             "matching": false
                         }
                     ], 
@@ -2395,7 +2400,7 @@
                             "sourceId": "389", 
                             "currency": "USD", 
                             "amount": 53250.0, 
-                            "recipientId": "G944", 
+                            "recipientId": "G782", 
                             "matching": false
                         }
                     ], 
@@ -2447,7 +2452,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-01-29", 
+                        "date": "2018-03-22", 
                         "dateType": "creation"
                     }
                 ]

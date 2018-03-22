@@ -99,20 +99,6 @@
             }, 
             {
                 "isOrganization": false, 
-                "name": "Elizabeth Marino", 
-                "memberOfOrganization": [
-                    "G820"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:elizabeth.marino@osucascades.edu"
-                    }
-                ], 
-                "contactId": "836", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
                 "name": "Philip Mote", 
                 "memberOfOrganization": [
                     "G820"
@@ -123,6 +109,20 @@
                     }
                 ], 
                 "contactId": "795", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Elizabeth Marino", 
+                "memberOfOrganization": [
+                    "G820"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:elizabeth.marino@osucascades.edu"
+                    }
+                ], 
+                "contactId": "836", 
                 "contactType": "Academic"
             }
         ], 
@@ -202,6 +202,17 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "795", 
+                                    "organizationMembers": [
+                                        "G820"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "836", 
                                     "organizationMembers": [
                                         "G820"
@@ -209,17 +220,6 @@
                                 }
                             ], 
                             "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "795", 
-                                    "organizationMembers": [
-                                        "G820"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
                         }
                     ], 
                     "onlineResource": [
@@ -837,32 +837,12 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-01-29", 
+                        "date": "2018-03-22", 
                         "dateType": "creation"
                     }
                 ]
             }, 
             "associatedResource": [
-                {
-                    "resourceType": [
-                        {
-                            "type": "Publication"
-                        }
-                    ], 
-                    "associationType": "product", 
-                    "metadataCitation": {
-                        "identifier": [
-                            {
-                                "identifier": "59cd4b7fe4b00fa06fefecf4", 
-                                "namespace": "gov.sciencbase.catalog"
-                            }
-                        ], 
-                        "title": "Understanding Native cultural dimensions of climate change in the Great Basin Science Paper"
-                    }, 
-                    "resourceCitation": {
-                        "title": "Understanding Native cultural dimensions of climate change in the Great Basin Science Paper"
-                    }
-                }, 
                 {
                     "resourceType": [
                         {
@@ -881,6 +861,26 @@
                     }, 
                     "resourceCitation": {
                         "title": "Understanding Native cultural dimensions of climate change in the Great Basin"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Publication"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "59cd4b7fe4b00fa06fefecf4", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Understanding Native cultural dimensions of climate change in the Great Basin Science Paper"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Understanding Native cultural dimensions of climate change in the Great Basin Science Paper"
                     }
                 }
             ], 

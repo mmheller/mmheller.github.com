@@ -73,19 +73,19 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G1037", 
+                "contactId": "G1039", 
                 "isOrganization": true, 
-                "name": "US Forest Service", 
-                "contactType": "Federal"
+                "name": "Teton Research Institute", 
+                "contactType": "Academic"
             }, 
             {
                 "memberOfOrganization": [
-                    "G1037"
+                    "G1039"
                 ], 
-                "contactId": "1037", 
+                "contactId": "1039", 
                 "isOrganization": false, 
-                "name": "Cheri Howell", 
-                "contactType": "Federal"
+                "name": "Kevin Krasnow", 
+                "contactType": "Academic"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -121,6 +121,52 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "G1080", 
+                "isOrganization": true, 
+                "name": "US Geological Survey", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1080"
+                ], 
+                "contactId": "1080", 
+                "isOrganization": false, 
+                "name": "Susan Earnst", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G1079", 
+                "isOrganization": true, 
+                "name": "University of Nevada - Reno", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1079"
+                ], 
+                "contactId": "1079", 
+                "isOrganization": false, 
+                "name": "Jian Yang", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Susan McIlroy", 
+                "memberOfOrganization": [
+                    "G1080"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:smcilroy@usgs.gov"
+                    }
+                ], 
+                "contactId": "926", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "G1048", 
                 "isOrganization": true, 
                 "name": "University of Idaho", 
@@ -137,18 +183,18 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G1079", 
+                "contactId": "G1097", 
                 "isOrganization": true, 
-                "name": "University of Nevada - Reno", 
+                "name": "Boise State University", 
                 "contactType": "Academic"
             }, 
             {
                 "memberOfOrganization": [
-                    "G1079"
+                    "G1097"
                 ], 
-                "contactId": "1079", 
+                "contactId": "1097", 
                 "isOrganization": false, 
-                "name": "Jian Yang", 
+                "name": "Kevin Glueckert", 
                 "contactType": "Academic"
             }, 
             {
@@ -169,22 +215,6 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G1039", 
-                "isOrganization": true, 
-                "name": "Teton Research Institute", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G1039"
-                ], 
-                "contactId": "1039", 
-                "isOrganization": false, 
-                "name": "Kevin Krasnow", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "G978", 
                 "isOrganization": true, 
                 "name": "Conservation Biology Institute", 
@@ -200,36 +230,10 @@
                 "contactType": "NGO"
             }, 
             {
-                "isOrganization": true, 
-                "name": "US Geological Survey", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:smcilroy@usgs.gov"
-                    }
-                ], 
-                "contactId": "G926", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Susan McIlroy", 
-                "memberOfOrganization": [
-                    "G926"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:smcilroy@usgs.gov"
-                    }
-                ], 
-                "contactId": "926", 
-                "contactType": "Federal"
-            }, 
-            {
                 "isOrganization": false, 
                 "name": "Doug Shinneman", 
                 "memberOfOrganization": [
-                    "G926"
+                    "G1080"
                 ], 
                 "onlineResource": [
                     {
@@ -301,12 +305,19 @@
                 "contactType": "Academic"
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "G1037", 
+                "isOrganization": true, 
+                "name": "US Forest Service", 
+                "contactType": "Federal"
+            }, 
+            {
                 "memberOfOrganization": [
-                    "G926"
+                    "G1037"
                 ], 
-                "contactId": "1080", 
+                "contactId": "1037", 
                 "isOrganization": false, 
-                "name": "Susan Earnst", 
+                "name": "Cheri Howell", 
                 "contactType": "Federal"
             }
         ], 
@@ -366,7 +377,7 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G1037", 
+                                    "contactId": "G1039", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -375,9 +386,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "1037", 
+                                    "contactId": "1039", 
                                     "organizationMembers": [
-                                        "G1037"
+                                        "G1039"
                                     ]
                                 }
                             ], 
@@ -426,6 +437,57 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G1080", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "1080", 
+                                    "organizationMembers": [
+                                        "G1080"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G1079", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "1079", 
+                                    "organizationMembers": [
+                                        "G1079"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "926", 
+                                    "organizationMembers": [
+                                        "G1080"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G1048", 
                                     "organizationMembers": []
                                 }
@@ -446,7 +508,7 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G1079", 
+                                    "contactId": "G1097", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -455,9 +517,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "1079", 
+                                    "contactId": "1097", 
                                     "organizationMembers": [
-                                        "G1079"
+                                        "G1097"
                                     ]
                                 }
                             ], 
@@ -486,26 +548,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G1039", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "1039", 
-                                    "organizationMembers": [
-                                        "G1039"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G978", 
                                     "organizationMembers": []
                                 }
@@ -526,29 +568,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G926", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "926", 
-                                    "organizationMembers": [
-                                        "G926"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "915", 
                                     "organizationMembers": [
-                                        "G926"
+                                        "G1080"
                                     ]
                                 }
                             ], 
@@ -608,9 +630,18 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "1080", 
+                                    "contactId": "G1037", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "1037", 
                                     "organizationMembers": [
-                                        "G926"
+                                        "G1037"
                                     ]
                                 }
                             ], 
@@ -2545,7 +2576,7 @@
                             "sourceId": "388", 
                             "currency": "USD", 
                             "amount": 20408.0, 
-                            "recipientId": "G926", 
+                            "recipientId": "G1080", 
                             "matching": false
                         }
                     ], 
@@ -2597,7 +2628,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-01-29", 
+                        "date": "2018-03-22", 
                         "dateType": "creation"
                     }
                 ]
@@ -2701,6 +2732,26 @@
                     }, 
                     "resourceCitation": {
                         "title": "The Role of Fire in Aspen Ecology and Restoration"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Publication"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5a9883c1e4b06990606de017", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Thesis: Quantifying Habitat Relationships of Songbirds in Quaking Aspen (Populus Tremuloides) and Other Montane Communities of the Jarbidge Mountains, Nevada"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Thesis: Quantifying Habitat Relationships of Songbirds in Quaking Aspen (Populus Tremuloides) and Other Montane Communities of the Jarbidge Mountains, Nevada"
                     }
                 }
             ], 

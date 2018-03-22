@@ -66,6 +66,13 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "910", 
+                "isOrganization": true, 
+                "name": "Nevada Department of Wildlife", 
+                "contactType": "State"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "908", 
                 "isOrganization": true, 
                 "name": "University of Nevada - Reno", 
@@ -87,10 +94,19 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "910", 
+                "contactId": "G934", 
                 "isOrganization": true, 
-                "name": "Nevada Department of Wildlife", 
-                "contactType": "State"
+                "name": "University of Nevada - Reno", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G934"
+                ], 
+                "contactId": "934", 
+                "isOrganization": false, 
+                "name": "Jane Van Gunst", 
+                "contactType": "Academic"
             }, 
             {
                 "isOrganization": true, 
@@ -120,22 +136,6 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G983", 
-                "isOrganization": true, 
-                "name": "University of Nevada - Reno", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G983"
-                ], 
-                "contactId": "983", 
-                "isOrganization": false, 
-                "name": "Tom Dilts", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "G935", 
                 "isOrganization": true, 
                 "name": "US Forest Service", 
@@ -149,15 +149,6 @@
                 "isOrganization": false, 
                 "name": "Lauren Cleeves", 
                 "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G983"
-                ], 
-                "contactId": "934", 
-                "isOrganization": false, 
-                "name": "Jane Van Gunst", 
-                "contactType": "Academic"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -193,23 +184,9 @@
             }, 
             {
                 "isOrganization": false, 
-                "name": "Peter Weisberg", 
-                "memberOfOrganization": [
-                    "G827"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:pweisberg@cabnr.unr.edu"
-                    }
-                ], 
-                "contactId": "802", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
                 "name": "Elizabeth Leger", 
                 "memberOfOrganization": [
-                    "G983"
+                    "G934"
                 ], 
                 "onlineResource": [
                     {
@@ -248,6 +225,29 @@
                 "isOrganization": false, 
                 "name": "Jack Williams", 
                 "contactType": "NGO"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G934"
+                ], 
+                "contactId": "983", 
+                "isOrganization": false, 
+                "name": "Tom Dilts", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Peter Weisberg", 
+                "memberOfOrganization": [
+                    "G827"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:pweisberg@cabnr.unr.edu"
+                    }
+                ], 
+                "contactId": "802", 
+                "contactType": "Academic"
             }
         ], 
         "metadata": {
@@ -295,6 +295,17 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "910", 
+                                    "organizationMembers": [
+                                        "910"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "908", 
                                     "organizationMembers": [
                                         "908"
@@ -328,13 +339,22 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "910", 
+                                    "contactId": "G934", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "934", 
                                     "organizationMembers": [
-                                        "910"
+                                        "G934"
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -359,26 +379,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G983", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "983", 
-                                    "organizationMembers": [
-                                        "G983"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G935", 
                                     "organizationMembers": []
                                 }
@@ -391,17 +391,6 @@
                                     "contactId": "935", 
                                     "organizationMembers": [
                                         "G935"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "934", 
-                                    "organizationMembers": [
-                                        "G983"
                                     ]
                                 }
                             ], 
@@ -450,20 +439,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "802", 
-                                    "organizationMembers": [
-                                        "G827"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "796", 
                                     "organizationMembers": [
-                                        "G983"
+                                        "G934"
                                     ]
                                 }
                             ], 
@@ -499,6 +477,28 @@
                                 }
                             ], 
                             "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "983", 
+                                    "organizationMembers": [
+                                        "G934"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "802", 
+                                    "organizationMembers": [
+                                        "G827"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
                         }
                     ], 
                     "onlineResource": [
@@ -639,10 +639,7 @@
                                 "keyword": "Report"
                             }, 
                             {
-                                "keyword": "Applications and Tools"
-                            }, 
-                            {
-                                "keyword": "Datasets/Database"
+                                "keyword": "Presentation"
                             }
                         ]
                     }, 
@@ -820,10 +817,28 @@
                 {
                     "allocation": [
                         {
+                            "sourceId": "908", 
+                            "currency": "USD", 
+                            "amount": 155268.0, 
+                            "recipientId": "G934", 
+                            "matching": true
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2013-09-30", 
+                        "periodName": [
+                            "FY2013"
+                        ], 
+                        "startDateTime": "2012-10-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
                             "sourceId": "560", 
                             "currency": "USD", 
                             "amount": 48222.0, 
-                            "recipientId": "G983", 
+                            "recipientId": "G934", 
                             "matching": false
                         }
                     ], 
@@ -838,10 +853,10 @@
                 {
                     "allocation": [
                         {
-                            "sourceId": "908", 
+                            "sourceId": "389", 
                             "currency": "USD", 
-                            "amount": 155268.0, 
-                            "recipientId": "G983", 
+                            "amount": 428000.0, 
+                            "recipientId": "G934", 
                             "matching": true
                         }
                     ], 
@@ -859,25 +874,7 @@
                             "sourceId": "910", 
                             "currency": "USD", 
                             "amount": 35000.0, 
-                            "recipientId": "G983", 
-                            "matching": true
-                        }
-                    ], 
-                    "timePeriod": {
-                        "endDateTime": "2013-09-30", 
-                        "periodName": [
-                            "FY2013"
-                        ], 
-                        "startDateTime": "2012-10-01"
-                    }
-                }, 
-                {
-                    "allocation": [
-                        {
-                            "sourceId": "389", 
-                            "currency": "USD", 
-                            "amount": 428000.0, 
-                            "recipientId": "G983", 
+                            "recipientId": "G934", 
                             "matching": true
                         }
                     ], 
@@ -929,12 +926,52 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-01-29", 
+                        "date": "2018-03-22", 
                         "dateType": "creation"
                     }
                 ]
             }, 
             "associatedResource": [
+                {
+                    "resourceType": [
+                        {
+                            "type": "Publication"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "59cd45abe4b00fa06fefec2b", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Journal Article: Cheatgrass Die-offs: A unique Restoration Opportunity In Northern Nevada"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Journal Article: Cheatgrass Die-offs: A unique Restoration Opportunity In Northern Nevada"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Presentation"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5a987597e4b06990606ddeef", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Webinar: Cheatgrass die offs as an opportunity for restoration"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Webinar: Cheatgrass die offs as an opportunity for restoration"
+                    }
+                }, 
                 {
                     "resourceType": [
                         {
@@ -949,10 +986,10 @@
                                 "namespace": "gov.sciencbase.catalog"
                             }
                         ], 
-                        "title": "Development of remote sensing indicators for mapping episodic die-off of an invasive annual grass (Bromus tectorum) from the Landsat archive"
+                        "title": "Journal Article: Development of remote sensing indicators for mapping episodic die-off of an invasive annual grass (Bromus tectorum) from the Landsat archive"
                     }, 
                     "resourceCitation": {
-                        "title": "Development of remote sensing indicators for mapping episodic die-off of an invasive annual grass (Bromus tectorum) from the Landsat archive"
+                        "title": "Journal Article: Development of remote sensing indicators for mapping episodic die-off of an invasive annual grass (Bromus tectorum) from the Landsat archive"
                     }
                 }, 
                 {
@@ -969,30 +1006,10 @@
                                 "namespace": "gov.sciencbase.catalog"
                             }
                         ], 
-                        "title": "Cheatgrass die-offs as an opportunity for restoration in the Great Basin, USA: Will local or commercial native plants succeed where exotic invaders fail?"
+                        "title": "Journal Article: Cheatgrass die-off as an opportunity for restoration in the Great Basin, USA: Will local or nonlocal commercial native plants succeed where exotic invaders fail?"
                     }, 
                     "resourceCitation": {
-                        "title": "Cheatgrass die-offs as an opportunity for restoration in the Great Basin, USA: Will local or commercial native plants succeed where exotic invaders fail?"
-                    }
-                }, 
-                {
-                    "resourceType": [
-                        {
-                            "type": "Publication"
-                        }
-                    ], 
-                    "associationType": "product", 
-                    "metadataCitation": {
-                        "identifier": [
-                            {
-                                "identifier": "59cd45abe4b00fa06fefec2b", 
-                                "namespace": "gov.sciencbase.catalog"
-                            }
-                        ], 
-                        "title": "Cheatgrass Die-offs: A unique Restoration Opportunity In Northern Nevada"
-                    }, 
-                    "resourceCitation": {
-                        "title": "Cheatgrass Die-offs: A unique Restoration Opportunity In Northern Nevada"
+                        "title": "Journal Article: Cheatgrass die-off as an opportunity for restoration in the Great Basin, USA: Will local or nonlocal commercial native plants succeed where exotic invaders fail?"
                     }
                 }
             ], 

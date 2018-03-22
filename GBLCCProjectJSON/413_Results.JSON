@@ -66,6 +66,20 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "389", 
+                "isOrganization": true, 
+                "name": "Bureau of Land Management", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "898", 
+                "isOrganization": true, 
+                "name": "Gonzaga University", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "897", 
                 "isOrganization": true, 
                 "name": "Brigham Young University", 
@@ -86,17 +100,29 @@
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "389", 
                 "isOrganization": true, 
-                "name": "Bureau of Land Management", 
-                "contactType": "Federal"
+                "name": "Brigham Young University", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:phil_allen@byu.edu"
+                    }
+                ], 
+                "contactId": "G838", 
+                "contactType": "Academic"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "898", 
-                "isOrganization": true, 
-                "name": "Gonzaga University", 
+                "isOrganization": false, 
+                "name": "Phil Allen", 
+                "memberOfOrganization": [
+                    "G838"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:phil_allen@byu.edu"
+                    }
+                ], 
+                "contactId": "838", 
                 "contactType": "Academic"
             }, 
             {
@@ -123,32 +149,6 @@
                     }
                 ], 
                 "contactId": "822", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "Brigham Young University", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:phil_allen@byu.edu"
-                    }
-                ], 
-                "contactId": "G838", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Phil Allen", 
-                "memberOfOrganization": [
-                    "G838"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:phil_allen@byu.edu"
-                    }
-                ], 
-                "contactId": "838", 
                 "contactType": "Academic"
             }, 
             {
@@ -223,6 +223,28 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "389", 
+                                    "organizationMembers": [
+                                        "389"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "898", 
+                                    "organizationMembers": [
+                                        "898"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "897", 
                                     "organizationMembers": [
                                         "897"
@@ -256,10 +278,8 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "389", 
-                                    "organizationMembers": [
-                                        "389"
-                                    ]
+                                    "contactId": "G838", 
+                                    "organizationMembers": []
                                 }
                             ], 
                             "role": "Fiscal Agent"
@@ -267,9 +287,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "898", 
+                                    "contactId": "838", 
                                     "organizationMembers": [
-                                        "898"
+                                        "G838"
                                     ]
                                 }
                             ], 
@@ -290,26 +310,6 @@
                                     "contactId": "822", 
                                     "organizationMembers": [
                                         "G822"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G838", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "838", 
-                                    "organizationMembers": [
-                                        "G838"
                                     ]
                                 }
                             ], 
@@ -695,11 +695,11 @@
                 {
                     "allocation": [
                         {
-                            "sourceId": "389", 
+                            "sourceId": "896", 
                             "currency": "USD", 
-                            "amount": 34852.0, 
-                            "recipientId": "G822", 
-                            "matching": false
+                            "amount": 64000.0, 
+                            "recipientId": "G777", 
+                            "matching": true
                         }
                     ], 
                     "timePeriod": {
@@ -713,11 +713,11 @@
                 {
                     "allocation": [
                         {
-                            "sourceId": "896", 
+                            "sourceId": "389", 
                             "currency": "USD", 
-                            "amount": 64000.0, 
-                            "recipientId": "G777", 
-                            "matching": true
+                            "amount": 34852.0, 
+                            "recipientId": "G822", 
+                            "matching": false
                         }
                     ], 
                     "timePeriod": {
@@ -786,7 +786,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-01-29", 
+                        "date": "2018-03-22", 
                         "dateType": "creation"
                     }
                 ]

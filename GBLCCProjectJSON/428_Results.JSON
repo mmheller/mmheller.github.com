@@ -99,55 +99,29 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "Nevada Department of Wildlife", 
+                "name": "University of Nevada, Reno", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:jasonw@ndow.org"
+                        "uri": "mailto:mforister@unr.edu"
                     }
                 ], 
-                "contactId": "G815", 
-                "contactType": "State"
+                "contactId": "G854", 
+                "contactType": "Academic"
             }, 
             {
                 "isOrganization": false, 
-                "name": "Jason Williams", 
+                "name": "Matt Forister", 
                 "memberOfOrganization": [
-                    "G815"
+                    "G854"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:jasonw@ndow.org"
+                        "uri": "mailto:mforister@unr.edu"
                     }
                 ], 
-                "contactId": "815", 
-                "contactType": "State"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "US Fish & Wildife Service", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:gail_collins@fws.gov"
-                    }
-                ], 
-                "contactId": "G830", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Gail Collins", 
-                "memberOfOrganization": [
-                    "G830"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:gail_collins@fws.gov"
-                    }
-                ], 
-                "contactId": "830", 
-                "contactType": "Federal"
+                "contactId": "854", 
+                "contactType": "Academic"
             }, 
             {
                 "isOrganization": true, 
@@ -177,29 +151,29 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "University of Nevada, Reno", 
+                "name": "Nevada Department of Wildlife", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mforister@unr.edu"
+                        "uri": "mailto:jasonw@ndow.org"
                     }
                 ], 
-                "contactId": "G854", 
-                "contactType": "Academic"
+                "contactId": "G815", 
+                "contactType": "State"
             }, 
             {
                 "isOrganization": false, 
-                "name": "Matt Forister", 
+                "name": "Jason Williams", 
                 "memberOfOrganization": [
-                    "G854"
+                    "G815"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mforister@unr.edu"
+                        "uri": "mailto:jasonw@ndow.org"
                     }
                 ], 
-                "contactId": "854", 
-                "contactType": "Academic"
+                "contactId": "815", 
+                "contactType": "State"
             }, 
             {
                 "isOrganization": false, 
@@ -214,6 +188,32 @@
                 ], 
                 "contactId": "862", 
                 "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:gail_collins@fws.gov"
+                    }
+                ], 
+                "contactId": "G830", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Gail Collins", 
+                "memberOfOrganization": [
+                    "G830"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:gail_collins@fws.gov"
+                    }
+                ], 
+                "contactId": "830", 
+                "contactType": "Federal"
             }
         ], 
         "metadata": {
@@ -276,7 +276,7 @@
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -287,12 +287,12 @@
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "G815", 
+                                    "contactId": "G854", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -301,29 +301,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "815", 
+                                    "contactId": "854", 
                                     "organizationMembers": [
-                                        "G815"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G830", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "830", 
-                                    "organizationMembers": [
-                                        "G830"
+                                        "G854"
                                     ]
                                 }
                             ], 
@@ -352,7 +332,7 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G854", 
+                                    "contactId": "G815", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -361,9 +341,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "854", 
+                                    "contactId": "815", 
                                     "organizationMembers": [
-                                        "G854"
+                                        "G815"
                                     ]
                                 }
                             ], 
@@ -375,6 +355,26 @@
                                     "contactId": "862", 
                                     "organizationMembers": [
                                         "G854"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G830", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "830", 
+                                    "organizationMembers": [
+                                        "G830"
                                     ]
                                 }
                             ], 
@@ -2558,7 +2558,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-01-29", 
+                        "date": "2018-03-22", 
                         "dateType": "creation"
                     }
                 ]

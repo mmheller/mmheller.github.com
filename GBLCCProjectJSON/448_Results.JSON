@@ -73,32 +73,6 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "US Geological Survey", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mgermino@usgs.gov"
-                    }
-                ], 
-                "contactId": "G782", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Matt Germino", 
-                "memberOfOrganization": [
-                    "G782"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mgermino@usgs.gov"
-                    }
-                ], 
-                "contactId": "782", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": true, 
                 "name": "US Forest Service", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
@@ -121,6 +95,32 @@
                     }
                 ], 
                 "contactId": "781", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "US Geological Survey", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mgermino@usgs.gov"
+                    }
+                ], 
+                "contactId": "G782", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Matt Germino", 
+                "memberOfOrganization": [
+                    "G782"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mgermino@usgs.gov"
+                    }
+                ], 
+                "contactId": "782", 
                 "contactType": "Federal"
             }
         ], 
@@ -175,27 +175,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G782", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "782", 
-                                    "organizationMembers": [
-                                        "G782"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
@@ -216,6 +196,26 @@
                                 }
                             ], 
                             "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G782", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "782", 
+                                    "organizationMembers": [
+                                        "G782"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
                         }
                     ], 
                     "onlineResource": [
@@ -886,7 +886,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-01-29", 
+                        "date": "2018-03-22", 
                         "dateType": "creation"
                     }
                 ]

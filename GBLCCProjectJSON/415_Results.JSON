@@ -106,6 +106,22 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "G948", 
+                "isOrganization": true, 
+                "name": "University of Nevada - Reno", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G948"
+                ], 
+                "contactId": "948", 
+                "isOrganization": false, 
+                "name": "Devon Snyder", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "G947", 
                 "isOrganization": true, 
                 "name": "Environmental Protection Agency of Aosta Valley", 
@@ -153,22 +169,6 @@
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "G948", 
-                "isOrganization": true, 
-                "name": "University of Nevada - Reno", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G948"
-                ], 
-                "contactId": "948", 
-                "isOrganization": false, 
-                "name": "Devon Snyder", 
-                "contactType": "Academic"
-            }, 
-            {
                 "isOrganization": true, 
                 "name": "University of Nevada, Reno", 
                 "memberOfOrganization": [], 
@@ -193,6 +193,20 @@
                 ], 
                 "contactId": "875", 
                 "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Rosemary Carroll", 
+                "memberOfOrganization": [
+                    "G850"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:Rosemary.Carroll@dri.edu"
+                    }
+                ], 
+                "contactId": "844", 
+                "contactType": "Research"
             }, 
             {
                 "isOrganization": false, 
@@ -233,20 +247,6 @@
                 ], 
                 "contactId": "779", 
                 "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Rosemary Carroll", 
-                "memberOfOrganization": [
-                    "G850"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:Rosemary.Carroll@dri.edu"
-                    }
-                ], 
-                "contactId": "844", 
-                "contactType": "Research"
             }
         ], 
         "metadata": {
@@ -336,6 +336,26 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G948", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "948", 
+                                    "organizationMembers": [
+                                        "G948"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G947", 
                                     "organizationMembers": []
                                 }
@@ -396,26 +416,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G948", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "948", 
-                                    "organizationMembers": [
-                                        "G948"
-                                    ]
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G875", 
                                     "organizationMembers": []
                                 }
@@ -432,6 +432,17 @@
                                 }
                             ], 
                             "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "844", 
+                                    "organizationMembers": [
+                                        "G850"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
                         }, 
                         {
                             "party": [
@@ -463,17 +474,6 @@
                                 }
                             ], 
                             "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "844", 
-                                    "organizationMembers": [
-                                        "G850"
-                                    ]
-                                }
-                            ], 
-                            "role": "Contributor"
                         }
                     ], 
                     "onlineResource": [
@@ -1061,7 +1061,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-01-29", 
+                        "date": "2018-03-22", 
                         "dateType": "creation"
                     }
                 ]

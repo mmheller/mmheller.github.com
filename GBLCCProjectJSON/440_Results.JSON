@@ -66,16 +66,16 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "389", 
+                "contactId": "560", 
                 "isOrganization": true, 
-                "name": "Bureau of Land Management", 
+                "name": "US Fish & Wildife Service", 
                 "contactType": "Federal"
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "560", 
+                "contactId": "389", 
                 "isOrganization": true, 
-                "name": "US Fish & Wildife Service", 
+                "name": "Bureau of Land Management", 
                 "contactType": "Federal"
             }, 
             {
@@ -84,31 +84,17 @@
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:execsecretary@wrpt.us"
+                        "uri": "mailto:marleneb@wrpt.us"
                     }
                 ], 
-                "contactId": "G816", 
-                "contactType": "Native/Tribal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Misty Benner", 
-                "memberOfOrganization": [
-                    "G816"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:execsecretary@wrpt.us"
-                    }
-                ], 
-                "contactId": "816", 
+                "contactId": "G799", 
                 "contactType": "Native/Tribal"
             }, 
             {
                 "isOrganization": false, 
                 "name": "Marlene Begay", 
                 "memberOfOrganization": [
-                    "G816"
+                    "G799"
                 ], 
                 "onlineResource": [
                     {
@@ -116,6 +102,20 @@
                     }
                 ], 
                 "contactId": "799", 
+                "contactType": "Native/Tribal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Misty Benner", 
+                "memberOfOrganization": [
+                    "G799"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:execsecretary@wrpt.us"
+                    }
+                ], 
+                "contactId": "816", 
                 "contactType": "Native/Tribal"
             }
         ], 
@@ -164,6 +164,17 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "389", 
                                     "organizationMembers": [
                                         "389"
@@ -175,44 +186,33 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "560", 
-                                    "organizationMembers": [
-                                        "560"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G816", 
+                                    "contactId": "G799", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "816", 
-                                    "organizationMembers": [
-                                        "G816"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
                                 {
                                     "contactId": "799", 
                                     "organizationMembers": [
-                                        "G816"
+                                        "G799"
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "816", 
+                                    "organizationMembers": [
+                                        "G799"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }
                     ], 
                     "onlineResource": [
@@ -223,7 +223,7 @@
                             "name": "Project Report Page"
                         }
                     ], 
-                    "title": "Walker River Paiute Tribe TEKproject"
+                    "title": "Walker River Paiute Tribe TEK Project"
                 }, 
                 "defaultResourceLocale": {
                     "country": "USA", 
@@ -1806,7 +1806,7 @@
                             "sourceId": "389", 
                             "currency": "USD", 
                             "amount": 50000.0, 
-                            "recipientId": "G816", 
+                            "recipientId": "G799", 
                             "matching": false
                         }
                     ], 
@@ -1824,7 +1824,7 @@
                             "sourceId": "560", 
                             "currency": "USD", 
                             "amount": 10000.0, 
-                            "recipientId": "G816", 
+                            "recipientId": "G799", 
                             "matching": true
                         }
                     ], 
@@ -1876,12 +1876,33 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-01-29", 
+                        "date": "2018-03-22", 
                         "dateType": "creation"
                     }
                 ]
             }, 
-            "associatedResource": [], 
+            "associatedResource": [
+                {
+                    "resourceType": [
+                        {
+                            "type": "Report"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5a998258e4b06990606f68f5", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Report: Vision of the Walker River Paiute Tribe for the Lower Walker River and Walker Lake"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Report: Vision of the Walker River Paiute Tribe for the Lower Walker River and Walker Lake"
+                    }
+                }
+            ], 
             "resourceDistribution": [
                 {
                     "distributor": [

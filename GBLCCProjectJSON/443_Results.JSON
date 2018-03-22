@@ -77,31 +77,17 @@
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mgermino@usgs.gov"
+                        "uri": "mailto:dpilliod@usgs.gov"
                     }
                 ], 
-                "contactId": "G782", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Matt Germino", 
-                "memberOfOrganization": [
-                    "G782"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:mgermino@usgs.gov"
-                    }
-                ], 
-                "contactId": "782", 
+                "contactId": "G230", 
                 "contactType": "Federal"
             }, 
             {
                 "isOrganization": false, 
                 "name": "David Pilliod", 
                 "memberOfOrganization": [
-                    "G782"
+                    "G230"
                 ], 
                 "onlineResource": [
                     {
@@ -109,6 +95,20 @@
                     }
                 ], 
                 "contactId": "230", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Matt Germino", 
+                "memberOfOrganization": [
+                    "G230"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:mgermino@usgs.gov"
+                    }
+                ], 
+                "contactId": "782", 
                 "contactType": "Federal"
             }
         ], 
@@ -163,34 +163,34 @@
                                     ]
                                 }
                             ], 
-                            "role": "Collaborator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "G782", 
+                                    "contactId": "G230", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "782", 
-                                    "organizationMembers": [
-                                        "G782"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
                                 {
                                     "contactId": "230", 
                                     "organizationMembers": [
-                                        "G782"
+                                        "G230"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "782", 
+                                    "organizationMembers": [
+                                        "G230"
                                     ]
                                 }
                             ], 
@@ -1965,7 +1965,7 @@
                             "sourceId": "389", 
                             "currency": "USD", 
                             "amount": 39439.0, 
-                            "recipientId": "G782", 
+                            "recipientId": "G230", 
                             "matching": false
                         }
                     ], 
@@ -2017,7 +2017,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-01-29", 
+                        "date": "2018-03-22", 
                         "dateType": "creation"
                     }
                 ]

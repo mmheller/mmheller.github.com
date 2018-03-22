@@ -80,22 +80,6 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G1024", 
-                "isOrganization": true, 
-                "name": "US Forest Service", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G1024"
-                ], 
-                "contactId": "1024", 
-                "isOrganization": false, 
-                "name": "Laurie Kurth", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "G1017", 
                 "isOrganization": true, 
                 "name": "Natural Resources Conservation Service", 
@@ -137,6 +121,22 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "G1027", 
+                "isOrganization": true, 
+                "name": "Bureau of Land Management", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1027"
+                ], 
+                "contactId": "1027", 
+                "isOrganization": false, 
+                "name": "Marco Perea", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "G1020", 
                 "isOrganization": true, 
                 "name": "US Fish & Wildife Service", 
@@ -153,18 +153,27 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G1021", 
+                "contactId": "G1026", 
                 "isOrganization": true, 
-                "name": "Bureau of Land Management", 
+                "name": "US Forest Service", 
                 "contactType": "Federal"
             }, 
             {
                 "memberOfOrganization": [
-                    "G1021"
+                    "G1026"
                 ], 
-                "contactId": "1021", 
+                "contactId": "1026", 
                 "isOrganization": false, 
-                "name": "Doug Havlina", 
+                "name": "Clinton McCarthy", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1027"
+                ], 
+                "contactId": "1022", 
+                "isOrganization": false, 
+                "name": "Kenneth Henke", 
                 "contactType": "Federal"
             }, 
             {
@@ -185,56 +194,21 @@
             }, 
             {
                 "memberOfOrganization": [
+                    "G1026"
+                ], 
+                "contactId": "1024", 
+                "isOrganization": false, 
+                "name": "Laurie Kurth", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [
                     "G1017"
                 ], 
                 "contactId": "1025", 
                 "isOrganization": false, 
                 "name": "Jeremy Maestas", 
                 "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G1024"
-                ], 
-                "contactId": "1026", 
-                "isOrganization": false, 
-                "name": "Clinton McCarthy", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G1021"
-                ], 
-                "contactId": "1027", 
-                "isOrganization": false, 
-                "name": "Marco Perea", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": true, 
-                "name": "US Geological Survey", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:shanser@usgs.gov"
-                    }
-                ], 
-                "contactId": "G226", 
-                "contactType": "Unknown"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Steve Hanser", 
-                "memberOfOrganization": [
-                    "G226"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:shanser@usgs.gov"
-                    }
-                ], 
-                "contactId": "226", 
-                "contactType": "Unknown"
             }, 
             {
                 "memberOfOrganization": [
@@ -246,12 +220,26 @@
                 "contactType": "Academic"
             }, 
             {
-                "memberOfOrganization": [
-                    "G1021"
-                ], 
-                "contactId": "1022", 
                 "isOrganization": false, 
-                "name": "Kenneth Henke", 
+                "name": "Jeanne Chambers", 
+                "memberOfOrganization": [
+                    "G1026"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:jchambers@fs.fed.us"
+                    }
+                ], 
+                "contactId": "792", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1027"
+                ], 
+                "contactId": "1021", 
+                "isOrganization": false, 
+                "name": "Doug Havlina", 
                 "contactType": "Federal"
             }, 
             {
@@ -272,39 +260,41 @@
             }, 
             {
                 "memberOfOrganization": [
-                    "G226"
+                    "G1023"
                 ], 
-                "contactId": "358", 
+                "contactId": "963", 
                 "isOrganization": false, 
-                "name": "David Pyke", 
-                "contactType": "Unknown"
+                "name": "Brian Mealor", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G961", 
+                "isOrganization": true, 
+                "name": "Wyoming Game & Fish Commission", 
+                "contactType": "State"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G961"
+                ], 
+                "contactId": "961", 
+                "isOrganization": false, 
+                "name": "Tom Christiansen", 
+                "contactType": "State"
             }, 
             {
                 "isOrganization": false, 
-                "name": "John Carlson", 
+                "name": "Mary Manning", 
                 "memberOfOrganization": [
-                    "G1021"
+                    "G1026"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:John_Carlson@blm.gov"
+                        "uri": "mailto:mmanning@fs.fed.us"
                     }
                 ], 
-                "contactId": "385", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Jeanne Chambers", 
-                "memberOfOrganization": [
-                    "G1024"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:jchambers@fs.fed.us"
-                    }
-                ], 
-                "contactId": "792", 
+                "contactId": "865", 
                 "contactType": "Federal"
             }, 
             {
@@ -335,42 +325,47 @@
             }, 
             {
                 "isOrganization": false, 
-                "name": "Mary Manning", 
+                "name": "John Carlson", 
                 "memberOfOrganization": [
-                    "G1024"
+                    "G1027"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mmanning@fs.fed.us"
+                        "uri": "mailto:John_Carlson@blm.gov"
                     }
                 ], 
-                "contactId": "865", 
+                "contactId": "385", 
                 "contactType": "Federal"
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G961", 
+                "contactId": "G358", 
                 "isOrganization": true, 
-                "name": "Wyoming Game & Fish Commission", 
-                "contactType": "State"
+                "name": "US Geological Survey", 
+                "contactType": "Unknown"
             }, 
             {
                 "memberOfOrganization": [
-                    "G961"
+                    "G358"
                 ], 
-                "contactId": "961", 
+                "contactId": "358", 
                 "isOrganization": false, 
-                "name": "Tom Christiansen", 
-                "contactType": "State"
+                "name": "David Pyke", 
+                "contactType": "Unknown"
             }, 
             {
-                "memberOfOrganization": [
-                    "G1023"
-                ], 
-                "contactId": "963", 
                 "isOrganization": false, 
-                "name": "Brian Mealor", 
-                "contactType": "Academic"
+                "name": "Steve Hanser", 
+                "memberOfOrganization": [
+                    "G358"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:shanser@usgs.gov"
+                    }
+                ], 
+                "contactId": "226", 
+                "contactType": "Unknown"
             }
         ], 
         "metadata": {
@@ -440,26 +435,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G1024", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "1024", 
-                                    "organizationMembers": [
-                                        "G1024"
-                                    ]
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G1017", 
                                     "organizationMembers": []
                                 }
@@ -511,6 +486,26 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G1027", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "1027", 
+                                    "organizationMembers": [
+                                        "G1027"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G1020", 
                                     "organizationMembers": []
                                 }
@@ -531,7 +526,7 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G1021", 
+                                    "contactId": "G1026", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -540,9 +535,20 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "1021", 
+                                    "contactId": "1026", 
                                     "organizationMembers": [
-                                        "G1021"
+                                        "G1026"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "1022", 
+                                    "organizationMembers": [
+                                        "G1027"
                                     ]
                                 }
                             ], 
@@ -571,51 +577,20 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "1024", 
+                                    "organizationMembers": [
+                                        "G1026"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "1025", 
                                     "organizationMembers": [
                                         "G1017"
-                                    ]
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "1026", 
-                                    "organizationMembers": [
-                                        "G1024"
-                                    ]
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "1027", 
-                                    "organizationMembers": [
-                                        "G1021"
-                                    ]
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G226", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "226", 
-                                    "organizationMembers": [
-                                        "G226"
                                     ]
                                 }
                             ], 
@@ -635,9 +610,20 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "1022", 
+                                    "contactId": "792", 
                                     "organizationMembers": [
-                                        "G1021"
+                                        "G1026"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "1021", 
+                                    "organizationMembers": [
+                                        "G1027"
                                     ]
                                 }
                             ], 
@@ -666,62 +652,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "358", 
+                                    "contactId": "963", 
                                     "organizationMembers": [
-                                        "G226"
-                                    ]
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "385", 
-                                    "organizationMembers": [
-                                        "G1021"
-                                    ]
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "792", 
-                                    "organizationMembers": [
-                                        "G1024"
-                                    ]
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G798", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "798", 
-                                    "organizationMembers": [
-                                        "G798"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "865", 
-                                    "organizationMembers": [
-                                        "G1024"
+                                        "G1023"
                                     ]
                                 }
                             ], 
@@ -750,9 +683,71 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "963", 
+                                    "contactId": "865", 
                                     "organizationMembers": [
-                                        "G1023"
+                                        "G1026"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G798", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "798", 
+                                    "organizationMembers": [
+                                        "G798"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "385", 
+                                    "organizationMembers": [
+                                        "G1027"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G358", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "358", 
+                                    "organizationMembers": [
+                                        "G358"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "226", 
+                                    "organizationMembers": [
+                                        "G358"
                                     ]
                                 }
                             ], 
@@ -2260,7 +2255,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-01-29", 
+                        "date": "2018-03-22", 
                         "dateType": "creation"
                     }
                 ]
