@@ -73,6 +73,7 @@ define([
                         var checkLabel = dojo.create('label', { 'for': checkBox.name, innerHTML: layerName }, checkBox.domNode, "after");
                         dojo.place("<br />", checkLabel, "after");
                     });
+
                 }
             });
 
@@ -113,7 +114,7 @@ define([
 
             app.portalUrl4Shapefile = "https://www.arcgis.com";
             var strHFL_URL = "https://utility.arcgis.com/usrsvcs/servers/e09a9437e03d4190a3f3a8f2e36190b4/rest/services/Development_Src_v2/FeatureServer/0";
-            pSrcFeatureLayer = new esri.layers.FeatureLayer(strHFL_URL, {
+            pSrcFeatureLayer = new esri.layers.FeatureLayer(strHFL_URL, { id:"99",
                 mode: esri.layers.FeatureLayer.MODE_ONDEMAND, "opacity": 0.6, outFields: ['*']
             });
 
@@ -134,7 +135,6 @@ define([
             cbxLayers.push({ layer: CED_PP_poly, title: 'Approved CED Polygons' });
 
             //app.map.addLayers([pSrcFeatureLayer]);
-
 
             if (typeof app.iCEDID != 'undefined') {
                 //app.dblExpandNum = 3.75;
