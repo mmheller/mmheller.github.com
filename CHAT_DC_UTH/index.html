@@ -22,6 +22,7 @@
 		<span id="mainNav">
 			<a id="toolsNav">TOOLS</a>
 			<a id="glossaryNav">GLOSSARY</a>
+            <a id="siteInfo"></a>
 			<!--<a href="http://www.ndow.org/Nevada_Wildlife/Maps_and_Data/NVCHAT/FAQs" target="_blank" class="ndowNav">FAQs</a>-->
 		</span>
 		<img id="baseMaps" src="images/basemaps.png" alt="Basemaps">
@@ -258,7 +259,7 @@
             bcMain.addChild(cpMap);
                         
             //var cpMap2 = new ContentPane({ id: "grid", region: "bottom", splitter: "true", style: "border: solid thin silver; overflow: hidden; height:20%;" }, domConstruct.create("div"));
-            var cpMap2 = new ContentPane({ id: "grid", region: "bottom", splitter: "true"}, domConstruct.create("div"));
+            var cpMap2 = new ContentPane({ id: "gridCP", region: "bottom", splitter: "true"}, domConstruct.create("div"));
             bcMain.addChild(cpMap2);
 		
             //var botContainer = registry.byId("grid");
@@ -305,6 +306,19 @@
             });
             nvCHATFL.setSelectionSymbol(selectSymbol);
 
+            nvCHATFL.on("selection-complete", function () {
+                dojo.byId("siteInfo").innerHTML = "Getting selected Hex's";
+                var results = nvCHATFL.getSelectedFeatures();
+                //if (results.length > 0 && tbStatus === "on") {
+                if (results.length > 0) {
+                    var tbStatus = "off";
+                    Query4Relates(results)
+                    //chartMulti(results);
+                }
+                map.setMapCursor("default");
+                map.enableMapNavigation();
+            });
+
             //var info = new OAuthInfo({ appId: "4y78XrGDoCd8wys2", popup: false });  //local
             var info = new OAuthInfo({ appId: "TCPRYxjUM1mxEcYn", popup: false });  //Draft
            
@@ -321,9 +335,7 @@
                       }
                   });
 
-                  nvCHATFL.on("mouse-out", function () {
-                      map.setMapCursor("default");
-                  });
+                  nvCHATFL.on("mouse-out", function () {map.setMapCursor("default");});
 
                   var sliderCHAT = new HorizontalSlider({ value: 50, minimum: 1, maximum: 100, intermediateChanges: true, showButtons: false, onChange: function (value) { nvCHAT.setOpacity(value / 100); } }, "sliderCHAT");
                   document.getElementById("sliderDivCHAT").style.visibility = "visible";
@@ -336,7 +348,6 @@
                   document.getElementById("toggleCHAT").onclick = function () { layerToggle(nvCHAT, document.getElementById("sliderDivCHAT")); }
                   document.getElementById("toggleSOC").onclick = function () { layerToggle(nvSOC, document.getElementById("sliderDivSOC")); }
                   document.getElementById("toggleSERI").onclick = function () { layerToggle(nvSERI, document.getElementById("sliderDivSERI")); }
-
               }
             ).otherwise(function () { });// Do nothing
 		
@@ -384,7 +395,88 @@
             document.getElementById("bmGray").onclick = function() {
                 changeBM(bmStreets = document.getElementById("bmGray"), "gray");
             }
+
+
+            function exportToCsv(filename, rows) {
+                var processRow = function (row) {
+                    var finalVal = '';
+                    for (var j = 0; j < row.length; j++) {
+                        var innerValue = row[j] === null ? '' : row[j].toString();
+                        if (row[j] instanceof Date) {
+                            innerValue = row[j].toLocaleString();
+                        };
+                        var result = innerValue.replace(/"/g, '""');
+                        if (result.search(/("|,|\n)/g) >= 0)
+                            result = '"' + result + '"';
+                        if (j > 0)
+                            finalVal += ',';
+                        finalVal += result;
+                    }
+                    return finalVal + '\n';
+                };
+
+                var csvFile = '';
+                for (var i = 0; i < rows.length; i++) {
+                    csvFile += processRow(rows[i]);
+                }
+
+                var blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
+                if (navigator.msSaveBlob) { // IE 10+
+                    navigator.msSaveBlob(blob, filename);
+                } else {
+                    var link = document.createElement("a");
+                    if (link.download !== undefined) { // feature detection
+                        // Browsers that support HTML5 download attribute
+                        var url = URL.createObjectURL(blob);
+                        link.setAttribute("href", url);
+                        link.setAttribute("download", filename);
+                        link.style.visibility = 'hidden';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    }
+                }
+            }
 		
+            function ClearMapandTable() {
+                tb.deactivate();
+                map.enableMapNavigation();
+                map.graphics.clear();
+                tbStatus = "off";
+                nvCHATFL.clearSelection();
+
+                if (app.pGrid) {
+                    //exportToCsv('export1a.csv', [
+                    //    ['name', 'description'],
+                    //  ['david', '123'],
+                    //  ['jona', '""'],
+                    //  ['a', 'b'],
+                    //])
+                    //var csv = [];
+                    //app.memStore.data.each(function (rec) {
+                    //    csv.push(Ext.encode(rec.data).replace(/[{}]/, ''));
+                    //})
+                    //return csv.join('\n');
+                    //exportToCsv('export1b.csv', csv)
+
+                    app.data = new dojo.data.ItemFileReadStore({ data: { identifier: "", items: [] } });
+                    app.memStore = new Memory({ data: app.data });
+                    app.pGrid.set("store", app.memStore);
+                    app.pGrid.refresh();
+                }
+
+                //var currentdate = new Date();
+                //var datetime = "" + currentdate.getDate() + "/"
+                //                + (currentdate.getMonth() + 1) + "/"
+                //                + currentdate.getFullYear() + " @ "
+                //                + currentdate.getHours() + ":"
+                //                + currentdate.getMinutes() + ":"
+                //                + currentdate.getSeconds();
+                //dojo.byId("siteInfo").innerHTML = "table cleared " + datetime;
+                dojo.byId("siteInfo").innerHTML = "Map and Table Cleared";
+                tb.deactivate();
+            }
+
             //Function to change basemap using custom basemap gallery
             function changeBM(bmElement, bmNew) {
                 document.getElementById("bmStreets").className = "";
@@ -418,37 +510,33 @@
             }
 		
             //Activate draw/query tool on click event		
-            document.getElementById("queryPoint").onclick = function() {
-                tb.deactivate();
+            document.getElementById("queryPoint").onclick = function () {
+                ClearMapandTable();
                 map.enableMapNavigation();
                 tbStatus = "off";
-                nvCHATFL.clearSelection();
             }
             document.getElementById("drawPoints").onclick = function() {
+                ClearMapandTable();
                 drawQuery("multipoint");
             }		
             document.getElementById("drawLine").onclick = function() {
+                ClearMapandTable();
                 drawQuery("polyline");
             }		
             document.getElementById("drawPoly").onclick = function() {
+                ClearMapandTable();
                 drawQuery("polygon");
             }		
             document.getElementById("drawCircle").onclick = function() {
+                ClearMapandTable();
                 drawQuery("circle");
             }		
             document.getElementById("drawRect").onclick = function() {
+                ClearMapandTable();
                 drawQuery("rectangle");
             }
             document.getElementById("drawClear").onclick = function() {
-                tb.deactivate();
-                map.enableMapNavigation();
-                map.graphics.clear();
-                tbStatus = "off";
-                nvCHATFL.clearSelection();
-                //clearCharts();
-                app.data = new dojo.data.ItemFileReadStore({ data: { identifier: "", items: [] } });
-                app.memStore = new Memory({ data: app.data });
-                app.pGrid.set("store", app.memStore);
+                ClearMapandTable();
             }
 		
             //Show glossary on mouse over event
@@ -465,11 +553,9 @@
             //Query CHAT data on single map click event		
             map.on("click", function(evt) {
                 if (tbStatus === "off") {
-                    nvCHATFL.clearSelection();
-				
+                    //nvCHATFL.clearSelection();
                     var scale = map.getScale();
                     var minMapScale = nvCHAT.minScale;
-                    //var minMapScale = 11111111111111111111 //temporarily a high number to get some values
 
                     //Respond if map scale is too large to display CHAT data
                     if ((scale > minMapScale) & (minMapScale != 0)) {
@@ -504,12 +590,6 @@
                 tbStatus = "off";
                 nvCHATFL.clearSelection();
                 //clearCharts();
-                if (app.data) {
-                    app.data = new dojo.data.ItemFileReadStore({ data: { identifier: "", items: [] } });
-                    app.memStore = new Memory({ data: app.data });
-                    app.pGrid.set("store", app.memStore);
-                }
-
 
                 if (tbStatus === "off") {
                     nvCHATFL.clearSelection();
@@ -536,29 +616,17 @@
                             break;
                     }
                     var tbStatus = "on";
-
                     map.graphics.add(new Graphic(evtGraph.geometry, symbol));
                     var qCHAT = new Query();
                     qCHAT.geometry = evtGraph.geometry;
-				
                     nvCHATFL.selectFeatures(qCHAT, FeatureLayer.SELECTION_ADD);
-				
-                    nvCHATFL.on("selection-complete", function() {
-                        var results = nvCHATFL.getSelectedFeatures();
-                        //if (results.length > 0 && tbStatus === "on") {
-                        if (results.length > 0) {
-                            var tbStatus = "off";
-                            Query4Relates(results)
-                            //chartMulti(results);
-                        }
-                        map.setMapCursor("default");
-                        map.enableMapNavigation();
-                    });
                 });
             }	
 
 
             function Query4Relates(results) {
+                dojo.byId("siteInfo").innerHTML = "Hex's selected";
+
                 var arrayHexs = [];
                 if ((results != null) || (results != undefined)) {
                     if (results.length > 0) {
@@ -579,6 +647,7 @@
                 pQuery.outFields = ["HexID", "Elmt_Name", "Elmt_Class", "Elmt_Code", "Sci_Name", "Elmt_Type", "Abund", "AbundUnit", "Obsrv_Date", "Src_Data", "Src_ID", "Src_Date", "Src_Geom", "OBJECTID"];
                 pQuery.returnGeometry = false;
                 pQuery.where = strWhere;
+                dojo.byId("siteInfo").innerHTML = "Finding related records";
                 pQueryTask.execute(pQuery, qryNonSpatialResults, err);
             }
 
@@ -599,46 +668,43 @@
             }
 
             function qryNonSpatialResults(results) {
-                var botContainer = registry.byId("grid");
-
+                var botContainer = registry.byId("gridCP");
+                
                 if (botContainer.containerNode.style.height == "") {
                     var bc = registry.byId('bcMain');
                     var newSize = 150;
                     dojo.style(botContainer.domNode, "height", 25 + "%");
                     bc.resize();
                 }
-
-
-                // Create a new constructor by mixing in the components // Allow row selection for the grid
-                //columns for the grid 
-                var columns = [
-                  { 'field': 'HexID', 'label': 'Hex ID' },
-                  { 'field': 'Elmt_Name', 'label': 'Element Name' },
-                { 'field': 'Elmt_Class', 'label': "Element Class" },
-                { 'field': 'Elmt_Code', 'label': "Element Code" },
-                { 'field': 'Sci_Name', 'label': "Scientific Name" },
-                { 'field': 'Elmt_Type', 'label': "Element Type" },
-                { 'field': 'Abund', 'label': "Abundance" },
-                { 'field': 'AbundUnit', 'label': "Abund Unit" },
-                { 'field': 'Obsrv_Date', 'label': "Observation Date" },
-                { 'field': 'Src_Data', 'label': "Source Data Name" },
-                { 'field': 'Src_ID', 'label': 'Source Identifier' },
-                { 'field': 'Src_Date', 'label': 'Source Date' },
-                { 'field': 'Src_Geom', 'label': 'Source Geometry'},
-                { 'field': 'OBJECTID', 'label': 'Record ID', width: "30%" }
-              ];
                 
-                app.pGrid = new (declare([Grid, Selection]))({
-                  // use Infinity so that all data is available in the grid
-                  bufferRows: Infinity,
-                  columns: columns
-              }, "grid");
+                if (!app.pGrid) {
+                    var columns = [    // Create a new constructor by mixing in the components // Allow row selection for the grid columns for the grid 
+                      { 'field': 'HexID', 'label': 'Hex ID' },
+                      { 'field': 'Elmt_Name', 'label': 'Element Name' },
+                    { 'field': 'Elmt_Class', 'label': "Element Class" },
+                    { 'field': 'Elmt_Code', 'label': "Element Code" },
+                    { 'field': 'Sci_Name', 'label': "Scientific Name" },
+                    { 'field': 'Elmt_Type', 'label': "Element Type" },
+                    { 'field': 'Abund', 'label': "Abundance" },
+                    { 'field': 'AbundUnit', 'label': "Abund Unit" },
+                    { 'field': 'Obsrv_Date', 'label': "Observation Date" },
+                    { 'field': 'Src_Data', 'label': "Source Data Name" },
+                    { 'field': 'Src_ID', 'label': 'Source Identifier' },
+                    { 'field': 'Src_Date', 'label': 'Source Date' },
+                    { 'field': 'Src_Geom', 'label': 'Source Geometry' },
+                    { 'field': 'OBJECTID', 'label': 'Record ID', width: "30%" }
+                    ];
+
+                    app.pGrid = new (declare([Grid, Selection]))({                  // use Infinity so that all data is available in the grid
+                        bufferRows: Infinity,
+                        columns: columns
+                    }, "gridCP"
+                    );
+                }
 
                 app.pGrid.on("dgrid-select", onRowClickHandler);
+                resultFeatures = results.features;
 
-              resultFeatures = results.features;
-
-              //var data = array.map(resultFeatures, function (feature) {
               app.data = array.map(resultFeatures, function (feature) {
                   return {
                       // property names used here match those used when creating the dgrid
@@ -665,11 +731,14 @@
                   };
 
               });
-              app.memStore = new Memory({ data: app.data });
-              app.pGrid.set("store", app.memStore);
+
 
               app.pGrid.refresh();              ////display the results in the grid
+              //app.pGrid.renderArray(app.data);
+              app.memStore = new Memory({ data: app.data });
+              app.pGrid.set("store", app.memStore);
               delete resultFeatures;
+              dojo.byId("siteInfo").innerHTML = app.data.length + " related records found";
           }
 
 		//Function to create chart content based on single map click query
