@@ -23,7 +23,9 @@
 			<a id="toolsNav">TOOLS</a>
 			<a id="glossaryNav">GLOSSARY</a>
             <a id="siteInfo"></a>
-			<!--<a href="http://www.ndow.org/Nevada_Wildlife/Maps_and_Data/NVCHAT/FAQs" target="_blank" class="ndowNav">FAQs</a>-->
+            <input id="btn_2CSV" type="button" value="Export Under the Hood records to CSV spreadsheet" style='margin-right:5px' />
+
+  		<!--<a href="http://www.ndow.org/Nevada_Wildlife/Maps_and_Data/NVCHAT/FAQs" target="_blank" class="ndowNav">FAQs</a>-->
 		</span>
 		<img id="baseMaps" src="images/basemaps.png" alt="Basemaps">
 		<a href="http://www.wafwachat.org" target="_blank"><img id="wafwaLogo" src="images/wafwachatlogo.png" alt="WAFWA CHAT Logo" title="Western Association of Fish and Wildlife Agencies' CHAT"></a>
@@ -253,6 +255,8 @@
             app.pGrid = null;
             app.memStore = null;
 
+            document.getElementById('btn_2CSV').style.visibility = 'hidden';
+
             //Create layout widgets for application
             var bcMain = new BorderContainer( {id: "bcMain",design: "sidebar",gutters: false,}, domConstruct.create("div"));
             var cpMap = new ContentPane({ id: "map", region: "center", style: "border: solid thin silver; overflow: hidden" }, domConstruct.create("div"));
@@ -270,6 +274,8 @@
             //    bc.resize();
             //}
 
+            var pbtn_2CSV = dojo.byId("btn_2CSV");
+            on(pbtn_2CSV, "click", btn_2CSV_click);
 
             document.body.appendChild(bcMain.domNode);
             bcMain.startup();
@@ -396,6 +402,20 @@
                 changeBM(bmStreets = document.getElementById("bmGray"), "gray");
             }
 
+            function btn_2CSV_click() {
+                var array2send = [["HexID", "Elmt_Name", "Elmt_Class", "Elmt_Code", "Sci_Name", "Elmt_Type", "Abund", "AbundUnit", "Obsrv_Date", "Src_Data", "Src_ID", "Src_Date", "Src_Geom", "OBJECTID"]];
+                dojo.forEach(app.data, function (pItem) {
+                    var tempArray = [];
+                    for (var prop in pItem) {
+                        if (pItem.hasOwnProperty(prop)) {
+                            tempArray.push(pItem[prop]);
+                        }
+                    }
+                    array2send.push(tempArray);
+                });
+
+                exportToCsv('under_the_hood_records.csv', array2send);
+            }
 
             function exportToCsv(filename, rows) {
                 var processRow = function (row) {
@@ -439,6 +459,7 @@
             }
 		
             function ClearMapandTable() {
+                document.getElementById('btn_2CSV').style.visibility = 'hidden';
                 tb.deactivate();
                 map.enableMapNavigation();
                 map.graphics.clear();
@@ -446,19 +467,6 @@
                 nvCHATFL.clearSelection();
 
                 if (app.pGrid) {
-                    //exportToCsv('export1a.csv', [
-                    //    ['name', 'description'],
-                    //  ['david', '123'],
-                    //  ['jona', '""'],
-                    //  ['a', 'b'],
-                    //])
-                    //var csv = [];
-                    //app.memStore.data.each(function (rec) {
-                    //    csv.push(Ext.encode(rec.data).replace(/[{}]/, ''));
-                    //})
-                    //return csv.join('\n');
-                    //exportToCsv('export1b.csv', csv)
-
                     app.data = new dojo.data.ItemFileReadStore({ data: { identifier: "", items: [] } });
                     app.memStore = new Memory({ data: app.data });
                     app.pGrid.set("store", app.memStore);
@@ -729,7 +737,6 @@
                       "Src_Geom": feature.attributes['Src_Geom'],
                       "OBJECTID": feature.attributes['OBJECTID']
                   };
-
               });
 
 
@@ -739,6 +746,7 @@
               app.pGrid.set("store", app.memStore);
               delete resultFeatures;
               dojo.byId("siteInfo").innerHTML = app.data.length + " related records found";
+              document.getElementById('btn_2CSV').style.visibility = 'visible';
           }
 
 		//Function to create chart content based on single map click query
