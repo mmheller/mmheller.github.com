@@ -10,6 +10,7 @@
 	
 	<link rel="stylesheet" href="nvchatstyle.css"/>
     <!--<link rel="stylesheet" href="https://js.arcgis.com/4.2/esri/themes/claro/dijit/claro.css"/>-->
+    <link rel="stylesheet" href="https://js.arcgis.com/3.19/dijit/themes//tundra/tundra.css" />
     <link rel="stylesheet" href="https://js.arcgis.com/3.19/esri/css/esri.css"/>
     <link rel="stylesheet" href="https://js.arcgis.com/3.19/dgrid/css/dgrid.css">
 
@@ -78,13 +79,12 @@
 	</div>	
 	
 	<span id="chartArea">
-<!--		<div id="CHATchrt" class="charts"></div>
-		<div id="SOCchrt" class="charts"></div>
-		<div id="SERIchrt" class="charts"></div>
-		<div id="WetRipchrt" class="charts"></div>
-		<div id="LSCondchrt" class="charts"></div>-->
         <div id="myTableNode"></div>
 	</span>
+
+ <!--   <div id="bot" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true">
+        <div id="myTableNode"></div>
+    </div>-->
 	
 	<div id="legendArea">
 		<img id="infoCHAT" src="images/help_black.png" alt="Info">
@@ -112,18 +112,20 @@
         <div id="legendSOC" class="legendTallDiv">
             <h4 id="legendHeadSOC">Status: PADUS/GAP USGS</h4>
             <img src="images/GAP_Status.JPG" alt="GAP_Status" width="280">
-            <input type="checkbox" id="toggleSOC"></input>
-            <label for="showLayer">Display</label>
-            <div id="sliderDivSOC" class="sliderDiv"><a id="sliderSOC"></a></div>
+            <div id="sliderDivSOC" class="sliderDiv2"><a id="sliderSOC"></a></div>
+            <input type="checkbox" id="toggleSOC" style="top:-21px"></input>
+            <label for="showLayer" style="top:-23px">Display</label>
+            
+            
         </div>
 
 		<div id="legendSERI" class="legendTallDiv">
 			<h4 id="legendHeadSERI">Fed/Tribal/Other: PADUS/GAP USGS</h4>
             <img src="images/GAP_FedTribOther.JPG" alt="GAP_Status" width="150">
             <br />
-            <input type="checkbox" id="toggleSERI"></input>
-            <label for="showLayer">Display</label>
-            <div id="sliderDivSERI" class="sliderDiv"><a id="sliderSERI"></a></div>
+            <div id="sliderDivSERI" class="sliderDiv2"><a id="sliderSERI"></a></div>
+            <input type="checkbox" id="toggleSERI" style="top:-21px"></input>
+            <label for="showLayer" style="top:-23px">Display</label>
 		</div>
 
 		

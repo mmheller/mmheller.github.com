@@ -175,15 +175,17 @@ Tooltip
 	new Tooltip( {
 		connectId: "legendHeadSOC",
 		label: "<div class='legendToolTip'>" +
-					"Species of Concern (SOC) represents the aggregated inforamtion describing the known location or habitat for species of conservation priority as identified by the Nevada State Wildlife Action Plan (2012). SOC include federally or state listed Threatened, Endangered, or Candidate species, as well as other species that were selected based upon their state conservation rank (S-Rank), degree of threats facing the species, Nevada's relative importance to the species overall range, the state of current knowledge of a species' life history, and the opportunity to increase the current knowledge of or implement a conservation strategy for a species. Species were also assessed based on their overall vulnerabilty to climate change using the NatureServe Climate Change Vulnerability Index (CCVI). Data representing SOC includes:" +
-					"<ul>" +
-						"<li>Documented species occurrence locations (NDOW, NNHP, museum specimen records, and partner organizations);</li>" +
-						"<li>Documented special use sites such as raptor nest and greater sage-grouse lek sites (NDOW);</li>" +
-						"<li>Radio-marked greater sage-grouse locations (NDOW, USGS, university partners);</li>" +
-						"<li>Nevada Greater Sage-Grouse Habitat Categorization Map (NDOW); and</li>" +
-						"<li>USGS National GAP species distribution models.</li>" +
-					"</ul>" +
-					"Currently, due to data availability, SOC are limited to terrestrial and amphibian species. Although individual species information is not provided specifically, SOC ranks should be interpreted as the relative probability, or risk, that a high-priority species of concern or its habitat would be encountered in a given area based on the best available wildlife resource information. SOC ranks are <strong>non-regulatory</strong> and in no way imply any specific avoidance or mitigation measures for a given area." +
+                    "GAP Status Code: represents a measure of management intent to permanently protect biodiversity. GAP Status 1 & 2 areas are primarily managed for biodiversity, GAP Status 3 areas are managed for multiple uses including conservation and extraction, GAP Status 4 areas identify unprotected areas or data gaps. Shows the full range of GAP Status Codes (1 through 4) for all lands and marine areas in PAD-US. <br><br>" +
+                    "US Geological Survey, Gap Analysis Program (GAP). May 2016. Protected Areas Database of the United States (PADUS), version 1.4 Combined Feature Class " +
+                    //"Species of Concern (SOC) represents the aggregated inforamtion describing the known location or habitat for species of conservation priority as identified by the Nevada State Wildlife Action Plan (2012). SOC include federally or state listed Threatened, Endangered, or Candidate species, as well as other species that were selected based upon their state conservation rank (S-Rank), degree of threats facing the species, Nevada's relative importance to the species overall range, the state of current knowledge of a species' life history, and the opportunity to increase the current knowledge of or implement a conservation strategy for a species. Species were also assessed based on their overall vulnerabilty to climate change using the NatureServe Climate Change Vulnerability Index (CCVI). Data representing SOC includes:" +
+					//"<ul>" +
+					//	"<li>Documented species occurrence locations (NDOW, NNHP, museum specimen records, and partner organizations);</li>" +
+					//	"<li>Documented special use sites such as raptor nest and greater sage-grouse lek sites (NDOW);</li>" +
+					//	"<li>Radio-marked greater sage-grouse locations (NDOW, USGS, university partners);</li>" +
+					//	"<li>Nevada Greater Sage-Grouse Habitat Categorization Map (NDOW); and</li>" +
+					//	"<li>USGS National GAP species distribution models.</li>" +
+					//"</ul>" +
+					//"Currently, due to data availability, SOC are limited to terrestrial and amphibian species. Although individual species information is not provided specifically, SOC ranks should be interpreted as the relative probability, or risk, that a high-priority species of concern or its habitat would be encountered in a given area based on the best available wildlife resource information. SOC ranks are <strong>non-regulatory</strong> and in no way imply any specific avoidance or mitigation measures for a given area." +
 				"</div>",
 		showDelay: 0
 	});
@@ -276,9 +278,8 @@ Tooltip
 	new Tooltip( {
 		connectId: "legendHeadSERI",
 		label: "<div class='legendToolTip'>" +
-					"Species of Economic and Recreational Importance (SERI) represents the aggregated inforamtion describing game species and other important species not otherwise described by Species of Concern (SOC). SERI were determined by their designation under State of Nevada Administrative Code Chapter 503 - Hunting, Fishing, and Trappping; Miscellaneous Protective Measures. To prevent double representation, some SERI species that are also SOC (e.g. Columbian sharp-tailed grouse, greater sage-grouse, pygmy rabbit, Sierra Nevada snowshoe hare) were dropped from this analysis and only considered under the SOC analysis. Similarly, other species that are both SERI and SOC (e.g. bighorn sheep, mountain quail, dusky grouse, sooty grouse) were only analyzed as SERI. Due to their abundance and ubiquitous distribution, furbearer species were not included in the SERI analysis.<br /><br />" +
-					"SERI were analyzed using the best available information on occupied or predicted species distributions from maps produced by NDOW staff or USGS National GAP species distribution models. Migratory waterfowl species were represented as a suite of species by open water, wetland, and riparian habitat as delineated by the USFWS National Wetlands Inventory and USGS National Hydrography Dataset, revised as needed by NDOW staff.<br /><br />" +
-					"Distribution data was relatively ranked into Priority or General categories based on ecological need, seasonal use, habitat quality, and conservation priority. Some species distribution data was categorized as entirely Priority or entirely General. Although individual species information is not provided specifically, SERI ranks should be interpreted as the relative probability, or risk, that a high-priority species or multiple species of economic or recreational importance or their habitat would be encountered in a given area based on the best available wildlife resource information. SERI ranks are <strong>non-regulatory</strong> and in no way imply any specific avoidance or mitigation measures for a given area." +
+					"Distinguishes federally managed areas from Tribal and others (states, local government, private. <br><br>" +
+                    "US Geological Survey, Gap Analysis Program (GAP). May 2016. Protected Areas Database of the United States (PADUS), version 1.4 Combined Feature Class " +
 				"</div>",
 		showDelay: 0
 	});
