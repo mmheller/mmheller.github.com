@@ -14,7 +14,8 @@ define([
 
 
           GetMasterAGSMapservicURL: function () {
-              return "https://gis.usgs.gov/sciencebase2/rest/services/Catalog/5a99dc60e4b06990606f6c32/MapServer";
+              return "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/GBLCC_PTS/FeatureServer/";
+              //return "https://gis.usgs.gov/sciencebase2/rest/services/Catalog/5a99dc60e4b06990606f6c32/MapServer";
               //return "https://gis.usgs.gov/sciencebase2/rest/services/Catalog/5a15fd39e4b09fc93dd17152/MapServer/";
               //return "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/GNLCC_PTS/FeatureServer/";
               //return "https://www.sciencebase.gov/arcgis/rest/services/Catalog/530fdba2e4b0686a920d1eea/MapServer/";
