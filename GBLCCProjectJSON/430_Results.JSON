@@ -72,22 +72,6 @@
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "G976", 
-                "isOrganization": true, 
-                "name": "Conservation Biology Institute", 
-                "contactType": "NGO"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G976"
-                ], 
-                "contactId": "976", 
-                "isOrganization": false, 
-                "name": "Mike Gough", 
-                "contactType": "NGO"
-            }, 
-            {
                 "isOrganization": true, 
                 "name": "US Fish & Wildife Service", 
                 "memberOfOrganization": [], 
@@ -130,8 +114,15 @@
                 "contactType": "NGO"
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "G1128", 
+                "isOrganization": true, 
+                "name": "Intregral Consulting, Inc.", 
+                "contactType": "Private"
+            }, 
+            {
                 "memberOfOrganization": [
-                    ""
+                    "G1128"
                 ], 
                 "contactId": "1128", 
                 "isOrganization": false, 
@@ -148,8 +139,15 @@
                 "contactType": "NGO"
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "G978", 
+                "isOrganization": true, 
+                "name": "Conservation Biology Institute", 
+                "contactType": "NGO"
+            }, 
+            {
                 "memberOfOrganization": [
-                    "G976"
+                    "G978"
                 ], 
                 "contactId": "978", 
                 "isOrganization": false, 
@@ -157,34 +155,24 @@
                 "contactType": "NGO"
             }, 
             {
+                "memberOfOrganization": [
+                    "G978"
+                ], 
+                "contactId": "976", 
+                "isOrganization": false, 
+                "name": "Mike Gough", 
+                "contactType": "NGO"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G825", 
                 "isOrganization": true, 
                 "name": "Great Basin LCC", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:john_tull@fws.gov"
-                    }
-                ], 
-                "contactId": "G883", 
-                "contactType": "LCC"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "John Tull", 
-                "memberOfOrganization": [
-                    "G883"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:john_tull@fws.gov"
-                    }
-                ], 
-                "contactId": "883", 
                 "contactType": "LCC"
             }, 
             {
                 "memberOfOrganization": [
-                    "G883"
+                    "G825"
                 ], 
                 "contactId": "825", 
                 "isOrganization": false, 
@@ -195,7 +183,7 @@
                 "isOrganization": false, 
                 "name": "Dominique Bachelet", 
                 "memberOfOrganization": [
-                    "G976"
+                    "G978"
                 ], 
                 "onlineResource": [
                     {
@@ -209,7 +197,7 @@
                 "isOrganization": false, 
                 "name": "Todd Hopkins", 
                 "memberOfOrganization": [
-                    "G883"
+                    "G825"
                 ], 
                 "onlineResource": [
                     {
@@ -218,6 +206,36 @@
                 ], 
                 "contactId": "682", 
                 "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G485", 
+                "isOrganization": true, 
+                "name": "Environmental Protection Agency", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G485"
+                ], 
+                "contactId": "485", 
+                "isOrganization": false, 
+                "name": "Nathan Schumaker", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "John Tull", 
+                "memberOfOrganization": [
+                    "G825"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:john_tull@fws.gov"
+                    }
+                ], 
+                "contactId": "883", 
+                "contactType": "LCC"
             }
         ], 
         "metadata": {
@@ -276,26 +294,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G976", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "976", 
-                                    "organizationMembers": [
-                                        "G976"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G232", 
                                     "organizationMembers": []
                                 }
@@ -336,9 +334,18 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G1128", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "1128", 
                                     "organizationMembers": [
-                                        ""
+                                        "G1128"
                                     ]
                                 }
                             ], 
@@ -358,18 +365,7 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "978", 
-                                    "organizationMembers": [
-                                        "G976"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G883", 
+                                    "contactId": "G978", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -378,9 +374,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "883", 
+                                    "contactId": "978", 
                                     "organizationMembers": [
-                                        "G883"
+                                        "G978"
                                     ]
                                 }
                             ], 
@@ -389,9 +385,29 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "976", 
+                                    "organizationMembers": [
+                                        "G978"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G825", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "825", 
                                     "organizationMembers": [
-                                        "G883"
+                                        "G825"
                                     ]
                                 }
                             ], 
@@ -402,7 +418,7 @@
                                 {
                                     "contactId": "780", 
                                     "organizationMembers": [
-                                        "G976"
+                                        "G978"
                                     ]
                                 }
                             ], 
@@ -413,11 +429,42 @@
                                 {
                                     "contactId": "682", 
                                     "organizationMembers": [
-                                        "G883"
+                                        "G825"
                                     ]
                                 }
                             ], 
                             "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G485", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "485", 
+                                    "organizationMembers": [
+                                        "G485"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "883", 
+                                    "organizationMembers": [
+                                        "G825"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }
                     ], 
                     "onlineResource": [
@@ -2607,7 +2654,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-03-22", 
+                        "date": "2018-04-17", 
                         "dateType": "creation"
                     }
                 ]

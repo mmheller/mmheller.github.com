@@ -103,17 +103,31 @@
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:mforister@unr.edu"
+                        "uri": "mailto:ophis@unr.edu"
                     }
                 ], 
-                "contactId": "G854", 
+                "contactId": "G862", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Chris Feldman", 
+                "memberOfOrganization": [
+                    "G862"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:ophis@unr.edu"
+                    }
+                ], 
+                "contactId": "862", 
                 "contactType": "Academic"
             }, 
             {
                 "isOrganization": false, 
                 "name": "Matt Forister", 
                 "memberOfOrganization": [
-                    "G854"
+                    "G862"
                 ], 
                 "onlineResource": [
                     {
@@ -174,20 +188,6 @@
                 ], 
                 "contactId": "815", 
                 "contactType": "State"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Chris Feldman", 
-                "memberOfOrganization": [
-                    "G854"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:ophis@unr.edu"
-                    }
-                ], 
-                "contactId": "862", 
-                "contactType": "Academic"
             }, 
             {
                 "isOrganization": true, 
@@ -292,8 +292,19 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G854", 
+                                    "contactId": "G862", 
                                     "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "862", 
+                                    "organizationMembers": [
+                                        "G862"
+                                    ]
                                 }
                             ], 
                             "role": "Collaborator"
@@ -303,7 +314,7 @@
                                 {
                                     "contactId": "854", 
                                     "organizationMembers": [
-                                        "G854"
+                                        "G862"
                                     ]
                                 }
                             ], 
@@ -344,17 +355,6 @@
                                     "contactId": "815", 
                                     "organizationMembers": [
                                         "G815"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "862", 
-                                    "organizationMembers": [
-                                        "G854"
                                     ]
                                 }
                             ], 
@@ -2558,7 +2558,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-03-22", 
+                        "date": "2018-04-17", 
                         "dateType": "creation"
                     }
                 ]

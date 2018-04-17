@@ -80,23 +80,14 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G1123", 
+                "contactId": "G1124", 
                 "isOrganization": true, 
                 "name": "Conservation Biology Institute", 
                 "contactType": "NGO"
             }, 
             {
                 "memberOfOrganization": [
-                    "G1123"
-                ], 
-                "contactId": "1123", 
-                "isOrganization": false, 
-                "name": "Kai Foster", 
-                "contactType": "NGO"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G1123"
+                    "G1124"
                 ], 
                 "contactId": "1124", 
                 "isOrganization": false, 
@@ -104,30 +95,13 @@
                 "contactType": "NGO"
             }, 
             {
-                "isOrganization": true, 
-                "name": "Great Basin LCC", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:john_tull@fws.gov"
-                    }
-                ], 
-                "contactId": "G883", 
-                "contactType": "LCC"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "John Tull", 
                 "memberOfOrganization": [
-                    "G883"
+                    "G1124"
                 ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:john_tull@fws.gov"
-                    }
-                ], 
-                "contactId": "883", 
-                "contactType": "LCC"
+                "contactId": "1123", 
+                "isOrganization": false, 
+                "name": "Kai Foster", 
+                "contactType": "NGO"
             }, 
             {
                 "isOrganization": true, 
@@ -154,6 +128,32 @@
                 ], 
                 "contactId": "772", 
                 "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Great Basin LCC", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:john_tull@fws.gov"
+                    }
+                ], 
+                "contactId": "G883", 
+                "contactType": "LCC"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "John Tull", 
+                "memberOfOrganization": [
+                    "G883"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:john_tull@fws.gov"
+                    }
+                ], 
+                "contactId": "883", 
+                "contactType": "LCC"
             }
         ], 
         "metadata": {
@@ -223,19 +223,8 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G1123", 
+                                    "contactId": "G1124", 
                                     "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "1123", 
-                                    "organizationMembers": [
-                                        "G1123"
-                                    ]
                                 }
                             ], 
                             "role": "Collaborator"
@@ -245,7 +234,7 @@
                                 {
                                     "contactId": "1124", 
                                     "organizationMembers": [
-                                        "G1123"
+                                        "G1124"
                                     ]
                                 }
                             ], 
@@ -254,22 +243,13 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G883", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "883", 
+                                    "contactId": "1123", 
                                     "organizationMembers": [
-                                        "G883"
+                                        "G1124"
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -286,6 +266,26 @@
                                     "contactId": "772", 
                                     "organizationMembers": [
                                         "G772"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G883", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "883", 
+                                    "organizationMembers": [
+                                        "G883"
                                     ]
                                 }
                             ], 
@@ -2158,7 +2158,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-03-22", 
+                        "date": "2018-04-17", 
                         "dateType": "creation"
                     }
                 ]
