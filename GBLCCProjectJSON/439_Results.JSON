@@ -66,42 +66,42 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "389", 
-                "isOrganization": true, 
-                "name": "Bureau of Land Management", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "897", 
                 "isOrganization": true, 
                 "name": "Brigham Young University", 
                 "contactType": "Academic"
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "389", 
+                "isOrganization": true, 
+                "name": "Bureau of Land Management", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "Brigham Young University", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:ncline@byu.edu"
+                        "uri": "mailto:bruce_roundy@byu.edu"
                     }
                 ], 
-                "contactId": "G803", 
+                "contactId": "G359", 
                 "contactType": "Academic"
             }, 
             {
                 "isOrganization": false, 
-                "name": "Nathan Cline", 
+                "name": "Bruce Roundy", 
                 "memberOfOrganization": [
-                    "G803"
+                    "G359"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:ncline@byu.edu"
+                        "uri": "mailto:bruce_roundy@byu.edu"
                     }
                 ], 
-                "contactId": "803", 
+                "contactId": "359", 
                 "contactType": "Academic"
             }, 
             {
@@ -131,6 +131,34 @@
                 "contactType": "Federal"
             }, 
             {
+                "isOrganization": false, 
+                "name": "William Christensen", 
+                "memberOfOrganization": [
+                    "G359"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:william@stat.byu.edu"
+                    }
+                ], 
+                "contactId": "828", 
+                "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Nathan Cline", 
+                "memberOfOrganization": [
+                    "G359"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:ncline@byu.edu"
+                    }
+                ], 
+                "contactId": "803", 
+                "contactType": "Academic"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "Oregon State University", 
                 "memberOfOrganization": [], 
@@ -154,34 +182,6 @@
                     }
                 ], 
                 "contactId": "177", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Bruce Roundy", 
-                "memberOfOrganization": [
-                    "G803"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:bruce_roundy@byu.edu"
-                    }
-                ], 
-                "contactId": "359", 
-                "contactType": "Academic"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "William Christensen", 
-                "memberOfOrganization": [
-                    "G803"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:william@stat.byu.edu"
-                    }
-                ], 
-                "contactId": "828", 
                 "contactType": "Academic"
             }
         ], 
@@ -230,17 +230,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "389", 
-                                    "organizationMembers": [
-                                        "389"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "897", 
                                     "organizationMembers": [
                                         "897"
@@ -252,22 +241,33 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G803", 
-                                    "organizationMembers": []
+                                    "contactId": "389", 
+                                    "organizationMembers": [
+                                        "389"
+                                    ]
                                 }
                             ], 
-                            "role": "Collaborator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "803", 
+                                    "contactId": "G359", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "359", 
                                     "organizationMembers": [
-                                        "G803"
+                                        "G359"
                                     ]
                                 }
                             ], 
-                            "role": "Collaborator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
@@ -292,6 +292,28 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "828", 
+                                    "organizationMembers": [
+                                        "G359"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "803", 
+                                    "organizationMembers": [
+                                        "G359"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G177", 
                                     "organizationMembers": []
                                 }
@@ -304,28 +326,6 @@
                                     "contactId": "177", 
                                     "organizationMembers": [
                                         "G177"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "359", 
-                                    "organizationMembers": [
-                                        "G803"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "828", 
-                                    "organizationMembers": [
-                                        "G803"
                                     ]
                                 }
                             ], 
@@ -2570,7 +2570,7 @@
                             "sourceId": "389", 
                             "currency": "USD", 
                             "amount": 68649.0, 
-                            "recipientId": "G803", 
+                            "recipientId": "G359", 
                             "matching": false
                         }
                     ], 
@@ -2588,7 +2588,7 @@
                             "sourceId": "897", 
                             "currency": "USD", 
                             "amount": 31799.0, 
-                            "recipientId": "G803", 
+                            "recipientId": "G359", 
                             "matching": true
                         }
                     ], 
@@ -2640,7 +2640,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-04-17", 
+                        "date": "2018-04-30", 
                         "dateType": "creation"
                     }
                 ]

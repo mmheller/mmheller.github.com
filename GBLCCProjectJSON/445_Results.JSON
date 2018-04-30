@@ -89,22 +89,6 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G1084", 
-                "isOrganization": true, 
-                "name": "Clark University", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G1084"
-                ], 
-                "contactId": "1084", 
-                "isOrganization": false, 
-                "name": "Dominik Kulakowski", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "G1083", 
                 "isOrganization": true, 
                 "name": "Utah State University", 
@@ -185,22 +169,6 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G1039", 
-                "isOrganization": true, 
-                "name": "Teton Research Institute", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G1039"
-                ], 
-                "contactId": "1039", 
-                "isOrganization": false, 
-                "name": "Kevin Krasnow", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "G1097", 
                 "isOrganization": true, 
                 "name": "Boise State University", 
@@ -217,19 +185,35 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "G1037", 
+                "contactId": "G1039", 
                 "isOrganization": true, 
-                "name": "US Forest Service", 
-                "contactType": "Federal"
+                "name": "Teton Research Institute", 
+                "contactType": "Academic"
             }, 
             {
                 "memberOfOrganization": [
-                    "G1037"
+                    "G1039"
                 ], 
-                "contactId": "1037", 
+                "contactId": "1039", 
                 "isOrganization": false, 
-                "name": "Cheri Howell", 
-                "contactType": "Federal"
+                "name": "Kevin Krasnow", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G1084", 
+                "isOrganization": true, 
+                "name": "Clark University", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1084"
+                ], 
+                "contactId": "1084", 
+                "isOrganization": false, 
+                "name": "Dominik Kulakowski", 
+                "contactType": "Academic"
             }, 
             {
                 "isOrganization": false, 
@@ -312,6 +296,22 @@
                 "contactType": "Academic"
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "G1037", 
+                "isOrganization": true, 
+                "name": "US Forest Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1037"
+                ], 
+                "contactId": "1037", 
+                "isOrganization": false, 
+                "name": "Cheri Howell", 
+                "contactType": "Federal"
+            }, 
+            {
                 "memberOfOrganization": [
                     "G1079"
                 ], 
@@ -389,26 +389,6 @@
                                     "contactId": "978", 
                                     "organizationMembers": [
                                         "G978"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G1084", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "1084", 
-                                    "organizationMembers": [
-                                        "G1084"
                                     ]
                                 }
                             ], 
@@ -517,26 +497,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G1039", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "1039", 
-                                    "organizationMembers": [
-                                        "G1039"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G1097", 
                                     "organizationMembers": []
                                 }
@@ -557,7 +517,7 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G1037", 
+                                    "contactId": "G1039", 
                                     "organizationMembers": []
                                 }
                             ], 
@@ -566,9 +526,29 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "1037", 
+                                    "contactId": "1039", 
                                     "organizationMembers": [
-                                        "G1037"
+                                        "G1039"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G1084", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "1084", 
+                                    "organizationMembers": [
+                                        "G1084"
                                     ]
                                 }
                             ], 
@@ -631,6 +611,26 @@
                                     "contactId": "802", 
                                     "organizationMembers": [
                                         "G802"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G1037", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "1037", 
+                                    "organizationMembers": [
+                                        "G1037"
                                     ]
                                 }
                             ], 
@@ -2628,7 +2628,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-04-17", 
+                        "date": "2018-04-30", 
                         "dateType": "creation"
                     }
                 ]

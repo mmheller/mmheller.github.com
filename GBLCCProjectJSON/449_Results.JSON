@@ -79,31 +79,6 @@
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "G1124", 
-                "isOrganization": true, 
-                "name": "Conservation Biology Institute", 
-                "contactType": "NGO"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G1124"
-                ], 
-                "contactId": "1124", 
-                "isOrganization": false, 
-                "name": "Mike Lundin", 
-                "contactType": "NGO"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G1124"
-                ], 
-                "contactId": "1123", 
-                "isOrganization": false, 
-                "name": "Kai Foster", 
-                "contactType": "NGO"
-            }, 
-            {
                 "isOrganization": true, 
                 "name": "Bureau of Land Management", 
                 "memberOfOrganization": [], 
@@ -128,6 +103,31 @@
                 ], 
                 "contactId": "772", 
                 "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G1124", 
+                "isOrganization": true, 
+                "name": "Conservation Biology Institute", 
+                "contactType": "NGO"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1124"
+                ], 
+                "contactId": "1124", 
+                "isOrganization": false, 
+                "name": "Mike Lundin", 
+                "contactType": "NGO"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1124"
+                ], 
+                "contactId": "1123", 
+                "isOrganization": false, 
+                "name": "Kai Foster", 
+                "contactType": "NGO"
             }, 
             {
                 "isOrganization": true, 
@@ -223,6 +223,26 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G772", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "772", 
+                                    "organizationMembers": [
+                                        "G772"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G1124", 
                                     "organizationMembers": []
                                 }
@@ -250,26 +270,6 @@
                                 }
                             ], 
                             "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G772", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "772", 
-                                    "organizationMembers": [
-                                        "G772"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -2158,7 +2158,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-04-17", 
+                        "date": "2018-04-30", 
                         "dateType": "creation"
                     }
                 ]

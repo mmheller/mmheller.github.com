@@ -106,6 +106,22 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "G963", 
+                "isOrganization": true, 
+                "name": "University of Wyoming", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G963"
+                ], 
+                "contactId": "963", 
+                "isOrganization": false, 
+                "name": "Brian Mealor", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "G962", 
                 "isOrganization": true, 
                 "name": "Bureau of Land Management", 
@@ -118,22 +134,6 @@
                 "contactId": "962", 
                 "isOrganization": false, 
                 "name": "Mike Pellant", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G960", 
-                "isOrganization": true, 
-                "name": "US Department of Agriculture", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G960"
-                ], 
-                "contactId": "960", 
-                "isOrganization": false, 
-                "name": "Chad Boyd", 
                 "contactType": "Federal"
             }, 
             {
@@ -151,22 +151,6 @@
                 "isOrganization": false, 
                 "name": "Michael Ielmini", 
                 "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G963", 
-                "isOrganization": true, 
-                "name": "University of Wyoming", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G963"
-                ], 
-                "contactId": "963", 
-                "isOrganization": false, 
-                "name": "Brian Mealor", 
-                "contactType": "Academic"
             }, 
             {
                 "isOrganization": true, 
@@ -218,6 +202,22 @@
                     }
                 ], 
                 "contactId": "682", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G960", 
+                "isOrganization": true, 
+                "name": "US Department of Agriculture", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G960"
+                ], 
+                "contactId": "960", 
+                "isOrganization": false, 
+                "name": "Chad Boyd", 
                 "contactType": "Federal"
             }
         ], 
@@ -308,6 +308,26 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "G963", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "963", 
+                                    "organizationMembers": [
+                                        "G963"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G962", 
                                     "organizationMembers": []
                                 }
@@ -328,26 +348,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G960", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "960", 
-                                    "organizationMembers": [
-                                        "G960"
-                                    ]
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G959", 
                                     "organizationMembers": []
                                 }
@@ -360,26 +360,6 @@
                                     "contactId": "959", 
                                     "organizationMembers": [
                                         "G959"
-                                    ]
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G963", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Contributor"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "963", 
-                                    "organizationMembers": [
-                                        "G963"
                                     ]
                                 }
                             ], 
@@ -420,6 +400,26 @@
                                     "contactId": "682", 
                                     "organizationMembers": [
                                         "G682"
+                                    ]
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G960", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Contributor"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "960", 
+                                    "organizationMembers": [
+                                        "G960"
                                     ]
                                 }
                             ], 
@@ -1748,7 +1748,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-04-17", 
+                        "date": "2018-04-30", 
                         "dateType": "creation"
                     }
                 ]

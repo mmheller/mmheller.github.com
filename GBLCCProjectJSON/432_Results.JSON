@@ -72,22 +72,6 @@
                 "contactType": "Federal"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "G974", 
-                "isOrganization": true, 
-                "name": "University of Arizona", 
-                "contactType": "Academic"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G974"
-                ], 
-                "contactId": "974", 
-                "isOrganization": false, 
-                "name": "Julie Brugger", 
-                "contactType": "Academic"
-            }, 
-            {
                 "isOrganization": true, 
                 "name": "Western Regional Climate Center, Desert Research Institute", 
                 "memberOfOrganization": [], 
@@ -166,21 +150,37 @@
                 "contactType": "Private"
             }, 
             {
-                "memberOfOrganization": [
-                    "G974"
-                ], 
-                "contactId": "975", 
-                "isOrganization": false, 
-                "name": "Holly Hartman", 
+                "memberOfOrganization": [], 
+                "contactId": "G973", 
+                "isOrganization": true, 
+                "name": "University of Arizona", 
                 "contactType": "Academic"
             }, 
             {
                 "memberOfOrganization": [
-                    "G974"
+                    "G973"
                 ], 
                 "contactId": "973", 
                 "isOrganization": false, 
                 "name": "Gregg Garfin", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G973"
+                ], 
+                "contactId": "974", 
+                "isOrganization": false, 
+                "name": "Julie Brugger", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G973"
+                ], 
+                "contactId": "975", 
+                "isOrganization": false, 
+                "name": "Holly Hartman", 
                 "contactType": "Academic"
             }
         ], 
@@ -236,26 +236,6 @@
                                 }
                             ], 
                             "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G974", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "974", 
-                                    "organizationMembers": [
-                                        "G974"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -320,10 +300,8 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "975", 
-                                    "organizationMembers": [
-                                        "G974"
-                                    ]
+                                    "contactId": "G973", 
+                                    "organizationMembers": []
                                 }
                             ], 
                             "role": "Collaborator"
@@ -333,7 +311,29 @@
                                 {
                                     "contactId": "973", 
                                     "organizationMembers": [
-                                        "G974"
+                                        "G973"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "974", 
+                                    "organizationMembers": [
+                                        "G973"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "975", 
+                                    "organizationMembers": [
+                                        "G973"
                                     ]
                                 }
                             ], 
@@ -2064,7 +2064,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-04-17", 
+                        "date": "2018-04-30", 
                         "dateType": "creation"
                     }
                 ]

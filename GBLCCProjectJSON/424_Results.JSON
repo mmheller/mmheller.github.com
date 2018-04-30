@@ -79,6 +79,32 @@
                 "contactType": "Federal"
             }, 
             {
+                "isOrganization": true, 
+                "name": "US Geological Survey", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:aldridgec@usgs.gov"
+                    }
+                ], 
+                "contactId": "G835", 
+                "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Cameron Aldridge", 
+                "memberOfOrganization": [
+                    "G835"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:aldridgec@usgs.gov"
+                    }
+                ], 
+                "contactId": "835", 
+                "contactType": "Federal"
+            }, 
+            {
                 "memberOfOrganization": [], 
                 "contactId": "G957", 
                 "isOrganization": true, 
@@ -199,32 +225,6 @@
                 "contactType": "Academic"
             }, 
             {
-                "isOrganization": true, 
-                "name": "US Geological Survey", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:aldridgec@usgs.gov"
-                    }
-                ], 
-                "contactId": "G835", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Cameron Aldridge", 
-                "memberOfOrganization": [
-                    "G835"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:aldridgec@usgs.gov"
-                    }
-                ], 
-                "contactId": "835", 
-                "contactType": "Federal"
-            }, 
-            {
                 "isOrganization": false, 
                 "name": "Benjamin Poulter", 
                 "memberOfOrganization": [
@@ -342,6 +342,26 @@
                                 }
                             ], 
                             "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G835", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "835", 
+                                    "organizationMembers": [
+                                        "G835"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -469,26 +489,6 @@
                                     "contactId": "848", 
                                     "organizationMembers": [
                                         "G955"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G835", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "835", 
-                                    "organizationMembers": [
-                                        "G835"
                                     ]
                                 }
                             ], 
@@ -1165,7 +1165,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-04-17", 
+                        "date": "2018-04-30", 
                         "dateType": "creation"
                     }
                 ]

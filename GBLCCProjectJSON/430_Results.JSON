@@ -72,46 +72,20 @@
                 "contactType": "Federal"
             }, 
             {
-                "isOrganization": true, 
-                "name": "US Fish & Wildife Service", 
                 "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:thomas_miewald@fws.gov"
-                    }
-                ], 
-                "contactId": "G232", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Thomas Miewald", 
-                "memberOfOrganization": [
-                    "G232"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:thomas_miewald@fws.gov"
-                    }
-                ], 
-                "contactId": "232", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G1127", 
+                "contactId": "G825", 
                 "isOrganization": true, 
-                "name": "The Nature Conservancy", 
-                "contactType": "NGO"
+                "name": "Great Basin LCC", 
+                "contactType": "LCC"
             }, 
             {
                 "memberOfOrganization": [
-                    "G1127"
+                    "G825"
                 ], 
-                "contactId": "1127", 
+                "contactId": "825", 
                 "isOrganization": false, 
-                "name": "Aaron Jones", 
-                "contactType": "NGO"
+                "name": "Levi Old", 
+                "contactType": "LCC"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -128,6 +102,22 @@
                 "isOrganization": false, 
                 "name": "Diana Dishman", 
                 "contactType": "Private"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G1127", 
+                "isOrganization": true, 
+                "name": "The Nature Conservancy", 
+                "contactType": "NGO"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1127"
+                ], 
+                "contactId": "1127", 
+                "isOrganization": false, 
+                "name": "Aaron Jones", 
+                "contactType": "NGO"
             }, 
             {
                 "memberOfOrganization": [
@@ -164,19 +154,17 @@
                 "contactType": "NGO"
             }, 
             {
-                "memberOfOrganization": [], 
-                "contactId": "G825", 
-                "isOrganization": true, 
-                "name": "Great Basin LCC", 
-                "contactType": "LCC"
-            }, 
-            {
+                "isOrganization": false, 
+                "name": "John Tull", 
                 "memberOfOrganization": [
                     "G825"
                 ], 
-                "contactId": "825", 
-                "isOrganization": false, 
-                "name": "Levi Old", 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:john_tull@fws.gov"
+                    }
+                ], 
+                "contactId": "883", 
                 "contactType": "LCC"
             }, 
             {
@@ -224,18 +212,30 @@
                 "contactType": "Federal"
             }, 
             {
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:thomas_miewald@fws.gov"
+                    }
+                ], 
+                "contactId": "G232", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": false, 
-                "name": "John Tull", 
+                "name": "Thomas Miewald", 
                 "memberOfOrganization": [
-                    "G825"
+                    "G232"
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:john_tull@fws.gov"
+                        "uri": "mailto:thomas_miewald@fws.gov"
                     }
                 ], 
-                "contactId": "883", 
-                "contactType": "LCC"
+                "contactId": "232", 
+                "contactType": "Federal"
             }
         ], 
         "metadata": {
@@ -294,42 +294,22 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G232", 
+                                    "contactId": "G825", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "232", 
+                                    "contactId": "825", 
                                     "organizationMembers": [
-                                        "G232"
+                                        "G825"
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G1127", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "1127", 
-                                    "organizationMembers": [
-                                        "G1127"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -346,6 +326,26 @@
                                     "contactId": "1128", 
                                     "organizationMembers": [
                                         "G1128"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G1127", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "1127", 
+                                    "organizationMembers": [
+                                        "G1127"
                                     ]
                                 }
                             ], 
@@ -396,22 +396,13 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G825", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "825", 
+                                    "contactId": "883", 
                                     "organizationMembers": [
                                         "G825"
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -458,13 +449,22 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "883", 
+                                    "contactId": "G232", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "232", 
                                     "organizationMembers": [
-                                        "G825"
+                                        "G232"
                                     ]
                                 }
                             ], 
-                            "role": "Collaborator"
+                            "role": "Principal Investigator"
                         }
                     ], 
                     "onlineResource": [
@@ -2654,7 +2654,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-04-17", 
+                        "date": "2018-04-30", 
                         "dateType": "creation"
                     }
                 ]
@@ -2778,6 +2778,26 @@
                     }, 
                     "resourceCitation": {
                         "title": "Tool: Nature's Stage Climate Mapper"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Presentation"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5aa85821e4b0b1c392ef5898", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Webinar: Nature's Stage Climate Mapper"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Webinar: Nature's Stage Climate Mapper"
                     }
                 }
             ], 

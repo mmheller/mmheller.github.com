@@ -66,6 +66,13 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "560", 
+                "isOrganization": true, 
+                "name": "US Fish & Wildife Service", 
+                "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "389", 
                 "isOrganization": true, 
                 "name": "Bureau of Land Management", 
@@ -73,10 +80,46 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "560", 
+                "contactId": "G967", 
                 "isOrganization": true, 
-                "name": "US Fish & Wildife Service", 
-                "contactType": "Federal"
+                "name": "SWCA Consultants", 
+                "contactType": "Private"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G967"
+                ], 
+                "contactId": "967", 
+                "isOrganization": false, 
+                "name": "Rick Griffin", 
+                "contactType": "Private"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G967"
+                ], 
+                "contactId": "966", 
+                "isOrganization": false, 
+                "name": "Tim O'Neil", 
+                "contactType": "Private"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G967"
+                ], 
+                "contactId": "965", 
+                "isOrganization": false, 
+                "name": "Nick Jones", 
+                "contactType": "Private"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G967"
+                ], 
+                "contactId": "964", 
+                "isOrganization": false, 
+                "name": "Chris Moller", 
+                "contactType": "Private"
             }, 
             {
                 "isOrganization": true, 
@@ -103,49 +146,6 @@
                 ], 
                 "contactId": "793", 
                 "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G964", 
-                "isOrganization": true, 
-                "name": "SWCA Consultants", 
-                "contactType": "Private"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G964"
-                ], 
-                "contactId": "964", 
-                "isOrganization": false, 
-                "name": "Chris Moller", 
-                "contactType": "Private"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G964"
-                ], 
-                "contactId": "965", 
-                "isOrganization": false, 
-                "name": "Nick Jones", 
-                "contactType": "Private"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G964"
-                ], 
-                "contactId": "966", 
-                "isOrganization": false, 
-                "name": "Tim O'Neil", 
-                "contactType": "Private"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G964"
-                ], 
-                "contactId": "967", 
-                "isOrganization": false, 
-                "name": "Rick Griffin", 
-                "contactType": "Private"
             }
         ], 
         "metadata": {
@@ -193,6 +193,17 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "389", 
                                     "organizationMembers": [
                                         "389"
@@ -204,13 +215,55 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "560", 
+                                    "contactId": "G967", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "967", 
                                     "organizationMembers": [
-                                        "560"
+                                        "G967"
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "966", 
+                                    "organizationMembers": [
+                                        "G967"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "965", 
+                                    "organizationMembers": [
+                                        "G967"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "964", 
+                                    "organizationMembers": [
+                                        "G967"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -231,59 +284,6 @@
                                 }
                             ], 
                             "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G964", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "964", 
-                                    "organizationMembers": [
-                                        "G964"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "965", 
-                                    "organizationMembers": [
-                                        "G964"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "966", 
-                                    "organizationMembers": [
-                                        "G964"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "967", 
-                                    "organizationMembers": [
-                                        "G964"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
                         }
                     ], 
                     "onlineResource": [
@@ -971,7 +971,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-04-17", 
+                        "date": "2018-04-30", 
                         "dateType": "creation"
                     }
                 ]

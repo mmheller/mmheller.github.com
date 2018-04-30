@@ -66,6 +66,13 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "909", 
+                "isOrganization": true, 
+                "name": "University of Oregon", 
+                "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "560", 
                 "isOrganization": true, 
                 "name": "US Fish & Wildife Service", 
@@ -73,36 +80,35 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "909", 
+                "contactId": "G1129", 
                 "isOrganization": true, 
-                "name": "University of Oregon", 
+                "name": "Conservation Biology Institute", 
+                "contactType": "NGO"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1129"
+                ], 
+                "contactId": "1129", 
+                "isOrganization": false, 
+                "name": "Tarylor Mutch", 
+                "contactType": "NGO"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "G1130", 
+                "isOrganization": true, 
+                "name": "Oregon State University", 
                 "contactType": "Academic"
             }, 
             {
-                "isOrganization": true, 
-                "name": "Conservation Biology Institute", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:dominique@consbio.org"
-                    }
-                ], 
-                "contactId": "G780", 
-                "contactType": "NGO"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Dominique Bachelet", 
                 "memberOfOrganization": [
-                    "G780"
+                    "G1130"
                 ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:dominique@consbio.org"
-                    }
-                ], 
-                "contactId": "780", 
-                "contactType": "NGO"
+                "contactId": "1130", 
+                "isOrganization": false, 
+                "name": "Chad Zanocco", 
+                "contactType": "Academic"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -121,22 +127,37 @@
                 "contactType": "Federal"
             }, 
             {
-                "isOrganization": true, 
-                "name": "Oregon State University", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:melanie.brown@consbio.org"
-                    }
+                "memberOfOrganization": [
+                    "G1129"
                 ], 
-                "contactId": "G806", 
-                "contactType": "Academic"
+                "contactId": "979", 
+                "isOrganization": false, 
+                "name": "Ken Ferschweiler", 
+                "contactType": "NGO"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1129"
+                ], 
+                "contactId": "978", 
+                "isOrganization": false, 
+                "name": "Barry Baker", 
+                "contactType": "NGO"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1129"
+                ], 
+                "contactId": "977", 
+                "isOrganization": false, 
+                "name": "Tim Sheehan", 
+                "contactType": "NGO"
             }, 
             {
                 "isOrganization": false, 
                 "name": "Melanie Brown", 
                 "memberOfOrganization": [
-                    "G806"
+                    "G1130"
                 ], 
                 "onlineResource": [
                     {
@@ -145,6 +166,38 @@
                 ], 
                 "contactId": "806", 
                 "contactType": "Academic"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Dominique Bachelet", 
+                "memberOfOrganization": [
+                    "G1129"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:dominique@consbio.org"
+                    }
+                ], 
+                "contactId": "780", 
+                "contactType": "NGO"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1129"
+                ], 
+                "contactId": "976", 
+                "isOrganization": false, 
+                "name": "Mike Gough", 
+                "contactType": "NGO"
+            }, 
+            {
+                "memberOfOrganization": [
+                    "G1129"
+                ], 
+                "contactId": "1131", 
+                "isOrganization": false, 
+                "name": "Jim Strittholt", 
+                "contactType": "NGO"
             }
         ], 
         "metadata": {
@@ -192,17 +245,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "560", 
-                                    "organizationMembers": [
-                                        "560"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "909", 
                                     "organizationMembers": [
                                         "909"
@@ -214,22 +256,53 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G780", 
-                                    "organizationMembers": []
+                                    "contactId": "560", 
+                                    "organizationMembers": [
+                                        "560"
+                                    ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "780", 
+                                    "contactId": "G1129", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "1129", 
                                     "organizationMembers": [
-                                        "G780"
+                                        "G1129"
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G1130", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "1130", 
+                                    "organizationMembers": [
+                                        "G1130"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -238,7 +311,7 @@
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Contributor"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
@@ -249,13 +322,37 @@
                                     ]
                                 }
                             ], 
-                            "role": "Contributor"
+                            "role": "Collaborator"
                         }, 
                         {
                             "party": [
                                 {
-                                    "contactId": "G806", 
-                                    "organizationMembers": []
+                                    "contactId": "979", 
+                                    "organizationMembers": [
+                                        "G1129"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "978", 
+                                    "organizationMembers": [
+                                        "G1129"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "977", 
+                                    "organizationMembers": [
+                                        "G1129"
+                                    ]
                                 }
                             ], 
                             "role": "Collaborator"
@@ -265,7 +362,40 @@
                                 {
                                     "contactId": "806", 
                                     "organizationMembers": [
-                                        "G806"
+                                        "G1130"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "780", 
+                                    "organizationMembers": [
+                                        "G1129"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "976", 
+                                    "organizationMembers": [
+                                        "G1129"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "1131", 
+                                    "organizationMembers": [
+                                        "G1129"
                                     ]
                                 }
                             ], 
@@ -1286,7 +1416,7 @@
                             "sourceId": "560", 
                             "currency": "USD", 
                             "amount": 30000.0, 
-                            "recipientId": "G780", 
+                            "recipientId": "G1129", 
                             "matching": false
                         }
                     ], 
@@ -1338,7 +1468,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-04-17", 
+                        "date": "2018-04-30", 
                         "dateType": "creation"
                     }
                 ]
@@ -1382,6 +1512,26 @@
                     }, 
                     "resourceCitation": {
                         "title": "Climate consoles: Pieces in the puzzle of climate change adaptation"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Publication"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5ae25644e4b0e2c2dd30308c", 
+                                "namespace": "gov.sciencbase.catalog"
+                            }
+                        ], 
+                        "title": "Journal Article: Great Basin land managers provide detailed feedback about usefulness of two climate information web applications"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Journal Article: Great Basin land managers provide detailed feedback about usefulness of two climate information web applications"
                     }
                 }
             ], 

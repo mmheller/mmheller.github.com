@@ -165,32 +165,6 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "Nevada Department of Wildlife", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:jasonw@ndow.org"
-                    }
-                ], 
-                "contactId": "G815", 
-                "contactType": "State"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Jason Williams", 
-                "memberOfOrganization": [
-                    "G815"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:jasonw@ndow.org"
-                    }
-                ], 
-                "contactId": "815", 
-                "contactType": "State"
-            }, 
-            {
-                "isOrganization": true, 
                 "name": "US Fish & Wildife Service", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
@@ -214,6 +188,32 @@
                 ], 
                 "contactId": "830", 
                 "contactType": "Federal"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Nevada Department of Wildlife", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:jasonw@ndow.org"
+                    }
+                ], 
+                "contactId": "G815", 
+                "contactType": "State"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "Jason Williams", 
+                "memberOfOrganization": [
+                    "G815"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:jasonw@ndow.org"
+                    }
+                ], 
+                "contactId": "815", 
+                "contactType": "State"
             }
         ], 
         "metadata": {
@@ -276,7 +276,7 @@
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
@@ -287,7 +287,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
@@ -343,26 +343,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G815", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "815", 
-                                    "organizationMembers": [
-                                        "G815"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "G830", 
                                     "organizationMembers": []
                                 }
@@ -375,6 +355,26 @@
                                     "contactId": "830", 
                                     "organizationMembers": [
                                         "G830"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G815", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "815", 
+                                    "organizationMembers": [
+                                        "G815"
                                     ]
                                 }
                             ], 
@@ -2558,7 +2558,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-04-17", 
+                        "date": "2018-04-30", 
                         "dateType": "creation"
                     }
                 ]

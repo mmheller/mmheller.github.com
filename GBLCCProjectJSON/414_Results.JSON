@@ -73,17 +73,17 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "389", 
-                "isOrganization": true, 
-                "name": "Bureau of Land Management", 
-                "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "900", 
                 "isOrganization": true, 
                 "name": "Northern Arizona University", 
                 "contactType": "Academic"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "389", 
+                "isOrganization": true, 
+                "name": "Bureau of Land Management", 
+                "contactType": "Federal"
             }, 
             {
                 "isOrganization": true, 
@@ -168,17 +168,6 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "389", 
-                                    "organizationMembers": [
-                                        "389"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "900", 
                                     "organizationMembers": [
                                         "900"
@@ -190,11 +179,22 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "389", 
+                                    "organizationMembers": [
+                                        "389"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G778", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -205,7 +205,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }
                     ], 
                     "onlineResource": [
@@ -934,7 +934,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-04-17", 
+                        "date": "2018-04-30", 
                         "dateType": "creation"
                     }
                 ]

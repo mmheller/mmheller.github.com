@@ -66,13 +66,6 @@
             }, 
             {
                 "memberOfOrganization": [], 
-                "contactId": "910", 
-                "isOrganization": true, 
-                "name": "Nevada Department of Wildlife", 
-                "contactType": "State"
-            }, 
-            {
-                "memberOfOrganization": [], 
                 "contactId": "389", 
                 "isOrganization": true, 
                 "name": "Bureau of Land Management", 
@@ -91,6 +84,39 @@
                 "isOrganization": true, 
                 "name": "US Fish & Wildife Service", 
                 "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "910", 
+                "isOrganization": true, 
+                "name": "Nevada Department of Wildlife", 
+                "contactType": "State"
+            }, 
+            {
+                "isOrganization": true, 
+                "name": "Great Basin Bird Observatory", 
+                "memberOfOrganization": [], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:boone@gbbo.org"
+                    }
+                ], 
+                "contactId": "G808", 
+                "contactType": "Research"
+            }, 
+            {
+                "isOrganization": false, 
+                "name": "John Boone", 
+                "memberOfOrganization": [
+                    "G808"
+                ], 
+                "onlineResource": [
+                    {
+                        "uri": "mailto:boone@gbbo.org"
+                    }
+                ], 
+                "contactId": "808", 
+                "contactType": "Research"
             }, 
             {
                 "isOrganization": true, 
@@ -119,22 +145,10 @@
                 "contactType": "Federal"
             }, 
             {
-                "isOrganization": true, 
-                "name": "Great Basin Bird Observatory", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:ammon@gbbo.org"
-                    }
-                ], 
-                "contactId": "G786", 
-                "contactType": "NGO"
-            }, 
-            {
                 "isOrganization": false, 
                 "name": "Elizabeth Ammon", 
                 "memberOfOrganization": [
-                    "G786"
+                    "G808"
                 ], 
                 "onlineResource": [
                     {
@@ -143,20 +157,6 @@
                 ], 
                 "contactId": "786", 
                 "contactType": "NGO"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "John Boone", 
-                "memberOfOrganization": [
-                    "G786"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:boone@gbbo.org"
-                    }
-                ], 
-                "contactId": "808", 
-                "contactType": "Research"
             }
         ], 
         "metadata": {
@@ -204,24 +204,13 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "910", 
-                                    "organizationMembers": [
-                                        "910"
-                                    ]
-                                }
-                            ], 
-                            "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "389", 
                                     "organizationMembers": [
                                         "389"
                                     ]
                                 }
                             ], 
-                            "role": "Collaborator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
@@ -248,6 +237,37 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "910", 
+                                    "organizationMembers": [
+                                        "910"
+                                    ]
+                                }
+                            ], 
+                            "role": "Collaborator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "G808", 
+                                    "organizationMembers": []
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "808", 
+                                    "organizationMembers": [
+                                        "G808"
+                                    ]
+                                }
+                            ], 
+                            "role": "Principal Investigator"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G879", 
                                     "organizationMembers": []
                                 }
@@ -268,33 +288,13 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G786", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "786", 
                                     "organizationMembers": [
-                                        "G786"
+                                        "G808"
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "808", 
-                                    "organizationMembers": [
-                                        "G786"
-                                    ]
-                                }
-                            ], 
-                            "role": "Principal Investigator"
+                            "role": "Fiscal Agent"
                         }
                     ], 
                     "onlineResource": [
@@ -1357,7 +1357,7 @@
                             "sourceId": "389", 
                             "currency": "USD", 
                             "amount": 110000.0, 
-                            "recipientId": "G786", 
+                            "recipientId": "G808", 
                             "matching": true
                         }
                     ], 
@@ -1375,7 +1375,7 @@
                             "sourceId": "282", 
                             "currency": "USD", 
                             "amount": 38855.0, 
-                            "recipientId": "G786", 
+                            "recipientId": "G808", 
                             "matching": false
                         }
                     ], 
@@ -1427,7 +1427,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-04-17", 
+                        "date": "2018-04-30", 
                         "dateType": "creation"
                     }
                 ]
