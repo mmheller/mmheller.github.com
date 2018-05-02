@@ -3,15 +3,8 @@
 <HEAD>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript">
-
-      require([
-        "dojo/json"
-      ],
-        function (JSON
-      ) {
             $.getJSON("https://spreadsheets.google.com/feeds/list/1HtadSaAxVfq53OlVklAIQR25jxNRybrjJOIqB0KOthI/od6/public/values?alt=json", function (json) {
                 var pEntries = json.feed.entry;
-
                 var tr;
                 for (var i = 0; i < pEntries.length; i++) {
                     tr = $('<tr/>');
@@ -21,7 +14,6 @@
                     $('table').append(tr);
                 }
             });
-        });
     </script>
 
 <TITLE>
@@ -30,14 +22,15 @@ A sample for Lance and co.
 </HEAD>
 <BODY>
 
- <P>This is very minimal example that reads a google sheet as json and writes an HTML table
-    <table>
-        <tr>
-            <th>location</th>
-            <th>name</th>
-            <th>committee</th>
-        </tr>
-    </table>
+    <P>This is very minimal example that reads a google sheet as json and writes an HTML table<P>
+        T
+        <table>
+            <tr>
+                <th>location</th>
+                <th>name</th>
+                <th>committee</th>
+            </tr>
+        </table>
 
 
 <P>This is very minimal iframe tag usage example displaying weather.gov.</P> 
