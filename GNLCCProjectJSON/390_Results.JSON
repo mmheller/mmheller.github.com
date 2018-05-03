@@ -127,32 +127,6 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "US Fish & Wildife Service", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:sean_finn@fws.gov"
-                    }
-                ], 
-                "contactId": "G577", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": false, 
-                "name": "Sean Finn", 
-                "memberOfOrganization": [
-                    "G577"
-                ], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:sean_finn@fws.gov"
-                    }
-                ], 
-                "contactId": "577", 
-                "contactType": "Federal"
-            }, 
-            {
-                "isOrganization": true, 
                 "name": "Craighead Institute", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
@@ -240,7 +214,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -251,7 +225,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -282,7 +256,7 @@
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Principal Investigator"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
@@ -293,27 +267,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G577", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Project Officer"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "577", 
-                                    "organizationMembers": [
-                                        "G577"
-                                    ]
-                                }
-                            ], 
-                            "role": "Project Officer"
+                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
@@ -2769,12 +2723,53 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-05-01", 
+                        "date": "2018-05-02", 
                         "dateType": "creation"
                     }
                 ]
             }, 
-            "associatedResource": [], 
+            "associatedResource": [
+                {
+                    "resourceType": [
+                        {
+                            "type": "Report"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5a7234bce4b0a9a2e9df0ea1", 
+                                "namespace": "gov.sciencebase.catalog"
+                            }
+                        ], 
+                        "title": "Final Report"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Final Report"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Map"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5a72380be4b0a9a2e9df4653", 
+                                "namespace": "gov.sciencebase.catalog"
+                            }
+                        ], 
+                        "title": "Maps of desirable future scenarios and stressor levels"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Maps of desirable future scenarios and stressor levels"
+                    }
+                }
+            ], 
             "resourceDistribution": [
                 {
                     "distributor": [

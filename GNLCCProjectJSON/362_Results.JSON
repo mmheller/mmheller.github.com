@@ -69,7 +69,7 @@
                 "contactId": "204", 
                 "isOrganization": true, 
                 "name": "Crown Managers Partnership", 
-                "contactType": "Academic"
+                "contactType": "Consortium"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -83,14 +83,14 @@
                 "contactId": "391", 
                 "isOrganization": true, 
                 "name": "Big Sky Institute", 
-                "contactType": "Unknown"
+                "contactType": "NGO"
             }, 
             {
                 "memberOfOrganization": [], 
                 "contactId": "530", 
                 "isOrganization": true, 
                 "name": "Crown Managers Partnership", 
-                "contactType": "Unknown"
+                "contactType": "Consortium"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -105,6 +105,13 @@
                 "isOrganization": true, 
                 "name": "National Park Service", 
                 "contactType": "Federal"
+            }, 
+            {
+                "memberOfOrganization": [], 
+                "contactId": "606", 
+                "isOrganization": true, 
+                "name": "Wilburforce Foundation", 
+                "contactType": "Foundation"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -423,7 +430,7 @@
                     }
                 ], 
                 "contactId": "G528", 
-                "contactType": "Unknown"
+                "contactType": "Consortium"
             }, 
             {
                 "isOrganization": false, 
@@ -437,7 +444,7 @@
                     }
                 ], 
                 "contactId": "528", 
-                "contactType": "Unknown"
+                "contactType": "Consortium"
             }, 
             {
                 "isOrganization": false, 
@@ -452,22 +459,6 @@
                 ], 
                 "contactId": "529", 
                 "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G606", 
-                "isOrganization": true, 
-                "name": "Wilberforce Foundation", 
-                "contactType": "Foundation"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G606"
-                ], 
-                "contactId": "606", 
-                "isOrganization": false, 
-                "name": "Wilberforce Foundation Unknown", 
-                "contactType": "Foundation"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -589,6 +580,17 @@
                                     "contactId": "603", 
                                     "organizationMembers": [
                                         "603"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "606", 
+                                    "organizationMembers": [
+                                        "606"
                                     ]
                                 }
                             ], 
@@ -773,7 +775,7 @@
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -784,7 +786,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -853,7 +855,7 @@
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -864,7 +866,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -947,26 +949,6 @@
                                 }
                             ], 
                             "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G606", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "606", 
-                                    "organizationMembers": [
-                                        "G606"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
@@ -3454,7 +3436,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-05-01", 
+                        "date": "2018-05-02", 
                         "dateType": "creation"
                     }
                 ]

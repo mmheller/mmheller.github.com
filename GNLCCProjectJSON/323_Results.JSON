@@ -79,6 +79,13 @@
                 "contactType": "Federal"
             }, 
             {
+                "memberOfOrganization": [], 
+                "contactId": "669", 
+                "isOrganization": true, 
+                "name": "Natural Resources Conservation Service", 
+                "contactType": "Federal"
+            }, 
+            {
                 "isOrganization": true, 
                 "name": "University of Montana", 
                 "memberOfOrganization": [], 
@@ -221,15 +228,6 @@
                 "isOrganization": false, 
                 "name": "Dave Naugle", 
                 "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G464"
-                ], 
-                "contactId": "669", 
-                "isOrganization": false, 
-                "name": "Natural Resources Conservation Service Unknown", 
-                "contactType": "Federal"
             }
         ], 
         "metadata": {
@@ -299,11 +297,22 @@
                         {
                             "party": [
                                 {
+                                    "contactId": "669", 
+                                    "organizationMembers": [
+                                        "669"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
                                     "contactId": "G228", 
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -314,7 +323,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -437,17 +446,6 @@
                                 }
                             ], 
                             "role": "Collaborator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "669", 
-                                    "organizationMembers": [
-                                        "G464"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
                         }
                     ], 
                     "onlineResource": [
@@ -2160,7 +2158,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-05-01", 
+                        "date": "2018-05-02", 
                         "dateType": "creation"
                     }
                 ]

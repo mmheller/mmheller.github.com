@@ -150,6 +150,13 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "606", 
+                "isOrganization": true, 
+                "name": "Wilburforce Foundation", 
+                "contactType": "Foundation"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "607", 
                 "isOrganization": true, 
                 "name": "University of Washington", 
@@ -472,7 +479,7 @@
                     }
                 ], 
                 "contactId": "G546", 
-                "contactType": "Unknown"
+                "contactType": "State"
             }, 
             {
                 "isOrganization": false, 
@@ -486,11 +493,11 @@
                     }
                 ], 
                 "contactId": "546", 
-                "contactType": "Unknown"
+                "contactType": "State"
             }, 
             {
                 "isOrganization": true, 
-                "name": "WSDOT", 
+                "name": "Washington Dept of Transportation", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
@@ -529,22 +536,6 @@
                 "isOrganization": false, 
                 "name": "Sam Cushman", 
                 "contactType": "Federal"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G606", 
-                "isOrganization": true, 
-                "name": "Wilberforce Foundation", 
-                "contactType": "Foundation"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G606"
-                ], 
-                "contactId": "606", 
-                "isOrganization": false, 
-                "name": "Wilberforce Foundation Unknown", 
-                "contactType": "Foundation"
             }, 
             {
                 "isOrganization": true, 
@@ -742,6 +733,17 @@
                                     "contactId": "605", 
                                     "organizationMembers": [
                                         "605"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "606", 
+                                    "organizationMembers": [
+                                        "606"
                                     ]
                                 }
                             ], 
@@ -1124,26 +1126,6 @@
                                 }
                             ], 
                             "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G606", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "606", 
-                                    "organizationMembers": [
-                                        "G606"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
@@ -3853,7 +3835,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-05-01", 
+                        "date": "2018-05-02", 
                         "dateType": "creation"
                     }
                 ]

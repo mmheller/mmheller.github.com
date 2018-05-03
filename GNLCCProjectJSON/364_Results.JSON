@@ -122,6 +122,13 @@
             }, 
             {
                 "memberOfOrganization": [], 
+                "contactId": "606", 
+                "isOrganization": true, 
+                "name": "Wilburforce Foundation", 
+                "contactType": "Foundation"
+            }, 
+            {
+                "memberOfOrganization": [], 
                 "contactId": "607", 
                 "isOrganization": true, 
                 "name": "University of Washington", 
@@ -180,28 +187,28 @@
                 "memberOfOrganization": [], 
                 "contactId": "637", 
                 "isOrganization": true, 
-                "name": "South Okanogen Regional District", 
+                "name": "South Okanagen Regional District", 
                 "contactType": "Local"
             }, 
             {
                 "memberOfOrganization": [], 
                 "contactId": "724", 
                 "isOrganization": true, 
-                "name": "South Okanogan Similkameen Conservation Program", 
+                "name": "South Okanagan Similkameen Conservation Program", 
                 "contactType": "Local"
             }, 
             {
                 "memberOfOrganization": [], 
                 "contactId": "725", 
                 "isOrganization": true, 
-                "name": "Okanogan Collaborative Conservation Program", 
+                "name": "Okanagan Collaborative Conservation Program", 
                 "contactType": "Local"
             }, 
             {
                 "memberOfOrganization": [], 
                 "contactId": "728", 
                 "isOrganization": true, 
-                "name": "Okanogan National Alliance", 
+                "name": "Okanagan National Alliance", 
                 "contactType": "Consortium"
             }, 
             {
@@ -303,7 +310,7 @@
                 "contactId": "G341", 
                 "isOrganization": true, 
                 "name": "South Okanagan Similkameen Conservation Program", 
-                "contactType": "Unknown"
+                "contactType": "Consortium"
             }, 
             {
                 "memberOfOrganization": [
@@ -312,7 +319,7 @@
                 "contactId": "341", 
                 "isOrganization": false, 
                 "name": "Bryn White", 
-                "contactType": "Unknown"
+                "contactType": "Consortium"
             }, 
             {
                 "isOrganization": false, 
@@ -366,7 +373,7 @@
                     }
                 ], 
                 "contactId": "G408", 
-                "contactType": "Unknown"
+                "contactType": "NGO"
             }, 
             {
                 "isOrganization": false, 
@@ -380,7 +387,7 @@
                     }
                 ], 
                 "contactId": "408", 
-                "contactType": "Unknown"
+                "contactType": "NGO"
             }, 
             {
                 "isOrganization": false, 
@@ -398,7 +405,7 @@
             }, 
             {
                 "isOrganization": true, 
-                "name": "WCSI", 
+                "name": "Washington Conservation Science Institute", 
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
@@ -406,7 +413,7 @@
                     }
                 ], 
                 "contactId": "G540", 
-                "contactType": "Unknown"
+                "contactType": "NGO"
             }, 
             {
                 "isOrganization": false, 
@@ -420,7 +427,7 @@
                     }
                 ], 
                 "contactId": "540", 
-                "contactType": "Unknown"
+                "contactType": "NGO"
             }, 
             {
                 "isOrganization": true, 
@@ -510,7 +517,7 @@
                     }
                 ], 
                 "contactId": "G546", 
-                "contactType": "Unknown"
+                "contactType": "State"
             }, 
             {
                 "isOrganization": false, 
@@ -524,7 +531,7 @@
                     }
                 ], 
                 "contactId": "546", 
-                "contactType": "Unknown"
+                "contactType": "State"
             }, 
             {
                 "isOrganization": false, 
@@ -541,22 +548,10 @@
                 "contactType": "State"
             }, 
             {
-                "isOrganization": true, 
-                "name": "Washington Conservation Science Institute", 
-                "memberOfOrganization": [], 
-                "onlineResource": [
-                    {
-                        "uri": "mailto:lyons@gennext.net"
-                    }
-                ], 
-                "contactId": "G587", 
-                "contactType": "NGO"
-            }, 
-            {
                 "isOrganization": false, 
                 "name": "Andrea Lyons", 
                 "memberOfOrganization": [
-                    "G587"
+                    "G540"
                 ], 
                 "onlineResource": [
                     {
@@ -657,22 +652,6 @@
                 ], 
                 "contactId": "592", 
                 "contactType": "Research"
-            }, 
-            {
-                "memberOfOrganization": [], 
-                "contactId": "G606", 
-                "isOrganization": true, 
-                "name": "Wilberforce Foundation", 
-                "contactType": "Foundation"
-            }, 
-            {
-                "memberOfOrganization": [
-                    "G606"
-                ], 
-                "contactId": "606", 
-                "isOrganization": false, 
-                "name": "Wilberforce Foundation Unknown", 
-                "contactType": "Foundation"
             }, 
             {
                 "memberOfOrganization": [], 
@@ -832,6 +811,17 @@
                                     "contactId": "605", 
                                     "organizationMembers": [
                                         "605"
+                                    ]
+                                }
+                            ], 
+                            "role": "Fiscal Agent"
+                        }, 
+                        {
+                            "party": [
+                                {
+                                    "contactId": "606", 
+                                    "organizationMembers": [
+                                        "606"
                                     ]
                                 }
                             ], 
@@ -1060,7 +1050,7 @@
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -1071,7 +1061,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -1144,7 +1134,7 @@
                                     "organizationMembers": []
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -1155,7 +1145,7 @@
                                     ]
                                 }
                             ], 
-                            "role": "Fiscal Agent"
+                            "role": "Principal Investigator"
                         }, 
                         {
                             "party": [
@@ -1251,18 +1241,9 @@
                         {
                             "party": [
                                 {
-                                    "contactId": "G587", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
                                     "contactId": "587", 
                                     "organizationMembers": [
-                                        "G587"
+                                        "G540"
                                     ]
                                 }
                             ], 
@@ -1338,26 +1319,6 @@
                                 }
                             ], 
                             "role": "Principal Investigator"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "G606", 
-                                    "organizationMembers": []
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
-                        }, 
-                        {
-                            "party": [
-                                {
-                                    "contactId": "606", 
-                                    "organizationMembers": [
-                                        "G606"
-                                    ]
-                                }
-                            ], 
-                            "role": "Fiscal Agent"
                         }, 
                         {
                             "party": [
@@ -4259,7 +4220,7 @@
                             "sourceId": "351", 
                             "currency": "USD", 
                             "amount": 2235.0, 
-                            "recipientId": "G587", 
+                            "recipientId": "G540", 
                             "matching": true
                         }
                     ], 
@@ -4455,7 +4416,7 @@
             "metadataInfo": {
                 "metadataOnlineResource": [
                     {
-                        "uri": "https://www.sciencebase.gov/catalog/folder/5785ad48e4b0e02680bfda86"
+                        "uri": "https://www.sciencebase.gov/catalog/item/5785ad48e4b0e02680bfda86"
                     }
                 ], 
                 "parentMetadata": {
@@ -4491,7 +4452,7 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-05-01", 
+                        "date": "2018-05-02", 
                         "dateType": "creation"
                     }
                 ]
@@ -5036,7 +4997,7 @@
                                     "unitsOfDistribution": "unknown", 
                                     "onlineOption": [
                                         {
-                                            "uri": "https://www.sciencebase.gov/catalog/folder/5785ad48e4b0e02680bfda86"
+                                            "uri": "https://www.sciencebase.gov/catalog/item/5785ad48e4b0e02680bfda86"
                                         }
                                     ]
                                 }
