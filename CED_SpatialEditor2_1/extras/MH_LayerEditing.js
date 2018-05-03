@@ -23,9 +23,7 @@ define([
         btn_PolyEdit_click: function (results) {
             var dom = dojo.byId("tpick-surface-0");
             on.emit(dom, "click", { bubbles: true, cancelable: true });
-
             //document.getElementById('btn_PolyEdit').style.visibility = 'hidden';
-
         },
 
         btn_Next_click: function () {
@@ -33,15 +31,18 @@ define([
         },
 
         initEditor: function (results) {
-            //document.getElementById('btn_PolyEdit').style.visibility = 'hidden';
-
             dojo.forEach(results, function (pLayer) {
                 if (pLayer.layer.id == "99") {
+                    var fieldInfos2 = [];
                     var fieldInfos = dojo.map(pLayer.layer.fields, function (field) {
-                        return { 'fieldName': field.name, 'label': field.alias };
+                        if ("Project_ID,DateCreated,DateUpdated".indexOf(field.name) >= 0) {
+                            fieldInfos2.push({ 'fieldName': field.name, 'label': field.alias + " (Attr. Read Only)" });
+                        }
+                        return { 'fieldName': field.name, 'label': field.alias};
                     });
                     var featureLayerInfos = [{
-                        featureLayer: pLayer.layer, 'fieldInfos': fieldInfos, 'isEditable': false
+                        featureLayer: pLayer.layer, 'fieldInfos': fieldInfos2, 'isEditable': false
+                        //featureLayer: pLayer.layer, 'fieldInfos': fieldInfos, 'isEditable': false
                     }];
                     var layers = featureLayerInfos;
 
@@ -59,7 +60,6 @@ define([
                             add.attributes['Project_ID'] = iCEDID_4_Edits;
                             add.attributes["DateCreated"] = Date.now();
                             add.attributes["DateUpdated"] = Date.now();
-                            //document.getElementById('btn_PolyEdit').style.visibility = 'visible';
                         });
                     });
 
@@ -84,14 +84,8 @@ define([
                     app.map.enableSnapping({ snapKey: dojo.keys.copyKey });       //Dojo.keys.copyKey maps to CTRL in Windows and CMD in Mac !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     editorWidget.startup();
                     app.map.infoWindow.resize(325, 500);
-
-                    //var dom = dojo.byId("tpick-surface-0");
-                    //on.emit(dom, "click", { bubbles: true, cancelable: true });
-
                 }
             });
-            
-           
         }
     });
 }

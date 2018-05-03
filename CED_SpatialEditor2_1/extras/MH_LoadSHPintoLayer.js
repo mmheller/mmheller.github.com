@@ -105,7 +105,6 @@ define([
             } else {
                 var iCEDID_4_Edits = 9999;
             }
-
             var fullExtent;
             var layers = [];
             dom.byId('upload-status').innerHTML = "Uploading data to Hosted Featuer Layer";

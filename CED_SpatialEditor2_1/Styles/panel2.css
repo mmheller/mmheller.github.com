@@ -1,7 +1,10 @@
 ﻿.dj_ie .infowindow .window .top .right .user .content { position: relative; }
       .dj_ie .simpleInfoWindow .content {position: relative;}
 
-      html, body { height: 100%; width: 100%; margin: 0; padding: 0; overflow:hidden; }
+      html, body {
+           height: 100%; width: 100%; margin: 0; padding: 0; overflow:hidden; font-family:Arial;
+
+      }
       #leftPane{
         width:255px;
         border:none;
@@ -78,7 +81,7 @@
  
     .selectClass {
        font-size: 12px;
-       font-family: 'Tahoma', cursive;
+       font-family: 'Arial', cursive;
        width: 95%;
     }​
   
@@ -110,18 +113,19 @@
 	    display: block;
 	    width: 140px;
 	    height: 30px;
-	    font-family: HelveticaNeue;
+	    font-family: Arial;
 	    text-align: center;
 	    line-height: 50px;
 	    cursor: pointer;
 	    padding: 0px;
     }
 
+
     #basemapContent {
 	    display: block;
 	    width: 140px;
 	    height: 350px;
-	    font-family: HelveticaNeue;
+	    font-family: Arial;
 	    text-align: center;
 	    cursor: pointer;
 	    overflow-y: auto;
@@ -147,17 +151,25 @@
 	    height: 400px;
     }
 
+    .alignleft {
+	    float: left;
+
+    }
+    .alignright {
+	    float: right;
+
+    }
 
     /* nextButtonPanel */
     .nextButtonPanel {
 	    position: absolute;
 	    bottom: 50px;
 	    right: 15px;
-	    width: 160px;
-	    height: 30px;
-	    font-family: HelveticaNeueUltraLight;
+	    /*width: 160px;
+	    height: 30px;*/
+	    font-family: Arial;
 	    color: #ffffff;
 	    font-size: 14px;
-	    padding: 25px;
+	    padding: 10px;
 	    overflow: hidden;
     }
