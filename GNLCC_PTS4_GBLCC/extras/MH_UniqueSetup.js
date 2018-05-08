@@ -535,58 +535,58 @@ define([
                                                             'section2content', this.app.gSup.iTableIndex.toString() + "-Prj_Org");
                       break;
 
+                  //case "PI_Org":
+                  //    this.app.gSup.iTableIndex = 5;
+                  //    this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
+                  //                                                      "dest_orgname", "dest_orgname",
+                  //                                          'section4content', this.app.gSup.iTableIndex.toString() + "-dest_orgname");
+                  //    break;
+
+                  //case "dest_orgname":
+                  //    this.app.gSup.iTableIndex = 1;
+                  //    this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
+                  //                                                      "CommonName", "CommonName",
+                  //                                          'section5content', this.app.gSup.iTableIndex.toString() + "-CommonName");
+                  //    break;
+
+                  //case "CommonName":
+                  //    this.app.gSup.iTableIndex = 5;
+                  //    this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
+                  //                                                      "DestinationType", "DestinationType",
+                  //                                          'section6content', this.app.gSup.iTableIndex.toString() + "-DestinationType");
+                  //    break;
+
                   case "PI_Org":
-                      this.app.gSup.iTableIndex = 5;
-                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
-                                                                        "dest_orgname", "dest_orgname",
-                                                            'section4content', this.app.gSup.iTableIndex.toString() + "-dest_orgname");
-                      break;
-
-                  case "dest_orgname":
-                      this.app.gSup.iTableIndex = 1;
-                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
-                                                                        "CommonName", "CommonName",
-                                                            'section5content', this.app.gSup.iTableIndex.toString() + "-CommonName");
-                      break;
-
-                  case "CommonName":
-                      this.app.gSup.iTableIndex = 5;
-                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
-                                                                        "DestinationType", "DestinationType",
-                                                            'section6content', this.app.gSup.iTableIndex.toString() + "-DestinationType");
-                      break;
-
-                  case "DestinationType":
                       this.app.gSup.iTableIndex = 8;
                       this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
                                                                         "GoalName", "GoalName",
                                                             'section7content', this.app.gSup.iTableIndex.toString() + "-GoalName");
                       break;
+                  //case "GoalName":
+                  //    this.app.gSup.iTableIndex = 2;
+                  //    this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex] + " and (not (NationalLCCDelivType in ('Contractual Document')))",
+                  //                                                      "NationalLCCDelivType", "NationalLCCDelivType",
+                  //                                          'section8content', this.app.gSup.iTableIndex.toString() + "-NationalLCCDelivType");
+                  //    break;
+                  //case "NationalLCCDelivType":
+                  //    this.app.gSup.iTableIndex = 7;
+                  //    this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
+                  //                                                      "orgname", "orgname",
+                  //                                          'section9content', this.app.gSup.iTableIndex.toString() + "-orgname");
+                  //    break;
+                  //case "orgname":
+                  //    this.app.gSup.iTableIndex = 11;
+                  //    this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
+                  //                                                      "Stressor", "Stressor",
+                  //                                          'section10content', this.app.gSup.iTableIndex.toString() + "-Stressor");
+                  //    break;
+                  //case "Stressor":
+                  //    this.app.gSup.iTableIndex = 9;
+                  //    this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
+                  //                                                      "GroupName", "GroupName",
+                  //                                          'section11content', this.app.gSup.iTableIndex.toString() + "-GroupName");
+                  //    break;
                   case "GoalName":
-                      this.app.gSup.iTableIndex = 2;
-                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex] + " and (not (NationalLCCDelivType in ('Contractual Document')))",
-                                                                        "NationalLCCDelivType", "NationalLCCDelivType",
-                                                            'section8content', this.app.gSup.iTableIndex.toString() + "-NationalLCCDelivType");
-                      break;
-                  case "NationalLCCDelivType":
-                      this.app.gSup.iTableIndex = 7;
-                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
-                                                                        "orgname", "orgname",
-                                                            'section9content', this.app.gSup.iTableIndex.toString() + "-orgname");
-                      break;
-                  case "orgname":
-                      this.app.gSup.iTableIndex = 11;
-                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
-                                                                        "Stressor", "Stressor",
-                                                            'section10content', this.app.gSup.iTableIndex.toString() + "-Stressor");
-                      break;
-                  case "Stressor":
-                      this.app.gSup.iTableIndex = 9;
-                      this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
-                                                                        "GroupName", "GroupName",
-                                                            'section11content', this.app.gSup.iTableIndex.toString() + "-GroupName");
-                      break;
-                  case "GroupName":
                       this.app.gSup.iTableIndex = 0;
                       this.app.gSup.qry_Query4UniquesAndCheckBoxes(this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex],
                                                                         "PrjStatus", "PrjStatus",
@@ -600,12 +600,12 @@ define([
                                                                         "NAME", "NAME",
                                                             'section13content', this.app.gSup.iTableIndex.toString() + "-Name");
                       break;
-                  case "NAME":
-                      this.app.gSup.iTableIndex = 0;
-                      this.app.gSup.SetRangeCheckboxes(["$0", "$1 - $12,499", "$12,500 - $24,999", "$25,000 - $49,999", "$50,000 - $99,999", "$100,000 - $199,999", "$200,000 - $499,999", "$500,000 and up"],
-                                                            'section14content', this.app.gSup.iTableIndex.toString() + "-Total__Funding_by_Your_LCC", "Total__Funding_by_Your_LCC",
-                                                            false, false, this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex]);
-                      break;
+                  //case "NAME":
+                  //    this.app.gSup.iTableIndex = 0;
+                  //    this.app.gSup.SetRangeCheckboxes(["$0", "$1 - $12,499", "$12,500 - $24,999", "$25,000 - $49,999", "$50,000 - $99,999", "$100,000 - $199,999", "$200,000 - $499,999", "$500,000 and up"],
+                  //                                          'section14content', this.app.gSup.iTableIndex.toString() + "-Total__Funding_by_Your_LCC", "Total__Funding_by_Your_LCC",
+                  //                                          false, false, this.app.gSup.strURL, this.app.gSup.arrayQueryStringsPerTable[this.app.gSup.iTableIndex]);
+                  //    break;
               }
 
               return results;

@@ -12,7 +12,6 @@ define([
           constructor: function (options) {
           },
 
-
           GetMasterAGSMapservicURL: function () {
               return "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/GBLCC_PTS/FeatureServer/";
               //return "https://gis.usgs.gov/sciencebase2/rest/services/Catalog/5a99dc60e4b06990606f6c32/MapServer";
