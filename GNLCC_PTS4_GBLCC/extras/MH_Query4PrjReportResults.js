@@ -90,12 +90,12 @@ define([
               arrayQuery = [];
               arrayQuery.push(["0", strQuery, "Prj_Title", "count", "Prj_Title", "divTitle", '<b>Title:</b> {0}', ""]);
               arrayQuery.push(["0", strQuery, "Description", "count", "Description", "divDescription", '<b>Description:</b> {0}', ""]);
-              arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "count", "Total__Funding_by_Your_LCC", "dTotalAllocatedbyLCCSum", '<b>Total GNLCC Funds Allocated: {0}</b>', "currency"]);
+              arrayQuery.push(["0", strQuery, "Total__Funding_by_Your_LCC", "count", "Total__Funding_by_Your_LCC", "dTotalAllocatedbyLCCSum", '<b>Total GBLCC Funds Allocated: {0}</b>', "currency"]);
               arrayQuery.push(["0", strQuery, "Total_Matching_or_In_kind_Funds", "count", "Total_Matching_or_In_kind_Funds", "dTotalInKindSum", '<b>Total In-Kind/Match Contributions: {0}</b>', "currency"]);
               arrayQuery.push(["0", strQuery, "Prj_Start_Date", "count", "Prj_Start_Date", "divStart", '{0} ', ""]);
               arrayQuery.push(["0", strQuery, "Prj_End_Date", "count", "Prj_End_Date", "divEnd", '{0} ', ""]);
               //              arrayQuery.push(["2", strQuery, "DelivType", "count", "DelivType", "divDeliverables", 'Deliverable Types: {0} ', ""]);
-              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", '<b>Total GNLCC Funds Allocated by Year:</b> \n<br>{0} ', "show both"]);
+              arrayQuery.push(["6", strQuery, "amount", "sum", "Fund_Year", "dTotalAllocatedbyLCCbyYear", '<b>Total GBLCC Funds Allocated by Year:</b> \n<br>{0} ', "show both"]);
               arrayQuery.push(["0", strQuery, "PI_and_Email", "count", "PI_and_Email", "divPI", '{0}', ""]);
               arrayQuery.push(["0", strQuery, "PI_Org", "count", "PI_Org", "divLeadOrg", '{0}', ""]);
               arrayQuery.push(["5", strQuery, "amount", "sum", "dest_orgname", "divFundingDispersal", '<b>Funding Recipient:</b> \n<br>{0} ', "show both"]);
