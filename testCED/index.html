@@ -192,7 +192,7 @@ Date:        Oct 2014-->
 
         function showCoordinates(evt) {
             var mp = webMercatorUtils.webMercatorToGeographic(evt.mapPoint);  //the map is in web mercator but display coordinates in geographic (lat, long)
-            dom.byId("txt_xyCoords").innerHTML = "Latitude:" + mp.x.toFixed(4) + ", Longitude:" + mp.y.toFixed(4);  //display mouse coordinates
+            dom.byId("txt_xyCoords").innerHTML = "Latitude:" + mp.y.toFixed(4) + ", Longitude:" + mp.x.toFixed(4);  //display mouse coordinates
         }
 
         function getTokens() {
@@ -719,7 +719,7 @@ Date:        Oct 2014-->
                  data-dojo-props="region:'center'"
                  style="overflow:hidden; background-color:rgb(151, 118, 123);">
                 <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
-                <div id="txt_Version" style="position:absolute; right:15px; bottom:20px; color:#404040; z-index:50; font-size:11px">CED Interactive Map Version 2.0.0</div>
+                <div id="txt_Version" style="position:absolute; right:15px; bottom:20px; color:#404040; z-index:50; font-size:11px">CED Interactive Map Version 2.1.0</div>
                 <img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
                 <!--<img id="loadingImg" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="position:fixed; right:40%; top:50%; z-index:100;" />-->
             </div>
@@ -771,10 +771,7 @@ Date:        Oct 2014-->
     <a href="http://www.usgs.gov" target="_blank">
         <img id="theImage2" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USGS_117x31.png"
              style="position:absolute; top:25px; left:505px;" height="35" />    </a>
-    <a href="http://lccnetwork.org" target="_blank">
-        <img id="theImage1" border="0" src="https://conservationefforts.org/static/ced_main/images/ced_main/lcc_logo_centered_white_small.png"
-             style="position:absolute; top:9px; left:650px;" width="120" />
-    </a>
+
 
 </body>
 

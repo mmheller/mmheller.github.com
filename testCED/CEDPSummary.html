@@ -23,16 +23,23 @@
     <!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/images/grsgmap/Styles/panel.css' %}"/>-->
 
 
-<!--    <style>
-        html, body {
-            height: 98%;
-            width: 99.95%;
-            margin: 0.00005%;
-            background-color: rgb(127, 105, 127);
-        }
-    </style>-->
-
     <style type="text/css">
+        @CHARSET "UTF-8";
+
+
+        .page-break {
+            page-break-after: always;
+            page-break-inside: avoid;
+            clear: both;
+        }
+
+        .page-break-before {
+            page-break-before: always;
+            page-break-inside: avoid;
+            clear: both;
+            margin-top:1px;
+        }
+
         .auto-style1 {
             vertical-align: middle;
             text-align: right;
@@ -42,16 +49,21 @@
             height: 59px;
         }
 
+        /*.myDivClass{background:#FFFFFF;}*/
     </style>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script>
+    <!--<script type="text/javascript"> var ua = window.navigator.userAgent; var msie = ua.indexOf("MSIE "); if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) document.write('<script src=cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/…;\/scr'+'ipt>'); </script>-->
+
+    <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js" integrity="sha384-CchuzHs077vGtfhGYl9Qtc7Vx64rXBXdIAZIPbItbNyWIRTdG0oYAqki3Ry13Yzu" crossorigin="anonymous"></script>
     <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
     <!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/images/grsgmap/extras' %}"} };</script>-->
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script type="text/javascript" src="https://js.arcgis.com/3.20/"></script>
-    <!--<script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>-->
-    <!--<script type="text/javascript" src="https://js.arcgis.com/3.12/"></script>-->
-    <!--<script src="https://raw.githubusercontent.com/Chaussette/esri.symbol.MultiLineTextSymbol/master/esri.symbol.MultiLineTextSymbol.js"></script>-->
 
 
     <script type="text/javascript">
@@ -77,6 +89,24 @@
                 RelationshipQuery, SimpleMarkerSymbol,
                 Color, Scalebar, Geocoder, PS_Identify, CK_AutoCompleteSearchAndZoom, PS_PopUniqueQueryInterfaceValues,
                 webMercatorUtils, BasemapGallery, mouse, query, FindTask, FindParameters) {
+
+        var base64Img1 = null;
+        var base64Img2 = null;
+        var base64Img3 = null;
+        imgToBase64('../images/CEDlogo_white_180x31.jpg', function (base64) {
+            base64Img1 = base64;
+        })
+        var base64Img2 = null;
+        imgToBase64('../images/USFWS_150x31.jpg', function (base64) {
+            base64Img2 = base64;
+        })
+        var base64Img3 = null;
+        imgToBase64('../images/USGS_117x31.jpg', function (base64) {
+            base64Img3 = base64;
+        })
+
+
+        pdfMargins = { top: 40, bottom: 40, left: 30,width: 624};
 
         esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
 
@@ -122,231 +152,199 @@
             });
             return tokens;
         }
-
         
+        generate = function () {
+            var pdf = new jsPDF('p', 'pt', 'letter');
+            pdf.setFontSize(18);
 
+            //var node = document.getElementById('html-2-pdfwrapper');
+            //var text  = node.textContent || node.innerText;
+            
+            pdf.fromHTML(document.getElementById('html-2-pdfwrapper'),
+                pdfMargins.left, // x coord
+                pdfMargins.top,
+                {
+                    // y coord
+                    width: pdfMargins.width// max width of content on PDF
+                }, function (dispose) {
+                    headerFooterFormatting(pdf, pdf.internal.getNumberOfPages());
+                },
+                pdfMargins);
+
+            pdf.save("text777.pdf");
+        };
+
+        // create canvas object
+        function getCanvas(form, a4) {
+            form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');
+            return html2canvas(form, {
+                imageTimeout: 2000,
+                removeContainer: false
+            });
+        }
+        
+        function headerFooterFormatting(doc, totalPages) {
+            for (var i = totalPages; i >= 1; i--) {
+                doc.setPage(i);
+                header(doc);                //header
+                footer(doc, i, totalPages);
+                doc.page++;
+            }
+        };
+
+        function header(doc) {
+            doc.setFontSize(20);
+            doc.setTextColor(40);
+            doc.setFontStyle('normal');
+            if (base64Img1) {
+                doc.addImage(base64Img1, 'JPEG', pdfMargins.left, 10, 130, 20);
+            }
+            if (base64Img2) {
+                doc.addImage(base64Img2, 'JPEG', 175, 10, 80, 20);
+            }
+            if (base64Img3) {
+                doc.addImage(base64Img3, 'JPEG', 260, 10, 80, 20);
+            }
+            doc.text("CED Report", pdfMargins.left + 420, 30);
+            doc.setLineCap(2);
+            doc.line(3, 40, pdfMargins.width + 43, 40); // horizontal line
+        };
+
+        // You could either use a function similar to this or pre convert an image with for example http://dopiaza.org/tools/datauri
+        // http://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript
+        function imgToBase64(url, callback, imgVariable) {
+            if (!window.FileReader) {
+                callback(null);
+                return;
+            }
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                var reader = new FileReader();
+                reader.onloadend = function () {
+                    imgVariable = reader.result.replace('text/xml', 'image/jpeg');
+                    callback(imgVariable);
+                };
+                reader.readAsDataURL(xhr.response);
+            };
+            xhr.open('GET', url);
+            xhr.responseType = 'blob';
+            xhr.send();
+        };
+
+        function footer(doc, pageNumber, totalPages) {
+            var str = "Page " + pageNumber + " of " + totalPages
+            doc.setFontSize(10);
+            doc.text(str, pdfMargins.left, doc.internal.pageSize.height - 20);
+        };
 
     });
     </script>
 </head>
    
 <body>
+    <!--<button onclick="javascript:demoFromHTML()">PDF</button>-->
+    <button onclick="generate()">Generate PDF</button><img id="ImgResultsLoading" src="images/loading.gif" style="height:15px" />
 
-                     
-           
-        <table style="width:100%; background-color: #f2f5f9; font-family: Arial;">
+    <div id="html-2-pdfwrapperORG" style='position: absolute; top: 60px; bottom: 0; overflow: auto; width: 850px'>
+        <table style="width:100%; background-color: #FFFFFF; font-family: Arial;">
             <tr>
-                <td class="auto-style1" colspan="5">
-                    <a href="http://conservationefforts.org/welcome/" target="_blank"> <img id="theImage4" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/CEDlogo_white_180x31.png" style="position: absolute; left: 15px; top: 18px; height: 45px;" /></a>
-                    <a href="http://www.fws.gov" target="_blank"> <img id="theImage3" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USFWS_150x31.png" height="36"  /></a>&nbsp;&nbsp;
-                    <a href="http://www.usgs.gov" target="_blank"><img id="theImage2" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USGS_117x31.png" height="36"   /></a>
-                    <a href="http://lccnetwork.org" target="_blank"> <img id="theImage1" border="0" src="https://conservationefforts.org/static/ced_main/images/ced_main/lcc_logo_centered_white_small.png" height="50"  /></a>
+                <td class="auto-style1">
+                    <a href="http://conservationefforts.org/welcome/" target="_blank"> <img id="theImage4" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/CEDlogo_white_180x31.png" style="position: absolute; left: 15px; top: 18px; height: 35px;" /></a>
+                    <a href="http://www.fws.gov" target="_blank"> <img id="theImage3" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USFWS_150x31.png" height="36" /></a>&nbsp;&nbsp;
+                    <a href="http://www.usgs.gov" target="_blank"><img id="theImage2" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USGS_117x31.png" height="36" /></a>
                 </td>
             </tr>
-<!--            <tr>
-                <td class="auto-style1" colspan="3">
-                    <font size="8px" color="red"><b>DRAFT VERSION 2.0</b></font>
-                </td>
-            </tr>-->
-            <tr>
-                <td class="HTMLTable_styleMiddleLessPad" colspan="5">
-                    &nbsp;<b>Report Date:</b> <span id="time"></span>
-                    <!--<img id="ImgResultsLoading" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="height:15px" /></td>-->
-                    <img id="ImgResultsLoading" src="images/loading.gif" style="height:15px" /></td>
-            </tr>
-            <tr>
-                <td class="HTMLTable_styleLeftLessPad" colspan="2">
-                    <div id="dTotalAcresQ2"></div><div id="dTotalCalcAcresQ2"></div>
-                    <div id="dTotalProjects"></div><div id="dTotalProjCalcAcresQ2"></div>
-                    <div id="dTotalProjectsNon"></div><div id="dTotalProjCalcAcresQ2"></div>
-                    <div id="dTotalPlans"></div><div id="dTotalPlanCalcAcresQ2"></div>
-                </td>
-                <td class="HTMLTable_styleMiddleLessPad"></td>
-                <td class="HTMLTable_styleLeftLessPad" colspan="2">
-                    <div id="dFilterParameters"></div>
-                    <div id="dMaxLastDataProviderEdit"></div>
-                    <div id="dMaxLastPubProc"></div>
-                </td>
-            </tr>
-            <tr>
-                <td class="HTMLTable_styleMiddleLessPad" colspan="2">
-                
-                </td>
-                <td></td>
-                <td colspan="2">
-                
-                </td>
-            </tr>
-
-            <tr>
-                <td class="HTMLTable_BannerRow" colspan="2">
-                    &nbsp;Implementing Party
-                </td>
-                <td class="HTMLTable_styleMiddle">
-                    &nbsp;
-                </td>
-                <td class="HTMLTable_BannerRow" colspan="2">
-                    &nbsp;Activity
-                </td>
-            </tr>
-          <!--  <tr>
-                <td class="HTMLTable_styleLeft">
-                    <div id="dTotalAcresQ2byImplementing_Party">
-                    </div>
-                </td>
-                <td class="HTMLTable_styleMiddle" colspan="2"></td>
-                <td class="HTMLTable_styleLeft">
-                    <div id="dTotalAcresQ2byActivity">
-                    </div>
-                </td>
-            </tr>-->
-            <tr>
-                <td class="HTMLTable_styleLeft" colspan="2">
-                    <div id="dNumofDistinctImpParties"></div>
-                    <div id="dNumberOfRecordsbyImpParty"></div>
-                </td>
-                <td class="HTMLTable_styleMiddle">
-                    &nbsp;
-                </td>
-                <td class="HTMLTable_styleLeft" colspan="2">
-                    <div id="dNumofDistinctActivities"></div>
-                    <div id="dNumberOfRecordsbyActivity"></div>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="HTMLTable_BannerRow" colspan="2">
-                    Office
-                    </td>
-                <td class="HTMLTable_styleMiddle"></td>
-                <td class="HTMLTable_BannerRow" colspan="2">
-                 SubActivities
-                    </td>
-                </td>
-            </tr>
-           <!-- <tr>
-                <td class=HTMLTable_styleLeft>
-                    <div id="dTotalAcresQ2byOffice">
-                    </div>
-                </td>
-                <td class="HTMLTable_styleMiddle" colspan="2"></td>
-                <td class="HTMLTable_styleLeft">
-                    <div id="dTotalAcresQ2bySubActivity">
-                    </div>
-                </td>
-            </tr>-->
-
-            <tr>
-                <td class="HTMLTable_styleLeft" colspan="2">
-                    <div id="dNumofDistinctOffices"></div>
-                    <div id="dNumberOfRecordsbyOffice"></div>
-                </td>
-                <td class="HTMLTable_styleMiddle"></td>
-                <td class="HTMLTable_styleLeft" colspan="2">
-                    <div id="dNumofDistinctSubActivities"></div>
-                    <div id="dNumberOfRecordsbySubActivity">
-                    </div>
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="HTMLTable_BannerRow" colspan="5">
-<!--                    DRAFT This is under construciton!&nbsp;-->
-                    Overlapping Areas
-                    <!--</td>-->
-                </td>
-            </tr>
-        
-            <tr>
-                <td class="HTMLTable_styleLeft">
-                    <div id="dNumberofOverlappingStates"></div>
-
-                </td>
-                <td class="HTMLTable_styleLeft">
-                    <div id="dGISStates"></div>
-                </td>
-                <td class="HTMLTable_styleMiddle">
-                    &nbsp;
-                </td>
-                <td class="HTMLTable_styleLeft">
-                    <div id="dNumberofOverlappingPopAreas"></div>    
-                </td>
-                <td class="HTMLTable_styleLeft">
-                                       <div id="dGISPoP"></div>  
-                </td>
-            </tr>
-            <tr>
-                <td class="HTMLTable_styleLeft">
-                    <div id="dNumberofOverlappingMngmtZones"></div>
-
-                </td>
-                <td class="HTMLTable_styleLeft">
-                    <div id="dGISMZ"></div>
-                </td>
-                <td class="HTMLTable_styleMiddle"></td>
-                <td class="HTMLTable_styleLeft" colspan="2" >
-                    <div id="dGISSMA"></div>    
-                </td>
-            </tr>
-
-            <tr>
-                <td class="HTMLTable_styleLeft" colspan="2">
-                    <div id="dGISGHMA"></div>
-                </td>
-                <td class="HTMLTable_styleMiddle"></td>
-                <td class="HTMLTable_styleLeft" colspan="2" >
-                    <div id="dGISPHMA"></div>    
-                </td>
-            </tr>
-
-            <tr>
-                <td class="HTMLTable_styleLeft" colspan="2">
-                    <div id="dGISRMZ"></div>
-                </td>
-                <td class="HTMLTable_styleMiddle"></td>
-                <td class="HTMLTable_styleLeft" colspan="2" >
-                    <div id="dGISAB"></div>    
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="HTMLTable_styleLeft" colspan="2">
-                    <div id="dGISBD"></div>
-                </td>
-                <td class="HTMLTable_styleMiddle"></td>
-                <td class="HTMLTable_styleLeft" colspan="2" >
-                    <div id="dGISBP"></div>    
-                </td>
-            </tr>
-
-
-
-
-            <tr>
-                <td class="HTMLTable_styleLeft" colspan="2">
-                    <div id="dGISIDX"></div>
-                </td>
-                <td class="HTMLTable_styleMiddle"></td>
-                <td class="HTMLTable_styleLeft" colspan="2" >
-                    <div id="dGISPACSum"></div>  
-                </td>
-            </tr>
-
-
-            <tr>
-                <td class="HTMLTable_styleLeft" colspan="2">
-                    <div>Note: GIS Acre values were calculated using Conus Albers/NAD 83 projected coordinate system</div>    
-                </td>
-                <td class="HTMLTable_styleMiddle"></td>
-                <td class="HTMLTable_styleLeft" colspan="2" >
-                    <div></div>    
-                </td>
-            </tr>
-
         </table>
-           
 
-</body>
+    </div>
+    <!--<div id="html-2-pdfwrapper" style='position: absolute; left: 20px; top: 150px; bottom: 0; overflow: auto; width: 850px'>-->
+    <div id="html-2-pdfwrapper" style='position: absolute; top: 150px; overflow: auto; width: 850px;'>
+        <b>Report Date:</b> <span id="time"></span>
+        <div id="dTotalAcresQ2" class="myDivClassNormal"></div>
+        <div id="dTotalCalcAcresQ2" class="myDivClassNormal"></div>
+        <div id="dTotalProjects" class="myDivClassNormal"></div><div id="dTotalProjCalcAcresQ2" class="myDivClass"></div>
+        <div id="dTotalProjectsNon" class="myDivClassNormal"></div><div id="dTotalProjCalcAcresQ2" class="myDivClass"></div>
+        <div id="dTotalPlans" class="myDivClassNormal"></div><div id="dTotalPlanCalcAcresQ2" class="myDivClass"></div>
+        <br />
+        <div id="dFilterParameters" class="myDivClassNormal"></div>
+        <div id="dMaxLastDataProviderEdit" class="myDivClassNormal"></div>
+        <div id="dMaxLastPubProc" class="myDivClassNormal"></div>
+        <br>
+        <table style="width:100%; background-color: #f2f5f9"><tr><td><b>Implementing Party</b></td></tr></table>
+        <div id="dNumberOfRecordsbyImpParty" class="myDivClassNormal"></div>
+
+        <table style="width:100%; background-color: #f2f5f9"><tr><td><b>Activity</b></td></tr></table>
+        <div id="dNumberOfRecordsbyActivity" background:red;></div>
+
+        <h1 style='page-break-before: always;'>Page Two</h1>
+        <table style="width:100%; background-color: #f2f5f9; margin-bottom:1px"><tr><td><b>SubActivities</b></td></tr></table>
+        <div id="dNumberOfRecordsbySubActivity" class="myDivClassNormal"></div>
+
+        <h1 style='page-break-before: always;'>Page Three</h1>
+
+        <table style="width:100%; background-color: #f2f5f9"><tr><td><b>Office</b></td></tr></table>
+        <div id="dNumberOfRecordsbyOffice" class="myDivClassNormal"></div>
+
+        <h1 style='page-break-before: always;'>Page Four</h1>
+        <table style="width:100%; background-color: #f2f5f9"><tr><td><b>Overlapping Areas: States</b></td></tr></table>
+        <div id="dNumberofOverlappingStates" class="myDivClassNormal"></div>
+
+        <table style="width:100%; background-color: #f2f5f9"><tr><td><b>Overlapping Areas: States (continuted)</b></td></tr></table>
+        <div id="dGISStates" class="myDivClassNormal"></div>
+        <h1 style='page-break-before: always; '>Page Five</h1>
+        <table style="width:100%; background-color: #f2f5f9; margin-bottom:1px; padding-bottom:1px">            <tr>                <td><b>Overlapping Areas: GRSG Population Areas</b></td>            </tr>        </table>
+        <div id="dNumberofOverlappingPopAreas" class="myDivClassSmall"></div>
+
+        <h1 style='page-break-before: always;'>Yet Another Page</h1>
+        
+        <table style="width:100%; background-color: #f2f5f9; margin-bottom:1px"><tr><td><b>Overlapping Areas: GRSG Population Areas (continuted)</b></td></tr></table>
+        <div id="dGISPoP" class="myDivClassSmall"></div>
+      
+        <h1 style='page-break-before: always; '>Yet Another Page</h1>
+
+            <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: Overlapping Mngmt Zones</b></td>            </tr>        </table>
+            <div id="dNumberofOverlappingMngmtZones" class="myDivClass"></div>
+
+            <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: WAFWA MANAGEMENT ZONES"</b></td>            </tr>        </table>
+            <div id="dGISMZ" class="myDivClassNormal"></div>
+
+        <h1 style='page-break-before: always; '>Yet Another Page</h1>
+
+            <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: SURFACE MANAGEMENT AGENCY</b></td>            </tr>        </table>
+            <div id="dGISSMA" class="myDivClassNormal"></div>
+
+        <h1 style='page-break-before: always; '>Yet Another Page</h1>
+
+            <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: GRSG GENERAL HABITAT MANAGEMENT AREAS</b></td>            </tr>        </table>
+            <div id="dGISGHMA" class="myDivClassNormal"></div>
+
+            <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: GRSG PRIORITY HABITAT MANAGEMENT AREAS</b></td>            </tr>        </table>
+            <div id="dGISPHMA" class="myDivClassNormal"></div>
+        <h1 style='page-break-before: always; '>Yet Another Page</h1>
+
+            <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: RESILIENCE and RESISTANCE</b></td>            </tr>        </table>
+            <div id="dGISRMZ" class="myDivClassNormal"></div>
+            <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: GRSG POPULATION by MANAGEMENT ZONE</b></td>            </tr>        </table>
+            <div id="dGISAB" class="myDivClassNormal"></div>
+
+            <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas:BREEDING HABITAT PROBABILITY</b></td>            </tr>        </table>
+            <div id="dGISBD" class="myDivClassNormal"></div>
+
+        <h1 style='page-break-before: always; '>Yet Another Page</h1>
+            <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: BREEDING HABITAT PROBABILITY (continuted)</b></td>            </tr>        </table>
+            <div id="dGISBP" class="myDivClassNormal"></div>
+        <h1 style='page-break-before: always; '>Yet Another Page</h1>
+
+            <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: RESILIENCE and RESISTANCE AND POPULATION INDEX </b></td>            </tr>        </table>
+            <div id="dGISIDX" class="myDivClassNormal"></div>
+
+            <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: GRSG PRIORITY AREAS for CONSERVATION (PACs</b></td>            </tr>        </table>
+            <div id="dGISPACSum" class="myDivClassNormal"></div>
+
+
+            <div>Note: GIS Acre values were calculated using Conus Albers/NAD 83 projected coordinate system</div>
+
+        </div>
+
+    </body>
 </html>

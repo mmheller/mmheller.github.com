@@ -15,6 +15,19 @@
 
 .HTMLTable_styleRight {text-align: right; vertical-align:bottom; padding:1px;}
 
+.myDivClassNormal {
+    font-size:16px;
+    /*background-color: tomato;*/
+    margin-top:1px; 
+    padding-top:1px;
+}
+
+.myDivClassSmall {
+    font-size:10px;
+    /*background-color: tomato;*/
+    margin-top:1px; 
+    padding-top:1px;
+}
 
 .bg {
 	display: block;
@@ -74,6 +87,19 @@
 	text-align: right;
 	font-family: Arial;
 }
+
+.page-break {
+    page-break-after: always;
+    page-break-inside: avoid;
+    clear: both;
+}
+
+.page-break-before {
+    page-break-before: always;
+    page-break-inside: avoid;
+    clear: both;
+}
+
 
 .panelStats {
 	position: absolute;
@@ -198,6 +224,7 @@
     .esriPopup .titleButton.maximize {       display: none;  }  
           
     h1 {
+      line-height: 10px;
       position: relative;
       color: #FFF;
     }
