@@ -57,13 +57,15 @@ define([
               //var customExtentAndSR = new esri.geometry.Extent(-14900000, 5200000, -11500000, 7600000, new esri.SpatialReference({ "wkid": 3857 }));
               var customExtentAndSR = new esri.geometry.Extent(-17200000, 5200000, -11500000, 8600000, new esri.SpatialReference({ "wkid": 3857 }));
               app.map = new esri.Map("map", { basemap: "topo", logo: false, extent: customExtentAndSR });
-              app.strTheme1_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/5653657ae4b071e7ea53ce52/MapServer/";  //Theme Layers
+              //app.strTheme1_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/5653657ae4b071e7ea53ce52/MapServer/";  //Theme Layers
+              app.strTheme1_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/PTS_Nov28/FeatureServer/";
+
               dojo.connect(app.map, "onUpdateStart", showLoading);
               dojo.connect(app.map, "onUpdateEnd", hideLoading);
 
 //              var legendLayers = [];
               pPTS_Projects = new FeatureLayer(app.strTheme1_URL + "0", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: 0, visible: true });
-              var strBase_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/546cfb04e4b0fc7976bf1d83/MapServer/"
+              var strBase_URL = "https://www.sciencebase.gov/arcgis/rest/services/Catalog/546cfb04e4b0fc7976bf1d83/MapServer/";
               var strlabelField1 = "area_names";
 //              pBase_LCC = new FeatureLayer(strBase_URL + "11", { mode: FeatureLayer.MODE_ONDEMAND, id: "LCC", outFields: [strlabelField1], visible: true });
 //              var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
@@ -83,7 +85,7 @@ define([
               pUSNativeLayer = new FeatureLayer("http://apps.fs.usda.gov/arcx/rest/services/EDW/EDW_TribalIndianLands_01/MapServer/0", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "US Native Lands", visible: false });
               pNPSLayer = new FeatureLayer(strBase_URL + "6", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "US National Park Service", visible: false });
               pUSFSLayer = new ArcGISDynamicMapServiceLayer("http://apps.fs.fed.us/arcx/rest/services/RDW_AdminAndOwnership/PublicPrivateForestOwnership_CONUS/MapServer", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: "US Public/Private Forest Ownership", visible: false });
-              pBLMLayer = new ArcGISDynamicMapServiceLayer("http://www.geocommunicator.gov/ArcGIS/rest/services/SMA/MapServer", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "BLM Land", visible: false });
+              //pBLMLayer = new ArcGISDynamicMapServiceLayer("http://www.geocommunicator.gov/ArcGIS/rest/services/SMA/MapServer", { "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, id: "BLM Land", visible: false });
 
               var strlabelField2 = "area_names";
               pLCCNetworkLayer = new FeatureLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/55b943ade4b09a3b01b65d78/MapServer/0", { "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, id: "LCC Network", outFields: [strlabelField2], visible: false });
@@ -106,7 +108,7 @@ define([
 //              arrayLayers = [pCascadiaPF, pColumbiaPF, pRMPF, pSSPF, pPartnershipsAreas, pPTS_Projects, plabels1, pHeatLayer2, pHeatLayer, pBase_LCC, pRefugesLayer,
 //                                pUSNativeLayer, pNPSLayer, pUSFSLayer, pBLMLayer, pLCCNetworkLayer, plabels2, pHumanMod];
               arrayLayers = [pCascadiaPF, pColumbiaPF, pSSPF, pPTS_Projects, pRefugesLayer,
-                                pUSNativeLayer, pNPSLayer, pUSFSLayer, pBLMLayer, pLCCNetworkLayer, plabels2];
+                                pUSNativeLayer, pNPSLayer, pUSFSLayer, pLCCNetworkLayer, plabels2];
 
               var cbxLayers = [];
 
@@ -116,7 +118,7 @@ define([
               cbxLayers.push({ layer: pUSNativeLayer, title: 'US Indian Lands Boundaries' });
               cbxLayers.push({ layer: pNPSLayer, title: 'US National Park Service' });
               cbxLayers.push({ layer: pUSFSLayer, title: 'US Public/Private Forest Ownership' });
-              cbxLayers.push({ layer: pBLMLayer, title: 'BLM Land' });
+              //cbxLayers.push({ layer: pBLMLayer, title: 'BLM Land' });
               
               cbxLayers.push({ layer: pCascadiaPF, title: 'Cascadia PF (General Area)' });
               cbxLayers.push({ layer: pColumbiaPF, title: 'Columbia Basin PF (General Area)' });
