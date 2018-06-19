@@ -49,7 +49,8 @@ Date:        Oct 2014-->
     dojo.require("dijit.layout.ContentPane");
     var app = {};
     require([
-        "esri/map", "esri/layers/FeatureLayer", "esri/dijit/Legend", "esri/urlUtils",
+        "esri/map", "esri/config", "dojo/dom-construct",
+        "dojo/_base/lang", "esri/layers/FeatureLayer", "esri/dijit/Legend", "esri/urlUtils",
         "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on", "extras/PS_MeasSiteSearch4Definition", "extras/PS_ReturnQuerySt",
         "dijit/form/CheckBox", "extras/PS_MeasSiteSearch_SetVisableQueryDef", "extras/MH_Zoom2FeatureLayer", "extras/MH_Setup",
         "extras/MH_FeatureCount", "extras/MH_Query4Summary",
@@ -62,14 +63,18 @@ Date:        Oct 2014-->
         "dijit/layout/AccordionContainer", "dojo/domReady!"
         ],
 
-    function (Map, FeatureLayer, Legend, urlUtils,
+    function (Map, esriConfig, domConstruct,
+        lang, FeatureLayer, Legend, urlUtils,
                 arrayUtils, parser, esriConfig, dom, domClass, on, PS_MeasSiteSearch4Definition, PS_ReturnQuerySt, CheckBox,
                 PS_MeasSiteSearch_SetVisableQueryDef, MH_Zoom2FeatureLayer, MH_Setup, MH_FeatureCount, MH_Query4Summary,
                 RelationshipQuery, SimpleMarkerSymbol,
                 Color, Scalebar, Geocoder, PS_Identify, CK_AutoCompleteSearchAndZoom, PS_PopUniqueQueryInterfaceValues,
                 webMercatorUtils, BasemapGallery, mouse, query, FindTask, FindParameters, registry) {
 
+        //esriConfig.defaults.io.proxyUrl = "/proxy/";
         esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
+        esriConfig.defaults.io.corsEnabledServers.push("https://sampleserver6.arcgisonline.com")
+        esriConfig.defaults.io.corsEnabledServers.push("https://services.arcgisonline.com");
 
         document.getElementById("txtQueryResults").innerHTML = "-";
         document.getElementById("dTotalProjectsQ").innerHTML = "-";
@@ -138,12 +143,9 @@ Date:        Oct 2014-->
         });
         dojo.connect(app.map, "onClick", executeIdeintifyQueries);
         app.pSup.Phase3(CED_PP_point, CED_PP_line, CED_PP_poly);
-
         app.iNonSpatialTableIndex = 0;  //these 3 lines populate the list values
         app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, divTagSource: null });
-        //app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, strQuery1: "objectid > 0", divTagSource: null });
         app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
-        //Debug.writeln("qry_SetUniqueValuesOf at startup");
         app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "objectid > 0"); //startup
 
         if (app.map.loaded) {
@@ -151,7 +153,6 @@ Date:        Oct 2014-->
         } else {
             app.map.on("load", function () { mapLoaded(); });
         }
-
 
         app.pFC = new MH_FeatureCount({}); // instantiate the zoom class
 
@@ -169,14 +170,12 @@ Date:        Oct 2014-->
             RunQueryArgs(strA_TypeAct, strA_entry_type, strA_activity, strA_Subactivity, strA_implementing_party, strA_State, strA_POPArea, strA_Managementunit, strA_office);
         } else {
             document.getElementById("btn_TextSummary").disabled = true;
-            //app.pFC.GetCountOfFCDef_ShowText(CED_PP_point.getDefinitionExpression(), CED_PP_point.url, "txtQueryResults", "count", "project_id", "");
         }
 
         app.gQuerySummary = new MH_Query4Summary({ strURL: app.strTheme1_URL }); // instantiate the class
 
         function calcOffset() {
-            //            return (app.map.extent.getWidth() / app.map.width);
-            return 200000
+            return 200000            //            return (app.map.extent.getWidth() / app.map.width);
         }
 
         function mapLoaded() {        // map loaded//            // Map is ready
@@ -278,21 +277,26 @@ Date:        Oct 2014-->
             } else {  // handling arguments passed
                 app.PSQ.ExecutetheDerivedQuery(strQuery, document.getElementById("ddlMatrix"));
             }
-            //app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, strQuery1: strQuery, divTagSource: null}); // instantiate the  class
             app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
             app.PS_Uniques.divTagSource = null;
-            //Debug.writeln("qry_SetUniqueValuesOf at args");
             app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), CED_PP_point.getDefinitionExpression()); //args
 
         }
-
 
         function openCEDPSummary() {
             localStorage.setItem("ls_strTheme1_URL", app.strTheme1_URL);
             localStorage.setItem("ls_strDefQuery", CED_PP_point.getDefinitionExpression());
             localStorage.setItem("ls_strDefQuery2", app.PS_Uniques.strQuery1);
-
             localStorage.setItem("ls_strQueryLabelText", app.strQueryLabelText);
+            localStorage.setItem("ls_strMapExtent", String(app.map.extent.xmin + "," + app.map.extent.ymin + "," + app.map.extent.xmax + "," + app.map.extent.ymax));
+
+            strBasemap = "topo";
+            if (app.basemapGallery._selectedBasemap != null){
+                pBasemap = app.basemapGallery.getSelected();
+                strBasemap = pBasemap.id;
+            }
+
+            localStorage.setItem("ls_strBasemap", strBasemap);
 
             var pNewWindow = window.open("CEDPSummary.html");
             //var pNewWindow = window.open("CEDPSummary");   //////**************Static

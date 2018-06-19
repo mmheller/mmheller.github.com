@@ -2,6 +2,101 @@
 //Date:        Oct 2016
 
 
+// You could either use a function similar to this or pre convert an image with for example http://dopiaza.org/tools/datauri
+// http://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript
+function imgToBase64(url, callback, imgVariable) {
+    if (!window.FileReader) {
+        callback(null);
+        return;
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.onload = function () {
+        var reader = new FileReader();
+        reader.onloadend = function () {
+            imgVariable = reader.result.replace('text/xml', 'image/jpeg');
+            callback(imgVariable);
+        };
+        reader.readAsDataURL(xhr.response);
+    };
+    xhr.open('GET', url);
+    xhr.responseType = 'blob';
+    xhr.send();
+};
+
+
+function headerFooterFormatting(doc, totalPages) {
+    for (var i = totalPages; i >= 1; i--) {
+        doc.setPage(i);
+        header(doc);                //header
+        footer(doc, i, totalPages);
+        doc.page++;
+    }
+};
+
+function header(doc) {
+    doc.setFontSize(20);
+    doc.setTextColor(40);
+    doc.setFontStyle('normal');
+    if (app.base64Img1) {
+        doc.addImage(app.base64Img1, 'JPEG', pdfMargins.left, 10, 130, 20);
+    }
+    if (app.base64Img2) {
+        doc.addImage(app.base64Img2, 'JPEG', 175, 10, 80, 20);
+    }
+    if (app.base64Img3) {
+        doc.addImage(app.base64Img3, 'JPEG', 260, 10, 80, 20);
+    }
+    if (app.base64ImgMap) {
+        doc.addImage(app.base64ImgMap, 'JPEG', 350, 10, 80, 20);
+    }
+    doc.text("CED Report", pdfMargins.left + 450, 30);
+    doc.setLineCap(2);
+    doc.line(pdfMargins.left, 40, pdfMargins.width - pdfMargins.left, 40); // horizontal line
+};
+
+
+function footer(doc, pageNumber, totalPages) {
+    var str = "Page " + pageNumber + " of " + totalPages
+    doc.setFontSize(10);
+    doc.text(str, pdfMargins.left, doc.internal.pageSize.height - 20);
+};
+
+
+function printErr(err) {
+    console.log("Failed to print due to an error: " + err);
+};
+
+function startExport2PDF() {
+    var pdf = new jsPDF('p', 'pt', 'letter');
+    pdf.setFontSize(18);
+
+    if (app.base64ImgMap) {
+        //doc.addImage(app.base64ImgMap, 'JPEG', 350, 10, 80, 20);
+        //pdf.addImage(app.base64ImgMap, 'JPEG', pdfMargins.left, 50, pdfMargins.left + 604, 284 + 50);
+        pdf.addImage(app.base64ImgMap, 'JPEG', pdfMargins.left, 90, pdfMargins.left + 520, 244 + 20);
+
+        pdf.setFontSize(12);
+        pdf.text("Note: Some overlapping area efforts may not be visible in PDF map", pdfMargins.left, 400);
+        pdf.setFontSize(18);
+    }
+
+    pdf.text("Conservation Efforts Database v2.1", pdfMargins.left, 60);
+    pdf.text("Interactive Map - Summary Report", pdfMargins.left, 80);
+
+    pdf.fromHTML(document.getElementById('html-2-pdfwrapper'),
+        pdfMargins.left, // x coord
+        pdfMargins.top + 390,
+        {
+            width: pdfMargins.width// max width of content on PDF
+        }, function (dispose) {
+            headerFooterFormatting(pdf, pdf.internal.getNumberOfPages());
+        },
+        pdfMargins);
+
+    document.getElementById("ImgResultsLoading").style.visibility = "hidden";
+    pdf.save("CEDReport.pdf");
+};
+
 function disableOrEnableFormElements(strFormName, strElementType, TorF, pDocument) {
     var pform = pDocument.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
     for (var i = 0; i < pform.elements.length; i++) {
@@ -47,6 +142,7 @@ function getRanges(array) {
 
 define([
   "dojo/_base/declare",
+  "esri/tasks/PrintTask", "esri/tasks/PrintTemplate", "esri/tasks/PrintParameters",
   "dojo/_base/lang",
   "esri/request",
       "esri/IdentityManager",
@@ -63,7 +159,9 @@ define([
       "dojo/data/ItemFileReadStore", "esri/config", 
       "dojo/date/locale"
 ], function (
-      declare, lang, esriRequest, IdentityManager, FeatureLayer, FeatureTable,
+      declare,
+      PrintTask, PrintTemplate, PrintParameters,
+      lang, esriRequest, IdentityManager, FeatureLayer, FeatureTable,
       domConstruct, dom, parser, ready, on,
       registry, Query, DataGrid, ItemFileReadStore, esriConfig
 ) {
@@ -102,10 +200,8 @@ define([
             this.strURL = options.strURL || "www.cnn.com"; // default AGS REST URL
         },
 
+
         Summarize: function (strQuery, strQuery2, blnOpenEntireSummary) {
-            esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
-
-
             document.getElementById("ImgResultsLoading").style.visibility = "visible";
             disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
@@ -177,6 +273,47 @@ define([
             this.SendQuery(arrayQuery, 0)
         },
 
+        StartPrinting: function (pMap) {
+            //esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
+            console.log("Starting printting map to .jpg");
+            
+            esriConfig.defaults.io.corsEnabledServers.push("https://sampleserver6.arcgisonline.com")
+
+            var oWid = pMap.width;
+            var oHgt = pMap.height;
+
+            var printTask = new PrintTask('https://sampleserver6.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task');
+            //var printTask = new PrintTask('https://sampleserver6.arcgisonline.com/arcgis/rest/services/ExportWebMap/GPServer/Export_Web_Map');
+            var template = new PrintTemplate();
+            this.imgHeight = (740 / oWid) * oHgt;
+            template.exportOptions = {
+                width: 1542,
+                height: (1542 / oWid) * oHgt,
+                dpi: 200
+            };
+            template.format = "jpg";
+            template.layout = "MAP_ONLY";
+            template.preserveScale = false;
+            template.showAttribution = false;
+            var params = new PrintParameters();
+            params.map = pMap;
+            params.template = template;
+
+            printTask.execute(params, this.printResult, this.printErr);
+            //return pQueryTask.execute(pQuery, this.returnEvents, this.err);
+        },
+
+
+        printResult: function (rsltURL) {
+            //var mapImg = domConstruct.toDom('<img src="' + rsltURL.url + '" border="0" style="width:740px;height:' + this.imgHeight + 'px;"/>');
+            //domConstruct.place(mapImg, dom.byId('mapImgDiv'), 'replace');
+            app.base64ImgMap = null;
+            imgToBase64(rsltURL.url, function (base64) {
+                app.base64ImgMap = base64;                ////waiting for the callback to change the .jpg to base64 string,  base64 string is required for the PDF exporter
+                startExport2PDF();
+            });
+        },
+        
 
         SendQuery: function (arrayQuery, iarrayQueryIndex) {
             this.m_iarrayQueryIndex = iarrayQueryIndex;

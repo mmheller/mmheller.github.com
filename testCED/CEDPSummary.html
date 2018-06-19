@@ -52,10 +52,10 @@
         /*.myDivClass{background:#FFFFFF;}*/
     </style>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/bluebird.min.js"></script>  <!--NOT sure if this blubird is needed-->
     <!--<script type="text/javascript"> var ua = window.navigator.userAgent; var msie = ua.indexOf("MSIE "); if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) document.write('<script src=cdnjs.cloudflare.com/ajax/libs/bluebird/3.3.5/…;\/scr'+'ipt>'); </script>-->
 
-    <script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>
+    <!--<script type="text/javascript"  src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.4.1/html2canvas.min.js"></script>-->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.5/jspdf.debug.js" integrity="sha384-CchuzHs077vGtfhGYl9Qtc7Vx64rXBXdIAZIPbItbNyWIRTdG0oYAqki3Ry13Yzu" crossorigin="anonymous"></script>
@@ -73,7 +73,7 @@
     require([
         "esri/map", "esri/layers/FeatureLayer", "esri/dijit/Legend", "esri/urlUtils",
         "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on", "extras/PS_MeasSiteSearch4Definition", "extras/PS_ReturnQuerySt",
-        "dijit/form/CheckBox", "extras/PS_MeasSiteSearch_SetVisableQueryDef", "extras/MH_Zoom2FeatureLayer", "extras/MH_Setup",
+        "dijit/form/CheckBox", "extras/PS_MeasSiteSearch_SetVisableQueryDef", "extras/MH_Zoom2FeatureLayer", "extras/MH_Setup", "extras/MH_SetupSummaryMap",
         "extras/MH_FeatureCount", "extras/MH_Query4Summary",
         "esri/tasks/RelationshipQuery", "esri/symbols/SimpleMarkerSymbol", "dojo/_base/Color", "esri/dijit/Scalebar",
         "esri/dijit/Geocoder", "extras/PS_Identify", "extras/CK_AutoCompleteSearchAndZoom", "extras/PS_PopUniqueQueryInterfaceValues",
@@ -85,30 +85,33 @@
 
     function (Map, FeatureLayer, Legend, urlUtils,
                 arrayUtils, parser, esriConfig, dom, domClass, on, PS_MeasSiteSearch4Definition, PS_ReturnQuerySt, CheckBox,
-                PS_MeasSiteSearch_SetVisableQueryDef, MH_Zoom2FeatureLayer, MH_Setup, MH_FeatureCount, MH_Query4Summary,
+                PS_MeasSiteSearch_SetVisableQueryDef, MH_Zoom2FeatureLayer, MH_Setup, MH_SetupSummaryMap, MH_FeatureCount, MH_Query4Summary,
                 RelationshipQuery, SimpleMarkerSymbol,
                 Color, Scalebar, Geocoder, PS_Identify, CK_AutoCompleteSearchAndZoom, PS_PopUniqueQueryInterfaceValues,
                 webMercatorUtils, BasemapGallery, mouse, query, FindTask, FindParameters) {
 
-        var base64Img1 = null;
-        var base64Img2 = null;
-        var base64Img3 = null;
+        //var 
+
+        //insertStaticMap(app.pSup.map);
+        
+        app.base64Img1 = null;
+        app.base64Img2 = null;
+        app.base64Img3 = null;
         imgToBase64('http://mmheller.github.io/testCED/images/CEDlogo_white_180x31.jpg', function (base64) {
-            base64Img1 = base64;
+            app.base64Img1 = base64;
         })
         var base64Img2 = null;
         imgToBase64('http://mmheller.github.io/testCED/images/USFWS_150x31.jpg', function (base64) {
-            base64Img2 = base64;
+            app.base64Img2 = base64;
         })
         var base64Img3 = null;
         imgToBase64('http://mmheller.github.io/testCED/images/USGS_117x31.jpg', function (base64) {
-            base64Img3 = base64;
+            app.base64Img3 = base64;
         })
-
-
+        
         pdfMargins = { top: 40, bottom: 40, left: 30,width: 624};
-
         esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
+        esriConfig.defaults.io.corsEnabledServers.push("https://sampleserver6.arcgisonline.com")
 
         parser.parse();
 
@@ -123,14 +126,17 @@
         } else {
             strQueryLabelText = "<b>USER SELECTED QUERY FILTERS:</b>  " + strQueryLabelText.substring(0, strQueryLabelText.length - 2);
         }
+              
 
         var div = document.getElementById("dFilterParameters");
         div.innerHTML = strQueryLabelText;
-
-
+        
         app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class
-
         app.gQuerySummary.Summarize(strDefQuery, strDefQuery2, true);
+
+        app.pSupSumMap = new MH_SetupSummaryMap({}); // instantiate the class
+        app.arrayLayers = app.pSupSumMap.Phase2();
+
 
         var today = new Date();
         var dd = today.getDate();
@@ -138,6 +144,15 @@
         var yyyy = today.getFullYear();
         today = mm + '/' + dd + '/' + yyyy;
         document.getElementById('time').innerHTML = today;
+
+
+
+
+
+        //function insertStaticMap(pMap) {
+
+        //};
+
 
         function getTokens() {
             var tokens = [];
@@ -151,102 +166,40 @@
                 tokens[key] = data;
             });
             return tokens;
-        }
+        };
         
         generate = function () {
-            var pdf = new jsPDF('p', 'pt', 'letter');
-            pdf.setFontSize(18);
-
-            //var node = document.getElementById('html-2-pdfwrapper');
-            //var text  = node.textContent || node.innerText;
-            
-            pdf.fromHTML(document.getElementById('html-2-pdfwrapper'),
-                pdfMargins.left, // x coord
-                pdfMargins.top,
-                {
-                    // y coord
-                    width: pdfMargins.width// max width of content on PDF
-                }, function (dispose) {
-                    headerFooterFormatting(pdf, pdf.internal.getNumberOfPages());
-                },
-                pdfMargins);
-
-            pdf.save("text777.pdf");
+            document.getElementById("ImgResultsLoading").style.visibility = "visible";
+            app.gQuerySummary.StartPrinting(app.map);
         };
 
-        // create canvas object
-        function getCanvas(form, a4) {
-            form.width((a4[0] * 1.33333) - 80).css('max-width', 'none');
-            return html2canvas(form, {
-                imageTimeout: 2000,
-                removeContainer: false
-            });
-        }
+        //function imgToBase64(url, callback, imgVariable) {
+        //    if (!window.FileReader) {
+        //        callback(null);
+        //        return;
+        //    }
+        //    var xhr = new XMLHttpRequest();
+        //    xhr.onload = function () {
+        //        var reader = new FileReader();
+        //        reader.onloadend = function () {
+        //            imgVariable = reader.result.replace('text/xml', 'image/jpeg');
+        //            callback(imgVariable);
+        //        };
+        //        reader.readAsDataURL(xhr.response);
+        //    };
+        //    xhr.open('GET', url);
+        //    xhr.responseType = 'blob';
+        //    xhr.send();
+        //};
         
-        function headerFooterFormatting(doc, totalPages) {
-            for (var i = totalPages; i >= 1; i--) {
-                doc.setPage(i);
-                header(doc);                //header
-                footer(doc, i, totalPages);
-                doc.page++;
-            }
-        };
-
-        function header(doc) {
-            doc.setFontSize(20);
-            doc.setTextColor(40);
-            doc.setFontStyle('normal');
-            if (base64Img1) {
-                doc.addImage(base64Img1, 'JPEG', pdfMargins.left, 10, 130, 20);
-            }
-            if (base64Img2) {
-                doc.addImage(base64Img2, 'JPEG', 175, 10, 80, 20);
-            }
-            if (base64Img3) {
-                doc.addImage(base64Img3, 'JPEG', 260, 10, 80, 20);
-            }
-            doc.text("CED Report", pdfMargins.left + 420, 30);
-            doc.setLineCap(2);
-            doc.line(3, 40, pdfMargins.width + 43, 40); // horizontal line
-        };
-
-        // You could either use a function similar to this or pre convert an image with for example http://dopiaza.org/tools/datauri
-        // http://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript
-        function imgToBase64(url, callback, imgVariable) {
-            if (!window.FileReader) {
-                callback(null);
-                return;
-            }
-            var xhr = new XMLHttpRequest();
-            xhr.onload = function () {
-                var reader = new FileReader();
-                reader.onloadend = function () {
-                    imgVariable = reader.result.replace('text/xml', 'image/jpeg');
-                    callback(imgVariable);
-                };
-                reader.readAsDataURL(xhr.response);
-            };
-            xhr.open('GET', url);
-            xhr.responseType = 'blob';
-            xhr.send();
-        };
-
-        function footer(doc, pageNumber, totalPages) {
-            var str = "Page " + pageNumber + " of " + totalPages
-            doc.setFontSize(10);
-            doc.text(str, pdfMargins.left, doc.internal.pageSize.height - 20);
-        };
-
     });
     </script>
 </head>
    
 <body>
     <!--<button onclick="javascript:demoFromHTML()">PDF</button>-->
-    <button onclick="generate()">Generate PDF</button><img id="ImgResultsLoading" src="images/loading.gif" style="height:15px" />
-
-    <div id="html-2-pdfwrapperORG" style='position: absolute; top: 60px; bottom: 0; overflow: auto; width: 850px'>
-        <table style="width:100%; background-color: #FFFFFF; font-family: Arial;">
+    <div id="html-2-pdfwrapperORG" style='position: absolute; top: 20px; bottom: 0; overflow: auto; width: 850px; font-family: Arial; padding:0px; margin-left:0px; padding-left:0px; margin:0px;'>
+        <table style="width:100%; background-color: #FFFFFF; padding:0px; margin-left:0px; padding-left:0px; margin:0px;">
             <tr>
                 <td class="auto-style1">
                     <a href="http://conservationefforts.org/welcome/" target="_blank"> <img id="theImage4" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/CEDlogo_white_180x31.png" style="position: absolute; left: 15px; top: 18px; height: 35px;" /></a>
@@ -255,11 +208,33 @@
                 </td>
             </tr>
         </table>
+        <div style="height:15px; position: absolute; top: 70px; right: 10px">
+            <img id="ImgResultsLoading" src="images/loading.gif" style="height:15px;" /><button onclick="generate()">Export Report to PDF</button>
+        </div>
+        <b>Conservation Efforts Database v2.1</b><br />
+        <b>Interactive Map - Summary Report</b>
 
+
+
+
+    <div id="mapSum"
+         style="overflow:hidden; background-color:rgb(151, 118, 123);">
+        <img id="loadingImg" src="images/loading.gif" style="position:fixed; left:30%; top:30%; z-index:100;" />
     </div>
+
+    <div id="panelBasemapsSum" class="panelBasemapsSum bg rounded shadow">
+        <!-- Panel Basemaps -->
+        <div id="basemapTitleSum"><img src="images/basemaps.png" height="30" title="Switch Base Map" /></div>
+        <div id="basemapContent">
+            <div id="basemapGallerySummary"></div>
+        </div>
+    </div>
+
+
+</b></div>
     <!--<div id="html-2-pdfwrapper" style='position: absolute; left: 20px; top: 150px; bottom: 0; overflow: auto; width: 850px'>-->
-    <div id="html-2-pdfwrapper" style='position: absolute; top: 150px; overflow: auto; width: 850px;'>
-        <b>Report Date:</b> <span id="time"></span>
+    <div id="html-2-pdfwrapper" style='position: absolute; top: 570px; overflow: auto; width: 850px; font-family: Arial;'>
+        <b>REPORT GENERATED:</b> <span id="time"></span>
         <div id="dTotalAcresQ2" class="myDivClassNormal"></div>
         <div id="dTotalCalcAcresQ2" class="myDivClassNormal"></div>
         <div id="dTotalProjects" class="myDivClassNormal"></div><div id="dTotalProjCalcAcresQ2" class="myDivClass"></div>
@@ -270,37 +245,40 @@
         <div id="dMaxLastDataProviderEdit" class="myDivClassNormal"></div>
         <div id="dMaxLastPubProc" class="myDivClassNormal"></div>
         <br>
+        
+        <h1 style='page-break-before: always;'>Page 2</h1>
+
         <table style="width:100%; background-color: #f2f5f9"><tr><td><b>Implementing Party</b></td></tr></table>
         <div id="dNumberOfRecordsbyImpParty" class="myDivClassNormal"></div>
 
         <table style="width:100%; background-color: #f2f5f9"><tr><td><b>Activity</b></td></tr></table>
         <div id="dNumberOfRecordsbyActivity" background:red;></div>
 
-        <h1 style='page-break-before: always;'>Page Two</h1>
+        <h1 style='page-break-before: always;'>Page 3</h1>
         <table style="width:100%; background-color: #f2f5f9; margin-bottom:1px"><tr><td><b>SubActivities</b></td></tr></table>
         <div id="dNumberOfRecordsbySubActivity" class="myDivClassNormal"></div>
 
-        <h1 style='page-break-before: always;'>Page Three</h1>
+        <h1 style='page-break-before: always;'>Page 4</h1>
 
         <table style="width:100%; background-color: #f2f5f9"><tr><td><b>Office</b></td></tr></table>
         <div id="dNumberOfRecordsbyOffice" class="myDivClassNormal"></div>
 
-        <h1 style='page-break-before: always;'>Page Four</h1>
+        <h1 style='page-break-before: always;'>Page 5</h1>
         <table style="width:100%; background-color: #f2f5f9"><tr><td><b>Overlapping Areas: States</b></td></tr></table>
         <div id="dNumberofOverlappingStates" class="myDivClassNormal"></div>
 
         <table style="width:100%; background-color: #f2f5f9"><tr><td><b>Overlapping Areas: States (continuted)</b></td></tr></table>
         <div id="dGISStates" class="myDivClassNormal"></div>
-        <h1 style='page-break-before: always; '>Page Five</h1>
+        <h1 style='page-break-before: always; '>Page 6</h1>
         <table style="width:100%; background-color: #f2f5f9; margin-bottom:1px; padding-bottom:1px">            <tr>                <td><b>Overlapping Areas: GRSG Population Areas</b></td>            </tr>        </table>
         <div id="dNumberofOverlappingPopAreas" class="myDivClassSmall"></div>
 
-        <h1 style='page-break-before: always;'>Yet Another Page</h1>
+        <h1 style='page-break-before: always;'>Page 7</h1>
         
         <table style="width:100%; background-color: #f2f5f9; margin-bottom:1px"><tr><td><b>Overlapping Areas: GRSG Population Areas (continuted)</b></td></tr></table>
         <div id="dGISPoP" class="myDivClassSmall"></div>
       
-        <h1 style='page-break-before: always; '>Yet Another Page</h1>
+        <h1 style='page-break-before: always; '>Page 8</h1>
 
             <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: Overlapping Mngmt Zones</b></td>            </tr>        </table>
             <div id="dNumberofOverlappingMngmtZones" class="myDivClass"></div>
@@ -308,19 +286,19 @@
             <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: WAFWA MANAGEMENT ZONES"</b></td>            </tr>        </table>
             <div id="dGISMZ" class="myDivClassNormal"></div>
 
-        <h1 style='page-break-before: always; '>Yet Another Page</h1>
+        <h1 style='page-break-before: always; '>Page 9</h1>
 
             <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: SURFACE MANAGEMENT AGENCY</b></td>            </tr>        </table>
             <div id="dGISSMA" class="myDivClassNormal"></div>
 
-        <h1 style='page-break-before: always; '>Yet Another Page</h1>
+        <h1 style='page-break-before: always; '>Page 10</h1>
 
             <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: GRSG GENERAL HABITAT MANAGEMENT AREAS</b></td>            </tr>        </table>
             <div id="dGISGHMA" class="myDivClassNormal"></div>
 
             <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: GRSG PRIORITY HABITAT MANAGEMENT AREAS</b></td>            </tr>        </table>
             <div id="dGISPHMA" class="myDivClassNormal"></div>
-        <h1 style='page-break-before: always; '>Yet Another Page</h1>
+        <h1 style='page-break-before: always; '>Page 11</h1>
 
             <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: RESILIENCE and RESISTANCE</b></td>            </tr>        </table>
             <div id="dGISRMZ" class="myDivClassNormal"></div>
@@ -330,10 +308,10 @@
             <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas:BREEDING HABITAT PROBABILITY</b></td>            </tr>        </table>
             <div id="dGISBD" class="myDivClassNormal"></div>
 
-        <h1 style='page-break-before: always; '>Yet Another Page</h1>
+        <h1 style='page-break-before: always; '>Page 12</h1>
             <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: BREEDING HABITAT PROBABILITY (continuted)</b></td>            </tr>        </table>
             <div id="dGISBP" class="myDivClassNormal"></div>
-        <h1 style='page-break-before: always; '>Yet Another Page</h1>
+        <h1 style='page-break-before: always; '>Page 13</h1>
 
             <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: RESILIENCE and RESISTANCE AND POPULATION INDEX </b></td>            </tr>        </table>
             <div id="dGISIDX" class="myDivClassNormal"></div>

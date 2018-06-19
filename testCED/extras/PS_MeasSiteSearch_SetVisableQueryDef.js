@@ -28,7 +28,7 @@ define([
             app.pSup.gFeatureTable.refresh();
 
             if (strQueryDef !== "") { strQueryDef += " and "; }
-            strQueryDef += "(((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))"
+            strQueryDef += "(((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))";
             //strQueryDef += "((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))"
             this.pCED_PP_point.setDefinitionExpression(strQueryDef);
 

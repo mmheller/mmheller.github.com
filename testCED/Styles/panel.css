@@ -360,3 +360,46 @@
 	    overflow-x: hidden;
 	    padding: 0px;
     }
+
+
+
+    /* BASEMAPS */
+   .panelBasemapsSum {
+	    position: absolute;
+	    top: 115px;
+	    right: 15px;
+	    width: 140px;
+	    height: 30px;
+	    font-family: HelveticaNeueUltraLight;
+	    color: #ffffff;
+	    font-size: 14px;
+	    padding: 0px;
+	    overflow: hidden;
+    }
+
+    .panelBasemapsOnSum {
+	    height: 400px;
+    }
+
+    #basemapTitleSum {
+	    display: block;
+	    width: 140px;
+	    height: 30px;
+	    font-family: HelveticaNeue;
+	    text-align: center;
+	    line-height: 50px;
+	    cursor: pointer;
+	    padding: 0px;
+    }
+
+    #basemapContentSum {
+	    display: block;
+	    width: 140px;
+	    height: 350px;
+	    font-family: HelveticaNeue;
+	    text-align: center;
+	    cursor: pointer;
+	    overflow-y: auto;
+	    overflow-x: hidden;
+	    padding: 0px;
+    }
