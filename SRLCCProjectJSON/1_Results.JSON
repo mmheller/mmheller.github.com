@@ -148,7 +148,7 @@
                     "identifier": [
                         {
                             "identifier": "1", 
-                            "namespace": "lcc:srC:\\Python27\\ArcGIS10.5\\python.exe"
+                            "namespace": "lcc:sr"
                         }, 
                         {
                             "identifier": "52b1e9b2e4b0d9b325230d0b", 
@@ -2242,10 +2242,46 @@
                 {
                     "allocation": [
                         {
-                            "sourceId": "14", 
+                            "sourceId": "None", 
                             "currency": "USD", 
-                            "amount": 91028.0, 
-                            "recipientId": "14", 
+                            "amount": 0, 
+                            "recipientId": "None", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2011-09-30", 
+                        "periodName": [
+                            "FY2011"
+                        ], 
+                        "startDateTime": "2010-10-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "None", 
+                            "currency": "USD", 
+                            "amount": 0, 
+                            "recipientId": "None", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2011-09-30", 
+                        "periodName": [
+                            "FY2011"
+                        ], 
+                        "startDateTime": "2010-10-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "None", 
+                            "currency": "USD", 
+                            "amount": 0, 
+                            "recipientId": "None", 
                             "matching": false
                         }
                     ], 
@@ -2297,53 +2333,12 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-03-22", 
+                        "date": "2018-06-21", 
                         "dateType": "creation"
                     }
                 ]
             }, 
-            "associatedResource": [
-                {
-                    "resourceType": [
-                        {
-                            "type": "Datasets/Database"
-                        }
-                    ], 
-                    "associationType": "product", 
-                    "metadataCitation": {
-                        "identifier": [
-                            {
-                                "identifier": "54f091a2e4b02419550ce8ba", 
-                                "namespace": "gov.sciencbase.catalog"
-                            }
-                        ], 
-                        "title": "Database: Vulnerability, impact, and adaptive capacity of riparian and terrestrial habitats"
-                    }, 
-                    "resourceCitation": {
-                        "title": "Database: Vulnerability, impact, and adaptive capacity of riparian and terrestrial habitats"
-                    }
-                }, 
-                {
-                    "resourceType": [
-                        {
-                            "type": "Report"
-                        }
-                    ], 
-                    "associationType": "product", 
-                    "metadataCitation": {
-                        "identifier": [
-                            {
-                                "identifier": "54ece769e4b02d776a68477d", 
-                                "namespace": "gov.sciencbase.catalog"
-                            }
-                        ], 
-                        "title": "Final Report: Vulnerability of terrestrial and riparian habitats to climate and land use change in the Southern Rockies"
-                    }, 
-                    "resourceCitation": {
-                        "title": "Final Report: Vulnerability of terrestrial and riparian habitats to climate and land use change in the Southern Rockies"
-                    }
-                }
-            ], 
+            "associatedResource": [], 
             "resourceDistribution": [
                 {
                     "distributor": [

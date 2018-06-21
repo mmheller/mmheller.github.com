@@ -93,7 +93,7 @@
                 "memberOfOrganization": [], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:lindsay.reynolds@colostate.edu"
+                        "uri": "mailto:reynoldsl@usgs.gov"
                     }
                 ], 
                 "contactId": "G40", 
@@ -107,7 +107,7 @@
                 ], 
                 "onlineResource": [
                     {
-                        "uri": "mailto:lindsay.reynolds@colostate.edu"
+                        "uri": "mailto:reynoldsl@usgs.gov"
                     }
                 ], 
                 "contactId": "40", 
@@ -148,7 +148,7 @@
                     "identifier": [
                         {
                             "identifier": "8", 
-                            "namespace": "lcc:srC:\\Python27\\ArcGIS10.5\\python.exe"
+                            "namespace": "lcc:sr"
                         }, 
                         {
                             "identifier": "50cf83ffe4b0fa1303b84d26", 
@@ -1947,7 +1947,13 @@
                         }, 
                         "keyword": [
                             {
+                                "keyword": "Report"
+                            }, 
+                            {
                                 "keyword": "Applications and Tools"
+                            }, 
+                            {
+                                "keyword": "Contractual Document"
                             }
                         ]
                     }, 
@@ -2320,10 +2326,10 @@
                 {
                     "allocation": [
                         {
-                            "sourceId": "10", 
+                            "sourceId": "None", 
                             "currency": "USD", 
-                            "amount": 105755.0, 
-                            "recipientId": "G40", 
+                            "amount": 0, 
+                            "recipientId": "None", 
                             "matching": false
                         }
                     ], 
@@ -2338,11 +2344,11 @@
                 {
                     "allocation": [
                         {
-                            "sourceId": "21", 
+                            "sourceId": "None", 
                             "currency": "USD", 
-                            "amount": 118404.0, 
-                            "recipientId": "21", 
-                            "matching": true
+                            "amount": 0, 
+                            "recipientId": "None", 
+                            "matching": false
                         }
                     ], 
                     "timePeriod": {
@@ -2356,11 +2362,83 @@
                 {
                     "allocation": [
                         {
-                            "sourceId": "10", 
+                            "sourceId": "None", 
                             "currency": "USD", 
-                            "amount": 11464.0, 
-                            "recipientId": "10", 
-                            "matching": true
+                            "amount": 0, 
+                            "recipientId": "None", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2011-09-30", 
+                        "periodName": [
+                            "FY2011"
+                        ], 
+                        "startDateTime": "2010-10-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "None", 
+                            "currency": "USD", 
+                            "amount": 0, 
+                            "recipientId": "None", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2011-09-30", 
+                        "periodName": [
+                            "FY2011"
+                        ], 
+                        "startDateTime": "2010-10-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "None", 
+                            "currency": "USD", 
+                            "amount": 0, 
+                            "recipientId": "None", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2011-09-30", 
+                        "periodName": [
+                            "FY2011"
+                        ], 
+                        "startDateTime": "2010-10-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "None", 
+                            "currency": "USD", 
+                            "amount": 0, 
+                            "recipientId": "None", 
+                            "matching": false
+                        }
+                    ], 
+                    "timePeriod": {
+                        "endDateTime": "2011-09-30", 
+                        "periodName": [
+                            "FY2011"
+                        ], 
+                        "startDateTime": "2010-10-01"
+                    }
+                }, 
+                {
+                    "allocation": [
+                        {
+                            "sourceId": "None", 
+                            "currency": "USD", 
+                            "amount": 0, 
+                            "recipientId": "None", 
+                            "matching": false
                         }
                     ], 
                     "timePeriod": {
@@ -2411,12 +2489,33 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-03-22", 
+                        "date": "2018-06-21", 
                         "dateType": "creation"
                     }
                 ]
             }, 
-            "associatedResource": [], 
+            "associatedResource": [
+                {
+                    "resourceType": [
+                        {
+                            "type": "Datasets/Database"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "https://www.sciencebase.gov/catalogMaps/mapping/ows/50cf83ffe4b0fa1303b84d26?service=wms&request=getcapabilities&version=1.3.0", 
+                                "namespace": "gov.sciencebase.catalog"
+                            }
+                        ], 
+                        "title": "Study area web mapping service of the Upper Colorado River Basin"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Study area web mapping service of the Upper Colorado River Basin"
+                    }
+                }
+            ], 
             "resourceDistribution": [
                 {
                     "distributor": [
