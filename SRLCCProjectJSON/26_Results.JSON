@@ -2399,12 +2399,53 @@
                 ], 
                 "metadataDate": [
                     {
-                        "date": "2018-06-21", 
+                        "date": "2018-06-22", 
                         "dateType": "creation"
                     }
                 ]
             }, 
-            "associatedResource": [], 
+            "associatedResource": [
+                {
+                    "resourceType": [
+                        {
+                            "type": "Report"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "5a79ddc2e4b00f54eb2002a4", 
+                                "namespace": "gov.sciencebase.catalog"
+                            }
+                        ], 
+                        "title": "Final Report: Watershed disturbance and restoration impacts on hydrologic function relative to increased snowmelt water yields, stream water quality, and species conservation in the Jemez Mountains, New Mexico"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Final Report: Watershed disturbance and restoration impacts on hydrologic function relative to increased snowmelt water yields, stream water quality, and species conservation in the Jemez Mountains, New Mexico"
+                    }
+                }, 
+                {
+                    "resourceType": [
+                        {
+                            "type": "Datasets/Database"
+                        }
+                    ], 
+                    "associationType": "product", 
+                    "metadataCitation": {
+                        "identifier": [
+                            {
+                                "identifier": "https://www.sciencebase.gov/catalogMaps/mapping/ows/53173b63e4b0cd4cd83be243?service=wms&request=getcapabilities&version=1.3.0", 
+                                "namespace": "gov.sciencebase.catalog"
+                            }
+                        ], 
+                        "title": "Study area boundary web mapping service"
+                    }, 
+                    "resourceCitation": {
+                        "title": "Study area boundary web mapping service"
+                    }
+                }
+            ], 
             "resourceDistribution": [
                 {
                     "distributor": [
