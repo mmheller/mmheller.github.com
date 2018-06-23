@@ -274,7 +274,9 @@ define([
         },
 
         StartPrinting: function (pMap) {
-            //esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
+            esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
+            esriConfig.defaults.io.corsEnabledServers.push("https://services.arcgis.com")
+
             console.log("Starting printting map to .jpg");
             
             esriConfig.defaults.io.corsEnabledServers.push("https://sampleserver6.arcgisonline.com")
@@ -282,16 +284,26 @@ define([
             var oWid = pMap.width;
             var oHgt = pMap.height;
 
-            var printTask = new PrintTask('https://sampleserver6.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task');
+            //var printTask = new PrintTask('https://sampleserver6.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task');
+            var printTask = new PrintTask('https://utility.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task');
             //var printTask = new PrintTask('https://sampleserver6.arcgisonline.com/arcgis/rest/services/ExportWebMap/GPServer/Export_Web_Map');
             var template = new PrintTemplate();
             this.imgHeight = (740 / oWid) * oHgt;
             template.exportOptions = {
                 width: 1542,
                 height: (1542 / oWid) * oHgt,
-                dpi: 200
+                dpi: 150
             };
-            template.format = "jpg";
+
+            //template.exportOptions = {
+            //    width: 1542,
+            //    height: (1542 / oWid) * oHgt,
+            //    dpi: 200
+            //};
+
+            //template.format = "png32";
+            //template.format = "jpg";
+            template.format = "JPG";
             template.layout = "MAP_ONLY";
             template.preserveScale = false;
             template.showAttribution = false;
@@ -300,16 +312,17 @@ define([
             params.template = template;
 
             printTask.execute(params, this.printResult, this.printErr);
-            //return pQueryTask.execute(pQuery, this.returnEvents, this.err);
         },
 
 
         printResult: function (rsltURL) {
-            //var mapImg = domConstruct.toDom('<img src="' + rsltURL.url + '" border="0" style="width:740px;height:' + this.imgHeight + 'px;"/>');
-            //domConstruct.place(mapImg, dom.byId('mapImgDiv'), 'replace');
             app.base64ImgMap = null;
             imgToBase64(rsltURL.url, function (base64) {
                 app.base64ImgMap = base64;                ////waiting for the callback to change the .jpg to base64 string,  base64 string is required for the PDF exporter
+                
+                if (app.base64ImgMap.indexOf("data:;base64,/9") >= 0) {     //// this is a work around, for some reason the 64base converter is sometimes not including the image/jpeg prefix
+                    app.base64ImgMap = app.base64ImgMap.replace("data:;base64,/9", "data:image/jpeg;base64,/9");
+                }
                 startExport2PDF();
             });
         },

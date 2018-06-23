@@ -6,17 +6,10 @@ Date:        Oct 2014-->
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />    <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
     <title>Greater Sage Grouse: Conservation Efforts</title>
     <link rel="stylesheet" href="https://js.arcgis.com/3.20/dijit/themes//tundra/tundra.css" />
     <link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css" />
-
-    <!--<link rel="stylesheet" href="https://js.arcgis.com/3.14/dijit/themes//tundra/tundra.css" />
-    <link rel="stylesheet" href="https://js.arcgis.com/3.14/esri/css/esri.css" />-->
-
-    <!--  <link rel="stylesheet" href="https://js.arcgis.com/3.12/dijit/themes//tundra/tundra.css"/>
-      <link rel="stylesheet" href="https://js.arcgis.com/3.12/esri/css/esri.css"/>-->
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="Styles/panel.css" />
@@ -39,10 +32,6 @@ Date:        Oct 2014-->
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script type="text/javascript" src="https://js.arcgis.com/3.20/"></script>    
-    <!--<script type="text/javascript" src="https://js.arcgis.com/3.14/"></script>-->
-    <!--<script type="text/javascript" src="https://js.arcgis.com/3.12/"></script>-->
-    <!--<script src="https://raw.githubusercontent.com/Chaussette/esri.symbol.MultiLineTextSymbol/master/esri.symbol.MultiLineTextSymbol.js"></script>-->
-
 
     <script type="text/javascript">
     dojo.require("dijit.layout.TabContainer");
@@ -297,6 +286,21 @@ Date:        Oct 2014-->
             }
 
             localStorage.setItem("ls_strBasemap", strBasemap);
+
+            var array_extraMaplayerList = [];
+            dojo.forEach(app.map.graphicsLayerIds, function (pGraphicLayerID) {
+                pTempGraphicLayer = app.map.getLayer(pGraphicLayerID);
+                if ((pTempGraphicLayer.visible) &
+                    (pGraphicLayerID != "labels1") & (pGraphicLayerID != "labels2")) {
+                    array_extraMaplayerList.push(pGraphicLayerID);
+                }
+            });
+
+            var str_extraMaplayerList = String(array_extraMaplayerList);
+            localStorage.setItem("ls_extraMaplayerList", str_extraMaplayerList);
+
+            //var str_extraMaplayerList = app.map.layerIds;
+            //localStorage.setItem("ls_extraMaplayerList", str_extraMaplayerList);
 
             var pNewWindow = window.open("CEDPSummary.html");
             //var pNewWindow = window.open("CEDPSummary");   //////**************Static
@@ -662,23 +666,6 @@ Date:        Oct 2014-->
                 <!--</form>-->
             </div>
 
-                    <!--<div data-dojo-type="dijit/layout/ContentPane" id="prjinfopane"
-                     data-dojo-props="title:'Project Background'">
-                    <div id="Div2">
-                        <p>The Conservation Efforts Database is a partnership between the US Fish and Wildlife Service and the US Geological Survey. The goal of the Conservation Efforts Database is to efficiently and effectively collect and analyze ongoing conservation efforts for unlisted, candidate, and listed species alike. Understanding the distribution and type of conservation actions happening across the landscape will allow visualization and quantification of the extent to which threats are being addressed. Currently, this database contains only information on the Greater sage-grouse. However, it could also be useful beyond Greater sage-grouse conservation and may act as a template for tracking conservation actions across the landscape for other candidate, sensitive, or listed species. The spatially explicit, web-based Conservation Efforts Database is capable of (1) allowing multiple-users to enter data from different locations, (2) uploading and storing documents, (3) linking conservation actions to one or more threats (one-to-many relationships), (4) reporting functions that would allow summaries of the conservation actions at multiple scales (e.g., management zones, populations, or priority areas for conservation), and (5) accounting for actions at multiple scales from small easements to state-wide planning efforts.</p>
-                    </div>
-                </div>
-
-                <div data-dojo-type="dijit/layout/ContentPane" id="helpdata"
-                     data-dojo-props="title:'Help/Data'">
-                    <div id="Div5">
-                        Contact Email: fw1sagegrouseced@fws.gov or <br />
-                        matthew_heller@fws.gov<br /><br />
-                        Note: contact partner data provider directly for questions/comments related to data specifics<br />
-                        <hr />
-                        <p>CED Front Page Map - Version 2.0</p>
-                    </div>
-                </div>-->
 
                 </div>
 

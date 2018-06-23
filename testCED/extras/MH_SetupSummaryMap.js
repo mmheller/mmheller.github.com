@@ -103,12 +103,13 @@ define([
               var panelBasemaps = dom.byId("panelBasemapsSum");
               on(panelBasemaps, mouse.leave, function () { domClass.remove("panelBasemapsSum", "panelBasemapsOnSum"); });
               
-              var strBasemap = localStorage.getItem("ls_strBasemap");
-              if (strBasemap != "topo") {
-                  app.basemapGallerySummary.select(strBasemap);
-              } else {
-                  app.basemapGallerySummary.select('StreetMap');
-              }
+              app.map.on("update-end", function () {   // this is designed to fire after the map has been fully updated, along with the basemap gallery available layers
+                  var strBasemap = localStorage.getItem("ls_strBasemap");
+                  if (!(app.basemapLoaded)) {
+                      app.basemapGallerySummary.select(strBasemap);
+                      app.basemapLoaded = true;
+                  }
+              });
           },
 
           Phase1: function () {
@@ -117,6 +118,7 @@ define([
 
 
           Phase2: function () {
+              app.basemapLoaded = false;
               app.loading = dojo.byId("loadingImg");  //loading image. id
               var arrayStrMapExtent = localStorage.getItem("ls_strMapExtent").split(",");
               //var customExtentAndSR = new esri.geometry.Extent(-14000000, 4800000, -11000000, 6200000, new esri.SpatialReference({ "wkid": 3857 }));
@@ -139,8 +141,6 @@ define([
               var strDefQuery = localStorage.getItem("ls_strDefQuery");
               //var strDefQuery2 = localStorage.getItem("ls_strDefQuery2");
               
-              CED_PP_point = new FeatureLayer(app.strTheme1_URL + "0", {id: "0", mode: FeatureLayer.MODE_ONDEMAND, visible: true});
-              CED_PP_point.setDefinitionExpression(strDefQuery);
 
               var str4Replacing = "(((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))";
               strDefQuery4LinePoly = strDefQuery;
@@ -148,142 +148,107 @@ define([
               str4Replacing = "((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))";
               strDefQuery4LinePoly = strDefQuery4LinePoly.replace(str4Replacing, "");
 
-              CED_PP_line = new FeatureLayer(app.strTheme1_URL + "1", { id: "1", mode: FeatureLayer.MODE_ONDEMAND, visible: true });
-              CED_PP_line.setDefinitionExpression(strDefQuery4LinePoly);
-
-              CED_PP_poly = new FeatureLayer(app.strTheme1_URL + "2", { id: "2", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: true });
-              CED_PP_poly.setDefinitionExpression(strDefQuery4LinePoly);
-
               var strBase_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/"
               var strlabelField1 = "POPULATION";
               var strlabelField2 = "Name";
               var strlabelField3 = "Mgmt_zone";
-              var pBase_Pop = new FeatureLayer(strBase_URL + "0", { id: "Pop", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: false });
-              var pBase_MZ = new FeatureLayer(strBase_URL + "1", { id: "MZ", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: false });
 
-              var pBase_RRP = new FeatureLayer(strBase_URL + "2", { id: "RRP", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              var pBase_RRB = new FeatureLayer(strBase_URL + "3", { id: "RRB", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              var pBase_Breed = new FeatureLayer(strBase_URL + "4", { id: "Breed", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              var pBase_PI = new FeatureLayer(strBase_URL + "5", { id: "PI", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              var pBase_Eco = new FeatureLayer(strBase_URL + "6", { id: "Eco", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              var pBase_PHMA = new FeatureLayer(strBase_URL + "7", { id: "PHMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              var pBase_GHMA = new FeatureLayer(strBase_URL + "8", { id: "GHMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              var pBase_SMA = new FeatureLayer(strBase_URL + "9", { id: "SMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              var pBase_PAC = new FeatureLayer(strBase_URL + "10", { id: "PAC", "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+              str_extraMaplayerList = localStorage.getItem("ls_extraMaplayerList");
+              extraMaplayerList = str_extraMaplayerList.split(",");
 
+              var arrayLayers = [];
               var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
-              var pLabel1 = new TextSymbol().setColor(vGreyColor);
-              pLabel1.font.setSize("10pt");
-              pLabel1.font.setFamily("arial");
-              var pLabelRenderer1 = new SimpleRenderer(pLabel1);
-              var plabels1 = new LabelLayer({ id: "labels1" });
-              plabels1.addFeatureLayer(pBase_Pop, pLabelRenderer1, "{" + strlabelField1 + "}");
 
-              var pLabel2 = new TextSymbol().setColor(vGreyColor);
-              pLabel2.font.setSize("10pt");
-              pLabel2.font.setFamily("Arial Black");
-              var pLabelRenderer2 = new SimpleRenderer(pLabel2);
-              var plabels2 = new LabelLayer({ id: "labels2" });
-              plabels2.addFeatureLayer(pBase_MZ, pLabelRenderer2, "{" + strlabelField2 + "} : {" + strlabelField3 + "}");
+              dojo.forEach(extraMaplayerList, function (pGraphicLayerIDFromOtherMap) {
+                  switch (pGraphicLayerIDFromOtherMap) {
+                      case "Pop":
+                          //var pBase_Pop = new FeatureLayer(strBase_URL + "0", { id: "Pop", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: true });
+                          var pBase_Pop = new FeatureLayer("https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/WAFWA_MZs/FeatureServer/0", { id: "Pop", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: true });
+                          arrayLayers.push(pBase_Pop);
 
-             
+                          var pLabel1 = new TextSymbol().setColor(vGreyColor);
+                          pLabel1.font.setSize("10pt");
+                          pLabel1.font.setFamily("arial");
+                          var pLabelRenderer1 = new SimpleRenderer(pLabel1);
+                          var plabels1 = new LabelLayer({ id: "labels1" });
+                          plabels1.addFeatureLayer(pBase_Pop, pLabelRenderer1, "{" + strlabelField1 + "}");
+                          arrayLayers.push(plabels1);
+                          break;
+                      case "MZ":
+                          var pBase_MZ = new FeatureLayer("https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/WAFWA_MZs/FeatureServer/1", { id: "MZ", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: true });
+                          //var pBase_MZ = new FeatureLayer(strBase_URL + "1", { id: "MZ", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: true });
+                          arrayLayers.push(pBase_MZ);
+
+                          var pLabel2 = new TextSymbol().setColor(vGreyColor);
+                          pLabel2.font.setSize("10pt");
+                          pLabel2.font.setFamily("Arial Black");
+                          var pLabelRenderer2 = new SimpleRenderer(pLabel2);
+                          var plabels2 = new LabelLayer({ id: "labels2" });
+                          plabels2.addFeatureLayer(pBase_MZ, pLabelRenderer2, "{" + strlabelField2 + "} : {" + strlabelField3 + "}");
+                          arrayLayers.push(plabels2);
+                          break;
+                      case "RRP":
+                          var pBase_RRP = new FeatureLayer(strBase_URL + "2", { id: "RRP", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+                          arrayLayers.push(pBase_RRP);
+                          break;
+                      case "RRB":
+                          var pBase_RRB = new FeatureLayer(strBase_URL + "3", { id: "RRB", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+                          arrayLayers.push(pBase_RRB);
+                          break;
+                      case "Breed":
+                          var pBase_Breed = new FeatureLayer(strBase_URL + "4", { id: "Breed", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+                          arrayLayers.push(pBase_Breed);
+                          break;
+                      case "PI":
+                          var pBase_PI = new FeatureLayer(strBase_URL + "5", { id: "PI", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+                          arrayLayers.push(pBase_PI);
+                          break;
+                      case "Eco":
+                          var pBase_Eco = new FeatureLayer(strBase_URL + "6", { id: "Eco", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+                          arrayLayers.push(pBase_Eco);
+                          break;
+                      case "PHMA":
+                          var pBase_PHMA = new FeatureLayer(strBase_URL + "7", { id: "PHMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+                          arrayLayers.push(pBase_PHMA);
+                          break;
+                      case "GHMA":
+                          var pBase_GHMA = new FeatureLayer(strBase_URL + "8", { id: "GHMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+                          arrayLayers.push(pBase_GHMA);
+                          break;
+                      case "SMA":
+                          var pBase_SMA = new FeatureLayer(strBase_URL + "9", { id: "SMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+                          arrayLayers.push(pBase_SMA);
+                          break;
+                      case "PAC":
+                          var pBase_PAC = new FeatureLayer(strBase_URL + "10", { id: "PAC", "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+                          arrayLayers.push(pBase_PAC);
+                          break;
+                      case "0":
+                          CED_PP_point = new FeatureLayer(app.strTheme1_URL + "0", { id: "0", mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+                          CED_PP_point.setDefinitionExpression(strDefQuery);
+                          arrayLayers.push(CED_PP_point);
+                          break;
+                      case "1":
+                          CED_PP_line = new FeatureLayer(app.strTheme1_URL + "1", { id: "1", mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+                          CED_PP_line.setDefinitionExpression(strDefQuery4LinePoly);
+                          arrayLayers.push(CED_PP_line);
+                          break;
+                      case "2":
+                          CED_PP_poly = new FeatureLayer(app.strTheme1_URL + "2", { id: "2", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: true });
+                          CED_PP_poly.setDefinitionExpression(strDefQuery4LinePoly);
+                          arrayLayers.push(CED_PP_poly);
+                  }
+              });
+                         
               //arrayLayers = [pBase_PAC, pBase_SMA, pBase_GHMA, pBase_PHMA, pBase_Eco, pBase_RRP, pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop, plabels1, plabels2, CED_PP_poly, CED_PP_line, CED_PP_point, this.gCED_PP_point4FeatureTable];
-              arrayLayers = [pBase_PAC, pBase_SMA, pBase_GHMA, pBase_PHMA, pBase_Eco, pBase_RRP, pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop,
-                                plabels1, plabels2, CED_PP_poly, CED_PP_line, CED_PP_point];
+              //arrayLayers = [pBase_PAC, pBase_SMA, pBase_GHMA, pBase_PHMA, pBase_Eco, pBase_RRP, pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop,
+              //                  plabels1, plabels2, , , CED_PP_point];
+
               app.map.addLayers(arrayLayers);
               
               return arrayLayers;
           },
 
-          //Phase3: function (CED_PP_point, CED_PP_line, CED_PP_poly) {
-          //    var scalebar = new Scalebar({ map: app.map, scalebarUnit: "dual" });
-          //    var pGeocoder = new Geocoder({ autoComplete: true, arcgisGeocoder: { placeholder: "Find a place" }, map: app.map }, dojo.byId('search'));
-          //    pGeocoder.startup();
-
-          //    var basemapTitle = dom.byId("basemapTitle");
-          //    on(basemapTitle, "click", function () {
-          //        domClass.toggle("panelBasemaps", "panelBasemapsOn");
-          //    });
-
-          //    on(basemapTitle, mouse.enter, function () {
-          //        domClass.add("panelBasemaps", "panelBasemapsOn");
-          //    });
-
-          //    var panelBasemaps = dom.byId("panelBasemaps");
-          //    on(panelBasemaps, mouse.leave, function () { domClass.remove("panelBasemaps", "panelBasemapsOn"); });
-
-          //    $('#loc').autocomplete({
-          //        source: function (request, response) {
-          //            var strURL4Search = "";
-          //            if (!(isNaN(request.term))) {
-          //                strURL4Search = app.strTheme1_URL + "0/query" +
-          //                             "?where=Project_Name+like+%27%25" + request.term + "%25%27+or+Project_ID+%3D+" + request.term + "&f=pjson&returnGeometry=true&outFields=Project_Name%2C+Project_ID%2C+SourceFeatureType%2C+TypeAct";
-          //                //strURL4Search = app.strTheme1_URL + "0/query" +
-          //                //             "?where=Project_Name+like+%27%25" + request.term + "%25%27+or+Project_ID+%3D+" + request.term + "&f=pjson&outFields=*&returnGeometry=true&outFields=Project_Name%2C+Project_ID%2C+SourceFeatureType%2C+TypeAct%2C+geometry";
-
-          //            } else {
-          //                strURL4Search = app.strTheme1_URL + "0/query" +
-          //                             "?where=Project_Name+like+'%25" + request.term + "%25'" + "&f=pjson&returnGeometry=true&outFields=Project_Name%2C+Project_ID%2C+SourceFeatureType%2C+TypeAct";
-          //                //strURL4Search = app.strTheme1_URL + "0/query" +
-          //                //             "?where=Project_Name+like+'%25" + request.term + "%25'" + "&f=pjson&outFields=*&returnGeometry=true&outFields=Project_Name%2C+Project_ID%2C+SourceFeatureType%2C+TypeAct%2C+geometry";
-
-          //            }
-          //            $.ajax({
-          //                //url: app.strTheme1_URL + "find" + "?searchFields=Project_Name,Project_ID&SearchText=" + request.term + "&layers=0&f=pjson&returnGeometry=true",
-          //                url: strURL4Search,
-          //                dataType: "jsonp",
-          //                data: {},                        //data: { where: strSearchField + " LIKE '%" + request.term.replace(/\'/g, '\'\'').toUpperCase() + "%'", outFields: strSearchField, returnGeometry: true, f: "pjson" },                        
-          //                success: function (data) {
-          //                    //if (data.results) {                           //                            if (data.features) {
-          //                    if (data.features) {                           //                            if (data.features) {
-          //                        response($.map(data.features.slice(0, 19), function (item) {      //only display first 10
-          //                            var strtemp = item.geometry;
-
-          //                            return { label: item.attributes.Project_Name + " ID:" + item.attributes.Project_ID +
-          //                              " (Layer:" + item.attributes.SourceFeatureType.replace("poly", "area") + ",Type:" + item.attributes.TypeAct + ")",
-          //                                value2: item.geometry, value3: item.attributes.Project_ID, value4: "CED Projects and Plans (point)"
-          //                            }
-          //                        }));
-          //                    }
-          //                },
-          //                error: function (message) { console.log("Failed to get autocomplete results due to an error: ", message); }
-          //            });
-          //        },
-          //        minLength: 3,
-          //        select: function (event, ui) {
-          //            this.blur();
-          //            var strMatrix = "Project";
-          //            var strManagUnit = "All";
-          //            var strDataType = "0";
-          //            var pGeometryMultipoint = ui.item.value2.points;
-          //            var pSR = ui.item.value2.spatialReference;
-          //            var pGeometryPoint = pGeometryMultipoint[0];
-
-          //            var dblX = pGeometryPoint[0];
-          //            var dblY = pGeometryPoint[1];
-          //            var strValue3 = ui.item.value3;
-          //            //var psqs_strQueryString = "objectid  > 0";
-          //            app.map.infoWindow.hide();            //var strquery4id = "Contaminant LIKE '%Mercury%'";
-          //            app.map.graphics.clear();
-          //            CED_PP_point.clearSelection();
-          //            CED_PP_line.clearSelection();
-          //            CED_PP_poly.clearSelection();
-
-          //            app.pPS_Identify = new PS_Identify({ pLayer1: CED_PP_point, pLayer2: CED_PP_line, pLayer3: CED_PP_poly, pMap: app.map,
-          //                strQueryString4Measurements: "Project_ID = " + strValue3, strURL: app.strTheme1_URL, pInfoWindow: app.infoWindow, mSR: pSR
-          //            }); // instantiate the ID Search class    
-
-          //            //app.pPS_Identify = new PS_Identify({
-          //            //    pLayer1: CED_PP_point, pLayer2: CED_PP_line, pLayer3: CED_PP_poly, pMap: app.map,
-          //            //    strQueryString4Measurements: "OBJECTID > 0", strURL: app.strTheme1_URL, pInfoWindow: app.infoWindow, mSR: pSR
-          //            //}); // instantiate the ID Search class    
-
-          //            var pPS_Identify_Results = app.pPS_Identify.executeQueries(null, "", 0, pGeometryPoint[0], pGeometryPoint[1]);
-          //        }
-          //    });
-
-
-          //},
 
           err: function (err) {
               console.log("Failed to get stat results due to an error: ", err);
