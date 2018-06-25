@@ -147,7 +147,6 @@ define([
               strDefQuery4LinePoly = strDefQuery4LinePoly.replace(str4Replacing, "");
 
               str4Replacing = "(((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))";
-              strDefQuery4LinePoly = strDefQuery;
               strDefQuery4LinePoly = strDefQuery4LinePoly.replace(str4Replacing, "");
 
               str4Replacing = " and ((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))";
