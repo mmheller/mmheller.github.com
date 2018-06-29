@@ -118,7 +118,8 @@ define([
             document.getElementById("dTotalAcresQ").innerHTML = "-";
 
             //this.PopulateUniqueQueryInterfaceValues(strQuery, divTagSource);
-            if (strQuery == "") { strQuery = "objectid > 0"; }
+            //if (strQuery == "") { strQuery = "objectid > 0"; }
+            if (strQuery == "") { strQuery = "OBJECTID > 0"; }
             app.iNonSpatialTableIndex = 0;  //
             //app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, strQuery1: strQuery, divTagSource: divTagSource }); // instantiate the  class
 

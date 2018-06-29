@@ -32,12 +32,13 @@ define([
             strQuery = strQuery.replace(" and (((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))", " and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))");
 
 
-
-            if (strQuery == "") { strQuery = "objectid > 0"; }
+            //if (strQuery == "") { strQuery = "objectid > 0"; }
+            if (strQuery == "") { strQuery = "OBJECTID > 0"; }
             var pQueryT1 = new esri.tasks.QueryTask(pFeatureLayer1.url);
             var pQuery1 = new esri.tasks.Query();
             pQuery1.returnGeometry = true;
-            pQuery1.outFields = ["objectid"];
+            pQuery1.outFields = ["OBJECTID"];
+            //pQuery1.outFields = ["objectid"];
             pQuery1.where = strQuery;
             this.strQuerySaved = strQuery
             var FLayer1, pPromises

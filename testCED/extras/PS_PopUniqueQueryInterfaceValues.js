@@ -259,7 +259,8 @@ define([
                         var strstop = ""; 
                     }
 
-                    if (this.strQuery1 == "objectid > 0") {
+                    //if (this.strQuery1 == "objectid > 0") {
+                    if (this.strQuery1 == "OBJECTID > 0") {
                         //do nothing
                     } else {
                         var strQuery2 = "Project_ID in (";

@@ -112,12 +112,12 @@ define([
               });
           },
 
+          //Phase1: function () {
+          //  //do nothing
+          //},
+
+
           Phase1: function () {
-            //do nothing
-          },
-
-
-          Phase2: function () {
               app.basemapLoaded = false;
               app.loading = dojo.byId("loadingImg");  //loading image. id
               var arrayStrMapExtent = localStorage.getItem("ls_strMapExtent").split(",");
@@ -142,7 +142,7 @@ define([
               //var strDefQuery2 = localStorage.getItem("ls_strDefQuery2");
               
 
-              var str4Replacing = "and (((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))";
+              var str4Replacing = " and (((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))";
               strDefQuery4LinePoly = strDefQuery;
               strDefQuery4LinePoly = strDefQuery4LinePoly.replace(str4Replacing, "");
 
@@ -150,6 +150,9 @@ define([
               strDefQuery4LinePoly = strDefQuery4LinePoly.replace(str4Replacing, "");
 
               str4Replacing = " and ((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))";
+              strDefQuery4LinePoly = strDefQuery4LinePoly.replace(str4Replacing, "");
+
+              str4Replacing = "((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))";
               strDefQuery4LinePoly = strDefQuery4LinePoly.replace(str4Replacing, "");
 
               var strBase_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/"

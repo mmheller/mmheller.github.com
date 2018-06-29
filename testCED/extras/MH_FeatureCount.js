@@ -55,7 +55,8 @@ define([
 
             strQuery = strQuery.replace(" and (((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))", "");
             if (strQuery == "((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))") {
-                strQuery = "(objectid > 0) ";
+                strQuery = "(OBJECTID > 0) ";
+                //strQuery = "(objectid > 0) ";
             }
             //strQuery = strQuery.replace(" and ((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))", "");
             //if (strQuery == "(SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)") {
@@ -82,18 +83,13 @@ define([
             }
 
             //Debug.writeln("mh_featurecount returnEvents BEFORE CASE" + strDispaly + ":'" + this.strHTML_ID + "'");
-
-
             document.getElementById(this.strHTML_ID).innerHTML = strDispaly;
 
             switch (this.strHTML_ID) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'
                 case "txtQueryResults":
                     disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
                     disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
-
                     this.strHTML_ID = "dTotalProjectsQ"; //this is redundant but having issues with some of the callbacks ie. GRSG pop area = Crab Creek
-                    //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"));
-                    //Debug.writeln("mh_featurecount returnEvents IN CASE" + strDispaly + ":" + this.strHTML_ID + ":" + this.strQueryStored +  " and (typeact = 'Project')");
 
                     app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalProjectsQ", "count", "project_id", " and (typeact = 'Spatial Project')");
                     break;

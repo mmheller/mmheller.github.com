@@ -135,7 +135,8 @@ Date:        Oct 2014-->
         app.iNonSpatialTableIndex = 0;  //these 3 lines populate the list values
         app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, divTagSource: null });
         app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
-        app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "objectid > 0"); //startup
+        //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "objectid > 0"); //startup
+        app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "OBJECTID > 0"); //startup
 
         if (app.map.loaded) {
             mapLoaded();
@@ -223,7 +224,8 @@ Date:        Oct 2014-->
                 var id = player.id;
                 //if ((id == "10") | (id == "11") | (id == "12") | (id == "graphicsLayer1")) { player.setVisibility(false); }
                 if ((id == "0") | (id == "1") | (id == "2") | (id == "graphicsLayer1")) {
-                    player.setDefinitionExpression("ObjectID < 0");  // set the definition expression for quick display of nothing
+                    player.setDefinitionExpression("OBJECTID < 0");  // set the definition expression for quick display of nothing
+                    //player.setDefinitionExpression("ObjectID < 0");  // set the definition expression for quick display of nothing
                     player.setVisibility(true);
                     }
             });
@@ -488,7 +490,8 @@ Date:        Oct 2014-->
             //app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, strQuery1: "objectid > 0", divTagSource: null}); // instantiate the  class
             app.PS_Uniques.divTagSource = null;
             app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
-            app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "objectid > 0"); //maybe move this to MH_FeatureCount  //clear111
+            app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "OBJECTID > 0"); //maybe move this to MH_FeatureCount  //clear111
+            //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "objectid > 0"); //maybe move this to MH_FeatureCount  //clear111
         }
 
         function PSStatSucceeded(results) {

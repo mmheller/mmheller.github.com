@@ -2,101 +2,6 @@
 //Date:        Oct 2016
 
 
-// You could either use a function similar to this or pre convert an image with for example http://dopiaza.org/tools/datauri
-// http://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript
-function imgToBase64(url, callback, imgVariable) {
-    if (!window.FileReader) {
-        callback(null);
-        return;
-    }
-    var xhr = new XMLHttpRequest();
-    xhr.onload = function () {
-        var reader = new FileReader();
-        reader.onloadend = function () {
-            imgVariable = reader.result.replace('text/xml', 'image/jpeg');
-            callback(imgVariable);
-        };
-        reader.readAsDataURL(xhr.response);
-    };
-    xhr.open('GET', url);
-    xhr.responseType = 'blob';
-    xhr.send();
-};
-
-
-function headerFooterFormatting(doc, totalPages) {
-    for (var i = totalPages; i >= 1; i--) {
-        doc.setPage(i);
-        header(doc);                //header
-        footer(doc, i, totalPages);
-        doc.page++;
-    }
-};
-
-function header(doc) {
-    doc.setFontSize(20);
-    doc.setTextColor(40);
-    doc.setFontStyle('normal');
-    if (app.base64Img1) {
-        doc.addImage(app.base64Img1, 'JPEG', pdfMargins.left, 10, 130, 20);
-    }
-    if (app.base64Img2) {
-        doc.addImage(app.base64Img2, 'JPEG', 175, 10, 80, 20);
-    }
-    if (app.base64Img3) {
-        doc.addImage(app.base64Img3, 'JPEG', 260, 10, 80, 20);
-    }
-    if (app.base64ImgMap) {
-        doc.addImage(app.base64ImgMap, 'JPEG', 350, 10, 80, 20);
-    }
-    doc.text("CED Report", pdfMargins.left + 450, 30);
-    doc.setLineCap(2);
-    doc.line(pdfMargins.left, 40, pdfMargins.width - pdfMargins.left, 40); // horizontal line
-};
-
-
-function footer(doc, pageNumber, totalPages) {
-    var str = "Page " + pageNumber + " of " + totalPages
-    doc.setFontSize(10);
-    doc.text(str, pdfMargins.left, doc.internal.pageSize.height - 20);
-};
-
-
-function printErr(err) {
-    console.log("Failed to print due to an error: " + err);
-};
-
-function startExport2PDF() {
-    var pdf = new jsPDF('p', 'pt', 'letter');
-    pdf.setFontSize(18);
-
-    if (app.base64ImgMap) {
-        //doc.addImage(app.base64ImgMap, 'JPEG', 350, 10, 80, 20);
-        //pdf.addImage(app.base64ImgMap, 'JPEG', pdfMargins.left, 50, pdfMargins.left + 604, 284 + 50);
-        pdf.addImage(app.base64ImgMap, 'JPEG', pdfMargins.left, 90, pdfMargins.left + 520, 244 + 20);
-
-        pdf.setFontSize(12);
-        pdf.text("Note: Some overlapping area efforts may not be visible in PDF map", pdfMargins.left, 400);
-        pdf.setFontSize(18);
-    }
-
-    pdf.text("Conservation Efforts Database v2.1", pdfMargins.left, 60);
-    pdf.text("Interactive Map - Summary Report", pdfMargins.left, 80);
-
-    pdf.fromHTML(document.getElementById('html-2-pdfwrapper'),
-        pdfMargins.left, // x coord
-        pdfMargins.top + 390,
-        {
-            width: pdfMargins.width// max width of content on PDF
-        }, function (dispose) {
-            headerFooterFormatting(pdf, pdf.internal.getNumberOfPages());
-        },
-        pdfMargins);
-
-    document.getElementById("ImgResultsLoading").style.visibility = "hidden";
-    pdf.save("CEDReport.pdf");
-};
-
 function disableOrEnableFormElements(strFormName, strElementType, TorF, pDocument) {
     var pform = pDocument.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
     for (var i = 0; i < pform.elements.length; i++) {
@@ -128,17 +33,6 @@ function getRanges(array) {
     }
     return ranges;
 }
-
-//function disableOrEnableFormElements(strFormName, strElementType, TorF) {
-//    var pform = document.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
-//    for (var i = 0; i < pform.elements.length; i++) {
-//        if (pform.elements[i].type == strElementType) {
-//            strID = pform.elements[i].id;
-//            document.getElementById(strID).disabled = TorF;
-//        }
-//    }
-//}
-
 
 define([
   "dojo/_base/declare",
@@ -210,7 +104,8 @@ define([
 
             strQuery = strQuery.replace(" and (((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))", "");
             if (strQuery == "((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))") {
-                strQuery = "objectid > 0";
+                strQuery = "OBJECTID  > 0";
+                //strQuery = "objectid > 0";
             }
             //strQuery = strQuery.replace(" and ((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))", "");
             //if (strQuery == "(SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)") {
@@ -244,25 +139,25 @@ define([
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Office", "dNumberOfRecordsbyOffice", '<b>"NUMBER of EFFORTS and TOTAL ACRES by OFFICE"</b><br>{0}', "show both-commas-no-round-decimal", ""]);
 
                 ////arrayQuery.push(["0", strQuery, "Project_ID", "count", "SubActivity", "dNumofDistinctSubActivities", '<b>Number of Unique Sub-Activities:</b> {0}', "countOfGroupBy", ""]);
-                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "SubActivity", "dNumberOfRecordsbySubActivity", '<p><b>"NUMBER of EFFORTS and TOTAL ACRES by SUBACTIVITY"</b><br>{0}</p>', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "SubActivity", "dNumberOfRecordsbySubActivity", '<b>"NUMBER of EFFORTS and TOTAL ACRES by SUBACTIVITY"</b><br>{0}', "show both-commas-no-round-decimal", ""]);
 
                 arrayQuery.push(["9", strQuery2, "Project_ID", "count", "State", "dNumberofOverlappingStates", '<b>"NUMBER of OVERLAPPING STATES"</b><br>{0}', "show both", ""]);
-                arrayQuery.push(["11", strQuery2, "Project_ID,GIS_Acres", "count,sum", "State", "dGISStates", '<b>"NUMBER of EFFORTS and TOTAL ACRES by STATE"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["11", strQuery2, "Project_ID,GIS_Acres", "count,sum", "State", "dGISStates", '<b>"NUMBER of EFFORTS and TOTAL ACRES by STATE"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
                 arrayQuery.push(["3", strQuery2, "Project_ID", "count", "WAFWA_Zone", "dNumberofOverlappingMngmtZones", '<b>"NUMBER of OVERLAPPING MANAGEMENT ZONES"</b><br>{0}', "show both", ""]);
-                arrayQuery.push(["8", strQuery2, "Project_ID", "count", "Pop_Name", "dNumberofOverlappingPopAreas", '<p><b>"NUMBER of OVERLAPPING POPULATION AREAS"</b>{0}</p>', "show both", ""]);
+                arrayQuery.push(["8", strQuery2, "Project_ID", "count", "Pop_Name", "dNumberofOverlappingPopAreas", '<b>"NUMBER of OVERLAPPING POPULATION AREAS"</b><br>{0}', "show both", ""]);
 
-                arrayQuery.push(["13", strQuery2, "Project_ID,GIS_Acres", "count,sum", "RR_class_n", "dGISRMZ", '<b>"RESILIENCE and RESISTANCE"<br>(Total Number of Efforts and Associated Acres Included in Each Class - NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b> \n<br>;{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["14", strQuery2 + " and Symbol <> 'Unknown'", "Project_ID,GIS_Acres", "count,sum", "Symbol", "dGISAB", '<b>"CUMULATIVE PERCENT of GRSG POPULATION by MANAGEMENT ZONE"<br>(Total Number of Efforts and Associated Acres Included in Each Class - NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b> \n<br>;{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["15", strQuery2, "Project_ID,GIS_Acres", "count,sum", "class", "dGISBD", '<b>"GRSG BREEDING HABITAT PROBABILITY by MANAGEMENT ZONE"<br>(Total Number of Efforts and Associated Acres Included in Each Class - NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b>\n<br>;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["13", strQuery2, "Project_ID,GIS_Acres", "count,sum", "RR_class_n", "dGISRMZ", '<b>"RESILIENCE and RESISTANCE"<br>(Total Number of Efforts and Associated Acres Included in Each Class - NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["14", strQuery2 + " and Symbol <> 'Unknown'", "Project_ID,GIS_Acres", "count,sum", "Symbol", "dGISAB", '<b>"CUMULATIVE PERCENT of GRSG POPULATION by MANAGEMENT ZONE"<br>(Total Number of Efforts and Associated Acres Included in Each Class - NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["15", strQuery2, "Project_ID,GIS_Acres", "count,sum", "class", "dGISBD", '<b>"GRSG BREEDING HABITAT PROBABILITY by MANAGEMENT ZONE"<br>(Total Number of Efforts and Associated Acres Included in Each Class - NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b>\n<br>{0}', "show both-commas-no-round-decimal", ""]);
                 arrayQuery.push(["16", strQuery2 + " and Symbol <> 'N/A'", "Project_ID,GIS_Acres", "count,sum", "Symbol", "dGISBP", '<b>"GRSG BREEDING HABITAT PROBABILITY intersected with RESILIENCE and RESISTANCE CATEGORIES by MANAGEMENT ZONE"<br>(Total Number of Efforts and Associated Acres Included in Each Class - NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)<br>(Breeding Habitat - R&R Value)</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["17", strQuery2, "Project_ID,GIS_Acres", "count,sum", "EIS_HAB", "dGISGHMA", '<b>"NUMBER of TOTAL ACRES BY PROPOSED GRSG GENERAL HABITAT MANAGEMENT AREAS"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["18", strQuery2, "Project_ID,GIS_Acres", "count,sum", "Mgmt_zone", "dGISMZ", '<b>"NUMBER of EFFORTS and TOTAL ACRES by WAFWA MANAGEMENT ZONES"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["19", strQuery2, "Project_ID,GIS_Acres", "count,sum", "EIS_HAB", "dGISPHMA", '<b>"NUMBER of TOTAL ACRES BY PROPOSED GRSG PRIORITY HABITAT MANAGEMENT AREAS"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["20", strQuery2, "Project_ID,GIS_Acres", "count,sum", "POPULATION", "dGISPoP", '<b>"NUMBER of EFFORTS and TOTAL ACRES by GRSG POPULATION AREAS"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["17", strQuery2, "Project_ID,GIS_Acres", "count,sum", "EIS_HAB", "dGISGHMA", '<b>"NUMBER of TOTAL ACRES BY PROPOSED GRSG GENERAL HABITAT MANAGEMENT AREAS"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["18", strQuery2, "Project_ID,GIS_Acres", "count,sum", "Mgmt_zone", "dGISMZ", '<b>"NUMBER of EFFORTS and TOTAL ACRES by WAFWA MANAGEMENT ZONES"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["19", strQuery2, "Project_ID,GIS_Acres", "count,sum", "EIS_HAB", "dGISPHMA", '<b>"NUMBER of TOTAL ACRES BY PROPOSED GRSG PRIORITY HABITAT MANAGEMENT AREAS"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["20", strQuery2, "Project_ID,GIS_Acres", "count,sum", "POPULATION", "dGISPoP", '<b>"NUMBER of EFFORTS and TOTAL ACRES by GRSG POPULATION AREAS"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
                 arrayQuery.push(["21", strQuery2 + " and Symbol <> 'N/A'", "Project_ID,GIS_Acres", "count,sum", "Symbol", "dGISIDX", '<b>"NUMBER of EFFORTS and TOTAL ACRES by RESILIENCE and RESISTANCE AND POPULATION INDEX HIGH/LOW DENSITY CLASS"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["10", strQuery2, "Project_ID,GIS_Acres", "count,sum", "ADMIN_AGEN", "dGISSMA", '<b>"NUMBER of EFFORTS and TOTAL ACRES by SURFACE MANAGEMENT AGENCY"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["10", strQuery2, "Project_ID,GIS_Acres", "count,sum", "ADMIN_AGEN", "dGISSMA", '<b>"NUMBER of EFFORTS and TOTAL ACRES by SURFACE MANAGEMENT AGENCY"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
 
-                arrayQuery.push(["22", strQuery2, "GIS_Acres", "sum", "", "dGISPACSum", '<b>"TOTAL ACRES within GRSG PRIORITY AREAS for CONSERVATION (PACs)"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;<i>{0}  acres</i>', "commas-no-round-decimal", ""]);
+                arrayQuery.push(["22", strQuery2, "GIS_Acres", "sum", "", "dGISPACSum", '<b>"TOTAL ACRES within GRSG PRIORITY AREAS for CONSERVATION (PACs)"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br><i>{0}  acres</i>', "commas-no-round-decimal", ""]);
             } else {
                 arrayQuery.push(["12", "OBJECTID > 0", "LastDataProviderEdit", "Max", "", "dFPMaxLastDataProviderEdit", '<font size="1px"><b>Last Approved Data Provider Edit:</b> {0}</font>', "convert2date", ""]);
                 arrayQuery.push(["12", "OBJECTID > 0", "ProcDate", "Max", "", "dFPMaxLastPubProc", '<font size="1px"><b>Last Data Refresh:</b> {0}</font>', "convert2date", ""]);
@@ -272,61 +167,6 @@ define([
             this.m_arrayQuery = arrayQuery;
             this.SendQuery(arrayQuery, 0)
         },
-
-        StartPrinting: function (pMap) {
-            esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
-            esriConfig.defaults.io.corsEnabledServers.push("https://services.arcgis.com")
-
-            console.log("Starting printting map to .jpg");
-            
-            esriConfig.defaults.io.corsEnabledServers.push("https://sampleserver6.arcgisonline.com")
-
-            var oWid = pMap.width;
-            var oHgt = pMap.height;
-
-            //var printTask = new PrintTask('https://sampleserver6.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task');
-            var printTask = new PrintTask('https://utility.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task');
-            //var printTask = new PrintTask('https://sampleserver6.arcgisonline.com/arcgis/rest/services/ExportWebMap/GPServer/Export_Web_Map');
-            var template = new PrintTemplate();
-            this.imgHeight = (740 / oWid) * oHgt;
-            template.exportOptions = {
-                width: 1542,
-                height: (1542 / oWid) * oHgt,
-                dpi: 150
-            };
-
-            //template.exportOptions = {
-            //    width: 1542,
-            //    height: (1542 / oWid) * oHgt,
-            //    dpi: 200
-            //};
-
-            //template.format = "png32";
-            //template.format = "jpg";
-            template.format = "JPG";
-            template.layout = "MAP_ONLY";
-            template.preserveScale = false;
-            template.showAttribution = false;
-            var params = new PrintParameters();
-            params.map = pMap;
-            params.template = template;
-
-            printTask.execute(params, this.printResult, this.printErr);
-        },
-
-
-        printResult: function (rsltURL) {
-            app.base64ImgMap = null;
-            imgToBase64(rsltURL.url, function (base64) {
-                app.base64ImgMap = base64;                ////waiting for the callback to change the .jpg to base64 string,  base64 string is required for the PDF exporter
-                
-                if (app.base64ImgMap.indexOf("data:;base64,/9") >= 0) {     //// this is a work around, for some reason the 64base converter is sometimes not including the image/jpeg prefix
-                    app.base64ImgMap = app.base64ImgMap.replace("data:;base64,/9", "data:image/jpeg;base64,/9");
-                }
-                startExport2PDF();
-            });
-        },
-        
 
         SendQuery: function (arrayQuery, iarrayQueryIndex) {
             this.m_iarrayQueryIndex = iarrayQueryIndex;
@@ -503,13 +343,17 @@ define([
                                         var iTempNumber = Number(strText);
                                         iTempNumber = Math.round(iTempNumber);
                                         if (iTempNumber >= 1000) {
-                                            iTempNumber = Math.round(iTempNumber);
                                             strText = iTempNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                        } else {
+                                            strText = iTempNumber.toString()
                                         }
                                         if (attrNames[0] == an) {
                                             strText += " efforts, ";
                                         } else if (attrNames[1] == an) {
-                                            strText += "acres</br>";//\n<br>
+                                            if (strText == "NaN") {
+                                                strText = "N/A"
+                                            }
+                                            strText += " acres</br>";//\n<br>
                                         }
 
                                         //strText = "<i>" + strText + "</i>"
@@ -517,10 +361,14 @@ define([
                                     } else if ((strVarType == "commas-no-round-decimal") & (an == "genericstat")) {
                                         var iTempNumber = Number(strText);
                                         iTempNumber = Math.round(iTempNumber);
-                                        //strText = iTempNumber.toCurrencyString().replace("$", "");
                                         if (iTempNumber >= 1000) {
                                             strText = iTempNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-                                            }
+                                        } else {
+                                            strText = iTempNumber.toString();
+                                        }
+                                        if (strText == "NaN") {
+                                            strText = "N/A"
+                                        }
                                         values.push(strText);
 
                                     } else if (strVarType == "convert2date") {
@@ -532,11 +380,12 @@ define([
                                         strText = "(" + strText + ")<br>";  //\n<br>
                                         values.push(strText);
                                     } else if (attrNames.length >= 2) {
-
                                             var iTempNumber = Number(strText);
                                             iTempNumber = Math.round(iTempNumber);
                                             if (iTempNumber >= 1000) {
                                                 strText = iTempNumber.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                            } else {
+                                                strText = iTempNumber.toString()
                                             }
 
                                         if (attrNames[0] == an) {
@@ -544,6 +393,9 @@ define([
                                             values.push(strText + " efforts, ");
                                         } else {
                                             //values.push(strTextTemp + ", " + an + ":" + strText);
+                                            if (strText == "NaN") {
+                                                strText = "N/A"
+                                            }
                                             values.push(strText + " acres");
                                         }
                                     }
@@ -600,6 +452,10 @@ define([
                         document.getElementById("ImgResultsLoading").style.visibility = "hidden";
                         disableOrEnableFormElements("dropdownForm", 'select-one', false, document); //disable/enable to avoid user clicking query options during pending queries
                         disableOrEnableFormElements("dropdownForm", 'button', false, document);  //disable/enable to avoid user clicking query options during pending queries
+                    }
+
+                    if (arrayQuery.length > 3) {
+                        app.gMakeCHARTS.StartCHARTING();
                     }
                 }
             }
