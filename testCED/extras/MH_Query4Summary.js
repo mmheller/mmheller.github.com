@@ -104,7 +104,7 @@ define([
 
             strQuery = strQuery.replace(" and (((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))", "");
             if (strQuery == "((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))") {
-                strQuery = "OBJECTID  > 0";
+                strQuery = "OBJECTID > 0";
                 //strQuery = "objectid > 0";
             }
             //strQuery = strQuery.replace(" and ((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))", "");
@@ -118,7 +118,6 @@ define([
                 arrayQuery.push(["12", "OBJECTID > 0", "LastDataProviderEdit", "Max", "", "dMaxLastDataProviderEdit", '<b>LAST APPROVED DATA PROVIDER EDIT:</b> {0}', "convert2date", ""]);
                 arrayQuery.push(["12", "OBJECTID > 0", "ProcDate", "Max", "", "dMaxLastPubProc", '<b>LAST DATA REFRESH:</b> {0}', "convert2date", ""]);
                 
-
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "", "dTotalAcresQ2", '<b>ALL EFFORTS:</b> {0}', "commas-no-round-decimal", ""]);
 
                 arrayQuery.push(["11", strQuery2, "GIS_Acres", "sum", "", "dTotalCalcAcresQ2", '{0} GIS calculated acres', "commas-no-round-decimal", ""]);
@@ -126,6 +125,9 @@ define([
                 arrayQuery.push(["0", strQuery + " and (typeact = 'Spatial Project')", "Project_ID,totalacres", "count,sum", "", "dTotalProjects", '<b>SPATIAL PROJECTS:</b> {0}', "", ""]);
                 arrayQuery.push(["0", strQuery + " and (typeact = 'Non-Spatial Project')", "Project_ID,totalacres", "count,sum", "", "dTotalProjectsNon", '<b>NON-SPATIAL PROJECTS:</b> {0}', "", ""]);
                 arrayQuery.push(["0", strQuery + " and (typeact = 'Non-Spatial Plan')", "Project_ID,totalacres", "count,sum", "", "dTotalPlans", '<b>NON-SPATIAL PLANS:</b> {0}', "", ""]);
+
+
+                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Start_Year", "dNumberOfRecordsbyStartYear", '<b>"NUMBER of EFFORTS and TOTAL ACRES by Effort Start Year"</b><br>{0}', "show both-commas-no-round-decimal", ""]);
                 
                 //////arrayQuery.push(["0", strQuery, "Project_ID", "count", "Implementing_Party", "dNumofDistinctImpParties", '<b>Number of Unique Implementing Parties:</b> {0}', "countOfGroupBy", ""]);
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Implementing_Party", "dNumberOfRecordsbyImpParty", '<b>"NUMBER of EFFORTS AND TOTAL ACRES by IMPLEMENTING PARTY"</b><br>{0}', "show both-commas-no-round-decimal", ""]);
@@ -465,13 +467,8 @@ define([
         err: function (err) {
             console.log("Failed to get stat results due to an error: " + this.app.gQuerySummary.iTempIndexSubmit + " " + this.app.gQuerySummary.iTempIndexResults, err);
             this.app.pFC.numberOfErrors += 1;
-
             if (this.app.pFC.numberOfErrors < 5) {
-                
-                //this.app.pFC.GetCountOfFCDef_ShowText(this.app.pFC.strQueryStored, this.app.pFC.strURLStored, "txtQueryResults", "count", "project_id");
-
                 this.app.pFC.gQuerySummary.SendQuery(this.app.pFC.gQuerySummary.m_arrayQuery, this.app.pFC.gQuerySummary.m_iarrayQueryIndex + 1)
-
             }
         }
     }

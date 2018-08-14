@@ -28,8 +28,18 @@ define([
     }
 
     function sortFunction(a, b) {
-        var textA = a.T.toUpperCase();
-        var textB = b.T.toUpperCase();
+        //var textA = a.T.toUpperCase();
+        //var textB = b.T.toUpperCase();
+
+        if (isNaN(a.T)) {
+            var textA = a.T.toUpperCase();
+            var textB = b.T.toUpperCase();
+        }
+        else {
+            var textA = a.T;
+            var textB = b.T;
+        }
+
         return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
     }
 
@@ -91,28 +101,15 @@ define([
             var resultFeatures = results.features;
             var strdivTagSourceID = "";
 
-            //console.log("111returnEvents:this.divTagSource.srcElement ID = " + this.divTagSource.srcElement.id);
-           
-            //if (this.divTagSource != undefined) {
-            //    if (this.divTagSource.target != undefined) {
-            //        console.log("122 returnEvents:this.divTagSource.target ID = " + this.divTagSource.target.id);
-            //        var tempstop = "";
-            //        this.divTagSource = null;
-            //    }
-            //} else {
-            //    console.log("1returnEvents:this.divTagSource is undefined:" + (this.divTagSource == undefined));
-            //}
-
             if ((this.divTagSource != "") & (this.divTagSource != null)) {
-                console.log("111returnEvents:this.divTagSource.target = " + this.divTagSource.target.id);
                 strdivTagSourceID = this.divTagSource.target.id;
             }
-            console.log("4returnEvents");
+            
             var strdivTag4ResultsID = "";
             if (this.divTag4Results != null) {
                 strdivTag4ResultsID = this.divTag4Results.id;
             }
-            console.log("5returnEvents");
+            
 
             if ((resultFeatures != null) || (resultFeatures != undefined)) {
                 if (resultFeatures.length > 0) {
@@ -140,8 +137,15 @@ define([
                                     }
                                     blnAdd2Dropdown = true;
                                     dojo.forEach(strRemoveStrings, function (str2remove) {  //check to see if should add to the values for the dropdown list
-                                        if (strText.toString != undefined) {
-                                            if (str2remove.toLowerCase() == strText.toString().toLowerCase()) { blnAdd2Dropdown = false; }
+                                        if (strText.toString != undefined)   {
+                                            if (isNaN(strText)){
+                                                if (strText.toString() == "null or undefined") {
+                                                    blnAdd2Dropdown = false;
+                                                }
+                                                else if (str2remove.toLowerCase() == strText.toString().toLowerCase()) {
+                                                    blnAdd2Dropdown = false;
+                                                }
+                                            }
                                         }
                                         else { console.log("error with: if (strValue.toString != undefined) {"); }
                                     });
@@ -279,15 +283,25 @@ define([
                 case "Prj_Status_Desc":
                     this.qry_SetUniqueValuesOf("Implementing_Party", "IP_ID", document.getElementById("ddlImpParty"), this.strQuery1);
                     break;
+
                 case "Implementing_Party":
+                    this.qry_SetUniqueValuesOf("Start_Year", "Start_Year", document.getElementById("ddlStartYear"), this.strQuery1);
+                    break;
+
+                case "Start_Year":
                     this.qry_SetUniqueValuesOf("Office", "FO_ID", document.getElementById("ddlOffice"), this.strQuery1);
                     break;
                 case "Office":
                     this.qry_SetUniqueValuesOf("Activity", "ACT_ID", document.getElementById("ddlActivity"), this.strQuery1);
                     break;
                 case "Activity":   // this project_ID query needs to happen here to make sure the query for the related tables works
+                    this.qry_SetUniqueValuesOf("SubActivity", "SACT_ID", document.getElementById("ddlSubActivity"), this.strQuery1);
+                    break;
+
+                case "SubActivity":   // this project_ID query needs to happen here to make sure the query for the related tables works
                     this.qry_SetUniqueValuesOf("Project_ID", "Project_ID", null, this.strQuery1);
                     break;
+
                 case "Project_ID":
                     this.iNonSpatialTableIndex = 9;
                     this.qry_SetUniqueValuesOf("State", "ST_ID", document.getElementById("ddlState"), this.strQuery1);

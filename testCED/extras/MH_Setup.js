@@ -17,7 +17,9 @@ function hideLoading(error) {
 function AllFiltersClear() {
     var strddlMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].value;
     var strddlEntry = document.getElementById("ddlEntry").options[document.getElementById("ddlEntry").selectedIndex].value;
+    var strddlStartYear = document.getElementById("ddlStartYear").options[document.getElementById("ddlStartYear").selectedIndex].value;
     var strActivity = document.getElementById("ddlActivity").options[document.getElementById("ddlActivity").selectedIndex].value;  //get dropdown menu selection
+    var strSubActivity = document.getElementById("ddlSubActivity").options[document.getElementById("ddlSubActivity").selectedIndex].value;  //get dropdown menu selection
     var strImpParty = document.getElementById("ddlImpParty").options[document.getElementById("ddlImpParty").selectedIndex].value;  //get dropdown menu selection
     var strOffice = document.getElementById("ddlOffice").options[document.getElementById("ddlOffice").selectedIndex].value;  //get dropdown menu selection
     var strState = document.getElementById("ddlState").options[document.getElementById("ddlState").selectedIndex].value;  //get dropdown menu selection
@@ -28,7 +30,9 @@ function AllFiltersClear() {
 
     if (((strddlMatrix == "All") | (strddlMatrix == "99")) &
                  (strddlEntry == "99") &
+                 (strddlStartYear == "99") &
                  (strActivity == "99") &
+                 (strSubActivity == "99") &
                  (strImpParty == "99") &
                  (strOffice == "99") &
                  (strState = "99") &
@@ -107,7 +111,7 @@ define([
 
               this.gCED_PP_point4FeatureTable = new FeatureLayer(app.strTheme1_URL + "0", {
                   id: "00", mode: FeatureLayer.MODE_ONDEMAND, visible: false,
-                  outFields: ["Project_ID", "SourceFeatureType", "Project_Name", "Project_Status", "Activity", "SubActivity", "Implementing_Party", "Office", "Date_Created", "Last_Updated", "Date_Approved", "TypeAct", "TotalAcres", "TotalMiles"]
+                  outFields: ["Project_ID", "SourceFeatureType", "Project_Name", "Project_Status", "Activity", "SubActivity", "Implementing_Party", "Office", "Date_Created", "Last_Updated", "Date_Approved", "Start_Year", "Finish_Year", "TypeAct", "TotalAcres", "TotalMiles"]
                   //outFields: ["Project_ID", "SourceFeatureType", "Project_Name", "Entry_Type", "Activity", "SubActivity", "Implementing_Party", "Office", "Date_Created", "Last_Updated", "Date_Approved", "TypeAct", "TotalAcres", "TotalMiles"]
               });
 
@@ -248,7 +252,7 @@ define([
                   "featureLayer": this.gCED_PP_point4FeatureTable,
                   "outFields": [
                     "Project_ID", "TypeAct", "Project_Name", "Activity", "SubActivity", "Implementing_Party", "Office", "Date_Created",
-                    "Last_Updated", "Date_Approved", "TotalAcres", "TotalMiles", "SourceFeatureType"
+                    "Last_Updated", "Date_Approved", "Start_Year", "Finish_Year", "TotalAcres", "TotalMiles", "SourceFeatureType"
                   ],
                   fieldInfos: [
                     { name: 'Project_ID', alias: 'ID'},
@@ -261,6 +265,8 @@ define([
                     { name: 'Date_Created', alias: 'Date Recorded', },
                     { name: 'Last_Updated', alias: 'Recorded Update', },
                     { name: 'Date_Approved', alias: 'Date Approved', },
+                    { name: 'Start_Year', alias: 'Start Year', },
+                    { name: 'Finish_Year', alias: 'Finish Year', },
                     { name: 'TotalAcres', alias: 'Acres', },
                     { name: 'TotalMiles', alias: 'Miles', },
                     { name: 'SourceFeatureType', alias: 'Source', }
@@ -491,4 +497,5 @@ define([
 
   }
 );
+
 

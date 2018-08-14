@@ -119,7 +119,9 @@ Date:        Oct 2014-->
         on(dom.byId("btn_TextSummary"), "click", btn_TextSummary_click);
         on(dom.byId("ddlMatrix"), "change", ddlMatrix_Change);
         on(dom.byId("ddlEntry"), "change", ddlMatrix_Change);
+        on(dom.byId("ddlStartYear"), "change", ddlMatrix_Change);
         on(dom.byId("ddlActivity"), "change", ddlMatrix_Change);
+        on(dom.byId("ddlSubActivity"), "change", ddlMatrix_Change);
         on(dom.byId("ddlImpParty"), "change", ddlMatrix_Change);
         on(dom.byId("ddlOffice"), "change", ddlMatrix_Change);
         on(dom.byId("ddlState"), "change", ddlMatrix_Change);
@@ -346,7 +348,9 @@ Date:        Oct 2014-->
             document.getElementById("txtQueryResults").innerHTML = "";
             var strddlMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].value;
             var strddlEntry = document.getElementById("ddlEntry").options[document.getElementById("ddlEntry").selectedIndex].value;
+            var strStartYear = document.getElementById("ddlStartYear").options[document.getElementById("ddlStartYear").selectedIndex].value;
             var strActivity = document.getElementById("ddlActivity").options[document.getElementById("ddlActivity").selectedIndex].value;  //get dropdown menu selection
+            var strSubActivity = document.getElementById("ddlSubActivity").options[document.getElementById("ddlSubActivity").selectedIndex].value;  //get dropdown menu selection
             var strImpParty = document.getElementById("ddlImpParty").options[document.getElementById("ddlImpParty").selectedIndex].value;  //get dropdown menu selection
             var strOffice = document.getElementById("ddlOffice").options[document.getElementById("ddlOffice").selectedIndex].value;  //get dropdown menu selection
             var strState = document.getElementById("ddlState").options[document.getElementById("ddlState").selectedIndex].value;  //get dropdown menu selection
@@ -355,7 +359,9 @@ Date:        Oct 2014-->
 
             if (((strddlMatrix == "All") | (strddlMatrix == "99")) &
                  (strddlEntry == "99") &
+                 (strStartYear == "99") &
                  (strActivity == "99") &
+                 (strSubActivity == "99") &
                  (strImpParty == "99") &
                  (strOffice == "99") &
                  (strState == "99") &
@@ -388,10 +394,22 @@ Date:        Oct 2014-->
                 strQuery += "Project_Status = " + strddlEntry + "";
                 app.strQueryLabelText += "Entry Type = " + document.getElementById("ddlEntry").options[document.getElementById("ddlEntry").selectedIndex].text + ", ";
             }
+
+            if (strStartYear !== "99") {
+                if (strQuery !== "") { strQuery += " and "; }
+                strQuery += "Start_Year = " + strStartYear + "";
+                app.strQueryLabelText += "Start Year = " + document.getElementById("ddlStartYear").options[document.getElementById("ddlStartYear").selectedIndex].text + ", ";
+            }
+
             if (strActivity !== "99") {  //            if ((strActivity !== "All") & (strActivity != 99)) {
                 if (strQuery !== "") { strQuery += " and "; }
                 strQuery += "ACT_ID = " + strActivity + "";
                 app.strQueryLabelText += "Activity Type = " + document.getElementById("ddlActivity").options[document.getElementById("ddlActivity").selectedIndex].text + ", ";
+            }
+            if (strSubActivity !== "99") {  //            if ((strActivity !== "All") & (strActivity != 99)) {
+                if (strQuery !== "") { strQuery += " and "; }
+                strQuery += "SACT_ID = " + strSubActivity + "";
+                app.strQueryLabelText += "SubActivity Type = " + document.getElementById("ddlSubActivity").options[document.getElementById("ddlSubActivity").selectedIndex].text + ", ";
             }
             if (strImpParty !== "99") {    //            if (strImpParty !== "All") {
                 if (strQuery !== "") { strQuery += " and "; }
@@ -505,7 +523,12 @@ Date:        Oct 2014-->
         function btn_TextSummary_click() {
             var strddlMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].value;
             var strddlEntry = document.getElementById("ddlEntry").options[document.getElementById("ddlEntry").selectedIndex].value;
+
+            var strddlStartYear = document.getElementById("ddlStartYear").options[document.getElementById("ddlStartYear").selectedIndex].value;
             var strActivity = document.getElementById("ddlActivity").options[document.getElementById("ddlActivity").selectedIndex].value;  //get dropdown menu selection
+
+            var strSubActivity = document.getElementById("ddlSubActivity").options[document.getElementById("ddlSubActivity").selectedIndex].value;  //get dropdown menu selection
+
             var strImpParty = document.getElementById("ddlImpParty").options[document.getElementById("ddlImpParty").selectedIndex].value;  //get dropdown menu selection
             var strOffice = document.getElementById("ddlOffice").options[document.getElementById("ddlOffice").selectedIndex].value;  //get dropdown menu selection
             var strState = document.getElementById("ddlState").options[document.getElementById("ddlState").selectedIndex].value;  //get dropdown menu selection
@@ -519,8 +542,17 @@ Date:        Oct 2014-->
             if (strddlEntry !== "99") {
                 strQuery += "&ET=" + strddlEntry; //entry_type
             }
+
+            if (strddlEntry !== "99") {
+                strQuery += "&StartYear=" + strddlStartYear; //entry_type
+            }
+
             if (strActivity !== "99") {
                 strQuery += "&ACT=" + strActivity; //activity
+            }
+
+            if (strSubActivity !== "99") {
+                strQuery += "&SubACT=" + strSubActivity; //activity
             }
             if (strImpParty !== "99") {
                 strQuery += "&IP=" + strImpParty; //implementing_party
@@ -607,8 +639,18 @@ Date:        Oct 2014-->
                         <option value="99">All</option>
                     </select><br /><br />
 
+                    <font size="2"><u>Start Year:</u></font><br />
+                    <select id="ddlStartYear" class="selectClass" disabled=disabled>
+                        <option value="99">All</option>
+                    </select><br /><br />
+
                     <font size="2"><u>Activity:</u></font><br />
                     <select id="ddlActivity" class="selectClass" disabled>
+                        <option value="99">All</option>
+                    </select><br /><br />
+
+                    <font size="2"><u>SubActivity:</u></font><br />
+                    <select id="ddlSubActivity" class="selectClass" disabled=disabled>
                         <option value="99">All</option>
                     </select><br /><br />
 
@@ -643,11 +685,11 @@ Date:        Oct 2014-->
                 <br />
 
                 <div id="Div1" style="font-size:12px;">
-                    <input type="checkbox" id="cbx_zoom" checked=checked checked=checked value="zoomzoom?"//>Zoom to results
+                    <input type="checkbox" id="cbx_zoom" checked="checked" value="zoomzoom?">Zoom to results
                 </div>
 
                 <div id="txtQueryResults" style="font-size:12px;"></div>
-                </br>
+                <br>
 
                 <center><h2>Search Projects and Plans</h2></center>
                 <div id="autocompleteSearch">

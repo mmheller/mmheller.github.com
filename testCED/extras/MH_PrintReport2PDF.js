@@ -125,6 +125,10 @@ function startExport2PDF() {
                     AddChartImage2PDF(pdf, "dNumberOfRecordsbySubActivity_COLUMNCHART", renderer.pdf.internal.pages.length - 1, renderer.pdf.tableHeaderRow[0][1] + 25);
                     return true;                      // true = "handled elsewhere, bypass text extraction"
                 },
+                '#dNumberOfRecordsbyStartYear_COLUMNCHART': function (element, renderer) {
+                    AddChartImage2PDF(pdf, "dNumberOfRecordsbyStartYear_COLUMNCHART", renderer.pdf.internal.pages.length - 1, renderer.pdf.tableHeaderRow[0][1] + 25);
+                    return true;                      // true = "handled elsewhere, bypass text extraction"
+                },
                 '#dNumberOfRecordsbyOffice_COLUMNCHART': function (element, renderer) {
                     AddChartImage2PDF(pdf, "dNumberOfRecordsbyOffice_COLUMNCHART", renderer.pdf.internal.pages.length - 1, renderer.pdf.tableHeaderRow[0][1] + 25);
                     return true;                      // true = "handled elsewhere, bypass text extraction"
