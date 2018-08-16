@@ -83,9 +83,11 @@
 	font-size: 13px;
 	font-weight: normal;
 	line-height: 16px;
-	padding: 10px;
+	padding: 5px;
 	text-align: right;
 	font-family: Arial;
+    vertical-align: bottom;
+    
 }
 
 .page-break {
@@ -268,6 +270,26 @@
         -webkit-box-shadow: 0px 0px 8px #7bc1f7;
     }*/
  
+        
+
+    .divOpenStats {
+        text-align: left;
+        position: relative;
+        padding-top: 20px;
+    }
+
+    #imageReport {
+          margin-left: 5px;
+        position: absolute;
+        bottom: 0;
+      }
+
+     #txtReport {
+        margin-left: 30px;
+        position: absolute;
+        bottom: 0;
+      }
+
     .selectClass {
        font-size: 12px;
        font-family: 'Tahoma', cursive;
@@ -294,7 +316,7 @@
 
      .dijitAccordionContainer
      {
-         height:calc(100% - 165px);
+         height:calc(100% - 170px);
      }
      
 
