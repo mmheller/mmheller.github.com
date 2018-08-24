@@ -104,6 +104,8 @@ function AddChartImage2PDF(doc, strElementID, iPageNumber, iTop) {
 function startExport2PDF() {
     var pdf = new jsPDF('p', 'pt', 'letter');
     pdf.setFontSize(18);
+    pdf.setFont("helvetica");  //not sure this is doing anything
+    pdf.setFontType("normal");
 
     if (app.base64ImgMap) {
         pdf.addImage(app.base64ImgMap, 'JPEG', pdfMargins.left, 90, pdfMargins.left + 520, 244 + 20);
@@ -114,12 +116,69 @@ function startExport2PDF() {
 
     pdf.text("Conservation Efforts Database v2.1", pdfMargins.left, 60);
     pdf.text("Interactive Map - Summary Report", pdfMargins.left, 80);
- 
-    pdf.fromHTML(document.getElementById('html-2-pdfwrapper'),
+
+    
+    $("#dREPORTGENERATED").css("font-family", "helvetica");// change property value
+     $("#dTotalAcresQ2").css("font-family", "helvetica");// change property value
+     $("#dTotalCalcAcresQ2").css("font-family", "helvetica");// change property value
+     $("#dTotalProjects").css("font-family", "helvetica");// change property value
+     $("#dTotalProjectsNon").css("font-family", "helvetica");// change property value
+     $("#dTotalPlans").css("font-family", "helvetica");// change property value
+     $("#dFilterParameters").css("font-family", "helvetica");// change property value
+     $("#dMaxLastDataProviderEdit").css("font-family", "helvetica");// change property value
+     $("#dMaxLastPubProc").css("font-family", "helvetica");// change property value
+
+    $("#dNumberOfRecordsbyImpParty").css("font-family", "helvetica");// change property value
+    $("#dNumberOfRecordsbyImpParty").css("font-size", "10px");// original value
+    $("#dNumberOfRecordsbyStartYear").css("font-family", "helvetica");// change property value
+    $("#dNumberOfRecordsbyStartYear").css("font-size", "10px");// original value
+    $("#dNumberOfRecordsbyActivity").css("font-family", "helvetica");// change property value
+    $("#dNumberOfRecordsbyActivity").css("font-size", "10px");// original value
+
+    $("#dNumberOfRecordsbySubActivity").css("font-family", "helvetica");// change property value
+    $("#dNumberOfRecordsbySubActivity").css("font-size", "10px");// original value
+    $("#dNumberOfRecordsbyOffice").css("font-family", "helvetica");// change property value
+    $("#dNumberOfRecordsbyOffice").css("font-size", "10px");// original value
+    $("#dNumberofOverlappingStates").css("font-family", "helvetica");// change property value
+    $("#dNumberofOverlappingStates").css("font-size", "10px");// original value
+    $("#dGISStates").css("font-family", "helvetica");// change property value
+    $("#dGISStates").css("font-size", "10px");// original value
+    $("#dNumberofOverlappingPopAreas").css("font-family", "helvetica");// change property value
+    $("#dNumberofOverlappingPopAreas").css("font-size", "10px");// original value
+    $("#dGISPoP").css("font-family", "helvetica");// change property value
+    $("#dGISPoP").css("font-size", "10px");// original value
+    $("#dNumberofOverlappingMngmtZones").css("font-family", "helvetica");// change property value
+    $("#dNumberofOverlappingMngmtZones").css("font-size", "10px");// original value
+    $("#dGISMZ").css("font-family", "helvetica");// change property value
+    $("#dGISMZ").css("font-size", "10px");// original value
+    $("#dGISSMA").css("font-family", "helvetica");// change property value
+    $("#dGISSMA").css("font-size", "10px");// original value
+    $("#dGISGHMA").css("font-family", "helvetica");// change property value
+    $("#dGISGHMA").css("font-size", "10px");// original value
+    $("#dGISPHMA").css("font-family", "helvetica");// change property value
+    $("#dGISPHMA").css("font-size", "10px");// original value
+    $("#dGISRMZ").css("font-family", "helvetica");// change property value
+    $("#dGISRMZ").css("font-size", "10px");// original value
+    $("#dGISAB").css("font-family", "helvetica");// change property value
+    $("#dGISAB").css("font-size", "10px");// original value
+    $("#dGISBD").css("font-family", "helvetica");// change property value
+    $("#dGISBD").css("font-size", "10px");// original value
+    $("#dGISBP").css("font-family", "helvetica");// change property value
+    $("#dGISBP").css("font-size", "10px");// original value
+    $("#dGISIDX").css("font-family", "helvetica");// change property value
+    $("#dGISIDX").css("font-size", "10px");// original value
+    $("#dGISPACSum").css("font-family", "helvetica");// change property value
+    $("#dGISPACSum").css("font-size", "10px");// original value
+            
+    
+   source = $('#html-2-pdfwrapper').html();//div_pdf contains idTablaDatos and idTablaDetalle
+    pdf.fromHTML(source,
         pdfMargins.left, // x coord
-        pdfMargins.top + 390,
+        pdfMargins.top + 390, 
         {
-            width: pdfMargins.width, // max width of content on PDF
+            setFont: "helvetica",
+            width: 5000, // resetting the max width of content on PDF, otherwise the text output word wraps because jsPDF doesnt' always recognize the <br>'s
+            //width: pdfMargins.width, // max width of content on PDF
             elementHandlers: specialElementHandlers = {
                 '#dNumberOfRecordsbySubActivity_COLUMNCHART': function (element, renderer) {
                     AddChartImage2PDF(pdf, "dNumberOfRecordsbySubActivity_COLUMNCHART", renderer.pdf.internal.pages.length - 1, renderer.pdf.tableHeaderRow[0][1] + 25);

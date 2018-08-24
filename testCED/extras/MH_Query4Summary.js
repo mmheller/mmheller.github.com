@@ -107,10 +107,6 @@ define([
                 strQuery = "OBJECTID > 0";
                 //strQuery = "objectid > 0";
             }
-            //strQuery = strQuery.replace(" and ((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))", "");
-            //if (strQuery == "(SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)") {
-            //    strQuery = "objectid > 0";
-            //}
             
             this.m_query4SummaryMap = strQuery;
 
@@ -129,19 +125,13 @@ define([
 
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Start_Year", "dNumberOfRecordsbyStartYear", '<b>"NUMBER of EFFORTS and TOTAL ACRES by Effort Start Year"</b><br>{0}', "show both-commas-no-round-decimal", ""]);
                 
-                //////arrayQuery.push(["0", strQuery, "Project_ID", "count", "Implementing_Party", "dNumofDistinctImpParties", '<b>Number of Unique Implementing Parties:</b> {0}', "countOfGroupBy", ""]);
-                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Implementing_Party", "dNumberOfRecordsbyImpParty", '<b>"NUMBER of EFFORTS AND TOTAL ACRES by IMPLEMENTING PARTY"</b><br>{0}', "show both-commas-no-round-decimal", ""]);
-                //arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Implementing_Party", "dNumberOfRecordsbyImpParty", '{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Implementing_Party", "dNumberOfRecordsbyImpParty", '<p><b>"NUMBER of EFFORTS AND TOTAL ACRES by IMPLEMENTING PARTY"</b><br />{0}</p>', "show both-commas-no-round-decimal", ""]);
 
+                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Activity", "dNumberOfRecordsbyActivity", '<p><b>"NUMBER OF EFFORTS and TOTAL ACRES by ACTIVITY"</b><br />{0}</p>', "show both-commas-no-round-decimal", ""]);
 
-                //////arrayQuery.push(["0", strQuery, "Project_ID", "count", "Activity", "dNumofDistinctActivities", '<b>Number of Unique Activities:</b> {0}', "countOfGroupBy", ""]);
-                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Activity", "dNumberOfRecordsbyActivity", '<b>"NUMBER OF EFFORTS and TOTAL ACRES by ACTIVITY"</b><br>{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Office", "dNumberOfRecordsbyOffice", '<p><b>"NUMBER of EFFORTS and TOTAL ACRES by OFFICE"</b><br />{0}</p>', "show both-commas-no-round-decimal", ""]);
 
-                //////arrayQuery.push(["0", strQuery, "Project_ID", "count", "Office", "dNumofDistinctOffices", '<b>Number of Unique Offices:</b> {0}', "countOfGroupBy", ""]);
-                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Office", "dNumberOfRecordsbyOffice", '<b>"NUMBER of EFFORTS and TOTAL ACRES by OFFICE"</b><br>{0}', "show both-commas-no-round-decimal", ""]);
-
-                ////arrayQuery.push(["0", strQuery, "Project_ID", "count", "SubActivity", "dNumofDistinctSubActivities", '<b>Number of Unique Sub-Activities:</b> {0}', "countOfGroupBy", ""]);
-                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "SubActivity", "dNumberOfRecordsbySubActivity", '<b>"NUMBER of EFFORTS and TOTAL ACRES by SUBACTIVITY"</b><br>{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "SubActivity", "dNumberOfRecordsbySubActivity", '<p><b>"NUMBER of EFFORTS and TOTAL ACRES by SUBACTIVITY"</b><br />{0}</p>', "show both-commas-no-round-decimal", ""]);
 
                 arrayQuery.push(["9", strQuery2, "Project_ID", "count", "State", "dNumberofOverlappingStates", '<b>"NUMBER of OVERLAPPING STATES"</b><br>{0}', "show both", ""]);
                 arrayQuery.push(["11", strQuery2, "Project_ID,GIS_Acres", "count,sum", "State", "dGISStates", '<b>"NUMBER of EFFORTS and TOTAL ACRES by STATE"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
@@ -334,11 +324,11 @@ define([
                                         //do nothing, don't add the the array of values
                                     }
                                     else if ((strStatisticType == "count") & (strVarType == "default")) {
-                                        strText += "<br>";//\n<br>
+                                        strText += "<br />";//\n<br>
                                         values.push(strText);
                                     } else if ((strVarType == "show both-currency") & (an == "genericstat")) {
                                         var iTempNumber = Number(strText);
-                                        strText = iTempNumber.toCurrencyString() + "<br>";//\n<br>
+                                        strText = iTempNumber.toCurrencyString() + "<br />";//\n<br>
                                         values.push(strText);
                                     //} else if ((strVarType == "show both-commas-no-round-decimal") & (an == "genericstat")) {
                                     } else if (strVarType == "show both-commas-no-round-decimal") {
@@ -379,7 +369,7 @@ define([
 
                                     } else if ((strVarType == "show both") & (an == "genericstat")) {
                                         //                                      var iTempNumber = Number(strText);
-                                        strText = "(" + strText + ")<br>";  //\n<br>
+                                        strText = "(" + strText + ")<br />";  //\n<br>
                                         values.push(strText);
                                     } else if (attrNames.length >= 2) {
                                             var iTempNumber = Number(strText);

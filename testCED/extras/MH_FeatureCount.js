@@ -51,17 +51,11 @@ define([
             var pQuery = new esri.tasks.Query();
 
             pQuery.returnGeometry = false;
-            //var strQuery = pLayer.getDefinitionExpression();
-
             strQuery = strQuery.replace(" and (((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))", "");
             if (strQuery == "((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))") {
                 strQuery = "(OBJECTID > 0) ";
                 //strQuery = "(objectid > 0) ";
             }
-            //strQuery = strQuery.replace(" and ((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))", "");
-            //if (strQuery == "(SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)") {
-            //    strQuery = "(objectid > 0) ";
-            //}
 
             if (strAddedQueryString != "") {
                 strQuery += strAddedQueryString;
@@ -76,13 +70,9 @@ define([
             var iStatValue = results.count;
             strDispaly = iStatValue.toString();
             if (this.strHTML_ID == "txtQueryResults") {
-                //Debug.writeln("mh_featurecount returnEvents" + strDispaly + ":" + this.strHTML_ID + ", supplemental");
-
-
                 strDispaly = strDispaly + " Resulting Efforts";
             }
 
-            //Debug.writeln("mh_featurecount returnEvents BEFORE CASE" + strDispaly + ":'" + this.strHTML_ID + "'");
             document.getElementById(this.strHTML_ID).innerHTML = strDispaly;
 
             switch (this.strHTML_ID) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'
@@ -94,6 +84,11 @@ define([
                     app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalProjectsQ", "count", "project_id", " and (typeact = 'Spatial Project')");
                     break;
                 case "dTotalProjectsQ":
+                    if (iStatValue == 0) {
+                        document.getElementById("txt_NoSpatial").style.visibility = 'visible';
+                    } else {
+                        document.getElementById("txt_NoSpatial").style.visibility = 'hidden';
+                    }
                     this.strHTML_ID = "dTotalPlansQ"; //this is redundant but having issues with some of the callbacks ie. GRSG pop area = Crab Creek
                     app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalNonProjectsQ", "count", "project_id", " and (typeact = 'Non-Spatial Project')");
                     break;

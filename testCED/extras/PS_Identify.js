@@ -227,7 +227,7 @@ define([
                 if ((this.m_ExceedCount > -1) && (this.m_ExceedSum > -1)) {
                     var c = dojo.create("div", { id: "ExceedChart" }, dojo.create('div')); //create the chart that will display in the second tab
                     var chart = new dojox.charting.Chart2D(c, { title: "Note: values depend on user search/query filter",
-                        titlePos: "bottom", titleGap: 30, titleFont: "normal normal normal 8pt Arial", titleFontColor: "grey"
+                        titlePos: "bottom", titleGap: 30, titleFont: "normal normal normal 8pt helvetica", titleFontColor: "grey"
                     });
                     dojo.addClass(chart, 'chart');
                     chart.setTheme(dojo.getObject("dojox.charting.themes.Julie")); //try other themes (Julie,CubanShirts, PrimaryColors, Charged, BlueDusk, Bahamation,Harmony,Shrooms,Wetland)   

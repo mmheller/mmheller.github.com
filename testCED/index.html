@@ -448,6 +448,7 @@ Date:        Oct 2014-->
         function PSQsearchSucceeded(results) { }
 
         function btn_clear_click() {
+            document.getElementById("txt_NoSpatial").style.visibility = 'hidden';
             disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
 
@@ -510,6 +511,8 @@ Date:        Oct 2014-->
             app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
             app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "OBJECTID > 0"); //maybe move this to MH_FeatureCount  //clear111
             //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "objectid > 0"); //maybe move this to MH_FeatureCount  //clear111
+
+            app.strQueryLabelText = "";
         }
 
         function PSStatSucceeded(results) {
@@ -590,7 +593,7 @@ Date:        Oct 2014-->
     <![endif]-->
 
     <div id="content" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline', gutters:false"
-         style="width: 100%; height: 100%; margin: 0; background-color:rgb(151, 118, 123); font-family: Arial;">
+         style="width: 100%; height: 100%; margin: 0; background-color:rgb(151, 118, 123); font-family: helvetica;">
 
         <!--<div id="content" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline', gutters:false"
              style="width: 100%; height: 100%; margin: 0; background-color:rgb(127, 105, 127); font-family: Arial;">-->
@@ -761,6 +764,9 @@ Date:        Oct 2014-->
                  data-dojo-type="dijit/layout/ContentPane"
                  data-dojo-props="region:'center'"
                  style="overflow:hidden; background-color:rgb(151, 118, 123);">
+
+                <div id="txt_NoSpatial" style="position:absolute; visibility:hidden; background-color: yellow; left:20%; bottom:40%; color:red; z-index:51; font-size:30px">Non-Spatial Projects/Plans Found,<br />See Table Below<br /><br />Spatial Projects NOT Found</div>
+
                 <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
                 <div id="txt_Version" style="position:absolute; right:15px; bottom:20px; color:#404040; z-index:50; font-size:11px">CED Interactive Map Version 2.1.0</div>
                 <img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
@@ -796,11 +802,11 @@ Date:        Oct 2014-->
 
 
     <div style="position:absolute; top:10px; right:20px;" >
-        <a href="https://conservationefforts.org/sgce/about/#AC" target="_blank" style="color: #ffffff;font-family: Arial">Contact Us</a>
+        <a href="https://conservationefforts.org/sgce/about/#AC" target="_blank" style="color: #ffffff;font-family: helvetica">Contact Us</a>
     </div>
 
     <div style="position:absolute; top:10px; right:130px;">
-        <a href="https://conservationefforts.org/sgce/about/" target="_blank" style="color: #ffffff;font-family: Arial">Project Background</a>
+        <a href="https://conservationefforts.org/sgce/about/" target="_blank" style="color: #ffffff;font-family: helvetica">Project Background</a>
     </div>
 
     <a href="http://conservationefforts.org/welcome/" target="_blank">

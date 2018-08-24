@@ -144,14 +144,14 @@ define([
               var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
               var pLabel1 = new TextSymbol().setColor(vGreyColor);
               pLabel1.font.setSize("10pt");
-              pLabel1.font.setFamily("arial");
+              pLabel1.font.setFamily("helvetica");
               var pLabelRenderer1 = new SimpleRenderer(pLabel1);
               var plabels1 = new LabelLayer({ id: "labels1" });
               plabels1.addFeatureLayer(pBase_Pop, pLabelRenderer1, "{" + strlabelField1 + "}");
 
               var pLabel2 = new TextSymbol().setColor(vGreyColor);
               pLabel2.font.setSize("10pt");
-              pLabel2.font.setFamily("Arial Black");
+              pLabel2.font.setFamily("helvetica Black");
               var pLabelRenderer2 = new SimpleRenderer(pLabel2);
               var plabels2 = new LabelLayer({ id: "labels2" });
               plabels2.addFeatureLayer(pBase_MZ, pLabelRenderer2, "{" + strlabelField2 + "} : {" + strlabelField3 + "}");
