@@ -42,35 +42,6 @@ function getImgData(chartContainer) {
     return imgData;
 };
 
-//function printErr(err) {
-//    console.log("Failed to print due to an error: " + err);
-//};
-
-
-//function escapeRegExp(string) {
-//    return string.replace(/([.*+?^=!:${}()|\[\]\/\\])/g, "\\$1");
-//}
-
-//function replaceAll(string, find, replace) {
-//    return string.replace(new RegExp(escapeRegExp(find), 'g'), replace);
-//}
-
-//function getRanges(array) {
-//    var ranges = [], rstart, rend;
-//    for (var i = 0; i < array.length; i++) {
-//        rstart = array[i];
-//        rend = rstart;
-//        while (array[i + 1] - array[i] == 1) {
-//            rend = array[i + 1]; // increment the index if the numbers sequential
-//            i++;
-//        }
-//        ranges.push(rstart == rend ? rstart + '' : rstart + '-' + rend);
-//    }
-//    return ranges;
-//}
-
-
-
 define([
   "dojo/_base/declare",
   "esri/tasks/PrintTask", "esri/tasks/PrintTemplate", "esri/tasks/PrintParameters",
@@ -163,6 +134,7 @@ define([
                                        "dNumberOfRecordsbySubActivity_COLUMNCHART",
                                        "dNumberOfRecordsbyOffice_COLUMNCHART",
                                        "dGISPoP_COLUMNCHART", "dGISSMA_PIECHART",
+                                       "dNumberOfRecordsbyImpStatus_PIECHART",
                                        "dNumberOfRecordsbyImpParty_PIECHART",
                                        "dNumberOfRecordsbyActivity_PIECHART",
                                        "dGISStates_PIECHART",

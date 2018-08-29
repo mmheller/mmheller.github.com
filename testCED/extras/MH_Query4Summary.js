@@ -124,6 +124,8 @@ define([
 
 
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Start_Year", "dNumberOfRecordsbyStartYear", '<b>"NUMBER of EFFORTS and TOTAL ACRES by Effort Start Year"</b><br>{0}', "show both-commas-no-round-decimal", ""]);
+
+                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Prj_Status_Desc", "dNumberOfRecordsbyImpStatus", '<p><b>"NUMBER of EFFORTS AND TOTAL ACRES by IMPLEMENTING STATUS"</b><br />{0}</p>', "show both-commas-no-round-decimal", ""]);
                 
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Implementing_Party", "dNumberOfRecordsbyImpParty", '<p><b>"NUMBER of EFFORTS AND TOTAL ACRES by IMPLEMENTING PARTY"</b><br />{0}</p>', "show both-commas-no-round-decimal", ""]);
 
@@ -418,19 +420,11 @@ define([
                     //str_divinnerHTML = "Results (" + strText + " projects) <span></span>";
                     div.innerHTML = str_divinnerHTML;
                 } else {
-
-
-                    if (strHTMLElementID == "dNumberOfRecordsbyImpParty") {
-                        var strop = "";
-                    }
-
                     var strFormattedString2Inject = strStringFormatting.format(strText);
 
                     strFormattedString2Inject = replaceAll(strFormattedString2Inject, "</br> <b>", "</br><b>");
                     strFormattedString2Inject = replaceAll(strFormattedString2Inject, ",  ", ", ");
-
                     div.innerHTML = strFormattedString2Inject;
-
                 }
 
                 //pTblindexAndQuery = this.app.gQuerySummary.m_arrayQuery[this.app.gQuerySummary.m_iarrayQueryIndex];

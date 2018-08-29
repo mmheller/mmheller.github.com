@@ -128,6 +128,9 @@ function startExport2PDF() {
      $("#dMaxLastDataProviderEdit").css("font-family", "helvetica");// change property value
      $("#dMaxLastPubProc").css("font-family", "helvetica");// change property value
 
+     $("#dNumberOfRecordsbyImpStatus").css("font-family", "helvetica");// change property value
+     $("#dNumberOfRecordsbyImpStatus").css("font-size", "10px");// original value
+
     $("#dNumberOfRecordsbyImpParty").css("font-family", "helvetica");// change property value
     $("#dNumberOfRecordsbyImpParty").css("font-size", "10px");// original value
     $("#dNumberOfRecordsbyStartYear").css("font-family", "helvetica");// change property value
@@ -198,6 +201,10 @@ function startExport2PDF() {
                 },
                 '#dGISSMA_PIECHART': function (element, renderer) {
                     AddChartImage2PDF(pdf, "dGISSMA_PIECHART", renderer.pdf.internal.pages.length - 1, renderer.pdf.tableHeaderRow[0][1] + 25);
+                    return true;                      // true = "handled elsewhere, bypass text extraction"
+                },
+                '#dNumberOfRecordsbyImpStatus_PIECHART': function (element, renderer) {
+                    AddChartImage2PDF(pdf, "dNumberOfRecordsbyImpStatus_PIECHART", renderer.pdf.internal.pages.length - 1, renderer.pdf.tableHeaderRow[0][1] + 25);
                     return true;                      // true = "handled elsewhere, bypass text extraction"
                 },
                 '#dNumberOfRecordsbyImpParty_PIECHART': function (element, renderer) {

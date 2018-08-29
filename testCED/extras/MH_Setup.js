@@ -111,7 +111,7 @@ define([
 
               this.gCED_PP_point4FeatureTable = new FeatureLayer(app.strTheme1_URL + "0", {
                   id: "00", mode: FeatureLayer.MODE_ONDEMAND, visible: false,
-                  outFields: ["Project_ID", "SourceFeatureType", "Project_Name", "Project_Status", "Activity", "SubActivity", "Implementing_Party", "Office", "Date_Created", "Last_Updated", "Date_Approved", "Start_Year", "Finish_Year", "TypeAct", "TotalAcres", "TotalMiles"]
+                  outFields: ["Project_ID", "SourceFeatureType", "Project_Name", "Project_Status", "Activity", "SubActivity", "Implementing_Party", "Office", "Date_Created", "Last_Updated", "Date_Approved", "Start_Year", "Finish_Year", "TypeAct", "TotalAcres", "TotalMiles", "Prj_Status_Desc"]
                   //outFields: ["Project_ID", "SourceFeatureType", "Project_Name", "Entry_Type", "Activity", "SubActivity", "Implementing_Party", "Office", "Date_Created", "Last_Updated", "Date_Approved", "TypeAct", "TotalAcres", "TotalMiles"]
               });
 
@@ -251,12 +251,13 @@ define([
               this.gFeatureTable = new FeatureTable({
                   "featureLayer": this.gCED_PP_point4FeatureTable,
                   "outFields": [
-                    "Project_ID", "TypeAct", "Project_Name", "Activity", "SubActivity", "Implementing_Party", "Office", "Date_Created",
+                    "Project_ID", "TypeAct", "Prj_Status_Desc", "Project_Name", "Activity", "SubActivity", "Implementing_Party", "Office", "Date_Created",
                     "Last_Updated", "Date_Approved", "Start_Year", "Finish_Year", "TotalAcres", "TotalMiles", "SourceFeatureType"
                   ],
                   fieldInfos: [
                     { name: 'Project_ID', alias: 'ID'},
                     { name: 'TypeAct', alias: 'Project or Plan', },
+                    { name: 'Prj_Status_Desc', alias: 'Implementation Status', },
                     { name: 'Project_Name', alias: 'Effort Name', },
                     { name: 'Activity', alias: 'Activity', },
                     { name: 'SubActivity', alias: 'Sub Activity', },
@@ -280,7 +281,7 @@ define([
 
               on(this.gFeatureTable, "load", function (evt) {  //resize the column widths
                   var pGrid = this.grid;
-                  var arrayColWidths = [55, 145, 380, 380, 360, 230, 290, 150, 150, 150, 80, 80, 60];
+                  var arrayColWidths = [55, 145, 145, 380, 380, 360, 230, 290, 150, 150, 150, 80, 80, 60, 100, 100];
                   var iTotalWidth = 0;
                   dojo.forEach(arrayColWidths, function (iWidth) {
                       iTotalWidth += iWidth;
