@@ -78,20 +78,13 @@ define([
             this.divTag4Results = divTag4Results;
             this.strFieldNameText = strFieldNameText;
             this.strFieldNameValue = strFieldNameValue;
-            //Debug.writeln("mh_PopUniqueQueryInterfaceValues:qry_SetUniqueValuesOf:" + this.strFieldNameText + ":" + strQuery);
             this.strQuery1 = strQuery;
-            //this.strFieldNameText = strFieldNameText;
-            //if (strFieldNameText == "Project_ID") {
-            //    var temp222 = "";
-            //}
-            //var strQuery = "";
+
             var pQueryT = new esri.tasks.QueryTask(this.strURL + this.iNonSpatialTableIndex + "?returnDistinctValues=true");
             var pQuery = new esri.tasks.Query();
             pQuery.returnGeometry = false;
             pQuery.outFields = [strFieldNameText, strFieldNameValue];
-            //pQuery.where = this.strQuery1;
             pQuery.where = strQuery;
-
             return pQueryT.execute(pQuery, this.returnEvents, this.err);
         },
 
@@ -318,8 +311,7 @@ define([
                     document.getElementById("ImgResultsLoading").style.visibility = "hidden";
                     disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
                     disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
-                    
-                    //Debug.writeln("mh_PopUniqueQueryInterfaceValues");
+
                     app.pFC.GetCountOfFCDef_ShowText(this.strQuery1, this.strURL + 0, "txtQueryResults", "count", "project_id", "");
 
                     this.iNonSpatialTableIndex = 0; //reset the table index for next time
@@ -333,11 +325,6 @@ define([
         err: function (err) {
             console.log("Error number" + String(this.app.PS_Uniques.numberOfErrors) + " Failed to get stat results due to an error: " + this.app.PS_Uniques.strFieldNameText + this.app.PS_Uniques.strFieldNameValue + " " + this.app.PS_Uniques.strURL + this.app.iNonSpatialTableIndex, err);
             this.app.PS_Uniques.numberOfErrors += 1;
-            
-            //if (this.app.PS_Uniques.numberOfErrors < 5) {
-            //    this.app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"));
-            //}
-
             disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
         }

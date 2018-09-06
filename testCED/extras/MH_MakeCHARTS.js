@@ -131,6 +131,7 @@ define([
         StartedCHARTING: function () {
             app.arrayCHARTsBASE64 = [];
             app.arrayOfCHART_DIVIDs = ["dNumberOfRecordsbyStartYear_COLUMNCHART",
+                                       "dNumberOfRecordsbyFinishYear_COLUMNCHART",
                                        "dNumberOfRecordsbySubActivity_COLUMNCHART",
                                        "dNumberOfRecordsbyOffice_COLUMNCHART",
                                        "dGISPoP_COLUMNCHART", "dGISSMA_PIECHART",

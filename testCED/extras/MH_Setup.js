@@ -44,10 +44,11 @@ function AllFiltersClear() {
 }
 
 define([
+         "esri/toolbars/draw", "esri/graphic", "extras/PS_MeasSiteSearch4Definition",
   "dojo/_base/declare",
   "dojo/_base/lang",
   "esri/request",
-  "dojo/promise/all",
+  "dojo/promise/all", "dojo/_base/array",
   "esri/urlUtils",
   "esri/layers/FeatureLayer",
   "esri/dijit/FeatureTable",
@@ -69,12 +70,13 @@ define([
   "esri/Color",
   "esri/renderers/SimpleRenderer",
   "esri/layers/LabelLayer",
-  "esri/symbols/TextSymbol"
+  "esri/symbols/TextSymbol",
+  "dijit/registry",
   ], function (
-            declare, lang, esriRequest, all, urlUtils, FeatureLayer, FeatureTable,
+            Draw, Graphic, PS_MeasSiteSearch4Definition, declare, lang, esriRequest, all, arrayUtils, urlUtils, FeatureLayer, FeatureTable,
             SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, graphicsUtils, Query, All,
             ArcGISDynamicMapServiceLayer, CheckBox, Legend, Scalebar, Geocoder, dom, domClass,
-            mouse, on, BasemapGallery, Map, PS_Identify, Color, SimpleRenderer, LabelLayer, TextSymbol
+            mouse, on, BasemapGallery, Map, PS_Identify, Color, SimpleRenderer, LabelLayer, TextSymbol, registry
 ) {
 
       return declare([], {
@@ -94,17 +96,20 @@ define([
 
 
           Phase2: function () {
-          app.loading = dojo.byId("loadingImg");  //loading image. id
+              app.loading = dojo.byId("loadingImg");  //loading image. id
+              var selectionToolbar;
+
               var customExtentAndSR = new esri.geometry.Extent(-14000000, 4800000, -11000000, 6200000, new esri.SpatialReference({ "wkid": 3857 }));
               app.map = new esri.Map("map", { basemap: "topo", logo: false, extent: customExtentAndSR });
               //app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/d725bb5ba60348fd841b05f80cf4465d/rest/services/CEDfrontpage_map_v9_Restrict/FeatureServer/"
               app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/5d5fc053dd7e4de4b9765f7a6b6f1f61/rest/services/CEDfrontpage_map_v9_Restrict/FeatureServer/";
 
+              app.map.on("load", initSelectToolbar);
               dojo.connect(app.map, "onUpdateStart", showLoading);
               dojo.connect(app.map, "onUpdateEnd", hideLoading);
 
               var legendLayers = [];
-              CED_PP_point = new FeatureLayer(app.strTheme1_URL + "0", {id: "0", mode: FeatureLayer.MODE_ONDEMAND, visible: true});
+              CED_PP_point = new FeatureLayer(app.strTheme1_URL + "0", { id: "0", mode: FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], visible: true });
               CED_PP_point.setDefinitionExpression("((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))");
               var PSelectionSymbolPoint = new SimpleMarkerSymbol().setColor(new Color([0, 255, 255, 0.4]))
               CED_PP_point.setSelectionSymbol(PSelectionSymbolPoint);
@@ -112,17 +117,15 @@ define([
               this.gCED_PP_point4FeatureTable = new FeatureLayer(app.strTheme1_URL + "0", {
                   id: "00", mode: FeatureLayer.MODE_ONDEMAND, visible: false,
                   outFields: ["Project_ID", "SourceFeatureType", "Project_Name", "Project_Status", "Activity", "SubActivity", "Implementing_Party", "Office", "Date_Created", "Last_Updated", "Date_Approved", "Start_Year", "Finish_Year", "TypeAct", "TotalAcres", "TotalMiles", "Prj_Status_Desc"]
-                  //outFields: ["Project_ID", "SourceFeatureType", "Project_Name", "Entry_Type", "Activity", "SubActivity", "Implementing_Party", "Office", "Date_Created", "Last_Updated", "Date_Approved", "TypeAct", "TotalAcres", "TotalMiles"]
               });
 
-              CED_PP_line = new FeatureLayer(app.strTheme1_URL + "1", { id: "1", mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+              CED_PP_line = new FeatureLayer(app.strTheme1_URL + "1", { id: "1", mode: FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], visible: true });
               pSeletionSymbolLine = new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([0, 255, 255]), 3)
               CED_PP_line.setSelectionSymbol(pSeletionSymbolLine);
 
-              CED_PP_poly = new FeatureLayer(app.strTheme1_URL + "2", { id: "2", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: true });
+              CED_PP_poly = new FeatureLayer(app.strTheme1_URL + "2", { id: "2", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], autoGeneralize: true, visible: true });
               pSeletionSymbolPoly = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([0, 0, 0]), 3), new Color([0, 255, 255, 0.4]));
               CED_PP_poly.setSelectionSymbol(pSeletionSymbolPoly);
-
 
               var strBase_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/"
               var strlabelField1 = "POPULATION";
@@ -166,8 +169,6 @@ define([
               legendLayers.push({ layer: pBase_Breed, title: 'Breeding Habitat Distribution (Doherty et al. 2017)' });
               legendLayers.push({ layer: pBase_PI, title: 'GRSG Pop’l’n Index (Relative Abundance) (Doherty et al. 2017)' });
               legendLayers.push({ layer: CED_PP_poly, title: 'CED Plans and Projects' });
-              //legendLayers.push({ layer: CED_PP_line, title: 'CED Plans and Projects (line)' });
-              //legendLayers.push({ layer: CED_PP_point, title: 'CED Plans and Projects (point)' });
               legendLayers.push({ layer: pBase_Pop, title: 'GRSG Populations' });
               legendLayers.push({ layer: pBase_MZ, title: 'WAFWA Management Zones' });
 
@@ -279,6 +280,134 @@ define([
               this.gFeatureTable.columnResizer = false;
               this.gFeatureTable.startup();
 
+              function handleSpatialSelectResults(results) {
+                  var featureLayer1Message = results[0].features.length;
+                  var featureLayer2Message = results[1].features.length;
+                  var featureLayer3Message = results[2].features.length;
+
+                  var count = 0;
+                  for (var i = 0; i < results.length; i++) {
+                      count = count + results[i].features.length;
+                  }
+                  var temp = "Total features selected:  <b>" + count + "</b><br>&nbsp;&nbsp;FeatureLayer1:  <b>" + featureLayer1Message + "</b><br>&nbsp;&nbsp;FeatureLayer2:  <b>" + featureLayer2Message + "</b><br>&nbsp;&nbsp;FeatureLayer3:  " + featureLayer3Message;
+
+                  var items = arrayUtils.map(results, function (result) {
+                      return result;
+                  });
+
+                  var allItems = [];
+
+                  arrayUtils.map(items[0].features, function (item) {
+                      allItems.push(item.attributes.Project_ID);
+                  })
+
+                  arrayUtils.map(items[1].features, function (item) {
+                      allItems.push(item.attributes.Project_ID);
+                  })
+
+                  arrayUtils.map(items[2].features, function (item) {
+                      allItems.push(item.attributes.Project_ID);
+                  })
+
+                  if (allItems.length > 0) {
+                      app.arrayPrjIDs_fromSpatialSelect = allItems;
+                      var strQuery2 = "";
+                      strQuery2 = "project_ID in (";
+                      for (var i = 0; i < app.arrayPrjIDs_fromSpatialSelect.length; i++) {
+                          strQuery2 += app.arrayPrjIDs_fromSpatialSelect[i] + ",";
+                      }
+                      strQuery2 = strQuery2.slice(0, -1) + ")";
+                      this.strFinalQuery += strQuery2;
+                      
+                      if (app.PSQ == null) {
+                          app.PSQ = new PS_MeasSiteSearch4Definition({
+                              strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
+                              strState: "", strPopArea: "", strManagUnit: "", strQuerySaved: strQuery2, divTagSource: document.getElementById("ddlMatrix"),
+                              pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line
+                          }); 
+                      }
+
+                      app.PSQ.ExecutetheDerivedQuery(strQuery2, null);
+                  }
+              }
+
+              function initSelectToolbar(event) {
+                  selectionToolbar = new Draw(event.map);
+                  var selectQuery = new Query();
+
+                  on(selectionToolbar, "DrawEnd", function (pGeometry) {
+                      if (app.strQueryLabelTextSpatial == undefined) {
+                          app.strQueryLabelTextSpatial = "";
+                      }
+                      app.strQueryLabelTextSpatial += "</br>Spatial Selection (xmin=" + Math.round(pGeometry.xmin / 100000).toString() +
+                                                                        ",ymin=" + Math.round(pGeometry.ymin / 100000).toString() +
+                                                                        ",xmax=" + Math.round(pGeometry.xmax / 100000).toString() +
+                                                                        ",ymax=" + Math.round(pGeometry.ymax / 100000).toString() + ")";
+                      app.FilterGeometry = pGeometry;
+                      selectionToolbar.deactivate();
+
+                      switch (pGeometry.type) {
+                          case "point":
+                          case "multipoint":
+                              symbol = new SimpleMarkerSymbol();
+                              break;
+                          case "polyline":
+                              symbol = new SimpleLineSymbol();
+                              break;
+                          default:
+                              symbol = new SimpleFillSymbol();
+                              break;
+                      }
+                      var graphic = new Graphic(pGeometry, symbol);
+                      app.map.graphics.add(graphic);
+                      SpatialqueryMapService(pGeometry);
+                  });
+              }
+
+
+              function SpatialqueryMapService(Geom) {
+                  qt_Layer1 = new esri.tasks.QueryTask(CED_PP_point.url);
+                  q_Layer1 = new esri.tasks.Query();
+                  qt_Layer2 = new esri.tasks.QueryTask(CED_PP_line.url);
+                  q_Layer2 = new esri.tasks.Query();
+                  qt_Layer3 = new esri.tasks.QueryTask(CED_PP_poly.url);
+                  q_Layer3 = new esri.tasks.Query();
+                  q_Layer1.returnGeometry = q_Layer2.returnGeometry = q_Layer3.returnGeometry = false;
+                  q_Layer1.outFields = q_Layer2.outFields = q_Layer3.outFields = ["Project_ID"];
+                  q_Layer1.geometry = q_Layer2.geometry = q_Layer3.geometry = Geom;
+
+                  q_Layer1.where = CED_PP_point.getDefinitionExpression();
+                  q_Layer2.where = CED_PP_line.getDefinitionExpression();
+                  q_Layer3.where = CED_PP_poly.getDefinitionExpression();
+
+                  var pLayer1, pLayer2, pLayer3, pPromises;
+                  pLayer1 = qt_Layer1.execute(q_Layer1);
+                  pLayer2 = qt_Layer2.execute(q_Layer2);
+                  pLayer3 = qt_Layer3.execute(q_Layer3);
+                  pPromises = new All([pLayer1, pLayer2, pLayer3]);
+                  pPromises.then(handleSpatialSelectResults, this.err);
+
+                  //var promises = [];
+                  //var query = new Query();
+                  //query.returnGeometry = false;
+                  //query.outFields = ["Project_ID"];
+                  //query.geometry = Geom;
+                  //promises.push(CED_PP_point.selectFeatures(query, FeatureLayer.SELECTION_NEW));
+                  //promises.push(CED_PP_line.selectFeatures(query, FeatureLayer.SELECTION_NEW));
+                  //promises.push(CED_PP_poly.selectFeatures(query, FeatureLayer.SELECTION_NEW));
+
+                  var botContainer = registry.byId("bottomTableContainer");//open the attribute table if not already done so
+                  if (botContainer.containerNode.style.height == "") {
+                      var bc = registry.byId('content');
+                      var newSize = 150;
+                      dojo.style(botContainer.domNode, "height", 15 + "%");
+                      bc.resize();
+                  }
+              }
+
+              on(dom.byId("btn_selectFieldsButton"), "click", function () {
+                  selectionToolbar.activate(Draw.EXTENT);
+              });
               on(this.gFeatureTable, "load", function (evt) {  //resize the column widths
                   var pGrid = this.grid;
                   var arrayColWidths = [55, 145, 145, 380, 380, 360, 230, 290, 150, 150, 150, 80, 80, 60, 100, 100];
@@ -295,9 +424,7 @@ define([
                   });
                   pGrid.bodyNode.scrollWidth = iTotalWidth;
               });
-
-
-
+              
               on(this.gFeatureTable, "row-select", function (evt) {  //resize the column widths
                   app.map.graphics.clear();
                   CED_PP_point.clearSelection();
@@ -314,7 +441,6 @@ define([
 
                       strProjectType = pRow.data.TypeAct;
                       if (strProjectType == "Spatial Project") {
-                          //strSourceGeom = pRow.data.SourceFeatureType;
                           iProjectid = pRow.data.Project_ID;
                           arrayPrjIDs.push(iProjectid);
                       }
@@ -393,9 +519,7 @@ define([
                       alert("Effort selected is a non-spatial record, select a spatial record for map highlighting");
                   }
               });
-
-
-
+              
               return arrayLayers;
           },
 
@@ -422,18 +546,13 @@ define([
                       if (!(isNaN(request.term))) {
                           strURL4Search = app.strTheme1_URL + "0/query" +
                                        "?where=Project_Name+like+%27%25" + request.term + "%25%27+or+Project_ID+%3D+" + request.term + "&f=pjson&returnGeometry=true&outFields=Project_Name%2C+Project_ID%2C+SourceFeatureType%2C+TypeAct";
-                          //strURL4Search = app.strTheme1_URL + "0/query" +
-                          //             "?where=Project_Name+like+%27%25" + request.term + "%25%27+or+Project_ID+%3D+" + request.term + "&f=pjson&outFields=*&returnGeometry=true&outFields=Project_Name%2C+Project_ID%2C+SourceFeatureType%2C+TypeAct%2C+geometry";
 
                       } else {
                           strURL4Search = app.strTheme1_URL + "0/query" +
                                        "?where=Project_Name+like+'%25" + request.term + "%25'" + "&f=pjson&returnGeometry=true&outFields=Project_Name%2C+Project_ID%2C+SourceFeatureType%2C+TypeAct";
-                          //strURL4Search = app.strTheme1_URL + "0/query" +
-                          //             "?where=Project_Name+like+'%25" + request.term + "%25'" + "&f=pjson&outFields=*&returnGeometry=true&outFields=Project_Name%2C+Project_ID%2C+SourceFeatureType%2C+TypeAct%2C+geometry";
 
                       }
                       $.ajax({
-                          //url: app.strTheme1_URL + "find" + "?searchFields=Project_Name,Project_ID&SearchText=" + request.term + "&layers=0&f=pjson&returnGeometry=true",
                           url: strURL4Search,
                           dataType: "jsonp",
                           data: {},                        //data: { where: strSearchField + " LIKE '%" + request.term.replace(/\'/g, '\'\'').toUpperCase() + "%'", outFields: strSearchField, returnGeometry: true, f: "pjson" },                        
@@ -466,7 +585,6 @@ define([
                       var dblX = pGeometryPoint[0];
                       var dblY = pGeometryPoint[1];
                       var strValue3 = ui.item.value3;
-                      //var psqs_strQueryString = "objectid  > 0";
                       app.map.infoWindow.hide();            //var strquery4id = "Contaminant LIKE '%Mercury%'";
                       app.map.graphics.clear();
                       CED_PP_point.clearSelection();
@@ -476,17 +594,9 @@ define([
                       app.pPS_Identify = new PS_Identify({ pLayer1: CED_PP_point, pLayer2: CED_PP_line, pLayer3: CED_PP_poly, pMap: app.map,
                           strQueryString4Measurements: "Project_ID = " + strValue3, strURL: app.strTheme1_URL, pInfoWindow: app.infoWindow, mSR: pSR
                       }); // instantiate the ID Search class    
-
-                      //app.pPS_Identify = new PS_Identify({
-                      //    pLayer1: CED_PP_point, pLayer2: CED_PP_line, pLayer3: CED_PP_poly, pMap: app.map,
-                      //    strQueryString4Measurements: "OBJECTID > 0", strURL: app.strTheme1_URL, pInfoWindow: app.infoWindow, mSR: pSR
-                      //}); // instantiate the ID Search class    
-
                       var pPS_Identify_Results = app.pPS_Identify.executeQueries(null, "", 0, pGeometryPoint[0], pGeometryPoint[1]);
                   }
               });
-
-
           },
 
           err: function (err) {

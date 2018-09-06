@@ -95,7 +95,7 @@ define([
         },
 
 
-        Summarize: function (strQuery, strQuery2, blnOpenEntireSummary) {
+        Summarize: function (strQuery, strQuery2, blnOpenEntireSummary, pGeometry) {
             document.getElementById("ImgResultsLoading").style.visibility = "visible";
             disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
@@ -124,6 +124,7 @@ define([
 
 
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Start_Year", "dNumberOfRecordsbyStartYear", '<b>"NUMBER of EFFORTS and TOTAL ACRES by Effort Start Year"</b><br>{0}', "show both-commas-no-round-decimal", ""]);
+                arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Finish_Year", "dNumberOfRecordsbyFinishYear", '<b>"NUMBER of EFFORTS and TOTAL ACRES by Effort Start Year"</b><br>{0}', "show both-commas-no-round-decimal", ""]);
 
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Prj_Status_Desc", "dNumberOfRecordsbyImpStatus", '<p><b>"NUMBER of EFFORTS AND TOTAL ACRES by IMPLEMENTING STATUS"</b><br />{0}</p>', "show both-commas-no-round-decimal", ""]);
                 
@@ -159,10 +160,10 @@ define([
             }
 
             this.m_arrayQuery = arrayQuery;
-            this.SendQuery(arrayQuery, 0)
+            this.SendQuery(arrayQuery, 0, pGeometry)
         },
 
-        SendQuery: function (arrayQuery, iarrayQueryIndex) {
+        SendQuery: function (arrayQuery, iarrayQueryIndex, pGeometry) {
             this.m_iarrayQueryIndex = iarrayQueryIndex;
             pTblindexAndQuery = arrayQuery[iarrayQueryIndex];
             var iTableIndex = pTblindexAndQuery[0];
@@ -177,7 +178,6 @@ define([
             if (strFieldNameText.indexOf(",") > -1) {
                 var strFieldNameText1 = strFieldNameText.substring(0, strFieldNameText.indexOf(","));
                 var strFieldNameText2 = strFieldNameText.replace(strFieldNameText1 + ",", "");
-
                 var strStateType = pTblindexAndQuery[3];
                 var strStateType1 = strStateType.substring(0, strStateType.indexOf(","));
                 var strStateType2 = strStateType.replace(strStateType1 + ",", "");
@@ -186,14 +186,12 @@ define([
                 pstatDef1.statisticType = strStateType1
                 pstatDef1.onStatisticField = strFieldNameText1;
                 pstatDef1.outStatisticFieldName = strFieldNameText1;
-                //pstatDef1.outStatisticFieldName = "genericstat1";
                 array_QueryStatDefs.push(pstatDef1);
 
                 var pstatDef2 = new esri.tasks.StatisticDefinition();
                 pstatDef2.statisticType = strStateType2;
                 pstatDef2.onStatisticField = strFieldNameText2;
                 pstatDef2.outStatisticFieldName = strFieldNameText2;
-                //pstatDef2.outStatisticFieldName = "genericstat2";
                 array_QueryStatDefs.push(pstatDef2);
             } else {
                 var pstatDef = new esri.tasks.StatisticDefinition();
@@ -206,28 +204,25 @@ define([
             pQuery.returnGeometry = false;
             pQuery.where = strQuery;
 
-            //pQuery.outFields = [strFieldNameText];
+            if (pGeometry != undefined) {
+                pQuery.geometry = pGeometry;
+            }
             pQuery.outFields = ["*"];
             var strGroupByField = pTblindexAndQuery[4];
 
             if (strGroupByField != "") {
                 pQuery.groupByFieldsForStatistics = [strGroupByField];
-                //pQuery.groupByFieldsForStatistics = [strGroupByField];
-                //pQuery.orderByFields = [strGroupByField + " DESC"];
                 pQuery.orderByFields = [strGroupByField + " ASC"];
             }
 
             pQuery.outStatistics = array_QueryStatDefs;
             console.log(iarrayQueryIndex, iarrayQueryIndex);
-
-
             return pQueryTask.execute(pQuery, this.returnEvents, this.err);
         },
 
 
         returnEvents: function (results) {
             this.iTempIndexResults += 1;
-
             pTblindexAndQuery = this.app.gQuerySummary.m_arrayQuery[this.app.gQuerySummary.m_iarrayQueryIndex];
 
             if (pTblindexAndQuery != undefined) {  //no idea why this return events is getting called twice
@@ -320,7 +315,6 @@ define([
                                     }
 
                                     if (((strGroupByField != "") & (an == "genericstat") & (strVarType != "show both") & (strVarType != "show both-commas-no-round-decimal")) | (strText == "")) {
-                                        //values.push(strText);
                                         //do nothing, don't add the the array of values
                                     } else if (an == strGroupByField){
                                         //do nothing, don't add the the array of values
@@ -332,7 +326,6 @@ define([
                                         var iTempNumber = Number(strText);
                                         strText = iTempNumber.toCurrencyString() + "<br />";//\n<br>
                                         values.push(strText);
-                                    //} else if ((strVarType == "show both-commas-no-round-decimal") & (an == "genericstat")) {
                                     } else if (strVarType == "show both-commas-no-round-decimal") {
                                         var iTempNumber = Number(strText);
                                         iTempNumber = Math.round(iTempNumber);
@@ -349,8 +342,6 @@ define([
                                             }
                                             strText += " acres</br>";//\n<br>
                                         }
-
-                                        //strText = "<i>" + strText + "</i>"
                                         values.push(strText);
                                     } else if ((strVarType == "commas-no-round-decimal") & (an == "genericstat")) {
                                         var iTempNumber = Number(strText);
@@ -401,7 +392,6 @@ define([
                             });
                         }
                     }
-
                     if ((values == null) | (values == undefined)) {
                         strText = "no results";
                     } else {
@@ -417,7 +407,6 @@ define([
                 if (strHTMLElementID == "page_collapsible1") {  // have to treat writing the collapsible content different becuase otherwise will loos 
                     var str_divinnerHTML = div.innerHTML;
                     str_divinnerHTML = "Results (" + strText + " projects)";
-                    //str_divinnerHTML = "Results (" + strText + " projects) <span></span>";
                     div.innerHTML = str_divinnerHTML;
                 } else {
                     var strFormattedString2Inject = strStringFormatting.format(strText);
@@ -427,29 +416,42 @@ define([
                     div.innerHTML = strFormattedString2Inject;
                 }
 
-                //pTblindexAndQuery = this.app.gQuerySummary.m_arrayQuery[this.app.gQuerySummary.m_iarrayQueryIndex];
                 this.app.gQuerySummary.m_iarrayQueryIndex += 1
                 if (this.app.gQuerySummary.m_iarrayQueryIndex < this.app.gQuerySummary.m_arrayQuery.length) {
                     this.app.gQuerySummary.SendQuery(this.app.gQuerySummary.m_arrayQuery, this.app.gQuerySummary.m_iarrayQueryIndex)
                 }
-                else {
-                    //loop through the checkboxes and enable, so user interaction dosen't disrupt the queryies
+                else {                    //loop through the checkboxes and enable, so user interaction dosen't disrupt the queryies
                     if (document.getElementById("ImgResultsLoading") != undefined) {
+                        if (app.arrayLayers[13] != undefined) {
+                            var CED_PP_poly = app.arrayLayers[13];  //index depends on MH_Setup-->Phase2-->arrayLayers =
+                            var CED_PP_line = app.arrayLayers[14];
+                            var CED_PP_point = app.arrayLayers[15];
+                            var CED_PP_point4FeatureTable = app.arrayLayers[16];
+
+                            CED_PP_point.clearSelection();
+                            CED_PP_line.clearSelection();
+                            CED_PP_poly.clearSelection();
+                        }
+
                         document.getElementById("ImgResultsLoading").style.visibility = "hidden";
                         disableOrEnableFormElements("dropdownForm", 'select-one', false, document); //disable/enable to avoid user clicking query options during pending queries
                         disableOrEnableFormElements("dropdownForm", 'button', false, document);  //disable/enable to avoid user clicking query options during pending queries
-                    }
 
+                        app.map.graphics.clear();
+
+                    }
                     if (arrayQuery.length > 3) {
+
                         app.gMakeCHARTS.StartCHARTING();
                     }
                 }
             }
-            //return results;
         },
 
         err: function (err) {
-            console.log("Failed to get stat results due to an error: " + this.app.gQuerySummary.iTempIndexSubmit + " " + this.app.gQuerySummary.iTempIndexResults, err);
+            console.log("Failed to get stat results due to an error: " + this.app.gQuerySummary.m_iarrayQueryIndex +
+                                                                   " " + this.app.gQuerySummary.iTempIndexSubmit +
+                                                                   " " + this.app.gQuerySummary.iTempIndexResults, err);
             this.app.pFC.numberOfErrors += 1;
             if (this.app.pFC.numberOfErrors < 5) {
                 this.app.pFC.gQuerySummary.SendQuery(this.app.pFC.gQuerySummary.m_arrayQuery, this.app.pFC.gQuerySummary.m_iarrayQueryIndex + 1)

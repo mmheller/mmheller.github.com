@@ -47,6 +47,7 @@ Date:        Oct 2014-->
         "esri/dijit/Geocoder", "extras/PS_Identify", "extras/CK_AutoCompleteSearchAndZoom", "extras/PS_PopUniqueQueryInterfaceValues",
         "esri/geometry/webMercatorUtils", "esri/dijit/BasemapGallery", "dojo/mouse", "dojo/query", "esri/tasks/FindTask", "esri/tasks/FindParameters",
         "dijit/registry",
+        "dijit/form/Button",
         "esri/arcgis/utils",
         "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
         "dijit/layout/AccordionContainer", "dojo/domReady!"
@@ -137,7 +138,6 @@ Date:        Oct 2014-->
         app.iNonSpatialTableIndex = 0;  //these 3 lines populate the list values
         app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, divTagSource: null });
         app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
-        //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "objectid > 0"); //startup
         app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "OBJECTID > 0"); //startup
 
         if (app.map.loaded) {
@@ -150,7 +150,7 @@ Date:        Oct 2014-->
 
         //https://conservationefforts.org/grsgmap/?IP=11,14,16&TA=3&ST=183,985,1992,4512,9901,12665,15561,19432
         if ((strA_TypeAct) || (strA_entry_type) || (strA_activity) || (strA_Subactivity) || (strA_implementing_party) || (strA_State) || (strA_POPArea) || (strA_Managementunit || strA_office)) {
-            var botContainer = registry.byId("bot");
+            var botContainer = registry.byId("bottomTableContainer");
 
             if (botContainer.containerNode.style.height == "") {
                 var bc = registry.byId('content');
@@ -258,7 +258,6 @@ Date:        Oct 2014-->
                 strQuery += "(FO_ID in (" + strA_office + "))";
             }
 
-
             app.PSQ = new PS_MeasSiteSearch4Definition({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
                 strState: strA_State, strPopArea: strA_POPArea, strManagUnit: strA_Managementunit, strQuerySaved: strQuery, divTagSource: document.getElementById("ddlMatrix"),
                 pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line
@@ -281,6 +280,8 @@ Date:        Oct 2014-->
             localStorage.setItem("ls_strDefQuery", CED_PP_point.getDefinitionExpression());
             localStorage.setItem("ls_strDefQuery2", app.PS_Uniques.strQuery1);
             localStorage.setItem("ls_strQueryLabelText", app.strQueryLabelText);
+            localStorage.setItem("ls_strQueryLabelTextSpatial", app.strQueryLabelTextSpatial);
+            
             localStorage.setItem("ls_strMapExtent", String(app.map.extent.xmin + "," + app.map.extent.ymin + "," + app.map.extent.xmax + "," + app.map.extent.ymax));
 
             strBasemap = "topo";
@@ -303,11 +304,7 @@ Date:        Oct 2014-->
             var str_extraMaplayerList = String(array_extraMaplayerList);
             localStorage.setItem("ls_extraMaplayerList", str_extraMaplayerList);
 
-            //var str_extraMaplayerList = app.map.layerIds;
-            //localStorage.setItem("ls_extraMaplayerList", str_extraMaplayerList);
-
             var pNewWindow = window.open("CEDPSummary.html");
-            //var pNewWindow = window.open("CEDPSummary");   //////**************Static
         }
 
         function disableOrEnableFormElements(strFormName, strElementType, TorF) {
@@ -324,7 +321,9 @@ Date:        Oct 2014-->
         }
 
         function ddlMatrix_Change(divTagSource) {
-            var botContainer = registry.byId("bot");
+
+
+            var botContainer = registry.byId("bottomTableContainer");
 
             if (botContainer.containerNode.style.height == ""){
                 var bc = registry.byId('content');
@@ -332,8 +331,6 @@ Date:        Oct 2014-->
                 dojo.style(botContainer.domNode, "height", 15 + "%");
                 bc.resize();
             }
-
-
 
             document.getElementById("ImgResultsLoading").style.visibility = "visible";
             disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
@@ -384,9 +381,17 @@ Date:        Oct 2014-->
             app.strQueryLabelText = "";
 
             var strQuery = "";
-            if ((strddlMatrix !== "All") & (strddlMatrix !== "99")) {
-                strQuery = "typeact = '" + strddlMatrix + "'";
+            if ((app.arrayPrjIDs_fromSpatialSelect != undefined) & (app.arrayPrjIDs_fromSpatialSelect != "")) {
+                strQuery = "project_ID in (";
+                for (var i = 0; i < app.arrayPrjIDs_fromSpatialSelect.length; i++) {
+                    strQuery += app.arrayPrjIDs_fromSpatialSelect[i] + ",";
+                }
+                strQuery = strQuery.slice(0, -1) + ")";
+            }
 
+            if ((strddlMatrix !== "All") & (strddlMatrix !== "99")) {
+                if (strQuery !== "") { strQuery += " and "; }
+                strQuery += "typeact = '" + strddlMatrix + "'";
                 app.strQueryLabelText += "Effort Type = " + document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].text + ", ";
             }
             if (strddlEntry !== "99") {
@@ -426,9 +431,7 @@ Date:        Oct 2014-->
             }); // instantiate the class
 
             if ((strState != "99") || (strPopArea != "99") || (strManagUnit != "99")) {
-                //var PSQResults = app.PSQ.qry_Non_SpatialTable("", null, "ST_ID");
                 app.PSQ.qry_Non_SpatialTable("", null, "ST_ID");
-                //PSQResults.then(PSQsearchSucceeded, PSQsearchFailed);
 
                 if (strState !== "99") {    //            if (strImpParty !== "All") {
                     app.strQueryLabelText += "State = " + document.getElementById("ddlState").options[document.getElementById("ddlState").selectedIndex].text + ", ";
@@ -448,6 +451,7 @@ Date:        Oct 2014-->
         function PSQsearchSucceeded(results) { }
 
         function btn_clear_click() {
+            app.arrayPrjIDs_fromSpatialSelect = "";
             document.getElementById("txt_NoSpatial").style.visibility = 'hidden';
             disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
@@ -506,13 +510,11 @@ Date:        Oct 2014-->
             }
 
             app.iNonSpatialTableIndex = 0;  //
-            //app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, strQuery1: "objectid > 0", divTagSource: null}); // instantiate the  class
             app.PS_Uniques.divTagSource = null;
             app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
             app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "OBJECTID > 0"); //maybe move this to MH_FeatureCount  //clear111
-            //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "objectid > 0"); //maybe move this to MH_FeatureCount  //clear111
-
             app.strQueryLabelText = "";
+            app.strQueryLabelTextSpatial = "";
         }
 
         function PSStatSucceeded(results) {
@@ -521,6 +523,7 @@ Date:        Oct 2014-->
         }
 
         function PSStatFailed(err) { document.getElementById("txtQueryResults").innerHTML = " Search error " + err.toString(); }
+
         function PSQsearchFailed(err) { document.getElementById("txtQueryResults").innerHTML = " Search error " + err.toString(); }
 
         function btn_TextSummary_click() {
@@ -577,8 +580,6 @@ Date:        Oct 2014-->
                 window.open(strURL);
             }
         }
-
-
     });
     </script>
 </head>
@@ -682,6 +683,9 @@ Date:        Oct 2014-->
                         <option value="99">All</option>
                     </select><br /><br />
 
+                    <!--input id="btn_selectFieldsButton" type="button" value="Spatial Select" />-->
+                    <input id="btn_selectFieldsButton" type="button" value="Select Efforts On Map Tool" class="button-SelectOnMap" />
+                    <br /> <br />
                     <input id="btn_clear" type="button" value="Clear" />
                 </form>
                 <input id="btn_TextSummary" type="button" value="Report" style="display: none;" />
@@ -773,8 +777,7 @@ Date:        Oct 2014-->
                 <!--<img id="loadingImg" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="position:fixed; right:40%; top:50%; z-index:100;" />-->
             </div>
 
-        <!--<div id="bot" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true" style="height:15%; display: none">-->
-            <div id="bot" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true">
+            <div id="bottomTableContainer" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true">
                 <div id="myTableNode"></div>
             </div>
         </div>

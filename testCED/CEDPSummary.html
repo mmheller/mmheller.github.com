@@ -115,13 +115,18 @@
         var strDefQuery2 = localStorage.getItem("ls_strDefQuery2");
         //var strDefQuery3 = localStorage.getItem("ls_strDefQuery3");
         var strQueryLabelText = localStorage.getItem("ls_strQueryLabelText");
+        var strQueryLabelTextSpatial = localStorage.getItem("ls_strQueryLabelTextSpatial");
 
         if ((strQueryLabelText == "") | (strQueryLabelText == "undefined")) {
             strQueryLabelText = "<b>USER SELECTED QUERY FILTERS:</b>  None selected"
         } else {
             strQueryLabelText = "<b>USER SELECTED QUERY FILTERS:</b>  " + strQueryLabelText.substring(0, strQueryLabelText.length - 2);
         }
-              
+        if ((strQueryLabelTextSpatial == "") | (strQueryLabelTextSpatial == "undefined")) {
+            //do nothing
+        } else {
+            strQueryLabelText += "<br><b>USER SPATIAL QUERY FILTERS:</b>  " + strQueryLabelTextSpatial;
+        }
 
         var div = document.getElementById("dFilterParameters");
         div.innerHTML = strQueryLabelText;
@@ -129,7 +134,7 @@
         app.gPrintReport2PDF = new MH_PrintReport2PDF({ strURL: strURL }); // instantiate the class
 
         app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class
-        app.gQuerySummary.Summarize(strDefQuery, strDefQuery2, true);
+        app.gQuerySummary.Summarize(strDefQuery, strDefQuery2, true, app.FilterGeometry);
 
         app.pSupSumMap = new MH_SetupSummaryMap({}); // instantiate the class
         app.arrayLayers = app.pSupSumMap.Phase1();
@@ -230,27 +235,34 @@
             <div id="dNumberOfRecordsbyImpParty" class="myDivClassSmall"></div>
 
             <!--<h1 style='page-break-before: always;'>Page 3</h1>-->
-            <table style="width:100%; background-color: #f2f5f9; margin-bottom:1px"><tr><td><b>Effort Start Year</b></td></tr></table>
+            <table style="width:100%; background-color: #f2f5f9; margin-bottom:1px"><tr><td><b>Start Year</b></td></tr></table>
             <div id="dNumberOfRecordsbyStartYear_COLUMNCHART"></div>
             <div id="dWhiteSpace3"></div>
             <div id="dNumberOfRecordsbyStartYear" class="myDivClassSmall"></div>
 
+
+        <table style="width:100%; background-color: #f2f5f9; margin-bottom:1px"><tr><td><b>Finish Year</b></td></tr></table>
+        <div id="dNumberOfRecordsbyFinishYear_COLUMNCHART"></div>
+        <div id="dWhiteSpace4"></div>
+        <div id="dNumberOfRecordsbyFinishYear" class="myDivClassSmall"></div>
+
+
             <table style="width:100%; background-color: #f2f5f9"><tr><td><b>Activity</b></td></tr></table>
             <div id="dNumberOfRecordsbyActivity_PIECHART"></div>
-            <div id="dWhiteSpace4"></div>
+            <div id="dWhiteSpace5"></div>
             <div id="dNumberOfRecordsbyActivity" class="myDivClassSmall"></div>
 
             <!--<h1 style='page-break-before: always;'>Page 3</h1>-->
             <table style="width:100%; background-color: #f2f5f9; margin-bottom:1px"><tr><td><b>SubActivities</b></td></tr></table>
             <div id="dNumberOfRecordsbySubActivity_COLUMNCHART"></div>
-            <div id="dWhiteSpace5"></div>
+            <div id="dWhiteSpace6"></div>
             <div id="dNumberOfRecordsbySubActivity" class="myDivClassSmall"></div>
 
             <!--<h1 style='page-break-before: always;'>Page 4</h1>-->
 
             <table style="width:100%; background-color: #f2f5f9"><tr><td><b>Office</b></td></tr></table>
             <div id="dNumberOfRecordsbyOffice_COLUMNCHART"></div>
-            <div id="dWhiteSpace6"></div>
+            <div id="dWhiteSpace7"></div>
             <div id="dNumberOfRecordsbyOffice" class="myDivClassSmall"></div>
 
             <!--<h1 style='page-break-before: always;'>Page 5</h1>-->
@@ -259,7 +271,7 @@
 
             <table style="width:100%; background-color: #f2f5f9"><tr><td><b>Overlapping Areas: States (continuted)</b></td></tr></table>
             <div id="dGISStates_PIECHART"></div>
-            <div id="dWhiteSpace7"></div>
+            <div id="dWhiteSpace8"></div>
             <div id="dGISStates" class="myDivClassSmall"></div>
 
             <!--<h1 style='page-break-before: always; '>Page 6</h1>-->
@@ -270,7 +282,7 @@
 
             <table style="width:100%; font-size: 13px; background-color: #f2f5f9; margin-bottom:1px"><tr><td><b>Overlapping Areas: GRSG Population Areas (continuted)</b></td></tr></table>
             <div id="dGISPoP_COLUMNCHART"></div>
-            <div id="dWhiteSpace8"></div>
+            <div id="dWhiteSpace9"></div>
             <div id="dGISPoP" class="myDivClassSmall"></div>
 
             <!--<h1 style='page-break-before: always; '>Page 8</h1>-->
@@ -280,7 +292,7 @@
 
             <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: WAFWA MANAGEMENT ZONES</b></td>            </tr>        </table>
             <div id="dGISMZ_PIECHART"></div>
-            <div id="dWhiteSpace9"></div>
+            <div id="dWhiteSpace10"></div>
 
             <div id="dGISMZ" class="myDivClassSmall"></div>
 
@@ -288,42 +300,42 @@
 
             <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: SURFACE MANAGEMENT AGENCY</b></td>            </tr>        </table>
             <div id="dGISSMA_PIECHART"></div>
-            <div id="dWhiteSpace10"></div>
+            <div id="dWhiteSpace11"></div>
             <div id="dGISSMA" class="myDivClassSmall"></div>
 
             <table style="width:100%; font-size: 13px; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: GRSG GENERAL HABITAT MANAGEMENT AREAS</b></td>            </tr>        </table>
             <div id="dGISGHMA_COLUMNCHART"></div>
-            <div id="dWhiteSpace11"></div>
+            <div id="dWhiteSpace12"></div>
             <div id="dGISGHMA" class="myDivClassSmall"></div>
 
             <table style="width:100%; font-size: 13px; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: GRSG PRIORITY HABITAT MANAGEMENT AREAS</b></td>            </tr>        </table>
             <div id="dGISPHMA_COLUMNCHART"></div>
-            <div id="dWhiteSpace12"></div>
+            <div id="dWhiteSpace13"></div>
             <div id="dGISPHMA" class="myDivClassSmall"></div>
 
             <table style="width:100%; font-size: 13px; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: RESILIENCE and RESISTANCE</b></td>                        </tr>        </table>
-            <div id="dWhiteSpace13"></div>
+            <div id="dWhiteSpace14"></div>
             <div id="dGISRMZ_PIECHART"></div>
             <div id="dGISRMZ" class="myDivClassSmall"></div>
             <table style="width:100%; font-size: 13px; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: GRSG POPULATION by MANAGEMENT ZONE</b></td>            </tr>        </table>
-            <div id="dWhiteSpace14"></div>
+            <div id="dWhiteSpace15"></div>
             <div id="dGISAB_PIECHART"></div>
             <div id="dGISAB" class="myDivClassSmall"></div>
 
             <table style="width:100%; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas:BREEDING HABITAT PROBABILITY</b></td>            </tr>        </table>
-            <div id="dWhiteSpace15"></div>
+            <div id="dWhiteSpace16"></div>
             <div id="dGISBD_PIECHART"></div>
             <div id="dGISBD" class="myDivClassSmall"></div>
 
             <!--<h1 style='page-break-before: always; '>Page 12</h1>-->
             <table style="width:100%; font-size: 13px; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: BREEDING HABITAT PROBABILITY (continuted)</b></td>            </tr>        </table>
-            <div id="dWhiteSpace16"></div>
+            <div id="dWhiteSpace17"></div>
             <div id="dGISBP_PIECHART"></div>
             <div id="dGISBP" class="myDivClassSmall"></div>
             <!--<h1 style='page-break-before: always; '>Page 13</h1>-->
 
             <table style="width:100%; font-size: 13px; background-color: #f2f5f9">            <tr>                <td><b>Overlapping Areas: RESILIENCE and RESISTANCE AND POPULATION INDEX </b></td>            </tr>        </table>
-            <div id="dWhiteSpace17"></div>
+            <div id="dWhiteSpace18"></div>
             <div id="dGISIDX_PIECHART"></div>
             <div id="dGISIDX" class="myDivClassSmall"></div>
 

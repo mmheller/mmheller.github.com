@@ -35,17 +35,10 @@ define([
 
         GetCountOfFCDef_ShowText: function (strQuery, strURL, strHTML_ID, strStatType, strFieldName, strAddedQueryString) {
             this.strHTML_ID = strHTML_ID;
-            //Debug.writeln("mh_featurecount GetCountOfFCDef_ShowText :" + this.strHTML_ID);
-            
             disableOrEnableFormElements("dropdownForm", 'select-one', true);  //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
   
             this.strURLStored = strURL;
-
-            if (this.strHTML_ID != "txtQueryResults") {
-                var temp = "";
-            }
-
             this.strQueryStored = strQuery;
             var pQueryTask = new esri.tasks.QueryTask(strURL + "?returnCountOnly=true");
             var pQuery = new esri.tasks.Query();
@@ -54,13 +47,11 @@ define([
             strQuery = strQuery.replace(" and (((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))", "");
             if (strQuery == "((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))") {
                 strQuery = "(OBJECTID > 0) ";
-                //strQuery = "(objectid > 0) ";
             }
 
             if (strAddedQueryString != "") {
                 strQuery += strAddedQueryString;
             }
-
             pQuery.where = strQuery;
             pQuery.returnGeometry = false;
             return pQueryTask.execute(pQuery, this.returnEvents, this.err);
@@ -99,7 +90,6 @@ define([
                     break;
 
                 case "dTotalPlansQ":
-
                     app.gQuerySummary.Summarize(this.strQueryStored, "", false);
 
                     break;

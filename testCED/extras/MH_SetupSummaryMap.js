@@ -112,16 +112,10 @@ define([
               });
           },
 
-          //Phase1: function () {
-          //  //do nothing
-          //},
-
-
           Phase1: function () {
               app.basemapLoaded = false;
               app.loading = dojo.byId("loadingImg");  //loading image. id
               var arrayStrMapExtent = localStorage.getItem("ls_strMapExtent").split(",");
-              //var customExtentAndSR = new esri.geometry.Extent(-14000000, 4800000, -11000000, 6200000, new esri.SpatialReference({ "wkid": 3857 }));
               var customExtentAndSR = new esri.geometry.Extent(Number(arrayStrMapExtent[0]), Number(arrayStrMapExtent[1]),
                                                                Number(arrayStrMapExtent[2]), Number(arrayStrMapExtent[3]), new esri.SpatialReference({ "wkid": 3857 }));
               app.map = new esri.Map("mapSum", { basemap: 'topo', logo: false, extent: customExtentAndSR });
@@ -246,13 +240,7 @@ define([
                           arrayLayers.push(CED_PP_poly);
                   }
               });
-                         
-              //arrayLayers = [pBase_PAC, pBase_SMA, pBase_GHMA, pBase_PHMA, pBase_Eco, pBase_RRP, pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop, plabels1, plabels2, CED_PP_poly, CED_PP_line, CED_PP_point, this.gCED_PP_point4FeatureTable];
-              //arrayLayers = [pBase_PAC, pBase_SMA, pBase_GHMA, pBase_PHMA, pBase_Eco, pBase_RRP, pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop,
-              //                  plabels1, plabels2, , , CED_PP_point];
-
               app.map.addLayers(arrayLayers);
-              
               return arrayLayers;
           },
 

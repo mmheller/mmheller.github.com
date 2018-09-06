@@ -135,6 +135,8 @@ function startExport2PDF() {
     $("#dNumberOfRecordsbyImpParty").css("font-size", "10px");// original value
     $("#dNumberOfRecordsbyStartYear").css("font-family", "helvetica");// change property value
     $("#dNumberOfRecordsbyStartYear").css("font-size", "10px");// original value
+    $("#dNumberOfRecordsbyFinishYear").css("font-family", "helvetica");// change property value
+    $("#dNumberOfRecordsbyFinishYear").css("font-size", "10px");// original value
     $("#dNumberOfRecordsbyActivity").css("font-family", "helvetica");// change property value
     $("#dNumberOfRecordsbyActivity").css("font-size", "10px");// original value
 
@@ -189,6 +191,10 @@ function startExport2PDF() {
                 },
                 '#dNumberOfRecordsbyStartYear_COLUMNCHART': function (element, renderer) {
                     AddChartImage2PDF(pdf, "dNumberOfRecordsbyStartYear_COLUMNCHART", renderer.pdf.internal.pages.length - 1, renderer.pdf.tableHeaderRow[0][1] + 25);
+                    return true;                      // true = "handled elsewhere, bypass text extraction"
+                },
+                '#dNumberOfRecordsbyFinishYear_COLUMNCHART': function (element, renderer) {
+                    AddChartImage2PDF(pdf, "dNumberOfRecordsbyFinishYear_COLUMNCHART", renderer.pdf.internal.pages.length - 1, renderer.pdf.tableHeaderRow[0][1] + 25);
                     return true;                      // true = "handled elsewhere, bypass text extraction"
                 },
                 '#dNumberOfRecordsbyOffice_COLUMNCHART': function (element, renderer) {
@@ -264,7 +270,7 @@ function startExport2PDF() {
         pdfMargins);
 
     var i;
-    for (i = 1; i < 17; i++) {
+    for (i = 1; i < 19; i++) {
         strDivID4WhiteSpace = "dWhiteSpace" + i.toString();
         var pElement = document.getElementById(strDivID4WhiteSpace);
         if (pElement != undefined) {
@@ -322,7 +328,7 @@ define([
         StartPrinting: function (pMap) {
 
             var i;
-            for (i = 1; i < 17; i++) {
+            for (i = 1; i < 19; i++) {
                 strDivID4WhiteSpace = "dWhiteSpace" + i.toString();
                 var pElement = document.getElementById(strDivID4WhiteSpace);
                 if (pElement != undefined) {
