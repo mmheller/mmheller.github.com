@@ -285,7 +285,10 @@ define([
             else if (strTheme == "Line") {
                 pFeature.setSymbol(new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([0, 255, 255]), 3));
             }
-            else { pFeature.setSymbol(new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([0, 0, 0]), 3), new Color([0, 255, 255, 0.4]))); }
+            else {
+                pFeature.setSymbol(new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([255, 0, 0]), 2), new Color([0, 255, 255, 0.4])));
+                //pSeletionSymbolPoly = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([255, 0, 0]), 1), new Color([0, 255, 255, 0.4]));
+            }
 
 
             var strGISTotalAcres = "n/a";

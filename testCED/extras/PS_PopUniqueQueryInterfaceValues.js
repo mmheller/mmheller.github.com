@@ -159,7 +159,7 @@ define([
                     //values.sort();
 
 
-                    if (this.strFieldNameText == "Activity") {
+                    if (this.strFieldNameText == "Start_Year") {
                         var all = [];
                         for (var i = 0; i < values.length; i++) {
                             all.push({ 'T': texts[i], 'V': values[i] });
@@ -170,26 +170,20 @@ define([
                         all.sort(sortFunction);
                         texts = [];
                         values = [];
-                        //arrayOfNot2ShowActivityValues = ["Fire-Related: Habitat Restoration and/or Pre-Suppression Efforts",
-                        //                                 "Habitat Restoration (Fire)",
-                        //                                 "Non-regulatory Conservation Strategies",
-                        //                                 "Regulatory Mechanisms, Plans, Policy",
-                        //                                 "Restoration:  Infrastructure Removal and Modification",
-                        //                                 "Restoration:  Livestock & Rangeland Management",
-                        //                                 "Restoration: Habitat Reclamation Efforts",
-                        //                                 "Wildfire: Interagency Pre-suppression Planning Efforts"];
-
-                        arrayOfNot2ShowActivityValues = [""];
+                        arrayOfNot2ShowActivityValues = ["1900", "1940", "1947", "1960",
+                                                         "1973", "1977", "1978", "1979",
+                                                         "1980", "1981", "1983", "1984",
+                                                         "1985", "1986", "1987", "1988", "1989",
+                                                         "1990", "2095", "2098", "2099"];
+                        //arrayOfNot2ShowActivityValues = [""];
 
                         for (var i = 0; i < all.length; i++) {
                             blnShow = true;
-
                             dojo.forEach(arrayOfNot2ShowActivityValues, function (arrayOfNot2ShowActivityValue) {
                                 if ((arrayOfNot2ShowActivityValue == all[i].T) | (arrayOfNot2ShowActivityValue == all[i].V)) {
                                     blnShow = false;
                                 }
                             });
-
                             if (blnShow) {
                                 texts.push(all[i].T);
                                 values.push(all[i].V);

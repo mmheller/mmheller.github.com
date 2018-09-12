@@ -124,7 +124,7 @@ define([
               CED_PP_line.setSelectionSymbol(pSeletionSymbolLine);
 
               CED_PP_poly = new FeatureLayer(app.strTheme1_URL + "2", { id: "2", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], autoGeneralize: true, visible: true });
-              pSeletionSymbolPoly = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([0, 0, 0]), 3), new Color([0, 255, 255, 0.4]));
+              pSeletionSymbolPoly = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([255, 0, 0]), 2), new Color([0, 255, 255, 0.4]));
               CED_PP_poly.setSelectionSymbol(pSeletionSymbolPoly);
 
               var strBase_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/"
@@ -472,7 +472,6 @@ define([
                           showResults(r);
                       });
 
-
                       function showResults(results) {
                           var pUnionedExtent;
                           if (results[0].length > 0) {
@@ -511,8 +510,10 @@ define([
                                   pUnionedExtent = graphicsUtils.graphicsExtent(CED_PP_line.getSelectedFeatures());
                               }
                           }
-
-                          app.map.setExtent(pUnionedExtent, true);
+                          if (document.getElementById("cbx_zoom").checked) {
+                            app.map.setExtent(pUnionedExtent, true);
+                          }
+                          
                       };
                   }
                   else {
