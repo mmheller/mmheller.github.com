@@ -13,7 +13,9 @@ function hideLoading(error) {
     app.map.showZoomSlider();
 }
 
-
+$(function () {
+    $("#dialog").dialog();
+});
 
 function AllFiltersClear() {
     var strddlMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].value;
