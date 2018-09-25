@@ -81,11 +81,17 @@
                 RelationshipQuery, SimpleMarkerSymbol,
                 Color, Scalebar, Geocoder, PS_Identify, CK_AutoCompleteSearchAndZoom, PS_PopUniqueQueryInterfaceValues,
                 webMercatorUtils, BasemapGallery, mouse, query, FindTask, FindParameters) {
+
+        $(function () {
+            $("#dialogWarning1").dialog({
+                autoOpen: false
+            });
+        });
+
         
         var i;
         for (i = 1; i < 12; i++) {
             strDivID4WhiteSpace = "dWhiteSpace" + i.toString();
-            //document.getElementById(strDivID4WhiteSpace).style.visibility = "hidden";
         }
             
         app.base64Img1 = null;
@@ -133,7 +139,7 @@
         
         app.gPrintReport2PDF = new MH_PrintReport2PDF({ strURL: strURL }); // instantiate the class
 
-        app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class
+        app.gQuerySummary = new MH_Query4Summary({ strURL: strURL}); // instantiate the class
         app.gQuerySummary.Summarize(strDefQuery, strDefQuery2, true, app.FilterGeometry);
 
         app.pSupSumMap = new MH_SetupSummaryMap({}); // instantiate the class
@@ -177,6 +183,10 @@
 <body>
     <div id="dialog" title="CED Notice!">
         <p>This CED in a period of data collection. <br /><br />If generating report(s), beware the summaries, values, and figures are to be considered DRAFT and PROVISIONAL until further notice.</p>
+    </div>
+    
+    <div id="dialogWarning1" title="CED Data Retreival Error!">
+        <p>The CED is currently unable to connect to our data repository, ArcGIS Online.<br /><br />Please try back again later. If the problem persists, please contact the CED team for additional support at fw1sagegrouseced@fws.gov</p>
     </div>
 
     <!--<button onclick="javascript:demoFromHTML()">PDF</button>-->

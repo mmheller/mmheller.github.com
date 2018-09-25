@@ -31,19 +31,6 @@ define([
         },
 
         returnQS: function () {
-//            strQuery = "Contaminant LIKE '%" + this.strContaminant + "%'";
-
-//            if (this.strDataType !== "0,1") {
-//                strQuery += " and Exceedance in (" + this.strDataType + ")";
-//            }
-
-//            if (this.strManagUnit !== "All") {
-//                strQuery += " and MU='" + this.strManagUnit + "'";
-//            }
-
-//            if (strQuery.indexOf("Select") != -1) {
-//                strQuery = "";
-//            }
             strQuery = "";
             return strQuery;
         }

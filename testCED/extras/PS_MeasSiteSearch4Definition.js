@@ -15,12 +15,6 @@ define([
         return str.replace('     ', ' ').replace('    ', ' ').replace('  ', ' ');
     }
 
-//    function CreateLayerDefString(values) {
-//        var strDefQuery2 = "Project_ID in (" + values + ")";
-//        strDefQuery2 = trimStringWhiteSpace(String(strDefQuery2));
-//        return strDefQuery2;
-//    }
-
     return declare([], {
         strURL: null,
         iNonSpatialTableIndex: null,
@@ -141,7 +135,6 @@ define([
                     var testVals = {};
                     var features = results.features; //Loop through the QueryTask results and populate an array with the unique values
                     dojo.forEach(features, function (feature) {
-                        //zone = feature.attributes.project_id;
                         zone = feature.attributes.Project_ID;
                         if (!testVals[zone]) {
                             testVals[zone] = true;
@@ -204,7 +197,9 @@ define([
         },
         err: function (err) {
             console.log("Failed to get results due to an error: ", err);
-            alert(error.name);
+            $(function () {
+                $("#dialogWarning1").dialog("open");
+            });
         }
     }
     )

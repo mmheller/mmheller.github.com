@@ -338,13 +338,11 @@ define([
 
             esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
             esriConfig.defaults.io.corsEnabledServers.push("https://services.arcgis.com")
-
             esriConfig.defaults.io.corsEnabledServers.push("https://sampleserver6.arcgisonline.com")
 
             var oWid = pMap.width;
             var oHgt = pMap.height;
 
-            //var printTask = new PrintTask('https://sampleserver6.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task');
             var printTask = new PrintTask('https://utility.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task');
             var template = new PrintTemplate();
             this.imgHeight = (740 / oWid) * oHgt;

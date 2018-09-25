@@ -26,19 +26,13 @@ define([
         qry_Zoom2FeatureLayerExtent: function (pFeatureLayer1) {
             this.pFeatureLayer1 = pFeatureLayer1;
             var strQuery = pFeatureLayer1.getDefinitionExpression();
-            //strQuery = strQuery.replace(" and ((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1))", "");
-            //strQuery = strQuery.replace(" and (((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))", "");
-
             strQuery = strQuery.replace(" and (((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))", " and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))");
 
-
-            //if (strQuery == "") { strQuery = "objectid > 0"; }
             if (strQuery == "") { strQuery = "OBJECTID > 0"; }
             var pQueryT1 = new esri.tasks.QueryTask(pFeatureLayer1.url);
             var pQuery1 = new esri.tasks.Query();
             pQuery1.returnGeometry = true;
             pQuery1.outFields = ["OBJECTID"];
-            //pQuery1.outFields = ["objectid"];
             pQuery1.where = strQuery;
             this.strQuerySaved = strQuery
             var FLayer1, pPromises
@@ -74,16 +68,16 @@ define([
                 }
             }
             else {
-                //var customExtentAndSR = new esri.geometry.Extent(-14000000, 4800000, -11000000, 6200000, new esri.SpatialReference({ "wkid": 3857 }));
-                //app.map.setExtent(customExtentAndSR, true);
-                //document.getElementById("txtQueryResults").innerHTML = "0 Results";
-                //document.getElementById("btn_TextSummary").disabled = true;
+                //do nothing
             }
             return results;
         },
         err: function (err) {
             console.log("Failed to get stat results due to an error: ", err);
-            alert(error.name);
+            
+            $(function () {
+                $("#dialogWarning1").dialog("open");
+            });
         }
     }
     )

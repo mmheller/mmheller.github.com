@@ -135,8 +135,6 @@ define([
 
               var legendLayers = [];
               var strDefQuery = localStorage.getItem("ls_strDefQuery");
-              //var strDefQuery2 = localStorage.getItem("ls_strDefQuery2");
-              
 
               var str4Replacing = " and (((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))";
               strDefQuery4LinePoly = strDefQuery;
@@ -165,7 +163,6 @@ define([
               dojo.forEach(extraMaplayerList, function (pGraphicLayerIDFromOtherMap) {
                   switch (pGraphicLayerIDFromOtherMap) {
                       case "Pop":
-                          //var pBase_Pop = new FeatureLayer(strBase_URL + "0", { id: "Pop", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: true });
                           var pBase_Pop = new FeatureLayer("https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/WAFWA_MZs/FeatureServer/0", { id: "Pop", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: true });
                           arrayLayers.push(pBase_Pop);
 
@@ -179,7 +176,6 @@ define([
                           break;
                       case "MZ":
                           var pBase_MZ = new FeatureLayer("https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/WAFWA_MZs/FeatureServer/1", { id: "MZ", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: true });
-                          //var pBase_MZ = new FeatureLayer(strBase_URL + "1", { id: "MZ", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: true });
                           arrayLayers.push(pBase_MZ);
 
                           var pLabel2 = new TextSymbol().setColor(vGreyColor);
@@ -249,6 +245,9 @@ define([
 
           err: function (err) {
               console.log("Failed to get stat results due to an error: ", err);
+              $(function () {
+                  $("#dialogWarning1").dialog("open");
+              });
           }
       }
     )

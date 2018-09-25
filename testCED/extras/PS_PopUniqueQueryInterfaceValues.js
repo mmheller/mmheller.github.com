@@ -28,9 +28,6 @@ define([
     }
 
     function sortFunction(a, b) {
-        //var textA = a.T.toUpperCase();
-        //var textB = b.T.toUpperCase();
-
         if (isNaN(a.T)) {
             var textA = a.T.toUpperCase();
             var textB = b.T.toUpperCase();
@@ -156,8 +153,6 @@ define([
                         strText = "";
                         iValue = "";
                     });
-                    //values.sort();
-
 
                     if (this.strFieldNameText == "Start_Year") {
                         var all = [];
@@ -211,11 +206,6 @@ define([
 
                 if ((strdivTag4ResultsID != "") & (strdivTag4ResultsID != strdivTagSourceID)) {
                     var strTempValue = this.divTag4Results.options[this.divTag4Results.selectedIndex].text;                //record the existing selection
-
-                    //if (strTempValue != "All") {
-                    //    var strStop = "";
-                    //}
-
                     this.divTag4Results.options.length = 0; // clear out existing items
                     this.divTag4Results.options.add(new Option("All", 99))
                     this.divTag4Results.selectedIndex = 0
@@ -226,22 +216,12 @@ define([
                             var tt = texts[i];
                             if (this.divTag4Results.id == "ddlEntry") {
                                 var strDTextTemp = tt.toString();
-                                //var strDText = strDTextTemp.replace("1", "Planned").replace("2", "In Progress").replace("3", "Completed");
-                                //this.divTag4Results.options.add(new Option(strDText, iValue));
-                                //if ((strTempValue == strDText) & (strdivTagSourceID != "")) {
-                                //    this.divTag4Results.selectedIndex = i
-                                //}
                             }
-                            //} else {
-                                //                                if (this.strFieldNameValue == "ST_ID") {
-                                //                                    iValue = iValue.toString();
-                                //                                }
 
-                                this.divTag4Results.options.add(new Option(tt, iValue))
-                                if ((strTempValue == tt) & (strdivTagSourceID != "")) {
-                                    this.divTag4Results.selectedIndex = i + 1
-                                }
-                            //}
+                            this.divTag4Results.options.add(new Option(tt, iValue))
+                            if ((strTempValue == tt) & (strdivTagSourceID != "")) {
+                                this.divTag4Results.selectedIndex = i + 1
+                            }
                         }
                     }
                 }
@@ -250,7 +230,6 @@ define([
                         var strstop = ""; 
                     }
 
-                    //if (this.strQuery1 == "objectid > 0") {
                     if (this.strQuery1 == "OBJECTID > 0") {
                         //do nothing
                     } else {
@@ -260,8 +239,6 @@ define([
                     }
                 }
             }
-
-            //Debug.writeln("mh_PopUniqueQueryInterfaceValues:" + this.strFieldNameText);
 
             switch (this.strFieldNameText) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'
                 case "TypeAct":
@@ -305,7 +282,12 @@ define([
                     document.getElementById("ImgResultsLoading").style.visibility = "hidden";
                     disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
                     disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
-
+                    
+                    $(function () {
+                        $('.divOpenStats').click(function () {
+                            app.pSup.openCEDPSummary();
+                        });
+                    });
                     app.pFC.GetCountOfFCDef_ShowText(this.strQuery1, this.strURL + 0, "txtQueryResults", "count", "project_id", "");
 
                     this.iNonSpatialTableIndex = 0; //reset the table index for next time
@@ -317,10 +299,19 @@ define([
         },
 
         err: function (err) {
+            $(function () {
+                $("#dialogWarning1").dialog("open");
+            });
             console.log("Error number" + String(this.app.PS_Uniques.numberOfErrors) + " Failed to get stat results due to an error: " + this.app.PS_Uniques.strFieldNameText + this.app.PS_Uniques.strFieldNameValue + " " + this.app.PS_Uniques.strURL + this.app.iNonSpatialTableIndex, err);
             this.app.PS_Uniques.numberOfErrors += 1;
             disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+            //$(".divOpenStats").prop("onclick", null).off("click");
+            $(function () {
+                $('.divOpenStats').click(function () {
+                    app.pSup.openCEDPSummary();
+                });
+            });
         }
     });
 }

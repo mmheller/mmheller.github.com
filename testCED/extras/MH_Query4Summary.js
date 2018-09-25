@@ -99,6 +99,7 @@ define([
             document.getElementById("ImgResultsLoading").style.visibility = "visible";
             disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
+            $(".divOpenStats").prop("onclick", null).off("click");
 
             arrayQuery = [];            //table/fc index, query string, field 4 aggregation, stat type (count, sum, avg), group by field, html ID, string function
 
@@ -436,6 +437,11 @@ define([
                         document.getElementById("ImgResultsLoading").style.visibility = "hidden";
                         disableOrEnableFormElements("dropdownForm", 'select-one', false, document); //disable/enable to avoid user clicking query options during pending queries
                         disableOrEnableFormElements("dropdownForm", 'button', false, document);  //disable/enable to avoid user clicking query options during pending queries
+                        $(function () {
+                            $('.divOpenStats').click(function () {
+                                app.pSup.openCEDPSummary();
+                            });
+                        });
 
                         app.map.graphics.clear();
 
@@ -449,6 +455,9 @@ define([
         },
 
         err: function (err) {
+            $(function () {
+                $("#dialogWarning1").dialog("open");
+            });
             console.log("Failed to get stat results due to an error: " + this.app.gQuerySummary.m_iarrayQueryIndex +
                                                                    " " + this.app.gQuerySummary.iTempIndexSubmit +
                                                                    " " + this.app.gQuerySummary.iTempIndexResults, err);

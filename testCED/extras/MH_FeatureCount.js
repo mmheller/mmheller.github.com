@@ -37,7 +37,8 @@ define([
             this.strHTML_ID = strHTML_ID;
             disableOrEnableFormElements("dropdownForm", 'select-one', true);  //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
-  
+            $(".divOpenStats").prop("onclick", null).off("click");
+
             this.strURLStored = strURL;
             this.strQueryStored = strQuery;
             var pQueryTask = new esri.tasks.QueryTask(strURL + "?returnCountOnly=true");
@@ -70,6 +71,13 @@ define([
                 case "txtQueryResults":
                     disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
                     disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+                    //$(".divOpenStats").prop("onclick", null).off("click");
+                    $(function () {
+                        $('.divOpenStats').click(function () {
+                            app.pSup.openCEDPSummary();
+                        });
+                    });
+
                     this.strHTML_ID = "dTotalProjectsQ"; //this is redundant but having issues with some of the callbacks ie. GRSG pop area = Crab Creek
 
                     app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalProjectsQ", "count", "project_id", " and (typeact = 'Spatial Project')");
@@ -99,6 +107,9 @@ define([
         err: function (err) {
             console.log("Failed to get stat results due to an error: ", err);
             this.app.pFC.numberOfErrors += 1;
+            $(function () {
+                $("#dialogWarning1").dialog("open");
+            });
             if (this.app.pFC.numberOfErrors < 5) {
                 this.app.pFC.GetCountOfFCDef_ShowText(this.app.pFC.strQueryStored, this.app.pFC.strURLStored, "txtQueryResults", "count", "project_id");
             }
