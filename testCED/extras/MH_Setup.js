@@ -73,40 +73,6 @@ function getTokens() {
     return tokens;
 }
 
-
-
-//function openCEDPSummary() {
-//    localStorage.setItem("ls_strTheme1_URL", app.strTheme1_URL);
-//    localStorage.setItem("ls_strDefQuery", CED_PP_point.getDefinitionExpression());
-//    localStorage.setItem("ls_strDefQuery2", app.PS_Uniques.strQuery1);
-//    localStorage.setItem("ls_strQueryLabelText", app.strQueryLabelText);
-//    localStorage.setItem("ls_strQueryLabelTextSpatial", app.strQueryLabelTextSpatial);
-
-//    localStorage.setItem("ls_strMapExtent", String(app.map.extent.xmin + "," + app.map.extent.ymin + "," + app.map.extent.xmax + "," + app.map.extent.ymax));
-
-//    strBasemap = "topo";
-//    if (app.basemapGallery._selectedBasemap != null) {
-//        pBasemap = app.basemapGallery.getSelected();
-//        strBasemap = pBasemap.id;
-//    }
-
-//    localStorage.setItem("ls_strBasemap", strBasemap);
-
-//    var array_extraMaplayerList = [];
-//    dojo.forEach(app.map.graphicsLayerIds, function (pGraphicLayerID) {
-//        pTempGraphicLayer = app.map.getLayer(pGraphicLayerID);
-//        if ((pTempGraphicLayer.visible) &
-//            (pGraphicLayerID != "labels1") & (pGraphicLayerID != "labels2")) {
-//            array_extraMaplayerList.push(pGraphicLayerID);
-//        }
-//    });
-
-//    var str_extraMaplayerList = String(array_extraMaplayerList);
-//    localStorage.setItem("ls_extraMaplayerList", str_extraMaplayerList);
-
-//    var pNewWindow = window.open("CEDPSummary.html");
-//}
-
 function disableOrEnableFormElements(strFormName, strElementType, TorF) {
     var pform = document.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
 
@@ -710,7 +676,7 @@ define([
                       if (app.strQueryLabelTextSpatial == undefined) {
                           app.strQueryLabelTextSpatial = "";
                       }
-                      app.strQueryLabelTextSpatial += "</br>Spatial Selection (xmin=" + Math.round(pGeometry.xmin / 100000).toString() +
+                      app.strQueryLabelTextSpatial = "</br>Spatial Selection (xmin=" + Math.round(pGeometry.xmin / 100000).toString() +
                                                                         ",ymin=" + Math.round(pGeometry.ymin / 100000).toString() +
                                                                         ",xmax=" + Math.round(pGeometry.xmax / 100000).toString() +
                                                                         ",ymax=" + Math.round(pGeometry.ymax / 100000).toString() + ")";

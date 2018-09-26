@@ -77,22 +77,58 @@ define([
 
         strTextTitle = arrayTextContent[0];
         strTextTitle = strTextTitle.replace("<b>", "").replace("</b>", "");
-        strTextTitle = strTextTitle.substring(strTextTitle.search('by ') + 3, strTextTitle.length);
-        strTextTitle = strTextTitle.substring(0, strTextTitle.search('"'));
+
+        strTextTitle = strTextTitle.replace("CUMULATIVE PERCENT of GRSG POPULATION by MANAGEMENT ZONE", "CUMULATIVE PERCENT of GRSG POPULATION");
+        strTextTitle = strTextTitle.replace("GRSG BREEDING HABITAT PROBABILITY by MANAGEMENT ZONE", "GRSG BREEDING HABITAT PROBABILITY");
+        strTextTitle = strTextTitle.replace("GRSG BREEDING HABITAT PROBABILITY intersected with RESILIENCE and RESISTANCE CATEGORIES by MANAGEMENT ZONE", "GRSG BREEDING HABITAT PROBABILITY intersected with RESILIENCE and RESISTANCE CATEGORIES");
+
+
+        if (strTextTitle.indexOf("by ") > -1) {
+            strTextTitle = strTextTitle.substring(strTextTitle.search('by ') + 3, strTextTitle.length);
+            strTextTitle = strTextTitle.substring(0, strTextTitle.search('"'));
+        } else {
+
+            strTextTitle = strTextTitle.substring(1, (strTextTitle.length - 1));
+        }
+
+
+
+        
         arrayTextContent.shift();  //remove the 1st line from the array
 
         var arrayRefined = [[strTextTitle, "Acres"]];
+
+        var blnProcessAcres = true;
+        var strTotalProjects = document.getElementById("dTotalProjects").innerHTML;
+        if (strTotalProjects.indexOf(" 0 efforts") > -1) {
+            blnProcessAcres = false;
+            arrayRefined = [[strTextTitle, "# of Efforts"]];
+        }
+        
         dojo.forEach(arrayTextContent, function (strTextContentRow) {
             arrayTextContentRow = strTextContentRow.split(", ");
 
             if (arrayTextContentRow.length == 2) {
-                strAcres = arrayTextContentRow[1];
-                strAcres = strAcres.replace(" acres", "")
-                strAcres = strAcres.replace(",", "").replace(",", "").replace(",", "").replace(",", "").replace(",", "").replace(",", "");
-                strAcres = strAcres.replace("N/A", "0");
-                strAcres = strAcres.replace("NaN", "0");
-                dblAcres = Number(strAcres);
-                 
+                if (blnProcessAcres) {
+                    strAcres = arrayTextContentRow[1];
+                    strAcres = strAcres.replace(" acres", "")
+                    strAcres = strAcres.replace(",", "").replace(",", "").replace(",", "").replace(",", "").replace(",", "").replace(",", "");
+                    strAcres = strAcres.replace("N/A", "0");
+                    strAcres = strAcres.replace("NaN", "0");
+                    dblValue = Number(strAcres);
+                } else {
+                    strNumberofEfforts = arrayTextContentRow[0];
+                    strNumberofEfforts = strNumberofEfforts.replace(" efforts", "")
+                    strNumberofEfforts = strNumberofEfforts.replace(",", "").replace(",", "").replace(",", "").replace(",", "").replace(",", "").replace(",", "");
+                    strNumberofEfforts = strNumberofEfforts.replace("<b>", "").replace("</b> ", "");
+                    strNumberofEfforts = strNumberofEfforts.replace("N/A", "0");
+                    strNumberofEfforts = strNumberofEfforts.replace("NaN", "0");
+                    
+                    arraystrNumberofEfforts = strNumberofEfforts.split(":");
+                    strNumberofEfforts = arraystrNumberofEfforts[1];
+                    dblValue = Number(strNumberofEfforts);
+
+                }
                 strEntitiy = arrayTextContentRow[0]
                 strEntitiy = strEntitiy.replace("RESTORATION: ", "RESTORATION| ");
                 strEntitiy = strEntitiy.split(":")[0].replace("<b>", "").replace("</b>", "");
@@ -104,8 +140,8 @@ define([
                 strEntitiy = strEntitiy.replace(";&lt;", "<");
                 strEntitiy = strEntitiy.replace("&lt;", "<");
                 strEntitiy = strEntitiy.replace("&gt;", ">");
-
-                arrayRefined.push([strEntitiy, dblAcres]);
+                
+                arrayRefined.push([strEntitiy, dblValue]);
             }
         });
         return arrayRefined;
@@ -158,7 +194,15 @@ define([
                 var dataArray = ConvertSummaryString2Array4DataTable(sCHART_DIVID);
                 if (dataArray.length > 1){  //some of the summaries will not return data
                     var dataTable = google.visualization.arrayToDataTable(dataArray);
-                    var options = { title: dataArray[0][0] };
+
+                    var strTitlePrefix = "Acres by ";
+                    var strTotalProjects = document.getElementById("dTotalProjects").innerHTML;
+                    if (strTotalProjects.indexOf(" 0 efforts") > -1) {
+                        var strTitlePrefix = "Number of Efforts by ";
+                    }
+
+                    var options = { title: strTitlePrefix + dataArray[0][0] };
+
                     if (blnPieCHART) {
                         var pChart1 = new google.visualization.PieChart(document.getElementById(app.arrayOfCHART_DIVIDs[i]));
                     } else {
