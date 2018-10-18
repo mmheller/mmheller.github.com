@@ -1,5 +1,5 @@
-﻿//Created By:  Matt Heller, Great Northern Landscape Conservation Cooperative / U.S. Fish and Wildlife Service
-//Date:        Oct 2014
+﻿//Created By:  Matt Heller,  U.S. Fish and Wildlife Service, Science Applications, Region 6
+//Date:        Oct 2014, Updated Oct 2018
 
 function showLoading() {
     esri.show(app.loading);

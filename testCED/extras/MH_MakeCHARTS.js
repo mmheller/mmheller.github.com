@@ -1,9 +1,9 @@
-﻿//Created By:  Matt Heller, Great Northern Landscape Conservation Cooperative / U.S. Fish and Wildlife Service
-//Date:        Oct 2016
+﻿//Created By:  Matt Heller,  U.S. Fish and Wildlife Service, Science Applications, Region 6
+//Date:        Oct 2014, Updated Oct 2018
 
 
-// You could either use a function similar to this or pre convert an image with for example http://dopiaza.org/tools/datauri
-// http://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript
+// You could either use a function similar to this or pre convert an image with for example https://dopiaza.org/tools/datauri
+// https://stackoverflow.com/questions/6150289/how-to-convert-image-into-base64-string-using-javascript
 function imgToBase64(url, callback, imgVariable) {
     if (!window.FileReader) {
         callback(null);
@@ -178,8 +178,7 @@ define([
                                        "dGISMZ_PIECHART",
                                        "dGISRMZ_PIECHART",
                                        "dGISAB_PIECHART",
-                                       "dGISGHMA_COLUMNCHART",
-                                       "dGISPHMA_COLUMNCHART",
+                                       "dGISBLMHMA_COLUMNCHART",
                                        "dGISBD_PIECHART",
                                        "dGISBP_PIECHART",
                                        "dGISIDX_PIECHART"];

@@ -1,6 +1,6 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<!--Created By:  Matt Heller, Great Northern Landscape Conservation Cooperative / U.S. Fish and Wildlife Service
-Date:        Oct 2014-->
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Created By:  Matt Heller,  U.S. Fish and Wildlife Service, Science Applications, Region 6
+Date:        Oct 2014, Updated Oct 2018-->
 <!--{% load staticfiles %}-->
 
 <html>
@@ -12,8 +12,8 @@ Date:        Oct 2014-->
     <link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css" />
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="Styles/panel.css" />
-    <!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/images/grsgmap/Styles/panel.css' %}"/>-->
+    <link rel="stylesheet" type="text/css" href="Styles/panelMapAndReport.css" />
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/Styles/panelMapAndReport.css' %}"/>-->
     <style>
         html, body {
               height: 100%;
@@ -25,7 +25,7 @@ Date:        Oct 2014-->
         }
     </style>
     <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
-    <!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/images/grsgmap/extras' %}"} };</script>-->
+    <!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/javascript/grsgmap/extras' %}"} };</script>-->
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
     <script type="text/javascript" src="https://js.arcgis.com/3.20/"></script>    
@@ -38,7 +38,7 @@ Date:        Oct 2014-->
         "esri/map", "esri/config", "dojo/dom-construct",
         "dojo/_base/lang", "esri/layers/FeatureLayer", "esri/dijit/Legend", "esri/urlUtils",
         "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on", "extras/PS_MeasSiteSearch4Definition", 
-        "dijit/form/CheckBox", "extras/MH_Zoom2FeatureLayer", "extras/MH_Setup",
+        "dijit/form/CheckBox", "extras/MH_Zoom2FeatureLayerCEDMap", "extras/MH_SetupCEDMap",
         "extras/MH_Query4Summary",
         "esri/tasks/RelationshipQuery", "esri/symbols/SimpleMarkerSymbol", "dojo/_base/Color", "esri/dijit/Scalebar",
         "esri/dijit/Geocoder", "extras/CK_AutoCompleteSearchAndZoom", 
@@ -139,7 +139,7 @@ Date:        Oct 2014-->
                 <br />
                 <form id="dropdownForm">
 
-                    <!--<center><h2>Filter/Query Data<img id="ImgResultsLoading" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="height:15px" /></h2></center>-->
+                    <!--<center><h2 title="To Filter/Query Data, select any of the dropdown filter options or use the 'Select Efforts On Map Tool' to spatially select conservation efforts.  Click the 'Clear' button to clear search criteria and return to full map extent.  Searching and zooming by Plan/Project name, or general geographic location name, is also available below">Filter/Query Data<img id="ImgResultsLoading" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="height:15px" /></h2></center>-->
                     <center><h2 title="To Filter/Query Data, select any of the dropdown filter options or use the 'Select Efforts On Map Tool' to spatially select conservation efforts.  Click the 'Clear' button to clear search criteria and return to full map extent.  Searching and zooming by Plan/Project name, or general geographic location name, is also available below">Filter/Query Data<img id="ImgResultsLoading" src="images/loading.gif" style="height:15px" /></h2></center>
 
                     <!---->
@@ -147,8 +147,6 @@ Date:        Oct 2014-->
                     <font size="2" title="Non-Spatial Projects or Non-Spatial Plans selections will provice results in the table and summaries, however NO efforts will show in the map"><u>Project or Plan:</u></font><br />
                     <select id="ddlMatrix" class="selectClass" disabled>
                         <option value="All">All</option>
-                        <!--                      <option value="Project">Project</option>
-            <option value="Plan">Plan</option>-->
                     </select><br /><br />
 
                     <font size="2" title="Efforts that are 'In Progress' have been only partially implemented and have not been completed. A conservation effort that would be considered 'Completed' no longer requires further actions aside from post-treatment monitoring (effectiveness monitoring), or maintenance.  No efforts designated as 'Planned' are available for viewing or reporting" ><u>Implementation Status:</u></font><br />
@@ -268,6 +266,7 @@ Date:        Oct 2014-->
 
                     <div id="pDivOpenStats" class="divOpenStats" onmouseover="" style="cursor: pointer;">
                         <div id="imageReport">
+                            <!--<img src="{% static 'ced_main/images/grsgmap/report.png' %}" alt="Click for summary report" height="22px" width="19px" />-->
                             <img src="images/report.png" alt="Click for summary report" height="22px" width="19px" />
                         </div>
                         <div id="txtReport" title="Click this link for the comprehensive CED summary report.  The summary report includes various report summaries, charts, map, and 'Print Report to PDF' options">
@@ -286,6 +285,7 @@ Date:        Oct 2014-->
 
                 <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
                 <div id="txt_Version" style="position:absolute; right:15px; bottom:20px; color:#404040; z-index:50; font-size:11px">CED Interactive Map Version 2.1.0</div>
+                <!--<img id="loadingImg" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="position:fixed; right:40%; top:50%; z-index:100;" />-->
                 <img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
 
                 <div id="dialogWarning1" title="CED Data Retreival Error!">
@@ -312,25 +312,39 @@ Date:        Oct 2014-->
     </div>
 
 
-    <div id="contact1" style="position:absolute; top:10px; right:20px;" >
-        <a href="https://conservationefforts.org/sgce/about/#AC" target="_blank" style="color: #ffffff;font-family: helvetica">Contact Us</a>
+    <div id="contact1" style="position:absolute; top:10px; right:20px;">  
+        <a href="/sgce/about/#AC" target="_blank" style="color: #ffffff;font-family: helvetica">Contact Us</a>
+    </div>
+    <div id="contact2" style="position:absolute; top:10px; right:130px;">
+        <a href="/sgce/about/" target="_blank" style="color: #ffffff;font-family: helvetica">Project Background</a>
     </div>
 
-    <div id="contact2"  style="position:absolute; top:10px; right:130px;">
-        <a href="https://conservationefforts.org/sgce/about/" target="_blank" style="color: #ffffff;font-family: helvetica">Project Background</a>
-    </div>
 
-    <a href="http://conservationefforts.org/welcome/" target="_blank">
-        <img id="theImage4" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/CEDlogo_white_180x31.png"
+    <!--<a href="/sgce/" target="_blank">
+        <img id="theImage4" border="0" src="{% static 'ced_main/images/ced_main/CEDlogo_white_180x31.png' %}"
              style="position:absolute; top:20px; left:18px;" height="45" />
     </a>
-    <a href="http://www.fws.gov" target="_blank">
-        <img id="theImage3" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USFWS_150x31.png"
+    <a href="https://www.fws.gov" target="_blank">
+        <img id="theImage3" border="0" src="{% static 'ced_main/images/ced_main/USFWS_150x31.png' %}"
              style="position:absolute; top:25px; left:325px;" height="35" />
     </a>
-    <a href="http://www.usgs.gov" target="_blank">
-        <img id="theImage2" border="0" src="http://conservationefforts.org/static/ced_main/images/ced_main/USGS_117x31.png"
-             style="position:absolute; top:25px; left:505px;" height="35" />    </a>
+    <a href="https://www.usgs.gov" target="_blank">
+        <img id="theImage2" border="0" src="{% static 'ced_main/images/ced_main/USGS_117x31.png' %}"
+             style="position:absolute; top:25px; left:505px;" height="35" />    </a>-->
+
+
+    <a href="/sgce/" target="_blank">
+        <img id="theImage4" border="0" src="images/CEDlogo_white_180x31.png"
+             style="position:absolute; top:20px; left:18px;" height="45" />
+    </a>
+    <a href="https://www.fws.gov" target="_blank">
+        <img id="theImage3" border="0" src="images/USFWS_150x31.png"
+             style="position:absolute; top:25px; left:325px;" height="35" />
+    </a>
+    <a href="https://www.usgs.gov" target="_blank">
+        <img id="theImage2" border="0" src="images/USGS_117x31.png"
+             style="position:absolute; top:25px; left:505px;" height="35" />
+    </a>
 
 
 </body>

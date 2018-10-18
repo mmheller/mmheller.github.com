@@ -1,10 +1,9 @@
-﻿//Created By:  Matt Heller, Great Northern Landscape Conservation Cooperative / U.S. Fish and Wildlife Service
-//Date:        Oct 2014
+﻿//Created By:  Matt Heller,  U.S. Fish and Wildlife Service, Science Applications, Region 6
+//Date:        Oct 2014, Updated Oct 2018
 
 function showFeaturePrep(feature, strURL, strTheme) {
     this.app.pPS_Identify.strURL4Statquery = strURL;
     this.app.pPS_Identify.showFeature(feature, strTheme);
-    //    this.showFeature(feature);
 }
 define([
   "dojo/_base/declare", "dojo/_base/lang", "esri/request", "dojo/promise/all", "dojo/_base/array", "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol", "esri/symbols/SimpleFillSymbol",

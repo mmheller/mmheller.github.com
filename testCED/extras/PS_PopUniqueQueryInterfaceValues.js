@@ -1,5 +1,5 @@
-﻿//Created By:  Matt Heller, Great Northern Landscape Conservation Cooperative / U.S. Fish and Wildlife Service
-//Date:        Oct 2014
+﻿////Created By:  Matt Heller,  U.S. Fish and Wildlife Service, Science Applications, Region 6
+//Date:        Oct 2014, Updated Oct 2018
 
 function disableOrEnableFormElements(strFormName, strElementType, TorF) {
     var pform = document.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
@@ -306,7 +306,7 @@ define([
             this.app.PS_Uniques.numberOfErrors += 1;
             disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
-            //$(".divOpenStats").prop("onclick", null).off("click");
+
             $(function () {
                 $('.divOpenStats').click(function () {
                     app.pSup.openCEDPSummary();

@@ -1,0 +1,439 @@
+﻿/* Classes */
+
+.HTMLTable_styleMiddle    {    width: 13px;background-color: #FFFFFF}
+.HTMLTable_styleLeft    {    vertical-align:top; width: 350px; border-bottom-style: solid; border-width: thick; border-color: #FFFFFF; padding:7px; font-size: 12px;}
+.HTMLTable_BannerRow    {   vertical-align:middle; background-color: rgb(151, 118, 123); color: #FFFFFF; font-weight: bold;}
+.HTMLTable_BannerRowRJ {    vertical-align: middle; text-align: right;   background-color: rgb(151, 118, 123);    color: #FFFFFF; font-weight: bold;}
+.HTMLTable_BannerRow2    {   vertical-align:middle; width: 350px; background-color: rgb(151, 118, 123); color: #FFFFFF; padding:5px;}
+.HTMLTable_styleMiddleLessPad    {    background-color: #FFFFFF; font-size: 12px;
+}
+.HTMLTable_styleLeftLessPad    {    vertical-align:top; width: 625px; border-bottom-style: solid; border-width: thick; border-color: #FFFFFF; font-size: 12px;}
+
+.HTMLTable_styleRightJ_Compact    { text-align: right; vertical-align:middle; width: 195px;}
+.HTMLTable_styleLeftJ_Compact    { text-align: left; vertical-align:middle;}
+.HTMLTable_styleMiddle_Compact    {    width: 5px;}
+
+.HTMLTable_styleRight {text-align: right; vertical-align:bottom; padding:1px;}
+
+
+input.button-SelectOnMap {
+    /* referencing image in Matt's local dev env*/
+    background-image: url(../images/SelectionSelectTool32.png);/* 16px x 16px */
+
+    /* referencing image in CED Django env*/
+    /*background-image: url(static("ced_main/images/grsgmap/SelectionSelectTool32.gif"));*/
+
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 0px 0px;  /* equivalent to 'top left' */
+    border: none;           /* assuming we don't want any borders */
+    cursor: pointer;        /* make the cursor like hovering over an <a> element */
+    height: 32px;           /* make this the size of your image */
+    padding-left: 34px;     /* make text start to the right of the image */
+    vertical-align: middle; /* align the text vertically centered */
+}
+
+.ui-widget {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.ui-tooltip {
+    white-space: pre-line;
+}
+
+.myDivClassNormal {
+    font-size:14px;
+    /*background-color: tomato;*/
+    margin-top:1px; 
+    padding-top:1px;
+    font-family: "helvetica";
+}
+
+.myDivClassSmall {
+    font-size:10px;
+    /*background-color: tomato;*/
+    margin-top:1px; 
+    padding-top:1px;
+    font-family: "helvetica";
+}
+
+.bg {
+	display: block;
+	background-color: rgb(151, 118, 123);
+	filter: alpha(opacity=80);
+	-moz-opacity: 0.80;
+	-khtml-opacity: 0.80;
+	opacity: 0.80;
+}
+.rounded {
+	-moz-border-radius: 0px 0px 0px 0px;
+	-webkit-border-radius: 0px 0px 0px 0px;
+	border-radius: 0px 0px 0px 0px;
+}
+.shadow {
+	-moz-box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+	box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=135, Color='#000000')";
+}
+
+.panelTitle {
+	position: absolute;
+    width: 100%;
+	height: 84px;
+	/*right: 15px;*/
+	top: 0px;
+	color: #FFFFFF;
+	font-size: 35px;
+	font-weight: normal;
+	line-height: 40px;
+	padding: 0px;
+	text-align: right;
+	font-family: helvetica;
+}
+
+.tablequickStats{
+	height: 140px;
+	color: #FFFFFF;
+	font-size: 13px;
+	font-weight: normal;
+	line-height: 16px;
+	padding: 5px;
+	text-align: right;
+	font-family: helvetica;
+    vertical-align: bottom;
+    
+}
+
+.page-break {
+    page-break-after: always;
+    page-break-inside: avoid;
+    clear: both;
+}
+
+.page-break-before {
+    page-break-before: always;
+    page-break-inside: avoid;
+    clear: both;
+}
+
+
+.panelStats {
+	position: absolute;
+	height: 155px;
+	right: 15px;
+	bottom: 16%;
+	color: #FFFFFF;
+	font-size: 13px;
+	font-weight: normal;
+	line-height: 16px;
+	padding: 0px;
+	text-align: right;
+	font-family: helvetica;
+}
+
+#toggleForm{
+    font-size: 13px;
+}
+
+#legendDiv_2_2{
+    font-size: 13px;
+}
+
+#panelStat {
+	width: 290px;
+	height: 150px;
+	overflow: hidden;
+	float: Right;
+	line-height: 16px;
+	font-weight: normal;
+    margin-right: 5px;
+}
+
+#panelContainer {
+	margin: auto;
+	width: 880px;
+	height: 90px;
+	overflow: hidden;
+	display: none;
+}
+.panelTitleDraft {
+	position: absolute;
+	height: 33px;
+	color: #FF0000;
+	font-size: 28px;
+	font-weight: normal;
+	line-height: 40px;
+	padding: 0px;
+	text-align: right;
+}
+#panelMainDraft {
+	width: 575px;
+	height: 34px;
+	overflow: hidden;
+	float: Right;
+	line-height: 30px;
+	font-weight: normal;
+    margin-right: 5px;
+}
+
+.col {
+	position: relative;
+	width: 219px;
+	height: 80px;
+	padding: 0px;
+	margin-top: 10px;
+	margin-bottom: 0px;
+	display: none;
+	text-align: center;
+	float: left;
+}
+
+.line {
+	border-left: 1px solid #fff;
+}
+    /* ################################## */
+    #leftPane {width: 300px;}
+
+    #topPane{
+        height:84px;
+	    -moz-box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+	    -webkit-box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+	    box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+	    -ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=135, Color='#000000')";
+    }
+
+    #legendPane {border: solid #97DCF2 1px;}
+
+    #search {
+    width: 97%;
+    z-index: 2;
+    }
+
+    /* customize geocoder appearance */
+    .simpleGeocoder, .simpleGeocoder .esriGeocoderContainer {
+    width: 100%;
+    }
+    .simpleGeocoder .esriGeocoder {
+    border: 0;
+    height: 100%;
+    -moz-border-radius: 0px;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    -moz-box-shadow: 0 0 5px #888;
+    -webkit-box-shadow: 0 0 5px #888;
+    box-shadow: 0 0 5px #888;
+    }
+    
+    .simpleGeocoder .esriGeocoderIcon { 
+    display: none;
+    }
+    .simpleGeocoder .esriGeocoder .esriGeocoderReset {
+    margin: 0;
+    }
+
+    .esriPopup .titleButton.maximize {       display: none;  }  
+          
+    h1 {
+      line-height: 10px;
+      position: relative;
+      color: #FFF;
+    }
+    
+    h2 {
+       font-size: 12px;
+       font-family: 'Tahoma', cursive;
+    }    
+
+    h1 span {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 100%;
+      height: 100%;
+    }
+    h1 span.last {
+      top: 2px;
+      left: 2px;
+      color: #000;
+    }
+ 
+ 
+    .textbox {
+        border: 1px solid #c4c4c4;
+        width: 92%;
+        height: 17px;
+        font-size: 12px;
+        font-family: 'Tahoma', cursive;
+        padding: 4px;
+        box-shadow: 0px 0px 8px #d9d9d9;
+        -moz-box-shadow: 0px 0px 8px #d9d9d9;
+        -webkit-box-shadow: 0px 0px 8px #d9d9d9;
+    }
+
+    /*.textbox:focus { 
+        outline: none;
+        border: 1px solid #7bc1f7;
+        box-shadow: 0px 0px 8px #7bc1f7;
+        -moz-box-shadow: 0px 0px 8px #7bc1f7;
+        -webkit-box-shadow: 0px 0px 8px #7bc1f7;
+    }*/
+ 
+        
+
+    .divOpenStats {
+        text-align: left;
+        position: relative;
+        padding-top: 20px;
+    }
+
+    #imageReport {
+          margin-left: 5px;
+        position: absolute;
+        bottom: 0;
+      }
+
+     #txtReport {
+        margin-left: 30px;
+        position: absolute;
+        bottom: 0;
+      }
+
+    .selectClass {
+       font-size: 12px;
+       font-family: 'Tahoma', cursive;
+       width: 95%;
+    }​
+  
+     .esriScalebar
+     {
+        left:2px; 
+        bottom:35px;
+     }
+     
+     .tundra .dijitAccordionTitle 
+     {
+         border-top: 0px solid rgb(127, 105, 127);
+         color:#5C5C2E;
+         font-family: helvetica;
+     }
+     
+     .dijitAccordionContainer
+     {
+         height:calc(100% - 170px);
+     }
+     
+
+
+        .palette3Icon {
+            /* referencing image in Matt's local dev env*/
+            background-image: url(../images/palette3.png);
+            
+            /* referencing image in CED Django env*/
+            /*background-image: url(static("ced_main/images/grsgmap/palette3.gif"));*/
+
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 18px;
+            height: 18px;
+        }
+
+
+        
+        .Find32Icon {
+            /* referencing image in Matt's local dev env*/
+            background-image: url(../images/Find32.png);
+
+            /* referencing image in CED Django env*/
+            /*background-image: url(static("ced_main/images/grsgmap/Find32.gif"));*/
+
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 18px;
+            height: 18px;
+        }
+
+
+     /* BASEMAPS */
+    .panelBasemaps {
+	    position: absolute;
+	    top: 45px;
+	    right: 15px;
+	    width: 140px;
+	    height: 30px;
+	    font-family: HelveticaNeueUltraLight;
+	    color: #ffffff;
+	    font-size: 14px;
+	    padding: 0px;
+	    overflow: hidden;
+    }
+
+    .panelBasemapsOn {
+	    height: 400px;
+    }
+
+    #basemapTitle {
+	    display: block;
+	    width: 140px;
+	    height: 30px;
+	    font-family: HelveticaNeue;
+	    text-align: center;
+	    line-height: 50px;
+	    cursor: pointer;
+	    padding: 0px;
+    }
+
+    #basemapContent {
+	    display: block;
+	    width: 140px;
+	    height: 350px;
+	    font-family: HelveticaNeue;
+	    text-align: center;
+	    cursor: pointer;
+	    overflow-y: auto;
+	    overflow-x: hidden;
+	    padding: 0px;
+    }
+
+
+
+    /* BASEMAPS */
+   .panelBasemapsSum {
+	    position: absolute;
+	    top: 115px;
+	    right: 15px;
+	    width: 140px;
+	    height: 30px;
+	    font-family: HelveticaNeueUltraLight;
+	    color: #ffffff;
+	    font-size: 14px;
+	    padding: 0px;
+	    overflow: hidden;
+    }
+
+    .panelBasemapsOnSum {
+	    height: 400px;
+    }
+
+    #basemapTitleSum {
+	    display: block;
+	    width: 140px;
+	    height: 30px;
+	    font-family: HelveticaNeue;
+	    text-align: center;
+	    line-height: 50px;
+	    cursor: pointer;
+	    padding: 0px;
+    }
+
+    #basemapContentSum {
+	    display: block;
+	    width: 140px;
+	    height: 350px;
+	    font-family: HelveticaNeue;
+	    text-align: center;
+	    cursor: pointer;
+	    overflow-y: auto;
+	    overflow-x: hidden;
+	    padding: 0px;
+    }

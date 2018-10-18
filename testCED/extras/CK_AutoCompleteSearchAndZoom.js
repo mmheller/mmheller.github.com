@@ -1,5 +1,5 @@
-﻿//Created By:  Matt Heller, Great Northern Landscape Conservation Cooperative / U.S. Fish and Wildlife Service
-//Date:        Oct 2014
+﻿//Created By:  Matt Heller,  U.S. Fish and Wildlife Service, Science Applications, Region 6
+//Date:        Oct 2014, Updated Oct 2018
 
 define([
   "dojo/_base/declare",
@@ -55,49 +55,6 @@ define([
                 }
             }); //End zoomToPoint require
         },
-
-
-
-        //        InitialSearch_And_AutoComplete: function () {
-        //            this.strSearchField = "SID";
-        //            $('#loc').autocomplete({
-        //                source: function (request, response) {
-        //                    $.ajax({
-        //                        url: app.strTheme1_URL + "0/query",
-        //                        dataType: "jsonp",
-        //                        data: {
-        //                            where: strSearchField + " LIKE '%" + request.term.replace(/\'/g, '\'\'').toUpperCase() + "%'",     //makes single quotes into double for sql
-        //                            outFields: strSearchField,
-        //                            returnGeometry: true,
-        //                            f: "pjson"
-        //                        },
-        //                        success: function (data) {
-        //                            if (data.features) {
-        //                                response($.map(data.features.slice(0, 19), function (item) {      //only display first 10
-        //                                    return { label: item.attributes.SID, value2: item.geometry.x, value3: item.geometry.y}  //REmove the hardcode of the field eventually
-
-        //                                }));
-        //                            }
-        //                        }
-        //                    });
-        //                },
-        //                minLength: 3,
-        //                select: function (event, ui) {
-        //                    this.blur();
-        //                    var xpoint = ui.item.value2;
-
-        //                    var ypoint = ui.item.value3;
-        //                    this.zoomToPoint(xpoint, ypoint, ""); //Add the noPoint variable to keep the point graphic from drawing on the screen
-        //                }
-        //            });
-
-
-        //            //            return pQueryT.execute(pQuery, this.returnEvents, this.err);
-        //        },
-
-
-
-
 
 
         createJSONPolygon: function (coords, selector, atts) {

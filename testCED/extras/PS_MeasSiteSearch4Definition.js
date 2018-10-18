@@ -1,5 +1,5 @@
-﻿//Created By:  Matt Heller, Great Northern Landscape Conservation Cooperative / U.S. Fish and Wildlife Service
-//Date:        Oct 2014
+﻿//Created By:  Matt Heller,  U.S. Fish and Wildlife Service, Science Applications, Region 6
+//Date:        Oct 2014, Updated Oct 2018
 
 define([
   "dojo/_base/declare",
@@ -7,7 +7,7 @@ define([
   "esri/request",
   "extras/PS_MeasSiteSearch_SetVisableQueryDef",
   "extras/PS_PopUniqueQueryInterfaceValues",
-  "extras/MH_Zoom2FeatureLayer",
+  "extras/MH_Zoom2FeatureLayerCEDMap",
 ], function (
   declare, lang, esriRequest, PS_MeasSiteSearch_SetVisableQueryDef, PS_PopUniqueQueryInterfaceValues, MH_Zoom2FeatureLayer
 ) {
