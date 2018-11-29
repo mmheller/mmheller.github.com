@@ -179,7 +179,7 @@
         "dgrid/OnDemandGrid",
         "dgrid/Selection",
 		"esri/geometry/Point",
-        "esri/map",
+        "esri/map", "esri/layers/VectorTileLayer",
 		"esri/toolbars/draw",
 		"esri/dijit/InfoWindow",
 		"esri/layers/FeatureLayer",
@@ -218,7 +218,7 @@
             arcgisPortal, OAuthInfo, esriId,
             ItemFileReadStore,array, Memory, Grid, Selection,
 		Point,
-        Map,
+        Map,VectorTileLayer,
 		Draw,
 		InfoWindow,
 		FeatureLayer,
@@ -303,6 +303,9 @@
 
             ////Tiled map service for CHAT data
             var nvCHAT = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58b99206e4b090ec658d7e71/MapServer", { opacity: 0.5 });
+
+            //var nvCHAT = new VectorTileLayer("https://tiles.arcgis.com/tiles/QVENGdaPbd4LUkLV/arcgis/rest/services/PilotStates4VTL_v1/VectorTileServer/resources/styles/root.json");
+
             //var nvCHAT = new ArcGISTiledMapServiceLayer("https://tiles.arcgis.com/tiles/QVENGdaPbd4LUkLV/arcgis/rest/services/UTH_createTPK_CHRank9/MapServer",
             //                                                { opacity: 0.5, resampling: true });
             var nvSOC = new ArcGISDynamicMapServiceLayer("https://gis1.usgs.gov/arcgis/rest/services/PADUS1_4/GAP_Status_Code/MapServer", { opacity: 0 });
