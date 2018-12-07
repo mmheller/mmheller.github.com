@@ -34,7 +34,7 @@ function headerFooterFormatting(doc, totalPages) {
 };
 
 function header(doc) {
-    doc.setFontSize(20);
+    doc.setFontSize(25);
     doc.setTextColor(40);
     doc.setFontStyle('normal');
     if (app.base64Img1) {
@@ -47,17 +47,23 @@ function header(doc) {
         doc.addImage(app.base64Img3, 'JPEG', 260, 10, 80, 20);
     }
     if (app.base64ImgMap) {
-        doc.addImage(app.base64ImgMap, 'JPEG', 350, 10, 80, 20);
+        doc.addImage(app.base64ImgMap, 'JPEG', 375, 5, 65, 30);
     }
 
-    doc.text("CED Report", pdfMargins.left + 450, 30);
+    doc.text("CED Report", pdfMargins.left + 425, 30);
     doc.setLineCap(2);
     doc.line(pdfMargins.left, 40, pdfMargins.width - pdfMargins.left, 40); // horizontal line
 };
 
 
 function footer(doc, pageNumber, totalPages) {
-    var str = "Page " + pageNumber + " of " + totalPages
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth() + 1; //January is 0!
+    var yyyy = today.getFullYear();
+    today = mm + '/' + dd + '/' + yyyy;
+
+    var str = "Page " + pageNumber + " of " + totalPages + ", Report Date: " + today
     doc.setFontSize(10);
     var iPageHeight = doc.internal.pageSize.getHeight();
     doc.text(str, pdfMargins.left, iPageHeight - 20);
@@ -110,7 +116,13 @@ function startExport2PDF() {
     if (app.base64ImgMap) {
         pdf.addImage(app.base64ImgMap, 'JPEG', pdfMargins.left, 90, pdfMargins.left + 520, 244 + 20);
         pdf.setFontSize(12);
-        pdf.text("Note: Some overlapping area efforts may not be visible in PDF map", pdfMargins.left, 400);
+        pdf.setFontType("bold");
+        pdf.text("ALERT:  The CED is in a period of data collection.", pdfMargins.left, 370);
+        pdf.text("If generating report(s), beware the summaries, values, and figures are to be considered", pdfMargins.left, 385);
+        pdf.text("DRAFT and PROVISIONAL until further notice.", pdfMargins.left, 400);
+
+        pdf.setFontType("normal");
+        pdf.text("Note: Some overlapping area efforts may not be visible in PDF map", pdfMargins.left, 420);
         pdf.setFontSize(18);
     }
 

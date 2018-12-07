@@ -123,7 +123,7 @@ Date:        Oct 2014, Updated Oct 2018-->
                          data-dojo-props='title:"Legend and Layer Options", iconClass:"palette3Icon"'>
                         <!--data-dojo-props='title:"Legend and Layer Options"'>-->
 
-                        <center><h2 title="Turn on/off layer visibility using the checkboxes next to the layer names.">Layer Visibility</h2></center>
+                        <div class="centerElement"><h2 title="Turn on/off layer visibility using the checkboxes next to the layer names.">Layer Visibility</h2></div>
                         <form id="toggleForm" style="width:650px; padding: 2px 2px;">
                             <div id="toggle"></div>
                         </form>
@@ -135,14 +135,12 @@ Date:        Oct 2014, Updated Oct 2018-->
                 <div data-dojo-type="dijit/layout/ContentPane" 
                          tooltip="Click to expand and show the Search Query Tools"
                          data-dojo-props="title:'Search Query Tools', iconClass:'Find32Icon', selected:true" 
-                         style="overflow-x: hidden !important; overflow-y: scroll"
+                         style="overflow-x: hidden !important; overflow-y: scroll"</div>
                 <br />
                 <form id="dropdownForm">
 
-                    <!--<center><h2 title="To Filter/Query Data, select any of the dropdown filter options or use the 'Select Efforts On Map Tool' to spatially select conservation efforts.  Click the 'Clear' button to clear search criteria and return to full map extent.  Searching and zooming by Plan/Project name, or general geographic location name, is also available below">Filter/Query Data<img id="ImgResultsLoading" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="height:15px" /></h2></center>-->
-                    <center><h2 title="To Filter/Query Data, select any of the dropdown filter options or use the 'Select Efforts On Map Tool' to spatially select conservation efforts.  Click the 'Clear' button to clear search criteria and return to full map extent.  Searching and zooming by Plan/Project name, or general geographic location name, is also available below">Filter/Query Data<img id="ImgResultsLoading" src="images/loading.gif" style="height:15px" /></h2></center>
-
-                    <!---->
+                    <!--<div class="centerElement"><h2 title="To Filter/Query Data, select any of the dropdown filter options or use the 'Select Efforts On Map Tool' to spatially select conservation efforts.  Click the 'Clear' button to clear search criteria and return to full map extent.  Searching and zooming by Plan/Project name, or general geographic location name, is also available below">Filter/Query Data<img id="ImgResultsLoading" src="{% static 'ced_main/images/ced_main/loading.gif' %}" style="height:15px" /></h2></div>-->
+                    <div class="centerElement"><h2 title="To Filter/Query Data, select any of the dropdown filter options or use the 'Select Efforts On Map Tool' to spatially select conservation efforts.  Click the 'Clear' button to clear search criteria and return to full map extent.  Searching and zooming by Plan/Project name, or general geographic location name, is also available below">Filter/Query Data<img id="ImgResultsLoading" src="images/loading.gif" style="height:15px" /></h2></div>
 
                     <font size="2" title="Non-Spatial Projects or Non-Spatial Plans selections will provice results in the table and summaries, however NO efforts will show in the map"><u>Project or Plan:</u></font><br />
                     <select id="ddlMatrix" class="selectClass" disabled>
@@ -209,24 +207,14 @@ Date:        Oct 2014, Updated Oct 2018-->
                 <div id="txtQueryResults" title="Total number of efforts meeting user queryfilter and/or user spatial selection/filter." style="font-size:12px;"></div>
                 <br>
 
-                <center><h2 title="Enter partial effort name or identificaiton # and pick from the resulting list to zoom to the effort location with corresponding Popup.">Search Projects and Plans</h2></center>
+                <div class="centerElement"><h2 title="Enter partial effort name or identificaiton # and pick from the resulting list to zoom to the effort location with corresponding Popup.">Search Projects and Plans</h2></div>
                 <div id="autocompleteSearch">
                     <input id="loc" class="textbox" type="text" /><br />
                     &nbsp;
                 </div>
 
-                <!--              <center><h2>Search Projects and Plans</h2></center>
-                    <div id="Div4">
-                        <input id="Text1"/><br />
-                        &nbsp;
-                    </div>-->
-
-                <center><h2 title="Enter any common geographic placename to zoom and pick from the resulting list to zoom to the location.">Go to Locations</h2></center>
+                <div class="centerElement"><h2 title="Enter any common geographic placename to zoom and pick from the resulting list to zoom to the location.">Go to Locations</h2></div>
                 <div id="search"></div>
-
-
-                <input id="btn_query_QS" type="button" value="Run Search/Filter" disabled=true style="visibility: hidden;" />
-                <!--</form>-->
             </div>
 
 
@@ -285,7 +273,7 @@ Date:        Oct 2014, Updated Oct 2018-->
 
                 <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
                 <div id="txt_Version" style="position:absolute; right:15px; bottom:20px; color:#404040; z-index:50; font-size:11px">CED Interactive Map Version 2.1.0</div>
-                <!--<img id="loadingImg" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="position:fixed; right:40%; top:50%; z-index:100;" />-->
+                <!--<img id="loadingImg" src="{% static 'ced_main/images/ced_main/loading.gif' %}" style="position:fixed; right:40%; top:50%; z-index:100;" />-->
                 <img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
 
                 <div id="dialogWarning1" title="CED Data Retreival Error!">

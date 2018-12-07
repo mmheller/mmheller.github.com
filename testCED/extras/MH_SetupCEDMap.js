@@ -1127,6 +1127,7 @@ define([
               localStorage.setItem("ls_extraMaplayerList", str_extraMaplayerList);
 
               var pNewWindow = window.open("CEDPSummary.html");
+              //var pNewWindow = window.open("CEDPSummary"); //static
           },
 
 
