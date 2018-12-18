@@ -121,7 +121,7 @@ define([
                 var strHFL_URL = "https://utility.arcgis.com/usrsvcs/servers/3ffd269482224fa9a08027ef8617a44c/rest/services/NA_SRC_v2/FeatureServer/5"; //***Production!!!!
             } else {
                 var strHFL_URL = "https://utility.arcgis.com/usrsvcs/servers/e09a9437e03d4190a3f3a8f2e36190b4/rest/services/Development_Src_v2/FeatureServer/0"; //***Sandbox!!!!!
-                dojo.byId("txt_Version").innerHTML = document.getElementById("txt_Version").innerHTML + ": Sandbox AGOL Hosted Feature Layer Currently Configured";
+                dojo.byId("txt_Version").innerHTML += ": Sandbox AGOL Hosted Feature Layer Currently Configured";
             }
 
             pSrcFeatureLayer = new esri.layers.FeatureLayer(strHFL_URL, { id:"99",
