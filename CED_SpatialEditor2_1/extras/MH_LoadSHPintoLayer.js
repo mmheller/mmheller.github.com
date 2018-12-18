@@ -1,4 +1,6 @@
-﻿
+﻿//Created By:  Matt Heller,  U.S. Fish and Wildlife Service, Science Applications, Region 6
+//Date:        May 2018, Updated Oct 2018
+
 define([
     "dojo/_base/declare",
     "dojo/_base/lang",
@@ -39,10 +41,10 @@ define([
 
         generateFeatureCollection: function (fileName) {
             var name = fileName.split(".");
-            name = name[0].replace("c:\\fakepath\\", "");            //Chrome and IE add c:\fakepath to the value - we need to remove it, See this link for more info: http://davidwalsh.name/fakepath
+            name = name[0].replace("c:\\fakepath\\", "");            //Chrome and IE add c:\fakepath to the value - we need to remove it, See this link for more info: https://davidwalsh.name/fakepath
             dom.byId('upload-status').innerHTML = '<b>Loading… </b>' + name;
 
-            var params = { //Define the input params for generate see the rest doc for details,  http://www.arcgis.com/apidocs/rest/index.html?generate.html
+            var params = { //Define the input params for generate see the rest doc for details,  https://www.arcgis.com/apidocs/rest/index.html?generate.html
                 'name': name,
                 'targetSR': app.map.spatialReference,
                 'maxRecordCount': 1000,
@@ -60,9 +62,6 @@ define([
                 'filetype': 'shapefile', 'publishParameters': JSON.stringify(params),
                 'f': 'json', 'callback.html': 'textarea'
             };
-
-            //esriId.destroyCredentials();//@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-            //map.removeLayer(pSrcFeatureLayer);
 
             request({            //use the rest generate operation to generate a feature collection from the zipped shapefile
                 url: app.portalUrl4Shapefile + '/sharing/rest/content/features/generate',

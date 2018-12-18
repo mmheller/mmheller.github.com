@@ -1,4 +1,5 @@
-﻿
+﻿//Created By:  Matt Heller,  U.S. Fish and Wildlife Service, Science Applications, Region 6
+//Date:        May 2018, Updated Oct 2018
 define([
     "dojo/_base/declare",
     "dojo/_base/lang",
@@ -23,10 +24,12 @@ define([
         btn_PolyEdit_click: function (results) {
             var dom = dojo.byId("tpick-surface-0");
             on.emit(dom, "click", { bubbles: true, cancelable: true });
-            //document.getElementById('btn_PolyEdit').style.visibility = 'hidden';
         },
 
         btn_Next_click: function () {
+            var dom = dojo.byId("tpick-surface-0");
+            on.emit(dom, "click", { bubbles: true, cancelable: true });  //Activate the poly editing tool to confirm previous edits
+            editorWidget.editToolbar.deactivate();                      //DeActivate the toolbar to close cleanly
             alert("will jump to URL per Justin");
         },
 

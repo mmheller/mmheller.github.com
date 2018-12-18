@@ -1,0 +1,175 @@
+﻿.dj_ie .infowindow .window .top .right .user .content { position: relative; }
+      .dj_ie .simpleInfoWindow .content {position: relative;}
+
+      html, body {
+           height: 100%; width: 100%; margin: 0; padding: 0; overflow:hidden; font-family:Arial;
+
+      }
+      #leftPane{
+        width:255px;
+        border:none;
+      }
+      #map{
+        padding:0;
+      }
+      #header{
+        font-weight:600;
+        font-size:14pt;
+        color:#666666;
+        padding-left:20px;
+      }
+
+
+
+
+/* Classes */
+.bg {
+	display: block;
+	background-color: rgb(151, 118, 123);
+	filter: alpha(opacity=80);
+	-moz-opacity: 0.80;
+	-khtml-opacity: 0.80;
+	opacity: 0.80;
+}
+.rounded {
+	-moz-border-radius: 0px 0px 0px 0px;
+	-webkit-border-radius: 0px 0px 0px 0px;
+	border-radius: 0px 0px 0px 0px;
+}
+.shadow {
+	-moz-box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+	box-shadow: 3px 3px 10px rgba(0,0,0,0.3);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=10, Direction=135, Color='#000000')";
+}
+.panelTitle {
+	position: absolute;
+	height: 200px;
+	right: 15px;
+	top: 15px;
+	color: #FFFFFF;
+	font-size: 15px;
+	font-weight: normal;
+	line-height: 5px;
+	padding: 0px;
+	text-align: right;
+	font-family: Arial;
+    width:320px;
+}
+
+.line {
+	border-left: 1px solid #fff;
+}
+          
+    h1 {
+      font-size: 25px;
+      color: #FFF;
+      margin-right:5px;
+    }
+    
+    h2 {
+       font-size: 9px;
+       margin-right:5px;
+       /*font-family: 'Tahoma', cursive;*/
+    }    
+     .file-upload-status {
+    	vertical-align: middle;
+    	padding: 5px 11px;
+        margin-right: 5px;
+    	font-size: 12px;
+    	}
+ 
+    .selectClass {
+       font-size: 12px;
+       font-family: 'Arial', cursive;
+       width: 95%;
+    }​
+  
+     .esriScalebar
+     {
+        left:2px; 
+        bottom:35px;
+     }
+     
+ /* BASEMAPS */
+    .panelBasemaps {
+	    position: absolute;
+	    top: 295px;
+	    right: 15px;
+	    width: 140px;
+	    height: 30px;
+	    font-family: HelveticaNeueUltraLight;
+	    color: #ffffff;
+	    font-size: 14px;
+	    padding: 0px;
+	    overflow: hidden;
+    }
+
+    .panelBasemapsOn {
+	    height: 400px;
+    }
+
+    #basemapTitle {
+	    display: block;
+	    width: 140px;
+	    height: 30px;
+	    font-family: Arial;
+	    text-align: center;
+	    line-height: 50px;
+	    cursor: pointer;
+	    padding: 0px;
+    }
+
+
+    #basemapContent {
+	    display: block;
+	    width: 140px;
+	    height: 350px;
+	    font-family: Arial;
+	    text-align: center;
+	    cursor: pointer;
+	    overflow-y: auto;
+	    overflow-x: hidden;
+	    padding: 0px;
+    }    
+    
+    /* panelLayers2Toggle */
+    .panelLayers2Toggle {
+	    position: absolute;
+	    top: 220px;
+	    right: 15px;
+	    width: 175px;
+	    height: 60px;
+	    font-family: Arial;
+	    color: #ffffff;
+	    font-size: 14px;
+	    padding: 5px;
+	    overflow: hidden;
+    }
+
+    .panelLayers2ToggleOn {
+	    height: 400px;
+    }
+
+    .alignleft {
+	    float: left;
+
+    }
+    .alignright {
+	    float: right;
+
+    }
+
+    /* nextButtonPanel */
+    .nextButtonPanel {
+	    position: absolute;
+	    bottom: 50px;
+	    right: 15px;
+	    /*width: 160px;
+	    height: 30px;*/
+	    font-family: Arial;
+	    color: #ffffff;
+	    font-size: 14px;
+	    padding: 10px;
+	    overflow: hidden;
+    }

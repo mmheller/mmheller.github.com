@@ -1,21 +1,56 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--Created By:  Matt Heller, U.S. Fish and Wildlife Service, Region 6 Science Applications
-Date:        February 2018-->
+Date:        February 2018, updated Oct 2018-->
 
 <!--{% load staticfiles %}-->
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
-    <title>Draft CED Footprinter</title>
+    <title>CED Footprinter</title>
    
     <link rel="stylesheet" href="https://js.arcgis.com/3.20/dijit/themes/claro/claro.css">
     <link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css" />
-    <link rel="stylesheet" type="text/css" href="Styles/panel2.css" />
-    <!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/images/grsgmap/Styles/panel2.css' %}" />-->
+    <link rel="stylesheet" type="text/css" href="Styles/panelFootprinter.css" />
+    <!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/Styles/panelFootprinter.css' %}" />-->
     
     <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>      
-    <!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/images/grsgmap/extras' %}"} };</script>-->
+    <!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/javascript/grsgmap/extras' %}" } };</script>-->
+
+
+      <style>
+          #GISDocText {
+              position: fixed;
+              float: left;
+              margin-left: auto;
+              margin-right: auto;
+              bottom: 50px;
+              color: black;
+              z-index: 200;
+              text-align: center;
+              width: 100%;
+          }
+
+
+              #GISDocText h3 {
+                  font-family: Arial;
+                  font-weight: bold;
+                  text-align: center;
+                  font-size: 24px;
+              }
+
+          #processinggisdiv {
+              position: fixed;
+              float: left;
+              margin-left: 49%;
+              bottom: 20px;
+              color: black;
+              z-index: 200;
+              text-align: center;
+              width: 100%;
+          }
+      </style>
+
 
     <script src="https://js.arcgis.com/3.23/"></script>
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
@@ -26,7 +61,7 @@ Date:        February 2018-->
       var pFCol;
       var app = {};
       require([
-        "extras/MH_Setup",
+        "extras/MH_SetupFootprinter",
         "esri/arcgis/Portal", "esri/arcgis/OAuthInfo", "esri/IdentityManager",
         "esri/config",
         "esri/map",
@@ -58,20 +93,22 @@ Date:        February 2018-->
   <body class="claro">   
     <div id="map" style="height:100%;"  >
         <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
-        <div id="txt_Version" style="position:absolute; left:225px; bottom:1px; color:#404040; z-index:50; font-size:11px">CED Footprinter 2.1.0</div>
+        <div id="txt_Version" style="position:absolute; left:225px; bottom:1px; color:#404040; z-index:50; font-size:11px">CED Footprinter 2.1.1</div>
         <img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
         <!--<img id="loadingImg" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="position:fixed; right:40%; top:50%; z-index:100;" />-->
     </div>
 
 
     <div class="panelTitle bg rounded shadow">
-        <div style='margin-bottom:30px' ><h1>DRAFT CED Footprinter</h1></div>
+        <div style='margin-bottom:30px' ><h1>CED Footprinter</h1></div>
 
         <div>      
             <a class="alignright" href="extras/UserHelpDocument.pdf" target="_blank">
+                <!--<img src="{% static 'ced_main/images/grsgmap/Help.png' %}" height="18" alt="Click for help" style='margin-right:5px;margin-Top:3px' />-->
                 <img src="images/Help.png" height="18" alt="Click for help" style='margin-right:5px;margin-Top:3px' />
             </a>   
 
+            <!--<a class="alignright" style='margin-right:5px;margin-Top:10px' href="{% static 'ced_main/extras/UserHelpDocument.pdf" target="_blank">-->
             <a class="alignright" style='margin-right:5px;margin-Top:10px' href="extras/UserHelpDocument.pdf" target="_blank">
                 <b>Help</b> 
             </a>   
@@ -84,7 +121,8 @@ Date:        February 2018-->
         <div id="editorDiv"></div>
         <div style='margin-top:15px'><hr /></div>
 
-        <form enctype="multipart/form-data" method="post" id="uploadForm">
+        <form enctype="multipart/form-data" method="post" id="uploadForm">  
+        <!--<form enctype="multipart/form-data" method="post" id="uploadForm">{% csrf_token %}-->  <!--static-->
             <div class="field" id="upload_Field" style='margin-top:15px'>
                 <label class="file-upload" id="upload_label">
                     <span style='margin-right:5px'><strong>Add Zipped-up Shapefile</strong></span>
@@ -117,5 +155,82 @@ Date:        February 2018-->
           <input id="btn_Next" type="button" value="Save and Go To the Next Step" />
       </div>
 
-  </bodyclass="claro">
+  </body class="claro">
 </html>
+
+
+
+<script type="text/javascript">
+  function showDiv() {
+     document.getElementById('processinggisdiv').style.display = "block";
+     document.getElementById('GISDocText').style.display = "block";
+  }
+</script>
+<script type="text/javascript">
+  var cSpeed=20;
+  var cWidth=40;
+  var cHeight=40;
+  var cTotalFrames=12;
+  var cFrameWidth=200;
+  //var cImageSrc = "{% static 'ced_main/images/ced_main/sprites1.gif' %}";
+  var cImageSrc = "../images/sprites1.gif";
+
+  var cImageTimeout=false;
+  var cIndex=0;
+  var cXpos=0;
+  var cPreloaderTimeout=false;
+  var SECONDS_BETWEEN_FRAMES=0;
+
+  function startAnimation(){
+      var loaderImageElem = document.getElementById('loaderImage');
+      if (loaderImageElem === null) {
+          //alert("busy loaderImage div does not exist, not running in Django?");
+          //do nothing
+      } else {
+          loaderImageElem.style.backgroundImage = 'url(' + cImageSrc + ')';
+          loaderImageElem.style.width = cWidth + 'px';
+          loaderImageElem.style.height = cHeight + 'px';
+          //FPS = Math.round(100/(maxSpeed+2-speed));//
+          FPS = Math.round(100 / cSpeed);
+          SECONDS_BETWEEN_FRAMES = 1 / FPS;
+
+          cPreloaderTimeout = setTimeout('continueAnimation()', SECONDS_BETWEEN_FRAMES / 2000);
+      }
+  }
+
+  function continueAnimation(){
+
+    cXpos += cFrameWidth;
+    //increase the index so we know which frame of our animation we are currently on//
+    cIndex += 1;
+
+    //if our cIndex is higher than our total number of frames, we're at the end and should restart//
+    if (cIndex >= cTotalFrames) {
+      cXpos =0;
+      cIndex=0;
+    }
+
+    if(document.getElementById('loaderImage'))
+      document.getElementById('loaderImage').style.backgroundPosition=(-cXpos)+'px 0';
+
+    cPreloaderTimeout=setTimeout('continueAnimation()', SECONDS_BETWEEN_FRAMES*2000);
+  }
+
+  function stopAnimation(){//stops animation//
+    clearTimeout(cPreloaderTimeout);
+    cPreloaderTimeout=false;
+  }
+
+  function imageLoader(s, fun)//Pre-loads the sprites image// 
+  {
+    clearTimeout(cImageTimeout);
+    cImageTimeout=0;
+    genImage = new Image();
+    genImage.onload=function (){cImageTimeout=setTimeout(fun, 0)};
+    genImage.onerror=new Function('alert(\'Could not load the image\')');
+    genImage.src=s;
+  }
+
+  //The following code starts the animation//
+  new imageLoader(cImageSrc, 'startAnimation()');
+</script>
