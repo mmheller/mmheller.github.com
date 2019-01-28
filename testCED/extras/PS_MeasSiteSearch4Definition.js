@@ -117,7 +117,7 @@ define([
             app.PS_Uniques.divTagSource = divTagSource;    //this may be redundant
             app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), strQuery);//dropdown change
 
-            var blnQSSet = app.pSetQS.setQS(strQuery);
+            var blnQSSet = app.pSetQS.setQS(strQuery);  //this sets the definition query on the layers
 
             if (document.getElementById("cbx_zoom").checked) {
                 var pZoom2 = new MH_Zoom2FeatureLayer({ pMap: app.map, dblExpandNum: 1.0 }); // instantiate the zoom class

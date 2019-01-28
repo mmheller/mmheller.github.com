@@ -100,6 +100,10 @@ $(function () {
     $(document).tooltip();
 });
 
+$(document).click(function () {
+    $('.ui-tooltip').remove();
+});
+
 function AllFiltersClear() {
     var strddlMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].value;
     var strddlEntry = document.getElementById("ddlEntry").options[document.getElementById("ddlEntry").selectedIndex].value;
@@ -318,7 +322,11 @@ define([
 
                   if (strActivity !== "99") {  //            if ((strActivity !== "All") & (strActivity != 99)) {
                       if (strQuery !== "") { strQuery += " and "; }
-                      strQuery += "ACT_ID = " + strActivity + "";
+                      
+                      var strQueryTemp = "ACT_ID = " + strActivity + "";
+                      strQueryTemp = strQueryTemp.replace("= null","is NULL");  //this is a simple temp fix to handle 'RESTORATION: Non-Fire Related: Habitat Improvement / Restoration' not having a lookup value
+                      strQuery += strQueryTemp;
+
                       app.strQueryLabelText += "Activity Type = " + document.getElementById("ddlActivity").options[document.getElementById("ddlActivity").selectedIndex].text + ", ";
                   }
                   if (strSubActivity !== "99") {  //            if ((strActivity !== "All") & (strActivity != 99)) {
@@ -360,6 +368,8 @@ define([
               }
 
               function btn_clear_click() {
+                  $('.btn_clear').tooltip("close");
+
                   app.arrayPrjIDs_fromSpatialSelect = "";
                   document.getElementById("txt_NoSpatial").style.visibility = 'hidden';
                   disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
@@ -424,6 +434,9 @@ define([
                   app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "OBJECTID > 0"); //maybe move this to MH_FeatureCount  //clear111
                   app.strQueryLabelText = "";
                   app.strQueryLabelTextSpatial = "";
+
+                  //$('.btn_clear').tooltip("close");
+                  //$(".btn_clear").parents('div').remove();
               }
           },
 
