@@ -167,7 +167,7 @@
 	  ga('create', 'UA-55453084-1', 'auto');
 	  ga('send', 'pageview');
 	</script>
-    <script src="https://js.arcgis.com/3.19/"></script>
+    <script src="https://js.arcgis.com/3.27/"></script>
 	<script type="text/javascript" src="tooltips.js"></script>
     <script type="text/javascript">
         var app = {};
@@ -264,18 +264,9 @@
             var cpMap = new ContentPane({ id: "map", region: "center", style: "border: solid thin silver; overflow: hidden" }, domConstruct.create("div"));
             bcMain.addChild(cpMap);
                         
-            //var cpMap2 = new ContentPane({ id: "grid", region: "bottom", splitter: "true", style: "border: solid thin silver; overflow: hidden; height:20%;" }, domConstruct.create("div"));
             var cpMap2 = new ContentPane({ id: "gridCP", region: "bottom", splitter: "true"}, domConstruct.create("div"));
             bcMain.addChild(cpMap2);
 		
-            //var botContainer = registry.byId("grid");
-            //if (botContainer.containerNode.style.height == "") {
-            //    var bc = registry.byId('content');
-            //    var newSize = 150;
-            //    dojo.style(botContainer.domNode, "height", 15 + "%");
-            //    bc.resize();
-            //}
-
             var pbtn_2CSV = dojo.byId("btn_2CSV");
             on(pbtn_2CSV, "click", btn_2CSV_click);
 
@@ -298,16 +289,13 @@
             theme.series.fontColor="black";	
 		
             //Create map
-            var map = new Map("map", {basemap: "streets",			center: [-112, 43],			zoom: 5,			sliderStyle: "large",			sliderPosition: "bottom-right",			infoWindow: infoWindow		});	
+            var map = new Map("map", {basemap: "streets",			center: [-127, 55],			zoom: 4,			sliderStyle: "large",			sliderPosition: "bottom-right",			infoWindow: infoWindow		});	
 
 
             ////Tiled map service for CHAT data
-            var nvCHAT = new ArcGISDynamicMapServiceLayer("https://www.sciencebase.gov/arcgis/rest/services/Catalog/58b99206e4b090ec658d7e71/MapServer", { opacity: 0.5 });
+            var nvCHAT = new ArcGISTiledMapServiceLayer("https://tiles.arcgis.com/tiles/QVENGdaPbd4LUkLV/arcgis/rest/services/UTH_TileLayer_CHRank/MapServer",
+                {opacity: 0.5, resampling: true });
 
-            //var nvCHAT = new VectorTileLayer("https://tiles.arcgis.com/tiles/QVENGdaPbd4LUkLV/arcgis/rest/services/PilotStates4VTL_v1/VectorTileServer/resources/styles/root.json");
-
-            //var nvCHAT = new ArcGISTiledMapServiceLayer("https://tiles.arcgis.com/tiles/QVENGdaPbd4LUkLV/arcgis/rest/services/UTH_createTPK_CHRank9/MapServer",
-            //                                                { opacity: 0.5, resampling: true });
             var nvSOC = new ArcGISDynamicMapServiceLayer("https://gis1.usgs.gov/arcgis/rest/services/PADUS1_4/GAP_Status_Code/MapServer", { opacity: 0 });
             var nvSERI = new ArcGISDynamicMapServiceLayer("https://gis1.usgs.gov/arcgis/rest/services/PADUS1_4/Fed_Tribal_Other/MapServer", { opacity: 0 });
             //Feature layer for CHAT data queries
@@ -320,25 +308,21 @@
             nvCHATFL.on("selection-complete", function () {
                 dojo.byId("siteInfo").innerHTML = "Getting selected Hex's";
                 var results = nvCHATFL.getSelectedFeatures();
-                //if (results.length > 0 && tbStatus === "on") {
                 if (results.length > 0) {
                     var tbStatus = "off";
                     Query4Relates(results)
-                    //chartMulti(results);
                 }
                 map.setMapCursor("default");
                 map.enableMapNavigation();
             });
 
-            //var info = new OAuthInfo({ appId: "4y78XrGDoCd8wys2", popup: false });  //local
-            var info = new OAuthInfo({ appId: "TCPRYxjUM1mxEcYn", popup: false });  //Draft
+            var info = new OAuthInfo({ appId: "4y78XrGDoCd8wys2", popup: false });  //local
            
             esriId.registerOAuthInfos([info]);
             esriId.getCredential(info.portalUrl + "/sharing");                // user will be redirected to OAuth Sign In page
             esriId.checkSignInStatus(info.portalUrl + "/sharing").then(
               function () {
                   map.addLayers([nvSERI, nvSOC, nvCHAT, nvCHATFL]);
-
                   //Set custom mouse cursor when over Nevada data layers
                   nvCHATFL.on("mouse-over", function () {
                       if (tbStatus === "off") {
@@ -477,15 +461,6 @@
                     app.pGrid.set("store", app.memStore);
                     app.pGrid.refresh();
                 }
-
-                //var currentdate = new Date();
-                //var datetime = "" + currentdate.getDate() + "/"
-                //                + (currentdate.getMonth() + 1) + "/"
-                //                + currentdate.getFullYear() + " @ "
-                //                + currentdate.getHours() + ":"
-                //                + currentdate.getMinutes() + ":"
-                //                + currentdate.getSeconds();
-                //dojo.byId("siteInfo").innerHTML = "table cleared " + datetime;
                 dojo.byId("siteInfo").innerHTML = "Map and Table Cleared";
                 tb.deactivate();
             }
@@ -569,6 +544,8 @@
                     //nvCHATFL.clearSelection();
                     var scale = map.getScale();
                     var minMapScale = nvCHAT.minScale;
+
+                    var temoMaxMapScale = nvCHAT.maxScale;
 
                     //Respond if map scale is too large to display CHAT data
                     if ((scale > minMapScale) & (minMapScale != 0)) {
