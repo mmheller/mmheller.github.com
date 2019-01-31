@@ -316,7 +316,9 @@
                 map.enableMapNavigation();
             });
 
-            var info = new OAuthInfo({ appId: "4y78XrGDoCd8wys2", popup: false });  //local
+
+	    var info = new OAuthInfo({ appId: "TCPRYxjUM1mxEcYn", popup: false });  //Draft
+            //var info = new OAuthInfo({ appId: "4y78XrGDoCd8wys2", popup: false });  //local
            
             esriId.registerOAuthInfos([info]);
             esriId.getCredential(info.portalUrl + "/sharing");                // user will be redirected to OAuth Sign In page
