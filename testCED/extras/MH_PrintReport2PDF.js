@@ -372,6 +372,8 @@ define([
             params.map = pMap;
             params.template = template;
 
+            esriConfig.defaults.io.timeout = 180000; //3 minutes  //this greatly helps with the printing task timeout issues
+
             printTask.execute(params, this.printResult, this.printErr);
         },
 

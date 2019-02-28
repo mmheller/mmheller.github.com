@@ -21,7 +21,7 @@ input.button-SelectOnMap {
     background-image: url(../images/SelectionSelectTool32.png);/* 16px x 16px */
 
     /* referencing image in CED Django env*/
-    /*background-image: url(static("ced_main/images/grsgmap/SelectionSelectTool32.gif"));*/
+    /*background-image: url("/static/ced_main/images/grsgmap/SelectionSelectTool32.png");*/
 
     background-color: transparent; /* make the button transparent */
     background-repeat: no-repeat;  /* make the background image appear only once */
@@ -334,7 +334,8 @@ input.button-SelectOnMap {
             background-image: url(../images/palette3.png);
             
             /* referencing image in CED Django env*/
-            /*background-image: url(static("ced_main/images/grsgmap/palette3.gif"));*/
+            /*background-image: url("/static/ced_main/images/grsgmap/palette3.png");*/
+
 
             background-repeat: no-repeat;
             background-position: center center;
@@ -347,9 +348,8 @@ input.button-SelectOnMap {
         .Find32Icon {
             /* referencing image in Matt's local dev env*/
             background-image: url(../images/Find32.png);
-
             /* referencing image in CED Django env*/
-            /*background-image: url(static("ced_main/images/grsgmap/Find32.gif"));*/
+            /*background-image: url("/static/ced_main/images/grsgmap/Find32.png");*/
 
             background-repeat: no-repeat;
             background-position: center center;

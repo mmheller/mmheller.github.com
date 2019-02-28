@@ -391,16 +391,11 @@ define([
 
                   document.getElementById("btn_TextSummary").disabled = true;
 
-                  CED_PP_poly.show();
-                  CED_PP_point.show();
-                  CED_PP_line.show();
-
                   // do not turn off layer visibility here, the checkbox click methods will handle layer visibility
                   var pform = dom.byId("toggleForm");
                   for (var i = 0; i < pform.elements.length; i++) {  //loop through the checkboxes of the form and determin if one of the ones to click
                       if (pform.elements[i].type == 'checkbox') {
                           if ((pform.elements[i].name == "checkBoxMZ") || (pform.elements[i].name == "checkBoxPop")) {
-                              //pform.elements[i].checked = false;
                               if (pform.elements[i].checked == true) {
                                   pform.elements[i].click();  //turn the layer visiblity on by firing the click event of the checkboxes
                               }
@@ -414,6 +409,11 @@ define([
                       }
                   }
 
+                  if (document.getElementById("cbx_zoom").checked) {
+                      var customExtentAndSR = new esri.geometry.Extent(-14000000, 4595472, -11000000, 5943351, new esri.SpatialReference({ "wkid": 3857 }));
+                      app.map.setExtent(customExtentAndSR, true);
+                  }
+
                   CED_PP_point.setDefinitionExpression("((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))");
                   //CED_PP_point4FeatureTable.setDefinitionExpression("");
                   app.pSup.gCED_PP_point4FeatureTable.setDefinitionExpression("");
@@ -423,10 +423,9 @@ define([
                   CED_PP_poly.setDefinitionExpression("");
                   document.getElementById("txtQueryResults").innerHTML = ""; //clear the text results
 
-                  if (document.getElementById("cbx_zoom").checked) {
-                      var customExtentAndSR = new esri.geometry.Extent(-14000000, 4595472, -11000000, 5943351, new esri.SpatialReference({ "wkid": 3857 }));
-                      app.map.setExtent(customExtentAndSR, true);
-                  }
+                  CED_PP_poly.show();
+                  CED_PP_point.show();
+                  CED_PP_line.show();
 
                   app.iNonSpatialTableIndex = 0;  //
                   app.PS_Uniques.divTagSource = null;
@@ -434,9 +433,6 @@ define([
                   app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "OBJECTID > 0"); //maybe move this to MH_FeatureCount  //clear111
                   app.strQueryLabelText = "";
                   app.strQueryLabelTextSpatial = "";
-
-                  //$('.btn_clear').tooltip("close");
-                  //$(".btn_clear").parents('div').remove();
               }
           },
 
@@ -465,12 +461,15 @@ define([
                   id: "00", mode: FeatureLayer.MODE_ONDEMAND, visible: false,
                   outFields: ["Project_ID", "SourceFeatureType", "Project_Name", "Project_Status", "Activity", "SubActivity", "Implementing_Party", "Office", "Date_Created", "Last_Updated", "Date_Approved", "Start_Year", "Finish_Year", "TypeAct", "TotalAcres", "TotalMiles", "Prj_Status_Desc"]
               });
+              this.gCED_PP_point4FeatureTable.setDefinitionExpression("OBJECTID < 0");
 
               CED_PP_line = new FeatureLayer(app.strTheme1_URL + "1", { id: "1", mode: FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], visible: true });
               pSeletionSymbolLine = new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([0, 255, 255]), 3)
               CED_PP_line.setSelectionSymbol(pSeletionSymbolLine);
 
+              //note: the autoGeneralize only works if the hosted feature layer editing is not enabled on AGOL
               CED_PP_poly = new FeatureLayer(app.strTheme1_URL + "2", { id: "2", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], autoGeneralize: true, visible: true });
+
               pSeletionSymbolPoly = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([255, 0, 0]), 2), new Color([0, 255, 255, 0.4]));
               CED_PP_poly.setSelectionSymbol(pSeletionSymbolPoly);
 
