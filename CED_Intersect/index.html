@@ -1,0 +1,245 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Created By:  Matt Heller, Great Northern Landscape Conservation Cooperative / U.S. Fish and Wildlife Service, Updated: Dec 2016-->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
+<title>Greater Sage Grouse: Conservation Efforts - Data Provider View</title>
+<link rel="stylesheet" href="https://js.arcgis.com/3.18/esri/css/esri.css" />
+    <style>
+        html, body {
+            padding: 0;
+            margin: 0;
+            height: 100%;
+        }
+    </style>
+
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script type="text/javascript" src="https://js.arcgis.com/3.18/"></script>
+
+
+<script type="text/javascript">
+    dojo.require("dijit.layout.TabContainer");
+    dojo.require("dijit.layout.ContentPane");
+    var app = {};
+
+    require([
+            "esri/map", "esri/graphic", "esri/geometry/Polygon", "esri/Color", "esri/tasks/QueryTask",
+        "esri/tasks/query", "esri/geometry/geometryEngine", "esri/layers/FeatureLayer", "esri/layers/KMLLayer", "dojo/dom-style", "esri/layers/WFSLayer", "esri/urlUtils",
+            "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on",
+            "esri/geometry/webMercatorUtils", "dojo/mouse", "dojo/promise/all", "esri/geometry/Point", "esri/symbols/SimpleMarkerSymbol",
+            "esri/symbols/SimpleLineSymbol", "esri/symbols/SimpleFillSymbol", "dojo/_base/Color",
+            "dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dijit/TitlePane", "esri/arcgis/utils", "dojo/domReady!"
+        ],
+
+
+    function (Map, Graphic, Polygon, Color2, QueryTask, Query, geometryEngine, FeatureLayer, KMLLayer, domStyle, WFSLayer, urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on, webMercatorUtils, mouse, all, Point, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Color) {
+        //var tokens = getTokens
+        console.log("1 M&J");
+
+        var iCEDID = getTokens()['CEDID'];    //*****************************************************Justin Change this to your Django CEID id variable!!!!!!!!
+
+        parser.parse();
+
+        app.loading = dojo.byId("loadingImg");  //loading image. id
+
+
+        var customExtentAndSR = new esri.geometry.Extent(-14000000, 4595472, -11000000, 5943351, new esri.SpatialReference({ "wkid": 3857 }));
+        app.map = new esri.Map("map", { basemap: "topo", logo: false, extent: customExtentAndSR, sliderPosition: "bottom-left" });
+        dojo.connect(app.map, "onUpdateStart", showLoading);
+        dojo.connect(app.map, "onUpdateEnd", hideLoading);
+
+        
+        app.pHUCs = new FeatureLayer("https://edits.nationalmap.gov/arcgis/rest/services/WBD/Wbd_EditVersion/MapServer/2", { "opacity": 0.2 }, { minScale: 5000000000, visible: true });
+                
+        if (typeof iCEDID != 'undefined') {
+            var CED_SRC_poly = new FeatureLayer("https://utility.arcgis.com/usrsvcs/servers/e09a9437e03d4190a3f3a8f2e36190b4/rest/services/Development_Src_v2/FeatureServer/" + "0", { "opacity": 0.8 }, { autoGeneralize: true, visible: true });  //DEV
+
+            CED_SRC_poly.setDefinitionExpression("(project_id = " + iCEDID + ")");
+            app.map.addLayers([app.pHUCs, CED_SRC_poly]);
+            app.dblExpandNum = 1
+
+            app.div2Add = document.getElementById("divResults");
+            app.div2Add.innerText = app.div2Add.innerText + "\r\nZooming To Feature";
+            
+            qry_Zoom2FeatureLayerExtent(CED_SRC_poly);
+        }
+        
+        function showLoading() {
+            esri.show(app.loading);
+            app.map.disableMapNavigation();
+            app.map.hideZoomSlider();
+        }
+
+        function hideLoading(error) {
+            esri.hide(app.loading);
+            app.map.enableMapNavigation();
+            app.map.showZoomSlider();
+        }
+       
+        function returnEvents(results) {
+            var resultFeatures = [];
+            resultFeatures = resultFeatures.concat(results[0].features);
+
+            if (resultFeatures.length > 0) {
+                var pExtent;
+                pfeatureExtent1 = esri.graphicsExtent(resultFeatures);
+                var ptempSR = new esri.SpatialReference({ "wkid": 3857 });
+                if (pfeatureExtent1) {
+                    if ((pfeatureExtent1.xmin != pfeatureExtent1.xmax) & (pfeatureExtent1.ymin != pfeatureExtent1.ymax)){  //if not a multipoint feature then continue
+                        pExtent = new esri.geometry.Extent(pfeatureExtent1.xmin, pfeatureExtent1.ymin, pfeatureExtent1.xmax, pfeatureExtent1.ymax, new esri.SpatialReference({ "wkid": 3857 }));
+                    }
+                }
+                if (pExtent == undefined) {
+                    var pFeature1 = resultFeatures[0];
+                    mapPoint1 = new Point(pFeature1.geometry.points[0][0], pFeature1.geometry.points[0][1], ptempSR);
+                    app.map.centerAndZoom(mapPoint1, 9);
+                }
+                if (pExtent) {
+                    pExtent = pExtent.expand(app.dblExpandNum);
+                    app.map.setExtent(pExtent, true);
+                }
+                else { var strMessage = "hold it up here"; }
+
+
+                for (var i = 0; i < results[0].features.length; i++) {
+                    var pFeature = results[0].features[i];
+                    app.pGeometry = pFeature.geometry;
+                    app.pField = "HUC12";
+
+                    app.div2Add.innerText = app.div2Add.innerText + "\r\nSelecting HUC features that intersect the Effort";
+
+                    qry_SelectFeaturesFromLayer(app.pHUCs.url);
+
+                    break;
+                }
+            }
+            else {
+                // do nothing
+            }
+            return results;
+        }
+
+        function qry_SelectFeaturesFromLayer(pESRIURL) {
+            var pQuery = new Query();
+            var queryTask = QueryTask(pESRIURL);
+            pQuery.returnGeometry = true;
+            pQuery.outFields = [app.pField];
+            pQuery.outSpatialReference = { "wkid": 102100 };
+            pQuery.geometry = app.pGeometry;
+            pQuery.spatialRelationship = Query.SPATIAL_REL_INTERSECTS;
+            queryTask.execute(pQuery, Results1, Results1Error1);
+        }
+
+        function calcArea(geom) {
+            return (Math.round(geometryEngine.geodesicArea(geom, 109402) * 100) / 100) + " acres"; //area in acres
+        }
+
+
+        function Results1(results) {
+            var strHUC = "";
+            var pGeometryResult = null;
+            var pFeature = null;
+
+            //var pfillSymbol = new SimpleFillSymbol({
+            //    color: [227, 139, 79, 0.8],
+            //    outline: {
+            //        color: [255, 255, 255],
+            //        width: 1
+            //    }
+            //});
+
+            var pfillSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+                                new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                                new Color2([98, 194, 204]), 2), new Color2([98, 194, 204, 0.5])
+          );
+
+            app.div2Add.innerText = app.div2Add.innerText + "\r\nEffort ID " + getTokens()['CEDID'] + " overlapps with...";
+            pFeatures = results.features;
+            var resultCount = pFeatures.length;
+            app.div2Add.innerText = app.div2Add.innerText + "\r\n   " + resultCount.toString() + " HUCs found";
+            var pGraphic = null;
+
+            if (resultCount > 0) {
+                for (var i = 0; i < pFeatures.length; i++) {
+                    pFeature = pFeatures[i];
+                    strHUC = pFeature.attributes.HUC12;
+                    pGeometryResult1 = pFeature.geometry;
+
+                    if (geometryEngine.intersects(app.pGeometry, pGeometryResult1)) {    //https://github.com/ekenes/esri-js-samples/blob/master/ge-demo/index.html
+                        //pGeometryResult2 = geometryEngine.difference(app.pGeometry, pGeometryResult1);
+                        pGeometryResult2 = geometryEngine.intersect(app.pGeometry, pGeometryResult1);
+                        pGraphic = new Graphic();
+                        pGraphic.setGeometry(pGeometryResult2);
+
+                        pGraphic.setSymbol(pfillSymbol);
+
+                        app.map.graphics.add(pGraphic);
+
+                        var pArea = calcArea(pGeometryResult2);
+
+                        var strResultText = "HUC " + strHUC + " area = " + pArea;
+                        app.div2Add.innerText = app.div2Add.innerText + "\r\n   " + strResultText;
+
+                    } else {
+                        console.log("Error with geometryEngine");
+                        alert("Error with geometryEngine");
+                    }
+                }
+            }
+        }
+        function Results1Error1(results) {
+            console.log("Error with query1");
+            alert("Error with query1");
+        }
+
+        function qry_Zoom2FeatureLayerExtent(pFeatureLayer1, pFeatureLayer2, pFeatureLayer3, pFeatureLayer4, pFeatureLayer5, pFeatureLayer6) {
+            var pQueryT1 = new QueryTask(pFeatureLayer1.url);
+            var pQuery1 = new Query();
+
+            pQuery1.returnGeometry = true;
+            pQuery1.outFields =  ["objectid", "Project_ID"];
+
+            var strQuery1 = pFeatureLayer1.getDefinitionExpression();
+            pQuery1.where = strQuery1;
+            var FLayer1, pPromises;
+            FLayer1 = pQueryT1.execute(pQuery1);
+            pPromises = new all([FLayer1]);
+            return pPromises.then(returnEvents, err);
+        }
+
+        function err(err) {
+            console.log("Failed to get stat results due to an error: ", err);
+        }
+
+        function getTokens() {
+            var tokens = [];
+            var query = location.search;
+            query = query.slice(1);
+            query = query.split('&');
+            $.each(query, function (i, value) {
+                var token = value.split('=');
+                var key = decodeURIComponent(token[0]);
+                var data = decodeURIComponent(token[1]);
+                tokens[key] = data;
+            });
+            return tokens;
+        }
+    });
+</script>
+</head>
+
+<body class="tundra">
+    <div id="map" style="height: 90%; width: 100%">
+        <img id="loadingImg" src="loading.gif" style="position:fixed; right:50%; top:50%; z-index:100;" />
+    </div>
+
+    <div id="divResults" style="height: 100%; width: 100%">
+        <p>Enter a effort id as a URL argument named CEDID  (i.e. ?CEDID=7694, ?CEDID=4930, ?CEDID=7717),  Effort ID's are from the samdbox source https://utility.arcgis.com/usrsvcs/servers/e09a9437e03d4190a3f3a8f2e36190b4/rest/services/Development_Src_v2/FeatureServer/ </p>
+    </div>
+
+
+
+</body>
+</html>
+
