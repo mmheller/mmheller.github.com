@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="https://js.arcgis.com/3.19/dijit/themes//tundra/tundra.css" />
     <link rel="stylesheet" href="https://js.arcgis.com/3.19/esri/css/esri.css"/>
     <link rel="stylesheet" href="https://js.arcgis.com/3.19/dgrid/css/dgrid.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">
 
   </head>
   
@@ -108,18 +111,19 @@
 			<label for="showLayer">Display</label>
 		</div>
         	
-
-        <div id="legendSOC" class="legendTallDiv">
+        <br />
+        <button type="button" class="btn btn-info" style="position:relative; font-size:12px; left:25px; padding-top:1px; padding-bottom:1px; vertical-align:text-top;" data-toggle="collapse" data-target="#legendSOC">Show/Hide PADUS/GAP Option</button>
+        <div id="legendSOC" class="legendTallDiv  in">
             <h4 id="legendHeadSOC">Status: PADUS/GAP USGS</h4>
             <img src="images/GAP_Status.JPG" alt="GAP_Status" width="280">
             <div id="sliderDivSOC" class="sliderDiv2"><a id="sliderSOC"></a></div>
             <input type="checkbox" id="toggleSOC" style="top:-21px"></input>
             <label for="showLayer" style="top:-23px">Display</label>
-            
-            
         </div>
 
-		<div id="legendSERI" class="legendTallDiv">
+        <br />
+        <button type="button" class="btn btn-info" style="position:relative; font-size:12px; left:25px; padding-top:1px; padding-bottom:1px; vertical-align:text-top;" data-toggle="collapse" data-target="#legendSERI">Show/Hide Ownership Option</button>
+		<div id="legendSERI" class="legendTallDiv in">
 			<h4 id="legendHeadSERI">Fed/Tribal/Other: PADUS/GAP USGS</h4>
             <img src="images/GAP_FedTribOther.JPG" alt="GAP_Status" width="150">
             <br />
@@ -293,8 +297,17 @@
 
 
             ////Tiled map service for CHAT data
+            //var nvCHAT = new ArcGISTiledMapServiceLayer("https://tiles.arcgis.com/tiles/QVENGdaPbd4LUkLV/arcgis/rest/services/UTH_TileLayer_CHRank/MapServer",
+            //    {opacity: 0.5, resampling: true });
+
+            //var nvCHAT = new ArcGISTiledMapServiceLayer("https://tiles.arcgis.com/tiles/QVENGdaPbd4LUkLV/arcgis/rest/services/CHAT_SOC_Rank/MapServer",
+            //    { opacity: 0.5, resampling: true });
             var nvCHAT = new ArcGISTiledMapServiceLayer("https://tiles.arcgis.com/tiles/QVENGdaPbd4LUkLV/arcgis/rest/services/UTH_TileLayer_CHRank/MapServer",
-                {opacity: 0.5, resampling: true });
+                { opacity: 0.5, resampling: true });
+
+
+            
+
 
             var nvSOC = new ArcGISDynamicMapServiceLayer("https://gis1.usgs.gov/arcgis/rest/services/PADUS1_4/GAP_Status_Code/MapServer", { opacity: 0 });
             var nvSERI = new ArcGISDynamicMapServiceLayer("https://gis1.usgs.gov/arcgis/rest/services/PADUS1_4/Fed_Tribal_Other/MapServer", { opacity: 0 });
@@ -316,14 +329,11 @@
                 map.enableMapNavigation();
             });
 
-
-	    var info = new OAuthInfo({ appId: "TCPRYxjUM1mxEcYn", popup: false });  //Draft
             //var info = new OAuthInfo({ appId: "4y78XrGDoCd8wys2", popup: false });  //local
-           
-            esriId.registerOAuthInfos([info]);
-            esriId.getCredential(info.portalUrl + "/sharing");                // user will be redirected to OAuth Sign In page
-            esriId.checkSignInStatus(info.portalUrl + "/sharing").then(
-              function () {
+            //esriId.registerOAuthInfos([info]);
+            //esriId.getCredential(info.portalUrl + "/sharing");                // user will be redirected to OAuth Sign In page
+            //esriId.checkSignInStatus(info.portalUrl + "/sharing").then(
+            //  function () {
                   map.addLayers([nvSERI, nvSOC, nvCHAT, nvCHATFL]);
                   //Set custom mouse cursor when over Nevada data layers
                   nvCHATFL.on("mouse-over", function () {
@@ -345,8 +355,8 @@
                   document.getElementById("toggleCHAT").onclick = function () { layerToggle(nvCHAT, document.getElementById("sliderDivCHAT")); }
                   document.getElementById("toggleSOC").onclick = function () { layerToggle(nvSOC, document.getElementById("sliderDivSOC")); }
                   document.getElementById("toggleSERI").onclick = function () { layerToggle(nvSERI, document.getElementById("sliderDivSERI")); }
-              }
-            ).otherwise(function () { });// Do nothing
+            //  }
+            //).otherwise(function () { });// Do nothing
 		
             
             //Function to show/hide data layers on legend click event
