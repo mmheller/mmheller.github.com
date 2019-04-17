@@ -115,9 +115,12 @@
                 }
                 app.pGeometry = mergeGeometries(arrayGemetriesOfEffort);
 
-                var iWebMercArea = calcAreaGeodesic4WebMercOrGeographicWGS84(app.pGeometry);
-                app.div2Add.innerText = app.div2Add.innerText + "\r\nWeb Mercator Aux Sphere Area = " + iWebMercArea.toString() + " acres";
+                var iWebMercAreaPlanar = calcAreaPlanar4ProjectedAndNotWebMerc(app.pGeometry);
+                app.div2Add.innerText = app.div2Add.innerText + "\r\nWeb Mercator Aux Sphere PLANAR Area = " + iWebMercAreaPlanar.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " acres";
 
+                var iWebMercAreaGeodesic = calcAreaGeodesic4WebMercOrGeographicWGS84(app.pGeometry);
+                app.div2Add.innerText = app.div2Add.innerText + "\r\nWeb Mercator Aux Sphere GEODESIC Area = " + iWebMercAreaGeodesic.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " acres";
+                
                 var outSpatialReference = new SpatialReference({ wkid: 5071 });  //NAD_1983_HARN_Contiguous_USA_Albers, WKID list here https://developers.arcgis.com/rest/services-reference/projected-coordinate-systems.htm
                 gsvc = new GeometryService("https://utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
                 var params = new ProjectParameters();
@@ -229,7 +232,7 @@
             if (app.m_ProcIndex < app.m_Array2Proc.length) {
                 qry_SelectFeaturesFromLayer(app.m_ProcIndex);
             } else {
-                var strDialogText = "<u>Click Ok to continue OR click Cancel to continue spatial editing...</u><br>";
+                var strDialogText = "<u>Click Ok to continue editing next step OR click Cancel to resume spatial editing...</u><br>";
                 strDialogText += "<b>Effort " + app.iCEDID + " Area:</b> " + app.m_EffortArea.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " (US Acres)<br>";
 
                 for (var i = 0; i < app.m_ArrayIntersectResults.length; i++) {
