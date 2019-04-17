@@ -148,12 +148,12 @@
 
         function calcAreaPlanar4ProjectedAndNotWebMerc(geom) {
             iValue = geometryEngine.planarArea(geom, 109403);//area in US_acres, codes here http://resources.arcgis.com/en/help/runtime-java/apiref/constant-values.html#com.esri.core.geometry.AreaUnit.Code.ACRE
-            return Math.round(iValue); 
+            return (Math.round(iValue * 10) / 10);
         }
 
         function calcAreaGeodesic4WebMercOrGeographicWGS84(geom) {
             iValue = geometryEngine.geodesicArea(geom, 109403); //area in US_acres, codes here http://resources.arcgis.com/en/help/runtime-java/apiref/constant-values.html#com.esri.core.geometry.AreaUnit.Code.ACRE
-            return Math.round(iValue); 
+            return (Math.round(iValue * 10) / 10);
         }
 
         function mergeGeometries(pGeometies) {// might have multi polygons merge them into a single one
