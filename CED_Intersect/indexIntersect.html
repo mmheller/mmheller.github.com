@@ -110,8 +110,8 @@
                 for (var i = 0; i < results[0].features.length; i++) {
                     var pFeature = results[0].features[i];
                     if (pFeature.geometry.rings.length > 400) {
-                        showErrorDialog("Spatial area polygon has " + pFeature.geometry.rings.length.toString() + " multi-part polygons, replace the polygon with a new generalized with less multi part polygons.  Contact the CED development team if help is needed");
                         blnError = true;
+                        break;
                     }
                    
                     try {
@@ -122,7 +122,8 @@
                 }
 
                 if (blnError) {
-                    showErrorDialog("Spatial area has " + pFeature.geometry.rings.length.toString() + " multi-part polygons, replace the polygon with a new generalized with less multi part polygons.  Contact the CED development team if help is needed");
+                    showErrorDialog("Spatial area polygon has " + pFeature.geometry.rings.length.toString() + " multi-part polygons, replace the polygon with a new generalized with less multi part polygons.  Contact the CED development team if help is needed");
+                    return;
                 } else {
                     var pExtent = null;
                     pfeatureExtent1 = esri.graphicsExtent(resultFeatures);
@@ -157,9 +158,7 @@
             else {
                 // do nothing
             }
-            //return results;
         }
-
 
         function showErrorDialog(strMessage) {
             $("#dialogError").html(strMessage);
