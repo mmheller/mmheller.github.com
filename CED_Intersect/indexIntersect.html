@@ -13,6 +13,12 @@
             height: 100%;
         }
 
+         .dialogError_text
+         {
+             font-family:    Arial, Helvetica, sans-serif;
+             font-weight:    bold;
+         }
+
         .dialog_text
          {
              font-family:    Arial, Helvetica, sans-serif;
@@ -33,7 +39,7 @@
     var app = {};
 
     require([
-            "esri/map", "esri/geometry", "esri/tasks/GeometryService", "esri/tasks/ProjectParameters", "esri/SpatialReference", "esri/graphic", "esri/geometry/Polygon", "esri/Color", "esri/tasks/QueryTask",
+            "esri/map", "esri/tasks/GeometryService", "esri/tasks/ProjectParameters", "esri/SpatialReference", "esri/graphic", "esri/geometry/Polygon", "esri/Color", "esri/tasks/QueryTask",
         "esri/tasks/query", "esri/geometry/geometryEngine", "esri/layers/FeatureLayer", "esri/layers/KMLLayer", "dojo/dom-style", "esri/layers/WFSLayer", "esri/urlUtils",
             "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on",
             "esri/geometry/webMercatorUtils", "dojo/mouse", "dojo/promise/all", "esri/geometry/Point", "esri/symbols/SimpleMarkerSymbol",
@@ -42,7 +48,7 @@
         ],
 
 
-    function (Map, geometry, GeometryService, ProjectParameters, SpatialReference, Graphic, Polygon, Color2, QueryTask, Query, geometryEngine, FeatureLayer, KMLLayer, domStyle, WFSLayer, urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on, webMercatorUtils, mouse, all, Point, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Color) {
+    function (Map, GeometryService, ProjectParameters, SpatialReference, Graphic, Polygon, Color2, QueryTask, Query, geometryEngine, FeatureLayer, KMLLayer, domStyle, WFSLayer, urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on, webMercatorUtils, mouse, all, Point, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Color) {
         app.iCEDID = getTokens()['CEDID'];    //*****************************************************Justin Change this to your Django CEID id variable!!!!!!!!
         parser.parse();
         app.loading = dojo.byId("loadingImg");  //loading image. id
@@ -95,17 +101,7 @@
             resultFeatures = resultFeatures.concat(results[0].features);
 
             if (resultFeatures.length > 0) {
-                var pExtent;
-                pfeatureExtent1 = esri.graphicsExtent(resultFeatures);
-                if (pfeatureExtent1) {
-                    if ((pfeatureExtent1.xmin != pfeatureExtent1.xmax) & (pfeatureExtent1.ymin != pfeatureExtent1.ymax)){  //if not a multipoint feature then continue
-                        pExtent = new esri.geometry.Extent(pfeatureExtent1.xmin, pfeatureExtent1.ymin, pfeatureExtent1.xmax, pfeatureExtent1.ymax, new esri.SpatialReference({ "wkid": 3857 }));
-                        pExtent = pExtent.expand(app.dblExpandNum);
-                        app.map.setExtent(pExtent, true);
-                    }
-                }
-
-                app.m_EffortArea = null;
+                app.m_EffortArea = 0;
                 app.m_ArrayIntersectResults = [];
                 arrayGemetriesOfEffort = [];
 
@@ -113,57 +109,76 @@
 
                 for (var i = 0; i < results[0].features.length; i++) {
                     var pFeature = results[0].features[i];
-
                     if (pFeature.geometry.rings.length > 400) {
-                        alert("Spatial area has " + pFeature.geometry.rings.length.toString() + " multi-part polygons, replace the polygon with a new generalized with less multi part polygons.  Contact the CED development team if help is needed");
+                        showErrorDialog("Spatial area polygon has " + pFeature.geometry.rings.length.toString() + " multi-part polygons, replace the polygon with a new generalized with less multi part polygons.  Contact the CED development team if help is needed");
                         blnError = true;
-                        break;
                     }
-
-                    //if (esri.geometry.polygonSelfIntersecting(pFeature.geometry)) {
-                    //    alert("Spatial area is self intersecting, replace the polygon with a new polygon.  Contact the CED development team if help is needed");
-                    //    blnError = true;
-                    //    break;
-                    //}
-                    
+                   
                     try {
                         arrayGemetriesOfEffort.push(pFeature.geometry);
                     } catch (err) {
-                        alert("Spatial area polygon is too complex, replace the polygon with a new generalized polygon.  Contact the CED development team if help is needed");
+                        showErrorDialog("Spatial area polygon is too complex, replace the polygon with a new generalized polygon.  Contact the CED development team if help is needed");
                     }
                 }
 
                 if (blnError) {
-                    return;
+                    showErrorDialog("Spatial area has " + pFeature.geometry.rings.length.toString() + " multi-part polygons, replace the polygon with a new generalized with less multi part polygons.  Contact the CED development team if help is needed");
+                } else {
+                    var pExtent = null;
+                    pfeatureExtent1 = esri.graphicsExtent(resultFeatures);
+                    if (pfeatureExtent1) {
+                        if ((pfeatureExtent1.xmin != pfeatureExtent1.xmax) & (pfeatureExtent1.ymin != pfeatureExtent1.ymax)) {  //if not a multipoint feature then continue
+                            pExtent = new esri.geometry.Extent(pfeatureExtent1.xmin, pfeatureExtent1.ymin, pfeatureExtent1.xmax, pfeatureExtent1.ymax, new esri.SpatialReference({ "wkid": 3857 }));
+                            pExtent = pExtent.expand(app.dblExpandNum);
+                            app.map.setExtent(pExtent, true);
+                        }
+                    }
+
+                    app.pGeometry = mergeGeometries(arrayGemetriesOfEffort);
+
+                    var iWebMercAreaPlanar = calcAreaPlanar4ProjectedAndNotWebMerc(app.pGeometry);
+                    app.div2Add.innerText = app.div2Add.innerText + "\r\nWeb Mercator Aux Sphere PLANAR Area = " + iWebMercAreaPlanar.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " acres";
+
+                    try {
+                        var iWebMercAreaGeodesic = calcAreaGeodesic4WebMercOrGeographicWGS84(app.pGeometry);
+                        app.div2Add.innerText = app.div2Add.innerText + "\r\nWeb Mercator Aux Sphere GEODESIC Area = " + iWebMercAreaGeodesic.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " acres";
+                    } catch (err) {
+                        showErrorDialog("Spatial area polygon is too complex, replace the polygon with a new generalized polygon.  Contact the CED development team if help is needed");
+                    }
+
+                    var outSpatialReference = new SpatialReference({ wkid: 5071 });  //NAD_1983_HARN_Contiguous_USA_Albers, WKID list here https://developers.arcgis.com/rest/services-reference/projected-coordinate-systems.htm
+                    gsvc = new GeometryService("https://utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
+                    var params = new ProjectParameters();
+                    params.geometries = [app.pGeometry];
+                    params.outSR = outSpatialReference;
+                    gsvc.project(params, projectedPolysResults, projectError);
                 }
-
-                app.pGeometry = mergeGeometries(arrayGemetriesOfEffort);
-                
-                var iWebMercAreaPlanar = calcAreaPlanar4ProjectedAndNotWebMerc(app.pGeometry);
-                app.div2Add.innerText = app.div2Add.innerText + "\r\nWeb Mercator Aux Sphere PLANAR Area = " + iWebMercAreaPlanar.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " acres";
-
-                try {
-                    var iWebMercAreaGeodesic = calcAreaGeodesic4WebMercOrGeographicWGS84(app.pGeometry);
-                    app.div2Add.innerText = app.div2Add.innerText + "\r\nWeb Mercator Aux Sphere GEODESIC Area = " + iWebMercAreaGeodesic.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " acres";
-                } catch (err) {
-                    alert("Spatial area polygon is too complex, replace the polygon with a new generalized polygon.  Contact the CED development team if help is needed");
-                }
-
-                var outSpatialReference = new SpatialReference({ wkid: 5071 });  //NAD_1983_HARN_Contiguous_USA_Albers, WKID list here https://developers.arcgis.com/rest/services-reference/projected-coordinate-systems.htm
-                gsvc = new GeometryService("https://utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
-                var params = new ProjectParameters();
-                params.geometries = [app.pGeometry];
-                params.outSR = outSpatialReference;
-                gsvc.project(params, projectedPolysResults, projectError);
             }
             else {
                 // do nothing
             }
-            return results;
+            //return results;
+        }
+
+
+        function showErrorDialog(strMessage) {
+            $("#dialogError").html(strMessage);
+            $(function () {
+                $("#dialogError").dialog({
+                    modal: true,
+                    buttons: {
+                        Ok: function () {
+                            $(this).dialog("close");
+                        },
+                    },
+                    width: "30%",
+                    maxWidth: "768px"
+                });
+            });
         }
 
         function projectError(pResults) {
-            alert("The area is to complex to calculate Acres, proceeding with other spatial operations.");
+            showErrorDialog("The area is to complex to calculate Acres, proceeding with other spatial operations.");
             app.div2Add.innerText = app.div2Add.innerText + "\r\nNAD_1983_HARN_Contiguous_USA_Albers Area = NOT Available DUE TO COMPLEX Area";
             app.m_ProcIndex = 0;
             qry_SelectFeaturesFromLayer(app.m_ProcIndex);  //run the select by intersect
@@ -352,9 +367,8 @@
         <p>Enter a effort id as a URL argument named CEDID  (i.e. ?CEDID=7694, ?CEDID=4930, ?CEDID=7717, ?CEDID=5428),  Effort ID's are from the samdbox source https://utility.arcgis.com/usrsvcs/servers/e09a9437e03d4190a3f3a8f2e36190b4/rest/services/Development_Src_v2/FeatureServer/ </p>
     </div>
 
-    <div id="dialog" class="dialog_text" title="Spatial edits processed successfully!">
-        
-    </div>
+    <div id="dialog" class="dialog_text" title="Spatial edits processed successfully!"></div>
+    <div id="dialogError" class="dialogError_text" title="Spatial Processing Issue"></div>
 
 </body>
 </html>
