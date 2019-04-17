@@ -5,7 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no"/>
 <title>Greater Sage Grouse: Conservation Efforts - Data Provider View</title>
-<link rel="stylesheet" href="https://js.arcgis.com/3.18/esri/css/esri.css" />
+<link rel="stylesheet" href="https://js.arcgis.com/3.28/esri/css/esri.css" />
     <style>
         html, body {
             padding: 0;
@@ -15,16 +15,16 @@
     </style>
 
 <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-<script type="text/javascript" src="https://js.arcgis.com/3.18/"></script>
+<script type="text/javascript" src="https://js.arcgis.com/3.28/"></script>
 
 
 <script type="text/javascript">
-    dojo.require("dijit.layout.TabContainer");
-    dojo.require("dijit.layout.ContentPane");
+    //dojo.require("dijit.layout.TabContainer");
+    //dojo.require("dijit.layout.ContentPane");
     var app = {};
 
     require([
-            "esri/map", "esri/graphic", "esri/geometry/Polygon", "esri/Color", "esri/tasks/QueryTask",
+            "esri/map", "esri/tasks/GeometryService", "esri/tasks/ProjectParameters", "esri/SpatialReference", "esri/graphic", "esri/geometry/Polygon", "esri/Color", "esri/tasks/QueryTask",
         "esri/tasks/query", "esri/geometry/geometryEngine", "esri/layers/FeatureLayer", "esri/layers/KMLLayer", "dojo/dom-style", "esri/layers/WFSLayer", "esri/urlUtils",
             "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on",
             "esri/geometry/webMercatorUtils", "dojo/mouse", "dojo/promise/all", "esri/geometry/Point", "esri/symbols/SimpleMarkerSymbol",
@@ -33,39 +33,39 @@
         ],
 
 
-    function (Map, Graphic, Polygon, Color2, QueryTask, Query, geometryEngine, FeatureLayer, KMLLayer, domStyle, WFSLayer, urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on, webMercatorUtils, mouse, all, Point, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Color) {
+    function (Map, GeometryService, ProjectParameters, SpatialReference, Graphic, Polygon, Color2, QueryTask, Query, geometryEngine, FeatureLayer, KMLLayer, domStyle, WFSLayer, urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on, webMercatorUtils, mouse, all, Point, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Color) {
         //var tokens = getTokens
         console.log("1 M&J");
-
         var iCEDID = getTokens()['CEDID'];    //*****************************************************Justin Change this to your Django CEID id variable!!!!!!!!
-
         parser.parse();
-
         app.loading = dojo.byId("loadingImg");  //loading image. id
-
 
         var customExtentAndSR = new esri.geometry.Extent(-14000000, 4595472, -11000000, 5943351, new esri.SpatialReference({ "wkid": 3857 }));
         app.map = new esri.Map("map", { basemap: "topo", logo: false, extent: customExtentAndSR, sliderPosition: "bottom-left" });
         dojo.connect(app.map, "onUpdateStart", showLoading);
         dojo.connect(app.map, "onUpdateEnd", hideLoading);
 
-        
-        //app.pHUCs = new FeatureLayer("https://edits.nationalmap.gov/arcgis/rest/services/WBD/Wbd_EditVersion/MapServer/2", { "opacity": 0.2 }, { minScale: 5000000000, visible: true });
-        //this is the counties layer
-        app.pHUCs = new FeatureLayer("https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Counties/FeatureServer/0", { "opacity": 0.2 }, { minScale: 5000000000, visible: true });
+        //strHUCs = "https://edits.nationalmap.gov/arcgis/rest/services/WBD/Wbd_EditVersion/MapServer/2";
+        strCountiesURL = "https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Counties/FeatureServer/0";
+        strGRSGPopulationAreasURL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/0";
+        strWAFWAManagementZones = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/1";
+          
+        app.m_Array2Proc = [];
+        //app.m_Array2Proc.push([strHUCs, "HUC12", "HUCs"]);
+        app.m_Array2Proc.push([strCountiesURL, "NAME", "Counties"]);
+        app.m_Array2Proc.push([strGRSGPopulationAreasURL, "POPULATION", "GRSG Population Areas"]);
+        app.m_Array2Proc.push([strWAFWAManagementZones, "Mgmt_zone", "WAFWA Management Zones"]);  //Name
 
-        
-                
+        app.m_ProcIndex = 0;
+
         if (typeof iCEDID != 'undefined') {
             var CED_SRC_poly = new FeatureLayer("https://utility.arcgis.com/usrsvcs/servers/e09a9437e03d4190a3f3a8f2e36190b4/rest/services/Development_Src_v2/FeatureServer/" + "0", { "opacity": 0.8 }, { autoGeneralize: true, visible: true });  //DEV
-
             CED_SRC_poly.setDefinitionExpression("(project_id = " + iCEDID + ")");
-            app.map.addLayers([app.pHUCs, CED_SRC_poly]);
-            app.dblExpandNum = 1
-
+            app.map.addLayers([CED_SRC_poly]);
+            app.dblExpandNum = 2;
             app.div2Add = document.getElementById("divResults");
             app.div2Add.innerText = app.div2Add.innerText + "\r\nZooming To Feature";
-            
+
             qry_Zoom2FeatureLayerExtent(CED_SRC_poly);
         }
         
@@ -88,37 +88,30 @@
             if (resultFeatures.length > 0) {
                 var pExtent;
                 pfeatureExtent1 = esri.graphicsExtent(resultFeatures);
-                var ptempSR = new esri.SpatialReference({ "wkid": 3857 });
                 if (pfeatureExtent1) {
                     if ((pfeatureExtent1.xmin != pfeatureExtent1.xmax) & (pfeatureExtent1.ymin != pfeatureExtent1.ymax)){  //if not a multipoint feature then continue
                         pExtent = new esri.geometry.Extent(pfeatureExtent1.xmin, pfeatureExtent1.ymin, pfeatureExtent1.xmax, pfeatureExtent1.ymax, new esri.SpatialReference({ "wkid": 3857 }));
+                        pExtent = pExtent.expand(app.dblExpandNum);
+                        app.map.setExtent(pExtent, true);
                     }
                 }
-                if (pExtent == undefined) {
-                    var pFeature1 = resultFeatures[0];
-                    mapPoint1 = new Point(pFeature1.geometry.points[0][0], pFeature1.geometry.points[0][1], ptempSR);
-                    app.map.centerAndZoom(mapPoint1, 9);
-                }
-                if (pExtent) {
-                    pExtent = pExtent.expand(app.dblExpandNum);
-                    app.map.setExtent(pExtent, true);
-                }
-                else { var strMessage = "hold it up here"; }
 
-
+                arrayGemetriesOfEffort = [];
                 for (var i = 0; i < results[0].features.length; i++) {
                     var pFeature = results[0].features[i];
-                    app.pGeometry = pFeature.geometry;
-                    //app.pField = "HUC12";
-                    app.pField = "NAME";
-
-                    app.div2Add.innerText = app.div2Add.innerText + "\r\nSelecting County features that intersect the Effort";
-                    //app.div2Add.innerText = app.div2Add.innerText + "\r\nSelecting HUC features that intersect the Effort";
-
-                    qry_SelectFeaturesFromLayer(app.pHUCs.url);
-
-                    break;
+                    arrayGemetriesOfEffort.push(pFeature.geometry);
                 }
+                app.pGeometry = mergeGeometries(arrayGemetriesOfEffort);
+
+                var iWebMercArea = calcAreaGeodesic4WebMercOrGeographicWGS84(app.pGeometry);
+                app.div2Add.innerText = app.div2Add.innerText + "\r\nWeb Mercator Aux Sphere Area = " + iWebMercArea.toString() + " acres";
+
+                var outSpatialReference = new SpatialReference({ wkid: 5071 });  //NAD_1983_HARN_Contiguous_USA_Albers, WKID list here https://developers.arcgis.com/rest/services-reference/projected-coordinate-systems.htm
+                gsvc = new GeometryService("https://utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
+                var params = new ProjectParameters();
+                params.geometries = [app.pGeometry];
+                params.outSR = outSpatialReference;
+                gsvc.project(params, projectedPolysResults, projectError);
             }
             else {
                 // do nothing
@@ -126,78 +119,102 @@
             return results;
         }
 
-        function qry_SelectFeaturesFromLayer(pESRIURL) {
+        function projectError(pResults) {
+            alert(pResults);
+        }
+
+        function projectedPolysResults(pResults) {
+            pProjectedGeometry = pResults[0];
+            var iProjectedArea = calcAreaPlanar4ProjectedAndNotWebMerc(pProjectedGeometry);
+            app.div2Add.innerText = app.div2Add.innerText + "\r\nNAD_1983_HARN_Contiguous_USA_Albers Area = " + iProjectedArea.toString() + " acres";
+            app.m_ProcIndex = 0;
+            qry_SelectFeaturesFromLayer(app.m_ProcIndex);  //run the select by intersect
+        }
+
+        function calcAreaPlanar4ProjectedAndNotWebMerc(geom) {
+            iValue = geometryEngine.planarArea(geom, 109403);//area in US_acres, codes here http://resources.arcgis.com/en/help/runtime-java/apiref/constant-values.html#com.esri.core.geometry.AreaUnit.Code.ACRE
+            return Math.round(iValue); 
+        }
+
+        function calcAreaGeodesic4WebMercOrGeographicWGS84(geom) {
+            iValue = geometryEngine.geodesicArea(geom, 109403); //area in US_acres, codes here http://resources.arcgis.com/en/help/runtime-java/apiref/constant-values.html#com.esri.core.geometry.AreaUnit.Code.ACRE
+            return Math.round(iValue); 
+        }
+
+        function mergeGeometries(pGeometies) {// might have multi polygons merge them into a single one
+            var polygon = pGeometies[0];
+            for (i = 1; i < pGeometies.length; i++) {
+                var poly = pGeometies[i];
+                for (j = 0; j < poly.rings.length; j++) {
+                    polygon.addRing(poly.rings[j]);
+                }
+            }
+            return polygon;
+        }
+
+        function qry_SelectFeaturesFromLayer(iProxIndex) {
+            showLoading();
+            var strURL = app.m_Array2Proc[iProxIndex][0];
+            var strOutField = app.m_Array2Proc[iProxIndex][1];
+
             var pQuery = new Query();
-            var queryTask = QueryTask(pESRIURL);
+            var queryTask = QueryTask(strURL);
             pQuery.returnGeometry = true;
-            pQuery.outFields = [app.pField];
-            pQuery.outSpatialReference = { "wkid": 102100 };
+            pQuery.outFields = [strOutField];
+            pQuery.outSpatialReference = { "wkid": 102100 }; //a.k.a. 3857, WGS_1984_Web_Mercator_Auxiliary_Sphere see https://support.esri.com/en/technical-article/000013950
             pQuery.geometry = app.pGeometry;
-            pQuery.spatialRelationship = Query.SPATIAL_REL_INTERSECTS;
+            pQuery.spatialRelationship = Query.SPATIAL_REL_INTERSECTS;  //this indicates to do the spatial select
             queryTask.execute(pQuery, Results1, Results1Error1);
         }
 
-        function calcArea(geom) {
-            return (Math.round(geometryEngine.geodesicArea(geom, 109402) * 100) / 100) + " acres"; //area in acres
-        }
 
         function Results1(results) {
-            var strHUC = "";
+            var strOutField = app.m_Array2Proc[app.m_ProcIndex][1];
+            var strTheme = app.m_Array2Proc[app.m_ProcIndex][2];
+            var strValue = "";
             var pGeometryResult = null;
             var pFeature = null;
+            var pGraphic = null;
+            var iRedValue4RBG = 98 + (app.m_ProcIndex * 40);
+            var iBlueValue4RBG = 204 - (app.m_ProcIndex * 40);
+            var nTransparency = 0.5 - (app.m_ProcIndex * 0.2);
             var pfillSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
                                 new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
-                                new Color2([98, 194, 204]), 2), new Color2([98, 194, 204, 0.5])
+                                new Color2([iRedValue4RBG, 194, iBlueValue4RBG]), 2),
+                                new Color2([iRedValue4RBG, 194, iBlueValue4RBG, nTransparency])
                                 );
 
-            app.div2Add.innerText = app.div2Add.innerText + "\r\nEffort ID " + getTokens()['CEDID'] + " overlapps with...";
+            
             pFeatures = results.features;
             var resultCount = pFeatures.length;
-            app.div2Add.innerText = app.div2Add.innerText + "\r\n   " + resultCount.toString() + " Counties found";
-            //app.div2Add.innerText = app.div2Add.innerText + "\r\n   " + resultCount.toString() + " HUCs found";
-            var pGraphic = null;
-
-            var blnRunIntersect = false;
-            var strRunIntersect = getTokens()['RunIntersect'];
-            if (strRunIntersect != undefined) {
-                strRunIntersect = strRunIntersect.toUpperCase();
-                if (strRunIntersect == "TRUE") {
-                    blnRunIntersect = true;
-                }
-            }
+            app.div2Add.innerText = app.div2Add.innerText + "\r\n\r\n" + strTheme +  ": " + resultCount.toString() + " overlaps with " + strTheme + " found";
+            app.div2Add.innerText = app.div2Add.innerText + "\r\nEffort ID " + getTokens()['CEDID'] + " overlapps with...";
             
             if (resultCount > 0) {
                 for (var i = 0; i < pFeatures.length; i++) {
                     pFeature = pFeatures[i];
-                    strHUC = pFeature.attributes.NAME;
-                    //strHUC = pFeature.attributes.HUC12;
+                    strValue = pFeature.attributes[strOutField];
                     pGeometryResult1 = pFeature.geometry;
                     var strAreaValue = "";
 
-                    if (geometryEngine.intersects(app.pGeometry, pGeometryResult1)) {    //https://github.com/ekenes/esri-js-samples/blob/master/ge-demo/index.html
-                        pGraphic = new Graphic();
-                        if (blnRunIntersect) {
-                            pGeometryResult2 = geometryEngine.intersect(app.pGeometry, pGeometryResult1);
-                            pGraphic.setGeometry(pGeometryResult2);
-                            strAreaValue = calcArea(pGeometryResult2);
-                        } else {
-                            pGraphic.setGeometry(pGeometryResult1);
-                            strAreaValue = "Geometry not calculated set argument &RunIntersect=true to calc geometry"
-                        }
-                        pGraphic.setSymbol(pfillSymbol);
-                        app.map.graphics.add(pGraphic);
-
-                        var strResultText = "County " + strHUC + " area = " + strAreaValue;
-                        //var strResultText = "HUC " + strHUC + " area = " + strAreaValue;
-                        app.div2Add.innerText = app.div2Add.innerText + "\r\n   " + strResultText;
-
-                    } else {
-                        console.log("Error with geometryEngine");
-                        alert("Error with geometryEngine");
-                    }
+                    pGraphic = new Graphic();
+                    pGraphic.setGeometry(pGeometryResult1);
+                    pGraphic.setSymbol(pfillSymbol);
+                    app.map.graphics.add(pGraphic);
+                    var strResultText = strOutField + " = " + strValue;
+                    app.div2Add.innerText = app.div2Add.innerText + "\r\n   " + strResultText;
                 }
             }
+
+            app.m_ProcIndex += 1;
+            hideLoading();
+            if (app.m_ProcIndex < app.m_Array2Proc.length) {
+                qry_SelectFeaturesFromLayer(app.m_ProcIndex);
+            } else {
+                alert("all done, scroll down in the webpage under the map to view the results");
+            }
         }
+
         function Results1Error1(results) {
             console.log("Error with query1: " + results);
             alert("Error with query1");
@@ -206,7 +223,6 @@
         function qry_Zoom2FeatureLayerExtent(pFeatureLayer1, pFeatureLayer2, pFeatureLayer3, pFeatureLayer4, pFeatureLayer5, pFeatureLayer6) {
             var pQueryT1 = new QueryTask(pFeatureLayer1.url);
             var pQuery1 = new Query();
-
             pQuery1.returnGeometry = true;
             pQuery1.outFields =  ["objectid", "Project_ID"];
 
