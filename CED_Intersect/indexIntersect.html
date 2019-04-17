@@ -125,6 +125,7 @@
                     showErrorDialog("Spatial area polygon has " + pFeature.geometry.rings.length.toString() + " multi-part polygons, replace the polygon with a new generalized with less multi part polygons.  Contact the CED development team if help is needed");
                     return;
                 } else {
+                    showLoading();
                     var pExtent = null;
                     pfeatureExtent1 = esri.graphicsExtent(resultFeatures);
                     if (pfeatureExtent1) {
@@ -180,6 +181,7 @@
             showErrorDialog("The area is to complex to calculate Acres, proceeding with other spatial operations.");
             app.div2Add.innerText = app.div2Add.innerText + "\r\nNAD_1983_HARN_Contiguous_USA_Albers Area = NOT Available DUE TO COMPLEX Area";
             app.m_ProcIndex = 0;
+            hideLoading();
             qry_SelectFeaturesFromLayer(app.m_ProcIndex);  //run the select by intersect
         }
 
@@ -188,6 +190,7 @@
             app.m_EffortArea = calcAreaPlanar4ProjectedAndNotWebMerc(pProjectedGeometry);
             app.div2Add.innerText = app.div2Add.innerText + "\r\nNAD_1983_HARN_Contiguous_USA_Albers Area = " + app.m_EffortArea.toString() + " acres";
             app.m_ProcIndex = 0;
+            hideLoading();
             qry_SelectFeaturesFromLayer(app.m_ProcIndex);  //run the select by intersect
         }
 
@@ -318,6 +321,7 @@
         }
 
         function Results1Error1(results) {
+            hideLoading();
             console.log("Error with query1: " + results);
             alert("Error with query1");
         }
