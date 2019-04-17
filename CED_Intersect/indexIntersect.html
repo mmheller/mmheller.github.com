@@ -33,7 +33,7 @@
     var app = {};
 
     require([
-            "esri/map", "esri/tasks/GeometryService", "esri/tasks/ProjectParameters", "esri/SpatialReference", "esri/graphic", "esri/geometry/Polygon", "esri/Color", "esri/tasks/QueryTask",
+            "esri/map", "esri/geometry", "esri/tasks/GeometryService", "esri/tasks/ProjectParameters", "esri/SpatialReference", "esri/graphic", "esri/geometry/Polygon", "esri/Color", "esri/tasks/QueryTask",
         "esri/tasks/query", "esri/geometry/geometryEngine", "esri/layers/FeatureLayer", "esri/layers/KMLLayer", "dojo/dom-style", "esri/layers/WFSLayer", "esri/urlUtils",
             "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on",
             "esri/geometry/webMercatorUtils", "dojo/mouse", "dojo/promise/all", "esri/geometry/Point", "esri/symbols/SimpleMarkerSymbol",
@@ -42,7 +42,7 @@
         ],
 
 
-    function (Map, GeometryService, ProjectParameters, SpatialReference, Graphic, Polygon, Color2, QueryTask, Query, geometryEngine, FeatureLayer, KMLLayer, domStyle, WFSLayer, urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on, webMercatorUtils, mouse, all, Point, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Color) {
+    function (Map, geometry, GeometryService, ProjectParameters, SpatialReference, Graphic, Polygon, Color2, QueryTask, Query, geometryEngine, FeatureLayer, KMLLayer, domStyle, WFSLayer, urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on, webMercatorUtils, mouse, all, Point, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Color) {
         app.iCEDID = getTokens()['CEDID'];    //*****************************************************Justin Change this to your Django CEID id variable!!!!!!!!
         parser.parse();
         app.loading = dojo.byId("loadingImg");  //loading image. id
@@ -90,7 +90,7 @@
             app.map.showZoomSlider();
         }
        
-        function returnEvents(results) {
+        function returnEventsZoom(results) {
             var resultFeatures = [];
             resultFeatures = resultFeatures.concat(results[0].features);
 
@@ -109,18 +109,46 @@
                 app.m_ArrayIntersectResults = [];
                 arrayGemetriesOfEffort = [];
 
+                var blnError = false;
+
                 for (var i = 0; i < results[0].features.length; i++) {
                     var pFeature = results[0].features[i];
-                    arrayGemetriesOfEffort.push(pFeature.geometry);
-                }
-                app.pGeometry = mergeGeometries(arrayGemetriesOfEffort);
 
+                    if (pFeature.geometry.rings.length > 400) {
+                        alert("Spatial area has " + pFeature.geometry.rings.length.toString() + " multi-part polygons, replace the polygon with a new generalized with less multi part polygons.  Contact the CED development team if help is needed");
+                        blnError = true;
+                        break;
+                    }
+
+                    //if (esri.geometry.polygonSelfIntersecting(pFeature.geometry)) {
+                    //    alert("Spatial area is self intersecting, replace the polygon with a new polygon.  Contact the CED development team if help is needed");
+                    //    blnError = true;
+                    //    break;
+                    //}
+                    
+                    try {
+                        arrayGemetriesOfEffort.push(pFeature.geometry);
+                    } catch (err) {
+                        alert("Spatial area polygon is too complex, replace the polygon with a new generalized polygon.  Contact the CED development team if help is needed");
+                    }
+                }
+
+                if (blnError) {
+                    return;
+                }
+
+                app.pGeometry = mergeGeometries(arrayGemetriesOfEffort);
+                
                 var iWebMercAreaPlanar = calcAreaPlanar4ProjectedAndNotWebMerc(app.pGeometry);
                 app.div2Add.innerText = app.div2Add.innerText + "\r\nWeb Mercator Aux Sphere PLANAR Area = " + iWebMercAreaPlanar.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " acres";
 
-                var iWebMercAreaGeodesic = calcAreaGeodesic4WebMercOrGeographicWGS84(app.pGeometry);
-                app.div2Add.innerText = app.div2Add.innerText + "\r\nWeb Mercator Aux Sphere GEODESIC Area = " + iWebMercAreaGeodesic.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " acres";
-                
+                try {
+                    var iWebMercAreaGeodesic = calcAreaGeodesic4WebMercOrGeographicWGS84(app.pGeometry);
+                    app.div2Add.innerText = app.div2Add.innerText + "\r\nWeb Mercator Aux Sphere GEODESIC Area = " + iWebMercAreaGeodesic.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " acres";
+                } catch (err) {
+                    alert("Spatial area polygon is too complex, replace the polygon with a new generalized polygon.  Contact the CED development team if help is needed");
+                }
+
                 var outSpatialReference = new SpatialReference({ wkid: 5071 });  //NAD_1983_HARN_Contiguous_USA_Albers, WKID list here https://developers.arcgis.com/rest/services-reference/projected-coordinate-systems.htm
                 gsvc = new GeometryService("https://utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
                 var params = new ProjectParameters();
@@ -135,7 +163,10 @@
         }
 
         function projectError(pResults) {
-            alert(pResults);
+            alert("The area is to complex to calculate Acres, proceeding with other spatial operations.");
+            app.div2Add.innerText = app.div2Add.innerText + "\r\nNAD_1983_HARN_Contiguous_USA_Albers Area = NOT Available DUE TO COMPLEX Area";
+            app.m_ProcIndex = 0;
+            qry_SelectFeaturesFromLayer(app.m_ProcIndex);  //run the select by intersect
         }
 
         function projectedPolysResults(pResults) {
@@ -262,14 +293,14 @@
         }
 
         function ExitFootprinter() {
-            var dom = dojo.byId("tpick-surface-0");
-            on.emit(dom, "click", { bubbles: true, cancelable: true });  //Activate the poly editing tool to confirm previous edits
-            editorWidget.editToolbar.deactivate();                      //DeActivate the toolbar to close cleanly
-            if (((document.location.host.indexOf("localhost") > -1) | (document.location.host.indexOf("github") > -1)) & (document.location.host != 'localhost:9000')) {
-                alert("Local/Testing version not configured with CED");
-            } else {
-                dojo.byId("uploadForm").submit(); //Use for CED production
-            }
+            //var dom = dojo.byId("tpick-surface-0");
+            //on.emit(dom, "click", { bubbles: true, cancelable: true });  //Activate the poly editing tool to confirm previous edits
+            //editorWidget.editToolbar.deactivate();                      //DeActivate the toolbar to close cleanly
+            //if (((document.location.host.indexOf("localhost") > -1) | (document.location.host.indexOf("github") > -1)) & (document.location.host != 'localhost:9000')) {
+            //    alert("Local/Testing version not configured with CED");
+            //} else {
+            //    dojo.byId("uploadForm").submit(); //Use for CED production
+            //}
         }
 
         function Results1Error1(results) {
@@ -288,7 +319,7 @@
             var FLayer1, pPromises;
             FLayer1 = pQueryT1.execute(pQuery1);
             pPromises = new all([FLayer1]);
-            return pPromises.then(returnEvents, err);
+            return pPromises.then(returnEventsZoom, err);
         }
 
         function err(err) {
