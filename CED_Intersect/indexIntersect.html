@@ -12,9 +12,18 @@
             margin: 0;
             height: 100%;
         }
+
+        .dialog_text
+         {
+             font-family:    Arial, Helvetica, sans-serif;
+             font-size:      10px;
+             font-weight:    bold;
+         }
     </style>
 
-<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript" src="https://js.arcgis.com/3.28/"></script>
 
 
@@ -34,9 +43,7 @@
 
 
     function (Map, GeometryService, ProjectParameters, SpatialReference, Graphic, Polygon, Color2, QueryTask, Query, geometryEngine, FeatureLayer, KMLLayer, domStyle, WFSLayer, urlUtils, arrayUtils, parser, esriConfig, dom, domClass, on, webMercatorUtils, mouse, all, Point, SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, Color) {
-        //var tokens = getTokens
-        console.log("1 M&J");
-        var iCEDID = getTokens()['CEDID'];    //*****************************************************Justin Change this to your Django CEID id variable!!!!!!!!
+        app.iCEDID = getTokens()['CEDID'];    //*****************************************************Justin Change this to your Django CEID id variable!!!!!!!!
         parser.parse();
         app.loading = dojo.byId("loadingImg");  //loading image. id
 
@@ -49,18 +56,20 @@
         strCountiesURL = "https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Counties/FeatureServer/0";
         strGRSGPopulationAreasURL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/0";
         strWAFWAManagementZones = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/1";
+        strStates = "https://services.arcgis.com/ue9rwulIoeLEI9bj/arcgis/rest/services/US_StateBoundaries/FeatureServer/0";
           
         app.m_Array2Proc = [];
         //app.m_Array2Proc.push([strHUCs, "HUC12", "HUCs"]);
         app.m_Array2Proc.push([strCountiesURL, "NAME", "Counties"]);
         app.m_Array2Proc.push([strGRSGPopulationAreasURL, "POPULATION", "GRSG Population Areas"]);
         app.m_Array2Proc.push([strWAFWAManagementZones, "Mgmt_zone", "WAFWA Management Zones"]);  //Name
+        app.m_Array2Proc.push([strStates, "NAME", "States"]);
 
         app.m_ProcIndex = 0;
 
-        if (typeof iCEDID != 'undefined') {
+        if (typeof app.iCEDID != 'undefined') {
             var CED_SRC_poly = new FeatureLayer("https://utility.arcgis.com/usrsvcs/servers/e09a9437e03d4190a3f3a8f2e36190b4/rest/services/Development_Src_v2/FeatureServer/" + "0", { "opacity": 0.8 }, { autoGeneralize: true, visible: true });  //DEV
-            CED_SRC_poly.setDefinitionExpression("(project_id = " + iCEDID + ")");
+            CED_SRC_poly.setDefinitionExpression("(project_id = " + app.iCEDID + ")");
             app.map.addLayers([CED_SRC_poly]);
             app.dblExpandNum = 2;
             app.div2Add = document.getElementById("divResults");
@@ -96,7 +105,10 @@
                     }
                 }
 
+                app.m_EffortArea = null;
+                app.m_ArrayIntersectResults = [];
                 arrayGemetriesOfEffort = [];
+
                 for (var i = 0; i < results[0].features.length; i++) {
                     var pFeature = results[0].features[i];
                     arrayGemetriesOfEffort.push(pFeature.geometry);
@@ -125,8 +137,8 @@
 
         function projectedPolysResults(pResults) {
             pProjectedGeometry = pResults[0];
-            var iProjectedArea = calcAreaPlanar4ProjectedAndNotWebMerc(pProjectedGeometry);
-            app.div2Add.innerText = app.div2Add.innerText + "\r\nNAD_1983_HARN_Contiguous_USA_Albers Area = " + iProjectedArea.toString() + " acres";
+            app.m_EffortArea = calcAreaPlanar4ProjectedAndNotWebMerc(pProjectedGeometry);
+            app.div2Add.innerText = app.div2Add.innerText + "\r\nNAD_1983_HARN_Contiguous_USA_Albers Area = " + app.m_EffortArea.toString() + " acres";
             app.m_ProcIndex = 0;
             qry_SelectFeaturesFromLayer(app.m_ProcIndex);  //run the select by intersect
         }
@@ -194,6 +206,12 @@
                 for (var i = 0; i < pFeatures.length; i++) {
                     pFeature = pFeatures[i];
                     strValue = pFeature.attributes[strOutField];
+
+                    var pResultObject = new Object();
+                    pResultObject.intersectTheme = strTheme;
+                    pResultObject.intersectName = strValue;
+                    app.m_ArrayIntersectResults.push(pResultObject);
+
                     pGeometryResult1 = pFeature.geometry;
                     var strAreaValue = "";
 
@@ -211,7 +229,43 @@
             if (app.m_ProcIndex < app.m_Array2Proc.length) {
                 qry_SelectFeaturesFromLayer(app.m_ProcIndex);
             } else {
-                alert("all done, scroll down in the webpage under the map to view the results");
+                var strDialogText = "<u>Click Ok to continue OR click Cancel to continue spatial editing...</u><br>";
+                strDialogText += "<b>Effort " + app.iCEDID + " Area:</b> " + app.m_EffortArea.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " (US Acres)<br>";
+
+                for (var i = 0; i < app.m_ArrayIntersectResults.length; i++) {
+                    pResultObject2 = app.m_ArrayIntersectResults[i];
+                    strDialogText += "<b>Theme:</b> " + pResultObject2.intersectTheme + " <b>Name:</b> " + pResultObject2.intersectName + "<br>";
+                }
+
+                $("#dialog").html(strDialogText);
+
+                $(function () {
+                    $("#dialog").dialog({
+                        modal: true,
+                        buttons: {
+                            Ok: function () {
+                                $(this).dialog("close");
+                                ExitFootprinter();
+                            },
+                            Cancel: function () {
+                                $(this).dialog("close");
+                            }
+                        },
+                        width: "30%",
+                        maxWidth: "768px"
+                    });
+                });
+            }
+        }
+
+        function ExitFootprinter() {
+            var dom = dojo.byId("tpick-surface-0");
+            on.emit(dom, "click", { bubbles: true, cancelable: true });  //Activate the poly editing tool to confirm previous edits
+            editorWidget.editToolbar.deactivate();                      //DeActivate the toolbar to close cleanly
+            if (((document.location.host.indexOf("localhost") > -1) | (document.location.host.indexOf("github") > -1)) & (document.location.host != 'localhost:9000')) {
+                alert("Local/Testing version not configured with CED");
+            } else {
+                dojo.byId("uploadForm").submit(); //Use for CED production
             }
         }
 
@@ -264,7 +318,9 @@
         <p>Enter a effort id as a URL argument named CEDID  (i.e. ?CEDID=7694, ?CEDID=4930, ?CEDID=7717, ?CEDID=5428),  Effort ID's are from the samdbox source https://utility.arcgis.com/usrsvcs/servers/e09a9437e03d4190a3f3a8f2e36190b4/rest/services/Development_Src_v2/FeatureServer/ </p>
     </div>
 
-
+    <div id="dialog" class="dialog_text" title="Spatial edits processed successfully!">
+        
+    </div>
 
 </body>
 </html>
