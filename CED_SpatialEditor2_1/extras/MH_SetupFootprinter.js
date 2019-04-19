@@ -17,6 +17,7 @@ define([
     "extras/MH_LoadSHPintoLayer",
     "extras/MH_LayerEditing",
     "extras/MH_Zoom2FeatureLayersFootprinter",
+    "extras/MH_ProcAreaIntersect",
     "dijit/form/CheckBox",
     "esri/dijit/BasemapGallery",
     "esri/geometry/webMercatorUtils",
@@ -34,7 +35,7 @@ define([
     "dojo/on",
     "esri/map"
 ], function (
-            MH_LoadSHPintoLayer, MH_LayerEditing, MH_Zoom2FeatureLayers, CheckBox, BasemapGallery, webMercatorUtils, declare, lang, urlUtils, FeatureLayer,
+            MH_LoadSHPintoLayer, MH_LayerEditing, MH_Zoom2FeatureLayers, MH_ProcAreaIntersect, CheckBox, BasemapGallery, webMercatorUtils, declare, lang, urlUtils, FeatureLayer,
             Scalebar, scaleUtils, arrayUtils, FeatureLayer,
             dom, domClass, registry, mouse, on, Map
 ) {
@@ -49,6 +50,8 @@ define([
                 var arrayCenterZoom = [-111, 45.5];
                 var izoomVal = 10;
             }
+
+            app.blnEditOccured = false;
 
             esri.config.defaults.geometryService = new esri.tasks.GeometryService("https://utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer");
             app.map = new esri.Map("map", { basemap: "topo", center: arrayCenterZoom, zoom: izoomVal, slider: true });
@@ -115,6 +118,8 @@ define([
             app.pSHPLoading = new MH_LoadSHPintoLayer({}); // instantiate the class
             app.pSHPLoading.shpLoadSetup();
 
+            app.pProcAreaIntersect = new MH_ProcAreaIntersect({}); // instantiate the class
+
             app.portalUrl4Shapefile = "https://www.arcgis.com";
 
             if (document.location.host == "conservationefforts.org") {
@@ -124,33 +129,31 @@ define([
                 dojo.byId("txt_Version").innerHTML += ": Sandbox AGOL Hosted Feature Layer Currently Configured";
             }
 
-            pSrcFeatureLayer = new esri.layers.FeatureLayer(strHFL_URL, { id:"99",
+            app.pSrcFeatureLayer = new esri.layers.FeatureLayer(strHFL_URL, { id:"99",
                 mode: esri.layers.FeatureLayer.MODE_ONDEMAND, "opacity": 0.6, outFields: ['*']
             });
 
             if (typeof app.iCEDID != 'undefined') {
-                pSrcFeatureLayer.setDefinitionExpression("(project_id = " + app.iCEDID + ")");
+                app.pSrcFeatureLayer.setDefinitionExpression("(project_id = " + app.iCEDID + ")");
             }
 
             var strBase_URL = "https://utility.arcgis.com/usrsvcs/servers/5d5fc053dd7e4de4b9765f7a6b6f1f61/rest/services/CEDfrontpage_map_v9_Restrict/FeatureServer/";
-            CED_PP_point = new FeatureLayer(strBase_URL + "0", { id: "0", "opacity": 0.3, mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+            CED_PP_point = new FeatureLayer(strBase_URL + "0", { id: "0", "opacity": 0.3, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
             CED_PP_point.setDefinitionExpression("((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))");
-            CED_PP_line = new FeatureLayer(strBase_URL + "1", { id: "1", "opacity": 0.3, mode: FeatureLayer.MODE_ONDEMAND, visible: true });
-            CED_PP_poly = new FeatureLayer(strBase_URL + "2", { id: "2", "opacity": 0.2, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: true });
+            CED_PP_line = new FeatureLayer(strBase_URL + "1", { id: "1", "opacity": 0.3, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+            CED_PP_poly = new FeatureLayer(strBase_URL + "2", { id: "2", "opacity": 0.2, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: false });
 
-            app.map.addLayers([pSrcFeatureLayer, CED_PP_poly, CED_PP_line, CED_PP_point]);
+            app.map.addLayers([app.pSrcFeatureLayer, CED_PP_poly, CED_PP_line, CED_PP_point]);
             var cbxLayers = [];
             cbxLayers.push({ layer: CED_PP_point, title: 'Approved CED Point' });
             cbxLayers.push({ layer: CED_PP_line, title: 'Approved CED Lines' });
             cbxLayers.push({ layer: CED_PP_poly, title: 'Approved CED Polygons' });
 
-            //app.map.addLayers([pSrcFeatureLayer]);
-
             if (typeof app.iCEDID != 'undefined') {
                 //app.dblExpandNum = 3.75;
                 app.dblExpandNum = 1;
                 app.pSup = new MH_Zoom2FeatureLayers({}); // instantiate the class
-                app.pSup.qry_Zoom2FeatureLayerExtent(pSrcFeatureLayer);
+                app.pSup.qry_Zoom2FeatureLayerExtent(app.pSrcFeatureLayer);
             }
             
             if (app.map.loaded) {
@@ -158,27 +161,6 @@ define([
             } else {
                 app.map.on("load", function () { mapLoaded(); });
             }
-
-            //var portalUrl4Shapefile = "https://fws.maps.arcgis.com";
-            //var portalUrl4Shapefile = "https://www.arcgis.com";
-            //var strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/Development_Src_v2/FeatureServer/0";
-            //var info = new OAuthInfo({ appId: "jHualSvRS1V5nVMM", popup: false });
-            //esriId.registerOAuthInfos([info]);
-            //esriId.getCredential(info.portalUrl + "/sharing");                // user will be redirected to OAuth Sign In page
-            //esriId.checkSignInStatus(info.portalUrl + "/sharing").then(
-            //  function () {
-            //      pSrcFeatureLayer = new esri.layers.FeatureLayer(strHFL_URL, {mode: esri.layers.FeatureLayer.MODE_ONDEMAND, "opacity": 0.6, outFields: ['*']});
-            //      map.addLayers([pSrcFeatureLayer]);
-            //      console.log("adding layer");
-
-            //      if (pFCol) {
-            //          console.log("feature col exists");
-            //      } else {
-            //          console.log("does not exists");
-            //      }
-
-            //  }
-            //).otherwise(function () { });// Do nothing
 
             function mapLoaded() {        // map loaded//            // Map is ready
                 app.map.on("mouse-move", showCoordinates); //after map loads, connect to listen to mouse move & drag events

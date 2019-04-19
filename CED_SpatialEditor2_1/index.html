@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--Created By:  Matt Heller, U.S. Fish and Wildlife Service, Region 6 Science Applications
-Date:        February 2018, updated Oct 2018-->
+Date:        February 2018, updated April 2019-->
 
 <!--{% load staticfiles %}-->
 <html>
@@ -9,53 +9,22 @@ Date:        February 2018, updated Oct 2018-->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
     <title>CED Footprinter</title>
    
-    <link rel="stylesheet" href="https://js.arcgis.com/3.20/dijit/themes/claro/claro.css">
-    <link rel="stylesheet" href="https://js.arcgis.com/3.20/esri/css/esri.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.28/dijit/themes/claro/claro.css">
+    <link rel="stylesheet" href="https://js.arcgis.com/3.28/esri/css/esri.css" />
     <link rel="stylesheet" type="text/css" href="Styles/panelFootprinter.css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
     <!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/Styles/panelFootprinter.css' %}" />-->
     
     <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>      
     <!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/javascript/grsgmap/extras' %}" } };</script>-->
+         
 
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://js.arcgis.com/3.28/"></script>
 
-      <style>
-          #GISDocText {
-              position: fixed;
-              float: left;
-              margin-left: auto;
-              margin-right: auto;
-              bottom: 50px;
-              color: black;
-              z-index: 200;
-              text-align: center;
-              width: 100%;
-          }
-
-
-              #GISDocText h3 {
-                  font-family: Arial;
-                  font-weight: bold;
-                  text-align: center;
-                  font-size: 24px;
-              }
-
-          #processinggisdiv {
-              position: fixed;
-              float: left;
-              margin-left: 49%;
-              bottom: 20px;
-              color: black;
-              z-index: 200;
-              text-align: center;
-              width: 100%;
-          }
-      </style>
-
-
-    <script src="https://js.arcgis.com/3.23/"></script>
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript">
-      //var map;
       var editorWidget;
       var pSrcFeatureLayer;
       var pFCol;
@@ -155,7 +124,10 @@ Date:        February 2018, updated Oct 2018-->
           <input id="btn_Next" type="button" value="Save and Go To the Next Step" />
       </div>
 
-  </body class="claro">
+
+      <div id="dialog" class="dialog_text ui-dialog ui-corner-all ui-widget ui-widget-content ui-front ui-dialog-buttons ui-draggable ui-resizable" title="Spatial edits processed successfully!"></div>
+      <div id="dialogError" class="dialogError_text ui-dialog-content ui-widget-content" title="Spatial Processing Issue"></div>
+  </body>
 </html>
 
 
