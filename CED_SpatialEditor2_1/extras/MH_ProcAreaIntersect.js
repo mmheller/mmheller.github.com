@@ -350,42 +350,42 @@ define([
 
                     if (theme == "Counties") {
                         if (counties.length > 0) {
-                            counties += "," + pResultObject2.intersectName + ":" + pResultObject2.intersectName2
+                            counties += "," + pResultObject2.intersectName + ":" + pResultObject2.intersectName2;
                         } else {
-                            counties = pResultObject2.intersectName
+                            counties = pResultObject2.intersectName + ":" + pResultObject2.intersectName2;
                         }
                     }
 
                     if (theme == "States") {
                         if (states.length > 0) {
-                            states += "," + pResultObject2.intersectName
+                            states += "," + pResultObject2.intersectName;
                         } else {
-                            states = pResultObject2.intersectName
+                            states = pResultObject2.intersectName;
                         }
                     }
 
                     if (theme == "WAFWA Management Zones") {
                         if (wafwamz.length > 0) {
-                            wafwamz += "," + pResultObject2.intersectName
+                            wafwamz += "," + pResultObject2.intersectName;
                         } else {
-                            wafwamz = pResultObject2.intersectName
+                            wafwamz = pResultObject2.intersectName;
                         }
                     }
 
                     if (theme == "GRSG Population Areas") {
                         if (grsgpops.length > 0) {
-                            grsgpops += "," + pResultObject2.intersectName
+                            grsgpops += "," + pResultObject2.intersectName;
                         } else {
-                            grsgpops = pResultObject2.intersectName
+                            grsgpops = pResultObject2.intersectName;
                         }
                     }
                 }
 
-                document.getElementById('id_countyvals').value = counties
-                document.getElementById('id_statevals').value = states
-                document.getElementById('id_mzvals').value = wafwamz
-                document.getElementById('id_grsgpopvals').value = grsgpops
-                document.getElementById('id_areavals').value = app.m_EffortArea
+                document.getElementById('id_countyvals').value = counties;
+                document.getElementById('id_statevals').value = states;
+                document.getElementById('id_mzvals').value = wafwamz;
+                document.getElementById('id_grsgpopvals').value = grsgpops;
+                document.getElementById('id_areavals').value = app.m_EffortArea;
 
                 if (((document.location.host.indexOf("localhost") > -1) | (document.location.host.indexOf("github") > -1)) & (document.location.host != 'localhost:9000')) {
                     alert("Area/Interesect Successfull, Local/Testing version not configured with CED");
