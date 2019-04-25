@@ -21,12 +21,12 @@ define([
 
     return declare([], {
         btn_PolyEdit_click: function (results) {
-            var dom = dojo.byId("tpick-surface-0");
+            var dom = document.getElementById("tpick-surface-0");
             on.emit(dom, "click", { bubbles: true, cancelable: true });
         },
 
         btn_Next_click: function () {
-            var dom = dojo.byId("tpick-surface-0");
+            var dom = document.getElementById("tpick-surface-0");
             on.emit(dom, "click", { bubbles: true, cancelable: true });  //Activate the poly editing tool to confirm previous edits
             editorWidget.editToolbar.deactivate();                      //DeActivate the toolbar to close cleanly
 
@@ -36,7 +36,9 @@ define([
                 if (((document.location.host.indexOf("localhost") > -1) | (document.location.host.indexOf("github") > -1)) & (document.location.host != 'localhost:9000')) {
                     alert("Local/Testing version not configured with CED");
                 } else {
-                    dojo.byId("uploadForm").submit(); //Use for CED production
+                    //In this scenario no-edits so no area/intersect calculations therefore no values to pass on
+                    //dojo.byId("uploadForm").submit(); //Use for CED production//firefox has issues finding HTML using this method
+                    document.getElementById("uploadForm").submit(); //Use for CED production
                 }
             }
         },
