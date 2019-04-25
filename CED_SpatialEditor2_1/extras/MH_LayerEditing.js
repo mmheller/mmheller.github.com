@@ -106,6 +106,9 @@ define([
 
                     editorWidget.editToolbar.on("graphic-move-stop", function (evt) {
                         app.blnEditOccured = true;  //this will allow the area and intersect calculations in the MH_ProcAreaIntersect code
+                        var dom = document.getElementById("tpick-surface-0");
+                        on.emit(dom, "click", { bubbles: true, cancelable: true });  //Activate the poly editing tool to confirm previous edits
+                        editorWidget.editToolbar.deactivate();                      //DeActivate the toolbar to close cleanly
                     });
 
                     app.map.infoWindow.resize(325, 500);
