@@ -65,6 +65,42 @@
           }
 
 /* Classes */
+
+.button100:hover {
+    background: #85c0b5;
+    border-radius: 25px;
+    position: relative;
+    height: 25px;
+    font-family: Arial;
+    color: #97767b;
+    font-weight: bold;
+    font-size: 16px;
+    z-index: 0;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-decoration: none;
+}
+
+.button100 {
+    background: #a4d4cb;
+    border-radius: 25px;
+    height: 25px;
+    font-family: Arial;
+    color: #7f697f;
+    font-weight: bold;
+    font-size: 16px;
+    z-index: 0;
+    padding-right: 20px;
+    padding-left: 20px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    text-decoration: none;
+    margin-top: 20px;
+    margin-left: 0px;
+}
+
 .bg {
 	display: block;
 	background-color: rgb(151, 118, 123);
@@ -208,11 +244,12 @@
 	    position: absolute;
 	    bottom: 50px;
 	    right: 15px;
-	    /*width: 160px;
-	    height: 30px;*/
 	    font-family: Arial;
 	    color: #ffffff;
 	    font-size: 14px;
-	    padding: 10px;
+	    padding-top: 5px;
+        padding-bottom: 20px;
+        padding-left: 20px;
+        padding-right: 20px;
 	    overflow: hidden;
     }
