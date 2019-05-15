@@ -1,5 +1,5 @@
-﻿//Created By:  Matt Heller,  U.S. Fish and Wildlife Service, Science Applications, Region 6
-//Date:        May 2018, Updated Oct 2018
+﻿//Created By:  Matt Heller, U.S. Fish and Wildlife Service, Region 6 Science Applications
+//Date:        February 2018, updated April 2019
 
 function showLoading() {
     esri.show(app.loading);
@@ -54,7 +54,7 @@ define([
             strCountiesURL = "https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Counties/FeatureServer/0";
             strGRSGPopulationAreasURL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/0";
             strWAFWAManagementZones = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/1";
-            strStates = "https://services.arcgis.com/ue9rwulIoeLEI9bj/arcgis/rest/services/US_StateBoundaries/FeatureServer/0";
+            strStates = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/States_and_Provinces_Map/FeatureServer/0";
 
             app.m_Array2Proc = [];
             //app.m_Array2Proc.push([strHUCs, "HUC12", "HUCs"]);
@@ -248,7 +248,7 @@ define([
                 var pGraphic = null;
                 var iRedValue4RBG = 98 + (app.m_ProcIndex * 40);
                 var iBlueValue4RBG = 204 - (app.m_ProcIndex * 40);
-                var nTransparency = 0.5 - (app.m_ProcIndex * 0.2);
+                var nTransparency = 0.6 - (app.m_ProcIndex * 0.1);
                 var pfillSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
                                     new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
                                     new Color2([iRedValue4RBG, 194, iBlueValue4RBG]), 2),
@@ -298,6 +298,7 @@ define([
                     document.getElementById("ToggleGraphicsContainer").style.display = 'inline';
 
                     var strDialogText = "<u>Click Ok to continue editing next step OR click Cancel to resume spatial editing...</u><br>";
+                    var strDialogText = "";
                     strDialogText += "<b>Effort " + app.iCEDID + " Area:</b> " + app.m_EffortArea.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " (US Acres)<br>";
 
                     for (var i = 0; i < app.m_ArrayIntersectResults.length; i++) {
@@ -315,11 +316,11 @@ define([
                         $("#dialog").dialog({
                             modal: true,
                             buttons: {
-                                Ok: function () {
+                                "Accept Edits and Continue": function () {
                                     $(this).dialog("close");
                                     ExitFootprinter();
                                 },
-                                Cancel: function () {
+                                "Cancel Process and Continue Editing": function () {
                                     $(this).dialog("close");
                                 }
                             },
