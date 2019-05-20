@@ -1,5 +1,5 @@
-﻿//Created By:  Matt Heller, U.S. Fish and Wildlife Service, Region 6 Science Applications
-//Date:        February 2018, updated April 2019
+﻿//Created By:  Matt Heller,  U.S. Fish and Wildlife Service, Science Applications, Region 6
+//Date:        February 2018, updated May 2019
 
 function showLoading() {
     esri.show(app.loading);
@@ -375,7 +375,7 @@ define([
 
                     if (theme == "GRSG Population Areas") {
                         if (grsgpops.length > 0) {
-                            grsgpops += "," + pResultObject2.intersectName;
+                            grsgpops += ";" + pResultObject2.intersectName;
                         } else {
                             grsgpops = pResultObject2.intersectName;
                         }
