@@ -1,5 +1,9 @@
 ﻿//Created By:  Matt Heller, U.S. Fish and Wildlife Service, Region 6 Science Applications
 //Date:        May 2018, Updated May 2019
+
+
+
+
 define([
     "dojo/_base/declare",
     "dojo/_base/lang",
@@ -25,10 +29,16 @@ define([
             on.emit(dom, "click", { bubbles: true, cancelable: true });
         },
 
-        btn_Next_click: function () {
+        DeAct: function () {
             var dom = document.getElementById("tpick-surface-0");
             on.emit(dom, "click", { bubbles: true, cancelable: true });  //Activate the poly editing tool to confirm previous edits
             editorWidget.editToolbar.deactivate();                      //DeActivate the toolbar to close cleanly
+        },
+
+
+
+        btn_Next_click: function () {
+            app.pLEdit.DeAct();
 
             if ((app.blnEditOccured) & (app.iCEDID != 'undefined')) {
                 app.pProcAreaIntersect.StartAreaIntersect();
@@ -94,8 +104,6 @@ define([
 
                     editorWidget = new esri.dijit.editing.Editor(params, 'editorDiv');
                     
-
-
                     app.map.enableSnapping({ snapKey: dojo.keys.copyKey });       //Dojo.keys.copyKey maps to CTRL in Windows and CMD in Mac !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     editorWidget.startup();
 
@@ -103,12 +111,24 @@ define([
                         app.blnEditOccured = true;  //this will allow the area and intersect calculations in the MH_ProcAreaIntersect code
                     });
 
-
                     editorWidget.editToolbar.on("graphic-move-stop", function (evt) {
                         app.blnEditOccured = true;  //this will allow the area and intersect calculations in the MH_ProcAreaIntersect code
-                        var dom = document.getElementById("tpick-surface-0");
-                        on.emit(dom, "click", { bubbles: true, cancelable: true });  //Activate the poly editing tool to confirm previous edits
-                        editorWidget.editToolbar.deactivate();                      //DeActivate the toolbar to close cleanly
+                        app.pLEdit.DeAct();
+                    });
+
+                    editorWidget.editToolbar.on("scale-stop", function (evt) {
+                        app.blnEditOccured = true;  //this will allow the area and intersect calculations in the MH_ProcAreaIntersect code
+                        app.pLEdit.DeAct();
+                    });
+
+                    editorWidget.editToolbar.on("rotate-stop", function (evt) {
+                        app.blnEditOccured = true;  //this will allow the area and intersect calculations in the MH_ProcAreaIntersect code
+                        app.pLEdit.DeAct();
+                    });
+
+                    editorWidget.editToolbar.on("vertex-move-stop", function (evt) {
+                        app.blnEditOccured = true;  //this will allow the area and intersect calculations in the MH_ProcAreaIntersect code
+                        app.pLEdit.DeAct();
                     });
 
                     app.map.infoWindow.resize(325, 500);
