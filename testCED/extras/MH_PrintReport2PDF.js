@@ -30,7 +30,7 @@ function headerFooterFormatting(doc, totalPages) {
         header(doc);                //header
         footer(doc, i, totalPages);
         doc.page++;
-    }
+	}
 };
 
 function header(doc) {
@@ -291,11 +291,10 @@ function startExport2PDF() {
         if (pElement != undefined) {
             pElement.innerHTML = "";
         }
-    }
+	}
 
-    document.getElementById("ImgResultsLoading").style.visibility = "hidden";
+	document.getElementById("ImgResultsLoading").style.visibility = "hidden";
     pdf.save("CEDReport.pdf");
-
 };
 
 
