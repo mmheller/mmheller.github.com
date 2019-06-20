@@ -96,16 +96,17 @@ Date:        Oct 2014, Updated Oct 2018-->
         
         app.base64Img1 = null;
         app.base64Img2 = null;
-        app.base64Img3 = null;
-        //imgToBase64("{% static 'ced_main/images/ced_main/CEDlogo_gray_180x31.png' %}", function (base64) {
+		app.base64Img3 = null;
+
+        //imgToBase64("{% static 'ced_main/images/grsgmap/CEDlogo_gray_180x31.png' %}", function (base64) {
         //    app.base64Img1 = base64;
         //})
         //var base64Img2 = null;
-        //imgToBase64("{% static 'ced_main/images/ced_main/USFWS_gray_150x31.png' %}", function (base64) {
+        //imgToBase64("{% static 'ced_main/images/grsgmap/USFWS_gray_150x31.png' %}", function (base64) {
         //    app.base64Img2 = base64;
         //})
         //var base64Img3 = null;
-        //imgToBase64("{% static 'ced_main/images/ced_main/USGS_gray_117x31.png' %}", function (base64) {
+        //imgToBase64("{% static 'ced_main/images/grsgmap/USGS_gray_117x31.png' %}", function (base64) {
         //    app.base64Img3 = base64;
         //})
 
@@ -121,7 +122,7 @@ Date:        Oct 2014, Updated Oct 2018-->
             app.base64Img3 = base64;
         })
                 
-        pdfMargins = { top: 40, bottom: 40, left: 30,width: 624};
+        
         esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
         esriConfig.defaults.io.corsEnabledServers.push("https://services.arcgis.com")
         esriConfig.defaults.io.corsEnabledServers.push("https://sampleserver6.arcgisonline.com")

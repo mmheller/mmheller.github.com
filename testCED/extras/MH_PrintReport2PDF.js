@@ -38,7 +38,7 @@ function header(doc) {
     doc.setTextColor(40);
     doc.setFontStyle('normal');
     if (app.base64Img1) {
-        doc.addImage(app.base64Img1, 'JPEG', pdfMargins.left, 10, 130, 20);
+		doc.addImage(app.base64Img1, 'JPEG', app.gPrintReport2PDF.pdfMargins.left, 10, 130, 20);
     }
     if (app.base64Img2) {
         doc.addImage(app.base64Img2, 'JPEG', 175, 10, 80, 20);
@@ -50,9 +50,9 @@ function header(doc) {
         doc.addImage(app.base64ImgMap, 'JPEG', 375, 5, 65, 30);
     }
 
-    doc.text("CED Report", pdfMargins.left + 425, 30);
+	doc.text("CED Report", app.gPrintReport2PDF.pdfMargins.left + 425, 30);
     doc.setLineCap(2);
-    doc.line(pdfMargins.left, 40, pdfMargins.width - pdfMargins.left, 40); // horizontal line
+	doc.line(app.gPrintReport2PDF.pdfMargins.left, 40, app.gPrintReport2PDF.pdfMargins.width - app.gPrintReport2PDF.pdfMargins.left, 40); // horizontal line
 };
 
 
@@ -66,7 +66,8 @@ function footer(doc, pageNumber, totalPages) {
     var str = "Page " + pageNumber + " of " + totalPages + ", Report Date: " + today
     doc.setFontSize(10);
     var iPageHeight = doc.internal.pageSize.getHeight();
-    doc.text(str, pdfMargins.left, iPageHeight - 20);
+	doc.text(str, app.gPrintReport2PDF.pdfMargins.left, iPageHeight - 20);
+
 };
 
 
@@ -103,31 +104,33 @@ function AddChartImage2PDF(doc, strElementID, iPageNumber, iTop) {
         }
         
         doc.setPage(iPageNumber);
-        doc.addImage(strBase64, 'PNG', pdfMargins.left, iTop, 520, 120);
+		doc.addImage(strBase64, 'PNG', app.gPrintReport2PDF.pdfMargins.left, iTop, 520, 120);
     }
 };
 
 function startExport2PDF() {
+	app.gPrintReport2PDF.pdfMargins = { top: 40, bottom: 80, left: 30, width: 624 };
+	//pdfMargins = { top: 40, bottom: 40, left: 30, width: 624 };
     var pdf = new jsPDF('p', 'pt', 'letter');
     pdf.setFontSize(18);
     pdf.setFont("helvetica");  //not sure this is doing anything
     pdf.setFontType("normal");
 
     if (app.base64ImgMap) {
-        pdf.addImage(app.base64ImgMap, 'JPEG', pdfMargins.left, 90, pdfMargins.left + 520, 244 + 20);
+		pdf.addImage(app.base64ImgMap, 'JPEG', app.gPrintReport2PDF.pdfMargins.left, 90, app.gPrintReport2PDF.pdfMargins.left + 520, 244 + 20);
         pdf.setFontSize(12);
         pdf.setFontType("bold");
-        pdf.text("ALERT:  The CED is in a period of data collection.", pdfMargins.left, 370);
-        pdf.text("If generating report(s), beware the summaries, values, and figures are to be considered", pdfMargins.left, 385);
-        pdf.text("DRAFT and PROVISIONAL until further notice.", pdfMargins.left, 400);
+		pdf.text("ALERT:  The CED is in a period of data collection.", app.gPrintReport2PDF.pdfMargins.left, 370);
+		pdf.text("If generating report(s), beware the summaries, values, and figures are to be considered", app.gPrintReport2PDF.pdfMargins.left, 385);
+		pdf.text("DRAFT and PROVISIONAL until further notice.", app.gPrintReport2PDF.pdfMargins.left, 400);
 
         pdf.setFontType("normal");
-        pdf.text("Note: Some overlapping area efforts may not be visible in PDF map", pdfMargins.left, 420);
+		pdf.text("Note: Some overlapping area efforts may not be visible in PDF map", app.gPrintReport2PDF.pdfMargins.left, 420);
         pdf.setFontSize(18);
     }
 
-    pdf.text("Conservation Efforts Database v2.1", pdfMargins.left, 60);
-    pdf.text("Interactive Map - Summary Report", pdfMargins.left, 80);
+	pdf.text("Conservation Efforts Database v2.1", app.gPrintReport2PDF.pdfMargins.left, 60);
+	pdf.text("Interactive Map - Summary Report", app.gPrintReport2PDF.pdfMargins.left, 80);
 
     
     $("#dREPORTGENERATED").css("font-family", "helvetica");// change property value
@@ -190,8 +193,8 @@ function startExport2PDF() {
     
    source = $('#html-2-pdfwrapper').html();//div_pdf contains idTablaDatos and idTablaDetalle
     pdf.fromHTML(source,
-        pdfMargins.left, // x coord
-        pdfMargins.top + 390, 
+		app.gPrintReport2PDF.pdfMargins.left, // x coord
+		app.gPrintReport2PDF.pdfMargins.top + 390, 
         {
             setFont: "helvetica",
             width: 5000, // resetting the max width of content on PDF, otherwise the text output word wraps because jsPDF doesnt' always recognize the <br>'s
@@ -279,7 +282,7 @@ function startExport2PDF() {
         }, function (dispose) {
             headerFooterFormatting(pdf, pdf.internal.getNumberOfPages());
         },
-        pdfMargins);
+		app.gPrintReport2PDF.pdfMargins);
 
     var i;
     for (i = 1; i < 19; i++) {

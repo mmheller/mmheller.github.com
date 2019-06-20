@@ -478,7 +478,15 @@ define([
               var strlabelField2 = "Name";
               var strlabelField3 = "Mgmt_zone";
               var pBase_Pop = new FeatureLayer(strBase_URL + "0", { id: "Pop", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: false });
-              var pBase_MZ = new FeatureLayer(strBase_URL + "1", { id: "MZ", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: false });
+			  var pBase_MZ = new FeatureLayer(strBase_URL + "1", { id: "MZ", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: false });
+			  
+			  var pBase_SBBiom = new FeatureLayer("https://gis.usgs.gov/sciencebase2/rest/services/Catalog/5ccb4a64e4b09b8c0b7808a6/MapServer/0", { id: "SBBi", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false })
+			  var sfsSBBiom = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+				  new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+					  new Color([0, 200, 0]), 3), new Color([26, 255, 158, 0.1])
+			  );
+			  var rendererSBBiom = new SimpleRenderer(sfsSBBiom);
+			  pBase_SBBiom.setRenderer(rendererSBBiom);
 
               var pBase_RRP = new FeatureLayer(strBase_URL + "2", { id: "RRP", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
               var pBase_RRB = new FeatureLayer(strBase_URL + "3", { id: "RRB", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
@@ -505,7 +513,8 @@ define([
               var plabels2 = new LabelLayer({ id: "labels2" });
               plabels2.addFeatureLayer(pBase_MZ, pLabelRenderer2, "{" + strlabelField2 + "} : {" + strlabelField3 + "}");
 
-              legendLayers.push({ layer: pBase_PAC, title: 'GRSG Priority Areas for Conservation (PACs)' });
+			  legendLayers.push({ layer: pBase_PAC, title: 'GRSG Priority Areas for Conservation (PACs)' });
+			  legendLayers.push({ layer: pBase_SBBiom, title: 'US Sagebrush Biome Range Extent' });
               legendLayers.push({ layer: pBase_SMA, title: 'Land Ownership (Surface Management Agency, BLM 2015)' });
               //legendLayers.push({ layer: pBase_GHMA, title: 'GRSG General Habitat Management Areas (GHMA + OHMA [NV, UT]) (BLM/USFS 2015)' });
               legendLayers.push({ layer: pBase_BLMHMA, title: 'GRSG BLM Habitat Management Areas (PHMA + IHMA [ID]) (BLM/USFS 2015)' });
@@ -527,10 +536,17 @@ define([
 
               cbxLayers.push({ layers: [pBase_PAC, pBase_PAC], title: 'GRSG Priority Areas for Conservation (PACs)' +
                                                                       '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<i title="This polygon data set represents all sage-grouse Priority Areas for Conservation (PACs) identified in the 2013 Greater Sage-Grouse Conservation Objectives Team (COT) Report. PACs represent areas identified as essential for the long-term conservation of the sage-grouse. The COT determined that the PACs are key for the conservation of the species range wide.">more..., </i>' +
-                                                                      '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://www.sciencebase.gov/catalog/item/56f96d88e4b0a6037df066a3" target="_blank">Team (COT) Report, 2014</a>'
-              });
+                                                                      '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://www.sciencebase.gov/catalog/item/56f96d88e4b0a6037df066a3" target="_blank">(COT Team Report, 2014)</a>'
+			  });
+
+			  cbxLayers.push({
+				  layers: [pBase_SBBiom, pBase_SBBiom], title: 'US Sagebrush Biome Range Extent' +
+					  '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<i title="This feature estimates the geographic extent of the sagebrush biome in the United States. It was created for the Western Association of Fish and Wildlife Agency’s (WAFWA) Sagebrush Conservation Strategy publication as a visual for the schematic figures. This layer does not represent the realized distribution of sagebrush and should not be used to summarize statistics about the distribution or precise location of sagebrush across the landscape.">more..., </i>' +
+					  '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://www.sciencebase.gov/catalog/item/5ccb4a64e4b09b8c0b7808a6" target="_blank">(Jeffries, M.I., and Finn, S.P., 2019)</a>'
+			  });
+
               cbxLayers.push({
-                  layers: [pBase_SMA, pBase_SMA], title: 'Land Ownership' +
+                  layers: [pBase_SMA, pBase_SMA], title: 'Land Ownership (SMA)' +
                                                                       '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<i title="The Surface Management Agency (SMA) Geographic Information System (GIS) dataset depicts Federal land for the United States and classifies this land by its active Federal surface managing agency.">more..., </i>' +
                                                                       '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://landscape.blm.gov/geoportal/catalog/search/resource/details.page?uuid=%7B2A8B8906-7711-4AF7-9510-C6C7FD991177%7D" target="_blank">(Surface Management Agency, BLM 2015)</a>'
               });
@@ -566,7 +582,7 @@ define([
                                                                       '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://www.wafwa.org/Documents%20and%20Settings/37/Site%20Documents/Initiatives/Sage%20Grouse/Primer%203%20SGMapping%20&%20Priority%20Habitats1.2.pdf" target="_blank">WAFWA</a>'
               });
 
-              arrayLayers = [pBase_PAC, pBase_SMA, pBase_BLMHMA, pBase_Eco, pBase_RRP, pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop, plabels1, plabels2, CED_PP_poly, CED_PP_line, CED_PP_point, this.gCED_PP_point4FeatureTable];
+			  arrayLayers = [pBase_PAC, pBase_SBBiom, pBase_SMA, pBase_BLMHMA, pBase_Eco, pBase_RRP, pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop, plabels1, plabels2, CED_PP_poly, CED_PP_line, CED_PP_point, this.gCED_PP_point4FeatureTable];
               app.map.addLayers(arrayLayers);
 
               dojo.connect(app.map, 'onLayersAddResult', function (results) {            //add check boxes 

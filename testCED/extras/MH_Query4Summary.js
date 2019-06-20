@@ -219,6 +219,7 @@ define([
 
 
         returnEvents: function (results) {
+            var strText = "";
             this.iTempIndexResults += 1;
             pTblindexAndQuery = this.app.gQuerySummary.m_arrayQuery[this.app.gQuerySummary.m_iarrayQueryIndex];
 
@@ -283,7 +284,7 @@ define([
                             var featAttrs = resultFeatures[0].attributes;
                             var values = [];
                             var texts = [];
-                            var strText = "";
+                            strText = "";
                             var strValue = "";
                             var testTexts = {};
                             var attrNames = [];

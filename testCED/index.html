@@ -37,7 +37,7 @@ Date:        Oct 2014, Updated Oct 2018-->
     require([
         "esri/map", "esri/config", "dojo/dom-construct",
         "dojo/_base/lang", "esri/layers/FeatureLayer", "esri/dijit/Legend", "esri/urlUtils",
-        "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on", "extras/PS_MeasSiteSearch4Definition", 
+        "dojo/_base/array", "dojo/parser", "dojo/dom", "dojo/dom-class", "dojo/on", "extras/PS_MeasSiteSearch4Definition", 
         "dijit/form/CheckBox", "extras/MH_Zoom2FeatureLayerCEDMap", "extras/MH_SetupCEDMap",
         "extras/MH_Query4Summary",
         "esri/tasks/RelationshipQuery", "esri/symbols/SimpleMarkerSymbol", "dojo/_base/Color", "esri/dijit/Scalebar",
@@ -52,7 +52,7 @@ Date:        Oct 2014, Updated Oct 2018-->
 
     function (Map, esriConfig, domConstruct,
                 lang, FeatureLayer, Legend, urlUtils,
-                arrayUtils, parser, esriConfig, dom, domClass, on, PS_MeasSiteSearch4Definition, CheckBox,
+                arrayUtils, parser, dom, domClass, on, PS_MeasSiteSearch4Definition, CheckBox,
                 MH_Zoom2FeatureLayer, MH_Setup, MH_Query4Summary,
                 RelationshipQuery, SimpleMarkerSymbol,
                 Color, Scalebar, Geocoder, CK_AutoCompleteSearchAndZoom,
@@ -75,10 +75,10 @@ Date:        Oct 2014, Updated Oct 2018-->
         app.pSetQS = null;
 
         app.arrayLayers = app.pSup.Phase2();
-        var CED_PP_poly = arrayLayers[12];  //index depends on MH_SetupCEDMap-->Phase2-->arrayLayers =
-        var CED_PP_line = arrayLayers[13];
-        var CED_PP_point = arrayLayers[14];
-        var CED_PP_point4FeatureTable = arrayLayers[15];
+        var CED_PP_poly = arrayLayers[13];  //index depends on MH_SetupCEDMap-->Phase2-->arrayLayers =
+        var CED_PP_line = arrayLayers[14];
+        var CED_PP_point = arrayLayers[15];
+        var CED_PP_point4FeatureTable = arrayLayers[16];
               
         app.pSup.Phase3(CED_PP_point, CED_PP_line, CED_PP_poly);
         

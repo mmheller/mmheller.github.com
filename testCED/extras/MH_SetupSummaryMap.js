@@ -217,7 +217,18 @@ define([
                       case "SMA":
                           var pBase_SMA = new FeatureLayer(strBase_URL + "9", { id: "SMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: true });
                           arrayLayers.push(pBase_SMA);
-                          break;
+						  break;
+					  case "SBBi":
+						  var pBase_SBBiome = new FeatureLayer("https://gis.usgs.gov/sciencebase2/rest/services/Catalog/5ccb4a64e4b09b8c0b7808a6/MapServer/0", { id: "SBBi", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: true });
+						  var sfsSBBiom = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+							  new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+								  new Color([0, 200, 0]), 3), new Color([26, 255, 158, 0.1])
+						  );
+						  var rendererSBBiom = new SimpleRenderer(sfsSBBiom);
+						  pBase_SBBiome.setRenderer(rendererSBBiom);
+
+						  arrayLayers.push(pBase_SBBiome);
+						  break;
                       case "PAC":
                           var pBase_PAC = new FeatureLayer(strBase_URL + "10", { id: "PAC", "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, visible: true });
                           arrayLayers.push(pBase_PAC);

@@ -90,6 +90,7 @@ define([
             var strRemoveStrings = ["", "---select an effort type---"];
             var resultFeatures = results.features;
             var strdivTagSourceID = "";
+            var strText = "";
 
             if ((this.divTagSource != "") & (this.divTagSource != null)) {
                 strdivTagSourceID = this.divTagSource.target.id;
@@ -106,7 +107,7 @@ define([
                     var featAttrs = resultFeatures[0].attributes;
                     var values = [];
                     var texts = [];
-                    var strText = "";
+
                     var strValue = "";
                     var testTexts = {};
                     var attrNames = [];
