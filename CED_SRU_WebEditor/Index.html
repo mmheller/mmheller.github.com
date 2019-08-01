@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!--Created By:  Matt Heller, U.S. Fish and Wildlife Service, Region 6 Science Applications
+Date:        February 2018, updated April 2019-->
+
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+	<title>CED SRU Web Tools</title>
+
+	<link rel="stylesheet" href="https://js.arcgis.com/3.28/dijit/themes/claro/claro.css">
+	<link rel="stylesheet" href="https://js.arcgis.com/3.28/esri/css/esri.css" />
+
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
+	<link rel="stylesheet" type="text/css" href="Styles/SRUEditor.css" />
+	<!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/Styles/SRUEditor.css' %}" />-->
+
+	<script type="text/javascript">var dojoConfig = { paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" } };</script>
+
+	<!--<script type="text/javascript">var dojoConfig = { paths: { extras: "{% static 'ced_main/javascript/grsgmap/extras' %}" } };</script>-->
+
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<script src="https://js.arcgis.com/3.28/"></script>
+	<script src="extras/jquery.ddslick.min.js"></script>
+
+
+	<script type="text/javascript">
+		var editorWidget;
+		var pSrcFeatureLayer;
+		var pFCol;
+		var app = {};
+		require([
+			"extras/MH_SRUEdit_Setup",
+			"esri/config",
+			"esri/map",
+			"dojo/dom",
+			"dojo/dom-style", "dojo/dom-attr",
+			"dojo/dom-class",
+			"dojo/dom-construct",
+			"dojo/json",
+			"dojo/on",
+			"dojo/parser",
+			"esri/Color",
+			"dojo/_base/lang",
+			"dijit/layout/BorderContainer",
+			"dijit/layout/ContentPane",
+			"dojo/domReady!"
+		],
+			function (MH_Setup, esriConfig, Map, dom, domStyle, domAttr, domClass, domConstruct, JSON, on, parser, Color, lang
+			) {
+				parser.parse();
+				esriConfig.defaults.io.proxyUrl = "/proxy/";
+
+				app.pSup = new MH_Setup({}); // instantiate the class
+				app.pSup.Phase1();
+			});</script>
+</head>
+
+<body class="claro">
+	<div id="DivInitialCBXs1">
+		<input type="checkbox" id="cbx_SRU1">Is this effort on private lands?
+	</div>
+	<div id="DivInitialCBXs2" style="display:none">
+		<input type="checkbox" id="cbx_SRU2">Do you want to obscure location by SRU?
+	</div>
+
+	<form id="dropdownForm" style="display:none">
+		<div id="ddlSRU"></div>
+
+		<!--<div id="myDropdown2"></div>
+	<select id="ddlSRU" class="selectClass">
+		<option value="99">All</option>
+	</select><br /><br />-->
+		<div id="divSRUState">
+			<span>Filter SRU options by state:</span>
+			<select id="ddlSRUState" class="selectClass" disabled>
+				<option value="99">All</option>
+			</select>
+		</div>
+		<div id="divBLMHAF">
+			<span>Filter SRU options by HAF/Lek Clusters:</span>
+			<select id="ddlBLMHAF" class="selectClass" disabled>
+				<option value="99">All</option>
+			</select>
+		</div>
+
+		<div id="DivInitialCBXs3">
+			<input type="checkbox" id="cbx_SRU3">Use SRU Map Picker Tool
+		</div>
+	</form>
+	   
+	<div id="MapPickerArea" style="display:none">
+		<div id="map" style="height:300px; width:600px; background-color:rgb(151, 118, 123);">
+			<div id="txt_Version" style="position:absolute; left:225px; bottom:1px; color:#404040; z-index:50; font-size:11px">CED Footprinter 2.1.1</div>
+			<img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
+		</div>
+		<span id="messages"></span>
+	</div>
+</body>
+</html>
