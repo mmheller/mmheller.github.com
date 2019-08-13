@@ -299,7 +299,6 @@ define([
 					selectText: "Select your preferred SRU (Sagebrush Reporting Unit)",
 					imagePosition: "right",
 					onSelected: function (pData) {
-						
 						app.pSup.ddSRUslickSelected(pData.selectedData.value);
 					}
 				});

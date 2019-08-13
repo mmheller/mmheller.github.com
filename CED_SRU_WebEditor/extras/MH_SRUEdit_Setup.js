@@ -116,7 +116,7 @@ define([
 
 			app.iNonSpatialTableIndex = 0;  //
 			app.MH_SRUUniques.divTagSource = null;
-			app.MH_SRUUniques.qry_SetUniqueValuesOf("Name", "SRU_ID", "Image", document.getElementById("ddlSRU"), "OBJECTID_1  > 0"); //maybe move this to MH_FeatureCount  //clear111
+			app.MH_SRUUniques.qry_SetUniqueValuesOf("Name", "SRU_ID", "Image", document.getElementById("ddlSRU"), "OBJECTID > 0"); //maybe move this to MH_FeatureCount  //clear111
 
 			app.pSup.Phase2();
 
