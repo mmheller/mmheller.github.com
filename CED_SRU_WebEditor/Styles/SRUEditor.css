@@ -24,6 +24,65 @@
 }*/
 
 
+.button100Right:disabled {
+	background: #dddddd;
+	border-radius: 25px;
+	position: relative;
+	height: 25px;
+	font-family: Arial;
+	color: #97767b;
+	font-weight: bold;
+	font-size: 16px;
+	z-index: 0;
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	text-decoration: none;
+	float: right;
+	margin-right: 30px;
+}
+
+
+.button100Right:hover {
+	background: #85c0b5;
+	border-radius: 25px;
+	position: relative;
+	height: 25px;
+	font-family: Arial;
+	color: #97767b;
+	font-weight: bold;
+	font-size: 16px;
+	z-index: 0;
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	text-decoration: none;
+	float: right;
+	margin-right: 30px;
+}
+
+.button100Right {
+	background: #a4d4cb;
+	border-radius: 25px;
+	height: 25px;
+	font-family: Arial;
+	color: #7f697f;
+	font-weight: bold;
+	font-size: 16px;
+	z-index: 0;
+	padding-right: 20px;
+	padding-left: 20px;
+	padding-top: 2px;
+	padding-bottom: 2px;
+	text-decoration: none;
+	margin-top: 20px;
+	margin-left: 0px;
+	float: right;
+	margin-right:30px;
+}
+
 #ddlSRU {
 	display: inline-block;
 	margin-right: 10px;
@@ -44,8 +103,12 @@
 	max-width: 250px !important;
 }
 
-html * {
-	font-size: 1em ;
-	color: #000;
-	font-family: Arial;
+
+.centerElement {
+	text-align: center;
 }
+
+h2 {
+	font-size: 12px;
+	font-family: 'Tahoma', cursive;
+}    

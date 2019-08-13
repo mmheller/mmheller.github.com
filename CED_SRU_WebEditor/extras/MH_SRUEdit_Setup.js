@@ -1,6 +1,19 @@
 ﻿//Created By:  Matt Heller,  U.S. Fish and Wildlife Service, Science Applications, Region 6
 //Date:        May 2018, Updated May 2019
 
+function getTokens() {
+	var tokens = [];
+	var query = location.search;
+	query = query.slice(1);
+	query = query.split('&');
+	$.each(query, function (i, value) {
+		var token = value.split('=');
+		var key = decodeURIComponent(token[0]);
+		var data = decodeURIComponent(token[1]);
+		tokens[key] = data;
+	});
+	return tokens;
+}
 
 function showLoading() {
     esri.show(app.loading);
@@ -23,12 +36,13 @@ define([
 	"esri/toolbars/draw",
 	"esri/symbols/SimpleFillSymbol",
 	"esri/symbols/SimpleLineSymbol",
-    "dijit/form/CheckBox", "esri/layers/GraphicsLayer",
+	"dijit/form/CheckBox", "esri/layers/GraphicsLayer", "esri/graphic", "esri/request",
     "esri/dijit/BasemapGallery",
     "esri/geometry/webMercatorUtils",
     "dojo/_base/declare",
 	"dojo/_base/lang",
 	"dojo/_base/array",
+	"dojo/_base/json",
     "esri/urlUtils",
     "esri/layers/FeatureLayer",
     "esri/dijit/Scalebar",
@@ -40,40 +54,65 @@ define([
     "dojo/mouse",
     "dojo/on",
 	"esri/map",
-	"extras/MH_SRUPopUniqueQueryInterfaceValues"
+	"extras/MH_SRUPopUniqueQueryInterfaceValues",
+	"extras/MH_SRUEdit_Backend"
 ], function (Color, SimpleRenderer, LabelLayer, TextSymbol, Query, Draw, SimpleFillSymbol, SimpleLineSymbol,
-		CheckBox, GraphicsLayer, BasemapGallery, webMercatorUtils, declare, lang, arrayUtil, urlUtils, FeatureLayer,
+		CheckBox, GraphicsLayer, Graphic, esriRequest, BasemapGallery, webMercatorUtils, declare, lang, arrayUtil, dojoJson, urlUtils, FeatureLayer,
             Scalebar, scaleUtils, arrayUtils, FeatureLayer,
-			dom, domClass, registry, mouse, on, Map, MH_SRUPopUniqueQueryInterfaceValues) {
+			dom, domClass, registry, mouse, on, Map, MH_SRUPopUniqueQueryInterfaceValues, MH_SRUEdit_Backend) {
 
     return declare([], {
 		Phase1: function () {
-			$(function () {
-				$('#cbx_SRU1').change(function () {
-					$('#DivInitialCBXs2').toggle(this.checked);
-				}).change(); //ensure visible state matches initially
+			app.blnMapClicked = false;
+			app.blnInitialLoad = true;
+
+			app.iCEDID = getTokens()['CEDID'];
+			if (app.iCEDID == undefined) {
+				app.iCEDID = 99989889;
+			}
+
+			app.iSRUID = getTokens()['SRUID'];
+
+			//$(function () {
+			//	$('#cbx_SRU1').change(function () {
+			//		$('#DivInitialCBXs2').toggle(this.checked);
+			//	}).change(); //ensure visible state matches initially
+			//});
+
+			//$(function () {
+			//	$('#cbx_SRU2').change(function () {
+			//		$('#dropdownForm').toggle(this.checked);
+			//	}).change(); //ensure visible state matches initially
+			//});
+
+	
+			$("#btn_NextSRU").click(function () {
+				app.pSup.ddSRUSaveClicked();
 			});
 
-			$(function () {
-				$('#cbx_SRU2').change(function () {
-					$('#dropdownForm').toggle(this.checked);
-				}).change(); //ensure visible state matches initially
+			$("#btn_BackSRU").click(function () {
+				app.pSup.ddSRUBackClicked();
 			});
+
 
 			$(function () {
 				$('#cbx_SRU3').change(function () {
-					$('#MapPickerArea').toggle(this.checked);
+					if (document.getElementById('cbx_SRU3').checked) {
+						$("#map").show();
 
+
+					} else {
+						$("#map").hide();
+					}
 				}).change(); //ensure visible state matches initially
 			});
 
-			//on(dom.byId("ddlSRU"), "change", ddlMatrix_Change);
 			on(dom.byId("ddlSRUState"), "change", ddlMatrix_Change);
-			on(dom.byId("ddlBLMHAF"), "change", ddlMatrix_Change);
+			//on(dom.byId("ddlBLMHAF"), "change", ddlMatrix_Change);
 
 			app.strSRU_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/ArcGIS/rest/services/SRU_HAF_Map/FeatureServer/0";
 			app.MH_SRUUniques = new MH_SRUPopUniqueQueryInterfaceValues({ strURL: app.strSRU_URL, iNonSpatialTableIndex: 0, divTagSource: null });
-			//app.MH_SRUUniques = new MH_SRUPopUniqueQueryInterfaceValues({ });
+			app.MH_SRUEditBackend = new MH_SRUEdit_Backend();
 
 			app.iNonSpatialTableIndex = 0;  //
 			app.MH_SRUUniques.divTagSource = null;
@@ -83,62 +122,28 @@ define([
 
 			function ddlMatrix_Change(divTagSource) {
 				$('#ddlSRU').ddslick('destroy');
-				
 
 				document.getElementById("loadingImg").style.visibility = "visible";
 				disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
 				disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
 
-				//app.map.infoWindow.hide();
-				//app.map.graphics.clear();
-				//CED_PP_poly.clearSelection();
-
-				//var strddlSRU = document.getElementById("ddlSRU").options[document.getElementById("ddlSRU").selectedIndex].value;
 				var strddlSRUState = document.getElementById("ddlSRUState").options[document.getElementById("ddlSRUState").selectedIndex].value;
-				var strddlBLMHAF = document.getElementById("ddlBLMHAF").options[document.getElementById("ddlBLMHAF").selectedIndex].value;
-
-				//if (((strddlSRU == "All") | (strddlSRU == "99")) &
-				//	(strddlSRUState == "99") &
-				//	(strBLMstrddlBLMHAFHAF == "99")) {
-				//	//dojo.forEach(app.arrayLayers, function (player) {
-				//	//	var id = player.id;
-				//	//	if (id == "graphicsLayer1") { player.setVisibility(!blnTPKs); }
-				//	//});
-				//}
-				//else {
-				//	//dojo.forEach(app.arrayLayers, function (player) {
-				//	//	var id = player.id;
-				//	//	if (id == "graphicsLayer1") { player.setVisibility(false); }
-				//	//});
-				//}
-
+				//var strddlBLMHAF = document.getElementById("ddlBLMHAF").options[document.getElementById("ddlBLMHAF").selectedIndex].value;
 				app.strQueryLabelText = "";
 
 				var strQuery = "";
-				//if ((app.arrayPrjIDs_fromSpatialSelect != undefined) & (app.arrayPrjIDs_fromSpatialSelect != "")) {
-				//	strQuery = "project_ID in (";
-				//	for (var i = 0; i < app.arrayPrjIDs_fromSpatialSelect.length; i++) {
-				//		strQuery += app.arrayPrjIDs_fromSpatialSelect[i] + ",";
-				//	}
-				//	strQuery = strQuery.slice(0, -1) + ")";
-				//}
 
 				if (strddlSRUState !== "99") {
 					if (strQuery !== "") { strQuery += " and "; }
 					strQuery += "State = '" + strddlSRUState + "'";
-					//app.strQueryLabelText += "Entry Type = " + document.getElementById("ddlEntry").options[document.getElementById("ddlEntry").selectedIndex].text + ", ";
 				}
 
-				if (strddlBLMHAF !== "99") {
-					if (strQuery !== "") { strQuery += " and "; }
-					strQuery += "HAF_SRU = '" + strddlBLMHAF + "'";
-					//app.strQueryLabelText += "Start Year = " + document.getElementById("ddlStartYear").options[document.getElementById("ddlStartYear").selectedIndex].text + ", ";
-				}
+				//if (strddlBLMHAF !== "99") {
+				//	if (strQuery !== "") { strQuery += " and "; }
+				//	strQuery += "HAF_SRU = '" + strddlBLMHAF + "'";
+				//}
 
 				ExecutetheDerivedQuery(strQuery, divTagSource);
-
-
-
 			};
 
 			function ExecutetheDerivedQuery(strQuery, divTagSource) {
@@ -147,13 +152,7 @@ define([
 
 				app.MH_SRUUniques.divTagSource = divTagSource;
 				app.MH_SRUUniques.qry_SetUniqueValuesOf("Name", "SRU_ID", "Image", document.getElementById("ddlSRU"), strQuery); //maybe move this to MH_FeatureCount  //clear111
-				
 				app.pSRULayer.setDefinitionExpression(strQuery);
-
-				//if (document.getElementById("cbx_zoom").checked) {
-				//	var pZoom2 = new MH_Zoom2FeatureLayer({ pMap: app.map, dblExpandNum: 1.0 }); // instantiate the zoom class
-				//	var pZoom2Result = pZoom2.qry_Zoom2FeatureLayerExtent(this.pCED_PP_point);
-				//}
 			};
 
 			function setQS(strQueryDef) {
@@ -164,15 +163,11 @@ define([
         },
 
 		Phase2: function () {
-			//app.loading = dojo.byId("loadingImg");  //loading image. id
-			var customExtentAndSR = new esri.geometry.Extent(-14000000, 4800000, -11000000, 6200000, new esri.SpatialReference({ "wkid": 3857 }));
+			var customExtentAndSR = new esri.geometry.Extent(-13500000, 4950000, -13100000, 5950000, new esri.SpatialReference({ "wkid": 3857 }));
 			app.map = new esri.Map("map", { basemap: "topo", logo: false, extent: customExtentAndSR });
-
 
 			var strlabelField1 = "Name";
 			var strlabelField2 = "SRU_ID";
-
-			//var selectionToolbar;
 			app.map.on("load", initSelectToolbar);
 
 			app.pSRULayer = new FeatureLayer(app.strSRU_URL, { id: "0", mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1, strlabelField2], visible: true });
@@ -184,10 +179,6 @@ define([
 
 			app.pSRULayer.setSelectionSymbol(pSelectionSymbol);
 			app.pSRULayer.on("selection-complete", PointSelectClick);
-			//pSRULayer.on("selection-clear", function () {
-			//	dom.byId('messages').innerHTML = "<i>SRU Not Selected</i>";
-			//});
-
 
 			var vRedColor = new Color("#FF0000");              // create a text symbol to define the style of labels
 			var pLabel1 = new TextSymbol().setColor(vRedColor);
@@ -200,17 +191,29 @@ define([
 			dojo.connect(app.map, "onUpdateStart", showLoading);
 			dojo.connect(app.map, "onUpdateEnd", hideLoading);
 
-			app.map.addLayers([app.pSRULayer, plabels1]);
+
+			if (document.location.host == "conservationefforts.org") {
+				var strHFL_URL = "https://utility.arcgis.com/usrsvcs/servers/3ffd269482224fa9a08027ef8617a44c/rest/services/NA_SRC_v2/FeatureServer/5"; //***Production!!!!
+			} else {
+				var strHFL_URL = "https://utility.arcgis.com/usrsvcs/servers/e09a9437e03d4190a3f3a8f2e36190b4/rest/services/Development_Src_v2/FeatureServer/0"; //***Sandbox!!!!!
+				//document.getElementById("messages").innerHTML += ": Sandbox AGOL Hosted Feature Layer Currently Configured";
+			}
+			app.pSrcFeatureLayer = new esri.layers.FeatureLayer(strHFL_URL, { id: "99", mode: esri.layers.FeatureLayer.MODE_ONDEMAND, "opacity": 0.6, outFields: ['*'], visible: false  });
+
+			app.map.addLayers([app.pSrcFeatureLayer, app.pSRULayer, plabels1]);
 
 			function initSelectToolbar(event) {
 				app.selectionToolbar = new Draw(event.map);
+				esri.bundle.toolbars.draw.addPoint = "Click to select a SRU";
 				var selectQuery = new Query();
 				app.selectionToolbar.activate(Draw.POINT);
+				
 				on(app.selectionToolbar, "DrawEnd", function (geometry) {
 					app.selectionToolbar.deactivate();
 					selectQuery.geometry = geometry;
 					app.pSRULayer.selectFeatures(selectQuery,
 						app.pSRULayer.SELECTION_NEW);
+					//esri.bundle.toolbars.draw.addPoint = "Add a new tree to the map";
 				});
 			}
 
@@ -224,6 +227,7 @@ define([
 						for (var ii = 0; ii < app.MH_SRUUniques.ddDataSRU.length; ii++) {
 							dataElement = app.MH_SRUUniques.ddDataSRU[ii];
 							if (dataElement.value == iSRU_ID) {
+								app.blnMapClicked = true;
 								$('#ddlSRU').ddslick('select', { index: ii });
 							}
 						}
@@ -234,8 +238,42 @@ define([
 			}
 		},
 
+		Select_dd_basedOnURLParam: function (iSRU_ID) {
+			if (app.iSRUID != undefined) {
+				for (var ii = 0; ii < app.MH_SRUUniques.ddDataSRU.length; ii++) {
+					dataElement = app.MH_SRUUniques.ddDataSRU[ii];
+					if (dataElement.value == app.iSRUID) {
+						//app.blnMapClicked = true;
+						$('#ddlSRU').ddslick('select', { index: ii });
+					}
+				}
+			}
+		},
+
 		ddSRUslickSelected: function (iSRU_ID) {
-			alert("test, SRU_ID selected " + iSRU_ID.toString());
+			app.iSelectedSRUID = iSRU_ID;
+			$("#btn_NextSRU").prop("disabled", false);
+
+			if (app.blnMapClicked) {
+				app.blnMapClicked = false;
+			} else {
+				//clear the map selection
+				app.pSRULayer.clearSelection();
+
+				var querySRU = new Query();
+				querySRU.where = "SRU_ID = " + iSRU_ID.toString();
+				app.pSRULayer.selectFeatures(querySRU, app.pSRULayer.SELECTION_NEW, function (results) {
+					//do nothing more
+				});
+			}
+		},
+
+		ddSRUBackClicked: function () {
+			alert("test, Back button clicked");
+		},
+
+		ddSRUSaveClicked: function () {
+			app.MH_SRUEditBackend.DeleteSRUPolygonIntheAGOL_HFL(app.iCEDID);
 		},
 
         err: function (err) {

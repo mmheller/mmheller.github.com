@@ -3,6 +3,7 @@
 Date:        February 2018, updated April 2019-->
 
 <html>
+
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
@@ -57,47 +58,71 @@ Date:        February 2018, updated April 2019-->
 				app.pSup = new MH_Setup({}); // instantiate the class
 				app.pSup.Phase1();
 			});</script>
+
+	<style>
+		html, body {
+			height: 100%;
+			min-height: 100%;
+			font-family:Arial, Helvetica, sans-serif;
+		}
+	</style>
 </head>
 
-<body class="claro">
-	<div id="DivInitialCBXs1">
-		<input type="checkbox" id="cbx_SRU1">Is this effort on private lands?
-	</div>
-	<div id="DivInitialCBXs2" style="display:none">
-		<input type="checkbox" id="cbx_SRU2">Do you want to obscure location by SRU?
-	</div>
 
-	<form id="dropdownForm" style="display:none">
-		<div id="ddlSRU"></div>
 
-		<!--<div id="myDropdown2"></div>
-	<select id="ddlSRU" class="selectClass">
-		<option value="99">All</option>
-	</select><br /><br />-->
-		<div id="divSRUState">
-			<span>Filter SRU options by state:</span>
-			<select id="ddlSRUState" class="selectClass" disabled>
-				<option value="99">All</option>
-			</select>
-		</div>
-		<div id="divBLMHAF">
-			<span>Filter SRU options by HAF/Lek Clusters:</span>
-			<select id="ddlBLMHAF" class="selectClass" disabled>
-				<option value="99">All</option>
-			</select>
+<body class="claro" style="overflow: hidden;">
+	<div dojotype="dijit.layout.BorderContainer" design="" gutters="false" style="width: 99%; height: 95%;	margin-bottom:40px; border:none;">
+		<div id="SRUHeader" dojotype="dijit.layout.ContentPane" region="left" style="width:325px !important; border:none; overflow:auto;">
+			<!--<div id="DivInitialCBXs1">
+				<input type="checkbox" id="cbx_SRU1">Is this effort on private lands?
+			</div>
+			<div id="DivInitialCBXs2" style="display:none">
+				<input type="checkbox" id="cbx_SRU2">Do you want to obscure location by SRU?
+			</div>-->
+
+			<form enctype="multipart/form-data" method="post" id="dropdownForm" style="">
+				<!--<form enctype="multipart/form-data" method="post" id="dropdownForm">{% csrf_token %}-->  <!--static-->
+				<!--<div style="border:inset; border-width: thin; margin:20px; padding:10px; ">
+					<div class="centerElement"><h2>Filter Options</h2></div>
+					<br />-->
+					<div id="divSRUState">
+						<u>Filter by state:</u>
+						<br />
+						<select id="ddlSRUState" class="selectClass" disabled>
+							<option value="99">All</option>
+						</select>
+					</div>
+					<br />					<!--<br />					<br />-->
+					<!--<div id="divBLMHAF">
+						<u>Filter by Lek Clusters/State HAFs:</u>
+						<br />
+						<select id="ddlBLMHAF" class="selectClass" disabled>
+							<option value="99">All</option>
+						</select>
+					</div>-->
+				<!--</div>-->
+				<br /><br />
+
+				<div id="ddlSRU"></div>
+				<br /><br /><br /><br /><br />
+
+
+
+				<div id="messages"></div>
+			</form>
 		</div>
 
-		<div id="DivInitialCBXs3">
-			<input type="checkbox" id="cbx_SRU3">Use SRU Map Picker Tool
-		</div>
-	</form>
-	   
-	<div id="MapPickerArea" style="display:none">
-		<div id="map" style="height:300px; width:600px; background-color:rgb(151, 118, 123);">
-			<div id="txt_Version" style="position:absolute; left:225px; bottom:1px; color:#404040; z-index:50; font-size:11px">CED Footprinter 2.1.1</div>
+		<div id="map" dojotype="dijit.layout.ContentPane" region="center" style="border:none;overflow:hidden;">
 			<img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
 		</div>
-		<span id="messages"></span>
+
+		<div id="SRUFooter" dojotype="dijit.layout.ContentPane" region="bottom" style="border:none; height:70px; overflow:hidden;">
+			<input id="btn_NextSRU" type="button" class="button100Right" value="Save and Continue" disabled="disabled" />
+			<input id="btn_BackSRU" type="button" class="button100Right" value="Cancel/Back" />
+			<div id="DivInitialCBXs3" style="margin:20px;">
+				<input type="checkbox" id="cbx_SRU3" checked="checked">Show/Hide SRU Map Picker Tool
+			</div>
+		</div>
 	</div>
 </body>
 </html>

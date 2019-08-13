@@ -310,16 +310,30 @@ define([
 					this.qry_SetUniqueValuesOf("State", "State", "", document.getElementById("ddlSRUState"), this.strQuery1);
                     break;
 				case "State":
-					this.qry_SetUniqueValuesOf("HAF_SRU", "HAF_SRU", "", document.getElementById("ddlBLMHAF"), this.strQuery1);
-                    break;
-
-				case "HAF_SRU":
 					document.getElementById("loadingImg").style.visibility = "hidden";
 					disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
 					disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
 					this.iNonSpatialTableIndex = 0; //reset the table index for next time
 
+					if (app.blnInitialLoad == true) {
+						app.blnInitialLoad == false;
+						app.pSup.Select_dd_basedOnURLParam();
+					}
+					
 					break;
+
+				//case "State":
+				//	this.qry_SetUniqueValuesOf("HAF_SRU", "HAF_SRU", "", document.getElementById("ddlBLMHAF"), this.strQuery1);
+				//	break;
+
+				//case "HAF_SRU":
+				//	document.getElementById("loadingImg").style.visibility = "hidden";
+				//	disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
+				//	disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+				//	this.iNonSpatialTableIndex = 0; //reset the table index for next time
+
+				//	break;
+
             }
 
             return results;
