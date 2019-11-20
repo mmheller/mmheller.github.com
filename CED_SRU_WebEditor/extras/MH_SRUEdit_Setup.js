@@ -58,11 +58,12 @@ define([
 	"extras/MH_SRUEdit_Backend",
 	"extras/MH_Zoom2FeatureLayersSRUFootprinter",
 	"esri/dijit/BasemapGallery",
+	"esri/dijit/Legend"
 ], function (Color, SimpleRenderer, LabelLayer, TextSymbol, Query, Draw, SimpleFillSymbol, SimpleLineSymbol,
 		CheckBox, GraphicsLayer, Graphic, esriRequest, BasemapGallery, webMercatorUtils, declare, lang, arrayUtil, dojoJson, urlUtils, FeatureLayer,
             Scalebar, scaleUtils, arrayUtils, FeatureLayer,
 		dom, domClass, registry, mouse, on, Map, MH_SRUPopUniqueQueryInterfaceValues, MH_SRUEdit_Backend,
-		MH_Zoom2FeatureLayersSRUFootprinter, BasemapGallery) {
+		MH_Zoom2FeatureLayersSRUFootprinter, BasemapGallery, Legend) {
 
     return declare([], {
 		Phase1: function () {
@@ -104,7 +105,6 @@ define([
 			on(panelBasemaps, mouse.leave, function () { domClass.remove("panelBasemaps", "panelBasemapsOn"); });
 
 			on(dom.byId("ddlSRUState"), "change", ddlMatrix_Change);
-			//on(dom.byId("ddlBLMHAF"), "change", ddlMatrix_Change);
 
 			app.strSRU_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/ArcGIS/rest/services/SRU_HAF_Map/FeatureServer/0";
 			app.MH_SRUUniques = new MH_SRUPopUniqueQueryInterfaceValues({ strURL: app.strSRU_URL, iNonSpatialTableIndex: 0, divTagSource: null });
@@ -113,19 +113,17 @@ define([
 			app.iNonSpatialTableIndex = 0;  //
 			app.MH_SRUUniques.divTagSource = null;
 			app.MH_SRUUniques.qry_SetUniqueValuesOf("Name", "SRU_ID", "Image", document.getElementById("ddlSRU"), "OBJECTID > 0"); //maybe move this to MH_FeatureCount  //clear111
-			
+
 			app.pSup.Phase2();
 
 			function ddlMatrix_Change(divTagSource) {
+				showLoading();
 				$('#ddlSRU').ddslick('destroy');
 				app.pSRULayer.clearSelection();
 
 				document.getElementById("loadingImg").style.visibility = "visible";
 				disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
 				disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
-
-				disableOrEnableFormElements("dropdownFormState", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
-				disableOrEnableFormElements("dropdownFormState", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
 
 				var strddlSRUState = document.getElementById("ddlSRUState").options[document.getElementById("ddlSRUState").selectedIndex].value;
 				app.strQueryLabelText = "";
@@ -144,7 +142,7 @@ define([
 				app.MH_SRUUniques.divTagSource = divTagSource;
 				app.MH_SRUUniques.qry_SetUniqueValuesOf("Name", "SRU_ID", "Image", document.getElementById("ddlSRU"), strQuery); //maybe move this to MH_FeatureCount  //clear111
 				app.pSRULayer.setDefinitionExpression(strQuery);
-
+				//hideLoading();
 				app.pSupZ.qry_Zoom2FeatureLayerExtent(app.pSRULayer);
 			};
 
@@ -204,17 +202,44 @@ define([
 			dojo.connect(app.map, "onUpdateStart", showLoading);
 			dojo.connect(app.map, "onUpdateEnd", hideLoading);
 
-
 			if (document.location.host == "conservationefforts.org") {
 				var strHFL_URL = "https://utility.arcgis.com/usrsvcs/servers/3ffd269482224fa9a08027ef8617a44c/rest/services/NA_SRC_v2/FeatureServer/5"; //***Production!!!!
 			} else {
 				var strHFL_URL = "https://utility.arcgis.com/usrsvcs/servers/e09a9437e03d4190a3f3a8f2e36190b4/rest/services/Development_Src_v2/FeatureServer/0"; //***Sandbox!!!!!
 				//document.getElementById("messages").innerHTML += ": Sandbox AGOL Hosted Feature Layer Currently Configured";
 			}
-			app.pSrcFeatureLayer = new esri.layers.FeatureLayer(strHFL_URL, { id: "99", mode: esri.layers.FeatureLayer.MODE_ONDEMAND, "opacity": 0.6, outFields: ['*'], visible: false  });
+			app.pSrcFeatureLayer = new esri.layers.FeatureLayer(strHFL_URL, {
+												id: "99", mode: esri.layers.FeatureLayer.MODE_ONDEMAND,
+												"opacity": 0.6, outFields: ['*'], visible: false
+			});
 
-			app.map.addLayers([app.pSrcFeatureLayer, app.pSRULayer, plabels1]);
-			//app.pSupZ.qry_Zoom2FeatureLayerExtent(app.pSRULayer);
+			app.pBase_SMA = new FeatureLayer("https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/" + "8",
+												{ id: "SMA", "opacity": 0.75, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+			app.map.addLayers([app.pBase_SMA, app.pSrcFeatureLayer, app.pSRULayer, plabels1]);
+
+			var legendLayers = [];
+			legendLayers.push({ layer: app.pBase_SMA, title: 'Lands Ownership (BLM-SMA)' });
+			legendLayers.push({ layer: app.pSrcFeatureLayer, title: 'Effort/Project Footprint' });
+			legendLayers.push({ layer: app.pSRULayer, title: 'Selectable SRUs' });
+
+			dojo.connect(app.map, 'onLayersAddResult', function (results) {
+				var legend = new Legend({ map: app.map, layerInfos: legendLayers, respectCurrentMapScale: false, autoUpdate: true }, "legendDiv");
+				legend.startup();
+			});
+
+			$(function () {
+				$('#cbx_SMALayer').change(function () {
+					if (this.checked) {
+						//dojo.connect(app.map, "onUpdateStart", showLoading);
+						//dojo.connect(app.map, "onUpdateEnd", hideLoading);
+						app.pBase_SMA.show();
+					} else {
+						app.pBase_SMA.hide();
+
+					}
+					
+				}).change(); //ensure visible state matches initially
+			});
 
 			function initSelectToolbar(event) {
 				app.selectionToolbar = new Draw(event.map);
@@ -273,14 +298,11 @@ define([
 			} else {
 				//clear the map selection
 				app.pSRULayer.clearSelection();
-
 				var querySRU = new Query();
 				querySRU.where = "SRU_ID = " + iSRU_ID.toString();
 				app.pSRULayer.selectFeatures(querySRU, app.pSRULayer.SELECTION_NEW, function (results) {
 					//do nothing more
 				});
-
-
 			}
 		},
 

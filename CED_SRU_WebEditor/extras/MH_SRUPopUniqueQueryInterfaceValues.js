@@ -313,8 +313,8 @@ define([
 					document.getElementById("loadingImg").style.visibility = "hidden";
 					disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
 					disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
-					disableOrEnableFormElements("dropdownFormState", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
-					disableOrEnableFormElements("dropdownFormState", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+					//disableOrEnableFormElements("dropdownFormState", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
+					//disableOrEnableFormElements("dropdownFormState", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
 
 					this.iNonSpatialTableIndex = 0; //reset the table index for next time
 
@@ -338,8 +338,8 @@ define([
             disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
 
-			disableOrEnableFormElements("dropdownFormState", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
-			disableOrEnableFormElements("dropdownFormState", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+			//disableOrEnableFormElements("dropdownFormState", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
+			//disableOrEnableFormElements("dropdownFormState", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
         }
     });
 }

@@ -2,6 +2,18 @@
 //Date:        May 2018, Updated May 2019
 
 
+function showLoading() {
+	esri.show(app.loading);
+	app.map.disableMapNavigation();
+	app.map.hideZoomSlider();
+}
+
+function hideLoading(error) {
+	esri.hide(app.loading);
+	app.map.enableMapNavigation();
+	app.map.showZoomSlider();
+}
+
 define([
   "dojo/_base/declare",
   "dojo/_base/lang",
@@ -19,7 +31,8 @@ define([
 ) {
 
     return declare([], {
-        qry_Zoom2FeatureLayerExtent: function (pFeatureLayer1) {
+		qry_Zoom2FeatureLayerExtent: function (pFeatureLayer1) {
+
             var pQueryT1 = new esri.tasks.QueryTask(pFeatureLayer1.url);
             var pQuery1 = new esri.tasks.Query();
 
@@ -61,7 +74,8 @@ define([
                 }
                 else {                    // do nothing                }
                     return results;
-                }
+				}
+				hideLoading();
             }
 
             function err(err) {
