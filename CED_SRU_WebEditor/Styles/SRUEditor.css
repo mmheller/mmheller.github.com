@@ -2,28 +2,6 @@
 	display: block;
 }
 
-/* select with custom icons */
-/*.ui-selectmenu-menu .ui-menu.customicons .ui-menu-item-wrapper {
-	padding: 0.5em 0 0.5em 3em;
-}
-
-.ui-selectmenu-menu .ui-menu.customicons .ui-menu-item .ui-icon {
-	height: 124px;
-	width: 124px;
-	top: 0.1em;
-}*/
-
-/*/* select with CSS avatar icons */
-/*option.avatar {
-	background-repeat: no-repeat !important;
-	padding-left: 20px;
-}*/
-
-/*.avatar .ui-icon {
-	background-position: left top;
-}*/
-
-
 .button100Right:disabled {
 	background: #dddddd;
 	border-radius: 25px;
@@ -86,12 +64,23 @@
 #ddlSRU {
 	display: inline-block;
 	margin-right: 10px;
-	width: 320px;
+	color: black;
+	text-align: left;
+	line-height:20px;
+}
+
+
+#message {
+	vertical-align: middle;
+	padding: 5px 11px;
+	margin-right: 5px;
+	font-size: 8px;
 }
 
 #divSRUState {
 	display: inline-block;
-	width: 200px;
+	width: 100px;
+	margin-right: 10px;
 }
 
 #divBLMHAF {
@@ -100,7 +89,7 @@
 }
 
 .dd-option-image {
-	max-width: 250px !important;
+	max-width: 150px !important;
 }
 
 

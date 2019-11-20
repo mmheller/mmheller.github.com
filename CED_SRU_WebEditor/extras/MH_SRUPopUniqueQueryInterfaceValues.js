@@ -295,8 +295,9 @@ define([
 
 				$('#ddlSRU').ddslick({
 					data: this.ddDataSRU,
-					width: 300,
-					selectText: "Select your preferred SRU (Sagebrush Reporting Unit)",
+					width: 320,
+					height: 300,
+					selectText: "Select your preferred SRU or click SRU on map",
 					imagePosition: "right",
 					onSelected: function (pData) {
 						app.pSup.ddSRUslickSelected(pData.selectedData.value);
@@ -312,6 +313,9 @@ define([
 					document.getElementById("loadingImg").style.visibility = "hidden";
 					disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
 					disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+					disableOrEnableFormElements("dropdownFormState", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
+					disableOrEnableFormElements("dropdownFormState", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+
 					this.iNonSpatialTableIndex = 0; //reset the table index for next time
 
 					if (app.blnInitialLoad == true) {
@@ -320,19 +324,6 @@ define([
 					}
 					
 					break;
-
-				//case "State":
-				//	this.qry_SetUniqueValuesOf("HAF_SRU", "HAF_SRU", "", document.getElementById("ddlBLMHAF"), this.strQuery1);
-				//	break;
-
-				//case "HAF_SRU":
-				//	document.getElementById("loadingImg").style.visibility = "hidden";
-				//	disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
-				//	disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
-				//	this.iNonSpatialTableIndex = 0; //reset the table index for next time
-
-				//	break;
-
             }
 
             return results;
@@ -347,7 +338,8 @@ define([
             disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
             disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
 
-
+			disableOrEnableFormElements("dropdownFormState", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
+			disableOrEnableFormElements("dropdownFormState", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
         }
     });
 }

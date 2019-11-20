@@ -14,6 +14,7 @@ Date:        February 2018, updated April 2019-->
 
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
+	<link rel="stylesheet" type="text/css" href="Styles/panelFootprinterSRU.css" />
 	<link rel="stylesheet" type="text/css" href="Styles/SRUEditor.css" />
 	<!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/Styles/SRUEditor.css' %}" />-->
 
@@ -46,8 +47,8 @@ Date:        February 2018, updated April 2019-->
 			"dojo/parser",
 			"esri/Color",
 			"dojo/_base/lang",
-			"dijit/layout/BorderContainer",
-			"dijit/layout/ContentPane",
+			//"dijit/layout/BorderContainer",
+			//"dijit/layout/ContentPane",
 			"dojo/domReady!"
 		],
 			function (MH_Setup, esriConfig, Map, dom, domStyle, domAttr, domClass, domConstruct, JSON, on, parser, Color, lang
@@ -63,66 +64,58 @@ Date:        February 2018, updated April 2019-->
 		html, body {
 			height: 100%;
 			min-height: 100%;
-			font-family:Arial, Helvetica, sans-serif;
+			font-family: Arial, Helvetica, sans-serif;
 		}
 	</style>
 </head>
 
 
 
-<body class="claro" style="overflow: hidden;">
-	<div dojotype="dijit.layout.BorderContainer" design="" gutters="false" style="width: 99%; height: 95%;	margin-bottom:40px; border:none;">
-		<div id="SRUHeader" dojotype="dijit.layout.ContentPane" region="left" style="width:325px !important; border:none; overflow:auto;">
-			<!--<div id="DivInitialCBXs1">
-				<input type="checkbox" id="cbx_SRU1">Is this effort on private lands?
-			</div>
-			<div id="DivInitialCBXs2" style="display:none">
-				<input type="checkbox" id="cbx_SRU2">Do you want to obscure location by SRU?
-			</div>-->
-
-			<form enctype="multipart/form-data" method="post" id="dropdownForm" style="">
-				<!--<form enctype="multipart/form-data" method="post" id="dropdownForm">{% csrf_token %}-->  <!--static-->
-				<!--<div style="border:inset; border-width: thin; margin:20px; padding:10px; ">
-					<div class="centerElement"><h2>Filter Options</h2></div>
-					<br />-->
-					<div id="divSRUState">
-						<u>Filter by state:</u>
-						<br />
-						<select id="ddlSRUState" class="selectClass" disabled>
-							<option value="99">All</option>
-						</select>
-					</div>
-					<br />					<!--<br />					<br />-->
-					<!--<div id="divBLMHAF">
-						<u>Filter by Lek Clusters/State HAFs:</u>
-						<br />
-						<select id="ddlBLMHAF" class="selectClass" disabled>
-							<option value="99">All</option>
-						</select>
-					</div>-->
-				<!--</div>-->
-				<br /><br />
-
-				<div id="ddlSRU"></div>
-				<br /><br /><br /><br /><br />
+<body class="claro">
+	<div id="map" style="height:100%;">
+		<div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
+		<div id="txt_Version" style="position:absolute; left:225px; bottom:1px; color:#404040; z-index:50; font-size:11px">CED Footprinter 2.2.1</div>
+		<img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
+	</div>
 
 
-
-				<div id="messages"></div>
-			</form>
-		</div>
-
-		<div id="map" dojotype="dijit.layout.ContentPane" region="center" style="border:none;overflow:hidden;">
-			<img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
-		</div>
-
-		<div id="SRUFooter" dojotype="dijit.layout.ContentPane" region="bottom" style="border:none; height:70px; overflow:hidden;">
-			<input id="btn_NextSRU" type="button" class="button100Right" value="Save and Continue" disabled="disabled" />
-			<input id="btn_BackSRU" type="button" class="button100Right" value="Cancel/Back" />
-			<div id="DivInitialCBXs3" style="margin:20px;">
-				<input type="checkbox" id="cbx_SRU3" checked="checked">Show/Hide SRU Map Picker Tool
-			</div>
+	<div id="panelBasemaps" class="panelBasemaps bg rounded shadow">
+		<!-- Panel Basemaps -->
+		<div id="basemapTitle"><img src="images/basemaps.png" height="30" title="Switch Base Map" /></div>
+		<!--<div id="basemapTitle"><img src="{% static 'ced_main/images/grsgmap/basemaps.png' %}" height="30" title="Switch Base Map" /></div>-->
+		<div id="basemapContent">
+			<div id="basemapGallery"></div>
 		</div>
 	</div>
+
+
+	<div class="panelTitle bg rounded shadow">
+		<div style='margin-bottom:15px'><h1>CED SRU Footprinter</h1></div>
+		<div style='margin-bottom:30px'><h1>(Sagebrush Reporting Unit)</h1></div>
+		<form enctype="multipart/form-data" method="post" id="dropdownFormState" style="">
+			<div id="divSRUState">
+				<u>Filter by state:</u>
+				<br />
+				<br />
+				<br />
+				<select id="ddlSRUState" class="selectClass" disabled>
+					<option value="99">All</option>
+				</select>
+			</div>
+			<br />					<!--<br />					<br />-->
+			<div style='margin-top:15px'><hr /></div>
+			<br />
+			<div id="ddlSRU"></div>
+			<div id="messages"></div>
+		</form>
+	</div>
+
+
+
+	<div id="nextButtonPanel" class="nextButtonPanel bg rounded shadow">
+		<input id="btn_NextSRU" type="button" class="button100Right" value="Save and Go To the Next Step" disabled="disabled" />
+		<input id="btn_BackSRU" type="button" class="button100Right" value="Cancel/Back" />
+	</div>
+
 </body>
 </html>
