@@ -88,8 +88,6 @@ define([
 				app.pSup.ddSRUBackClicked();
 			});
 
-
-			var scalebar = new Scalebar({ map: app.map, scalebarUnit: "dual" });
 			app.loading = document.getElementById("loadingImg");  //loading image. id
 			dojo.connect(app.map, "onUpdateStart", showLoading);
 			dojo.connect(app.map, "onUpdateEnd", hideLoading);
@@ -176,7 +174,7 @@ define([
 		Phase2: function () {
 			var customExtentAndSR = new esri.geometry.Extent(-14000000, 4250000, -11000000, 7050000, new esri.SpatialReference({ "wkid": 3857 }));
 			app.map = new esri.Map("map", { basemap: "topo", logo: false, extent: customExtentAndSR });
-
+			var scalebar = new Scalebar({ map: app.map, scalebarUnit: "dual" });
 			var strlabelField1 = "Name";
 			var strlabelField2 = "SRU_ID";
 			app.map.on("load", initSelectToolbar);
