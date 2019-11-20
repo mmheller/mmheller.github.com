@@ -84,7 +84,8 @@ define([
 			}
             this.strQuery1 = strQuery;
 
-            var pQueryT = new esri.tasks.QueryTask(this.strURL + this.iNonSpatialTableIndex + "?returnDistinctValues=true");
+			//var pQueryT = new esri.tasks.QueryTask(this.strURL);
+			var pQueryT = new esri.tasks.QueryTask(this.strURL + "?returnDistinctValues=true");
             var pQuery = new esri.tasks.Query();
             pQuery.returnGeometry = false;
 			pQuery.outFields = arraystrFieldNames;
@@ -124,12 +125,15 @@ define([
                     var blnAdd2Dropdown;
                     for (var i in featAttrs) { attrNames.push(i); }
 
+					var iCounter111 = 0;
+
                     dojo.forEach(resultFeatures, function (feature) {//Loop through the QueryTask results and populate an array with the unique values
-                        blnAdd2Dropdown = false;
+						iCounter111 += 1;
+						blnAdd2Dropdown = false;
                         dojo.forEach(attrNames, function (an) {
 							if (an.toLowerCase() == this.app.MH_SRUUniques.strFieldNameText.toString().toLowerCase()) {
                                 var strTempText = feature.attributes[an];
-                                if (!testTexts[strTempText]) {
+                                //if (!testTexts[strTempText]) {    // remove the condition of finding duplication
                                     testTexts[strTempText] = true;
 
                                     strText = strTempText;
@@ -140,17 +144,17 @@ define([
                                     dojo.forEach(strRemoveStrings, function (str2remove) {  //check to see if should add to the values for the dropdown list
                                         if (strText.toString != undefined)   {
                                             if (isNaN(strText)){
-                                                if (strText.toString() == "null or undefined") {
-                                                    blnAdd2Dropdown = false;
-                                                }
-                                                else if (str2remove.toLowerCase() == strText.toString().toLowerCase()) {
-                                                    blnAdd2Dropdown = false;
-                                                }
+												if (strText.toString() == "null or undefined") {
+													blnAdd2Dropdown = false;
+												}
+												else if (str2remove.toLowerCase() == strText.toString().toLowerCase()) {
+													blnAdd2Dropdown = false;
+												}
                                             }
                                         }
                                         else { console.log("error with: if (strValue.toString != undefined) {"); }
                                     });
-                                }
+                                //}
                             }
 							if (an.toLowerCase() == this.app.MH_SRUUniques.strFieldNameValue.toString().toLowerCase()) {
                                 iValue = feature.attributes[an];
@@ -160,7 +164,9 @@ define([
 							}
                         });
                         if (blnAdd2Dropdown) {
-							if (strText == "") { strText = iValue.toString(); }
+							if (strText == "") {
+								strText = iValue.toString();
+							}
                             texts.push(strText);
 							values.push(iValue);
 							if (this.app.MH_SRUUniques.strFieldImageName != "") {
@@ -255,10 +261,10 @@ define([
 
 							if (this.divTag4Results.id == "ddlSRU") {
 								this.ddDataSRU.push({
-									text: tt,
+									text: "SRU ID: " + iValue,
 									value: iValue,
 									selected: false,
-									description: "SRU ID: " + iValue,
+									description: tt,
 									imageSrc: imagesSRU[i]
 												});
 							}
@@ -278,7 +284,7 @@ define([
                         var strstop = ""; 
                     }
 
-					if (this.strQuery1 == "OBJECTID_1 > 0") {
+					if (this.strQuery1 == "1=1") {
                         //do nothing
                     } else {
                         var strQuery2 = "Project_ID in (";
