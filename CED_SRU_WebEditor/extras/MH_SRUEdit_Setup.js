@@ -195,7 +195,7 @@ define([
 			pLabel1.font.setFamily("helvetica");
 			var pLabelRenderer1 = new SimpleRenderer(pLabel1);
 			var plabels1 = new LabelLayer({ id: "labels1" });
-			plabels1.addFeatureLayer(app.pSRULayer, pLabelRenderer1, "{" + strlabelField1 + "} : {" + strlabelField2 + "}");
+			plabels1.addFeatureLayer(app.pSRULayer, pLabelRenderer1, "{" + strlabelField1 + "}");
 
 			dojo.connect(app.map, "onUpdateStart", showLoading);
 			dojo.connect(app.map, "onUpdateEnd", hideLoading);
@@ -288,6 +288,8 @@ define([
 		},
 
 		ddSRUslickSelected: function (iSRU_ID) {
+			document.getElementById('id_SRU').value = iSRU_ID;
+
 			app.iSelectedSRUID = iSRU_ID;
 			$("#btn_NextSRU").prop("disabled", false);
 
