@@ -288,7 +288,7 @@ define([
 		},
 
 		ddSRUslickSelected: function (iSRU_ID) {
-			document.getElementById('id_SRU').value = iSRU_ID;
+			document.getElementById('id_sru').value = iSRU_ID;
 
 			app.iSelectedSRUID = iSRU_ID;
 			$("#btn_NextSRU").prop("disabled", false);
