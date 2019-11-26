@@ -27,6 +27,20 @@ define([
         return str.replace('     ', ' ').replace('    ', ' ').replace('  ', ' ');
     }
 
+
+		function sortFunctionByVal(a, b) {
+			if (isNaN(a.V)) {
+				var textA = a.V.toUpperCase();
+				var textB = b.V.toUpperCase();
+			}
+			else {
+				var textA = a.V;
+				var textB = b.V;
+			}
+
+			return (textA < textB) ? -1 : (textA > textB) ? 1 : 0;
+		}
+
     function sortFunction(a, b) {
         if (isNaN(a.T)) {
             var textA = a.T.toUpperCase();
@@ -186,7 +200,7 @@ define([
                         if (this.strFieldNameText == "ST_ID") {
                             var temp = "";
                         }
-                        all.sort(sortFunction);
+						all.sort(sortFunctionByVal);
                         texts = [];
                         values = [];
                         arrayOfNot2ShowActivityValues = ["1900", "1940", "1947", "1960",
@@ -221,7 +235,7 @@ define([
                         if (this.strFieldNameText == "ST_ID") {
                             var temp = "";
                         }
-                        all.sort(sortFunction);
+						all.sort(sortFunctionByVal);
                         texts = [];
                         values = [];
 						imagesSRU = [];
