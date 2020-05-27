@@ -36,7 +36,8 @@ define([
         GetCountOfFCDef_ShowText: function (strQuery, strURL, strHTML_ID, strStatType, strFieldName, strAddedQueryString) {
             this.strHTML_ID = strHTML_ID;
             disableOrEnableFormElements("dropdownForm", 'select-one', true);  //disable/enable to avoid user clicking query options during pending queries
-            disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
+			disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
+			disableOrEnableFormElements("dropdownForm", 'radio', true);  //disable/enable to avoid user clicking query options during pending queries
             $(".divOpenStats").prop("onclick", null).off("click");
 
             this.strURLStored = strURL;
@@ -70,7 +71,8 @@ define([
             switch (this.strHTML_ID) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'
                 case "txtQueryResults":
                     disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
-                    disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+					disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+					disableOrEnableFormElements("dropdownForm", 'radio', false);  //disable/enable to avoid user clicking query options during pending queries
                     //$(".divOpenStats").prop("onclick", null).off("click");
                     $(function () {
                         $('.divOpenStats').click(function () {

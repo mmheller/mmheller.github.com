@@ -1,6 +1,6 @@
 ﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <!--Created By:  Matt Heller, U.S. Fish and Wildlife Service, Region 6 Science Applications
-Date:        February 2018, updated April 2019-->
+Date:        February 2018, updated November 2019-->
 
 <html>
 
@@ -9,8 +9,8 @@ Date:        February 2018, updated April 2019-->
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
 	<title>CED SRU Web Tools</title>
 
-	<link rel="stylesheet" href="https://js.arcgis.com/3.28/dijit/themes/claro/claro.css">
-	<link rel="stylesheet" href="https://js.arcgis.com/3.28/esri/css/esri.css" />
+	<link rel="stylesheet" href="https://js.arcgis.com/3.30/dijit/themes/claro/claro.css">
+	<link rel="stylesheet" href="https://js.arcgis.com/3.30/esri/css/esri.css" />
 
 	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
 
@@ -19,13 +19,11 @@ Date:        February 2018, updated April 2019-->
 	<!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/Styles/SRUEditor.css' %}" />-->
 
 	<script type="text/javascript">var dojoConfig = { paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" } };</script>
-
 	<!--<script type="text/javascript">var dojoConfig = { paths: { extras: "{% static 'ced_main/javascript/grsgmap/extras' %}" } };</script>-->
-
 
 	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<script src="https://js.arcgis.com/3.28/"></script>
+	<script src="https://js.arcgis.com/3.30/"></script>
 	<script src="extras/jquery.ddslick.min.js"></script>
 
 
@@ -72,11 +70,24 @@ Date:        February 2018, updated April 2019-->
 
 
 <body class="claro">
+
+
 	<div id="map" style="height:100%;">
 		<div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
-		<div id="txt_Version" style="position:absolute; left:225px; bottom:1px; color:#404040; z-index:50; font-size:11px">CED Footprinter 2.2.1</div>
+		<div id="txt_Version" style="position:absolute; left:225px; bottom:1px; color:#404040; z-index:50; font-size:11px">CED SRU Footprinter 1.0</div>
 		<img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
+
+		<div id="Legend Container" class="bg rounded shadow" style="width:200px; color:black; background-color:white; font-size:12px; position:absolute; left:20px; top:100px;
+												padding:5px; float:left; z-index:101;">
+			Legend
+			<div id="legendDiv" style="font-size:10px;">
+
+			</div>
+		</div>
+
 	</div>
+
+
 
 
 	<div id="panelBasemaps" class="panelBasemaps bg rounded shadow">
@@ -92,7 +103,7 @@ Date:        February 2018, updated April 2019-->
 	<div class="panelTitle bg rounded shadow">
 		<div style='margin-bottom:15px'><h1>CED SRU Footprinter</h1></div>
 		<div style='margin-bottom:30px'><h1>(Sagebrush Reporting Unit)</h1></div>
-		<form enctype="multipart/form-data" method="post" id="dropdownFormState" style="">
+		<form enctype="multipart/form-data" method="post" id="dropdownForm" style="">
 			<div id="divSRUState">
 				<u>Filter by state:</u>
 				<br />
@@ -103,14 +114,19 @@ Date:        February 2018, updated April 2019-->
 				</select>
 			</div>
 			<br />					<!--<br />					<br />-->
-			<div style='margin-top:15px'><hr /></div>
+			<div style="padding-right:10px;">
+				<input type="checkbox" id="cbx_SMALayer">Show/Hide Lands Layer
+			</div>
+			<div style='margin-top:5px'><hr /></div>
 			<br />
 			<div id="ddlSRU"></div>
 			<div id="messages"></div>
+
+			<div style="display:none;">
+				<input id="id_sru" name="sruid" />
+			</div>
 		</form>
 	</div>
-
-
 
 	<div id="nextButtonPanel" class="nextButtonPanel bg rounded shadow">
 		<input id="btn_NextSRU" type="button" class="button100Right" value="Save and Go To the Next Step" disabled="disabled" />

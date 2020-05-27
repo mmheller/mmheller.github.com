@@ -242,29 +242,28 @@ define([
             }
 
             switch (this.strFieldNameText) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'
-                case "TypeAct":
-                    this.qry_SetUniqueValuesOf("Prj_Status_Desc", "Project_Status", document.getElementById("ddlEntry"), this.strQuery1);
-                    break;
+				case "Start_Year":
+					this.qry_SetUniqueValuesOf("Activity", "ACT_ID", document.getElementById("ddlActivity"), this.strQuery1);
+					break;
+
+				case "Activity":   // this project_ID query needs to happen here to make sure the query for the related tables works
+					this.qry_SetUniqueValuesOf("SubActivity", "SACT_ID", document.getElementById("ddlSubActivity"), this.strQuery1);
+					break;
+
+				case "SubActivity":   // this project_ID query needs to happen here to make sure the query for the related tables works
+					this.qry_SetUniqueValuesOf("Prj_Status_Desc", "Project_Status", document.getElementById("ddlEntry"), this.strQuery1);
+					break;
+
                 case "Prj_Status_Desc":
                     this.qry_SetUniqueValuesOf("Implementing_Party", "IP_ID", document.getElementById("ddlImpParty"), this.strQuery1);
                     break;
 
                 case "Implementing_Party":
-                    this.qry_SetUniqueValuesOf("Start_Year", "Start_Year", document.getElementById("ddlStartYear"), this.strQuery1);
+					this.qry_SetUniqueValuesOf("Office", "FO_ID", document.getElementById("ddlOffice"), this.strQuery1);
                     break;
 
-                case "Start_Year":
-                    this.qry_SetUniqueValuesOf("Office", "FO_ID", document.getElementById("ddlOffice"), this.strQuery1);
-                    break;
                 case "Office":
-                    this.qry_SetUniqueValuesOf("Activity", "ACT_ID", document.getElementById("ddlActivity"), this.strQuery1);
-                    break;
-                case "Activity":   // this project_ID query needs to happen here to make sure the query for the related tables works
-                    this.qry_SetUniqueValuesOf("SubActivity", "SACT_ID", document.getElementById("ddlSubActivity"), this.strQuery1);
-                    break;
-
-                case "SubActivity":   // this project_ID query needs to happen here to make sure the query for the related tables works
-                    this.qry_SetUniqueValuesOf("Project_ID", "Project_ID", null, this.strQuery1);
+					this.qry_SetUniqueValuesOf("Project_ID", "Project_ID", null, this.strQuery1);
                     break;
 
                 case "Project_ID":
@@ -282,7 +281,8 @@ define([
                 case "WAFWA_Zone":
                     document.getElementById("ImgResultsLoading").style.visibility = "hidden";
                     disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
-                    disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+					disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+					disableOrEnableFormElements("dropdownForm", 'radio', false);  //disable/enable to avoid user clicking query options during pending queries
                     
                     $(function () {
                         $('.divOpenStats').click(function () {
@@ -306,7 +306,8 @@ define([
             console.log("Error number" + String(this.app.PS_Uniques.numberOfErrors) + " Failed to get stat results due to an error: " + this.app.PS_Uniques.strFieldNameText + this.app.PS_Uniques.strFieldNameValue + " " + this.app.PS_Uniques.strURL + this.app.iNonSpatialTableIndex, err);
             this.app.PS_Uniques.numberOfErrors += 1;
             disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
-            disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+			disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+			disableOrEnableFormElements("dropdownForm", 'radio', false);  //disable/enable to avoid user clicking query options during pending queries
 
             $(function () {
                 $('.divOpenStats').click(function () {

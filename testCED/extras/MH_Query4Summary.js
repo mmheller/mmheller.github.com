@@ -98,7 +98,8 @@ define([
         Summarize: function (strQuery, strQuery2, blnOpenEntireSummary, pGeometry) {
             document.getElementById("ImgResultsLoading").style.visibility = "visible";
             disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
-            disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
+			disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
+			disableOrEnableFormElements("dropdownForm", 'radio', true);  //disable/enable to avoid user clicking query options during pending queries
             $(".divOpenStats").prop("onclick", null).off("click");
 
             arrayQuery = [];            //table/fc index, query string, field 4 aggregation, stat type (count, sum, avg), group by field, html ID, string function
@@ -151,7 +152,8 @@ define([
 
                 arrayQuery.push(["20", strQuery2, "GIS_Acres", "sum", "", "dGISPACSum", '<b>"TOTAL ACRES within GRSG PRIORITY AREAS for CONSERVATION (PACs)"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br><i>{0}  acres</i>', "commas-no-round-decimal", ""]);
             } else {
-                arrayQuery.push(["12", "OBJECTID > 0", "LastDataProviderEdit", "Max", "", "dFPMaxLastDataProviderEdit", '<font size="1px"><b>Last Approved Data Provider Edit:</b> {0}</font>', "convert2date", ""]);
+				//arrayQuery.push(["12", "OBJECTID > 0", "LastDataProviderEdit", "Max", "", "dFPMaxLastDataProviderEdit", '<font size="1px"><b>Last Approved Data Provider Edit:</b> {0}</font>', "convert2date", ""]);
+				arrayQuery.push(["0", "OBJECTID > 0", "Last_Updated", "Max", "", "dFPMaxLastDataProviderEdit", '<font size="1px"><b>Last Approved Data Provider Edit:</b> {0}</font>', "convert2date", ""]);
                 arrayQuery.push(["12", "OBJECTID > 0", "ProcDate", "Max", "", "dFPMaxLastPubProc", '<font size="1px"><b>Last Data Refresh:</b> {0}</font>', "convert2date", ""]);
                 arrayQuery.push(["0", strQuery, "totalacres", "sum", "", "dTotalAcresQ", '{0}', "commas-no-round-decimal", ""]);
             }
@@ -229,7 +231,6 @@ define([
                 var strFieldNameText = pTblindexAndQuery[2];
                 var strGroupByField = pTblindexAndQuery[4];
                 var strHTMLElementID = pTblindexAndQuery[5];
-
 
                 var strStringFormatting = pTblindexAndQuery[6];
                 var strVarType = pTblindexAndQuery[7];
@@ -433,14 +434,18 @@ define([
 
                         document.getElementById("ImgResultsLoading").style.visibility = "hidden";
                         disableOrEnableFormElements("dropdownForm", 'select-one', false, document); //disable/enable to avoid user clicking query options during pending queries
-                        disableOrEnableFormElements("dropdownForm", 'button', false, document);  //disable/enable to avoid user clicking query options during pending queries
-                        $(function () {
+						disableOrEnableFormElements("dropdownForm", 'button', false, document);  //disable/enable to avoid user clicking query options during pending queries
+						disableOrEnableFormElements("dropdownForm", 'radio', false, document);  //disable/enable to avoid user clicking query options during pending queries
+
+						app.pSup.gFeatureTable.refresh(); //may have to rely on refreshing table here due to table refresh issues
+
+						$(function () {
                             $('.divOpenStats').click(function () {
                                 app.pSup.openCEDPSummary();
                             });
                         });
 
-                        app.map.graphics.clear();
+						app.map.graphics.clear();
 
                     }
                     if (arrayQuery.length > 3) {

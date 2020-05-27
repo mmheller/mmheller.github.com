@@ -22,16 +22,29 @@ define([
         setQS: function (strQueryDef) {
             this.pCED_PP_poly.setDefinitionExpression(strQueryDef);
             this.pCED_PP_line.setDefinitionExpression(strQueryDef);
-            app.pSup.gCED_PP_point4FeatureTable.setDefinitionExpression(strQueryDef);
-            app.pSup.gFeatureTable.refresh();
+
+			var strQueryDef4FeatureTable = strQueryDef;  //setting the gCED_PP_point4FeatureTable later due to table refresh issues
 
             if (strQueryDef !== "") { strQueryDef += " and "; }
-            strQueryDef += "(((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))";
+			strQueryDef += "(((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))";
             this.pCED_PP_point.setDefinitionExpression(strQueryDef);
             this.pCED_PP_point.setVisibility(true);
             this.pCED_PP_line.setVisibility(true);
             this.pCED_PP_poly.setVisibility(true);
-            return true;
+
+			console.log("setting app.pSup.gCED_PP_point4FeatureTable.setDefinitionExpression");
+
+			app.pSup.gFeatureTable.clearSelection();
+			if (app.blnPopulateFeatureTable == true) {
+				app.pSup.gCED_PP_point4FeatureTable.setDefinitionExpression(strQueryDef4FeatureTable);
+				//app.pSup.gFeatureTable.refresh();
+			} else {
+				app.pSup.gCED_PP_point4FeatureTable.setDefinitionExpression("OBJECTID < 0");
+				//app.pSup.gFeatureTable.clearFilter();
+				//app.pSup.gFeatureTable.refresh();
+			}   
+			//app.pSup.gFeatureTable.refresh();
+			return true;
         },
         err: function (err) {
             $(function () {

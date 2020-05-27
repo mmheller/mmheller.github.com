@@ -43,7 +43,7 @@ define([
 
         returnEvents: function (results) {
             if (results) {
-                document.getElementById("btn_TextSummary").disabled = false;
+                //document.getElementById("btn_TextSummary").disabled = false;
 
                 var pExtent;
                 var mapPoint1;

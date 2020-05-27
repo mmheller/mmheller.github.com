@@ -8,8 +8,8 @@ Date:        Oct 2014, Updated Oct 2018-->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />    <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
     <title>Greater Sage Grouse: Conservation Efforts</title>
-    <link rel="stylesheet" href="https://js.arcgis.com/3.27/dijit/themes//tundra/tundra.css" />
-    <link rel="stylesheet" href="https://js.arcgis.com/3.27/esri/css/esri.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.32/dijit/themes//tundra/tundra.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.32/esri/css/esri.css" />
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="Styles/panelMapAndReport.css" />
@@ -28,7 +28,7 @@ Date:        Oct 2014, Updated Oct 2018-->
     <!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/javascript/grsgmap/extras' %}"} };</script>-->
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script type="text/javascript" src="https://js.arcgis.com/3.27/"></script>    
+    <script type="text/javascript" src="https://js.arcgis.com/3.32/"></script>    
 
     <script type="text/javascript">
     dojo.require("dijit.layout.TabContainer");
@@ -106,233 +106,245 @@ Date:        Oct 2014, Updated Oct 2018-->
 </head>
 
 <body class="tundra">
-    <div id="content" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline', gutters:false"
-         style="width: 100%; height: 100%; margin: 0; background-color:rgb(151, 118, 123); font-family: helvetica;">
-            <div id="topPane" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top', splitter:false">
-                
-            </div>
+	<div id="dialogMap" title="CED Notice!">
+		<p>The CED is in the middle of a large data collection period and the CED Team respectfully requests that any queries/reports generated from the CED's interactive map/reporting tool not be cited until we have had an opportunity to conduct a final QA/QC. <br /><br />If generating report(s), beware the summaries, values, and figures are to be considered DRAFT and PROVISIONAL until further notice.</p>
+		<!--<p>The CED is in a period of data collection. <br /><br />If generating report(s), beware the summaries, values, and figures are to be considered DRAFT and PROVISIONAL until further notice.</p>-->
+	</div>
+
+	<div id="content" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline', gutters:false"
+		 style="width: 100%; height: 100%; margin: 0; background-color:rgb(151, 118, 123); font-family: helvetica;">
+		<div id="topPane" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top', splitter:false">
+
+		</div>
 
 
-            <div id="leftPane"
-                 data-dojo-type="dijit/layout/ContentPane"
-                 data-dojo-props="region:'left'" style="background-color:rgb(151, 118, 123);">
+		<div id="leftPane"
+			 data-dojo-type="dijit/layout/ContentPane"
+			 data-dojo-props="region:'left'" style="background-color:rgb(151, 118, 123);">
 
-                <div data-dojo-type="dijit/layout/AccordionContainer">
-                    <div data-dojo-type="dijit/layout/ContentPane" id="legendPane" 
-                         tooltip="Click to expand and show the Legend and Layer Options"
-                         data-dojo-props='title:"Legend and Layer Options", iconClass:"palette3Icon"'>
-                        <!--data-dojo-props='title:"Legend and Layer Options"'>-->
+			<div data-dojo-type="dijit/layout/AccordionContainer">
+				<div data-dojo-type="dijit/layout/ContentPane" id="legendPane"
+					 tooltip="Click to expand and show the Legend and Layer Options"
+					 data-dojo-props='title:"Legend and Layer Options", iconClass:"palette3Icon"'>
+					<!--data-dojo-props='title:"Legend and Layer Options"'>-->
 
-                        <div class="centerElement"><h2 title="Turn on/off layer visibility using the checkboxes next to the layer names.">Layer Visibility</h2></div>
-                        <form id="toggleForm" style="width:650px; padding: 2px 2px;">
-                            <div id="toggle"></div>
-                        </form>
-                        <br />
-                        <!--<h2>Note: some layers have been simplified for web speed performance</h2>-->
-                        <h2>Note:Some layers simplified for performance</h2>
-                            <div id="legendDiv" style="width:650px; padding: 2px 2px;"></div>
-                    </div>
-                <div data-dojo-type="dijit/layout/ContentPane" 
-                         tooltip="Click to expand and show the Search Query Tools"
-                         data-dojo-props="title:'Search Query Tools', iconClass:'Find32Icon', selected:true" 
-                         style="overflow-x: hidden !important; overflow-y: scroll"</div>
-                <br />
-                <form id="dropdownForm">
+					<div class="centerElement"><h2 title="Turn on/off layer visibility using the checkboxes next to the layer names.">Layer Visibility</h2></div>
+					<form id="toggleForm" style="width:650px; padding: 2px 2px;">
+						<div id="toggle"></div>
+					</form>
+					<br />
+					<!--<h2>Note: some layers have been simplified for web speed performance</h2>-->
+					<h2>Note:Some layers simplified for performance</h2>
+					<div id="legendDiv" style="width:650px; padding: 2px 2px;"></div>
+				</div>
+				<div data-dojo-type="dijit/layout/ContentPane"
+					 tooltip="Click to expand and show the Search Query Tools"
+					 data-dojo-props="title:'Search Query Tools', iconClass:'Find32Icon', selected:true"
+					 style="overflow-x: hidden !important; overflow-y: scroll"</div>
+				<br />
+				<form id="dropdownForm">
 
-                    <!--<div class="centerElement"><h2 title="To Filter/Query Data, select any of the dropdown filter options or use the 'Select Efforts On Map Tool' to spatially select conservation efforts.  Click the 'Clear' button to clear search criteria and return to full map extent.  Searching and zooming by Plan/Project name, or general geographic location name, is also available below">Filter/Query Data<img id="ImgResultsLoading" src="{% static 'ced_main/images/ced_main/loading.gif' %}" style="height:15px" /></h2></div>-->
-                    <div class="centerElement"><h2 title="To Filter/Query Data, select any of the dropdown filter options or use the 'Select Efforts On Map Tool' to spatially select conservation efforts.  Click the 'Clear' button to clear search criteria and return to full map extent.  Searching and zooming by Plan/Project name, or general geographic location name, is also available below">Filter/Query Data<img id="ImgResultsLoading" src="images/loading.gif" style="height:15px" /></h2></div>
+					<!--<div class="centerElement"><h2 title="To Filter/Query Data, select any of the dropdown filter options or use the 'Select Efforts On Map Tool' to spatially select conservation efforts.  Click the 'Clear' button to clear search criteria and return to full map extent.  Searching and zooming by Plan/Project name, or general geographic location name, is also available below">Filter/Query Data<img id="ImgResultsLoading" src="{% static 'ced_main/images/ced_main/loading.gif' %}" style="height:15px" /></h2></div>-->
+					<div class="centerElement"><h2 title="To Filter/Query Data, select any of the dropdown filter options or use the 'Select Efforts On Map Tool' to spatially select conservation efforts.  Click the 'Clear' button to clear search criteria and return to full map extent.  Searching and zooming by Plan/Project name, or general geographic location name, is also available below" style="margin-top: 0px !important">Filter/Query Data<img id="ImgResultsLoading" src="images/loading.gif" style="height:15px" /></h2></div>
 
-                    <font size="2" title="Non-Spatial Projects or Non-Spatial Plans selections will provice results in the table and summaries, however NO efforts will show in the map"><u>Project or Plan:</u></font><br />
-                    <select id="ddlMatrix" class="selectClass" disabled>
-                        <option value="All">All</option>
-                    </select><br /><br />
+					<input type="radio" id="rdo_Public" name="gender" value="Public" checked="checked" disabled>
+					<label for="rdo_Public">Spatially Explicit</label><br>
+					<input type="radio" id="rdo_SRU" name="gender" value="SRU" disabled>
+					<label for="rdo_SRU">Spatialy Obsured</label><br>
+					<input type="radio" id="rdo_NonSpatial" name="gender" value="SRU" disabled>
+					<label for="rdo_NonSpatial">Non-Spatial</label><br><br>
 
-                    <font size="2" title="Efforts that are 'In Progress' have been only partially implemented and have not been completed. A conservation effort that would be considered 'Completed' no longer requires further actions aside from post-treatment monitoring (effectiveness monitoring), or maintenance.  No efforts designated as 'Planned' are available for viewing or reporting" ><u>Implementation Status:</u></font><br />
-                    <select id="ddlEntry" class="selectClass" disabled>
-                        <option value="99">All</option>
-                    </select><br /><br />
+					<!--<font size="2" title="Non-Spatial Projects or Non-Spatial Plans selections will provice results in the table and summaries, however NO efforts will show in the map"><u>Project or Plan:</u></font><br />
+	<select id="ddlMatrix" class="selectClass" disabled>
+		<option value="All">All</option>
+	</select><br /><br />-->
 
-                    <font size="2" title="Start Year represents the year of an effort start date."><u>Start Year:</u></font><br />
-                    <select id="ddlStartYear" class="selectClass" disabled>
-                        <option value="99">All</option>
-                    </select><br /><br />
+					<font size="2" title="Start Year represents the year of an effort start date."><u>Start Year:</u> *REQUIRED FOR RESULTS</font><br />
+					<select id="ddlStartYear" class="selectClass" disabled>
+						<option value="99">All</option>
+					</select><br /><br />
 
-                    <font size="2" title="Activity filter options include spatial project, non-spatial projects, and non-spatial plans.  Activity relates directly to the SubActivity filters/data."><u>Activity:</u></font><br />
-                    <select id="ddlActivity" class="selectClass" disabled>
-                        <option value="99">All</option>
-                    </select><br /><br />
+					<font size="2" title="Activity filter options include spatial project, non-spatial projects, and non-spatial plans.  Activity relates directly to the SubActivity filters/data."><u>Activity:</u></font><br />
+					<select id="ddlActivity" class="selectClass" disabled>
+						<option value="99">All</option>
+					</select><br /><br />
 
-                    <font size="2" title="SubActivity filter options include spatial project, non-spatial projects, and non-spatial plans.  SubActivity relates directly to the Activity query filter/data."><u>SubActivity:</u></font><br />
-                    <select id="ddlSubActivity" class="selectClass" disabled>
-                        <option value="99">All</option>
-                    </select><br /><br />
+					<font size="2" title="SubActivity filter options include spatial project, non-spatial projects, and non-spatial plans.  SubActivity relates directly to the Activity query filter/data."><u>SubActivity:</u> *REQUIRED FOR RESULTS</font><br />
+					<select id="ddlSubActivity" class="selectClass" disabled>
+						<option value="99">All</option>
+					</select><br /><br />
 
-                    <font size="2" title="Implementing Party refers to the authoritative data owner of the effort and directly relates to Office query filter/data."><u>Implementing Party:</u></font><br />
-                    <select id="ddlImpParty" class="selectClass" disabled>
-                        <option value="99">All</option>
-                    </select><br /><br />
+					<font size="2" title="Efforts that are 'In Progress' have been only partially implemented and have not been completed. A conservation effort that would be considered 'Completed' no longer requires further actions aside from post-treatment monitoring (effectiveness monitoring), or maintenance.  No efforts designated as 'Planned' are available for viewing or reporting"><u>Implementation Status:</u></font><br />
+					<select id="ddlEntry" class="selectClass" disabled>
+						<option value="99">All</option>
+					</select><br /><br />
 
-                    <font size="2" title="Office refers to the office name for the authoritative data owner of the effort and directly relates to Implementing Party query filter/data."><u>Office:</u></font><br />
-                    <select id="ddlOffice" class="selectClass" disabled>
-                        <option value="99">All</option>
-                    </select><br /><br />
+					<font size="2" title="Implementing Party refers to the authoritative data owner of the effort and directly relates to Office query filter/data."><u>Implementing Party:</u></font><br />
+					<select id="ddlImpParty" class="selectClass" disabled>
+						<option value="99">All</option>
+					</select><br /><br />
 
-                    <font size="2" title="WAFWA Management Zones overlapping the efforts in some fashion.  Some non-spatial projects/plans will not overlap zones.  The corresponding layer can be turned on in the ‘Legend and Layer Options’ panel.  Zones depict the management zone boundaries for Greater and Gunnison sage-grouse in the western United States and Canada. These boundaries were digitized from a hand drawn figure originally created by the Western Association of Fish and Wildlife Agencies' (WAFWA) Sage-grouse Conservation Planning Framework Team for use in the Greater Sage-grouse Comprehensive Conservation Strategy."><u>WAFWA Management Zone:</u></font><br />
-                    <select id="ddlManagUnit" class="selectClass" disabled>
-                        <option value="99">All</option>
-                    </select><br /><br />
+					<font size="2" title="Office refers to the office name for the authoritative data owner of the effort and directly relates to Implementing Party query filter/data."><u>Office:</u></font><br />
+					<select id="ddlOffice" class="selectClass" disabled>
+						<option value="99">All</option>
+					</select><br /><br />
 
-                    <font size="2" title="States and Canadian Provinces overlapping the efforts in some manner.  Some non-spatial projects/plans will not overlap zones."><u>State/Province:</u></font><br />
-                    <select id="ddlState" class="selectClass" disabled>
-                        <option value="99"> All</option>
-                    </select><br /><br />
+					<font size="2" title="WAFWA Management Zones overlapping the efforts in some fashion.  Some non-spatial projects/plans will not overlap zones.  The corresponding layer can be turned on in the ‘Legend and Layer Options’ panel.  Zones depict the management zone boundaries for Greater and Gunnison sage-grouse in the western United States and Canada. These boundaries were digitized from a hand drawn figure originally created by the Western Association of Fish and Wildlife Agencies' (WAFWA) Sage-grouse Conservation Planning Framework Team for use in the Greater Sage-grouse Comprehensive Conservation Strategy."><u>WAFWA Management Zone:</u></font><br />
+					<select id="ddlManagUnit" class="selectClass" disabled>
+						<option value="99">All</option>
+					</select><br /><br />
 
-                    <font size="2" title="GRSG Populations Areas overlapping the efforts in some fashion. Some non-spatial projects/plans will not overlap zones.  The corresponding layer can be turned on in the ‘Legend and Layer Options’ panel.  GRSG Populations Areas represents areas to be used in work for the US Fish and Wildlife (USFWS) 2015 Status Review for the greater sage-grouse. Populations do not represent occupied habitat. Population polygons are meant to coarsely identify areas of occupation based on encircling groups of leks."><u>GRSG Population Area:</u></font><br />
-                    <select id="ddlPopArea" class="selectClass" disabled>
-                        <option value="99">All</option>
-                    </select><br /><br />
+					<font size="2" title="States and Canadian Provinces overlapping the efforts in some manner.  Some non-spatial projects/plans will not overlap zones."><u>State/Province:</u></font><br />
+					<select id="ddlState" class="selectClass" disabled>
+						<option value="99"> All</option>
+					</select><br /><br />
 
-                    <!--input id="btn_selectFieldsButton" type="button" value="Spatial Select" />-->
-                    <input id="btn_selectFieldsButton" type="button" value="Select Efforts On Map Tool" title="Spatially select features in the map by 1)Clicking this 'Select Efforts On Map Tool' 2)Left-click mouse on the map, drag mouse to make a rectangle in area of interest on map, unclick mouse" class="button-SelectOnMap" />
-                    <br /> <br />
-                    <input id="btn_clear" type="button" title="Click to clear all the user query filters, spatial selection/query filters, pop-ups, etc. and return to the full map extent" value="Clear" />
-                </form>
-                <input id="btn_TextSummary" type="button" value="Report" style="display: none;" />
-                <br />
+					<font size="2" title="GRSG Populations Areas overlapping the efforts in some fashion. Some non-spatial projects/plans will not overlap zones.  The corresponding layer can be turned on in the ‘Legend and Layer Options’ panel.  GRSG Populations Areas represents areas to be used in work for the US Fish and Wildlife (USFWS) 2015 Status Review for the greater sage-grouse. Populations do not represent occupied habitat. Population polygons are meant to coarsely identify areas of occupation based on encircling groups of leks."><u>GRSG Population Area:</u></font><br />
+					<select id="ddlPopArea" class="selectClass" disabled>
+						<option value="99">All</option>
+					</select><br /><br />
 
-                <div id="Div1" style="font-size:12px;">
-                    <input type="checkbox" id="cbx_zoom" checked="checked" value="zoomzoom?">Zoom to results
-                </div>
+					<!--input id="btn_selectFieldsButton" type="button" value="Spatial Select" />-->
+					<input id="btn_selectFieldsButton" type="button" value="Select Efforts On Map Tool" title="Spatially select features in the map by 1)Clicking this 'Select Efforts On Map Tool' 2)Left-click mouse on the map, drag mouse to make a rectangle in area of interest on map, unclick mouse" class="button-SelectOnMap" />
+					<br /> <br />
+					<input id="btn_clear" type="button" title="Click to clear all the user query filters, spatial selection/query filters, pop-ups, etc. and return to the full map extent" value="Clear" />
+				</form>
 
-                <div id="txtQueryResults" title="Total number of efforts meeting user queryfilter and/or user spatial selection/filter." style="font-size:12px;"></div>
-                <br>
+				<br />
 
-                <div class="centerElement"><h2 title="Enter partial effort name or identificaiton # and pick from the resulting list to zoom to the effort location with corresponding Popup.">Search Projects and Plans</h2></div>
-                <div id="autocompleteSearch">
-                    <input id="loc" class="textbox" type="text" /><br />
-                    &nbsp;
-                </div>
+				<div id="Div1" style="font-size:12px;">
+					<input type="checkbox" id="cbx_zoom" checked="checked" value="zoomzoom?">Zoom to results
+				</div>
 
-                <div class="centerElement"><h2 title="Enter any common geographic placename to zoom and pick from the resulting list to zoom to the location.">Go to Locations</h2></div>
-                <div id="search"></div>
-            </div>
+				<div id="txtQueryResults" title="Total number of efforts meeting user queryfilter and/or user spatial selection/filter." style="font-size:12px;"></div>
+				<br>
 
+				<div class="centerElement"><h2 title="Enter partial effort name or identificaiton # and pick from the resulting list to zoom to the effort location with corresponding Popup.">Search Projects and Plans</h2></div>
+				<div id="autocompleteSearch">
+					<input id="loc" class="textbox" type="text" /><br />
+					&nbsp;
+				</div>
 
-                </div>
-
-                <div class="tablequickStats">
-                    <table>
-                        <tr>
-                            <td class="HTMLTable_styleRightJ_Compact"><b><u>Quick Summary</u></b></td>
-                            <td class="HTMLTable_styleMiddle_Compact"> </td>
-                            <td class="HTMLTable_styleLeftJ_Compact"> </td>
-                        </tr>
-                        <tr>
-                            <td class="HTMLTable_styleRightJ_Compact"><b>Total # of Spatial Projects</b></td>
-                            <td class="HTMLTable_styleMiddle_Compact"> </td>
-                            <td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalProjectsQ"></div></td>
-                        </tr>
-                        <tr>
-                            <td class="HTMLTable_styleRightJ_Compact"><b>Total # of Non-Spatial Projects</b></td>
-                            <td class="HTMLTable_styleMiddle_Compact"> </td>
-                            <td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalNonProjectsQ"></div></td>
-                        </tr>
-                        <tr>
-                            <td class="HTMLTable_styleRightJ_Compact"><b>Total # of Non-Spatial Plans</b></td>
-                            <td class="HTMLTable_styleMiddle_Compact"> </td>
-                            <td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalPlansQ"></div></td>
-                        </tr>
-                        <tr>
-                            <td class="HTMLTable_styleRightJ_Compact" title="This Total Acres value is the sum of the 'reported acreage', submitted by the effort(s) data providers, that corresponds with the user query filters and/or spatial selection.  To also view the GIS calculated acreage total, click the summary report link."><b>Total Acres</b></td>
-                            <td class="HTMLTable_styleMiddle_Compact"> </td>
-                            <td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalAcresQ"  title="This Total Acres value is the sum of the 'reported acreage', submitted by the effort(s) data providers, that corresponds with the user query filters and/or spatial selection.  To also view the GIS calculated acreage total, click the summary report link."></div></td>
-                        </tr>
-                    </table>
-
-                    <div id="dFPMaxLastDataProviderEdit"></div>
-                    <div id="dFPMaxLastPubProc"></div>
-
-                    <div id="pDivOpenStats" class="divOpenStats" onmouseover="" style="cursor: pointer;">
-                        <div id="imageReport">
-                            <!--<img src="{% static 'ced_main/images/grsgmap/report.png' %}" alt="Click for summary report" height="22px" width="19px" />-->
-                            <img src="images/report.png" alt="Click for summary report" height="22px" width="19px" />
-                        </div>
-                        <div id="txtReport" title="Click this link for the comprehensive CED summary report.  The summary report includes various report summaries, charts, map, and 'Print Report to PDF' options">
-                            <b><u><I><font size="3px" color="white">Click</font> <font size="3px" color="blue">here</font> <font size="3px" color="white">for summary report...</font></I></u></b>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div id="map"
-                 data-dojo-type="dijit/layout/ContentPane"
-                 data-dojo-props="region:'center'"
-                 style="overflow:hidden; background-color:rgb(151, 118, 123);">
-
-                <div id="txt_NoSpatial" style="position:absolute; visibility:hidden; background-color: yellow; left:20%; bottom:40%; color:red; z-index:51; font-size:30px">Non-Spatial Projects/Plans Found,<br />See Table Below<br /><br />Spatial Projects NOT Found</div>
-
-                <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
-                <div id="txt_Version" style="position:absolute; right:15px; bottom:20px; color:#404040; z-index:50; font-size:11px">CED Interactive Map Version 2.1.0</div>
-                <!--<img id="loadingImg" src="{% static 'ced_main/images/ced_main/loading.gif' %}" style="position:fixed; right:40%; top:50%; z-index:100;" />-->
-                <img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
-
-                <div id="dialogWarning1" title="CED Data Retreival Error!">
-                    <p>The CED is currently unable to connect to our data repository, ArcGIS Online.<br /><br />Please try back again later. If the problem persists, please contact the CED team for additional support at fw1sagegrouseced@fws.gov</p>
-                </div>
-            </div>
-
-            <div id="bottomTableContainer" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true">
-                <div id="myTableNode"></div>
-            </div>
-        </div>
-
-    <div id="mapPanelTitle" class="panelTitle bg rounded shadow">
-    </div>
+				<div class="centerElement"><h2 title="Enter any common geographic placename to zoom and pick from the resulting list to zoom to the location.">Go to Locations</h2></div>
+				<div id="search"></div>
+			</div>
 
 
-    <div id="panelBasemaps" class="panelBasemaps bg rounded shadow">
-        <!-- Panel Basemaps -->
-        <div id="basemapTitle"><img src="images/basemaps.png" height="30" title="Switch Base Map" /></div>
-        <!--<div id="basemapTitle"><img src="{% static 'ced_main/images/grsgmap/basemaps.png' %}" height="30" title="Switch Base Map"/></div>-->
-        <div id="basemapContent">
-            <div id="basemapGallery"></div>
-        </div>
-    </div>
+		</div>
+
+		<div class="tablequickStats">
+			<table>
+				<tr>
+					<td class="HTMLTable_styleRightJ_Compact"><b><u>Quick Summary</u></b></td>
+					<td class="HTMLTable_styleMiddle_Compact"> </td>
+					<td class="HTMLTable_styleLeftJ_Compact"> </td>
+				</tr>
+				<tr>
+					<td class="HTMLTable_styleRightJ_Compact"><b>Total # of Spatial Projects</b></td>
+					<td class="HTMLTable_styleMiddle_Compact"> </td>
+					<td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalProjectsQ"></div></td>
+				</tr>
+				<tr>
+					<td class="HTMLTable_styleRightJ_Compact"><b>Total # of Non-Spatial Projects</b></td>
+					<td class="HTMLTable_styleMiddle_Compact"> </td>
+					<td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalNonProjectsQ"></div></td>
+				</tr>
+				<tr>
+					<td class="HTMLTable_styleRightJ_Compact"><b>Total # of Non-Spatial Plans</b></td>
+					<td class="HTMLTable_styleMiddle_Compact"> </td>
+					<td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalPlansQ"></div></td>
+				</tr>
+				<tr>
+					<td class="HTMLTable_styleRightJ_Compact" title="This Total Acres value is the sum of the 'reported acreage', submitted by the effort(s) data providers, that corresponds with the user query filters and/or spatial selection.  To also view the GIS calculated acreage total, click the summary report link."><b>Total Acres</b></td>
+					<td class="HTMLTable_styleMiddle_Compact"> </td>
+					<td class="HTMLTable_styleLeftJ_Compact"><div id="dTotalAcresQ" title="This Total Acres value is the sum of the 'reported acreage', submitted by the effort(s) data providers, that corresponds with the user query filters and/or spatial selection.  To also view the GIS calculated acreage total, click the summary report link."></div></td>
+				</tr>
+			</table>
+
+			<div id="dFPMaxLastDataProviderEdit"></div>
+			<div id="dFPMaxLastPubProc"></div>
+
+			<div id="pDivOpenStats" class="divOpenStats" onmouseover="" style="cursor: pointer;">
+				<div id="imageReport">
+					<!--<img src="{% static 'ced_main/images/grsgmap/report.png' %}" alt="Click for summary report" height="22px" width="19px" />-->
+					<img src="images/report.png" alt="Click for summary report" height="22px" width="19px" />
+				</div>
+				<div id="txtReport" title="Click this link for the comprehensive CED summary report.  The summary report includes various report summaries, charts, map, and 'Print Report to PDF' options">
+					<b><u><I><font size="3px" color="white">Click</font> <font size="3px" color="blue">here</font> <font size="3px" color="white">for summary report...</font></I></u></b>
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div id="map"
+		 data-dojo-type="dijit/layout/ContentPane"
+		 data-dojo-props="region:'center'"
+		 style="overflow:hidden; background-color:rgb(151, 118, 123);">
+
+		<div id="txt_NoSpatial" style="position:absolute; visibility:hidden; background-color: yellow; left:20%; bottom:40%; color:red; z-index:51; font-size:30px">Non-Spatial Projects/Plans Found,<br />See Table Below<br /><br />Spatial Projects NOT Found</div>
+
+		<div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
+		<div id="txt_Version" style="position:absolute; right:15px; bottom:20px; color:#404040; z-index:50; font-size:11px">CED Interactive Map Version 2.1.0</div>
+		<!--<img id="loadingImg" src="{% static 'ced_main/images/ced_main/loading.gif' %}" style="position:fixed; right:40%; top:50%; z-index:100;" />-->
+		<img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
+
+		<div id="dialogWarning1" title="CED Data Retreival Error!">
+			<p>The CED is currently unable to connect to our data repository, ArcGIS Online.<br /><br />Please try back again later. If the problem persists, please contact the CED team for additional support at fw1sagegrouseced@fws.gov</p>
+		</div>
+	</div>
+
+	<div id="bottomTableContainer" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'bottom', splitter:true">
+		<div id="myTableNode"></div>
+	</div>
+	</div>
+
+	<div id="mapPanelTitle" class="panelTitle bg rounded shadow">
+	</div>
 
 
-    <div id="contact1" style="position:absolute; top:10px; right:20px;">  
-        <a href="/sgce/about/#AC" target="_blank" style="color: #ffffff;font-family: helvetica">Contact Us</a>
-    </div>
-    <div id="contact2" style="position:absolute; top:10px; right:130px;">
-        <a href="/sgce/about/" target="_blank" style="color: #ffffff;font-family: helvetica">Project Background</a>
-    </div>
+	<div id="panelBasemaps" class="panelBasemaps bg rounded shadow">
+		<!-- Panel Basemaps -->
+		<div id="basemapTitle"><img src="images/basemaps.png" height="30" title="Switch Base Map" /></div>
+		<!--<div id="basemapTitle"><img src="{% static 'ced_main/images/grsgmap/basemaps.png' %}" height="30" title="Switch Base Map"/></div>-->
+		<div id="basemapContent">
+			<div id="basemapGallery"></div>
+		</div>
+	</div>
 
 
-    <!--<a href="/sgce/" target="_blank">
-        <img id="theImage4" border="0" src="{% static 'ced_main/images/ced_main/CEDlogo_white_180x31.png' %}"
-             style="position:absolute; top:20px; left:18px;" height="45" />
-    </a>
-    <a href="https://www.fws.gov" target="_blank">
-        <img id="theImage3" border="0" src="{% static 'ced_main/images/ced_main/USFWS_150x31.png' %}"
-             style="position:absolute; top:25px; left:325px;" height="35" />
-    </a>
-    <a href="https://www.usgs.gov" target="_blank">
-        <img id="theImage2" border="0" src="{% static 'ced_main/images/ced_main/USGS_117x31.png' %}"
-             style="position:absolute; top:25px; left:505px;" height="35" />    </a>-->
+	<div id="contact1" style="position:absolute; top:10px; right:20px;">
+		<a href="/sgce/about/#AC" target="_blank" style="color: #ffffff;font-family: helvetica">Contact Us</a>
+	</div>
+	<div id="contact2" style="position:absolute; top:10px; right:130px;">
+		<a href="/sgce/about/" target="_blank" style="color: #ffffff;font-family: helvetica">Project Background</a>
+	</div>
 
 
-    <a href="/sgce/" target="_blank">
-        <img id="theImage4" border="0" src="images/CEDlogo_white_180x31.png"
-             style="position:absolute; top:20px; left:18px;" height="45" />
-    </a>
-    <a href="https://www.fws.gov" target="_blank">
-        <img id="theImage3" border="0" src="images/USFWS_150x31.png"
-             style="position:absolute; top:25px; left:325px;" height="35" />
-    </a>
-    <a href="https://www.usgs.gov" target="_blank">
-        <img id="theImage2" border="0" src="images/USGS_117x31.png"
-             style="position:absolute; top:25px; left:505px;" height="35" />
-    </a>
+	<!--<a href="/sgce/" target="_blank">
+		<img id="theImage4" border="0" src="{% static 'ced_main/images/ced_main/CEDlogo_white_180x31.png' %}"
+			 style="position:absolute; top:20px; left:18px;" height="45" />
+	</a>
+	<a href="https://www.fws.gov" target="_blank">
+		<img id="theImage3" border="0" src="{% static 'ced_main/images/ced_main/USFWS_150x31.png' %}"
+			 style="position:absolute; top:25px; left:325px;" height="35" />
+	</a>
+	<a href="https://www.usgs.gov" target="_blank">
+		<img id="theImage2" border="0" src="{% static 'ced_main/images/ced_main/USGS_117x31.png' %}"
+			 style="position:absolute; top:25px; left:505px;" height="35" />    </a>-->
+
+
+	<a href="/sgce/" target="_blank">
+		<img id="theImage4" border="0" src="images/CEDlogo_white_180x31.png"
+			 style="position:absolute; top:20px; left:18px;" height="45" />
+	</a>
+	<a href="https://www.fws.gov" target="_blank">
+		<img id="theImage3" border="0" src="images/USFWS_150x31.png"
+			 style="position:absolute; top:25px; left:325px;" height="35" />
+	</a>
+	<a href="https://www.usgs.gov" target="_blank">
+		<img id="theImage2" border="0" src="images/USGS_117x31.png"
+			 style="position:absolute; top:25px; left:505px;" height="35" />
+	</a>
 
 
 </body>

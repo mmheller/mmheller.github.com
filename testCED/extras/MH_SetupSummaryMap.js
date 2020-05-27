@@ -18,7 +18,7 @@ $(function () {
 });
 
 function AllFiltersClear() {
-    var strddlMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].value;
+    //var strddlMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].value;
     var strddlEntry = document.getElementById("ddlEntry").options[document.getElementById("ddlEntry").selectedIndex].value;
     var strActivity = document.getElementById("ddlActivity").options[document.getElementById("ddlActivity").selectedIndex].value;  //get dropdown menu selection
     var strImpParty = document.getElementById("ddlImpParty").options[document.getElementById("ddlImpParty").selectedIndex].value;  //get dropdown menu selection
@@ -29,7 +29,7 @@ function AllFiltersClear() {
 
     var blnClear = false;
 
-    if (((strddlMatrix == "All") | (strddlMatrix == "99")) &
+    if (
                  (strddlEntry == "99") &
                  (strActivity == "99") &
                  (strImpParty == "99") &
@@ -130,7 +130,7 @@ define([
               }
 
               app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/5d5fc053dd7e4de4b9765f7a6b6f1f61/rest/services/CEDfrontpage_map_v9_Restrict/FeatureServer/";
-              dojo.connect(app.map, "onUpdateStart", showLoading);
+			  dojo.connect(app.map, "onUpdateStart", showLoading);
               dojo.connect(app.map, "onUpdateEnd", hideLoading);
 
               var legendLayers = [];

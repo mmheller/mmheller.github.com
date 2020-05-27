@@ -11,7 +11,8 @@ define([
     return declare([], {
         strURL: null,
         strContaminant: null,
-        strMatrix: null,
+		//strMatrix: null,
+		iMatrix: null,
         strManagUnit: null,
         strDataType: null,
         SIDs: null,
@@ -21,7 +22,8 @@ define([
         constructor: function (options) {            // specify class defaults
             this.strURL = options.strURL || "test";
             this.strContaminant = options.strContaminant || "20mi"; // default seat geek range is 30mi
-            this.strMatrix = options.strMatrix || ""; // default to 50 results per page
+			this.iMatrix = options.iMatrix || ""; // default to 50 results per page
+			//this.strMatrix = options.strMatrix || ""; // default to 50 results per page
             this.strManagUnit = options.strManagUnit || "";
             this.strDataType = options.strDataType || "";
             this.SIDs = options.SIDs || null;

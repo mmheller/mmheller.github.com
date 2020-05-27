@@ -1,60 +1,10 @@
 ﻿///Created By:  Matt Heller,  U.S. Fish and Wildlife Service, Science Applications, Region 6
 //Date:        Oct 2014, Updated Oct 2018
 
-function btn_TextSummary_click() {
-    var strddlMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].value;
-    var strddlEntry = document.getElementById("ddlEntry").options[document.getElementById("ddlEntry").selectedIndex].value;
+$(function () {
+	$("#dialogMap").dialog();
+});
 
-    var strddlStartYear = document.getElementById("ddlStartYear").options[document.getElementById("ddlStartYear").selectedIndex].value;
-    var strActivity = document.getElementById("ddlActivity").options[document.getElementById("ddlActivity").selectedIndex].value;  //get dropdown menu selection
-
-    var strSubActivity = document.getElementById("ddlSubActivity").options[document.getElementById("ddlSubActivity").selectedIndex].value;  //get dropdown menu selection
-
-    var strImpParty = document.getElementById("ddlImpParty").options[document.getElementById("ddlImpParty").selectedIndex].value;  //get dropdown menu selection
-    var strOffice = document.getElementById("ddlOffice").options[document.getElementById("ddlOffice").selectedIndex].value;  //get dropdown menu selection
-    var strState = document.getElementById("ddlState").options[document.getElementById("ddlState").selectedIndex].value;  //get dropdown menu selection
-    var strPopArea = document.getElementById("ddlPopArea").options[document.getElementById("ddlPopArea").selectedIndex].value;  //get dropdown menu selection
-    var strManagUnit = document.getElementById("ddlManagUnit").options[document.getElementById("ddlManagUnit").selectedIndex].value;  //get dropdown menu selection
-
-    var strQuery = "";
-    if (strddlMatrix !== "99") {
-        strQuery += "&TA=" + strddlMatrix.replace("Plan", "2").replace("Project", "3"); //TypeAct
-    }
-    if (strddlEntry !== "99") {
-        strQuery += "&ET=" + strddlEntry; //entry_type
-    }
-
-    if (strddlEntry !== "99") {
-        strQuery += "&StartYear=" + strddlStartYear; //entry_type
-    }
-
-    if (strActivity !== "99") {
-        strQuery += "&ACT=" + strActivity; //activity
-    }
-
-    if (strSubActivity !== "99") {
-        strQuery += "&SubACT=" + strSubActivity; //activity
-    }
-    if (strImpParty !== "99") {
-        strQuery += "&IP=" + strImpParty; //implementing_party
-    }
-    if (strOffice !== "99") {
-        strQuery += "&FO=" + strOffice; //implementing_party
-    }
-    if (strState != "99") {
-        strQuery += "&ST=" + strState; //State
-    }
-    if (strPopArea != "99") {
-        strQuery += "&POP=" + strPopArea; //pop area
-    }
-    if (strManagUnit != "99") {
-        strQuery += "&MU=" + strManagUnit; //management unit
-    }
-    if (strQuery !== "") {
-        var strURL = "/sgce/sgcedquery/" + strQuery.replace('&', '?');
-        window.open(strURL);
-    }
-}
 
 function getTokens() {
     var tokens = [];
@@ -105,7 +55,7 @@ $(document).click(function () {
 });
 
 function AllFiltersClear() {
-    var strddlMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].value;
+    //var strddlMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].value;
     var strddlEntry = document.getElementById("ddlEntry").options[document.getElementById("ddlEntry").selectedIndex].value;
     var strddlStartYear = document.getElementById("ddlStartYear").options[document.getElementById("ddlStartYear").selectedIndex].value;
     var strActivity = document.getElementById("ddlActivity").options[document.getElementById("ddlActivity").selectedIndex].value;  //get dropdown menu selection
@@ -118,7 +68,7 @@ function AllFiltersClear() {
 
     var blnClear = false;
 
-    if (((strddlMatrix == "All") | (strddlMatrix == "99")) &
+    if (
                  (strddlEntry == "99") &
                  (strddlStartYear == "99") &
                  (strActivity == "99") &
@@ -183,12 +133,13 @@ define([
               this.dblExpandNum = options.dblExpandNum || 4;
           },
 
-          Phase1: function () {
+		  Phase1: function () {
+
               disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
-              disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
+			  disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
+			  disableOrEnableFormElements("dropdownForm", 'radio', true);  //disable/enable to avoid user clicking query options during pending queries
 
               $(".divOpenStats").prop("onclick", null).off("click");
-
 
               esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
               esriConfig.defaults.io.corsEnabledServers.push("https://sampleserver6.arcgisonline.com")
@@ -203,8 +154,20 @@ define([
               document.getElementById("ImgResultsLoading").style.visibility = "visible";
 
               on(dom.byId("btn_clear"), "click", btn_clear_click);
-              on(dom.byId("btn_TextSummary"), "click", btn_TextSummary_click);
-              on(dom.byId("ddlMatrix"), "change", ddlMatrix_Change);
+              //on(dom.byId("btn_TextSummary"), "click", btn_TextSummary_click);
+
+			  //on(dom.byId("rdo_SRU"), "change", ddlMatrix_Change);
+			  //on(dom.byId("rdo_Public"), "change", ddlMatrix_Change);
+			  //on(dom.byId("rdo_NonSpatial"), "change", ddlMatrix_Change);
+
+			  on(dom.byId("rdo_SRU"), "change", btn_clear_click);
+			  on(dom.byId("rdo_Public"), "change", btn_clear_click);
+			  on(dom.byId("rdo_NonSpatial"), "change", btn_clear_click);
+			  
+
+
+
+			  //on(dom.byId("ddlMatrix"), "change", ddlMatrix_Change);
               on(dom.byId("ddlEntry"), "change", ddlMatrix_Change);
               on(dom.byId("ddlStartYear"), "change", ddlMatrix_Change);
               on(dom.byId("ddlActivity"), "change", ddlMatrix_Change);
@@ -217,8 +180,19 @@ define([
               
 
               var blnShoReportButton = getTokens()['RButton'];
-              if (blnShoReportButton) { document.getElementById("btn_TextSummary").style.display = "inline"; }
-              var blnnoBannter = getTokens()['noBanner'];
+              //if (blnShoReportButton) { document.getElementById("btn_TextSummary").style.display = "inline"; }
+			  var blnnoBannter = getTokens()['noBanner'];
+
+			  var blnAdmin = getTokens()['Admin'];
+			  if (blnAdmin) {
+				  app.Admin = true;
+			  }
+			  else {
+				  app.Admin = false;
+			  }
+
+			  
+
               if (typeof blnnoBannter != 'undefined') {
 
                   document.getElementById("contact1").style.visibility = "hidden";
@@ -235,20 +209,11 @@ define([
               parser.parse();
 
               function ddlMatrix_Change(divTagSource) {
-                  var botContainer = registry.byId("bottomTableContainer");
-
-                  if (botContainer.containerNode.style.height == "") {
-                      var bc = registry.byId('content');
-                      var newSize = 150;
-                      dojo.style(botContainer.domNode, "height", 15 + "%");
-                      bc.resize();
-                  }
-
                   document.getElementById("ImgResultsLoading").style.visibility = "visible";
                   disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
-                  disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
+				  disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
+				  disableOrEnableFormElements("dropdownForm", 'radio', true);  //disable/enable to avoid user clicking query options during pending queries
                   $(".divOpenStats").prop("onclick", null).off("click");
-
 
                   app.map.infoWindow.hide();
                   app.map.graphics.clear();
@@ -256,8 +221,9 @@ define([
                   CED_PP_line.clearSelection();
                   CED_PP_poly.clearSelection();
 
-                  document.getElementById("txtQueryResults").innerHTML = "";
-                  var strddlMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].value;
+				  document.getElementById("txtQueryResults").innerHTML = "";
+			  
+                  //var strddlMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].value;
                   var strddlEntry = document.getElementById("ddlEntry").options[document.getElementById("ddlEntry").selectedIndex].value;
                   var strStartYear = document.getElementById("ddlStartYear").options[document.getElementById("ddlStartYear").selectedIndex].value;
                   var strActivity = document.getElementById("ddlActivity").options[document.getElementById("ddlActivity").selectedIndex].value;  //get dropdown menu selection
@@ -268,7 +234,29 @@ define([
                   var strPopArea = document.getElementById("ddlPopArea").options[document.getElementById("ddlPopArea").selectedIndex].value;  //get dropdown menu selection
                   var strManagUnit = document.getElementById("ddlManagUnit").options[document.getElementById("ddlManagUnit").selectedIndex].value;  //get dropdown menu selection
 
-                  if (((strddlMatrix == "All") | (strddlMatrix == "99")) &
+
+				  var botContainer = registry.byId("bottomTableContainer");
+
+				  if ((app.Admin) | ((strStartYear != "99") & (strSubActivity != "99"))) {
+					  app.blnPopulateFeatureTable = true;
+					  if (botContainer.containerNode.style.height == "") {
+						  var bc = registry.byId('content');
+						  //var newSize = 150;
+
+						  dojo.style(botContainer.domNode, "height", 15 + "%");
+						  bc.resize();
+					  }
+				  } else {
+					  app.blnPopulateFeatureTable = false;
+					  if (botContainer.containerNode.style.height != "") {
+						  var bc = registry.byId('content');
+						  app.pSup.gCED_PP_point4FeatureTable.setDefinitionExpression("OBJECTID < 0");
+						  dojo.style(botContainer.domNode, "height", "");
+						  bc.resize();
+					  }
+				  }
+
+                  if (
                        (strddlEntry == "99") &
                        (strStartYear == "99") &
                        (strActivity == "99") &
@@ -294,7 +282,17 @@ define([
 
                   app.strQueryLabelText = "";
 
-                  var strQuery = "";
+				  var strQuery = "";
+
+				  var bln_rdo_Public = document.getElementById("rdo_Public").checked
+				  var bln_rdo_SRU = document.getElementById("rdo_SRU").checked
+				  if (bln_rdo_Public)
+					  strQuery = "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')";
+				  else if (bln_rdo_SRU)
+					  strQuery = "(SRU_ID IS NOT NULL) AND (SRU_ID > 0)";
+				  else
+					  strQuery = "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact <> 'Spatial Project')";
+
                   if ((app.arrayPrjIDs_fromSpatialSelect != undefined) & (app.arrayPrjIDs_fromSpatialSelect != "")) {
                       strQuery = "project_ID in (";
                       for (var i = 0; i < app.arrayPrjIDs_fromSpatialSelect.length; i++) {
@@ -303,11 +301,11 @@ define([
                       strQuery = strQuery.slice(0, -1) + ")";
                   }
 
-                  if ((strddlMatrix !== "All") & (strddlMatrix !== "99")) {
-                      if (strQuery !== "") { strQuery += " and "; }
-                      strQuery += "typeact = '" + strddlMatrix + "'";
-                      app.strQueryLabelText += "Effort Type = " + document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].text + ", ";
-                  }
+                  //if ((strddlMatrix !== "All") & (strddlMatrix !== "99")) {
+                  //    if (strQuery !== "") { strQuery += " and "; }
+                  //    strQuery += "typeact = '" + strddlMatrix + "'";
+                  //    app.strQueryLabelText += "Effort Type = " + document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].text + ", ";
+                  //}
                   if (strddlEntry !== "99") {
                       if (strQuery !== "") { strQuery += " and "; }
                       strQuery += "Project_Status = " + strddlEntry + "";
@@ -367,13 +365,12 @@ define([
                   }
               }
 
-              function btn_clear_click() {
-                  $('.btn_clear').tooltip("close");
-
+			  function btn_clear_click() {
                   app.arrayPrjIDs_fromSpatialSelect = "";
                   document.getElementById("txt_NoSpatial").style.visibility = 'hidden';
                   disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
-                  disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
+				  disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
+				  disableOrEnableFormElements("dropdownForm", 'radio', true);  //disable/enable to avoid user clicking query options during pending queries
                   $(".divOpenStats").prop("onclick", null).off("click");
 
                   document.getElementById("txtQueryResults").innerHTML = "-";
@@ -389,7 +386,7 @@ define([
                   CED_PP_line.clearSelection();
                   CED_PP_poly.clearSelection();
 
-                  document.getElementById("btn_TextSummary").disabled = true;
+                  //document.getElementById("btn_TextSummary").disabled = true;
 
                   // do not turn off layer visibility here, the checkbox click methods will handle layer visibility
                   var pform = dom.byId("toggleForm");
@@ -414,13 +411,42 @@ define([
                       app.map.setExtent(customExtentAndSR, true);
                   }
 
-                  CED_PP_point.setDefinitionExpression("((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))");
-                  //CED_PP_point4FeatureTable.setDefinitionExpression("");
-                  app.pSup.gCED_PP_point4FeatureTable.setDefinitionExpression("");
-                  app.pSup.gFeatureTable.refresh();
 
-                  CED_PP_line.setDefinitionExpression("");
-                  CED_PP_poly.setDefinitionExpression("");
+				  var bln_rdo_Public = document.getElementById("rdo_Public").checked
+				  var bln_rdo_SRU = document.getElementById("rdo_SRU").checked
+				  if (bln_rdo_Public)
+					  strQuerySRU = "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')";
+				  else if (bln_rdo_SRU)
+					  strQuerySRU = "(SRU_ID IS NOT NULL) AND (SRU_ID > 0)";
+				  else
+					  strQuerySRU = "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact <> 'Spatial Project')";
+
+
+				  CED_PP_point.setDefinitionExpression("((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')) and " + strQuerySRU);
+				  
+				  if (!(app.Admin)) {
+					  //CED_PP_point4FeatureTable.setDefinitionExpression("");
+					  app.blnPopulateFeatureTable = false;
+					  app.pSup.gCED_PP_point4FeatureTable.setDefinitionExpression("OBJECTID < 0");
+					  app.pSup.gFeatureTable.refresh();
+					  var botContainer = registry.byId("bottomTableContainer");  //clear out the visible attribute table
+					  if (botContainer.containerNode.style.height != "") {
+						  var bc = registry.byId('content');
+						  var newSize = 0;
+						  dojo.style(botContainer.domNode, "height", "");
+						  bc.resize();
+					  }
+				  } 
+				  
+				  if (app.blnPopulateFeatureTable == true) {
+					  app.pSup.gCED_PP_point4FeatureTable.setDefinitionExpression(strQuerySRU);
+				  }
+				  app.pSup.gFeatureTable.refresh();
+
+				  $('.btn_clear').tooltip("close");
+
+				  CED_PP_line.setDefinitionExpression(strQuerySRU);
+				  CED_PP_poly.setDefinitionExpression(strQuerySRU);
                   document.getElementById("txtQueryResults").innerHTML = ""; //clear the text results
 
                   CED_PP_poly.show();
@@ -430,7 +456,9 @@ define([
                   app.iNonSpatialTableIndex = 0;  //
                   app.PS_Uniques.divTagSource = null;
                   app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
-                  app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "OBJECTID > 0"); //maybe move this to MH_FeatureCount  //clear111
+				  app.PS_Uniques.qry_SetUniqueValuesOf("Start_Year", "Start_Year", document.getElementById("ddlStartYear"), strQuerySRU); //maybe move this to MH_FeatureCount  //clear111
+				  //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), strQuerySRU); //maybe move this to MH_FeatureCount  //clear111
+				  //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "OBJECTID > 0"); //maybe move this to MH_FeatureCount  //clear111
                   app.strQueryLabelText = "";
                   app.strQueryLabelTextSpatial = "";
               }
@@ -453,15 +481,16 @@ define([
 
               var legendLayers = [];
               CED_PP_point = new FeatureLayer(app.strTheme1_URL + "0", { id: "0", mode: FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], visible: true });
-              CED_PP_point.setDefinitionExpression("((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))");
+			  CED_PP_point.setDefinitionExpression("((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')) and ((SRU_ID IS NULL) OR (SRU_ID = 0))");
               var PSelectionSymbolPoint = new SimpleMarkerSymbol().setColor(new Color([0, 255, 255, 0.4]))
               CED_PP_point.setSelectionSymbol(PSelectionSymbolPoint);
 
               this.gCED_PP_point4FeatureTable = new FeatureLayer(app.strTheme1_URL + "0", {
                   id: "00", mode: FeatureLayer.MODE_ONDEMAND, visible: false,
-                  outFields: ["Project_ID", "SourceFeatureType", "Project_Name", "Project_Status", "Activity", "SubActivity", "Implementing_Party", "Office", "Date_Created", "Last_Updated", "Date_Approved", "Start_Year", "Finish_Year", "TypeAct", "TotalAcres", "TotalMiles", "Prj_Status_Desc"]
+				  outFields: ["Project_ID", "SourceFeatureType", "Project_Name", "Project_Status", "Activity", "SubActivity", "Implementing_Party", "Office", "Date_Created", "Last_Updated", "Date_Approved", "Start_Year", "Finish_Year", "TypeAct", "TotalAcres", "TotalMiles", "Prj_Status_Desc", "post_fire", "SRU_ID"]
               });
               this.gCED_PP_point4FeatureTable.setDefinitionExpression("OBJECTID < 0");
+			  app.blnPopulateFeatureTable = false
 
               CED_PP_line = new FeatureLayer(app.strTheme1_URL + "1", { id: "1", mode: FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], visible: true });
               pSeletionSymbolLine = new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([0, 255, 255]), 3)
@@ -469,6 +498,7 @@ define([
 
               //note: the autoGeneralize only works if the hosted feature layer editing is not enabled on AGOL
               CED_PP_poly = new FeatureLayer(app.strTheme1_URL + "2", { id: "2", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], autoGeneralize: true, visible: true });
+			  CED_PP_poly.setDefinitionExpression("((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')"); 
 
               pSeletionSymbolPoly = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([255, 0, 0]), 2), new Color([0, 255, 255, 0.4]));
               CED_PP_poly.setSelectionSymbol(pSeletionSymbolPoly);
@@ -490,7 +520,7 @@ define([
 
               var pBase_RRP = new FeatureLayer(strBase_URL + "2", { id: "RRP", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
               var pBase_RRB = new FeatureLayer(strBase_URL + "3", { id: "RRB", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              var pBase_Breed = new FeatureLayer(strBase_URL + "4", { id: "Breed", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+			  var pBase_Breed = new FeatureLayer(strBase_URL + "4", { id: "Breed", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
               var pBase_PI = new FeatureLayer(strBase_URL + "5", { id: "PI", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
               var pBase_Eco = new FeatureLayer(strBase_URL + "6", { id: "Eco", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
               var pBase_BLMHMA = new FeatureLayer(strBase_URL + "7", { id: "BLMMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
@@ -641,10 +671,20 @@ define([
                   "featureLayer": this.gCED_PP_point4FeatureTable,
                   "outFields": [
                     "Project_ID", "TypeAct", "Prj_Status_Desc", "Project_Name", "Activity", "SubActivity", "Implementing_Party", "Office", "Date_Created",
-                    "Last_Updated", "Date_Approved", "Start_Year", "Finish_Year", "TotalAcres", "TotalMiles", "SourceFeatureType"
-                  ],
+					  "Last_Updated", "Date_Approved", "Start_Year", "Finish_Year", "TotalAcres", "TotalMiles", "post_fire","SRU_ID", "SourceFeatureType"
+				  ],
+				  dateOptions: {
+					  // set date options at the feature table level 
+					  // all date fields will adhere this 
+					  datePattern: "y MM dd"
+				  },
                   fieldInfos: [
-                    { name: 'Project_ID', alias: 'ID'},
+					{
+						  name: 'Project_ID', alias: 'ID',
+						  	format: {
+							  template: "${value}"
+						  }
+					},
                     { name: 'TypeAct', alias: 'Project or Plan', },
                     { name: 'Prj_Status_Desc', alias: 'Implementation Status', },
                     { name: 'Project_Name', alias: 'Effort Name', },
@@ -652,13 +692,31 @@ define([
                     { name: 'SubActivity', alias: 'Sub Activity', },
                     { name: 'Implementing_Party', alias: 'Implementing Party', },
                     { name: 'Office', alias: 'Office', },
-                    { name: 'Date_Created', alias: 'Date Recorded', },
-                    { name: 'Last_Updated', alias: 'Recorded Update', },
+					{ name: 'Date_Created', alias: 'Date Recorded', },
+					{
+						  name: 'Last_Updated', alias: 'Recorded Update',
+						  format: {
+							  template: "${value}"
+						  }
+					},
                     { name: 'Date_Approved', alias: 'Date Approved', },
-                    { name: 'Start_Year', alias: 'Start Year', },
-                    { name: 'Finish_Year', alias: 'Finish Year', },
-                    { name: 'TotalAcres', alias: 'Acres', },
-                    { name: 'TotalMiles', alias: 'Miles', },
+					{
+						  name: 'Start_Year', alias: 'Start Year',
+						  format: {
+							  template: "${value}"
+						  }
+					  },
+					{ name: 'Finish_Year', alias: 'Finish Year', 
+					  format: {
+						  template: "${value}"
+						  }
+					},
+					  {
+						  name: 'TotalAcres', alias: 'Acres',
+					  },
+					{ name: 'TotalMiles', alias: 'Miles', },
+					{ name: 'post_fire', alias: 'Post Fire Effort', },
+     				{ name: 'SRU_ID', alias: 'SRU ID', },
                     { name: 'SourceFeatureType', alias: 'Source', }
                   ],
                   "map": map
@@ -707,13 +765,39 @@ define([
                       strQuery2 = strQuery2.slice(0, -1) + ")";
                       this.strFinalQuery += strQuery2;
                       
-                      if (app.PSQ == null) {
-                          app.PSQ = new PS_MeasSiteSearch4Definition({
-                              strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
-                              strState: "", strPopArea: "", strManagUnit: "", strQuerySaved: strQuery2, divTagSource: document.getElementById("ddlMatrix"),
-                              pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line
-                          }); 
-                      }
+                      //if (app.PSQ == null) {
+                      //    app.PSQ = new PS_MeasSiteSearch4Definition({
+                      //        strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
+                      //        strState: "", strPopArea: "", strManagUnit: "", strQuerySaved: strQuery2, divTagSource: document.getElementById("ddlMatrix"),
+                      //        pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line
+                      //    }); 
+                      //}
+					  if (app.PSQ == null) {
+						  app.PSQ = new PS_MeasSiteSearch4Definition({
+							  strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
+							  strState: "", strPopArea: "", strManagUnit: "", strQuerySaved: strQuery2, divTagSource: document.getElementById("ddlStartYear"),
+							  pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line
+						  });
+					  }
+
+
+					  if (!(app.Admin)) {
+						  //CED_PP_point4FeatureTable.setDefinitionExpression("");
+						  app.blnPopulateFeatureTable = false;
+						  app.pSup.gCED_PP_point4FeatureTable.setDefinitionExpression("OBJECTID < 0");
+						  app.pSup.gFeatureTable.refresh();
+						  var botContainer = registry.byId("bottomTableContainer");  //clear out the visible attribute table
+						  if (botContainer.containerNode.style.height != "") {
+							  var bc = registry.byId('content');
+							  var newSize = 0;
+							  dojo.style(botContainer.domNode, "height", "");
+							  bc.resize();
+						  }
+					  }
+					  if (app.blnPopulateFeatureTable == true) {
+						  app.pSup.gCED_PP_point4FeatureTable.setDefinitionExpression(strQuery2);
+					  }
+					  app.pSup.gFeatureTable.refresh();
 
                       app.PSQ.ExecutetheDerivedQuery(strQuery2, null);
                   }
@@ -788,7 +872,7 @@ define([
               });
               on(this.gFeatureTable, "load", function (evt) {  //resize the column widths
                   var pGrid = this.grid;
-                  var arrayColWidths = [55, 145, 145, 380, 380, 360, 230, 290, 150, 150, 150, 80, 80, 60, 100, 100];
+				  var arrayColWidths = [55, 145, 145, 380, 380, 360, 230, 290, 150, 150, 150, 80, 80, 60, 100, 150, 100, 100];
                   var iTotalWidth = 0;
                   dojo.forEach(arrayColWidths, function (iWidth) {
                       iTotalWidth += iWidth;
@@ -802,7 +886,17 @@ define([
                   });
                   pGrid.bodyNode.scrollWidth = iTotalWidth;
               });
-              
+
+			  on(this.gFeatureTable, "error", function (evt) {  //resize the column widths
+				  console.log("Failed to get stat results due to an error: ", err);
+				  $(function () {
+					  $("#dialogWarning1").dialog("open");
+				  });
+
+
+			  });
+
+
               on(this.gFeatureTable, "row-select", function (evt) {  //resize the column widths
                   app.map.graphics.clear();
                   CED_PP_point.clearSelection();
@@ -985,7 +1079,11 @@ define([
               app.iNonSpatialTableIndex = 0;  //these 3 lines populate the list values
               app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, divTagSource: null });
               app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
-              app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "OBJECTID > 0"); //startup
+              //app.PS_Uniques.qry_SetUniqueValuesOf("Start_Year", "Start_Year", document.getElementById("ddlMatrix"), "OBJECTID > 0"); //startup
+			  //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')"); 
+			  app.PS_Uniques.qry_SetUniqueValuesOf("Start_Year", "Start_Year", document.getElementById("ddlStartYear"), "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')"); 
+			  
+
 
               if (app.map.loaded) {
                   mapLoaded();
@@ -1016,10 +1114,15 @@ define([
                   CED_PP_line.clearSelection();
                   CED_PP_poly.clearSelection();
 
-                  var strMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].text;  //get dropdown menu selection
-                  var strManagUnit = document.getElementById("ddlManagUnit").options[document.getElementById("ddlManagUnit").selectedIndex].value;  //get dropdown menu selection
-                  app.PSQS = new PS_ReturnQuerySt({ strURL: app.strTheme1_URL, strMatrix: strMatrix, strManagUnit: strManagUnit, SIDs: null, iNonSpatialTableIndex: null }); // instantiate the Seat Geek Search class
-                  var psqs_strQueryString = app.PSQS.returnQS();
+
+				  //var strMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].text;  //get dropdown menu selection
+				  var iMatrix = document.getElementById("ddlStartYear").options[document.getElementById("ddlStartYear").selectedIndex].text;  //get dropdown menu selection
+
+				  var strManagUnit = document.getElementById("ddlManagUnit").options[document.getElementById("ddlManagUnit").selectedIndex].value;  //get dropdown menu selection
+				  //app.PSQS = new PS_ReturnQuerySt({ strURL: app.strTheme1_URL, strMatrix: strMatrix, strManagUnit: strManagUnit, SIDs: null, iNonSpatialTableIndex: null }); // instantiate the Seat Geek Search class
+				  app.PSQS = new PS_ReturnQuerySt({ strURL: app.strTheme1_URL, iMatrix: iMatrix, strManagUnit: strManagUnit, SIDs: null, iNonSpatialTableIndex: null }); // instantiate the Seat Geek Search class
+
+				  var psqs_strQueryString = app.PSQS.returnQS();
 
                   app.map.infoWindow.hide();            //var strquery4id = "Contaminant LIKE '%Mercury%'";
                   app.pPS_Identify = new PS_Identify({
@@ -1060,7 +1163,7 @@ define([
 
                   RunQueryArgs(strA_TypeAct, strA_entry_type, strA_activity, strA_Subactivity, strA_implementing_party, strA_State, strA_POPArea, strA_Managementunit, strA_office);
               } else {
-                  document.getElementById("btn_TextSummary").disabled = true;
+                  //document.getElementById("btn_TextSummary").disabled = true;
               }
 
 
@@ -1074,9 +1177,12 @@ define([
                       }
                   });
 
-                  var strQuery = ""
+				  var strQuery = ""
+
+				  strQuery = "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')"
+
                   if (strA_TypeAct) {
-                      strQuery = "(ta_id in (" + strA_TypeAct + "))";
+                      strQuery += "(ta_id in (" + strA_TypeAct + "))";
                   }
                   if (strA_entry_type) {
                       if (strQuery !== "") { strQuery += " and "; }
@@ -1101,7 +1207,7 @@ define([
 
                   app.PSQ = new PS_MeasSiteSearch4Definition({
                       strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
-                      strState: strA_State, strPopArea: strA_POPArea, strManagUnit: strA_Managementunit, strQuerySaved: strQuery, divTagSource: document.getElementById("ddlMatrix"),
+					  strState: strA_State, strPopArea: strA_POPArea, strManagUnit: strA_Managementunit, strQuerySaved: strQuery, divTagSource: document.getElementById("ddlStartYear"),
                       pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line
                   }); // instantiate the class
 
@@ -1109,11 +1215,13 @@ define([
                       var PSQResults = app.PSQ.qry_Non_SpatialTable("", null, "ST_ID");
                       PSQResults.then(PSQsearchSucceeded, PSQsearchFailed);
                   } else {  // handling arguments passed
-                      app.PSQ.ExecutetheDerivedQuery(strQuery, document.getElementById("ddlMatrix"));
+					  app.PSQ.ExecutetheDerivedQuery(strQuery, document.getElementById("ddlStartYear"));
                   }
                   app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
                   app.PS_Uniques.divTagSource = null;
-                  app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), CED_PP_point.getDefinitionExpression()); //args
+				  //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), CED_PP_point.getDefinitionExpression()); //args
+				  app.PS_Uniques.qry_SetUniqueValuesOf("Start_Year", "Start_Year", document.getElementById("ddlStartYear"), CED_PP_point.getDefinitionExpression()); //args
+				  
 
               }
 
@@ -1123,6 +1231,7 @@ define([
 
               function PSQsearchFailed(err) { document.getElementById("txtQueryResults").innerHTML = " Search error " + err.toString(); }
           },
+
 
 
           openCEDPSummary: function () {

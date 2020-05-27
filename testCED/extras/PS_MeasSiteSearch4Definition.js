@@ -115,7 +115,8 @@ define([
             app.iNonSpatialTableIndex = 0;  //
 
             app.PS_Uniques.divTagSource = divTagSource;    //this may be redundant
-            app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), strQuery);//dropdown change
+            //app.PS_Uniques.qry_SetUniqueValuesOf("Start_Year", "Start_Year", document.getElementById("ddlMatrix"), strQuery);//dropdown change
+			app.PS_Uniques.qry_SetUniqueValuesOf("Start_Year", "Start_Year", document.getElementById("ddlStartYear"), strQuery);//dropdown change
 
             var blnQSSet = app.pSetQS.setQS(strQuery);  //this sets the definition query on the layers
 

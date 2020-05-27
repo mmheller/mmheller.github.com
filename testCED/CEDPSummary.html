@@ -11,8 +11,8 @@ Date:        Oct 2014, Updated Oct 2018-->
     <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
     <title>Greater Sage Grouse: Conservation Efforts</title>
-    <link rel="stylesheet" href="https://js.arcgis.com/3.27/dijit/themes//tundra/tundra.css" />
-    <link rel="stylesheet" href="https://js.arcgis.com/3.27/esri/css/esri.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.32/dijit/themes//tundra/tundra.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.32/esri/css/esri.css" />
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="Styles/panelMapAndReport.css" />
@@ -53,7 +53,7 @@ Date:        Oct 2014, Updated Oct 2018-->
     <!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/javascript/grsgmap/extras' %}"} };</script>-->
     <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>   
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script type="text/javascript" src="https://js.arcgis.com/3.27/"></script>
+    <script type="text/javascript" src="https://js.arcgis.com/3.32/"></script>
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -194,9 +194,10 @@ Date:        Oct 2014, Updated Oct 2018-->
 </head>
    
 <body>
-    <div id="dialog" title="CED Notice!">
-        <p>The CED is in a period of data collection. <br /><br />If generating report(s), beware the summaries, values, and figures are to be considered DRAFT and PROVISIONAL until further notice.</p>
-    </div>
+	<div id="dialog" title="CED Notice!">
+		<p>The CED is in the middle of a large data collection period and the CED Team respectfully requests that any queries/reports generated from the CED's interactive map/reporting tool not be cited until we have had an opportunity to conduct a final QA/QC. <br /><br />If generating report(s), beware the summaries, values, and figures are to be considered DRAFT and PROVISIONAL until further notice.</p>
+		<!--<p>The CED is in a period of data collection. <br /><br />If generating report(s), beware the summaries, values, and figures are to be considered DRAFT and PROVISIONAL until further notice.</p>-->
+	</div>
     
     <div id="dialogWarning1" title="CED Data Retreival Error!">
         <p>The CED is currently unable to connect to our data repository, ArcGIS Online.<br /><br />Please try back again later. If the problem persists, please contact the CED team for additional support at fw1sagegrouseced@fws.gov</p>
