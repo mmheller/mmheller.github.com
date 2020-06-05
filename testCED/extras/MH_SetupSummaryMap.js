@@ -17,30 +17,30 @@ $(function () {
     $("#dialog").dialog();
 });
 
-function AllFiltersClear() {
-    //var strddlMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].value;
-    var strddlEntry = document.getElementById("ddlEntry").options[document.getElementById("ddlEntry").selectedIndex].value;
-    var strActivity = document.getElementById("ddlActivity").options[document.getElementById("ddlActivity").selectedIndex].value;  //get dropdown menu selection
-    var strImpParty = document.getElementById("ddlImpParty").options[document.getElementById("ddlImpParty").selectedIndex].value;  //get dropdown menu selection
-    var strOffice = document.getElementById("ddlOffice").options[document.getElementById("ddlOffice").selectedIndex].value;  //get dropdown menu selection
-    var strState = document.getElementById("ddlState").options[document.getElementById("ddlState").selectedIndex].value;  //get dropdown menu selection
-    var strPopArea = document.getElementById("ddlPopArea").options[document.getElementById("ddlPopArea").selectedIndex].value;  //get dropdown menu selection
-    var strManagUnit = document.getElementById("ddlManagUnit").options[document.getElementById("ddlManagUnit").selectedIndex].value;  //get dropdown menu selection
+//function AllFiltersClear() {
+//    //var strddlMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].value;
+//    var strddlEntry = document.getElementById("ddlEntry").options[document.getElementById("ddlEntry").selectedIndex].value;
+//    var strActivity = document.getElementById("ddlActivity").options[document.getElementById("ddlActivity").selectedIndex].value;  //get dropdown menu selection
+//    var strImpParty = document.getElementById("ddlImpParty").options[document.getElementById("ddlImpParty").selectedIndex].value;  //get dropdown menu selection
+//    var strOffice = document.getElementById("ddlOffice").options[document.getElementById("ddlOffice").selectedIndex].value;  //get dropdown menu selection
+//    var strState = document.getElementById("ddlState").options[document.getElementById("ddlState").selectedIndex].value;  //get dropdown menu selection
+//    var strPopArea = document.getElementById("ddlPopArea").options[document.getElementById("ddlPopArea").selectedIndex].value;  //get dropdown menu selection
+//    var strManagUnit = document.getElementById("ddlManagUnit").options[document.getElementById("ddlManagUnit").selectedIndex].value;  //get dropdown menu selection
 
-    var blnClear = false;
+//    var blnClear = false;
 
-    if (
-                 (strddlEntry == "99") &
-                 (strActivity == "99") &
-                 (strImpParty == "99") &
-                 (strOffice == "99") &
-                 (strState = "99") &
-                 (strPopArea = "99") &
-                 (strManagUnit = "99")) {
-        blnClear = true;
-    }
-    return blnClear;
-}
+//    if (
+//                 (strddlEntry == "99") &
+//                 (strActivity == "99") &
+//                 (strImpParty == "99") &
+//                 (strOffice == "99") &
+//                 (strState = "99") &
+//                 (strPopArea = "99") &
+//                 (strManagUnit = "99")) {
+//        blnClear = true;
+//    }
+//    return blnClear;
+//}
 
 define([
   "dojo/_base/declare",

@@ -219,8 +219,11 @@ define([
                         chart_divBASE64.style.display = "none";
                     });
                     pChart1.draw(dataTable, options);
-                }
-            }
+				}
+			}
+
+			var strBasemap = localStorage.getItem("ls_strBasemap");  ////setting the basemap here is a fix for app.map.on("update-end" not working, possibly due to charting timing issue
+			app.basemapGallerySummary.select(strBasemap);  ////setting the basemap here is a fix for app.map.on("update-end" not working, possibly due to charting timing issue
         },
     }
     );

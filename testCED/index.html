@@ -150,7 +150,7 @@ Date:        Oct 2014, Updated Oct 2018-->
 					<input type="radio" id="rdo_Public" name="gender" value="Public" checked="checked" disabled>
 					<label for="rdo_Public">Spatially Explicit</label><br>
 					<input type="radio" id="rdo_SRU" name="gender" value="SRU" disabled>
-					<label for="rdo_SRU">Spatialy Obsured</label><br>
+					<label for="rdo_SRU">Spatialy Obscured</label><br>
 					<input type="radio" id="rdo_NonSpatial" name="gender" value="SRU" disabled>
 					<label for="rdo_NonSpatial">Non-Spatial</label><br><br>
 
@@ -159,18 +159,18 @@ Date:        Oct 2014, Updated Oct 2018-->
 		<option value="All">All</option>
 	</select><br /><br />-->
 
-					<font size="2" title="Start Year represents the year of an effort start date."><u>Start Year:</u> *REQUIRED FOR RESULTS</font><br />
+																	   <font size="2" title="Start Year represents the year of an effort start date."><u>Start Year:</u></font> <font size="2" color="red">*REQUIRED FOR RESULTS</font><br />
 					<select id="ddlStartYear" class="selectClass" disabled>
+						<option value="99">All</option>
+					</select><br /><br />
+
+					<font size="2" title="SubActivity filter options include spatial project, non-spatial projects, and non-spatial plans.  SubActivity relates directly to the Activity query filter/data."><u>SubActivity:</u></font> <font size="2" color="red">*REQUIRED FOR RESULTS</font><br />
+					<select id="ddlSubActivity" class="selectClass" disabled>
 						<option value="99">All</option>
 					</select><br /><br />
 
 					<font size="2" title="Activity filter options include spatial project, non-spatial projects, and non-spatial plans.  Activity relates directly to the SubActivity filters/data."><u>Activity:</u></font><br />
 					<select id="ddlActivity" class="selectClass" disabled>
-						<option value="99">All</option>
-					</select><br /><br />
-
-					<font size="2" title="SubActivity filter options include spatial project, non-spatial projects, and non-spatial plans.  SubActivity relates directly to the Activity query filter/data."><u>SubActivity:</u> *REQUIRED FOR RESULTS</font><br />
-					<select id="ddlSubActivity" class="selectClass" disabled>
 						<option value="99">All</option>
 					</select><br /><br />
 
@@ -269,7 +269,7 @@ Date:        Oct 2014, Updated Oct 2018-->
 					<!--<img src="{% static 'ced_main/images/grsgmap/report.png' %}" alt="Click for summary report" height="22px" width="19px" />-->
 					<img src="images/report.png" alt="Click for summary report" height="22px" width="19px" />
 				</div>
-				<div id="txtReport" title="Click this link for the comprehensive CED summary report.  The summary report includes various report summaries, charts, map, and 'Print Report to PDF' options">
+				<div id="txtReport" title="Click this link for the comprehensive CED summary report.  The summary report includes various report summaries, charts, map, and 'Print Report to PDF' options  -----  Note: year filter and subactivity filter selections required for Summary Report.">
 					<b><u><I><font size="3px" color="white">Click</font> <font size="3px" color="blue">here</font> <font size="3px" color="white">for summary report...</font></I></u></b>
 				</div>
 			</div>

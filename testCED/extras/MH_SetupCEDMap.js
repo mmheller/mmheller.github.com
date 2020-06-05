@@ -112,14 +112,15 @@ define([
   "esri/layers/LabelLayer",
   "esri/symbols/TextSymbol",
   "dijit/registry", "esri/geometry/webMercatorUtils",
-  "extras/MH_FeatureCount", "extras/PS_ReturnQuerySt", "extras/PS_MeasSiteSearch_SetVisableQueryDef", "extras/PS_PopUniqueQueryInterfaceValues", "dojo/parser"
+	"extras/MH_FeatureCount", "extras/PS_ReturnQuerySt", "extras/PS_MeasSiteSearch_SetVisableQueryDef", "extras/PS_PopUniqueQueryInterfaceValues", "extras/MH_SRU_SumAndMap",
+	"dojo/parser"
 
   ], function (
             Draw, Graphic, PS_MeasSiteSearch4Definition, declare, lang, esriRequest, all, arrayUtils, urlUtils, FeatureLayer, FeatureTable,
             SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, graphicsUtils, Query, All,
             ArcGISDynamicMapServiceLayer, CheckBox, Legend, Scalebar, Geocoder, dom, domClass,
             mouse, on, BasemapGallery, Map, PS_Identify, Color, SimpleRenderer, LabelLayer, TextSymbol, registry, webMercatorUtils,
-            MH_FeatureCount, PS_ReturnQuerySt, PS_MeasSiteSearch_SetVisableQueryDef, PS_PopUniqueQueryInterfaceValues, parser
+		MH_FeatureCount, PS_ReturnQuerySt, PS_MeasSiteSearch_SetVisableQueryDef, PS_PopUniqueQueryInterfaceValues, MH_SRU_SumAndMap, parser
 ) {
 
       return declare([], {
@@ -216,7 +217,8 @@ define([
                   $(".divOpenStats").prop("onclick", null).off("click");
 
                   app.map.infoWindow.hide();
-                  app.map.graphics.clear();
+				  app.map.graphics.clear();
+				  app.MH_SRUsumMap.gl.clear();
                   CED_PP_point.clearSelection();
                   CED_PP_line.clearSelection();
                   CED_PP_poly.clearSelection();
@@ -286,10 +288,14 @@ define([
 
 				  var bln_rdo_Public = document.getElementById("rdo_Public").checked
 				  var bln_rdo_SRU = document.getElementById("rdo_SRU").checked
-				  if (bln_rdo_Public)
+				  if (bln_rdo_Public) {
 					  strQuery = "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')";
-				  else if (bln_rdo_SRU)
+
+				  }
+				  else if (bln_rdo_SRU) {
 					  strQuery = "(SRU_ID IS NOT NULL) AND (SRU_ID > 0)";
+					  CED_PP_poly.setRenderer(app.rendererSRU);
+				  }
 				  else
 					  strQuery = "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact <> 'Spatial Project')";
 
@@ -300,6 +306,8 @@ define([
                       }
                       strQuery = strQuery.slice(0, -1) + ")";
                   }
+
+				  app.strQueryLabelText += strQuery + " ";
 
                   //if ((strddlMatrix !== "All") & (strddlMatrix !== "99")) {
                   //    if (strQuery !== "") { strQuery += " and "; }
@@ -362,10 +370,17 @@ define([
 
                   } else {  // if not filters realting to related table selected then execute the queries
                       app.PSQ.ExecutetheDerivedQuery(strQuery, divTagSource);
-                  }
+				  }
+				  
+				  if(bln_rdo_SRU) {
+					  app.MH_SRUsumMap.startSRUSum4Map(strQuery, undefined);
+				  }
+
+
               }
 
 			  function btn_clear_click() {
+				  app.MH_SRUsumMap.gl.clear();
                   app.arrayPrjIDs_fromSpatialSelect = "";
                   document.getElementById("txt_NoSpatial").style.visibility = 'hidden';
                   disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
@@ -381,7 +396,8 @@ define([
 
                   document.getElementById("ImgResultsLoading").style.visibility = "visible";
                   app.map.infoWindow.hide();
-                  app.map.graphics.clear();
+				  app.map.graphics.clear();
+
                   CED_PP_point.clearSelection();
                   CED_PP_line.clearSelection();
                   CED_PP_poly.clearSelection();
@@ -414,10 +430,14 @@ define([
 
 				  var bln_rdo_Public = document.getElementById("rdo_Public").checked
 				  var bln_rdo_SRU = document.getElementById("rdo_SRU").checked
-				  if (bln_rdo_Public)
+				  if (bln_rdo_Public) {
 					  strQuerySRU = "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')";
-				  else if (bln_rdo_SRU)
+					  CED_PP_poly.setRenderer(app.PolyRendererSpatialyExplicit);
+				  }
+				  else if (bln_rdo_SRU) {
 					  strQuerySRU = "(SRU_ID IS NOT NULL) AND (SRU_ID > 0)";
+					  CED_PP_poly.setRenderer(app.rendererSRU);
+				  }
 				  else
 					  strQuerySRU = "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact <> 'Spatial Project')";
 
@@ -460,8 +480,12 @@ define([
 				  //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), strQuerySRU); //maybe move this to MH_FeatureCount  //clear111
 				  //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "OBJECTID > 0"); //maybe move this to MH_FeatureCount  //clear111
                   app.strQueryLabelText = "";
-                  app.strQueryLabelTextSpatial = "";
-              }
+				  app.strQueryLabelTextSpatial = "";
+
+				  if (bln_rdo_SRU) {
+					  app.MH_SRUsumMap.startSRUSum4Map(strQuerySRU, undefined);
+				  }
+			  }
           },
 
 
@@ -500,6 +524,20 @@ define([
               CED_PP_poly = new FeatureLayer(app.strTheme1_URL + "2", { id: "2", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], autoGeneralize: true, visible: true });
 			  CED_PP_poly.setDefinitionExpression("((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')"); 
 
+
+			  var sfsSRU = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+				  new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+					  new Color([0, 0, 0]), 3), new Color([200, 200, 155, 0.8])
+			  );
+			  app.rendererSRU = new SimpleRenderer(sfsSRU);
+			  
+
+			  CED_PP_poly.on('load', function (evt) {
+				  if (app.PolyRendererSpatialyExplicit == undefined) {
+					  app.PolyRendererSpatialyExplicit = evt.target.renderer;
+				  }
+			  });  
+			  
               pSeletionSymbolPoly = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([255, 0, 0]), 2), new Color([0, 255, 255, 0.4]));
               CED_PP_poly.setSelectionSymbol(pSeletionSymbolPoly);
 
@@ -798,8 +836,14 @@ define([
 						  app.pSup.gCED_PP_point4FeatureTable.setDefinitionExpression(strQuery2);
 					  }
 					  app.pSup.gFeatureTable.refresh();
+					  
+					  app.PSQ.ExecutetheDerivedQuery(strQuery2, null);
 
-                      app.PSQ.ExecutetheDerivedQuery(strQuery2, null);
+					  var bln_rdo_SRU = document.getElementById("rdo_SRU").checked
+					  if (bln_rdo_SRU) {
+						  app.MH_SRUsumMap.startSRUSum4Map(strQuery2, undefined);
+					  }
+
                   }
               }
 
@@ -1083,7 +1127,7 @@ define([
 			  //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')"); 
 			  app.PS_Uniques.qry_SetUniqueValuesOf("Start_Year", "Start_Year", document.getElementById("ddlStartYear"), "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')"); 
 			  
-
+			  app.MH_SRUsumMap = new MH_SRU_SumAndMap({ pCED_PP_poly: CED_PP_poly, pCED_PP_point: CED_PP_point });
 
               if (app.map.loaded) {
                   mapLoaded();
@@ -1110,6 +1154,7 @@ define([
               function executeIdeintifyQueries(e) {
                   app.map.graphics.clear();
 
+
                   CED_PP_point.clearSelection();
                   CED_PP_line.clearSelection();
                   CED_PP_poly.clearSelection();
@@ -1121,6 +1166,7 @@ define([
 				  var strManagUnit = document.getElementById("ddlManagUnit").options[document.getElementById("ddlManagUnit").selectedIndex].value;  //get dropdown menu selection
 				  //app.PSQS = new PS_ReturnQuerySt({ strURL: app.strTheme1_URL, strMatrix: strMatrix, strManagUnit: strManagUnit, SIDs: null, iNonSpatialTableIndex: null }); // instantiate the Seat Geek Search class
 				  app.PSQS = new PS_ReturnQuerySt({ strURL: app.strTheme1_URL, iMatrix: iMatrix, strManagUnit: strManagUnit, SIDs: null, iNonSpatialTableIndex: null }); // instantiate the Seat Geek Search class
+
 
 				  var psqs_strQueryString = app.PSQS.returnQS();
 

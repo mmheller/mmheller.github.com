@@ -437,16 +437,18 @@ define([
 						disableOrEnableFormElements("dropdownForm", 'button', false, document);  //disable/enable to avoid user clicking query options during pending queries
 						disableOrEnableFormElements("dropdownForm", 'radio', false, document);  //disable/enable to avoid user clicking query options during pending queries
 
-						app.pSup.gFeatureTable.refresh(); //may have to rely on refreshing table here due to table refresh issues
-
-						$(function () {
-                            $('.divOpenStats').click(function () {
-                                app.pSup.openCEDPSummary();
-                            });
-                        });
-
-						app.map.graphics.clear();
-
+						if (this.app.gQuerySummary.m_arrayQuery.length < 5) {  //no need to refesh the table or clear graphics if opening the summary page
+							app.pSup.gFeatureTable.refresh(); //may have to rely on refreshing table here due to table refresh issues
+							if (app.blnPopulateFeatureTable) {
+								$(function () {
+									$('.divOpenStats').click(function () {
+										//<b><u><I><font size="3px" color="grey">Click</font> <font size="3px" color="blue">here</font> <font size="3px" color="white">for summary report...</font></I></u></b>
+										app.pSup.openCEDPSummary();
+									});
+								});
+							}
+							app.map.graphics.clear();
+						}
                     }
                     if (arrayQuery.length > 3) {
 
