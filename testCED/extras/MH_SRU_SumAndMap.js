@@ -100,7 +100,7 @@ define([
 							//	name: strSRUQuery
 							//});
 							//app.MH_SRUsumMap.gl.add(g);
-							var t = new TextSymbol(iSum2.toString() + " efforts", app.MH_SRUsumMap.font, new Color([0, 0, 0]));
+							var t = new TextSymbol(iSum2.toString() + " effort(s)", app.MH_SRUsumMap.font, new Color([0, 0, 0]));
 							var g2 = new Graphic(pPoint, t);
 							app.MH_SRUsumMap.gl.add(g2);
 						}
