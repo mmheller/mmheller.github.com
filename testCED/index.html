@@ -149,17 +149,22 @@ Date:        Oct 2014, Updated Oct 2018-->
 
 					<input type="radio" id="rdo_Public" name="gender" value="Public" checked="checked" disabled>
 					<label for="rdo_Public">Spatially Explicit</label><br>
+					<div id="txtPublicSubText" style="font-size:12px;">Primarily public lands with some private included</div>
+					<br>
 					<input type="radio" id="rdo_SRU" name="gender" value="SRU" disabled>
-					<label for="rdo_SRU">Spatialy Obscured</label><br>
+					<label for="rdo_SRU">Sagebrush Reporting Units (SRU)</label><br>
+					<div id="txtSRUSubText" style="font-size:12px;">Primarily private obscured to protect land owner location</div>
+					<br>
 					<input type="radio" id="rdo_NonSpatial" name="gender" value="SRU" disabled>
-					<label for="rdo_NonSpatial">Non-Spatial</label><br><br>
-
+					<label for="rdo_NonSpatial">Non-Spatial</label>
+					<div id="txtNonSpatialSubText" style="font-size:12px;">Both plans and actions with no spatial mapping</div>
+					<br>
 					<!--<font size="2" title="Non-Spatial Projects or Non-Spatial Plans selections will provice results in the table and summaries, however NO efforts will show in the map"><u>Project or Plan:</u></font><br />
 	<select id="ddlMatrix" class="selectClass" disabled>
 		<option value="All">All</option>
 	</select><br /><br />-->
 
-																	   <font size="2" title="Start Year represents the year of an effort start date."><u>Start Year:</u></font> <font size="2" color="red">*PLEASE MAKE SELECTION FOR RESULTS</font><br />
+					<font size="2" title="Start Year represents the year of an effort start date."><u>Start Year:</u></font> <font size="2" color="red">*PLEASE MAKE SELECTION FOR RESULTS</font><br />
 					<select id="ddlStartYear" class="selectClass" disabled>
 						<option value="99">All</option>
 					</select><br /><br />
