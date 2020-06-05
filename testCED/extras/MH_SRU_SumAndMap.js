@@ -28,7 +28,7 @@ define([
 			startSRUSum4Map: function (strQuery, pGeometry) {
 				this.gl.clear();
 
-				this.font = new Font("20px", Font.STYLE_NORMAL, Font.VARIANT_NORMAL, Font.WEIGHT_BOLDER);
+				this.font = new Font("15px", Font.STYLE_NORMAL, Font.VARIANT_NORMAL, Font.WEIGHT_BOLDER, "Arial");
 				this.s = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 20,
 					new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
 						new Color([255, 0, 0]), 1),
@@ -100,7 +100,7 @@ define([
 							//	name: strSRUQuery
 							//});
 							//app.MH_SRUsumMap.gl.add(g);
-							var t = new TextSymbol(iSum2.toString(), app.MH_SRUsumMap.font, new Color([0, 0, 0]));
+							var t = new TextSymbol(iSum2.toString() + " efforts", app.MH_SRUsumMap.font, new Color([0, 0, 0]));
 							var g2 = new Graphic(pPoint, t);
 							app.MH_SRUsumMap.gl.add(g2);
 						}
