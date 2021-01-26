@@ -219,7 +219,7 @@ define([
                     pGraphicsLayer.show();
                 }
             });
-
+			console.log("3");
 
             if (typeof app.iCEDID != 'undefined') {
                 //app.dblExpandNum = 3.75;
@@ -227,7 +227,7 @@ define([
                 app.pSup = new MH_Zoom2FeatureLayers({}); // instantiate the class
                 app.pSup.qry_Zoom2FeatureLayerExtent(app.pSrcFeatureLayer);
             }
-            
+			console.log("4");
             if (app.map.loaded) {
                 mapLoaded();
             } else {
