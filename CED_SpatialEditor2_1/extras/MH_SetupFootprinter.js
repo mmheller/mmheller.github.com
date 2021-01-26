@@ -156,7 +156,7 @@ define([
 				app.pMZGraphicsLayer = new esri.layers.GraphicsLayer();
 				app.map.addLayer(app.pMZGraphicsLayer);
 			}
-
+			console.log("1.01");
             if (typeof app.iCEDID != 'undefined') {
                 app.pSrcFeatureLayer.setDefinitionExpression("(project_id = " + app.iCEDID + ")");
             }
