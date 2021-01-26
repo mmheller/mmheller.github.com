@@ -170,7 +170,8 @@ define([
 				app.strSRUURL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/SRU_GUSG_Map/FeatureServer/0";
 				SRUs_poly = new FeatureLayer(app.strSRUURL, { id: "3", "opacity": 0.2, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: false });
 				console.log("1.4");
-				app.map.addLayers([app.pSrcFeatureLayer, SRUs_poly, CED_PP_poly]);
+				app.map.addLayers([app.pSrcFeatureLayer]);
+				//app.map.addLayers([app.pSrcFeatureLayer, SRUs_poly, CED_PP_poly]);
 				console.log("1.5");
 			} else {
 				var strBase_URL = "https://utility.arcgis.com/usrsvcs/servers/5d5fc053dd7e4de4b9765f7a6b6f1f61/rest/services/CEDfrontpage_map_v9_Restrict/FeatureServer/";
