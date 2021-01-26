@@ -6,7 +6,7 @@ define([
     "extras/MH_LayerEditing",
     "extras/MH_Zoom2FeatureLayersFootprinter",
     "esri/tasks/GeometryService", "esri/tasks/ProjectParameters", "esri/SpatialReference", "esri/graphic", "esri/geometry/Polygon", 
-    "esri/Color", "esri/tasks/QueryTask", "esri/tasks/query", "esri/geometry/geometryEngine",
+	"esri/Color", "esri/tasks/QueryTask", "esri/tasks/query", "esri/geometry/geometryEngine", "esri/geometry/projection",
     "dijit/form/CheckBox", "dojo/promise/all",
     "esri/dijit/BasemapGallery",
     "esri/geometry/webMercatorUtils",
@@ -24,7 +24,7 @@ define([
     "esri/map"
 ], function (
             MH_LoadSHPintoLayer, MH_LayerEditing, MH_Zoom2FeatureLayers,
-            GeometryService, ProjectParameters, SpatialReference, Graphic, Polygon, Color2, QueryTask, Query, geometryEngine,
+		GeometryService, ProjectParameters, SpatialReference, Graphic, Polygon, Color2, QueryTask, Query, geometryEngine, projection,
             CheckBox, all, BasemapGallery, webMercatorUtils, declare, lang, urlUtils, FeatureLayer, SimpleLineSymbol, SimpleFillSymbol,
             arrayUtils, 
             dom, domClass, registry, mouse, on, Map
@@ -37,22 +37,34 @@ define([
 
             app.pStateGraphicsLayer.clear();
             app.pCountyGraphicsLayer.clear();
-            app.pMZGraphicsLayer.clear();
-            app.pPopGraphicsLayer.clear();
+			app.pPopGraphicsLayer.clear();
+			app.pSRUGraphicsLayer.clear();
+
             document.getElementById("ToggleGraphicsContainer").style.display = 'none';
 
-            //strHUCs = "https://edits.nationalmap.gov/arcgis/rest/services/WBD/Wbd_EditVersion/MapServer/2";
-            strCountiesURL = "https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Counties/FeatureServer/0";
-            strGRSGPopulationAreasURL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/0";
-            strWAFWAManagementZones = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/1";
-            strStates = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/States_and_Provinces_Map/FeatureServer/0";
+			app.m_Array2Proc = [];
+			strCountiesURL = "https://services.arcgis.com/P3ePLMYs2RVChkJx/ArcGIS/rest/services/USA_Counties/FeatureServer/0";
+			strStatesURL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/States_and_Provinces_Map/FeatureServer/0";
+			app.m_Array2Proc.push([strCountiesURL, "NAME", "Counties", "STATE_NAME"]);
+			app.m_Array2Proc.push([strStatesURL, "NAME", "States", ""]);
 
-            app.m_Array2Proc = [];
-            //app.m_Array2Proc.push([strHUCs, "HUC12", "HUCs"]);
-            app.m_Array2Proc.push([strCountiesURL, "NAME", "Counties", "STATE_NAME"]);
-            app.m_Array2Proc.push([strGRSGPopulationAreasURL, "POPULATION", "GRSG Population Areas", ""]);
-            app.m_Array2Proc.push([strWAFWAManagementZones, "Mgmt_zone2", "WAFWA Management Zones", ""]);  //Name
-            app.m_Array2Proc.push([strStates, "NAME", "States", ""]);
+			var strSRUURL = "";
+			if (app.strModule == "GUSG") {
+				strGUSGPopulationAreasURL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/GUSG_Range/FeatureServer/0";
+				app.m_Array2Proc.push([strGUSGPopulationAreasURL, "Population", "GUSG Population Areas", ""]);
+				//var strSRUURL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/SRU_GUSG_Map/FeatureServer/0";
+			} else {
+				app.pMZGraphicsLayer.clear();
+				
+				strGRSGPopulationAreasURL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/0";
+				strWAFWAManagementZones = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/1";
+				app.m_Array2Proc.push([strGRSGPopulationAreasURL, "POPULATION", "GRSG Population Areas", ""]);
+				app.m_Array2Proc.push([strWAFWAManagementZones, "Mgmt_zone2", "WAFWA Management Zones", ""]);  //Name
+
+				//var strSRUURL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/SRU_HAF_Map/FeatureServer/0";
+			}
+
+			app.m_Array2Proc.push([app.strSRUURL, "SRU_ID", "SRUs", "Name"]);
 
             app.m_ProcIndex = 0;
             app.dblExpandNum = 2;
@@ -189,7 +201,6 @@ define([
                 return (Math.round(iValue * 10) / 10);
             }
 
-
             function mergeGeometries(pGeometies) {// might have multi polygons merge them into a single one
                 var polygon = pGeometies[0];
                 for (i = 1; i < pGeometies.length; i++) {
@@ -226,103 +237,179 @@ define([
                 console.log("Failed to get stat results due to an error: ", err);
             }
 
-            function Results1(results) {
-                var strOutField = app.m_Array2Proc[app.m_ProcIndex][1];
-                var strOutField2 = "";
-                var strTheme = app.m_Array2Proc[app.m_ProcIndex][2];
+			function Results1(results) {
+				projection.load().then(function () { // the projection module loaded. Geometries can be reprojected.
+					var strOutField = app.m_Array2Proc[app.m_ProcIndex][1];
+					var strOutField2 = "";
+					var strTheme = app.m_Array2Proc[app.m_ProcIndex][2];
 
-                if (app.m_Array2Proc[app.m_ProcIndex][3] != "") {
-                    strOutField2 = app.m_Array2Proc[app.m_ProcIndex][3];
-                }
+					if (app.m_Array2Proc[app.m_ProcIndex][3] != "") {
+						strOutField2 = app.m_Array2Proc[app.m_ProcIndex][3];
+					}
 
-                var strValue = "";
-                var strValue2 = "";
-                var pGeometryResult = null;
-                var pFeature = null;
-                var pGraphic = null;
-                var iRedValue4RBG = 98 + (app.m_ProcIndex * 40);
-                var iBlueValue4RBG = 204 - (app.m_ProcIndex * 40);
-                var nTransparency = 0.6 - (app.m_ProcIndex * 0.1);
-                var pfillSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
-                                    new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
-                                    new Color2([iRedValue4RBG, 194, iBlueValue4RBG]), 2),
-                                    new Color2([iRedValue4RBG, 194, iBlueValue4RBG, nTransparency])
-                                    );
+					var strValue = "";
+					var strValue2 = "";
+					var pGeometryResult = null;
+					var pFeature = null;
+					var pGraphic = null;
+					var iRedValue4RBG = 98 + (app.m_ProcIndex * 40);
+					var iBlueValue4RBG = 204 - (app.m_ProcIndex * 40);
+					var nTransparency = 0.6 - (app.m_ProcIndex * 0.1);
+					var pfillSymbol = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+										new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+										new Color2([iRedValue4RBG, 194, iBlueValue4RBG]), 2),
+										new Color2([iRedValue4RBG, 194, iBlueValue4RBG, nTransparency])
+										);
 
-                pFeatures = results.features;
-                var resultCount = pFeatures.length;
-                if (resultCount > 0) {
-                    for (var i = 0; i < pFeatures.length; i++) {
-                        pFeature = pFeatures[i];
-                        strValue = pFeature.attributes[strOutField];
 
-                        if (strOutField2 != "") {
-                            strValue2 = pFeature.attributes[strOutField2];
-                        }
+					var pfillSymbol2 = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+						new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+							new Color2([10, 10, 10]), 2),
+							new Color2([10, 10, 10, 0.8])
+					);
 
-                        var pResultObject = new Object();
-                        pResultObject.intersectTheme = strTheme;
-                        pResultObject.intersectName = strValue;
-                        pResultObject.intersectName2 = strValue2;
-                        app.m_ArrayIntersectResults.push(pResultObject);
+					pFeatures = results.features;
+					var resultCount = pFeatures.length;
 
-                        pGeometryResult1 = pFeature.geometry;
-                        pGraphic = new Graphic();
-                        pGraphic.setGeometry(pGeometryResult1);
-                        pGraphic.setSymbol(pfillSymbol);
 
-                        switch (strTheme) {     //add the graphic to the appropirate graphic layer
-                            case "States":
-                                app.pStateGraphicsLayer.add(pGraphic);
-                            case "Counties":
-                                app.pCountyGraphicsLayer.add(pGraphic);
-                            case "WAFWA Management Zones":
-                                app.pMZGraphicsLayer.add(pGraphic);
-                            case "GRSG Population Areas":
-                                app.pPopGraphicsLayer.add(pGraphic);
-                        }
-                    }
-                }
+					if (resultCount > 0) {
+						for (var i = 0; i < pFeatures.length; i++) {
+							pFeature = pFeatures[i];
+							strValue = pFeature.attributes[strOutField];
 
-                app.m_ProcIndex += 1;
+							if (strOutField2 != "") {
+								strValue2 = pFeature.attributes[strOutField2];
+							}
 
-                if (app.m_ProcIndex < app.m_Array2Proc.length) {
-                    qry_SelectFeaturesFromLayer(app.m_ProcIndex);
-                } else {
-                    document.getElementById("ToggleGraphicsContainer").style.display = 'inline';
+							var pResultObject = new Object();
+							pResultObject.intersectTheme = strTheme;
+							pResultObject.intersectName = strValue;
+							pResultObject.intersectName2 = strValue2;
 
-                    var strDialogText = "<u>Click Ok to continue editing next step OR click Cancel to resume spatial editing...</u><br>";
-                    var strDialogText = "";
-                    strDialogText += "<b>Effort " + app.iCEDID + " Area:</b> " + app.m_EffortArea.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " (US Acres)<br>";
+							var outSpatialReference = new SpatialReference({ wkid: 5071 });  //NAD_1983_HARN_Contiguous_USA_Albers, WKID list here https://developers.arcgis.com/rest/services-reference/projected-coordinate-systems.htm
+							var pIntersectGeom = geometryEngine.intersect(app.pGeometry, pFeature.geometry);
+							var pGeometryAlbers = projection.project(pIntersectGeom, outSpatialReference);
 
-                    for (var i = 0; i < app.m_ArrayIntersectResults.length; i++) {
-                        pResultObject2 = app.m_ArrayIntersectResults[i];
-                        strDialogText += "<b>Theme:</b> " + pResultObject2.intersectTheme + " <b>Name:</b> " + pResultObject2.intersectName;
-                        if (pResultObject2.intersectName2 != "") {
-                            strDialogText += " <b>Addition info:</b> " + pResultObject2.intersectName2
-                        }
-                        strDialogText +=  "<br>"
-                    }
+							if (pGeometryAlbers == undefined) {
+								pResultObject.area1 = 999999;
+							} else {
+								pResultObject.area1 = calcAreaPlanar4ProjectedAndNotWebMerc(pGeometryAlbers);
+							}
+							app.m_ArrayIntersectResults.push(pResultObject);
+							var pGeometryResult1 = pFeature.geometry;
+							var pGraphic = new Graphic();
+							pGraphic.setGeometry(pGeometryResult1);
+							pGraphic.setSymbol(pfillSymbol);
 
-                    $("#dialog").html(strDialogText);
+							switch (strTheme) {     //add the graphic to the appropirate graphic layer
+								case "SRUs":
+									var pGraphic2 = new Graphic();
+									pGraphic2.setGeometry(pIntersectGeom);
+									pGraphic2.setSymbol(pfillSymbol2);
+									app.pSRUGraphicsLayer.add(pGraphic);
+									app.pSRUGraphicsLayer.add(pGraphic2);
+									blnSRUsIntersected = true;
+									break;
+								case "States":
+									app.pStateGraphicsLayer.add(pGraphic);
+									break;
+								case "Counties":
+									app.pCountyGraphicsLayer.add(pGraphic);
+									break;
+								case "WAFWA Management Zones":
+									app.pMZGraphicsLayer.add(pGraphic);
+									break;
+								case "GRSG Population Areas":
+									app.pPopGraphicsLayer.add(pGraphic);
+									break;
+								case "GUSG Population Areas":
+									app.pPopGraphicsLayer.add(pGraphic);
+									break;
+							}
+						}
 
-                    $(function () {
-                        $("#dialog").dialog({
-                            modal: true,
-                            buttons: {
-                                "Accept Edits and Continue": function () {
-                                    $(this).dialog("close");
-                                    ExitFootprinter();
-                                },
-                                "Cancel Process and Continue Editing": function () {
-                                    $(this).dialog("close");
-                                }
-                            },
-                            width: "30%",
-                            maxWidth: "768px"
-                        });
-                    });
-                }
+						hideLoading();
+					}
+
+					app.m_ProcIndex += 1;
+
+					if (app.m_ProcIndex < app.m_Array2Proc.length) {
+						qry_SelectFeaturesFromLayer(app.m_ProcIndex);
+					} else {
+
+						var blnSRUsIntersected = false;
+						if (app.pSRUGraphicsLayer.graphics.length > 0) {
+							blnSRUsIntersected = true;
+						}
+
+						document.getElementById("ToggleGraphicsContainer").style.display = 'inline';
+
+						if (blnSRUsIntersected == false) {
+							var strDialogText = "<p style='color: blue; font - size: 12px;'><u>Redraw in an area with SRUs!!!...</u><br>Turn on 'SRU Index Basemap' to view SRU areas <br></p>";
+						} else {
+							var strDialogText = "";
+						}
+						
+						strDialogText += "<b>Effort " + app.iCEDID + " Area:</b> " + app.m_EffortArea.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") + " ac<br>";
+
+						for (var i = 0; i < app.m_ArrayIntersectResults.length; i++) {
+							pResultObject2 = app.m_ArrayIntersectResults[i];
+							strDialogText += "<b>Theme:</b> " + pResultObject2.intersectTheme + " <b>Name/ID:</b> " + pResultObject2.intersectName + ", Clip Area:" + pResultObject2.area1 + " ac";
+							if (pResultObject2.intersectName2 != "") {
+								strDialogText += " <b>Addition info:</b> " + pResultObject2.intersectName2
+							}
+							strDialogText +=  "<br>"
+						}
+
+						$("#dialog").html(strDialogText);
+
+						$(function () {
+							if (blnSRUsIntersected == false) {
+								$("#dialog").dialog({
+									modal: true,
+									title: "Effort must cross an SRU!!!  Redraw!!!!",
+									buttons: {
+										"Continue Editing": function () {
+											$(this).dialog("close");
+											document.getElementById("btn_Next").disabled = false;
+											hideLoading();
+										}
+									},
+									close: function () {
+										document.getElementById("btn_Next").disabled = false;
+										hideLoading();
+									},
+									width: "40%",
+									maxWidth: "768px"
+								});
+							} else {
+								$("#dialog").dialog({
+									modal: true,
+									title: "Spatial edits processed successfully!",
+									buttons: {
+										"Accept Edits and Continue": function () {
+											$(this).dialog("close");
+											ExitFootprinter();
+											hideLoading();
+										},
+										"Cancel Process and Continue Editing": function () {
+											$(this).dialog("close");
+											document.getElementById("btn_Next").disabled = false;
+											hideLoading();
+										}
+									},
+									close: function () {
+										document.getElementById("btn_Next").disabled = false;
+										hideLoading();
+									},
+									width: "40%",
+									maxWidth: "768px"
+								});
+							}
+
+						});
+						}
+				});
             }
 
             function Results1Error1(results) {
@@ -335,9 +422,11 @@ define([
             function ExitFootprinter() {
                 //Populating div's for Django to access
                 var counties = ""
-                var states = ""
-                var wafwamz = ""
-                var grsgpops = ""
+				var states = "";
+				var sruS = "";
+				var wafwamz = "";
+				var grsgpops = "";
+				var gusgpops = "";
 
                 for (var i = 0; i < app.m_ArrayIntersectResults.length; i++) {
                     pResultObject2 = app.m_ArrayIntersectResults[i];
@@ -360,6 +449,14 @@ define([
                         }
                     }
 
+					if (theme == "SRUs") {
+						if (sruS.length > 0) {
+							sruS += ";" + pResultObject2.intersectName + "," + pResultObject2.intersectName2 + "," + pResultObject2.area1;
+						} else {
+							sruS = pResultObject2.intersectName + "," + pResultObject2.intersectName2 + "," + pResultObject2.area1;
+						}
+					}
+
                     if (theme == "WAFWA Management Zones") {
                         if (wafwamz.length > 0) {
                             wafwamz += "," + pResultObject2.intersectName;
@@ -375,10 +472,20 @@ define([
                             grsgpops = pResultObject2.intersectName;
                         }
                     }
-                }
+
+					if (theme == "GUSG Population Areas") {
+						if (gusgpops.length > 0) {
+							gusgpops += ";" + pResultObject2.intersectName;
+						} else {
+							gusgpops = pResultObject2.intersectName;
+						}
+					}
+
+				}
 
                 document.getElementById('id_countyvals').value = counties;
-                document.getElementById('id_statevals').value = states;
+				document.getElementById('id_statevals').value = states;
+				document.getElementById('id_SRUvals').value = sruS;
                 document.getElementById('id_mzvals').value = wafwamz;
                 document.getElementById('id_grsgpopvals').value = grsgpops;
                 document.getElementById('id_areavals').value = app.m_EffortArea;

@@ -26,7 +26,7 @@ define([
     return declare([], {
         btn_PolyEdit_click: function (results) {
             var dom = document.getElementById("tpick-surface-0");
-            on.emit(dom, "click", { bubbles: true, cancelable: true });
+			on.emit(dom, "click", { bubbles: true, cancelable: true });
         },
 
         DeAct: function () {
@@ -37,7 +37,8 @@ define([
 
 
 
-        btn_Next_click: function () {
+		btn_Next_click: function () {
+			console.log("in btn_Next_click  2222");
             app.pLEdit.DeAct();
 
             if ((app.blnEditOccured) & (app.iCEDID != 'undefined')) {

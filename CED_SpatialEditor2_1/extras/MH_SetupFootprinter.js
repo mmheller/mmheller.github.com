@@ -42,7 +42,8 @@ define([
 
     return declare([], {
         Phase1: function () {
-            app.iCEDID = getTokens()['CEDID'];    //*****************************************************Justin Change this to your Django CEID id variable!!!!!!!!
+			app.iCEDID = getTokens()['CEDID'];    //*****************************************************Justin Change this to your Django CEID id variable!!!!!!!!
+			app.strModule = getTokens()['module'];    //*****************************************************Justin Change this to your Django CEID id variable!!!!!!!!
             if (typeof app.iCEDID != 'undefined') {
                 var arrayCenterZoom = [-111, 45.5];
                 var izoomVal = 5;
@@ -59,7 +60,7 @@ define([
             app.pLEdit = new MH_LayerEditing({}); // instantiate the class
             dojo.connect(app.map, "onLayersAddResult", app.pLEdit.initEditor);
 
-            dojo.connect(app.map, 'onLayersAddResult', function (results) {            //add check boxes 
+			dojo.connect(app.map, 'onLayersAddResult', function (results) {            //add check boxes 
                 if (results !== 'undefined') {
                     dojo.forEach(arraycbxLayers, function (cbxLayersAndDiv) {
                         var cbxLayers = cbxLayersAndDiv[0];
@@ -75,7 +76,7 @@ define([
                                     } else {
                                         clayer.show();
                                     }
-                                    this.checked = clayer.visible;
+									this.checked = clayer.visible;
                                 }
                             });
                             dojo.place(checkBox.domNode, document.getElementById(strDiv), "after"); //add the check box and label to the toc
@@ -117,48 +118,91 @@ define([
 
             app.portalUrl4Shapefile = "https://www.arcgis.com";
 
-            if (document.location.host == "conservationefforts.org") {
-                var strHFL_URL = "https://utility.arcgis.com/usrsvcs/servers/3ffd269482224fa9a08027ef8617a44c/rest/services/NA_SRC_v2/FeatureServer/5"; //***Production!!!!
+			if (document.location.host == "conservationefforts.org") {
+				if (app.strModule == "GUSG") {
+					var strHFL_URL = "https://utility.arcgis.com/usrsvcs/servers/5934fa19d7fd4c779f5651253df96047/rest/services/GUSG_Src_Prod/FeatureServer/0"; //***Production!!!!
+				} else {
+					var strHFL_URL = "https://utility.arcgis.com/usrsvcs/servers/3ffd269482224fa9a08027ef8617a44c/rest/services/NA_SRC_v2/FeatureServer/5"; //***Production!!!!
+				}
             } else {
-                var strHFL_URL = "https://utility.arcgis.com/usrsvcs/servers/e09a9437e03d4190a3f3a8f2e36190b4/rest/services/Development_Src_v2/FeatureServer/0"; //***Sandbox!!!!!
+				if (app.strModule == "GUSG") {
+					var strHFL_URL = "https://utility.arcgis.com/usrsvcs/servers/d822c013abba405495457cd5a90130d1/rest/services/GUSG_Src_Dev/FeatureServer/0"; //***Sandbox!!!!!
+				} else {
+					var strHFL_URL = "https://utility.arcgis.com/usrsvcs/servers/e09a9437e03d4190a3f3a8f2e36190b4/rest/services/Development_Src_v2/FeatureServer/0"; //***Sandbox!!!!!
+				}
                 document.getElementById("txt_Version").innerHTML += ": Sandbox AGOL Hosted Feature Layer Currently Configured";
             }
 
             app.pSrcFeatureLayer = new esri.layers.FeatureLayer(strHFL_URL, { id:"99",
                 mode: esri.layers.FeatureLayer.MODE_ONDEMAND, "opacity": 0.6, outFields: ['*']
-            });
+			});
 
             app.pStateGraphicsLayer = new esri.layers.GraphicsLayer();
-            app.pCountyGraphicsLayer = new esri.layers.GraphicsLayer();
-            app.pMZGraphicsLayer = new esri.layers.GraphicsLayer();
-            app.pPopGraphicsLayer = new esri.layers.GraphicsLayer();
+			app.pCountyGraphicsLayer = new esri.layers.GraphicsLayer();
+
+			app.pSRUGraphicsLayer = new esri.layers.GraphicsLayer();
 
             app.map.addLayer(app.pStateGraphicsLayer);
-            app.map.addLayer(app.pCountyGraphicsLayer);
-            app.map.addLayer(app.pMZGraphicsLayer);
-            app.map.addLayer(app.pPopGraphicsLayer);
+			app.map.addLayer(app.pCountyGraphicsLayer);
+			app.map.addLayer(app.pSRUGraphicsLayer);
+
+			app.pPopGraphicsLayer = new esri.layers.GraphicsLayer();
+			app.map.addLayer(app.pPopGraphicsLayer);
+
+			if (app.strModule == "GUSG") {
+				//do nothong
+				console.log("GUSG layers not needed");
+			} else {
+				app.pMZGraphicsLayer = new esri.layers.GraphicsLayer();
+				app.map.addLayer(app.pMZGraphicsLayer);
+			}
 
             if (typeof app.iCEDID != 'undefined') {
                 app.pSrcFeatureLayer.setDefinitionExpression("(project_id = " + app.iCEDID + ")");
             }
 
-            var strBase_URL = "https://utility.arcgis.com/usrsvcs/servers/5d5fc053dd7e4de4b9765f7a6b6f1f61/rest/services/CEDfrontpage_map_v9_Restrict/FeatureServer/";
-            CED_PP_point = new FeatureLayer(strBase_URL + "0", { id: "0", "opacity": 0.3, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-            CED_PP_point.setDefinitionExpression("((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))");
-            CED_PP_line = new FeatureLayer(strBase_URL + "1", { id: "1", "opacity": 0.3, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-            CED_PP_poly = new FeatureLayer(strBase_URL + "2", { id: "2", "opacity": 0.2, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: false });
+			var cbxLayers1 = [];
+			if (app.strModule == "GUSG") {
+				var strBase_URL = "https://utility.arcgis.com/usrsvcs/servers/7a5cc2f9e5c540289acf0c291af7ab15/rest/services/CED_GUSG_frontpage_map_Restrict/FeatureServer/";
+				CED_PP_poly = new FeatureLayer(strBase_URL + "1", { id: "2", "opacity": 0.2, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: false });
+				app.strSRUURL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/SRU_GUSG_Map/FeatureServer/0";
+				SRUs_poly = new FeatureLayer(app.strSRUURL, { id: "3", "opacity": 0.2, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: false });
 
-            app.map.addLayers([app.pSrcFeatureLayer, CED_PP_poly, CED_PP_line, CED_PP_point]);
-            var cbxLayers1 = [];
-            cbxLayers1.push({ layer: CED_PP_point, title: 'Approved CED Point' });
-            cbxLayers1.push({ layer: CED_PP_line, title: 'Approved CED Lines' });
-            cbxLayers1.push({ layer: CED_PP_poly, title: 'Approved CED Polygons' });
+				app.map.addLayers([app.pSrcFeatureLayer, SRUs_poly, CED_PP_poly]);
+			} else {
+				var strBase_URL = "https://utility.arcgis.com/usrsvcs/servers/5d5fc053dd7e4de4b9765f7a6b6f1f61/rest/services/CEDfrontpage_map_v9_Restrict/FeatureServer/";
+				CED_PP_point = new FeatureLayer(strBase_URL + "0", { id: "0", "opacity": 0.3, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+				CED_PP_point.setDefinitionExpression("((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))");
+				CED_PP_line = new FeatureLayer(strBase_URL + "1", { id: "1", "opacity": 0.3, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+				CED_PP_poly = new FeatureLayer(strBase_URL + "2", { id: "2", "opacity": 0.2, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: false });
 
-            var cbxLayers2 = [];
-            cbxLayers2.push({ layer: app.pStateGraphicsLayer, title: 'Intersecting State(s)' });
-            cbxLayers2.push({ layer: app.pCountyGraphicsLayer, title: 'Intersecting County(s)' });
-            cbxLayers2.push({ layer: app.pMZGraphicsLayer, title: 'Intersecting MZ(s)' });
-            cbxLayers2.push({ layer: app.pPopGraphicsLayer, title: 'Intersecting Pop Area(s)' });
+				app.strSRUURL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/SRU_HAF_Map/FeatureServer/0";
+				SRUs_poly = new FeatureLayer(app.strSRUURL, { id: "3", "opacity": 0.2, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: false });
+				app.map.addLayers([app.pSrcFeatureLayer, SRUs_poly, CED_PP_poly, CED_PP_line, CED_PP_point]);
+				cbxLayers1.push({ layer: CED_PP_point, title: 'Approved CED Point' });
+				cbxLayers1.push({ layer: CED_PP_line, title: 'Approved CED Lines' });
+
+			}
+
+
+			cbxLayers1.push({ layer: CED_PP_poly, title: 'Approved CED Polygons' });
+			cbxLayers1.push({ layer: SRUs_poly, title: 'SRU Index Basemap' });
+			var cbxLayers2 = [];
+			cbxLayers2.push({ layer: app.pStateGraphicsLayer, title: 'Intersecting State(s)' });
+			cbxLayers2.push({ layer: app.pCountyGraphicsLayer, title: 'Intersecting County(s)' });
+			cbxLayers2.push({ layer: app.pSRUGraphicsLayer, title: 'Intersecting Clipped SRU(s)' });
+
+			if (app.strModule == "GUSG") {
+				//cbxLayers2.push({ layer: app.pStateGraphicsLayer, title: 'Intersecting State(s)' });
+				//cbxLayers2.push({ layer: app.pCountyGraphicsLayer, title: 'Intersecting County(s)' });
+				cbxLayers2.push({ layer: app.pPopGraphicsLayer, title: 'Intersecting GUSG Pop Area(s)' });
+				
+			} else {
+				//cbxLayers2.push({ layer: app.pStateGraphicsLayer, title: 'Intersecting State(s)' });
+				//cbxLayers2.push({ layer: app.pCountyGraphicsLayer, title: 'Intersecting County(s)' });
+				cbxLayers2.push({ layer: app.pMZGraphicsLayer, title: 'Intersecting MZ(s)' });
+				cbxLayers2.push({ layer: app.pPopGraphicsLayer, title: 'Intersecting Pop Area(s)' });
+			}
             
             var arraycbxLayers = [[cbxLayers1, "LayerToggleDiv"], [cbxLayers2, "ToggleGraphics"]];
 

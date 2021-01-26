@@ -22,9 +22,12 @@ define([
 
     return declare([], {
 
-        shpLoadSetup: function () {
+		shpLoadSetup: function () {
+
+
             on(dom.byId("uploadForm"), "change", function (event) { //Shapefile loading
-                dom.byId('upload-status').innerHTML = '<p style="color:blue">Select shapefile as .zip file</p>';
+
+				dom.byId('upload-status').innerHTML = '<p style="color:blue">Select shapefile as .zip file</p>';
                 var fileName = event.target.value.toLowerCase();
                 if (sniff("ie")) { //filename is full path in IE so extract the file name
                     var arr = fileName.split("\\");

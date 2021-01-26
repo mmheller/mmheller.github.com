@@ -4,65 +4,69 @@ Date:        February 2018, updated May 2019-->
 
 <!--{% load staticfiles %}-->
 <html>
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
-    <title>CED Footprinter</title>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no">
+	<title>CED Footprinter</title>
+
+	<link rel="stylesheet" href="https://js.arcgis.com/3.35/dijit/themes/tundra/tundra.css">
+	<link rel="stylesheet" href="https://js.arcgis.com/3.35/esri/css/esri.css" />
+	<!--<link rel="stylesheet" href="https://js.arcgis.com/3.29/dijit/themes/claro/claro.css">
+	<link rel="stylesheet" href="https://js.arcgis.com/3.29/esri/css/esri.css" />-->
+
+	<link rel="stylesheet" type="text/css" href="Styles/panelFootprinter.css" />
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+
+	<!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/Styles/panelFootprinter.css' %}" />-->
+
+	<script type="text/javascript">var dojoConfig = { paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" } };</script>
+	<!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/javascript/grsgmap/extras' %}" } };</script>-->
+
+
+	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+	<!--<script src="https://js.arcgis.com/3.29/"></script>-->
+	<script src="https://js.arcgis.com/3.35/"></script>
+
+	<script type="text/javascript">
+		var editorWidget;
+		var pSrcFeatureLayer;
+		var pFCol;
+		var app = {};
+		require([
+			"extras/MH_SetupFootprinter",
+			"esri/arcgis/Portal", "esri/arcgis/OAuthInfo", "esri/IdentityManager",
+			"esri/config",
+			"esri/map",
+			"dojo/dom",
+			"dojo/dom-style", "dojo/dom-attr",
+			"dojo/dom-class",
+			"dojo/dom-construct",
+			"dojo/json",
+			"dojo/on",
+			"dojo/parser",
+			"esri/Color",
+			"dojo/_base/lang",
+			"dijit/layout/BorderContainer",
+			"dijit/layout/ContentPane",
+			"dojo/domReady!"
+		],
+			function (MH_Setup, arcgisPortal, OAuthInfo, esriId,
+				esriConfig, Map, dom, domStyle, domAttr, domClass, domConstruct, JSON, on, parser, Color, lang
+			) {
+				parser.parse();
+				esriConfig.defaults.io.proxyUrl = "/proxy/";
+
+				app.pSup = new MH_Setup({}); // instantiate the class
+				app.pSup.Phase1();
+			});
+	</script>
+</head>
    
-    <link rel="stylesheet" href="https://js.arcgis.com/3.28/dijit/themes/claro/claro.css">
-    <link rel="stylesheet" href="https://js.arcgis.com/3.28/esri/css/esri.css" />
-    <link rel="stylesheet" type="text/css" href="Styles/panelFootprinter.css" />
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
-
-    <!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/Styles/panelFootprinter.css' %}" />-->
-    
-    <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>      
-    <!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/javascript/grsgmap/extras' %}" } };</script>-->
-         
-
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="https://js.arcgis.com/3.28/"></script>
-
-    <script type="text/javascript">
-      var editorWidget;
-      var pSrcFeatureLayer;
-      var pFCol;
-      var app = {};
-      require([
-        "extras/MH_SetupFootprinter",
-        "esri/arcgis/Portal", "esri/arcgis/OAuthInfo", "esri/IdentityManager",
-        "esri/config",
-        "esri/map",
-        "dojo/dom",
-        "dojo/dom-style", "dojo/dom-attr",
-        "dojo/dom-class",
-        "dojo/dom-construct",
-        "dojo/json",
-        "dojo/on",
-        "dojo/parser",
-        "esri/Color",
-        "dojo/_base/lang",
-        "dijit/layout/BorderContainer",
-        "dijit/layout/ContentPane",
-        "dojo/domReady!"
-      ],
-        function (MH_Setup, arcgisPortal, OAuthInfo, esriId,
-        esriConfig, Map, dom, domStyle, domAttr, domClass, domConstruct, JSON, on, parser,  Color, lang
-      ) {
-            parser.parse();
-            esriConfig.defaults.io.proxyUrl = "/proxy/";
-
-            app.pSup = new MH_Setup({}); // instantiate the class
-            app.pSup.Phase1();
-        });
-      </script>
-  </head>
-   
-  <body class="claro">   
+  <body class="tundra">   
     <div id="map" style="height:100%;"  >
         <div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
-        <div id="txt_Version" style="position:absolute; left:225px; bottom:1px; color:#404040; z-index:50; font-size:11px">CED Footprinter 2.1.1</div>
+        <div id="txt_Version" style="position:absolute; left:225px; bottom:1px; color:#404040; z-index:50; font-size:11px">CED Footprinter 3.0.0</div>
         <img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
         <!--<img id="loadingImg" src="{% static 'ced_main/images/grsgmap/loading.gif' %}" style="position:fixed; right:40%; top:50%; z-index:100;" />-->
     </div>
@@ -100,13 +104,14 @@ Date:        February 2018, updated May 2019-->
             </div>
             <span class="file-upload-status" style="opacity:1;margin-right:5px;" id="upload-status"></span>
             <span class="file-upload-status" style="opacity:1;margin-right:5px;" id="userId"></span>
-            <div style="display:none;">
-                <input id="id_countyvals" name="countyvals" />
-                <input id="id_grsgpopvals" name="grsgpopvals" />
-                <input id="id_mzvals" name="mzvals" />
-                <input id="id_statevals" name="statevals" />
-                <input id="id_areavals" name="areavals" />
-            </div>
+			<div style="display:none;">
+				<input id="id_countyvals" name="countyvals" />
+				<input id="id_grsgpopvals" name="grsgpopvals" />
+				<input id="id_mzvals" name="mzvals" />
+				<input id="id_statevals" name="statevals" />
+				<input id="id_areavals" name="areavals" />
+				<input id="id_SRUvals" name="areavals" />
+			</div>
         </form>
     </div>
 
