@@ -132,7 +132,6 @@ define([
 				}
                 document.getElementById("txt_Version").innerHTML += ": Sandbox AGOL Hosted Feature Layer Currently Configured";
             }
-			console.log("1");
             app.pSrcFeatureLayer = new esri.layers.FeatureLayer(strHFL_URL, { id:"99",
                 mode: esri.layers.FeatureLayer.MODE_ONDEMAND, "opacity": 0.6, outFields: ['*']
 			});
@@ -156,26 +155,20 @@ define([
 				app.pMZGraphicsLayer = new esri.layers.GraphicsLayer();
 				app.map.addLayer(app.pMZGraphicsLayer);
 			}
-			console.log("1.01");
             if (typeof app.iCEDID != 'undefined') {
                 app.pSrcFeatureLayer.setDefinitionExpression("(project_id = " + app.iCEDID + ")");
             }
-			console.log("1.1");
 			var cbxLayers1 = [];
 			if (app.strModule == "GUSG") {
-				console.log("1.2");
 				var strBase_URL = "https://utility.arcgis.com/usrsvcs/servers/7a5cc2f9e5c540289acf0c291af7ab15/rest/services/CED_GUSG_frontpage_map_Restrict/FeatureServer/";
 				CED_PP_poly = new FeatureLayer(strBase_URL + "1", { id: "2", "opacity": 0.2, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: false });
-				console.log("1.3");
 				app.strSRUURL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/SRU_GUSG_Map/FeatureServer/0";
 				SRUs_poly = new FeatureLayer(app.strSRUURL, { id: "3", "opacity": 0.2, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, autoGeneralize: true, visible: false });
-				console.log("1.4");
-				app.map.addLayers([app.pSrcFeatureLayer]);
-				//app.map.addLayers([app.pSrcFeatureLayer, SRUs_poly, CED_PP_poly]);
-				console.log("1.5");
+
+				app.map.addLayers([app.pSrcFeatureLayer, SRUs_poly, CED_PP_poly]);
+
 			} else {
 				var strBase_URL = "https://utility.arcgis.com/usrsvcs/servers/5d5fc053dd7e4de4b9765f7a6b6f1f61/rest/services/CEDfrontpage_map_v9_Restrict/FeatureServer/";
-				console.log("2");
 				CED_PP_point = new FeatureLayer(strBase_URL + "0", { id: "0", "opacity": 0.3, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
 				CED_PP_point.setDefinitionExpression("((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project'))");
 				CED_PP_line = new FeatureLayer(strBase_URL + "1", { id: "1", "opacity": 0.3, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
@@ -220,7 +213,6 @@ define([
                     pGraphicsLayer.show();
                 }
             });
-			console.log("3");
 
             if (typeof app.iCEDID != 'undefined') {
                 //app.dblExpandNum = 3.75;
@@ -228,7 +220,6 @@ define([
                 app.pSup = new MH_Zoom2FeatureLayers({}); // instantiate the class
                 app.pSup.qry_Zoom2FeatureLayerExtent(app.pSrcFeatureLayer);
             }
-			console.log("4");
             if (app.map.loaded) {
                 mapLoaded();
             } else {
