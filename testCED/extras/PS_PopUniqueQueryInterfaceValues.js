@@ -71,7 +71,8 @@ define([
         },
 
 
-        qry_SetUniqueValuesOf: function (strFieldNameText, strFieldNameValue, divTag4Results, strQuery) {
+		qry_SetUniqueValuesOf: function (strFieldNameText, strFieldNameValue, divTag4Results, strQuery) {
+			console.log(strFieldNameText);
             this.divTag4Results = divTag4Results;
             this.strFieldNameText = strFieldNameText;
             this.strFieldNameValue = strFieldNameValue;
@@ -155,14 +156,12 @@ define([
                         iValue = "";
                     });
 
-                    if (this.strFieldNameText == "Start_Year") {
+					if ((this.strFieldNameText == "Start_Year") | (this.strQuery1 == "Theme = 'StartYear'")) {
                         var all = [];
                         for (var i = 0; i < values.length; i++) {
                             all.push({ 'T': texts[i], 'V': values[i] });
                         }
-                        if (this.strFieldNameText == "ST_ID") {
-                            var temp = "";
-                        }
+
                         all.sort(sortFunction);
                         texts = [];
                         values = [];
@@ -175,12 +174,16 @@ define([
 
                         for (var i = 0; i < all.length; i++) {
                             blnShow = true;
-                            dojo.forEach(arrayOfNot2ShowActivityValues, function (arrayOfNot2ShowActivityValue) {
+							dojo.forEach(arrayOfNot2ShowActivityValues, function (arrayOfNot2ShowActivityValue) {
+								if (all[i].T == "2099"){
+									var stop = true;
+								}
+
                                 if ((arrayOfNot2ShowActivityValue == all[i].T) | (arrayOfNot2ShowActivityValue == all[i].V)) {
                                     blnShow = false;
                                 }
                             });
-                            if (blnShow) {
+							if (blnShow) {
                                 texts.push(all[i].T);
                                 values.push(all[i].V);
                             }
@@ -191,9 +194,7 @@ define([
                         for (var i = 0; i < values.length; i++) {
                             all.push({ 'T': texts[i], 'V': values[i] });
                         }
-                        if (this.strFieldNameText == "ST_ID") {
-                            var temp = "";
-                        }
+
                         all.sort(sortFunction);
                         texts = [];
                         values = [];
@@ -241,60 +242,183 @@ define([
                 }
             }
 
-            switch (this.strFieldNameText) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'
-				case "Start_Year":
-					this.qry_SetUniqueValuesOf("Activity", "ACT_ID", document.getElementById("ddlActivity"), this.strQuery1);
-					break;
+			var strDescField, strIDField, strQuery;
 
-				case "Activity":   // this project_ID query needs to happen here to make sure the query for the related tables works
-					this.qry_SetUniqueValuesOf("SubActivity", "SACT_ID", document.getElementById("ddlSubActivity"), this.strQuery1);
-					break;
+			if (app.blnInitialLoadOrSpatialCleared == true) {
+				switch (this.strQuery1) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'
+					case "Theme = 'StartYear'":
+						strDescField = "Value";
+						strIDField = "Value_ID";
+						strQuery = "Theme = 'Activity'";
+						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlActivity"), strQuery);
+						break;
+					case "Theme = 'Activity'":   // this project_ID query needs to happen here to make sure the query for the related tables works
+						strDescField = "Value";
+						strIDField = "Value_ID";
+						strQuery = "Theme = 'SubActivity'";
+						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlSubActivity"), strQuery);
+						break;
+					case "Theme = 'SubActivity'":   // this project_ID query needs to happen here to make sure the query for the related tables works
+						strDescField = "Value";
+						strIDField = "Value_ID";
+						strQuery = "Theme = 'Prj_Status'";
+						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlEntry"), strQuery);
+						break;
+					case "Theme = 'Prj_Status'":
+						strDescField = "Value";
+						strIDField = "Value_ID";
+						strQuery = "Theme = 'Imp_Party'";
+						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlImpParty"), strQuery);
+						break;
+					case "Theme = 'Imp_Party'":
+						strDescField = "Value";
+						strIDField = "Value_ID";
+						strQuery = "Theme = 'Office'";
+						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlOffice"), strQuery);
+						break;
+					case "Theme = 'Office'":
+						strDescField = "Value";
+						strIDField = "Value_ID";
+						strQuery = "Theme = 'State'";
+						this.strURL = app.strInitialLoad_URL;
+						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlState"), strQuery);
+						break;
+					case "Theme = 'State'":
+						strDescField = "Value";
+						strIDField = "Value_ID";
+						strQuery = "Theme = 'Pop'";
+						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlPopArea"), strQuery);
+						break;
+					case "Theme = 'Pop'":
+						strDescField = "Value";
+						strIDField = "Value_ID";
+						strQuery = "Theme = 'WAFWA'";
+						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlManagUnit"), strQuery);
+						break;
+					case "Theme = 'WAFWA'":
+						document.getElementById("ImgResultsLoading").style.visibility = "hidden";
+						disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
+						disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+						disableOrEnableFormElements("dropdownForm", 'radio', false);  //disable/enable to avoid user clicking query options during pending queries
 
-				case "SubActivity":   // this project_ID query needs to happen here to make sure the query for the related tables works
-					this.qry_SetUniqueValuesOf("Prj_Status_Desc", "Project_Status", document.getElementById("ddlEntry"), this.strQuery1);
-					break;
+						$(function () {
+							$('.divOpenStats').click(function () {
+								app.pSup.openCEDPSummary();
+							});
+						});
 
-                case "Prj_Status_Desc":
-                    this.qry_SetUniqueValuesOf("Implementing_Party", "IP_ID", document.getElementById("ddlImpParty"), this.strQuery1);
-                    break;
+						this.strQuery1 = "((SRU_ID IS NULL) OR(SRU_ID = 0)) and(typeact = 'Spatial Project')";
+						this.strURL = app.strTheme1_URL;
+						app.pFC.GetCountOfFCDef_ShowText(this.strQuery1, this.strURL + 0, "txtQueryResults", "count", "project_id", "");
 
-                case "Implementing_Party":
-					this.qry_SetUniqueValuesOf("Office", "FO_ID", document.getElementById("ddlOffice"), this.strQuery1);
-                    break;
+						this.iNonSpatialTableIndex = 0; //reset the table index for next time
+						app.blnInitialLoadOrSpatialCleared = false;
+						break;
+				}
+			} else {
+				switch (this.strFieldNameText) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'
+					case "Start_Year":
 
-                case "Office":
-					this.qry_SetUniqueValuesOf("Project_ID", "Project_ID", null, this.strQuery1);
-                    break;
+						strDescField = "Activity";
+						strIDField = "ACT_ID";
+						strQuery = this.strQuery1;
+						//this.qry_SetUniqueValuesOf("Activity", "ACT_ID", document.getElementById("ddlActivity"), this.strQuery1);
 
-                case "Project_ID":
-                    this.iNonSpatialTableIndex = 9;
-                    this.qry_SetUniqueValuesOf("State", "ST_ID", document.getElementById("ddlState"), this.strQuery1);
-                    break;
-                case "State":
-                    this.iNonSpatialTableIndex = 8;
-                    this.qry_SetUniqueValuesOf("Pop_Name", "Pop_ID", document.getElementById("ddlPopArea"), this.strQuery1);
-                    break;
-                case "Pop_Name":
-                    this.iNonSpatialTableIndex = 3;
-                    this.qry_SetUniqueValuesOf("WAFWA_Zone", "WAFWA_ID", document.getElementById("ddlManagUnit"), this.strQuery1);
-                    break;
-                case "WAFWA_Zone":
-                    document.getElementById("ImgResultsLoading").style.visibility = "hidden";
-                    disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
-					disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
-					disableOrEnableFormElements("dropdownForm", 'radio', false);  //disable/enable to avoid user clicking query options during pending queries
-                    
-                    $(function () {
-                        $('.divOpenStats').click(function () {
-                            app.pSup.openCEDPSummary();
-                        });
-                    });
-                    app.pFC.GetCountOfFCDef_ShowText(this.strQuery1, this.strURL + 0, "txtQueryResults", "count", "project_id", "");
+						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlActivity"), strQuery);
+						break;
 
-                    this.iNonSpatialTableIndex = 0; //reset the table index for next time
+					case "Activity":   // this project_ID query needs to happen here to make sure the query for the related tables works
 
-                    break;
-            }
+						strDescField = "SubActivity";
+						strIDField = "SACT_ID";
+						strQuery = this.strQuery1;
+						//this.qry_SetUniqueValuesOf("SubActivity", "SACT_ID", document.getElementById("ddlSubActivity"), this.strQuery1);
+
+						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlSubActivity"), strQuery);
+						break;
+
+					case "SubActivity":   // this project_ID query needs to happen here to make sure the query for the related tables works
+						strDescField = "Prj_Status_Desc";
+						strIDField = "Project_Status";
+						strQuery = this.strQuery1;
+						//this.qry_SetUniqueValuesOf("Prj_Status_Desc", "Project_Status", document.getElementById("ddlEntry"), this.strQuery1);
+
+						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlEntry"), strQuery);
+						break;
+
+					case "Prj_Status_Desc":
+						strDescField = "Implementing_Party";
+						strIDField = "IP_ID";
+						strQuery = this.strQuery1;
+						//this.qry_SetUniqueValuesOf("Implementing_Party", "IP_ID", document.getElementById("ddlImpParty"), this.strQuery1);
+
+						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlImpParty"), strQuery);
+						break;
+
+					case "Implementing_Party":
+						strDescField = "Office";
+						strIDField = "FO_ID";
+						strQuery = this.strQuery1;
+						//this.qry_SetUniqueValuesOf("Office", "FO_ID", document.getElementById("ddlOffice"), this.strQuery1);
+						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlOffice"), strQuery);
+						break;
+
+					case "Office":
+						strDescField = "Project_ID";
+						strIDField = "Project_ID";
+						strQuery = this.strQuery1;
+						//this.qry_SetUniqueValuesOf("Project_ID", "Project_ID", null, this.strQuery1);
+						
+						this.qry_SetUniqueValuesOf(strDescField, strIDField, null, strQuery);
+						break;
+
+					case "Project_ID":
+						strDescField = "State";
+						strIDField = "ST_ID";
+						strQuery = this.strQuery1;
+						//this.qry_SetUniqueValuesOf("State", "ST_ID", document.getElementById("ddlState"), this.strQuery1);
+						this.iNonSpatialTableIndex = 9;
+
+						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlState"), strQuery);
+						break;
+					case "State":
+						strDescField = "Pop_Name";
+						strIDField = "Pop_ID";
+						strQuery = this.strQuery1;
+						//this.qry_SetUniqueValuesOf("Pop_Name", "Pop_ID", document.getElementById("ddlPopArea"), this.strQuery1);
+						this.iNonSpatialTableIndex = 8;
+
+						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlPopArea"), strQuery);
+						break;
+					case "Pop_Name":
+						strDescField = "WAFWA_Zone";
+						strIDField = "WAFWA_ID";
+						strQuery = this.strQuery1;
+						//this.qry_SetUniqueValuesOf("WAFWA_Zone", "WAFWA_ID", document.getElementById("ddlManagUnit"), this.strQuery1);
+						this.iNonSpatialTableIndex = 3;
+
+						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlManagUnit"), strQuery);
+						break;
+					case "WAFWA_Zone":
+						document.getElementById("ImgResultsLoading").style.visibility = "hidden";
+						disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
+						disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
+						disableOrEnableFormElements("dropdownForm", 'radio', false);  //disable/enable to avoid user clicking query options during pending queries
+
+						$(function () {
+							$('.divOpenStats').click(function () {
+								app.pSup.openCEDPSummary();
+							});
+						});
+						app.pFC.GetCountOfFCDef_ShowText(this.strQuery1, this.strURL + 0, "txtQueryResults", "count", "project_id", "");
+
+						this.iNonSpatialTableIndex = 0; //reset the table index for next time
+
+						break;
+				}
+			}
+
+
 
             return results;
         },

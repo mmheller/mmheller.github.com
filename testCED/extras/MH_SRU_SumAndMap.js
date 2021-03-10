@@ -23,10 +23,10 @@ define([
 			constructor: function (options) {            // specify class defaults
 				this.pCED_PP_poly = options.pCED_PP_poly || null;
 				this.pCED_PP_point = options.pCED_PP_point || null;
-				this.gl = new GraphicsLayer();
 			},
 			startSRUSum4Map: function (strQuery, pGeometry) {
-				this.gl.clear();
+				app.gl.clear();
+
 
 				this.font = new Font("15px", Font.STYLE_NORMAL, Font.VARIANT_NORMAL, Font.WEIGHT_BOLDER, "Arial");
 				this.s = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 20,
@@ -74,13 +74,14 @@ define([
 				for (i = 0; i < arraySRUResutls.length; i++) {
 					var iSRU4Query2 = arraySRUResutls[i][0];
 					var strSRUQuery = "SRU_ID = " + iSRU4Query2.toString();
+					strSRUQuery = "(" + strSRUQuery + ") and (" + app.MH_SRUsumMap.pCED_PP_poly.getDefinitionExpression() + ")";
+
 					var pQuery = new Query();
 					var queryTask = new esri.tasks.QueryTask(app.MH_SRUsumMap.pCED_PP_point.url);
 
 					pQuery.where = strSRUQuery;
 					pQuery.returnGeometry = true;
 					pQuery.outFields = ["SRU_ID"];
-					//pQuery.outSpatialReference = { "wkid": 102100 };
 					queryTask.execute(pQuery, function (results) {
 						var resultFeatures = results.features;
 						var resultCount = resultFeatures.length;
@@ -95,20 +96,14 @@ define([
 								}
 							}
 
-							//var g = new Graphic(pPoint, app.MH_SRUsumMap.s);
-							//g.setAttributes({
-							//	name: strSRUQuery
-							//});
-							//app.MH_SRUsumMap.gl.add(g);
 							var t = new TextSymbol(iSum2.toString() + " effort(s)", app.MH_SRUsumMap.font, new Color([0, 0, 0]));
 							var g2 = new Graphic(pPoint, t);
-							app.MH_SRUsumMap.gl.add(g2);
+							app.gl.add(g2);
 						}
 					}, function (error) {
 						console.log(error);
 					});
 				}
-				app.map.addLayer(app.MH_SRUsumMap.gl)
 			},
 
 			err: function (err) {

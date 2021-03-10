@@ -90,7 +90,7 @@ define([
   "esri/request",
   "dojo/promise/all", "dojo/_base/array",
   "esri/urlUtils",
-  "esri/layers/FeatureLayer",
+	"esri/layers/FeatureLayer", "esri/layers/GraphicsLayer",
   "esri/dijit/FeatureTable",
   "esri/symbols/SimpleMarkerSymbol", "esri/symbols/SimpleLineSymbol", "esri/symbols/SimpleFillSymbol", "esri/graphicsUtils",
   "esri/tasks/query",
@@ -116,7 +116,7 @@ define([
 	"dojo/parser"
 
   ], function (
-            Draw, Graphic, PS_MeasSiteSearch4Definition, declare, lang, esriRequest, all, arrayUtils, urlUtils, FeatureLayer, FeatureTable,
+		Draw, Graphic, PS_MeasSiteSearch4Definition, declare, lang, esriRequest, all, arrayUtils, urlUtils, FeatureLayer, GraphicsLayer, FeatureTable,
             SimpleMarkerSymbol, SimpleLineSymbol, SimpleFillSymbol, graphicsUtils, Query, All,
             ArcGISDynamicMapServiceLayer, CheckBox, Legend, Scalebar, Geocoder, dom, domClass,
             mouse, on, BasemapGallery, Map, PS_Identify, Color, SimpleRenderer, LabelLayer, TextSymbol, registry, webMercatorUtils,
@@ -192,8 +192,6 @@ define([
 				  app.Admin = false;
 			  }
 
-			  
-
               if (typeof blnnoBannter != 'undefined') {
 
                   document.getElementById("contact1").style.visibility = "hidden";
@@ -218,7 +216,7 @@ define([
 
                   app.map.infoWindow.hide();
 				  app.map.graphics.clear();
-				  app.MH_SRUsumMap.gl.clear();
+				  app.gl.clear();
                   CED_PP_point.clearSelection();
                   CED_PP_line.clearSelection();
                   CED_PP_poly.clearSelection();
@@ -380,7 +378,7 @@ define([
               }
 
 			  function btn_clear_click() {
-				  app.MH_SRUsumMap.gl.clear();
+				  app.gl.clear();
                   app.arrayPrjIDs_fromSpatialSelect = "";
                   document.getElementById("txt_NoSpatial").style.visibility = 'hidden';
                   disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
@@ -474,11 +472,17 @@ define([
                   CED_PP_line.show();
 
                   app.iNonSpatialTableIndex = 0;  //
-                  app.PS_Uniques.divTagSource = null;
-                  app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
-				  app.PS_Uniques.qry_SetUniqueValuesOf("Start_Year", "Start_Year", document.getElementById("ddlStartYear"), strQuerySRU); //maybe move this to MH_FeatureCount  //clear111
-				  //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), strQuerySRU); //maybe move this to MH_FeatureCount  //clear111
-				  //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "OBJECTID > 0"); //maybe move this to MH_FeatureCount  //clear111
+				  app.PS_Uniques.divTagSource = null;
+
+				  app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
+				  if (bln_rdo_Public) {
+					  app.PS_Uniques.strURL = app.strInitialLoad_URL;
+					  app.blnInitialLoadOrSpatialCleared = true;
+					  app.PS_Uniques.qry_SetUniqueValuesOf("Value", "Value", document.getElementById("ddlStartYear"), "Theme = 'StartYear'"); 
+				  } else {
+					  app.PS_Uniques.qry_SetUniqueValuesOf("Start_Year", "Start_Year", document.getElementById("ddlStartYear"), strQuerySRU); //maybe move this to MH_FeatureCount  //clear111
+				  }
+
                   app.strQueryLabelText = "";
 				  app.strQueryLabelTextSpatial = "";
 
@@ -650,8 +654,16 @@ define([
                                                                       '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://www.wafwa.org/Documents%20and%20Settings/37/Site%20Documents/Initiatives/Sage%20Grouse/Primer%203%20SGMapping%20&%20Priority%20Habitats1.2.pdf" target="_blank">WAFWA</a>'
               });
 
-			  arrayLayers = [pBase_PAC, pBase_SBBiom, pBase_SMA, pBase_BLMHMA, pBase_Eco, pBase_RRP, pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop, plabels1, plabels2, CED_PP_poly, CED_PP_line, CED_PP_point, this.gCED_PP_point4FeatureTable];
+
+
+			  arrayLayers = [pBase_PAC, pBase_SBBiom, pBase_SMA, pBase_BLMHMA, pBase_Eco, pBase_RRP,
+				  pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop, plabels1, plabels2,
+				  CED_PP_poly, CED_PP_line, CED_PP_point, this.gCED_PP_point4FeatureTable];
               app.map.addLayers(arrayLayers);
+
+			  app.gl = new esri.layers.GraphicsLayer();
+			  app.map.addLayer(app.gl)
+			  app.gl.setMinScale(5000000);
 
               dojo.connect(app.map, 'onLayersAddResult', function (results) {            //add check boxes 
                   if (results !== 'undefined') {
@@ -1062,6 +1074,8 @@ define([
               var panelBasemaps = dom.byId("panelBasemaps");
               on(panelBasemaps, mouse.leave, function () { domClass.remove("panelBasemaps", "panelBasemapsOn"); });
 
+
+
               $('#loc').autocomplete({
                   source: function (request, response) {
                       var strURL4Search = "";
@@ -1119,13 +1133,12 @@ define([
                       var pPS_Identify_Results = app.pPS_Identify.executeQueries(null, "", 0, pGeometryPoint[0], pGeometryPoint[1]);
                   }
               });
-              
-              app.iNonSpatialTableIndex = 0;  //these 3 lines populate the list values
-              app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strTheme1_URL, iNonSpatialTableIndex: 0, divTagSource: null });
-              app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
-              //app.PS_Uniques.qry_SetUniqueValuesOf("Start_Year", "Start_Year", document.getElementById("ddlMatrix"), "OBJECTID > 0"); //startup
-			  //app.PS_Uniques.qry_SetUniqueValuesOf("TypeAct", "TypeAct", document.getElementById("ddlMatrix"), "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')"); 
-			  app.PS_Uniques.qry_SetUniqueValuesOf("Start_Year", "Start_Year", document.getElementById("ddlStartYear"), "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')"); 
+			  app.blnInitialLoadOrSpatialCleared = true;
+			  app.iNonSpatialTableIndex = 0;  //these 3 lines populate the list values
+			  app.strInitialLoad_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CEDStartup/FeatureServer/";
+			  app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strInitialLoad_URL, iNonSpatialTableIndex: 0, divTagSource: null });
+			  app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
+			  app.PS_Uniques.qry_SetUniqueValuesOf("Value", "Value", document.getElementById("ddlStartYear"), "Theme = 'StartYear'"); 
 			  
 			  app.MH_SRUsumMap = new MH_SRU_SumAndMap({ pCED_PP_poly: CED_PP_poly, pCED_PP_point: CED_PP_point });
 

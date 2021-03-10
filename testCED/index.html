@@ -8,8 +8,8 @@ Date:        Oct 2014, Updated Oct 2018-->
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />    <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
     <title>Greater Sage Grouse: Conservation Efforts</title>
-    <link rel="stylesheet" href="https://js.arcgis.com/3.32/dijit/themes//tundra/tundra.css" />
-    <link rel="stylesheet" href="https://js.arcgis.com/3.32/esri/css/esri.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.35/dijit/themes//tundra/tundra.css" />
+    <link rel="stylesheet" href="https://js.arcgis.com/3.35/esri/css/esri.css" />
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
     <link rel="stylesheet" type="text/css" href="Styles/panelMapAndReport.css" />
@@ -21,7 +21,7 @@ Date:        Oct 2014, Updated Oct 2018-->
               margin: 0;
               padding: 0;
               overflow: hidden;
-            background-color: rgb(127, 105, 127);
+			  background-color: white;
         }
     </style>
     <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
@@ -112,7 +112,7 @@ Date:        Oct 2014, Updated Oct 2018-->
 	</div>
 
 	<div id="content" data-dojo-type="dijit/layout/BorderContainer" data-dojo-props="design:'headline', gutters:false"
-		 style="width: 100%; height: 100%; margin: 0; background-color:rgb(151, 118, 123); font-family: helvetica;">
+		 style="width: 100%; height: 100%; margin: 0; background-color:white;">
 		<div id="topPane" data-dojo-type="dijit/layout/ContentPane" data-dojo-props="region:'top', splitter:false">
 
 		</div>
@@ -120,7 +120,7 @@ Date:        Oct 2014, Updated Oct 2018-->
 
 		<div id="leftPane"
 			 data-dojo-type="dijit/layout/ContentPane"
-			 data-dojo-props="region:'left'" style="background-color:rgb(151, 118, 123);">
+			 data-dojo-props="region:'left'" style="background-color:white;">
 
 			<div data-dojo-type="dijit/layout/AccordionContainer">
 				<div data-dojo-type="dijit/layout/ContentPane" id="legendPane"
@@ -160,9 +160,9 @@ Date:        Oct 2014, Updated Oct 2018-->
 					<div id="txtNonSpatialSubText" style="font-size:12px;">Both plans and actions with no spatial mapping</div>
 					<br>
 					<!--<font size="2" title="Non-Spatial Projects or Non-Spatial Plans selections will provice results in the table and summaries, however NO efforts will show in the map"><u>Project or Plan:</u></font><br />
-	<select id="ddlMatrix" class="selectClass" disabled>
-		<option value="All">All</option>
-	</select><br /><br />-->
+					<select id="ddlMatrix" class="selectClass" disabled>
+						<option value="All">All</option>
+					</select><br /><br />-->
 
 					<font size="2" title="Start Year represents the year of an effort start date."><u>Start Year:</u></font> <font size="2" color="red">*PLEASE MAKE SELECTION FOR RESULTS</font><br />
 					<select id="ddlStartYear" class="selectClass" disabled>
@@ -284,12 +284,12 @@ Date:        Oct 2014, Updated Oct 2018-->
 	<div id="map"
 		 data-dojo-type="dijit/layout/ContentPane"
 		 data-dojo-props="region:'center'"
-		 style="overflow:hidden; background-color:rgb(151, 118, 123);">
+		 style="overflow:hidden;">
 
 		<div id="txt_NoSpatial" style="position:absolute; visibility:hidden; background-color: yellow; left:20%; bottom:40%; color:red; z-index:51; font-size:30px">Non-Spatial Projects/Plans Found,<br />See Table Below<br /><br />Spatial Projects NOT Found</div>
 
 		<div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
-		<div id="txt_Version" style="position:absolute; right:15px; bottom:20px; color:#404040; z-index:50; font-size:11px">CED Interactive Map Version 2.1.0</div>
+		<div id="txt_Version" style="position:absolute; right:15px; bottom:20px; color:#404040; z-index:50; font-size:11px">CED Interactive Map Version 3.0.0</div>
 		<!--<img id="loadingImg" src="{% static 'ced_main/images/ced_main/loading.gif' %}" style="position:fixed; right:40%; top:50%; z-index:100;" />-->
 		<img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
 
@@ -316,16 +316,11 @@ Date:        Oct 2014, Updated Oct 2018-->
 		</div>
 	</div>
 
-
 	<div id="contact1" style="position:absolute; top:10px; right:20px;">
-		<a href="/sgce/about/#AC" target="_blank" style="color: #ffffff;font-family: helvetica">Contact Us</a>
-	</div>
-	<div id="contact2" style="position:absolute; top:10px; right:130px;">
-		<a href="/sgce/about/" target="_blank" style="color: #ffffff;font-family: helvetica">Project Background</a>
+		<a href="/welcome/about/" target="_blank" style="color: #ffffff;">About CED</a>
 	</div>
 
-
-	<!--<a href="/sgce/" target="_blank">
+	<!--<a href="https://conservationefforts.org" target="_blank">
 		<img id="theImage4" border="0" src="{% static 'ced_main/images/ced_main/CEDlogo_white_180x31.png' %}"
 			 style="position:absolute; top:20px; left:18px;" height="45" />
 	</a>
@@ -338,7 +333,7 @@ Date:        Oct 2014, Updated Oct 2018-->
 			 style="position:absolute; top:25px; left:505px;" height="35" />    </a>-->
 
 
-	<a href="/sgce/" target="_blank">
+	<a href="https://conservationefforts.org" target="_blank">
 		<img id="theImage4" border="0" src="images/CEDlogo_white_180x31.png"
 			 style="position:absolute; top:20px; left:18px;" height="45" />
 	</a>
