@@ -1,16 +1,18 @@
 ﻿//Created By:  Matt Heller,  U.S. Fish and Wildlife Service, Science Applications, Region 6
 //Date:        Oct 2014, Updated Oct 2018
-
 function disableOrEnableFormElements(strFormName, strElementType, TorF) {
-    var pform = document.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
-    for (var i = 0; i < pform.elements.length; i++) {
-        if (pform.elements[i].type == strElementType) {
-            strID = pform.elements[i].id;
-            document.getElementById(strID).disabled = TorF;
-        }
-    }
-}
+	var pform = document.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
 
+	if (pform != null) {
+		for (var i = 0; i < pform.elements.length; i++) {
+			if (pform.elements[i].type == strElementType) {
+				strID = pform.elements[i].id;
+				document.getElementById(strID).disabled = TorF;
+			}
+		}
+	}
+
+}  
 
 define([
   "dojo/_base/declare",
@@ -70,15 +72,17 @@ define([
 
             switch (this.strHTML_ID) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'
                 case "txtQueryResults":
-                    disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
+					disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
 					disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
 					disableOrEnableFormElements("dropdownForm", 'radio', false);  //disable/enable to avoid user clicking query options during pending queries
                     //$(".divOpenStats").prop("onclick", null).off("click");
-                    $(function () {
-                        $('.divOpenStats').click(function () {
-                            app.pSup.openCEDPSummary();
-                        });
-                    });
+     //               $(function () {
+     //                   $('.divOpenStats').click(function () {
+     //                       app.pSup.openCEDPSummary();
+     //                   });
+     //               });
+					//$("#btn_Report").prop("disabled", false);
+
 
                     this.strHTML_ID = "dTotalProjectsQ"; //this is redundant but having issues with some of the callbacks ie. GRSG pop area = Crab Creek
 

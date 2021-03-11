@@ -5,104 +5,106 @@ Date:        Oct 2014, Updated Oct 2018-->
 
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />    <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
-    <title>Greater Sage Grouse: Conservation Efforts</title>
-    <link rel="stylesheet" href="https://js.arcgis.com/3.35/dijit/themes//tundra/tundra.css" />
-    <link rel="stylesheet" href="https://js.arcgis.com/3.35/esri/css/esri.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />    <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
+	<title>Greater Sage Grouse: Conservation Efforts</title>
+	<link rel="shortcut icon" type="image/png" href="//www.usgs.gov/sites/all/themes/usgs_palladium/favicons/favicon.ico" />
+	<link rel="stylesheet" href="https://js.arcgis.com/3.35/dijit/themes//tundra/tundra.css" />
+	<link rel="stylesheet" href="https://js.arcgis.com/3.35/esri/css/esri.css" />
 
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="Styles/panelMapAndReport.css" />
-    <!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/Styles/panelMapAndReport.css' %}"/>-->
-    <style>
-        html, body {
-              height: 100%;
-              width: 100%; 
-              margin: 0;
-              padding: 0;
-              overflow: hidden;
-			  background-color: white;
-        }
-    </style>
-    <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
-    <!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/javascript/grsgmap/extras' %}"} };</script>-->
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script type="text/javascript" src="https://js.arcgis.com/3.32/"></script>    
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="Styles/panelMapAndReport.css" />
+	<!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/Styles/panelMapAndReport.css' %}"/>-->
+	<style>
+		html, body {
+			height: 100%;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			overflow: hidden;
+			background-color: white;
+		}
+	</style>
+	<script type="text/javascript">var dojoConfig = { paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" } };</script>
+	<!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/javascript/grsgmap/extras' %}"} };</script>-->
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script type="text/javascript" src="https://js.arcgis.com/3.32/"></script>
 
-    <script type="text/javascript">
-    dojo.require("dijit.layout.TabContainer");
-    dojo.require("dijit.layout.ContentPane");
-    var app = {};
-    require([
-        "esri/map", "esri/config", "dojo/dom-construct",
-        "dojo/_base/lang", "esri/layers/FeatureLayer", "esri/dijit/Legend", "esri/urlUtils",
-        "dojo/_base/array", "dojo/parser", "dojo/dom", "dojo/dom-class", "dojo/on", "extras/PS_MeasSiteSearch4Definition", 
-        "dijit/form/CheckBox", "extras/MH_Zoom2FeatureLayerCEDMap", "extras/MH_SetupCEDMap",
-        "extras/MH_Query4Summary",
-        "esri/tasks/RelationshipQuery", "esri/symbols/SimpleMarkerSymbol", "dojo/_base/Color", "esri/dijit/Scalebar",
-        "esri/dijit/Geocoder", "extras/CK_AutoCompleteSearchAndZoom", 
-        "esri/dijit/BasemapGallery", "dojo/mouse", "dojo/query", "esri/tasks/FindTask", "esri/tasks/FindParameters",
-        "dijit/registry",
-        "dijit/form/Button",
-        "esri/arcgis/utils",
-        "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
-        "dijit/layout/AccordionContainer", "dojo/domReady!"
-        ],
+	<script type="text/javascript">
+		dojo.require("dijit.layout.TabContainer");
+		dojo.require("dijit.layout.ContentPane");
+		var app = {};
+		require([
+			"esri/map", "esri/config", "dojo/dom-construct",
+			"dojo/_base/lang", "esri/layers/FeatureLayer", "esri/dijit/Legend", "esri/urlUtils",
+			"dojo/_base/array", "dojo/parser", "dojo/dom", "dojo/dom-class", "dojo/on", "extras/PS_MeasSiteSearch4Definition",
+			"dijit/form/CheckBox", "extras/MH_Zoom2FeatureLayerCEDMap", "extras/MH_SetupCEDMap",
+			"extras/MH_Query4Summary",
+			"esri/tasks/RelationshipQuery", "esri/symbols/SimpleMarkerSymbol", "dojo/_base/Color", "esri/dijit/Scalebar",
+			"esri/dijit/Geocoder", "extras/CK_AutoCompleteSearchAndZoom",
+			"esri/dijit/BasemapGallery", "dojo/mouse", "dojo/query", "esri/tasks/FindTask", "esri/tasks/FindParameters",
+			"dijit/registry",
+			"dijit/form/Button",
+			"esri/arcgis/utils",
+			"dijit/layout/BorderContainer", "dijit/layout/ContentPane",
+			"dijit/layout/AccordionContainer", "dojo/domReady!"
+		],
 
-    function (Map, esriConfig, domConstruct,
-                lang, FeatureLayer, Legend, urlUtils,
-                arrayUtils, parser, dom, domClass, on, PS_MeasSiteSearch4Definition, CheckBox,
-                MH_Zoom2FeatureLayer, MH_Setup, MH_Query4Summary,
-                RelationshipQuery, SimpleMarkerSymbol,
-                Color, Scalebar, Geocoder, CK_AutoCompleteSearchAndZoom,
-                BasemapGallery, mouse, query, FindTask, FindParameters, registry) {
+			function (Map, esriConfig, domConstruct,
+				lang, FeatureLayer, Legend, urlUtils,
+				arrayUtils, parser, dom, domClass, on, PS_MeasSiteSearch4Definition, CheckBox,
+				MH_Zoom2FeatureLayer, MH_Setup, MH_Query4Summary,
+				RelationshipQuery, SimpleMarkerSymbol,
+				Color, Scalebar, Geocoder, CK_AutoCompleteSearchAndZoom,
+				BasemapGallery, mouse, query, FindTask, FindParameters, registry) {
 
-        $( function() {
-            $( "#dialogWarning1" ).dialog({
-                autoOpen: false
-            });
-        });
+				$(function () {
+					$("#dialogWarning1").dialog({
+						autoOpen: false
+					});
+				});
 
-        app.pSup = new MH_Setup({}); // instantiate the class
-        app.arrayLayers = app.pSup.Phase1();
-       
-        parser.parse();
-        app.SIDs = null;
-        app.PSQ = null;
-        app.PSQS = null;
-        app.PS_Stat = null;
-        app.pSetQS = null;
+				app.pSup = new MH_Setup({}); // instantiate the class
+				app.arrayLayers = app.pSup.Phase1();
 
-        app.arrayLayers = app.pSup.Phase2();
-        var CED_PP_poly = arrayLayers[13];  //index depends on MH_SetupCEDMap-->Phase2-->arrayLayers =
-        var CED_PP_line = arrayLayers[14];
-        var CED_PP_point = arrayLayers[15];
-        var CED_PP_point4FeatureTable = arrayLayers[16];
-              
-        app.pSup.Phase3(CED_PP_point, CED_PP_line, CED_PP_poly);
-        
-        app.pSup.Phase4();
+				parser.parse();
+				app.SIDs = null;
+				app.PSQ = null;
+				app.PSQS = null;
+				app.PS_Stat = null;
+				app.pSetQS = null;
 
-        app.gQuerySummary = new MH_Query4Summary({ strURL: app.strTheme1_URL }); // instantiate the class
+				app.arrayLayers = app.pSup.Phase2();
+				var CED_PP_poly = arrayLayers[13];  //index depends on MH_SetupCEDMap-->Phase2-->arrayLayers =
+				var CED_PP_line = arrayLayers[14];
+				var CED_PP_point = arrayLayers[15];
+				var CED_PP_point4FeatureTable = arrayLayers[16];
 
-        function getTokens() {
-            var tokens = [];
-            var query = location.search;
-            query = query.slice(1);
-            query = query.split('&');
-            $.each(query, function (i, value) {
-                var token = value.split('=');
-                var key = decodeURIComponent(token[0]);
-                var data = decodeURIComponent(token[1]);
-                tokens[key] = data;
-            });
-            return tokens;
-        }
+				app.pSup.Phase3(CED_PP_point, CED_PP_line, CED_PP_poly);
+
+				app.pSup.Phase4();
+
+				app.gQuerySummary = new MH_Query4Summary({ strURL: app.strTheme1_URL }); // instantiate the class
+
+				function getTokens() {
+					var tokens = [];
+					var query = location.search;
+					query = query.slice(1);
+					query = query.split('&');
+					$.each(query, function (i, value) {
+						var token = value.split('=');
+						var key = decodeURIComponent(token[0]);
+						var data = decodeURIComponent(token[1]);
+						tokens[key] = data;
+					});
+					return tokens;
+				}
 
 
-    });
-    </script>
+			});
+
+/**/</script>
 </head>
 
 <body class="tundra">
@@ -141,7 +143,6 @@ Date:        Oct 2014, Updated Oct 2018-->
 					 tooltip="Click to expand and show the Search Query Tools"
 					 data-dojo-props="title:'Search Query Tools', iconClass:'Find32Icon', selected:true"
 					 style="overflow-x: hidden !important; overflow-y: scroll"</div>
-				<br />
 				<form id="dropdownForm">
 
 					<!--<div class="centerElement"><h2 title="To Filter/Query Data, select any of the dropdown filter options or use the 'Select Efforts On Map Tool' to spatially select conservation efforts.  Click the 'Clear' button to clear search criteria and return to full map extent.  Searching and zooming by Plan/Project name, or general geographic location name, is also available below">Filter/Query Data<img id="ImgResultsLoading" src="{% static 'ced_main/images/ced_main/loading.gif' %}" style="height:15px" /></h2></div>-->
@@ -269,14 +270,11 @@ Date:        Oct 2014, Updated Oct 2018-->
 			<div id="dFPMaxLastDataProviderEdit"></div>
 			<div id="dFPMaxLastPubProc"></div>
 
-			<div id="pDivOpenStats" class="divOpenStats" onmouseover="" style="cursor: pointer;">
-				<div id="imageReport">
-					<!--<img src="{% static 'ced_main/images/grsgmap/report.png' %}" alt="Click for summary report" height="22px" width="19px" />-->
-					<img src="images/report.png" alt="Click for summary report" height="22px" width="19px" />
-				</div>
-				<div id="txtReport" title="Click this link for the comprehensive CED summary report.  The summary report includes various report summaries, charts, map, and 'Print Report to PDF' options  -----  Note: year filter and subactivity filter selections required for Summary Report.">
-					<b><u><I><font size="3px" color="white">Click</font> <font size="3px" color="blue">here</font> <font size="3px" color="white">for summary report...</font></I></u></b>
-				</div>
+
+			<div id="pDivOpenStats" class="divOpenStats">
+				<input id="btn_Report" type="button"  onmouseover="" style="cursor: pointer;"
+					   title="Click for the comprehensive CED summary report.  The summary report includes various report summaries, charts, map, and 'Print Report to PDF' options  -----  Note: year filter and subactivity filter selections required for Summary Report."
+					   value="Summary Report"  acceptdisabled="disabled"/>
 			</div>
 		</div>
 

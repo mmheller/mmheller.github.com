@@ -7,190 +7,191 @@ Date:        Oct 2014, Updated Oct 2018-->
 <html>
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
-    <meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
-    <title>Greater Sage Grouse: Conservation Efforts</title>
-    <link rel="stylesheet" href="https://js.arcgis.com/3.35/dijit/themes//tundra/tundra.css" />
-    <link rel="stylesheet" href="https://js.arcgis.com/3.35/esri/css/esri.css" />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
+	<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
+	<title>Greater Sage Grouse: Conservation Efforts</title>
+	<link rel="shortcut icon" type="image/png" href="//www.usgs.gov/sites/all/themes/usgs_palladium/favicons/favicon.ico" />
+	<link rel="stylesheet" href="https://js.arcgis.com/3.35/dijit/themes//tundra/tundra.css" />
+	<link rel="stylesheet" href="https://js.arcgis.com/3.35/esri/css/esri.css" />
 
-    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
-    <link rel="stylesheet" type="text/css" href="Styles/panelMapAndReport.css" />
-    <!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/Styles/panelMapAndReport.css' %}"/>-->
-
-
-    <style type="text/css">
-        @CHARSET "UTF-8";
+	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" href="Styles/panelMapAndReport.css" />
+	<!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/Styles/panelMapAndReport.css' %}"/>-->
 
 
-        .page-break {
-            page-break-after: always;
-            page-break-inside: avoid;
-            clear: both;
-        }
-
-        .page-break-before {
-            page-break-before: always;
-            page-break-inside: avoid;
-            clear: both;
-            margin-top:1px;
-        }
-
-        .auto-style1 {
-            vertical-align: middle;
-            text-align: right;
-            background-color: #2C3E50;
-            color: #FFFFFF;
-            font-weight: bold;
-            height: 59px;
-        }
-
-    </style>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
-
-    <script type="text/javascript">var dojoConfig = {paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" }};</script>
-    <!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/javascript/grsgmap/extras' %}"} };</script>-->
-    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>   
-    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-    <script type="text/javascript" src="https://js.arcgis.com/3.32/"></script>
-
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-    <script type="text/javascript">
-    dojo.require("dijit.layout.TabContainer");
-    dojo.require("dijit.layout.ContentPane");
-    var app = {};
-    require([
-        "esri/map", "esri/layers/FeatureLayer", "esri/dijit/Legend", "esri/urlUtils",
-        "dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on", "extras/PS_MeasSiteSearch4Definition", "extras/PS_ReturnQuerySt",
-        "dijit/form/CheckBox", "extras/PS_MeasSiteSearch_SetVisableQueryDef", "extras/MH_Zoom2FeatureLayerCEDMap", "extras/MH_SetupCEDMap",
-        "extras/MH_SetupSummaryMap", "extras/MH_MakeCHARTS",
-        "extras/MH_FeatureCount", "extras/MH_Query4Summary", "extras/MH_PrintReport2PDF",
-        "esri/tasks/RelationshipQuery", "esri/symbols/SimpleMarkerSymbol", "dojo/_base/Color", "esri/dijit/Scalebar",
-        "esri/dijit/Geocoder", "extras/PS_Identify", "extras/CK_AutoCompleteSearchAndZoom", "extras/PS_PopUniqueQueryInterfaceValues",
-        "esri/geometry/webMercatorUtils", "esri/dijit/BasemapGallery", "dojo/mouse", "dojo/query", "esri/tasks/FindTask", "esri/tasks/FindParameters",
-        "esri/arcgis/utils",
-        "dijit/layout/BorderContainer", "dijit/layout/ContentPane",
-        "dijit/layout/AccordionContainer", "dojo/domReady!"
-        ],
-
-    function (Map, FeatureLayer, Legend, urlUtils,
-                arrayUtils, parser, esriConfig, dom, domClass, on, PS_MeasSiteSearch4Definition, PS_ReturnQuerySt, CheckBox,
-                PS_MeasSiteSearch_SetVisableQueryDef, MH_Zoom2FeatureLayer, MH_Setup, MH_SetupSummaryMap, MH_MakeCHARTS, MH_FeatureCount, MH_Query4Summary, MH_PrintReport2PDF,
-                RelationshipQuery, SimpleMarkerSymbol,
-                Color, Scalebar, Geocoder, PS_Identify, CK_AutoCompleteSearchAndZoom, PS_PopUniqueQueryInterfaceValues,
-                webMercatorUtils, BasemapGallery, mouse, query, FindTask, FindParameters) {
-
-        $(function () {
-            $("#dialogWarning1").dialog({
-                autoOpen: false
-            });
-        });
-
-        
-        var i;
-        for (i = 1; i < 12; i++) {
-            strDivID4WhiteSpace = "dWhiteSpace" + i.toString();
-        }
-        
-        app.base64Img1 = null;
-        app.base64Img2 = null;
-		app.base64Img3 = null;
-
-        //imgToBase64("{% static 'ced_main/images/grsgmap/CEDlogo_gray_180x31.png' %}", function (base64) {
-        //    app.base64Img1 = base64;
-        //})
-        //var base64Img2 = null;
-        //imgToBase64("{% static 'ced_main/images/grsgmap/USFWS_gray_150x31.png' %}", function (base64) {
-        //    app.base64Img2 = base64;
-        //})
-        //var base64Img3 = null;
-        //imgToBase64("{% static 'ced_main/images/grsgmap/USGS_gray_117x31.png' %}", function (base64) {
-        //    app.base64Img3 = base64;
-        //})
-
-        imgToBase64('https://mmheller.github.io/testCED/images/CEDlogo_gray_180x31.png', function (base64) {
-            app.base64Img1 = base64;
-        })
-        var base64Img2 = null;
-        imgToBase64('https://mmheller.github.io/testCED/images/USFWS_gray_150x31.png', function (base64) {
-            app.base64Img2 = base64;
-        })
-        var base64Img3 = null;
-        imgToBase64('https://mmheller.github.io/testCED/images/USGS_gray_117x31.png', function (base64) {
-            app.base64Img3 = base64;
-        })
-                
-        
-        esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
-        esriConfig.defaults.io.corsEnabledServers.push("https://services.arcgis.com")
-        esriConfig.defaults.io.corsEnabledServers.push("https://sampleserver6.arcgisonline.com")
-
-        parser.parse();
-
-        var strURL = localStorage.getItem("ls_strTheme1_URL");
-        var strDefQuery = localStorage.getItem("ls_strDefQuery");
-        var strDefQuery2 = localStorage.getItem("ls_strDefQuery2");
-        //var strDefQuery3 = localStorage.getItem("ls_strDefQuery3");
-        var strQueryLabelText = localStorage.getItem("ls_strQueryLabelText");
-        var strQueryLabelTextSpatial = localStorage.getItem("ls_strQueryLabelTextSpatial");
-
-        if ((strQueryLabelText == "") | (strQueryLabelText == "undefined")) {
-            strQueryLabelText = "<b>USER SELECTED QUERY FILTERS:</b>  None selected"
-        } else {
-            strQueryLabelText = "<b>USER SELECTED QUERY FILTERS:</b>  " + strQueryLabelText.substring(0, strQueryLabelText.length - 2);
-        }
-        if ((strQueryLabelTextSpatial == "") | (strQueryLabelTextSpatial == "undefined")) {
-            //do nothing
-        } else {
-            strQueryLabelText += "<br><b>USER SPATIAL QUERY FILTERS:</b>  " + strQueryLabelTextSpatial;
-        }
-
-        var div = document.getElementById("dFilterParameters");
-        div.innerHTML = strQueryLabelText;
-        
-        app.gPrintReport2PDF = new MH_PrintReport2PDF({ strURL: strURL }); // instantiate the class
-
-        app.gQuerySummary = new MH_Query4Summary({ strURL: strURL}); // instantiate the class
-        app.gQuerySummary.Summarize(strDefQuery, strDefQuery2, true, app.FilterGeometry);
-
-        app.pSupSumMap = new MH_SetupSummaryMap({}); // instantiate the class
-        app.arrayLayers = app.pSupSumMap.Phase1();
-
-        
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth() + 1; //January is 0!
-        var yyyy = today.getFullYear();
-        today = mm + '/' + dd + '/' + yyyy;
-        document.getElementById('time').innerHTML = today;
+	<style type="text/css">
+		@CHARSET "UTF-8";
 
 
-        app.gMakeCHARTS = new MH_MakeCHARTS({ strURL: strURL }); // instantiate the class
-        //app.gMakeCHARTS.StartCHARTING();  moving this to after the text summary has been loaded
+		.page-break {
+			page-break-after: always;
+			page-break-inside: avoid;
+			clear: both;
+		}
 
-        function getTokens() {
-            var tokens = [];
-            var query = location.search;
-            query = query.slice(1);
-            query = query.split('&');
-            $.each(query, function (i, value) {
-                var token = value.split('|');
-                var key = decodeURIComponent(token[0]);
-                var data = decodeURIComponent(token[1]);
-                tokens[key] = data;
-            });
-            return tokens;
-        };
-        
-        generate = function () {
-            document.getElementById("ImgResultsLoading").style.visibility = "visible";
-            app.gPrintReport2PDF.StartPrinting(app.map);
-        };
+		.page-break-before {
+			page-break-before: always;
+			page-break-inside: avoid;
+			clear: both;
+			margin-top: 1px;
+		}
 
-    });
-    </script>
+		.auto-style1 {
+			vertical-align: middle;
+			text-align: right;
+			background-color: #2C3E50;
+			color: #FFFFFF;
+			font-weight: bold;
+			height: 59px;
+		}
+	</style>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+
+	<script type="text/javascript">var dojoConfig = { paths: { extras: location.pathname.replace(/\/[^/]+$/, "") + "/extras" } };</script>
+	<!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/javascript/grsgmap/extras' %}"} };</script>-->
+	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+	<script type="text/javascript" src="https://js.arcgis.com/3.32/"></script>
+
+	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+	<script type="text/javascript">
+		dojo.require("dijit.layout.TabContainer");
+		dojo.require("dijit.layout.ContentPane");
+		var app = {};
+		require([
+			"esri/map", "esri/layers/FeatureLayer", "esri/dijit/Legend", "esri/urlUtils",
+			"dojo/_base/array", "dojo/parser", "esri/config", "dojo/dom", "dojo/dom-class", "dojo/on", "extras/PS_MeasSiteSearch4Definition", "extras/PS_ReturnQuerySt",
+			"dijit/form/CheckBox", "extras/PS_MeasSiteSearch_SetVisableQueryDef", "extras/MH_Zoom2FeatureLayerCEDMap", "extras/MH_SetupCEDMap",
+			"extras/MH_SetupSummaryMap", "extras/MH_MakeCHARTS",
+			"extras/MH_FeatureCount", "extras/MH_Query4Summary", "extras/MH_PrintReport2PDF",
+			"esri/tasks/RelationshipQuery", "esri/symbols/SimpleMarkerSymbol", "dojo/_base/Color", "esri/dijit/Scalebar",
+			"esri/dijit/Geocoder", "extras/PS_Identify", "extras/CK_AutoCompleteSearchAndZoom", "extras/PS_PopUniqueQueryInterfaceValues",
+			"esri/geometry/webMercatorUtils", "esri/dijit/BasemapGallery", "dojo/mouse", "dojo/query", "esri/tasks/FindTask", "esri/tasks/FindParameters",
+			"esri/arcgis/utils",
+			"dijit/layout/BorderContainer", "dijit/layout/ContentPane",
+			"dijit/layout/AccordionContainer", "dojo/domReady!"
+		],
+
+			function (Map, FeatureLayer, Legend, urlUtils,
+				arrayUtils, parser, esriConfig, dom, domClass, on, PS_MeasSiteSearch4Definition, PS_ReturnQuerySt, CheckBox,
+				PS_MeasSiteSearch_SetVisableQueryDef, MH_Zoom2FeatureLayer, MH_Setup, MH_SetupSummaryMap, MH_MakeCHARTS, MH_FeatureCount, MH_Query4Summary, MH_PrintReport2PDF,
+				RelationshipQuery, SimpleMarkerSymbol,
+				Color, Scalebar, Geocoder, PS_Identify, CK_AutoCompleteSearchAndZoom, PS_PopUniqueQueryInterfaceValues,
+				webMercatorUtils, BasemapGallery, mouse, query, FindTask, FindParameters) {
+
+				$(function () {
+					$("#dialogWarning1").dialog({
+						autoOpen: false
+					});
+				});
+
+
+				var i;
+				for (i = 1; i < 12; i++) {
+					strDivID4WhiteSpace = "dWhiteSpace" + i.toString();
+				}
+
+				app.base64Img1 = null;
+				app.base64Img2 = null;
+				app.base64Img3 = null;
+
+				//imgToBase64("{% static 'ced_main/images/grsgmap/CEDlogo_gray_180x31.png' %}", function (base64) {
+				//    app.base64Img1 = base64;
+				//})
+				//var base64Img2 = null;
+				//imgToBase64("{% static 'ced_main/images/grsgmap/USFWS_gray_150x31.png' %}", function (base64) {
+				//    app.base64Img2 = base64;
+				//})
+				//var base64Img3 = null;
+				//imgToBase64("{% static 'ced_main/images/grsgmap/USGS_gray_117x31.png' %}", function (base64) {
+				//    app.base64Img3 = base64;
+				//})
+
+				imgToBase64('https://mmheller.github.io/testCED/images/CEDlogo_gray_180x31.png', function (base64) {
+					app.base64Img1 = base64;
+				})
+				var base64Img2 = null;
+				imgToBase64('https://mmheller.github.io/testCED/images/USFWS_gray_150x31.png', function (base64) {
+					app.base64Img2 = base64;
+				})
+				var base64Img3 = null;
+				imgToBase64('https://mmheller.github.io/testCED/images/USGS_gray_117x31.png', function (base64) {
+					app.base64Img3 = base64;
+				})
+
+
+				esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
+				esriConfig.defaults.io.corsEnabledServers.push("https://services.arcgis.com")
+				esriConfig.defaults.io.corsEnabledServers.push("https://sampleserver6.arcgisonline.com")
+
+				parser.parse();
+
+				var strURL = localStorage.getItem("ls_strTheme1_URL");
+				var strDefQuery = localStorage.getItem("ls_strDefQuery");
+				var strDefQuery2 = localStorage.getItem("ls_strDefQuery2");
+				//var strDefQuery3 = localStorage.getItem("ls_strDefQuery3");
+				var strQueryLabelText = localStorage.getItem("ls_strQueryLabelText");
+				var strQueryLabelTextSpatial = localStorage.getItem("ls_strQueryLabelTextSpatial");
+
+				if ((strQueryLabelText == "") | (strQueryLabelText == "undefined")) {
+					strQueryLabelText = "<b>USER SELECTED QUERY FILTERS:</b>  None selected"
+				} else {
+					strQueryLabelText = "<b>USER SELECTED QUERY FILTERS:</b>  " + strQueryLabelText.substring(0, strQueryLabelText.length - 2);
+				}
+				if ((strQueryLabelTextSpatial == "") | (strQueryLabelTextSpatial == "undefined")) {
+					//do nothing
+				} else {
+					strQueryLabelText += "<br><b>USER SPATIAL QUERY FILTERS:</b>  " + strQueryLabelTextSpatial;
+				}
+
+				var div = document.getElementById("dFilterParameters");
+				div.innerHTML = strQueryLabelText;
+
+				app.gPrintReport2PDF = new MH_PrintReport2PDF({ strURL: strURL }); // instantiate the class
+
+				app.gQuerySummary = new MH_Query4Summary({ strURL: strURL }); // instantiate the class
+				app.gQuerySummary.Summarize(strDefQuery, strDefQuery2, true, app.FilterGeometry);
+
+				app.pSupSumMap = new MH_SetupSummaryMap({}); // instantiate the class
+				app.arrayLayers = app.pSupSumMap.Phase1();
+
+
+				var today = new Date();
+				var dd = today.getDate();
+				var mm = today.getMonth() + 1; //January is 0!
+				var yyyy = today.getFullYear();
+				today = mm + '/' + dd + '/' + yyyy;
+				document.getElementById('time').innerHTML = today;
+
+
+				app.gMakeCHARTS = new MH_MakeCHARTS({ strURL: strURL }); // instantiate the class
+				//app.gMakeCHARTS.StartCHARTING();  moving this to after the text summary has been loaded
+
+				function getTokens() {
+					var tokens = [];
+					var query = location.search;
+					query = query.slice(1);
+					query = query.split('&');
+					$.each(query, function (i, value) {
+						var token = value.split('|');
+						var key = decodeURIComponent(token[0]);
+						var data = decodeURIComponent(token[1]);
+						tokens[key] = data;
+					});
+					return tokens;
+				};
+
+				generate = function () {
+					document.getElementById("ImgResultsLoading").style.visibility = "visible";
+					app.gPrintReport2PDF.StartPrinting(app.map);
+				};
+
+			});
+
+/**/</script>
 </head>
    
 <body>
@@ -204,7 +205,7 @@ Date:        Oct 2014, Updated Oct 2018-->
     </div>
 
     <!--<button onclick="javascript:demoFromHTML()">PDF</button>-->
-    <div id="html-2-pdfwrapperORG" style='position: absolute; top: 20px; bottom: 0; overflow: auto; width: 850px; font-family: helvetica; padding:0px; margin-left:0px; padding-left:0px; margin:0px;'>
+    <div id="html-2-pdfwrapperORG" style='position: absolute; top: 20px; bottom: 0; overflow: auto; width: 850px; font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; padding:0px; margin-left:0px; padding-left:0px; margin:0px;'>
         <table style="width:100%; background-color: #FFFFFF; padding:0px; margin-left:0px; padding-left:0px; margin:0px;">
             <tr>
                 <td class="auto-style1">
@@ -220,7 +221,7 @@ Date:        Oct 2014, Updated Oct 2018-->
             </tr>
         </table>
         <div style="height:15px; position: absolute; top: 70px; right: 10px">
-            <img id="ImgResultsLoading" src="images/loading.gif" style="height:15px;" /><button onclick="generate()">Print Report to PDF</button>
+            <img id="ImgResultsLoading" src="images/loading.gif" style="height:15px;" /><button id="btn_PDF" onclick="generate()">Print Report to PDF</button>
             <!--<img id="ImgResultsLoading" src="{% static 'ced_main/images/ced_main/loading.gif' %}" style="height:15px;" /><button onclick="generate()">Print Report to PDF</button>-->
         </div>
         <b>Conservation Efforts Database v2.1</b><br />
@@ -247,7 +248,7 @@ Date:        Oct 2014, Updated Oct 2018-->
 
 
     <!--<div id="html-2-pdfwrapper" style='position: absolute; left: 20px; top: 150px; bottom: 0; overflow: auto; width: 850px'>-->
-    <div id="html-2-pdfwrapper" style='position: absolute; top: 570px; overflow: auto; width: 850px; font-family: helvetica;'>
+    <div id="html-2-pdfwrapper" style='position: absolute; top: 570px; overflow: auto; width: 850px; font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";'>
             <div id="dREPORTGENERATED" class="myDivClassNormal"><b>REPORT GENERATED:</b> <span id="time"></span></div>
             <div id="dTotalAcresQ2" class="myDivClassNormal"></div>
             <div id="dTotalCalcAcresQ2" class="myDivClassNormal"></div>
@@ -384,7 +385,7 @@ Date:        Oct 2014, Updated Oct 2018-->
         </div>
 
 
-    <div id="html-2-pdfwrapper3" style='position: absolute; top: 670px; overflow: auto; width: 850px; font-family: helvetica;'>
+    <div id="html-2-pdfwrapper3" style='position: absolute; top: 670px; overflow: auto; width: 850px; font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";'>
 
         <div id="piechartBASE64"></div>
     </div>

@@ -21,17 +21,18 @@ function getTokens() {
 }
 
 function disableOrEnableFormElements(strFormName, strElementType, TorF) {
-    var pform = document.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
+	var pform = document.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
 
-    if (pform != null) {
-        for (var i = 0; i < pform.elements.length; i++) {
-            if (pform.elements[i].type == strElementType) {
-                strID = pform.elements[i].id;
-                document.getElementById(strID).disabled = TorF;
-            }
-        }
-    }
-}
+	if (pform != null) {
+		for (var i = 0; i < pform.elements.length; i++) {
+			if (pform.elements[i].type == strElementType) {
+				strID = pform.elements[i].id;
+				document.getElementById(strID).disabled = TorF;
+			}
+		}
+	}
+
+}  
 
 
 function showLoading() {
@@ -140,7 +141,9 @@ define([
 			  disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
 			  disableOrEnableFormElements("dropdownForm", 'radio', true);  //disable/enable to avoid user clicking query options during pending queries
 
-              $(".divOpenStats").prop("onclick", null).off("click");
+			  $(".divOpenStats").prop("onclick", null).off("click");
+			  $("#btn_Report").prop("disabled", true);
+
 
               esriConfig.defaults.io.corsEnabledServers.push("https://utility.arcgis.com")
               esriConfig.defaults.io.corsEnabledServers.push("https://sampleserver6.arcgisonline.com")
@@ -205,14 +208,15 @@ define([
                   
               }
 
-              parser.parse();
+              //parser.parse();
 
               function ddlMatrix_Change(divTagSource) {
                   document.getElementById("ImgResultsLoading").style.visibility = "visible";
-                  disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
+				  disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
 				  disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
 				  disableOrEnableFormElements("dropdownForm", 'radio', true);  //disable/enable to avoid user clicking query options during pending queries
-                  $(".divOpenStats").prop("onclick", null).off("click");
+				  $(".divOpenStats").prop("onclick", null).off("click");
+				  $("#btn_Report").prop("disabled", true);
 
                   app.map.infoWindow.hide();
 				  app.map.graphics.clear();
@@ -381,10 +385,11 @@ define([
 				  app.gl.clear();
                   app.arrayPrjIDs_fromSpatialSelect = "";
                   document.getElementById("txt_NoSpatial").style.visibility = 'hidden';
-                  disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
+				  disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
 				  disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
 				  disableOrEnableFormElements("dropdownForm", 'radio', true);  //disable/enable to avoid user clicking query options during pending queries
-                  $(".divOpenStats").prop("onclick", null).off("click");
+				  $(".divOpenStats").prop("onclick", null).off("click");
+				  $("#btn_Report").prop("disabled", true);
 
                   document.getElementById("txtQueryResults").innerHTML = "-";
                   document.getElementById("dTotalProjectsQ").innerHTML = "-";
@@ -595,9 +600,9 @@ define([
               legendLayers.push({ layer: pBase_RRB, title: 'GRSG Breeding Habitat Dist. + R&R (Chambers et al. 2017)' });
               legendLayers.push({ layer: pBase_Breed, title: 'Breeding Habitat Distribution (Doherty et al. 2017)' });
               legendLayers.push({ layer: pBase_PI, title: 'GRSG Pop’l’n Index (Relative Abundance) (Doherty et al. 2017)' });
-              legendLayers.push({ layer: CED_PP_poly, title: 'CED Plans and Projects' });
               legendLayers.push({ layer: pBase_Pop, title: 'GRSG Populations' });
               legendLayers.push({ layer: pBase_MZ, title: 'WAFWA Management Zones' });
+			  legendLayers.push({ layer: CED_PP_poly, title: 'CED Plans and Projects' });
 
               dojo.connect(app.map, 'onLayersAddResult', function (results) {
                   var legend = new Legend({ map: app.map, layerInfos: legendLayers, respectCurrentMapScale: false, autoUpdate: true }, "legendDiv");
@@ -639,9 +644,6 @@ define([
               cbxLayers.push({ layers: [pBase_RRB, pBase_RRB], title: 'GRSG Breeding Habitat Dist. + R&R<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Chambers et al. 2017)' });
               cbxLayers.push({ layers: [pBase_Breed, pBase_Breed], title: 'Breeding Habitat Distribution<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Doherty et al. 2017)' });
               cbxLayers.push({ layers: [pBase_PI, plabels2], title: 'GRSG Pop’l’n Index (Relative Abundance)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Doherty et al. 2017)' });
-              cbxLayers.push({ layers: [CED_PP_poly, CED_PP_poly], title: 'CED Plans and Projects (area)' });
-              cbxLayers.push({ layers: [CED_PP_point, CED_PP_point], title: 'CED Plans and Projects (point)' });
-              cbxLayers.push({ layers: [CED_PP_line, CED_PP_line], title: 'CED Plans and Projects (line)' });
               cbxLayers.push({
                   layers: [pBase_Pop, plabels1], title: 'GRSG Populations' +
                                                          '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<i title="This data set represents greater sage-grouse populations to be used in work for the US Fish and Wildlife (USFWS) 2015 Status Review for the greater sage-grouse. Populations do not represent occupied habitat. Population polygons are meant to coarsely identify areas of occupation based on encircling groups of leks. Boundaries taken from BLM/WAFWA revised population boundaries (‘COT_SG_Populations_2014_WAFWA_UT’ data layer). The original data layer was slightly modified for the USFWS 2015 Status Review...">more..., </i>' +
@@ -653,8 +655,9 @@ define([
                                                                       '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<i title="The Greater Sage-grouse Comprehensive Conservation Strategy developed sage-grouse management zones determined by sage-grouse populations and sub-populations identified within seven floristic provinces.">more..., </i>' +
                                                                       '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://www.wafwa.org/Documents%20and%20Settings/37/Site%20Documents/Initiatives/Sage%20Grouse/Primer%203%20SGMapping%20&%20Priority%20Habitats1.2.pdf" target="_blank">WAFWA</a>'
               });
-
-
+			  cbxLayers.push({ layers: [CED_PP_poly, CED_PP_poly], title: 'CED Plans and Projects (area)' });
+			  cbxLayers.push({ layers: [CED_PP_point, CED_PP_point], title: 'CED Plans and Projects (point)' });
+			  cbxLayers.push({ layers: [CED_PP_line, CED_PP_line], title: 'CED Plans and Projects (line)' });
 
 			  arrayLayers = [pBase_PAC, pBase_SBBiom, pBase_SMA, pBase_BLMHMA, pBase_Eco, pBase_RRP,
 				  pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop, plabels1, plabels2,
@@ -1208,7 +1211,7 @@ define([
               var strA_POPArea = getTokens()['POP'];
               var strA_Managementunit = getTokens()['MU'];
 
-              parser.parse();
+              //parser.parse();
               //?IP=11,14,16&TA=3&ST=183,985,1992,4512,9901,12665,15561,19432
               if ((strA_TypeAct) || (strA_entry_type) || (strA_activity) || (strA_Subactivity) || (strA_implementing_party) || (strA_State) || (strA_POPArea) || (strA_Managementunit || strA_office)) {
                   var botContainer = registry.byId("bottomTableContainer");

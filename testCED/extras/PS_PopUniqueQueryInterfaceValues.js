@@ -2,18 +2,20 @@
 //Date:        Oct 2014, Updated Oct 2018
 
 function disableOrEnableFormElements(strFormName, strElementType, TorF) {
-    var pform = document.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
+	var pform = document.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
 
-    if (pform != null) {
-        for (var i = 0; i < pform.elements.length; i++) {
-            if (pform.elements[i].type == strElementType) {
-                strID = pform.elements[i].id;
-                document.getElementById(strID).disabled = TorF;
-            }
-        }
-    }
+	if (pform != null) {
+		for (var i = 0; i < pform.elements.length; i++) {
+			if (pform.elements[i].type == strElementType) {
+				strID = pform.elements[i].id;
+				document.getElementById(strID).disabled = TorF;
+			}
+		}
+	}
 
 }  
+
+
 
 define([
   "dojo/_base/declare",
@@ -72,7 +74,6 @@ define([
 
 
 		qry_SetUniqueValuesOf: function (strFieldNameText, strFieldNameValue, divTag4Results, strQuery) {
-			console.log(strFieldNameText);
             this.divTag4Results = divTag4Results;
             this.strFieldNameText = strFieldNameText;
             this.strFieldNameValue = strFieldNameValue;
@@ -301,11 +302,12 @@ define([
 						disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
 						disableOrEnableFormElements("dropdownForm", 'radio', false);  //disable/enable to avoid user clicking query options during pending queries
 
-						$(function () {
-							$('.divOpenStats').click(function () {
-								app.pSup.openCEDPSummary();
-							});
-						});
+						//$(function () {
+						//	$('.divOpenStats').click(function () {
+						//		app.pSup.openCEDPSummary();
+						//	});
+						//	$("#btn_Report").prop("disabled", false);
+						//});
 
 						this.strQuery1 = "((SRU_ID IS NULL) OR(SRU_ID = 0)) and(typeact = 'Spatial Project')";
 						this.strURL = app.strTheme1_URL;
@@ -405,11 +407,12 @@ define([
 						disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
 						disableOrEnableFormElements("dropdownForm", 'radio', false);  //disable/enable to avoid user clicking query options during pending queries
 
-						$(function () {
-							$('.divOpenStats').click(function () {
-								app.pSup.openCEDPSummary();
-							});
-						});
+						//$(function () {
+						//	$('.divOpenStats').click(function () {
+						//		app.pSup.openCEDPSummary();
+						//	});
+						//	$("#btn_Report").prop("disabled", false);
+						//});
 						app.pFC.GetCountOfFCDef_ShowText(this.strQuery1, this.strURL + 0, "txtQueryResults", "count", "project_id", "");
 
 						this.iNonSpatialTableIndex = 0; //reset the table index for next time
@@ -433,11 +436,12 @@ define([
 			disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
 			disableOrEnableFormElements("dropdownForm", 'radio', false);  //disable/enable to avoid user clicking query options during pending queries
 
-            $(function () {
-                $('.divOpenStats').click(function () {
-                    app.pSup.openCEDPSummary();
-                });
-            });
+    //        $(function () {
+    //            $('.divOpenStats').click(function () {
+    //                app.pSup.openCEDPSummary();
+				//});
+				//$("#btn_Report").prop("disabled", false);
+    //        });
         }
     });
 }

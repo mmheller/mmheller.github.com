@@ -133,13 +133,13 @@ function startExport2PDF() {
 	pdf.text("Interactive Map - Summary Report", app.gPrintReport2PDF.pdfMargins.left, 80);
 
     
-    $("#dREPORTGENERATED").css("font-family", "helvetica");// change property value
-     $("#dTotalAcresQ2").css("font-family", "helvetica");// change property value
-     $("#dTotalCalcAcresQ2").css("font-family", "helvetica");// change property value
-     $("#dTotalProjects").css("font-family", "helvetica");// change property value
-     $("#dTotalProjectsNon").css("font-family", "helvetica");// change property value
-     $("#dTotalPlans").css("font-family", "helvetica");// change property value
-     $("#dFilterParameters").css("font-family", "helvetica");// change property value
+	$("#dREPORTGENERATED").css("font-family", "helvetica");// change property value
+	$("#dTotalAcresQ2").css("font-family", "helvetica");// change property value
+	$("#dTotalCalcAcresQ2").css("font-family", "helvetica");// change property value
+	$("#dTotalProjects").css("font-family", "helvetica");// change property value
+	$("#dTotalProjectsNon").css("font-family", "helvetica");// change property value
+	$("#dTotalPlans").css("font-family", "helvetica");// change property value
+	$("#dFilterParameters").css("font-family", "helvetica");// change property value
      $("#dMaxLastDataProviderEdit").css("font-family", "helvetica");// change property value
      $("#dMaxLastPubProc").css("font-family", "helvetica");// change property value
 
@@ -196,7 +196,7 @@ function startExport2PDF() {
 		app.gPrintReport2PDF.pdfMargins.left, // x coord
 		app.gPrintReport2PDF.pdfMargins.top + 390, 
         {
-            setFont: "helvetica",
+			setFont: '"Lato", - apple - system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans - serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"',
             width: 5000, // resetting the max width of content on PDF, otherwise the text output word wraps because jsPDF doesnt' always recognize the <br>'s
             //width: pdfMargins.width, // max width of content on PDF
             elementHandlers: specialElementHandlers = {

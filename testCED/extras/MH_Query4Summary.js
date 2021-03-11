@@ -2,14 +2,15 @@
 //Date:        Oct 2016, Updated Oct 2018
 
 
+
 function disableOrEnableFormElements(strFormName, strElementType, TorF, pDocument) {
-    var pform = pDocument.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
-    for (var i = 0; i < pform.elements.length; i++) {
-        if (pform.elements[i].type == strElementType) {
-            strID = pform.elements[i].id;
-            pDocument.getElementById(strID).disabled = TorF;
-        }
-    }
+	var pform = pDocument.getElementById(strFormName);   // enable all the dropdown menu's while queries are running
+	for (var i = 0; i < pform.elements.length; i++) {
+		if (pform.elements[i].type == strElementType) {
+			strID = pform.elements[i].id;
+			pDocument.getElementById(strID).disabled = TorF;
+		}
+	}
 }
 
 function escapeRegExp(string) {
@@ -97,9 +98,9 @@ define([
 
         Summarize: function (strQuery, strQuery2, blnOpenEntireSummary, pGeometry) {
             document.getElementById("ImgResultsLoading").style.visibility = "visible";
-            disableOrEnableFormElements("dropdownForm", 'select-one', true); //disable/enable to avoid user clicking query options during pending queries
-			disableOrEnableFormElements("dropdownForm", 'button', true);  //disable/enable to avoid user clicking query options during pending queries
-			disableOrEnableFormElements("dropdownForm", 'radio', true);  //disable/enable to avoid user clicking query options during pending queries
+			disableOrEnableFormElements("dropdownForm", 'select-one', true, document); //disable/enable to avoid user clicking query options during pending queries
+			disableOrEnableFormElements("dropdownForm", 'button', true, document);  //disable/enable to avoid user clicking query options during pending queries
+			disableOrEnableFormElements("dropdownForm", 'radio', true, document);  //disable/enable to avoid user clicking query options during pending queries
             $(".divOpenStats").prop("onclick", null).off("click");
 
             arrayQuery = [];            //table/fc index, query string, field 4 aggregation, stat type (count, sum, avg), group by field, html ID, string function
@@ -213,9 +214,7 @@ define([
                 pQuery.groupByFieldsForStatistics = [strGroupByField];
                 pQuery.orderByFields = [strGroupByField + " ASC"];
             }
-
             pQuery.outStatistics = array_QueryStatDefs;
-            console.log(iarrayQueryIndex, iarrayQueryIndex);
             return pQueryTask.execute(pQuery, this.returnEvents, this.err);
         },
 
@@ -442,9 +441,9 @@ define([
 							if (app.blnPopulateFeatureTable) {
 								$(function () {
 									$('.divOpenStats').click(function () {
-										//<b><u><I><font size="3px" color="grey">Click</font> <font size="3px" color="blue">here</font> <font size="3px" color="white">for summary report...</font></I></u></b>
 										app.pSup.openCEDPSummary();
 									});
+									$("#btn_Report").prop("disabled", false);
 								});
 							}
 							app.map.graphics.clear();
