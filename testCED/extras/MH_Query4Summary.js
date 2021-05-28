@@ -114,12 +114,12 @@ define([
             this.m_query4SummaryMap = strQuery;
 
             if (blnOpenEntireSummary) {
-                arrayQuery.push(["12", "OBJECTID > 0", "LastDataProviderEdit", "Max", "", "dMaxLastDataProviderEdit", '<b>LAST APPROVED DATA PROVIDER EDIT:</b> {0}', "convert2date", ""]);
-                arrayQuery.push(["12", "OBJECTID > 0", "ProcDate", "Max", "", "dMaxLastPubProc", '<b>LAST DATA REFRESH:</b> {0}', "convert2date", ""]);
+				arrayQuery.push([(parseInt("12") + parseInt(app.iIncrementHFL)).toString(), "OBJECTID > 0", "LastDataProviderEdit", "Max", "", "dMaxLastDataProviderEdit", '<b>LAST APPROVED DATA PROVIDER EDIT:</b> {0}', "convert2date", ""]);
+				arrayQuery.push([(parseInt("12") + parseInt(app.iIncrementHFL)).toString(), "OBJECTID > 0", "ProcDate", "Max", "", "dMaxLastPubProc", '<b>LAST DATA REFRESH:</b> {0}', "convert2date", ""]);
                 
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "", "dTotalAcresQ2", '<b>ALL EFFORTS:</b> {0}', "commas-no-round-decimal", ""]);
 
-                arrayQuery.push(["11", strQuery2, "GIS_Acres", "sum", "", "dTotalCalcAcresQ2", '{0} GIS calculated acres', "commas-no-round-decimal", ""]);
+				arrayQuery.push([(parseInt("11") + parseInt(app.iIncrementHFL)).toString(), strQuery2, "GIS_Acres", "sum", "", "dTotalCalcAcresQ2", '{0} GIS calculated acres', "commas-no-round-decimal", ""]);
 
                 arrayQuery.push(["0", strQuery + " and (typeact = 'Spatial Project')", "Project_ID,totalacres", "count,sum", "", "dTotalProjects", '<b>SPATIAL PROJECTS:</b> {0}', "", ""]);
                 arrayQuery.push(["0", strQuery + " and (typeact = 'Non-Spatial Project')", "Project_ID,totalacres", "count,sum", "", "dTotalProjectsNon", '<b>NON-SPATIAL PROJECTS:</b> {0}', "", ""]);
@@ -133,29 +133,29 @@ define([
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Activity", "dNumberOfRecordsbyActivity", '<p><b>"NUMBER OF EFFORTS and TOTAL ACRES by ACTIVITY"</b><br />{0}</p>', "show both-commas-no-round-decimal", ""]);
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "Office", "dNumberOfRecordsbyOffice", '<p><b>"NUMBER of EFFORTS and TOTAL ACRES by OFFICE"</b><br />{0}</p>', "show both-commas-no-round-decimal", ""]);
                 arrayQuery.push(["0", strQuery, "Project_ID,totalacres", "count,sum", "SubActivity", "dNumberOfRecordsbySubActivity", '<p><b>"NUMBER of EFFORTS and TOTAL ACRES by SUBACTIVITY"</b><br />{0}</p>', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["9", strQuery2, "Project_ID", "count", "State", "dNumberofOverlappingStates", '<b>"NUMBER of OVERLAPPING STATES"</b><br>{0}', "show both", ""]);
-                arrayQuery.push(["11", strQuery2, "Project_ID,GIS_Acres", "count,sum", "State", "dGISStates", '<b>"NUMBER of EFFORTS and TOTAL ACRES by STATE"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["3", strQuery2, "Project_ID", "count", "WAFWA_Zone", "dNumberofOverlappingMngmtZones", '<b>"NUMBER of OVERLAPPING MANAGEMENT ZONES"</b><br>{0}', "show both", ""]);
-                arrayQuery.push(["8", strQuery2, "Project_ID", "count", "Pop_Name", "dNumberofOverlappingPopAreas", '<b>"NUMBER of OVERLAPPING POPULATION AREAS"</b><br>{0}', "show both", ""]);
-                arrayQuery.push(["13", strQuery2, "Project_ID,GIS_Acres", "count,sum", "RR_class_n", "dGISRMZ", '<b>"RESILIENCE and RESISTANCE"<br>(Total Number of Efforts and Associated Acres Included in Each Class - NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["14", strQuery2 + " and Symbol <> 'Unknown'", "Project_ID,GIS_Acres", "count,sum", "Symbol", "dGISAB", '<b>"CUMULATIVE PERCENT of GRSG POPULATION by MANAGEMENT ZONE"<br>(Total Number of Efforts and Associated Acres Included in Each Class - NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["15", strQuery2, "Project_ID,GIS_Acres", "count,sum", "class", "dGISBD", '<b>"GRSG BREEDING HABITAT PROBABILITY by MANAGEMENT ZONE"<br>(Total Number of Efforts and Associated Acres Included in Each Class - NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b>\n<br>{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["16", strQuery2 + " and Symbol <> 'N/A'", "Project_ID,GIS_Acres", "count,sum", "Symbol", "dGISBP", '<b>"GRSG BREEDING HABITAT PROBABILITY intersected with RESILIENCE and RESISTANCE CATEGORIES by MANAGEMENT ZONE"<br>(Total Number of Efforts and Associated Acres Included in Each Class - NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)<br>(Breeding Habitat - R&R Value)</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+				arrayQuery.push([(parseInt("9") + parseInt(app.iIncrementHFL)).toString(), strQuery2, "Project_ID", "count", "State", "dNumberofOverlappingStates", '<b>"NUMBER of OVERLAPPING STATES"</b><br>{0}', "show both", ""]);
+				arrayQuery.push([(parseInt("11") + parseInt(app.iIncrementHFL)).toString(), strQuery2, "Project_ID,GIS_Acres", "count,sum", "State", "dGISStates", '<b>"NUMBER of EFFORTS and TOTAL ACRES by STATE"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
+				arrayQuery.push([(parseInt("3") + parseInt(app.iIncrementHFL)).toString(), strQuery2, "Project_ID", "count", "WAFWA_Zone", "dNumberofOverlappingMngmtZones", '<b>"NUMBER of OVERLAPPING MANAGEMENT ZONES"</b><br>{0}', "show both", ""]);
+				arrayQuery.push([(parseInt("8") + parseInt(app.iIncrementHFL)).toString(), strQuery2, "Project_ID", "count", "Pop_Name", "dNumberofOverlappingPopAreas", '<b>"NUMBER of OVERLAPPING POPULATION AREAS"</b><br>{0}', "show both", ""]);
+				arrayQuery.push([(parseInt("13") + parseInt(app.iIncrementHFL)).toString(), strQuery2, "Project_ID,GIS_Acres", "count,sum", "RR_class_n", "dGISRMZ", '<b>"RESILIENCE and RESISTANCE"<br>(Total Number of Efforts and Associated Acres Included in Each Class - NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
+				arrayQuery.push([(parseInt("14") + parseInt(app.iIncrementHFL)).toString(), strQuery2 + " and Symbol <> 'Unknown'", "Project_ID,GIS_Acres", "count,sum", "Symbol", "dGISAB", '<b>"CUMULATIVE PERCENT of GRSG POPULATION by MANAGEMENT ZONE"<br>(Total Number of Efforts and Associated Acres Included in Each Class - NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
+				arrayQuery.push([(parseInt("15") + parseInt(app.iIncrementHFL)).toString(), strQuery2, "Project_ID,GIS_Acres", "count,sum", "class", "dGISBD", '<b>"GRSG BREEDING HABITAT PROBABILITY by MANAGEMENT ZONE"<br>(Total Number of Efforts and Associated Acres Included in Each Class - NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b>\n<br>{0}', "show both-commas-no-round-decimal", ""]);
+				arrayQuery.push([(parseInt("16") + parseInt(app.iIncrementHFL)).toString(), strQuery2 + " and Symbol <> 'N/A'", "Project_ID,GIS_Acres", "count,sum", "Symbol", "dGISBP", '<b>"GRSG BREEDING HABITAT PROBABILITY intersected with RESILIENCE and RESISTANCE CATEGORIES by MANAGEMENT ZONE"<br>(Total Number of Efforts and Associated Acres Included in Each Class - NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)<br>(Breeding Habitat - R&R Value)</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
 
-                arrayQuery.push(["21", strQuery2, "Project_ID,GIS_Acres", "count,sum", "Hab_Type", "dGISBLMHMA", '<b>"NUMBER of TOTAL ACRES BY BLM HABITAT MANAGEMENT AREAS"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
+				arrayQuery.push([(parseInt("21") + parseInt(app.iIncrementHFL)).toString(), strQuery2, "Project_ID,GIS_Acres", "count,sum", "Hab_Type", "dGISBLMHMA", '<b>"NUMBER of TOTAL ACRES BY BLM HABITAT MANAGEMENT AREAS"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
 
                 //arrayQuery.push(["17", strQuery2, "Project_ID,GIS_Acres", "count,sum", "EIS_HAB", "dGISGHMA", '<b>"NUMBER of TOTAL ACRES BY PROPOSED GRSG GENERAL HABITAT MANAGEMENT AREAS"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["17", strQuery2, "Project_ID,GIS_Acres", "count,sum", "Mgmt_zone", "dGISMZ", '<b>"NUMBER of EFFORTS and TOTAL ACRES by WAFWA MANAGEMENT ZONES"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
+				arrayQuery.push([(parseInt("17") + parseInt(app.iIncrementHFL)).toString(), strQuery2, "Project_ID,GIS_Acres", "count,sum", "Mgmt_zone", "dGISMZ", '<b>"NUMBER of EFFORTS and TOTAL ACRES by WAFWA MANAGEMENT ZONES"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
                 //arrayQuery.push(["19", strQuery2, "Project_ID,GIS_Acres", "count,sum", "EIS_HAB", "dGISPHMA", '<b>"NUMBER of TOTAL ACRES BY PROPOSED GRSG PRIORITY HABITAT MANAGEMENT AREAS"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["18", strQuery2, "Project_ID,GIS_Acres", "count,sum", "POPULATION", "dGISPoP", '<b>"NUMBER of EFFORTS and TOTAL ACRES by GRSG POPULATION AREAS"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["19", strQuery2 + " and Symbol <> 'N/A'", "Project_ID,GIS_Acres", "count,sum", "Symbol", "dGISIDX", '<b>"NUMBER of EFFORTS and TOTAL ACRES by RESILIENCE and RESISTANCE AND POPULATION INDEX HIGH/LOW DENSITY CLASS"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
-                arrayQuery.push(["10", strQuery2, "Project_ID,GIS_Acres", "count,sum", "ADMIN_AGEN", "dGISSMA", '<b>"NUMBER of EFFORTS and TOTAL ACRES by SURFACE MANAGEMENT AGENCY"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
+				arrayQuery.push([(parseInt("18") + parseInt(app.iIncrementHFL)).toString(), strQuery2, "Project_ID,GIS_Acres", "count,sum", "POPULATION", "dGISPoP", '<b>"NUMBER of EFFORTS and TOTAL ACRES by GRSG POPULATION AREAS"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
+				arrayQuery.push([(parseInt("19") + parseInt(app.iIncrementHFL)).toString(), strQuery2 + " and Symbol <> 'N/A'", "Project_ID,GIS_Acres", "count,sum", "Symbol", "dGISIDX", '<b>"NUMBER of EFFORTS and TOTAL ACRES by RESILIENCE and RESISTANCE AND POPULATION INDEX HIGH/LOW DENSITY CLASS"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
+				arrayQuery.push([(parseInt("10") + parseInt(app.iIncrementHFL)).toString(), strQuery2, "Project_ID,GIS_Acres", "count,sum", "ADMIN_AGEN", "dGISSMA", '<b>"NUMBER of EFFORTS and TOTAL ACRES by SURFACE MANAGEMENT AGENCY"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
 
-                arrayQuery.push(["20", strQuery2, "GIS_Acres", "sum", "", "dGISPACSum", '<b>"TOTAL ACRES within GRSG PRIORITY AREAS for CONSERVATION (PACs)"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br><i>{0}  acres</i>', "commas-no-round-decimal", ""]);
+				arrayQuery.push([(parseInt("20") + parseInt(app.iIncrementHFL)).toString(), strQuery2, "GIS_Acres", "sum", "", "dGISPACSum", '<b>"TOTAL ACRES within GRSG PRIORITY AREAS for CONSERVATION (PACs)"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br><i>{0}  acres</i>', "commas-no-round-decimal", ""]);
             } else {
 				//arrayQuery.push(["12", "OBJECTID > 0", "LastDataProviderEdit", "Max", "", "dFPMaxLastDataProviderEdit", '<font size="1px"><b>Last Approved Data Provider Edit:</b> {0}</font>', "convert2date", ""]);
 				arrayQuery.push(["0", "OBJECTID > 0", "Last_Updated", "Max", "", "dFPMaxLastDataProviderEdit", '<font size="1px"><b>Last Approved Data Provider Edit:</b> {0}</font>', "convert2date", ""]);
-                arrayQuery.push(["12", "OBJECTID > 0", "ProcDate", "Max", "", "dFPMaxLastPubProc", '<font size="1px"><b>Last Data Refresh:</b> {0}</font>', "convert2date", ""]);
+				arrayQuery.push([(parseInt("12") + app.iIncrementHFL).toString(), "OBJECTID > 0", "ProcDate", "Max", "", "dFPMaxLastPubProc", '<font size="1px"><b>Last Data Refresh:</b> {0}</font>', "convert2date", ""]);
                 arrayQuery.push(["0", strQuery, "totalacres", "sum", "", "dTotalAcresQ", '{0}', "commas-no-round-decimal", ""]);
             }
 
@@ -420,17 +420,34 @@ define([
                 }
                 else {                    //loop through the checkboxes and enable, so user interaction dosen't disrupt the queryies
                     if (document.getElementById("ImgResultsLoading") != undefined) {
-                        if (app.arrayLayers[13] != undefined) {
-                            var CED_PP_poly = app.arrayLayers[13];  //index depends on MH_Setup-->Phase2-->arrayLayers =
-                            var CED_PP_line = app.arrayLayers[14];
-                            var CED_PP_point = app.arrayLayers[15];
-                            var CED_PP_point4FeatureTable = app.arrayLayers[16];
+                        //if (app.arrayLayers[13] != undefined) {
+                        //    var CED_PP_poly = app.arrayLayers[13];  //index depends on MH_Setup-->Phase2-->arrayLayers =
+                        //    var CED_PP_line = app.arrayLayers[14];
+                        //    var CED_PP_point = app.arrayLayers[15];
+                        //    var CED_PP_point4FeatureTable = app.arrayLayers[16];
 
-                            CED_PP_point.clearSelection();
-                            CED_PP_line.clearSelection();
-                            CED_PP_poly.clearSelection();
-                        }
-
+                        //    CED_PP_point.clearSelection();
+                        //    CED_PP_line.clearSelection();
+                        //    CED_PP_poly.clearSelection();
+                        //}
+						if (app.arrayLayers[13] != undefined) {
+							if (app.strModule == "GRSG") {
+								var CED_PP_poly = arrayLayers[13];  //index depends on MH_SetupCEDMap-->Phase2-->arrayLayers =
+								var CED_PP_line = arrayLayers[14];
+								var CED_PP_point = arrayLayers[15];
+								var CED_PP_point4FeatureTable = arrayLayers[16];
+								CED_PP_point.clearSelection();
+								CED_PP_line.clearSelection();
+								CED_PP_poly.clearSelection();
+							} else {
+								var CED_PP_poly = arrayLayers[13];  //index depends on MH_SetupCEDMap-->Phase2-->arrayLayers =
+								var CED_PP_line = undefined;
+								var CED_PP_point = arrayLayers[14];
+								var CED_PP_point4FeatureTable = arrayLayers[15];
+								CED_PP_point.clearSelection();
+								CED_PP_poly.clearSelection();
+							}
+						}
                         document.getElementById("ImgResultsLoading").style.visibility = "hidden";
                         disableOrEnableFormElements("dropdownForm", 'select-one', false, document); //disable/enable to avoid user clicking query options during pending queries
 						disableOrEnableFormElements("dropdownForm", 'button', false, document);  //disable/enable to avoid user clicking query options during pending queries

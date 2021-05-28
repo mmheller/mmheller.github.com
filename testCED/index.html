@@ -7,10 +7,10 @@ Date:        Oct 2014, Updated Oct 2018-->
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />    <!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
-	<title>Greater Sage Grouse: Conservation Efforts</title>
+	<title>The Conservation Efforts Database</title>
 	<link rel="shortcut icon" type="image/png" href="//www.usgs.gov/sites/all/themes/usgs_palladium/favicons/favicon.ico" />
-	<link rel="stylesheet" href="https://js.arcgis.com/3.35/dijit/themes//tundra/tundra.css" />
-	<link rel="stylesheet" href="https://js.arcgis.com/3.35/esri/css/esri.css" />
+	<link rel="stylesheet" href="https://js.arcgis.com/3.36/dijit/themes//tundra/tundra.css" />
+	<link rel="stylesheet" href="https://js.arcgis.com/3.36/esri/css/esri.css" />
 
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 	<link rel="stylesheet" type="text/css" href="Styles/panelMapAndReport.css" />
@@ -29,7 +29,7 @@ Date:        Oct 2014, Updated Oct 2018-->
 	<!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/javascript/grsgmap/extras' %}"} };</script>-->
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<script type="text/javascript" src="https://js.arcgis.com/3.32/"></script>
+	<script type="text/javascript" src="https://js.arcgis.com/3.36/"></script>
 
 	<script type="text/javascript">
 		dojo.require("dijit.layout.TabContainer");
@@ -76,10 +76,18 @@ Date:        Oct 2014, Updated Oct 2018-->
 				app.pSetQS = null;
 
 				app.arrayLayers = app.pSup.Phase2();
-				var CED_PP_poly = arrayLayers[13];  //index depends on MH_SetupCEDMap-->Phase2-->arrayLayers =
-				var CED_PP_line = arrayLayers[14];
-				var CED_PP_point = arrayLayers[15];
-				var CED_PP_point4FeatureTable = arrayLayers[16];
+
+				if (app.strModule == "GRSG") {
+					var CED_PP_poly = arrayLayers[13];  //index depends on MH_SetupCEDMap-->Phase2-->arrayLayers =
+					var CED_PP_line = arrayLayers[14];
+					var CED_PP_point = arrayLayers[15];
+					var CED_PP_point4FeatureTable = arrayLayers[16];
+				} else {
+					var CED_PP_poly = arrayLayers[13];  //index depends on MH_SetupCEDMap-->Phase2-->arrayLayers =
+					var CED_PP_line = undefined;
+					var CED_PP_point = arrayLayers[14];
+					var CED_PP_point4FeatureTable = arrayLayers[15];
+				}
 
 				app.pSup.Phase3(CED_PP_point, CED_PP_line, CED_PP_poly);
 
@@ -272,9 +280,9 @@ Date:        Oct 2014, Updated Oct 2018-->
 
 
 			<div id="pDivOpenStats" class="divOpenStats">
-				<input id="btn_Report" type="button"  onmouseover="" style="cursor: pointer;"
+				<input id="btn_Report" type="button" onmouseover="" style="cursor: pointer;"
 					   title="Click for the comprehensive CED summary report.  The summary report includes various report summaries, charts, map, and 'Print Report to PDF' options  -----  Note: year filter and subactivity filter selections required for Summary Report."
-					   value="Summary Report"  acceptdisabled="disabled"/>
+					   value="Summary Report" acceptdisabled="disabled" />
 			</div>
 		</div>
 
@@ -287,7 +295,7 @@ Date:        Oct 2014, Updated Oct 2018-->
 		<div id="txt_NoSpatial" style="position:absolute; visibility:hidden; background-color: yellow; left:20%; bottom:40%; color:red; z-index:51; font-size:30px">Non-Spatial Projects/Plans Found,<br />See Table Below<br /><br />Spatial Projects NOT Found</div>
 
 		<div id="txt_xyCoords" style="position:absolute; left:25px; bottom:1px; color:#404040; z-index:50; font-size:11px"></div>
-		<div id="txt_Version" style="position:absolute; right:15px; bottom:20px; color:#404040; z-index:50; font-size:11px">CED Interactive Map Version 3.0.0</div>
+		<div id="txt_Version" style="position:absolute; right:15px; bottom:20px; color:#404040; z-index:50; font-size:11px">CED Interactive Map Version 3.1.0</div>
 		<!--<img id="loadingImg" src="{% static 'ced_main/images/ced_main/loading.gif' %}" style="position:fixed; right:40%; top:50%; z-index:100;" />-->
 		<img id="loadingImg" src="images/loading.gif" style="position:fixed; right:40%; top:50%; z-index:100;" />
 
@@ -314,35 +322,39 @@ Date:        Oct 2014, Updated Oct 2018-->
 		</div>
 	</div>
 
-	<div id="contact1" style="position:absolute; top:10px; right:20px;">
-		<a href="/welcome/about/" target="_blank" style="color: #ffffff;">About CED</a>
-	</div>
+		<div id="txtModuleTitle" class="" style="position:absolute; top:0px; left:650px;">
+			<h4 id="mapModID">Sagebrush Ecosystem</h4>
+		</div>
 
-	<!--<a href="https://conservationefforts.org" target="_blank">
-		<img id="theImage4" border="0" src="{% static 'ced_main/images/ced_main/CEDlogo_white_180x31.png' %}"
-			 style="position:absolute; top:20px; left:18px;" height="45" />
-	</a>
-	<a href="https://www.fws.gov" target="_blank">
-		<img id="theImage3" border="0" src="{% static 'ced_main/images/ced_main/USFWS_150x31.png' %}"
-			 style="position:absolute; top:25px; left:325px;" height="35" />
-	</a>
-	<a href="https://www.usgs.gov" target="_blank">
-		<img id="theImage2" border="0" src="{% static 'ced_main/images/ced_main/USGS_117x31.png' %}"
-			 style="position:absolute; top:25px; left:505px;" height="35" />    </a>-->
+		<div id="contact1" style="position:absolute; top:10px; right:20px;">
+			<a href="/welcome/about/" target="_blank" style="color: #ffffff;">About CED</a>
+		</div>
+
+		<!--<a href="https://conservationefforts.org" target="_blank">
+			<img id="theImage4" border="0" src="{% static 'ced_main/images/ced_main/CEDlogo_white_180x31.png' %}"
+				 style="position:absolute; top:20px; left:18px;" height="45" />
+		</a>
+		<a href="https://www.fws.gov" target="_blank">
+			<img id="theImage3" border="0" src="{% static 'ced_main/images/ced_main/USFWS_150x31.png' %}"
+				 style="position:absolute; top:25px; left:325px;" height="35" />
+		</a>
+		<a href="https://www.usgs.gov" target="_blank">
+			<img id="theImage2" border="0" src="{% static 'ced_main/images/ced_main/USGS_117x31.png' %}"
+				 style="position:absolute; top:25px; left:505px;" height="35" />    </a>-->
 
 
-	<a href="https://conservationefforts.org" target="_blank">
-		<img id="theImage4" border="0" src="images/CEDlogo_white_180x31.png"
-			 style="position:absolute; top:20px; left:18px;" height="45" />
-	</a>
-	<a href="https://www.fws.gov" target="_blank">
-		<img id="theImage3" border="0" src="images/USFWS_150x31.png"
-			 style="position:absolute; top:25px; left:325px;" height="35" />
-	</a>
-	<a href="https://www.usgs.gov" target="_blank">
-		<img id="theImage2" border="0" src="images/USGS_117x31.png"
-			 style="position:absolute; top:25px; left:505px;" height="35" />
-	</a>
+		<a href="https://conservationefforts.org" target="_blank">
+			<img id="theImage4" border="0" src="images/CEDlogo_white_180x31.png"
+				 style="position:absolute; top:20px; left:18px;" height="45" />
+		</a>
+		<a href="https://www.fws.gov" target="_blank">
+			<img id="theImage3" border="0" src="images/USFWS_150x31.png"
+				 style="position:absolute; top:25px; left:325px;" height="35" />
+		</a>
+		<a href="https://www.usgs.gov" target="_blank">
+			<img id="theImage2" border="0" src="images/USGS_117x31.png"
+				 style="position:absolute; top:25px; left:505px;" height="35" />
+		</a>
 
 
 </body>

@@ -51,8 +51,10 @@ define([
         mSR: null,
 
         constructor: function (options) {// specify class defaults
-            this.pLayer1 = options.pLayer1 || null;
-            this.pLayer2 = options.pLayer2 || null;
+			this.pLayer1 = options.pLayer1 || null;
+			if (app.strModule == "GRSG") {
+				this.pLayer2 = options.pLayer2 || null;
+			}
             this.pLayer3 = options.pLayer3 || null; // default to 50 results per page
             this.strSingleLayerName = options.strSingleLayerName || null;
             this.iSingleObjectID = options.iSingleObjectID || null;
@@ -85,12 +87,18 @@ define([
                 pxWidth = app.map.extent.getWidth() / app.map.width; // create an extent from the mapPoint that was clicked // this is used to return features within 3 pixels of the click point
                 padding = 8 * pxWidth;
 
-                strQuery1 = this.pLayer1.getDefinitionExpression();
-                if (this.pLayer2.getDefinitionExpression() != "") {
-                    strQuery23 = this.pLayer2.getDefinitionExpression();
-                } else {
-                    strQuery23 = "OBJECTID > 0";
-                }
+				strQuery1 = this.pLayer1.getDefinitionExpression();
+
+    //            if (this.pLayer2.getDefinitionExpression() != "") {
+    //                strQuery23 = this.pLayer2.getDefinitionExpression();
+    //            } else {
+    //                strQuery23 = "OBJECTID > 0";
+				//}
+				if (this.pLayer3.getDefinitionExpression() != "") {
+					strQuery23 = this.pLayer3.getDefinitionExpression();
+				} else {
+					strQuery23 = "OBJECTID > 0";
+				}
 
             } else {
                 var pMP = new esri.geometry.Point(dblX, dblY, new esri.SpatialReference({ "wkid": 3857 }));
@@ -108,30 +116,41 @@ define([
 
             this.pSP = pSP;
             qt_Layer1 = new esri.tasks.QueryTask(this.pLayer1.url);
-            q_Layer1 = new esri.tasks.Query();
-            qt_Layer2 = new esri.tasks.QueryTask(this.pLayer2.url);
-            q_Layer2 = new esri.tasks.Query();
-            qt_Layer3 = new esri.tasks.QueryTask(this.pLayer3.url);
-            q_Layer3 = new esri.tasks.Query();
+			q_Layer1 = new esri.tasks.Query();
 
-            q_Layer1.returnGeometry = q_Layer2.returnGeometry = q_Layer3.returnGeometry = true;
-            q_Layer1.outSpatialReference = q_Layer2.outSpatialReference = q_Layer3.outSpatialReference = new esri.SpatialReference({ "wkid": 3857 })
+			qt_Layer3 = new esri.tasks.QueryTask(this.pLayer3.url);
+			q_Layer3 = new esri.tasks.Query();
+			q_Layer3.maxAllowableOffset = 200;
+			q_Layer1.where = strQuery1;
+			var pLayer1, pLayer2, pLayer3, pPromises, pxWidth, padding;
+			qGeom = new esri.geometry.Extent({ "xmin": dblX - padding, "ymin": dblY - padding, "xmax": dblX + padding, "ymax": dblY + padding, "spatialReference": this.mSR });
 
-            q_Layer3.maxAllowableOffset = 200;
-            q_Layer1.outFields = q_Layer2.outFields = q_Layer3.outFields = ["*"];
-            
-            q_Layer1.where = strQuery1;
-            q_Layer2.where = q_Layer3.where = strQuery23;
-                                    
-            var pLayer1, pLayer2, pLayer3, pPromises, pxWidth, padding;
-
-            qGeom = new esri.geometry.Extent({ "xmin": dblX - padding, "ymin": dblY - padding, "xmax": dblX + padding, "ymax": dblY + padding, "spatialReference": this.mSR });
-            q_Layer1.geometry = q_Layer2.geometry = q_Layer3.geometry = qGeom; // use the extent for the query geometry
-
-            pLayer1 = qt_Layer1.execute(q_Layer1);
-            pLayer2 = qt_Layer2.execute(q_Layer2);
-            pLayer3 = qt_Layer3.execute(q_Layer3);
-            pPromises = new all([pLayer1, pLayer2, pLayer3]);
+			if (app.strModule == "GRSG") {
+				qt_Layer2 = new esri.tasks.QueryTask(this.pLayer2.url);
+				q_Layer2 = new esri.tasks.Query();
+				q_Layer1.returnGeometry = q_Layer2.returnGeometry = q_Layer3.returnGeometry = true;
+				q_Layer1.outSpatialReference = q_Layer2.outSpatialReference = q_Layer3.outSpatialReference = new esri.SpatialReference({ "wkid": 3857 })
+				q_Layer1.outFields = q_Layer2.outFields = q_Layer3.outFields = ["*"];
+				q_Layer2.where = q_Layer3.where = strQuery23;
+				q_Layer1.geometry = q_Layer2.geometry = q_Layer3.geometry = qGeom; // use the extent for the query geometry
+			} else {
+				q_Layer1.returnGeometry = q_Layer3.returnGeometry = true;
+				q_Layer1.outSpatialReference = q_Layer3.outSpatialReference = new esri.SpatialReference({ "wkid": 3857 })
+				q_Layer1.outFields = q_Layer3.outFields = ["*"];
+				q_Layer3.where = strQuery23;
+				q_Layer1.geometry = q_Layer3.geometry = qGeom; // use the extent for the query geometry
+			}
+                                  
+			pLayer1 = qt_Layer1.execute(q_Layer1);
+			if (app.strModule == "GRSG") {
+				pLayer2 = qt_Layer2.execute(q_Layer2);
+			}
+			pLayer3 = qt_Layer3.execute(q_Layer3);
+			if (app.strModule == "GRSG") {
+				pPromises = new all([pLayer1, pLayer2, pLayer3]);
+			} else {
+				pPromises = new all([pLayer1, pLayer2, pLayer3]);
+			}
             return pPromises.then(this.returnEvents, this.err);
         },
 
@@ -265,8 +284,10 @@ define([
 
         showFeature: function (pFeature, strTheme) {
             this.pMap.graphics.clear();
-            CED_PP_point.clearSelection();
-            CED_PP_line.clearSelection();
+			CED_PP_point.clearSelection();
+			if (app.strModule == "GRSG") {
+				CED_PP_line.clearSelection();
+			}
             CED_PP_poly.clearSelection();
 
             var attr = pFeature.attributes;
@@ -334,8 +355,7 @@ define([
             this.mTc.resize({ w: 460, h: 235 });
 
             app.map.graphics.add(pFeature);
-            this.qry_Non_SpatialTable("agency = '" + strImplementing_party + "' and field_office = '" + strOffice + "'", "6", "user_phone_number");
-
+			this.qry_Non_SpatialTable("agency = '" + strImplementing_party + "' and field_office = '" + strOffice + "'", (parseInt("6") + app.iIncrementHFL).toString(), "user_phone_number");
         },
 
         qry_Non_SpatialTable: function (strWhere, strTableIndex, strOutField) {
@@ -388,9 +408,11 @@ define([
             }
         },
 
-        showFeatureSet: function (results) {
-            pLayer1 = results[0].features; // results from deferred lists are returned in the order they were created  // so parcel results are first in the array and buildings results are second
-            pLayer2 = results[1].features;
+		showFeatureSet: function (results) {
+			pLayer1 = results[0].features; // results from deferred lists are returned in the order they were created  // so parcel results are first in the array and buildings results are second
+			if (app.strModule == "GRSG") {
+				pLayer2 = results[1].features;
+			}
             pLayer3 = results[2].features;
 
             var content = "<u>Number of point projects/plans:  " + pLayer1.length + "</u><br />";
@@ -400,15 +422,17 @@ define([
                 strThemeT = "Point";
                 strURL4query1 = this.strURL + "0";
                 content += "  " + graphic1.attributes.Project_ID + ", " + graphic1.attributes.Project_Name.substring(0, 35) + " (<A href='#' onclick='showFeaturePrep(pLayer1[" + i + "],strURL4query1,strThemeT);'>show</A>)<br/>";
-            }
-            content += "<br /><u>Number of line projects/plans:  " + pLayer2.length + "</u><br />";
-            arrayUtils.forEach(pLayer2, function (feat) { feat.setSymbol(new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([0, 255, 255]), 3)); app.map.graphics.add(feat); }); // add the results to the map
-            for (var ii = 0; ii < pLayer2.length; ii++) {
-                var graphic2 = pLayer2[ii];
-                strThemeT = "Line";
-                strURL4query2 = this.strURL + "1";
-                content += "  " + graphic2.attributes.Project_ID + ", " + graphic2.attributes.Project_Name.substring(0, 35) + " (<A href='#' onclick='showFeaturePrep(pLayer2[" + ii + "],strURL4query2,strThemeT);'>show</A>)<br/>";
-            }
+			}
+			if (app.strModule == "GRSG") {
+				content += "<br /><u>Number of line projects/plans:  " + pLayer2.length + "</u><br />";
+				arrayUtils.forEach(pLayer2, function (feat) { feat.setSymbol(new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([0, 255, 255]), 3)); app.map.graphics.add(feat); }); // add the results to the map
+				for (var ii = 0; ii < pLayer2.length; ii++) {
+					var graphic2 = pLayer2[ii];
+					strThemeT = "Line";
+					strURL4query2 = this.strURL + "1";
+					content += "  " + graphic2.attributes.Project_ID + ", " + graphic2.attributes.Project_Name.substring(0, 35) + " (<A href='#' onclick='showFeaturePrep(pLayer2[" + ii + "],strURL4query2,strThemeT);'>show</A>)<br/>";
+				}
+			}
             content += "<br /><u>Number of area projects/plans:  " + pLayer3.length + "</u><br />";
             arrayUtils.forEach(pLayer3, function (feat) { feat.setSymbol(new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_NULL, new Color([255, 0, 0]), 2), new Color([0, 255, 255, 0.2]))); app.map.graphics.add(feat); }); // add the results to the map
             for (var iii = 0; iii < pLayer3.length; iii++) {
@@ -426,27 +450,39 @@ define([
 
         returnEvents: function (results) {
             console.log("queries finished: ", results);
-            var pLayer1, pLayer2, pLayer3
+			var pLayer1, pLayer2, pLayer3
 
-            if ((results[0].features.length == 1 & (results[1].features.length == 0 & results[2].features.length == 0)) ||
-                (results[1].features.length == 1 & (results[0].features.length == 0 & results[2].features.length == 0)) ||
-                (results[2].features.length == 1 & (results[0].features.length == 0 & results[1].features.length == 0))
-                        ) {
+			blnSingleFeatureSelect = false;
+
+			if (app.strModule == "GUSG") {
+				if ((results[0].features.length == 1 & results[2].features.length == 0) ||
+					(results[2].features.length == 1 & (results[0].features.length == 0))) {
+					blnSingleFeatureSelect = true;
+				}
+			} else {
+				if ((results[0].features.length == 1 & (results[1].features.length == 0 & results[2].features.length == 0)) ||
+					(results[1].features.length == 1 & (results[0].features.length == 0 & results[2].features.length == 0)) ||
+					(results[2].features.length == 1 & (results[0].features.length == 0 & results[1].features.length == 0))) {
+					blnSingleFeatureSelect = true;
+				}
+			}
+
+			if (blnSingleFeatureSelect == true) {
                 var pFeature = null;
                 var strURL4query = "";
                 if (results[0].features.length == 1) {
                     pFeature = results[0].features[0];
                     strTheme = "Point";
+				}
+				if (app.strModule == "GRSG") {
+					if (results[1].features.length == 1) {
+						pFeature = results[1].features[0];
+						strTheme = "Line";
+					}
                 }
-                else if (results[1].features.length == 1) {
-                    pFeature = results[1].features[0];
-                    strTheme = "Line";
-                }
-                else if (results[2].features.length == 1) {
+                if (results[2].features.length == 1) {
                     pFeature = results[2].features[0];
                     strTheme = "Poly";
-                }
-                else { //some issue
                 }
 
                 this.strURL4Statquery = strURL4query;

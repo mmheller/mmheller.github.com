@@ -167,9 +167,6 @@ define([
 			  on(dom.byId("rdo_SRU"), "change", btn_clear_click);
 			  on(dom.byId("rdo_Public"), "change", btn_clear_click);
 			  on(dom.byId("rdo_NonSpatial"), "change", btn_clear_click);
-			  
-
-
 
 			  //on(dom.byId("ddlMatrix"), "change", ddlMatrix_Change);
               on(dom.byId("ddlEntry"), "change", ddlMatrix_Change);
@@ -181,8 +178,16 @@ define([
               on(dom.byId("ddlState"), "change", ddlMatrix_Change);
               on(dom.byId("ddlManagUnit"), "change", ddlMatrix_Change);
               on(dom.byId("ddlPopArea"), "change", ddlMatrix_Change);
-              
 
+			  app.strModule = getTokens()['module'];
+			  if (!(app.strModule == undefined)) {
+				  if (app.strModule.toUpperCase() == "GUSG") {
+					  dom.byId("mapModID").innerHTML = "Gunnison Sage-Grouse Recovery TEST DATA!!!";
+				  } 
+			  } else {
+				  app.strModule = "GRSG";
+			  }
+			  
               var blnShoReportButton = getTokens()['RButton'];
               //if (blnShoReportButton) { document.getElementById("btn_TextSummary").style.display = "inline"; }
 			  var blnnoBannter = getTokens()['noBanner'];
@@ -221,8 +226,10 @@ define([
                   app.map.infoWindow.hide();
 				  app.map.graphics.clear();
 				  app.gl.clear();
-                  CED_PP_point.clearSelection();
-                  CED_PP_line.clearSelection();
+				  CED_PP_point.clearSelection();
+				  if (app.strModule == "GRSG") {
+					  CED_PP_line.clearSelection();
+				  }
                   CED_PP_poly.clearSelection();
 
 				  document.getElementById("txtQueryResults").innerHTML = "";
@@ -351,11 +358,19 @@ define([
                       if (strQuery !== "") { strQuery += " and "; }
                       strQuery += "FO_ID = " + strOffice + "";
                       app.strQueryLabelText += "Field Office = " + document.getElementById("ddlOffice").options[document.getElementById("ddlOffice").selectedIndex].text + ", ";
-                  }
-                  app.PSQ = new PS_MeasSiteSearch4Definition({
-                      strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
-                      strState: strState, strPopArea: strPopArea, strManagUnit: strManagUnit, strQuerySaved: strQuery, divTagSource: divTagSource, pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line
-                  }); // instantiate the class
+				  }
+
+				  if (app.strModule == "GRSG") {
+					  app.PSQ = new PS_MeasSiteSearch4Definition({
+						  strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
+						  strState: strState, strPopArea: strPopArea, strManagUnit: strManagUnit, strQuerySaved: strQuery, divTagSource: divTagSource, pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line
+					  }); // instantiate the class
+				  } else {
+					  app.PSQ = new PS_MeasSiteSearch4Definition({
+						  strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
+						  strState: strState, strPopArea: strPopArea, strManagUnit: strManagUnit, strQuerySaved: strQuery, divTagSource: divTagSource, pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly
+					  }); // instantiate the class
+				  }
 
                   if ((strState != "99") || (strPopArea != "99") || (strManagUnit != "99")) {
                       app.PSQ.qry_Non_SpatialTable("", null, "ST_ID");
@@ -401,11 +416,11 @@ define([
                   app.map.infoWindow.hide();
 				  app.map.graphics.clear();
 
-                  CED_PP_point.clearSelection();
-                  CED_PP_line.clearSelection();
+				  CED_PP_point.clearSelection();
+				  if (app.strModule == "GRSG") {
+					  CED_PP_line.clearSelection();
+				  }
                   CED_PP_poly.clearSelection();
-
-                  //document.getElementById("btn_TextSummary").disabled = true;
 
                   // do not turn off layer visibility here, the checkbox click methods will handle layer visibility
                   var pform = dom.byId("toggleForm");
@@ -426,10 +441,13 @@ define([
                   }
 
                   if (document.getElementById("cbx_zoom").checked) {
-                      var customExtentAndSR = new esri.geometry.Extent(-14000000, 4595472, -11000000, 5943351, new esri.SpatialReference({ "wkid": 3857 }));
-                      app.map.setExtent(customExtentAndSR, true);
+					  if (app.strModule == "GUSG") {
+						  var customExtentAndSR = new esri.geometry.Extent(-12260000, 4400000, -11620000, 4840000, new esri.SpatialReference({ "wkid": 3857 }));
+					  } else {
+						  var customExtentAndSR = new esri.geometry.Extent(-14000000, 4800000, -11000000, 6200000, new esri.SpatialReference({ "wkid": 3857 }));
+					  }
+					  app.map.setExtent(customExtentAndSR, true);
                   }
-
 
 				  var bln_rdo_Public = document.getElementById("rdo_Public").checked
 				  var bln_rdo_SRU = document.getElementById("rdo_SRU").checked
@@ -468,23 +486,28 @@ define([
 
 				  $('.btn_clear').tooltip("close");
 
-				  CED_PP_line.setDefinitionExpression(strQuerySRU);
 				  CED_PP_poly.setDefinitionExpression(strQuerySRU);
                   document.getElementById("txtQueryResults").innerHTML = ""; //clear the text results
 
                   CED_PP_poly.show();
-                  CED_PP_point.show();
-                  CED_PP_line.show();
+				  CED_PP_point.show();
+				  if (app.strModule == "GRSG") {
+					  CED_PP_line.setDefinitionExpression(strQuerySRU);
+					  CED_PP_line.show();
+				  }
 
-                  app.iNonSpatialTableIndex = 0;  //
 				  app.PS_Uniques.divTagSource = null;
 
 				  app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
 				  if (bln_rdo_Public) {
+					  app.iNonSpatialTableIndex = 23 + app.iIncrementHFL;  //
+					  app.PS_Uniques.iNonSpatialTableIndex = app.iNonSpatialTableIndex;
 					  app.PS_Uniques.strURL = app.strInitialLoad_URL;
 					  app.blnInitialLoadOrSpatialCleared = true;
 					  app.PS_Uniques.qry_SetUniqueValuesOf("Value", "Value", document.getElementById("ddlStartYear"), "Theme = 'StartYear'"); 
 				  } else {
+					  app.iNonSpatialTableIndex = 0;  //
+					  app.PS_Uniques.iNonSpatialTableIndex = app.iNonSpatialTableIndex;
 					  app.PS_Uniques.qry_SetUniqueValuesOf("Start_Year", "Start_Year", document.getElementById("ddlStartYear"), strQuerySRU); //maybe move this to MH_FeatureCount  //clear111
 				  }
 
@@ -503,16 +526,27 @@ define([
                                       
               var selectionToolbar;
 
-              var customExtentAndSR = new esri.geometry.Extent(-14000000, 4800000, -11000000, 6200000, new esri.SpatialReference({ "wkid": 3857 }));
-              app.map = new esri.Map("map", { basemap: "topo", logo: false, extent: customExtentAndSR });
-              //app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/d725bb5ba60348fd841b05f80cf4465d/rest/services/CEDfrontpage_map_v9_Restrict/FeatureServer/"
-              app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/5d5fc053dd7e4de4b9765f7a6b6f1f61/rest/services/CEDfrontpage_map_v9_Restrict/FeatureServer/";
+			  if (app.strModule == "GUSG") {
+				  var customExtentAndSR = new esri.geometry.Extent(-12260000, 4400000, -11620000, 4840000, new esri.SpatialReference({ "wkid": 3857 }));
+				  app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/7a5cc2f9e5c540289acf0c291af7ab15/rest/services/CED_GUSG_frontpage_map_Restrict/FeatureServer/";
+			  } else {
+				  var customExtentAndSR = new esri.geometry.Extent(-14000000, 4800000, -11000000, 6200000, new esri.SpatialReference({ "wkid": 3857 }));
+				  app.strTheme1_URL = "https://utility.arcgis.com/usrsvcs/servers/5d5fc053dd7e4de4b9765f7a6b6f1f61/rest/services/CEDfrontpage_map_v9_Restrict/FeatureServer/";
+			  }
+
+			  app.map = new esri.Map("map", { basemap: "topo", logo: false, extent: customExtentAndSR });
+
 
               app.map.on("load", initSelectToolbar);
               dojo.connect(app.map, "onUpdateStart", showLoading);
               dojo.connect(app.map, "onUpdateEnd", hideLoading);
 
-              var legendLayers = [];
+			  var legendLayers = [];
+
+			  app.iIncrementHFL = 0;
+			  if (app.strModule == "GUSG") {
+				  app.iIncrementHFL = -1;
+			  }
               CED_PP_point = new FeatureLayer(app.strTheme1_URL + "0", { id: "0", mode: FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], visible: true });
 			  CED_PP_point.setDefinitionExpression("((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')) and ((SRU_ID IS NULL) OR (SRU_ID = 0))");
               var PSelectionSymbolPoint = new SimpleMarkerSymbol().setColor(new Color([0, 255, 255, 0.4]))
@@ -525,14 +559,15 @@ define([
               this.gCED_PP_point4FeatureTable.setDefinitionExpression("OBJECTID < 0");
 			  app.blnPopulateFeatureTable = false
 
-              CED_PP_line = new FeatureLayer(app.strTheme1_URL + "1", { id: "1", mode: FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], visible: true });
-              pSeletionSymbolLine = new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([0, 255, 255]), 3)
-              CED_PP_line.setSelectionSymbol(pSeletionSymbolLine);
+			  if (app.strModule == "GRSG") {
+				  CED_PP_line = new FeatureLayer(app.strTheme1_URL + "1", { id: "1", mode: FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], visible: true });
+				  pSeletionSymbolLine = new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([0, 255, 255]), 3)
+				  CED_PP_line.setSelectionSymbol(pSeletionSymbolLine);
+			  }
 
               //note: the autoGeneralize only works if the hosted feature layer editing is not enabled on AGOL
-              CED_PP_poly = new FeatureLayer(app.strTheme1_URL + "2", { id: "2", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], autoGeneralize: true, visible: true });
+			  CED_PP_poly = new FeatureLayer(app.strTheme1_URL + (parseInt("2") + app.iIncrementHFL).toString(), { id: "2", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], autoGeneralize: true, visible: true });
 			  CED_PP_poly.setDefinitionExpression("((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')"); 
-
 
 			  var sfsSRU = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
 				  new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
@@ -657,11 +692,19 @@ define([
               });
 			  cbxLayers.push({ layers: [CED_PP_poly, CED_PP_poly], title: 'CED Plans and Projects (area)' });
 			  cbxLayers.push({ layers: [CED_PP_point, CED_PP_point], title: 'CED Plans and Projects (point)' });
-			  cbxLayers.push({ layers: [CED_PP_line, CED_PP_line], title: 'CED Plans and Projects (line)' });
+			  if (app.strModule == "GRSG") {
+				  cbxLayers.push({ layers: [CED_PP_line, CED_PP_line], title: 'CED Plans and Projects (line)' });
+			  }
 
-			  arrayLayers = [pBase_PAC, pBase_SBBiom, pBase_SMA, pBase_BLMHMA, pBase_Eco, pBase_RRP,
-				  pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop, plabels1, plabels2,
-				  CED_PP_poly, CED_PP_line, CED_PP_point, this.gCED_PP_point4FeatureTable];
+			  if (app.strModule == "GRSG") {
+				  arrayLayers = [pBase_PAC, pBase_SBBiom, pBase_SMA, pBase_BLMHMA, pBase_Eco, pBase_RRP,
+					  pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop, plabels1, plabels2,
+					  CED_PP_poly, CED_PP_line, CED_PP_point, this.gCED_PP_point4FeatureTable];
+			  } else {
+				  arrayLayers = [pBase_PAC, pBase_SBBiom, pBase_SMA, pBase_BLMHMA, pBase_Eco, pBase_RRP,
+					  pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop, plabels1, plabels2,
+					  CED_PP_poly, CED_PP_point, this.gCED_PP_point4FeatureTable];
+			  }
               app.map.addLayers(arrayLayers);
 
 			  app.gl = new esri.layers.GraphicsLayer();
@@ -781,15 +824,23 @@ define([
 
               function handleSpatialSelectResults(results) {
                   var featureLayer1Message = results[0].features.length;
-                  var featureLayer2Message = results[1].features.length;
-                  var featureLayer3Message = results[2].features.length;
+				  var featureLayer2Message = results[1].features.length;
+
+				  if (app.strModule == "GRSG") {
+					  var featureLayer3Message = results[2].features.length;
+				  }
 
                   var count = 0;
                   for (var i = 0; i < results.length; i++) {
                       count = count + results[i].features.length;
                   }
-                  var temp = "Total features selected:  <b>" + count + "</b><br>&nbsp;&nbsp;FeatureLayer1:  <b>" + featureLayer1Message + "</b><br>&nbsp;&nbsp;FeatureLayer2:  <b>" + featureLayer2Message + "</b><br>&nbsp;&nbsp;FeatureLayer3:  " + featureLayer3Message;
+				  var temp = "Total features selected:  <b>" + count +
+					  "</b><br>&nbsp;&nbsp;FeatureLayer1:  <b>" + featureLayer1Message +
+					  "</b><br>&nbsp;&nbsp;FeatureLayer2:  <b>" + featureLayer2Message
 
+				  if (app.strModule == "GRSG") {
+					  temp += "</b><br>&nbsp;&nbsp;FeatureLayer3:  " + featureLayer3Message;
+				  }
                   var items = arrayUtils.map(results, function (result) {
                       return result;
                   });
@@ -804,9 +855,11 @@ define([
                       allItems.push(item.attributes.Project_ID);
                   })
 
-                  arrayUtils.map(items[2].features, function (item) {
-                      allItems.push(item.attributes.Project_ID);
-                  })
+				  if (app.strModule == "GRSG") {
+					  arrayUtils.map(items[2].features, function (item) {
+						  allItems.push(item.attributes.Project_ID);
+					  })
+				  }
 
                   if (allItems.length > 0) {
                       app.arrayPrjIDs_fromSpatialSelect = allItems;
@@ -817,20 +870,21 @@ define([
                       }
                       strQuery2 = strQuery2.slice(0, -1) + ")";
                       this.strFinalQuery += strQuery2;
-                      
-                      //if (app.PSQ == null) {
-                      //    app.PSQ = new PS_MeasSiteSearch4Definition({
-                      //        strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
-                      //        strState: "", strPopArea: "", strManagUnit: "", strQuerySaved: strQuery2, divTagSource: document.getElementById("ddlMatrix"),
-                      //        pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line
-                      //    }); 
-                      //}
+
 					  if (app.PSQ == null) {
-						  app.PSQ = new PS_MeasSiteSearch4Definition({
-							  strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
-							  strState: "", strPopArea: "", strManagUnit: "", strQuerySaved: strQuery2, divTagSource: document.getElementById("ddlStartYear"),
-							  pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line
-						  });
+						  if (app.strModule == "GRSG") {
+							  app.PSQ = new PS_MeasSiteSearch4Definition({
+								  strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
+								  strState: "", strPopArea: "", strManagUnit: "", strQuerySaved: strQuery2, divTagSource: document.getElementById("ddlStartYear"),
+								  pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line
+							  });
+						  } else {
+							  app.PSQ = new PS_MeasSiteSearch4Definition({
+								  strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
+								  strState: "", strPopArea: "", strManagUnit: "", strQuerySaved: strQuery2, divTagSource: document.getElementById("ddlStartYear"),
+								  pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly
+							  });
+						  }
 					  }
 
 
@@ -897,24 +951,38 @@ define([
 
               function SpatialqueryMapService(Geom) {
                   qt_Layer1 = new esri.tasks.QueryTask(CED_PP_point.url);
-                  q_Layer1 = new esri.tasks.Query();
-                  qt_Layer2 = new esri.tasks.QueryTask(CED_PP_line.url);
-                  q_Layer2 = new esri.tasks.Query();
+				  q_Layer1 = new esri.tasks.Query();
+				  if (app.strModule == "GRSG") {
+					  qt_Layer2 = new esri.tasks.QueryTask(CED_PP_line.url);
+					  q_Layer2 = new esri.tasks.Query();
+				  }
                   qt_Layer3 = new esri.tasks.QueryTask(CED_PP_poly.url);
                   q_Layer3 = new esri.tasks.Query();
-                  q_Layer1.returnGeometry = q_Layer2.returnGeometry = q_Layer3.returnGeometry = false;
-                  q_Layer1.outFields = q_Layer2.outFields = q_Layer3.outFields = ["Project_ID"];
-                  q_Layer1.geometry = q_Layer2.geometry = q_Layer3.geometry = Geom;
+                  q_Layer1.returnGeometry = q_Layer3.returnGeometry = false;
+                  q_Layer1.outFields = q_Layer3.outFields = ["Project_ID"];
+                  q_Layer1.geometry = q_Layer3.geometry = Geom;
 
-                  q_Layer1.where = CED_PP_point.getDefinitionExpression();
-                  q_Layer2.where = CED_PP_line.getDefinitionExpression();
+				  if (app.strModule == "GRSG") {
+					  q_Layer2.returnGeometry  = false;
+					  q_Layer2.outFields ["Project_ID"];
+					  q_Layer2.geometry = Geom;
+					  q_Layer2.where = CED_PP_line.getDefinitionExpression();
+				  }
+
+				  q_Layer1.where = CED_PP_point.getDefinitionExpression();
                   q_Layer3.where = CED_PP_poly.getDefinitionExpression();
 
                   var pLayer1, pLayer2, pLayer3, pPromises;
-                  pLayer1 = qt_Layer1.execute(q_Layer1);
-                  pLayer2 = qt_Layer2.execute(q_Layer2);
-                  pLayer3 = qt_Layer3.execute(q_Layer3);
-                  pPromises = new All([pLayer1, pLayer2, pLayer3]);
+				  pLayer1 = qt_Layer1.execute(q_Layer1);
+				  if (app.strModule == "GRSG") {
+					  pLayer2 = qt_Layer2.execute(q_Layer2);
+				  }
+				  pLayer3 = qt_Layer3.execute(q_Layer3);
+				  if (app.strModule == "GRSG") {
+					  pPromises = new All([pLayer1, pLayer2, pLayer3]);
+				  } else {
+					  pPromises = new All([pLayer1, pLayer3]);
+				  }
                   pPromises.then(handleSpatialSelectResults, this.err);
 
                   var botContainer = registry.byId("bottomTableContainer");//open the attribute table if not already done so
@@ -958,8 +1026,10 @@ define([
 
               on(this.gFeatureTable, "row-select", function (evt) {  //resize the column widths
                   app.map.graphics.clear();
-                  CED_PP_point.clearSelection();
-                  CED_PP_line.clearSelection();
+				  CED_PP_point.clearSelection();
+				  if (app.strModule == "GRSG") {
+					  CED_PP_line.clearSelection();
+				  }
                   CED_PP_poly.clearSelection();
 
                   var pGrid = this.grid;
@@ -996,8 +1066,10 @@ define([
                       pSelQuery.returnGeometry = false;
                       pSelQuery.outFields = ["*"];
                       pSelQuery.where = strQuery1;
-                      promises.push(CED_PP_poly.selectFeatures(pSelQuery, FeatureLayer.SELECTION_NEW));
-                      promises.push(CED_PP_line.selectFeatures(pSelQuery, FeatureLayer.SELECTION_NEW));
+					  promises.push(CED_PP_poly.selectFeatures(pSelQuery, FeatureLayer.SELECTION_NEW));
+					  if (app.strModule == "GRSG") {
+						  promises.push(CED_PP_line.selectFeatures(pSelQuery, FeatureLayer.SELECTION_NEW));
+					  }
                       var allPromises = new All(promises);
                       allPromises.then(function (r) {
                           showResults(r);
@@ -1024,23 +1096,25 @@ define([
                               } else {
                                   pUnionedExtent = graphicsUtils.graphicsExtent(CED_PP_poly.getSelectedFeatures());
                               }
-                          }
-                          if (results[2].length > 0) {
-                              if (pUnionedExtent) {
-                                  if (pUnionedExtent.xmax == pUnionedExtent.xmin) {  //if extent is derived from a point must expand otherwise union will not work properly
-                                      var pXtemp = pUnionedExtent.xmax
-                                      var pYtemp = pUnionedExtent.ymax
+						  }
+						  if (app.strModule == "GRSG") {
+							  if (results[2].length > 0) {
+								  if (pUnionedExtent) {
+									  if (pUnionedExtent.xmax == pUnionedExtent.xmin) {  //if extent is derived from a point must expand otherwise union will not work properly
+										  var pXtemp = pUnionedExtent.xmax
+										  var pYtemp = pUnionedExtent.ymax
 
-                                      pUnionedExtent.xmax = pXtemp + 10000;
-                                      pUnionedExtent.xmin = pXtemp - 10000;
-                                      pUnionedExtent.ymax = pYtemp + 10000;
-                                      pUnionedExtent.ymin = pYtemp - 10000;
-                                  }
-                                  pUnionedExtent = pUnionedExtent.union(graphicsUtils.graphicsExtent(CED_PP_line.getSelectedFeatures()));
-                              } else {
-                                  pUnionedExtent = graphicsUtils.graphicsExtent(CED_PP_line.getSelectedFeatures());
-                              }
-                          }
+										  pUnionedExtent.xmax = pXtemp + 10000;
+										  pUnionedExtent.xmin = pXtemp - 10000;
+										  pUnionedExtent.ymax = pYtemp + 10000;
+										  pUnionedExtent.ymin = pYtemp - 10000;
+									  }
+									  pUnionedExtent = pUnionedExtent.union(graphicsUtils.graphicsExtent(CED_PP_line.getSelectedFeatures()));
+								  } else {
+									  pUnionedExtent = graphicsUtils.graphicsExtent(CED_PP_line.getSelectedFeatures());
+								  }
+							  }
+						  }
                           if (document.getElementById("cbx_zoom").checked) {
                             app.map.setExtent(pUnionedExtent, true);
                           }
@@ -1126,20 +1200,30 @@ define([
                       var strValue3 = ui.item.value3;
                       app.map.infoWindow.hide();            //var strquery4id = "Contaminant LIKE '%Mercury%'";
                       app.map.graphics.clear();
-                      CED_PP_point.clearSelection();
-                      CED_PP_line.clearSelection();
+					  CED_PP_point.clearSelection();
+					  if (app.strModule == "GRSG") {
+						  CED_PP_line.clearSelection();
+					  }
                       CED_PP_poly.clearSelection();
-
-                      app.pPS_Identify = new PS_Identify({ pLayer1: CED_PP_point, pLayer2: CED_PP_line, pLayer3: CED_PP_poly, pMap: app.map,
-                          strQueryString4Measurements: "Project_ID = " + strValue3, strURL: app.strTheme1_URL, pInfoWindow: app.infoWindow, mSR: pSR
-                      }); // instantiate the ID Search class    
+					  if (app.strModule == "GRSG") {
+						  app.pPS_Identify = new PS_Identify({
+							  pLayer1: CED_PP_point, pLayer2: CED_PP_line, pLayer3: CED_PP_poly, pMap: app.map,
+							  strQueryString4Measurements: "Project_ID = " + strValue3, strURL: app.strTheme1_URL, pInfoWindow: app.infoWindow, mSR: pSR
+						  }); // instantiate the ID Search class    
+					  } else {
+						  app.pPS_Identify = new PS_Identify({
+							  pLayer1: CED_PP_point, pLayer3: CED_PP_poly, pMap: app.map,
+							  strQueryString4Measurements: "Project_ID = " + strValue3, strURL: app.strTheme1_URL, pInfoWindow: app.infoWindow, mSR: pSR
+						  }); // instantiate the ID Search class    
+					  }
                       var pPS_Identify_Results = app.pPS_Identify.executeQueries(null, "", 0, pGeometryPoint[0], pGeometryPoint[1]);
                   }
               });
 			  app.blnInitialLoadOrSpatialCleared = true;
 			  app.iNonSpatialTableIndex = 0;  //these 3 lines populate the list values
-			  app.strInitialLoad_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CEDStartup/FeatureServer/";
-			  app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strInitialLoad_URL, iNonSpatialTableIndex: 0, divTagSource: null });
+			  app.strInitialLoad_URL = app.strTheme1_URL;
+			  //app.strInitialLoad_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CEDStartup/FeatureServer/";
+			  app.PS_Uniques = new PS_PopUniqueQueryInterfaceValues({ strURL: app.strInitialLoad_URL, iNonSpatialTableIndex: 23 + app.iIncrementHFL, divTagSource: null });
 			  app.PS_Uniques.m_strCED_PP_pointQuery = CED_PP_point.getDefinitionExpression();
 			  app.PS_Uniques.qry_SetUniqueValuesOf("Value", "Value", document.getElementById("ddlStartYear"), "Theme = 'StartYear'"); 
 			  
@@ -1171,10 +1255,11 @@ define([
                   app.map.graphics.clear();
 
 
-                  CED_PP_point.clearSelection();
-                  CED_PP_line.clearSelection();
+				  CED_PP_point.clearSelection();
+				  if (app.strModule == "GRSG") {
+					  CED_PP_line.clearSelection();
+				  }
                   CED_PP_poly.clearSelection();
-
 
 				  //var strMatrix = document.getElementById("ddlMatrix").options[document.getElementById("ddlMatrix").selectedIndex].text;  //get dropdown menu selection
 				  var iMatrix = document.getElementById("ddlStartYear").options[document.getElementById("ddlStartYear").selectedIndex].text;  //get dropdown menu selection
@@ -1187,16 +1272,23 @@ define([
 				  var psqs_strQueryString = app.PSQS.returnQS();
 
                   app.map.infoWindow.hide();            //var strquery4id = "Contaminant LIKE '%Mercury%'";
-                  app.pPS_Identify = new PS_Identify({
-                      pLayer1: CED_PP_point, pLayer2: CED_PP_line, pLayer3: CED_PP_poly, pMap: app.map,
-                      strQueryString4Measurements: psqs_strQueryString, strURL: app.strTheme1_URL,
-                      pInfoWindow: app.infoWindow
-                  }); // instantiate the ID Search class
-                  app.pEvt = e;
+
+				  if (app.strModule == "GRSG") {
+					  app.pPS_Identify = new PS_Identify({
+						  pLayer1: CED_PP_point, pLayer2: CED_PP_line, pLayer3: CED_PP_poly, pMap: app.map,
+						  strQueryString4Measurements: psqs_strQueryString, strURL: app.strTheme1_URL,
+						  pInfoWindow: app.infoWindow
+					  }); // instantiate the ID Search class
+				  } else {
+					  app.pPS_Identify = new PS_Identify({
+						  pLayer1: CED_PP_point, pLayer3: CED_PP_poly, pMap: app.map,
+						  strQueryString4Measurements: psqs_strQueryString, strURL: app.strTheme1_URL,
+						  pInfoWindow: app.infoWindow
+					  }); // instantiate the ID Search class
+				  }
+				  app.pEvt = e;
                   var pPS_Identify_Results = app.pPS_Identify.executeQueries(e, "", 0, 0, 0);
               }
-
-
           },
 
           Phase4: function () {
@@ -1267,13 +1359,21 @@ define([
                       strQuery += "(FO_ID in (" + strA_office + "))";
                   }
 
-                  app.PSQ = new PS_MeasSiteSearch4Definition({
-                      strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
-					  strState: strA_State, strPopArea: strA_POPArea, strManagUnit: strA_Managementunit, strQuerySaved: strQuery, divTagSource: document.getElementById("ddlStartYear"),
-                      pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line
-                  }); // instantiate the class
 
-                  if ((strA_State != undefined) || (strA_POPArea != undefined) || (strA_Managementunit != undefined)) {
+				  if (app.strModule == "GRSG") {
+					  app.PSQ = new PS_MeasSiteSearch4Definition({
+						  strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
+						  strState: strA_State, strPopArea: strA_POPArea, strManagUnit: strA_Managementunit, strQuerySaved: strQuery, divTagSource: document.getElementById("ddlStartYear"),
+						  pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly, pCED_PP_line: CED_PP_line
+					  }); // instantiate the class
+				  } else {
+					  app.PSQ = new PS_MeasSiteSearch4Definition({
+						  strURL: app.strTheme1_URL, iNonSpatialTableIndex: app.iNonSpatialTableIndex,
+						  strState: strA_State, strPopArea: strA_POPArea, strManagUnit: strA_Managementunit, strQuerySaved: strQuery, divTagSource: document.getElementById("ddlStartYear"),
+						  pCED_PP_point: CED_PP_point, pCED_PP_poly: CED_PP_poly,
+					  }); // instantiate the class
+				  }
+				  if ((strA_State != undefined) || (strA_POPArea != undefined) || (strA_Managementunit != undefined)) {
                       var PSQResults = app.PSQ.qry_Non_SpatialTable("", null, "ST_ID");
                       PSQResults.then(PSQsearchSucceeded, PSQsearchFailed);
                   } else {  // handling arguments passed
@@ -1301,7 +1401,8 @@ define([
               localStorage.setItem("ls_strDefQuery", CED_PP_point.getDefinitionExpression());
               localStorage.setItem("ls_strDefQuery2", app.PS_Uniques.strQuery1);
               localStorage.setItem("ls_strQueryLabelText", app.strQueryLabelText);
-              localStorage.setItem("ls_strQueryLabelTextSpatial", app.strQueryLabelTextSpatial);
+			  localStorage.setItem("ls_strQueryLabelTextSpatial", app.strQueryLabelTextSpatial);
+			  localStorage.setItem("iIncrementHFL4Summary", app.iIncrementHFL);
 
               localStorage.setItem("ls_strMapExtent", String(app.map.extent.xmin + "," + app.map.extent.ymin + "," + app.map.extent.xmax + "," + app.map.extent.ymax));
 

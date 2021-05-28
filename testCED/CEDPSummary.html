@@ -10,16 +10,15 @@ Date:        Oct 2014, Updated Oct 2018-->
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<!--The viewport meta tag is used to improve the presentation and behavior of the samples on iOS devices-->
 	<meta name="viewport" content="initial-scale=1, maximum-scale=1,user-scalable=no" />
-	<title>Greater Sage Grouse: Conservation Efforts</title>
+	<title>The Conservation Efforts Database</title>
 	<link rel="shortcut icon" type="image/png" href="//www.usgs.gov/sites/all/themes/usgs_palladium/favicons/favicon.ico" />
-	<link rel="stylesheet" href="https://js.arcgis.com/3.35/dijit/themes//tundra/tundra.css" />
-	<link rel="stylesheet" href="https://js.arcgis.com/3.35/esri/css/esri.css" />
+	<link rel="stylesheet" href="https://js.arcgis.com/3.36/dijit/themes//tundra/tundra.css" />
+	<link rel="stylesheet" href="https://js.arcgis.com/3.36/esri/css/esri.css" />
 
 	<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css" />
 	<link rel="stylesheet" type="text/css" href="Styles/panelMapAndReport.css" />
 	<!--<link rel="stylesheet" type="text/css" href="{% static 'ced_main/Styles/panelMapAndReport.css' %}"/>-->
-
-
+	
 	<style type="text/css">
 		@CHARSET "UTF-8";
 
@@ -53,7 +52,7 @@ Date:        Oct 2014, Updated Oct 2018-->
 	<!--<script type="text/javascript"> var dojoConfig = { paths: { extras: "{% static 'ced_main/javascript/grsgmap/extras' %}"} };</script>-->
 	<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
-	<script type="text/javascript" src="https://js.arcgis.com/3.32/"></script>
+	<script type="text/javascript" src="https://js.arcgis.com/3.36/"></script>
 
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 
@@ -135,6 +134,8 @@ Date:        Oct 2014, Updated Oct 2018-->
 				//var strDefQuery3 = localStorage.getItem("ls_strDefQuery3");
 				var strQueryLabelText = localStorage.getItem("ls_strQueryLabelText");
 				var strQueryLabelTextSpatial = localStorage.getItem("ls_strQueryLabelTextSpatial");
+
+				app.iIncrementHFL = localStorage.getItem("iIncrementHFL4Summary");
 
 				if ((strQueryLabelText == "") | (strQueryLabelText == "undefined")) {
 					strQueryLabelText = "<b>USER SELECTED QUERY FILTERS:</b>  None selected"

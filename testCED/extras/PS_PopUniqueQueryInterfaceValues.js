@@ -320,7 +320,6 @@ define([
 			} else {
 				switch (this.strFieldNameText) {                //                'count' | 'sum' | 'min' | 'max' | 'avg' | 'stddev'
 					case "Start_Year":
-
 						strDescField = "Activity";
 						strIDField = "ACT_ID";
 						strQuery = this.strQuery1;
@@ -330,7 +329,6 @@ define([
 						break;
 
 					case "Activity":   // this project_ID query needs to happen here to make sure the query for the related tables works
-
 						strDescField = "SubActivity";
 						strIDField = "SACT_ID";
 						strQuery = this.strQuery1;
@@ -379,8 +377,8 @@ define([
 						strIDField = "ST_ID";
 						strQuery = this.strQuery1;
 						//this.qry_SetUniqueValuesOf("State", "ST_ID", document.getElementById("ddlState"), this.strQuery1);
-						this.iNonSpatialTableIndex = 9;
-
+						this.iNonSpatialTableIndex = (9 + app.iIncrementHFL);
+						
 						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlState"), strQuery);
 						break;
 					case "State":
@@ -388,7 +386,7 @@ define([
 						strIDField = "Pop_ID";
 						strQuery = this.strQuery1;
 						//this.qry_SetUniqueValuesOf("Pop_Name", "Pop_ID", document.getElementById("ddlPopArea"), this.strQuery1);
-						this.iNonSpatialTableIndex = 8;
+						this.iNonSpatialTableIndex = (8 + app.iIncrementHFL);
 
 						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlPopArea"), strQuery);
 						break;
@@ -397,7 +395,7 @@ define([
 						strIDField = "WAFWA_ID";
 						strQuery = this.strQuery1;
 						//this.qry_SetUniqueValuesOf("WAFWA_Zone", "WAFWA_ID", document.getElementById("ddlManagUnit"), this.strQuery1);
-						this.iNonSpatialTableIndex = 3;
+						this.iNonSpatialTableIndex = (3 + app.iIncrementHFL);
 
 						this.qry_SetUniqueValuesOf(strDescField, strIDField, document.getElementById("ddlManagUnit"), strQuery);
 						break;

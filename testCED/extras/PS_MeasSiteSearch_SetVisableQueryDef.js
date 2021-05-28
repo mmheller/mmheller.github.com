@@ -20,16 +20,19 @@ define([
             this.pCED_PP_point = options.pCED_PP_point || null;
         },
         setQS: function (strQueryDef) {
-            this.pCED_PP_poly.setDefinitionExpression(strQueryDef);
-            this.pCED_PP_line.setDefinitionExpression(strQueryDef);
-
+			this.pCED_PP_poly.setDefinitionExpression(strQueryDef);
+			if (app.strModule == "GRSG") {
+				this.pCED_PP_line.setDefinitionExpression(strQueryDef);
+			}
 			var strQueryDef4FeatureTable = strQueryDef;  //setting the gCED_PP_point4FeatureTable later due to table refresh issues
 
             if (strQueryDef !== "") { strQueryDef += " and "; }
 			strQueryDef += "(((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')))";
             this.pCED_PP_point.setDefinitionExpression(strQueryDef);
             this.pCED_PP_point.setVisibility(true);
-            this.pCED_PP_line.setVisibility(true);
+			if (app.strModule == "GRSG") {
+				this.pCED_PP_line.setVisibility(true);
+			}
             this.pCED_PP_poly.setVisibility(true);
 
 			console.log("setting app.pSup.gCED_PP_point4FeatureTable.setDefinitionExpression");
