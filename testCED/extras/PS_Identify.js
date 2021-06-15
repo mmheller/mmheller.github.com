@@ -329,15 +329,64 @@ define([
 
             tempstrcontent += "<u>Implementing Party:</u>  " + attr.Implementing_Party + "<br />" +
                                      "<u>Activity:</u> " + attr.Activity + "<br />" +
-                                     "<u>Subactivity:</u> " + attr.SubActivity +
+									 "<u>Subactivity:</u> " + attr.SubActivity + "<br />" +
+									 "<u>SRU(s) ID:</u> n/a" +
                                         "<br/><hr>" + "Summary" + "<br />" +
                                         "<u>Total Acres:</u>  " + strTotalAcres + "<br />" +
                                         "<u>Total Acres Calculated by GIS (Areas Efforts Only):</u>  " + strGISTotalAcres + "<br />" +
                                         "<u>Total Miles:</u>  " + strTotalMiles + "<br />" +
                                         "<u>Total Number Removed</u> : " + strTotalRemoved + "<br />"
-            this.strFeatureContent = tempstrcontent;
-            this.strFeatureContent += "<br />For More information, contact...<br />    " + strOffice + ",<br />" + strImplementing_party + "<br/>Phone Number(s):";
+			this.strFeatureContent = tempstrcontent;
+			
+			var strSRU = "n/a";
+			if (app.strModule == "GRSG") {
+				if (attr.SRU_ID != undefined && attr.SRU_ID != null && attr.SRU_ID != 0) { strSRU = attr.SRU_ID.toString(); }
+				this.strFeatureContent += "<br />SRU = " + strSRU;
+			} else {
+				var arraySRUs = [];
+				var pQueryTask = new esri.tasks.QueryTask(app.strTheme1_URL + "21");
+				var pQuery = new esri.tasks.Query();
 
+				pQuery.where = "Project_ID = " + attr.Project_ID.toString();
+				pQuery.outFields = ["SRU_ID"];
+				pQueryTask.execute(pQuery, function (results) {
+					var resultFeatures = results.features;
+					var resultCount = resultFeatures.length;
+					if (resultCount > 0) {
+						var iSRUReturn;
+						for (iSRUReturn = 0; iSRUReturn < resultFeatures.length; iSRUReturn++) {
+							var iSRU2 = resultFeatures[iSRUReturn].attributes["SRU_ID"];
+							arraySRUs.push(iSRU2);
+						}
+					}
+
+					if (arraySRUs.length != 0) {
+						var strSRU = arraySRUs.join(",");
+						var strNewSRUString = "SRU(s) ID:</u> " + strSRU;
+						var strFindString = "SRU(s) ID:</u> n/a"
+						this.app.pPS_Identify.strFeatureContent = this.app.pPS_Identify.strFeatureContent.replace(strFindString, strNewSRUString);
+					}
+					if (dijit.byId('tabcontainer1')) { dijit.byId('tabcontainer1').destroy(); }
+					if (dijit.byId('cp1')) { dijit.byId('cp1').destroy(); }
+
+					this.app.mTc = new dijit.layout.TabContainer({ id: "tabcontainer1", style: "width:100%;height:100%;", useMenu: false, useSlider: false, focused: false }, dojo.create('div'));
+					this.app.mCp1 = new dijit.layout.ContentPane({ id: "cp1", title: "Site and Summary", content: this.app.pPS_Identify.strFeatureContent });
+					this.app.mCp1.selected = true;
+					this.app.mTc.addChild(this.app.mCp1);
+					this.app.mTc.startup();   //*************************** don't know if this is necessary
+
+					this.app.map.infoWindow.setContent("");
+					this.app.map.infoWindow.setContent(this.app.mTc.domNode);
+					this.app.mTc.resize({ w: 460, h: 235 });
+
+
+				}, function (error) {
+					console.log(error);
+				});
+
+			}
+
+            this.strFeatureContent += "<br />For More information, contact...<br />    " + strOffice + ",<br />" + strImplementing_party + "<br/>Phone Number(s):";
 
             if (dijit.byId('tabcontainer1')) { dijit.byId('tabcontainer1').destroy(); }
             if (dijit.byId('cp1')) { dijit.byId('cp1').destroy(); }

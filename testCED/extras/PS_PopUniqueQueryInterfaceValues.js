@@ -302,14 +302,13 @@ define([
 						disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
 						disableOrEnableFormElements("dropdownForm", 'radio', false);  //disable/enable to avoid user clicking query options during pending queries
 
-						//$(function () {
-						//	$('.divOpenStats').click(function () {
-						//		app.pSup.openCEDPSummary();
-						//	});
-						//	$("#btn_Report").prop("disabled", false);
-						//});
+						if (app.strModule == "GRSG") {
+							this.strQuery1 = "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')";
+						}
+						if (app.strModule == "GUSG") {
+							this.strQuery1 = "((Private_Lands IS NULL) OR (Private_Lands = '0')) and (typeact = 'Spatial Project')";
+						}
 
-						this.strQuery1 = "((SRU_ID IS NULL) OR(SRU_ID = 0)) and(typeact = 'Spatial Project')";
 						this.strURL = app.strTheme1_URL;
 						app.pFC.GetCountOfFCDef_ShowText(this.strQuery1, this.strURL + 0, "txtQueryResults", "count", "project_id", "");
 
@@ -405,12 +404,6 @@ define([
 						disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
 						disableOrEnableFormElements("dropdownForm", 'radio', false);  //disable/enable to avoid user clicking query options during pending queries
 
-						//$(function () {
-						//	$('.divOpenStats').click(function () {
-						//		app.pSup.openCEDPSummary();
-						//	});
-						//	$("#btn_Report").prop("disabled", false);
-						//});
 						app.pFC.GetCountOfFCDef_ShowText(this.strQuery1, this.strURL + 0, "txtQueryResults", "count", "project_id", "");
 
 						this.iNonSpatialTableIndex = 0; //reset the table index for next time
@@ -418,7 +411,6 @@ define([
 						break;
 				}
 			}
-
 
 
             return results;

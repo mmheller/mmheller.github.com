@@ -158,11 +158,6 @@ define([
               document.getElementById("ImgResultsLoading").style.visibility = "visible";
 
               on(dom.byId("btn_clear"), "click", btn_clear_click);
-              //on(dom.byId("btn_TextSummary"), "click", btn_TextSummary_click);
-
-			  //on(dom.byId("rdo_SRU"), "change", ddlMatrix_Change);
-			  //on(dom.byId("rdo_Public"), "change", ddlMatrix_Change);
-			  //on(dom.byId("rdo_NonSpatial"), "change", ddlMatrix_Change);
 
 			  on(dom.byId("rdo_SRU"), "change", btn_clear_click);
 			  on(dom.byId("rdo_Public"), "change", btn_clear_click);
@@ -183,6 +178,11 @@ define([
 			  if (!(app.strModule == undefined)) {
 				  if (app.strModule.toUpperCase() == "GUSG") {
 					  dom.byId("mapModID").innerHTML = "Gunnison Sage-Grouse Recovery TEST DATA!!!";
+
+					  document.getElementById("ddlPopArea").style.visibility = "collapse";
+					  document.getElementById("txtPop_4_GRSG").style.visibility = "collapse";
+					  document.getElementById("txtWAFWA_4_GRSG").style.visibility = "collapse";
+					  document.getElementById("ddlManagUnit").style.visibility = "collapse";
 				  } 
 			  } else {
 				  app.strModule = "GRSG";
@@ -451,17 +451,31 @@ define([
 
 				  var bln_rdo_Public = document.getElementById("rdo_Public").checked
 				  var bln_rdo_SRU = document.getElementById("rdo_SRU").checked
+				  var bln_rdo_NonSpatial = document.getElementById("rdo_NonSpatial").checked
+				  
 				  if (bln_rdo_Public) {
-					  strQuerySRU = "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')";
+					  if (app.strModule == "GRSG") {
+						  strQuerySRU = "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')";
+					  }
+					  if (app.strModule == "GUSG") {
+						  strQuerySRU = "((Private_Lands IS NULL) OR (Private_Lands = '0')) and (typeact = 'Spatial Project')";
+					  }
 					  CED_PP_poly.setRenderer(app.PolyRendererSpatialyExplicit);
 				  }
 				  else if (bln_rdo_SRU) {
-					  strQuerySRU = "(SRU_ID IS NOT NULL) AND (SRU_ID > 0)";
+					  if (app.strModule == "GRSG") {
+						  strQuerySRU = "(SRU_ID IS NOT NULL) AND (SRU_ID > 0) and (typeact = 'Spatial Project')";
+					  }
+					  if (app.strModule == "GUSG") {
+						  strQuerySRU = "Private_Lands = '1' and (typeact = 'Spatial Project')";
+					  }
 					  CED_PP_poly.setRenderer(app.rendererSRU);
 				  }
-				  else
-					  strQuerySRU = "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact <> 'Spatial Project')";
-
+				  else {
+						  //strQuerySRU = "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact <> 'Spatial Project')";
+						  strQuerySRU = "(typeact <> 'Spatial Project')";
+						  //strQuerySRU = "((Private_Lands IS NULL) OR (Private_Lands= '0')) and (typeact <> 'Spatial Project')";
+				  }
 
 				  CED_PP_point.setDefinitionExpression("((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')) and " + strQuerySRU);
 				  
@@ -547,9 +561,18 @@ define([
 			  if (app.strModule == "GUSG") {
 				  app.iIncrementHFL = -1;
 			  }
-              CED_PP_point = new FeatureLayer(app.strTheme1_URL + "0", { id: "0", mode: FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], visible: true });
-			  CED_PP_point.setDefinitionExpression("((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')) and ((SRU_ID IS NULL) OR (SRU_ID = 0))");
-              var PSelectionSymbolPoint = new SimpleMarkerSymbol().setColor(new Color([0, 255, 255, 0.4]))
+			  CED_PP_point = new FeatureLayer(app.strTheme1_URL + "0", { id: "0", mode: FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], visible: true });
+
+			  var strstrCED_PP_point_Where;
+			  if (app.strModule == "GRSG") {
+				  strstrCED_PP_point_Where = "((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')) and ((SRU_ID IS NULL) OR (SRU_ID = 0))"
+			  } else {
+				  strstrCED_PP_point_Where = "((SourceFeatureType = 'point') OR ( SourceFeatureType = 'poly' AND Wobbled_GIS = 1)) and (TypeAct not in ('Non-Spatial Plan', 'Non-Spatial Project')) and ((Private_Lands IS NULL) OR (Private_Lands = '0'))"
+			  }
+			  CED_PP_point.setDefinitionExpression(strstrCED_PP_point_Where);
+
+
+			  var PSelectionSymbolPoint = new SimpleMarkerSymbol().setColor(new Color([0, 255, 255, 0.4]))
               CED_PP_point.setSelectionSymbol(PSelectionSymbolPoint);
 
               this.gCED_PP_point4FeatureTable = new FeatureLayer(app.strTheme1_URL + "0", {
@@ -559,15 +582,19 @@ define([
               this.gCED_PP_point4FeatureTable.setDefinitionExpression("OBJECTID < 0");
 			  app.blnPopulateFeatureTable = false
 
+			  var strstrCED_PP_poly_Where;
 			  if (app.strModule == "GRSG") {
 				  CED_PP_line = new FeatureLayer(app.strTheme1_URL + "1", { id: "1", mode: FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], visible: true });
 				  pSeletionSymbolLine = new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([0, 255, 255]), 3)
 				  CED_PP_line.setSelectionSymbol(pSeletionSymbolLine);
+				  strCED_PP_poly_Where = "((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')";
+			  } else {
+				  strCED_PP_poly_Where = "((Private_Lands IS NULL) OR (Private_Lands = '0')) and (typeact = 'Spatial Project')";
 			  }
 
               //note: the autoGeneralize only works if the hosted feature layer editing is not enabled on AGOL
 			  CED_PP_poly = new FeatureLayer(app.strTheme1_URL + (parseInt("2") + app.iIncrementHFL).toString(), { id: "2", "opacity": 0.5, mode: esri.layers.FeatureLayer.MODE_ONDEMAND, outFields: ["Project_ID"], autoGeneralize: true, visible: true });
-			  CED_PP_poly.setDefinitionExpression("((SRU_ID IS NULL) OR (SRU_ID = 0)) and (typeact = 'Spatial Project')"); 
+			  CED_PP_poly.setDefinitionExpression(strCED_PP_poly_Where); 
 
 			  var sfsSRU = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
 				  new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
@@ -585,58 +612,63 @@ define([
               pSeletionSymbolPoly = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID, new SimpleLineSymbol(SimpleLineSymbol.STYLE_DASH, new Color([255, 0, 0]), 2), new Color([0, 255, 255, 0.4]));
               CED_PP_poly.setSelectionSymbol(pSeletionSymbolPoly);
 
-              var strBase_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/"
-              var strlabelField1 = "POPULATION";
-              var strlabelField2 = "Name";
-              var strlabelField3 = "Mgmt_zone";
-              var pBase_Pop = new FeatureLayer(strBase_URL + "0", { id: "Pop", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: false });
-			  var pBase_MZ = new FeatureLayer(strBase_URL + "1", { id: "MZ", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: false });
+			  var strBase_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/CED_Base_Layers/FeatureServer/"
+			  if (app.strModule == "GRSG") {
+
+				  var strlabelField1 = "POPULATION";
+				  var strlabelField2 = "Name";
+				  var strlabelField3 = "Mgmt_zone";
+				  var pBase_Pop = new FeatureLayer(strBase_URL + "0", { id: "Pop", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField1], visible: false });
+				  var pBase_MZ = new FeatureLayer(strBase_URL + "1", { id: "MZ", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, outFields: [strlabelField2, strlabelField3], visible: false });
 			  
-			  var pBase_SBBiom = new FeatureLayer("https://gis.usgs.gov/sciencebase2/rest/services/Catalog/5ccb4a64e4b09b8c0b7808a6/MapServer/0", { id: "SBBi", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false })
-			  var sfsSBBiom = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
-				  new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
-					  new Color([0, 200, 0]), 3), new Color([26, 255, 158, 0.1])
-			  );
-			  var rendererSBBiom = new SimpleRenderer(sfsSBBiom);
-			  pBase_SBBiom.setRenderer(rendererSBBiom);
+				  var pBase_SBBiom = new FeatureLayer("https://gis.usgs.gov/sciencebase2/rest/services/Catalog/5ccb4a64e4b09b8c0b7808a6/MapServer/0", { id: "SBBi", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false })
+				  var sfsSBBiom = new SimpleFillSymbol(SimpleFillSymbol.STYLE_SOLID,
+					  new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+						  new Color([0, 200, 0]), 3), new Color([26, 255, 158, 0.1])
+				  );
+				  var rendererSBBiom = new SimpleRenderer(sfsSBBiom);
+				  pBase_SBBiom.setRenderer(rendererSBBiom);
 
-              var pBase_RRP = new FeatureLayer(strBase_URL + "2", { id: "RRP", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              var pBase_RRB = new FeatureLayer(strBase_URL + "3", { id: "RRB", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-			  var pBase_Breed = new FeatureLayer(strBase_URL + "4", { id: "Breed", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              var pBase_PI = new FeatureLayer(strBase_URL + "5", { id: "PI", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              var pBase_Eco = new FeatureLayer(strBase_URL + "6", { id: "Eco", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              var pBase_BLMHMA = new FeatureLayer(strBase_URL + "7", { id: "BLMMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              //var pBase_GHMA = new FeatureLayer(strBase_URL + "8", { id: "GHMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              var pBase_SMA = new FeatureLayer(strBase_URL + "8", { id: "SMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
-              var pBase_PAC = new FeatureLayer(strBase_URL + "9", { id: "PAC", "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+				  var pBase_RRP = new FeatureLayer(strBase_URL + "2", { id: "RRP", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+				  var pBase_RRB = new FeatureLayer(strBase_URL + "3", { id: "RRB", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+				  var pBase_Breed = new FeatureLayer(strBase_URL + "4", { id: "Breed", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+				  var pBase_PI = new FeatureLayer(strBase_URL + "5", { id: "PI", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+				  var pBase_Eco = new FeatureLayer(strBase_URL + "6", { id: "Eco", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+				  var pBase_BLMHMA = new FeatureLayer(strBase_URL + "7", { id: "BLMMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+				  var pBase_PAC = new FeatureLayer(strBase_URL + "9", { id: "PAC", "opacity": 0.8, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
+			  }
+			  var pBase_SMA = new FeatureLayer(strBase_URL + "8", { id: "SMA", "opacity": 0.5, mode: FeatureLayer.MODE_ONDEMAND, visible: false });
 
-              var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
-              var pLabel1 = new TextSymbol().setColor(vGreyColor);
-              pLabel1.font.setSize("10pt");
-              pLabel1.font.setFamily("helvetica");
-              var pLabelRenderer1 = new SimpleRenderer(pLabel1);
-              var plabels1 = new LabelLayer({ id: "labels1" });
-              plabels1.addFeatureLayer(pBase_Pop, pLabelRenderer1, "{" + strlabelField1 + "}");
+			  if (app.strModule == "GRSG") {
+				  var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
+				  var pLabel1 = new TextSymbol().setColor(vGreyColor);
+				  pLabel1.font.setSize("10pt");
+				  pLabel1.font.setFamily("helvetica");
+				  var pLabelRenderer1 = new SimpleRenderer(pLabel1);
+				  var plabels1 = new LabelLayer({ id: "labels1" });
+				  plabels1.addFeatureLayer(pBase_Pop, pLabelRenderer1, "{" + strlabelField1 + "}");
 
-              var pLabel2 = new TextSymbol().setColor(vGreyColor);
-              pLabel2.font.setSize("10pt");
-              pLabel2.font.setFamily("helvetica Black");
-              var pLabelRenderer2 = new SimpleRenderer(pLabel2);
-              var plabels2 = new LabelLayer({ id: "labels2" });
-              plabels2.addFeatureLayer(pBase_MZ, pLabelRenderer2, "{" + strlabelField2 + "} : {" + strlabelField3 + "}");
+				  var pLabel2 = new TextSymbol().setColor(vGreyColor);
+				  pLabel2.font.setSize("10pt");
+				  pLabel2.font.setFamily("helvetica Black");
+				  var pLabelRenderer2 = new SimpleRenderer(pLabel2);
+				  var plabels2 = new LabelLayer({ id: "labels2" });
+				  plabels2.addFeatureLayer(pBase_MZ, pLabelRenderer2, "{" + strlabelField2 + "} : {" + strlabelField3 + "}");
+			  }
 
-			  legendLayers.push({ layer: pBase_PAC, title: 'GRSG Priority Areas for Conservation (PACs)' });
-			  legendLayers.push({ layer: pBase_SBBiom, title: 'US Sagebrush Biome Range Extent' });
-              legendLayers.push({ layer: pBase_SMA, title: 'Land Ownership (Surface Management Agency, BLM 2015)' });
-              //legendLayers.push({ layer: pBase_GHMA, title: 'GRSG General Habitat Management Areas (GHMA + OHMA [NV, UT]) (BLM/USFS 2015)' });
-              legendLayers.push({ layer: pBase_BLMHMA, title: 'GRSG BLM Habitat Management Areas (PHMA + IHMA [ID]) (BLM/USFS 2015)' });
-              legendLayers.push({ layer: pBase_Eco, title: 'Ecosystem Resilience & Resistance (R&R) (Chambers et al. 2014, 2016)' });
-              legendLayers.push({ layer: pBase_RRP, title: 'GRSG Pop’l’n Index (High/Low (80% threshold)) + R&R (Chambers et al. 2017 )' });
-              legendLayers.push({ layer: pBase_RRB, title: 'GRSG Breeding Habitat Dist. + R&R (Chambers et al. 2017)' });
-              legendLayers.push({ layer: pBase_Breed, title: 'Breeding Habitat Distribution (Doherty et al. 2017)' });
-              legendLayers.push({ layer: pBase_PI, title: 'GRSG Pop’l’n Index (Relative Abundance) (Doherty et al. 2017)' });
-              legendLayers.push({ layer: pBase_Pop, title: 'GRSG Populations' });
-              legendLayers.push({ layer: pBase_MZ, title: 'WAFWA Management Zones' });
+			  legendLayers.push({ layer: pBase_SMA, title: 'Land Ownership (Surface Management Agency, BLM 2015)' });
+			  if (app.strModule == "GRSG") {
+				  legendLayers.push({ layer: pBase_PAC, title: 'GRSG Priority Areas for Conservation (PACs)' });
+				  legendLayers.push({ layer: pBase_SBBiom, title: 'US Sagebrush Biome Range Extent' });				
+				  legendLayers.push({ layer: pBase_BLMHMA, title: 'GRSG BLM Habitat Management Areas (PHMA + IHMA [ID]) (BLM/USFS 2015)' });
+				  legendLayers.push({ layer: pBase_Eco, title: 'Ecosystem Resilience & Resistance (R&R) (Chambers et al. 2014, 2016)' });
+				  legendLayers.push({ layer: pBase_RRP, title: 'GRSG Pop’l’n Index (High/Low (80% threshold)) + R&R (Chambers et al. 2017 )' });
+				  legendLayers.push({ layer: pBase_RRB, title: 'GRSG Breeding Habitat Dist. + R&R (Chambers et al. 2017)' });
+				  legendLayers.push({ layer: pBase_Breed, title: 'Breeding Habitat Distribution (Doherty et al. 2017)' });
+				  legendLayers.push({ layer: pBase_PI, title: 'GRSG Pop’l’n Index (Relative Abundance) (Doherty et al. 2017)' });
+				  legendLayers.push({ layer: pBase_Pop, title: 'GRSG Populations' });
+				  legendLayers.push({ layer: pBase_MZ, title: 'WAFWA Management Zones' });
+			  }
 			  legendLayers.push({ layer: CED_PP_poly, title: 'CED Plans and Projects' });
 
               dojo.connect(app.map, 'onLayersAddResult', function (results) {
@@ -645,54 +677,56 @@ define([
               });
 
               var cbxLayers = [];
+			  if (app.strModule == "GRSG") {
+				  cbxLayers.push({
+					  layers: [pBase_PAC, pBase_PAC], title: 'GRSG Priority Areas for Conservation (PACs)' +
+						  '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<i title="This polygon data set represents all sage-grouse Priority Areas for Conservation (PACs) identified in the 2013 Greater Sage-Grouse Conservation Objectives Team (COT) Report. PACs represent areas identified as essential for the long-term conservation of the sage-grouse. The COT determined that the PACs are key for the conservation of the species range wide.">more..., </i>' +
+						  '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://www.sciencebase.gov/catalog/item/56f96d88e4b0a6037df066a3" target="_blank">(COT Team Report, 2014)</a>'
+				  });
 
-              cbxLayers.push({ layers: [pBase_PAC, pBase_PAC], title: 'GRSG Priority Areas for Conservation (PACs)' +
-                                                                      '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<i title="This polygon data set represents all sage-grouse Priority Areas for Conservation (PACs) identified in the 2013 Greater Sage-Grouse Conservation Objectives Team (COT) Report. PACs represent areas identified as essential for the long-term conservation of the sage-grouse. The COT determined that the PACs are key for the conservation of the species range wide.">more..., </i>' +
-                                                                      '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://www.sciencebase.gov/catalog/item/56f96d88e4b0a6037df066a3" target="_blank">(COT Team Report, 2014)</a>'
-			  });
-
-			  cbxLayers.push({
-				  layers: [pBase_SBBiom, pBase_SBBiom], title: 'US Sagebrush Biome Range Extent' +
-					  '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<i title="This feature estimates the geographic extent of the sagebrush biome in the United States. It was created for the Western Association of Fish and Wildlife Agency’s (WAFWA) Sagebrush Conservation Strategy publication as a visual for the schematic figures. This layer does not represent the realized distribution of sagebrush and should not be used to summarize statistics about the distribution or precise location of sagebrush across the landscape.">more..., </i>' +
-					  '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://www.sciencebase.gov/catalog/item/5ccb4a64e4b09b8c0b7808a6" target="_blank">(Jeffries, M.I., and Finn, S.P., 2019)</a>'
-			  });
-
+				  cbxLayers.push({
+					  layers: [pBase_SBBiom, pBase_SBBiom], title: 'US Sagebrush Biome Range Extent' +
+						  '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<i title="This feature estimates the geographic extent of the sagebrush biome in the United States. It was created for the Western Association of Fish and Wildlife Agency’s (WAFWA) Sagebrush Conservation Strategy publication as a visual for the schematic figures. This layer does not represent the realized distribution of sagebrush and should not be used to summarize statistics about the distribution or precise location of sagebrush across the landscape.">more..., </i>' +
+						  '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://www.sciencebase.gov/catalog/item/5ccb4a64e4b09b8c0b7808a6" target="_blank">(Jeffries, M.I., and Finn, S.P., 2019)</a>'
+				  });
+			  }
               cbxLayers.push({
                   layers: [pBase_SMA, pBase_SMA], title: 'Land Ownership (SMA)' +
                                                                       '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<i title="The Surface Management Agency (SMA) Geographic Information System (GIS) dataset depicts Federal land for the United States and classifies this land by its active Federal surface managing agency.">more..., </i>' +
                                                                       '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://landscape.blm.gov/geoportal/catalog/search/resource/details.page?uuid=%7B2A8B8906-7711-4AF7-9510-C6C7FD991177%7D" target="_blank">(Surface Management Agency, BLM 2015)</a>'
               });
 
-              //cbxLayers.push({ layers: [pBase_GHMA, pBase_GHMA], title: 'GRSG General Habitat Management Areas<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(GHMA + OHMA [NV, UT])<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://landscape.blm.gov/geoportal/catalog/search/resource/details.page?uuid=%7BB0348167-81B5-481E-80CB-BF28B1587988%7D" target="_blank">(BLM/USFS 2015)</a>' });
-              cbxLayers.push({
-                  layers: [pBase_BLMHMA, pBase_BLMHMA], title: 'GRSG Habitat Management Areas' +
-                                                               '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<i title="This dataset represents the consolidated submissions of GRSG habitat management areas from each individual BLM ARMP & ARMPA/Records of Decision (ROD) and for subsequent updates. These data were submitted to the BLM’s Wildlife Habitat Spatial Analysis Lab in March 2016 and were updated for UT in April of 2017 and WY in October of 2017. All of the data used to create this file was submitted by the EIS.">more..., </i>' +
-                                                               '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://landscape.blm.gov/geoportal/catalog/search/resource/details.page?uuid=%7BECEEE1DF-9B8A-478D-874B-C6FF315A7585%7D" target="_blank">(Habitat Management Areas, BLM 2017)</a>'
-
-                  
-              });
-
-
-
-              cbxLayers.push({ layers: [pBase_Eco, pBase_Eco], title: 'Ecosystem Resilience & Resistance (R&R)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Chambers et al. 2014, 2016)' });
-              cbxLayers.push({ layers: [pBase_RRP, pBase_RRP], title: 'GRSG Pop’l’n Index (High/Low (80% threshold)) + R&R<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Chambers et al. 2017 )' });
-              cbxLayers.push({ layers: [pBase_RRB, pBase_RRB], title: 'GRSG Breeding Habitat Dist. + R&R<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Chambers et al. 2017)' });
-              cbxLayers.push({ layers: [pBase_Breed, pBase_Breed], title: 'Breeding Habitat Distribution<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Doherty et al. 2017)' });
-              cbxLayers.push({ layers: [pBase_PI, plabels2], title: 'GRSG Pop’l’n Index (Relative Abundance)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Doherty et al. 2017)' });
-              cbxLayers.push({
-                  layers: [pBase_Pop, plabels1], title: 'GRSG Populations' +
-                                                         '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<i title="This data set represents greater sage-grouse populations to be used in work for the US Fish and Wildlife (USFWS) 2015 Status Review for the greater sage-grouse. Populations do not represent occupied habitat. Population polygons are meant to coarsely identify areas of occupation based on encircling groups of leks. Boundaries taken from BLM/WAFWA revised population boundaries (‘COT_SG_Populations_2014_WAFWA_UT’ data layer). The original data layer was slightly modified for the USFWS 2015 Status Review...">more..., </i>' +
-                                                         '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://www.sciencebase.gov/catalog/item/56f96f78e4b0a6037df06b0f" target="_blank">USFWS, ES 2014</a>'
-              });
-
-              cbxLayers.push({
-                  layers: [pBase_MZ, plabels2], title: 'WAFWA Management Zones' +
-                                                                      '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<i title="The Greater Sage-grouse Comprehensive Conservation Strategy developed sage-grouse management zones determined by sage-grouse populations and sub-populations identified within seven floristic provinces.">more..., </i>' +
-                                                                      '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://www.wafwa.org/Documents%20and%20Settings/37/Site%20Documents/Initiatives/Sage%20Grouse/Primer%203%20SGMapping%20&%20Priority%20Habitats1.2.pdf" target="_blank">WAFWA</a>'
-              });
-			  cbxLayers.push({ layers: [CED_PP_poly, CED_PP_poly], title: 'CED Plans and Projects (area)' });
-			  cbxLayers.push({ layers: [CED_PP_point, CED_PP_point], title: 'CED Plans and Projects (point)' });
 			  if (app.strModule == "GRSG") {
+				  cbxLayers.push({
+					  layers: [pBase_BLMHMA, pBase_BLMHMA], title: 'GRSG Habitat Management Areas' +
+						  '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<i title="This dataset represents the consolidated submissions of GRSG habitat management areas from each individual BLM ARMP & ARMPA/Records of Decision (ROD) and for subsequent updates. These data were submitted to the BLM’s Wildlife Habitat Spatial Analysis Lab in March 2016 and were updated for UT in April of 2017 and WY in October of 2017. All of the data used to create this file was submitted by the EIS.">more..., </i>' +
+						  '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://landscape.blm.gov/geoportal/catalog/search/resource/details.page?uuid=%7BECEEE1DF-9B8A-478D-874B-C6FF315A7585%7D" target="_blank">(Habitat Management Areas, BLM 2017)</a>'
+
+
+				  });
+			  }
+
+			  if (app.strModule == "GRSG") {
+				  cbxLayers.push({ layers: [pBase_Eco, pBase_Eco], title: 'Ecosystem Resilience & Resistance (R&R)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Chambers et al. 2014, 2016)' });
+				  cbxLayers.push({ layers: [pBase_RRP, pBase_RRP], title: 'GRSG Pop’l’n Index (High/Low (80% threshold)) + R&R<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Chambers et al. 2017 )' });
+				  cbxLayers.push({ layers: [pBase_RRB, pBase_RRB], title: 'GRSG Breeding Habitat Dist. + R&R<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Chambers et al. 2017)' });
+				  cbxLayers.push({ layers: [pBase_Breed, pBase_Breed], title: 'Breeding Habitat Distribution<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Doherty et al. 2017)' });
+				  cbxLayers.push({ layers: [pBase_PI, plabels2], title: 'GRSG Pop’l’n Index (Relative Abundance)<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp(Doherty et al. 2017)' });
+				  cbxLayers.push({
+					  layers: [pBase_Pop, plabels1], title: 'GRSG Populations' +
+						  '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<i title="This data set represents greater sage-grouse populations to be used in work for the US Fish and Wildlife (USFWS) 2015 Status Review for the greater sage-grouse. Populations do not represent occupied habitat. Population polygons are meant to coarsely identify areas of occupation based on encircling groups of leks. Boundaries taken from BLM/WAFWA revised population boundaries (‘COT_SG_Populations_2014_WAFWA_UT’ data layer). The original data layer was slightly modified for the USFWS 2015 Status Review...">more..., </i>' +
+						  '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://www.sciencebase.gov/catalog/item/56f96f78e4b0a6037df06b0f" target="_blank">USFWS, ES 2014</a>'
+				  });
+
+				  cbxLayers.push({
+					  layers: [pBase_MZ, plabels2], title: 'WAFWA Management Zones' +
+						  '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<i title="The Greater Sage-grouse Comprehensive Conservation Strategy developed sage-grouse management zones determined by sage-grouse populations and sub-populations identified within seven floristic provinces.">more..., </i>' +
+						  '<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp<a href="https://www.wafwa.org/Documents%20and%20Settings/37/Site%20Documents/Initiatives/Sage%20Grouse/Primer%203%20SGMapping%20&%20Priority%20Habitats1.2.pdf" target="_blank">WAFWA</a>'
+				  });
+			  }
+			  cbxLayers.push({ layers: [CED_PP_poly, CED_PP_poly], title: 'CED Plans and Projects (area)' });
+			  if (app.strModule == "GRSG") {
+				  cbxLayers.push({ layers: [CED_PP_point, CED_PP_point], title: 'CED Plans and Projects (point)' });
 				  cbxLayers.push({ layers: [CED_PP_line, CED_PP_line], title: 'CED Plans and Projects (line)' });
 			  }
 
@@ -701,9 +735,7 @@ define([
 					  pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop, plabels1, plabels2,
 					  CED_PP_poly, CED_PP_line, CED_PP_point, this.gCED_PP_point4FeatureTable];
 			  } else {
-				  arrayLayers = [pBase_PAC, pBase_SBBiom, pBase_SMA, pBase_BLMHMA, pBase_Eco, pBase_RRP,
-					  pBase_RRB, pBase_Breed, pBase_PI, pBase_MZ, pBase_Pop, plabels1, plabels2,
-					  CED_PP_poly, CED_PP_point, this.gCED_PP_point4FeatureTable];
+				  arrayLayers = [pBase_SMA, CED_PP_poly, CED_PP_point, this.gCED_PP_point4FeatureTable];
 			  }
               app.map.addLayers(arrayLayers);
 

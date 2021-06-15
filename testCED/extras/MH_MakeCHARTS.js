@@ -180,7 +180,8 @@ define([
                                        "dGISAB_PIECHART",
                                        "dGISBLMHMA_COLUMNCHART",
                                        "dGISBD_PIECHART",
-                                       "dGISBP_PIECHART",
+										"dGISBP_PIECHART",
+										"dGISSRU_COLUMNCHART",
                                        "dGISIDX_PIECHART"];
 
             var i;

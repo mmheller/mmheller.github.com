@@ -83,10 +83,10 @@ Date:        Oct 2014, Updated Oct 2018-->
 					var CED_PP_point = arrayLayers[15];
 					var CED_PP_point4FeatureTable = arrayLayers[16];
 				} else {
-					var CED_PP_poly = arrayLayers[13];  //index depends on MH_SetupCEDMap-->Phase2-->arrayLayers =
+					var CED_PP_poly = arrayLayers[1];  //index depends on MH_SetupCEDMap-->Phase2-->arrayLayers =
 					var CED_PP_line = undefined;
-					var CED_PP_point = arrayLayers[14];
-					var CED_PP_point4FeatureTable = arrayLayers[15];
+					var CED_PP_point = arrayLayers[2];
+					var CED_PP_point4FeatureTable = arrayLayers[3];
 				}
 
 				app.pSup.Phase3(CED_PP_point, CED_PP_line, CED_PP_poly);
@@ -203,17 +203,17 @@ Date:        Oct 2014, Updated Oct 2018-->
 						<option value="99">All</option>
 					</select><br /><br />
 
-					<font size="2" title="WAFWA Management Zones overlapping the efforts in some fashion.  Some non-spatial projects/plans will not overlap zones.  The corresponding layer can be turned on in the ‘Legend and Layer Options’ panel.  Zones depict the management zone boundaries for Greater and Gunnison sage-grouse in the western United States and Canada. These boundaries were digitized from a hand drawn figure originally created by the Western Association of Fish and Wildlife Agencies' (WAFWA) Sage-grouse Conservation Planning Framework Team for use in the Greater Sage-grouse Comprehensive Conservation Strategy."><u>WAFWA Management Zone:</u></font><br />
+					<font size="2" id="txtWAFWA_4_GRSG" title="WAFWA Management Zones overlapping the efforts in some fashion.  Some non-spatial projects/plans will not overlap zones.  The corresponding layer can be turned on in the ‘Legend and Layer Options’ panel.  Zones depict the management zone boundaries for Greater and Gunnison sage-grouse in the western United States and Canada. These boundaries were digitized from a hand drawn figure originally created by the Western Association of Fish and Wildlife Agencies' (WAFWA) Sage-grouse Conservation Planning Framework Team for use in the Greater Sage-grouse Comprehensive Conservation Strategy."><u>WAFWA Management Zone:</u></font><br />
 					<select id="ddlManagUnit" class="selectClass" disabled>
 						<option value="99">All</option>
 					</select><br /><br />
 
 					<font size="2" title="States and Canadian Provinces overlapping the efforts in some manner.  Some non-spatial projects/plans will not overlap zones."><u>State/Province:</u></font><br />
 					<select id="ddlState" class="selectClass" disabled>
-						<option value="99"> All</option>
+						<option value="99">All</option>
 					</select><br /><br />
 
-					<font size="2" title="GRSG Populations Areas overlapping the efforts in some fashion. Some non-spatial projects/plans will not overlap zones.  The corresponding layer can be turned on in the ‘Legend and Layer Options’ panel.  GRSG Populations Areas represents areas to be used in work for the US Fish and Wildlife (USFWS) 2015 Status Review for the greater sage-grouse. Populations do not represent occupied habitat. Population polygons are meant to coarsely identify areas of occupation based on encircling groups of leks."><u>GRSG Population Area:</u></font><br />
+					<font size="2" id="txtPop_4_GRSG" title="GRSG Populations Areas overlapping the efforts in some fashion. Some non-spatial projects/plans will not overlap zones.  The corresponding layer can be turned on in the ‘Legend and Layer Options’ panel.  GRSG Populations Areas represents areas to be used in work for the US Fish and Wildlife (USFWS) 2015 Status Review for the greater sage-grouse. Populations do not represent occupied habitat. Population polygons are meant to coarsely identify areas of occupation based on encircling groups of leks."><u>GRSG Population Area:</u></font><br />
 					<select id="ddlPopArea" class="selectClass" disabled>
 						<option value="99">All</option>
 					</select><br /><br />

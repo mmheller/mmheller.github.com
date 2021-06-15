@@ -175,6 +175,10 @@ function startExport2PDF() {
     $("#dGISSMA").css("font-size", "10px");// original value
     $("#dGISBLMHMA").css("font-family", "helvetica");// change property value
     $("#dGISBLMHMA").css("font-size", "10px");// original value
+
+	$("#dGISSRU").css("font-family", "helvetica");// change property value
+	$("#dGISSRU").css("font-size", "10px");// original value
+
     ////$("#dGISPHMA").css("font-family", "helvetica");// change property value
     ////$("#dGISPHMA").css("font-size", "10px");// original value
     $("#dGISRMZ").css("font-family", "helvetica");// change property value
@@ -253,6 +257,12 @@ function startExport2PDF() {
                     AddChartImage2PDF(pdf, "dGISBLMHMA_COLUMNCHART", renderer.pdf.internal.pages.length - 1, renderer.pdf.tableHeaderRow[0][1] + 25);
                     return true;                      // true = "handled elsewhere, bypass text extraction"
                 },
+
+				'#dGISSRU_COLUMNCHART': function (element, renderer) {
+					AddChartImage2PDF(pdf, "dGISSRU_COLUMNCHART", renderer.pdf.internal.pages.length - 1, renderer.pdf.tableHeaderRow[0][1] + 25);
+					return true;                      // true = "handled elsewhere, bypass text extraction"
+				},
+
                 //'#dGISPHMA_COLUMNCHART': function (element, renderer) {
                 //    AddChartImage2PDF(pdf, "dGISPHMA_COLUMNCHART", renderer.pdf.internal.pages.length - 1, renderer.pdf.tableHeaderRow[0][1] + 25);
                 //    return true;                      

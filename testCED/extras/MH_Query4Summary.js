@@ -151,6 +151,8 @@ define([
 				arrayQuery.push([(parseInt("19") + parseInt(app.iIncrementHFL)).toString(), strQuery2 + " and Symbol <> 'N/A'", "Project_ID,GIS_Acres", "count,sum", "Symbol", "dGISIDX", '<b>"NUMBER of EFFORTS and TOTAL ACRES by RESILIENCE and RESISTANCE AND POPULATION INDEX HIGH/LOW DENSITY CLASS"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b> \n<br>&nbsp;&nbsp;&nbsp;&nbsp;{0}', "show both-commas-no-round-decimal", ""]);
 				arrayQuery.push([(parseInt("10") + parseInt(app.iIncrementHFL)).toString(), strQuery2, "Project_ID,GIS_Acres", "count,sum", "ADMIN_AGEN", "dGISSMA", '<b>"NUMBER of EFFORTS and TOTAL ACRES by SURFACE MANAGEMENT AGENCY"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
 
+				arrayQuery.push([(parseInt("22") + parseInt(app.iIncrementHFL)).toString(), strQuery2, "Project_ID,GIS_Acres", "count,sum", "SRU_ID", "dGISSRU", '<b>"NUMBER of TOTAL ACRES BY SRU Reporting Unit"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br>{0}', "show both-commas-no-round-decimal", ""]);
+
 				arrayQuery.push([(parseInt("20") + parseInt(app.iIncrementHFL)).toString(), strQuery2, "GIS_Acres", "sum", "", "dGISPACSum", '<b>"TOTAL ACRES within GRSG PRIORITY AREAS for CONSERVATION (PACs)"<br>(NOTE: Acreages are GIS Calculated and Results *Does Not* Include Point or Line Data)</b><br><i>{0}  acres</i>', "commas-no-round-decimal", ""]);
             } else {
 				//arrayQuery.push(["12", "OBJECTID > 0", "LastDataProviderEdit", "Max", "", "dFPMaxLastDataProviderEdit", '<font size="1px"><b>Last Approved Data Provider Edit:</b> {0}</font>', "convert2date", ""]);
@@ -420,16 +422,7 @@ define([
                 }
                 else {                    //loop through the checkboxes and enable, so user interaction dosen't disrupt the queryies
                     if (document.getElementById("ImgResultsLoading") != undefined) {
-                        //if (app.arrayLayers[13] != undefined) {
-                        //    var CED_PP_poly = app.arrayLayers[13];  //index depends on MH_Setup-->Phase2-->arrayLayers =
-                        //    var CED_PP_line = app.arrayLayers[14];
-                        //    var CED_PP_point = app.arrayLayers[15];
-                        //    var CED_PP_point4FeatureTable = app.arrayLayers[16];
 
-                        //    CED_PP_point.clearSelection();
-                        //    CED_PP_line.clearSelection();
-                        //    CED_PP_poly.clearSelection();
-                        //}
 						if (app.arrayLayers[13] != undefined) {
 							if (app.strModule == "GRSG") {
 								var CED_PP_poly = arrayLayers[13];  //index depends on MH_SetupCEDMap-->Phase2-->arrayLayers =

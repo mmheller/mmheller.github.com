@@ -75,17 +75,8 @@ define([
 					disableOrEnableFormElements("dropdownForm", 'select-one', false); //disable/enable to avoid user clicking query options during pending queries
 					disableOrEnableFormElements("dropdownForm", 'button', false);  //disable/enable to avoid user clicking query options during pending queries
 					disableOrEnableFormElements("dropdownForm", 'radio', false);  //disable/enable to avoid user clicking query options during pending queries
-                    //$(".divOpenStats").prop("onclick", null).off("click");
-     //               $(function () {
-     //                   $('.divOpenStats').click(function () {
-     //                       app.pSup.openCEDPSummary();
-     //                   });
-     //               });
-					//$("#btn_Report").prop("disabled", false);
 
-
-                    this.strHTML_ID = "dTotalProjectsQ"; //this is redundant but having issues with some of the callbacks ie. GRSG pop area = Crab Creek
-
+					this.strHTML_ID = "dTotalProjectsQ"; //this is redundant but having issues with some of the callbacks ie. GRSG pop area = Crab Creek
                     app.pFC.GetCountOfFCDef_ShowText(this.strQueryStored, this.strURLStored + "0", "dTotalProjectsQ", "count", "project_id", " and (typeact = 'Spatial Project')");
                     break;
                 case "dTotalProjectsQ":
