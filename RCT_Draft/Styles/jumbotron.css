@@ -1,0 +1,232 @@
+﻿/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+	/*padding-top: 650px;*/
+	/*padding-top: 350px;*/
+	padding-top: 60px !important;
+	padding-bottom: 5px;
+}
+
+/*.alignright {
+	float: left;
+	width: 33.33333%;
+	text-align: right;
+}*/
+
+​
+
+span.logo_helper {
+	display: inline-block;
+	width: 0;
+	height: 100%;
+	vertical-align: middle;
+}
+
+
+logo_container {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	transition:none;
+}
+
+#logo {
+	display: inline-block;
+	float: none;
+	height: 70px !important;
+	/*max-height: 56px !important;*/
+	padding-top: 10px !important;
+	margin-bottom: 0;
+	vertical-align: middle !important;
+	-webkit-transition: all .4s ease-in-out !important;
+	-moz-transition: all .4s ease-in-out !important;
+	transition: all .4s ease-in-out !important;
+	-webkit-transform: translate3d(0,0,0) !important;
+}
+
+    text[fill="rgb(127, 82, 83)"]{  
+      text-shadow: 1px 1px #DCE1E3;  
+    }  
+
+#bloc1, #bloc2, #bloc3, #bloc4, #bloc5, #bloc6, #bloc7, #bloc8, #bloc9, #bloc10
+{
+    display:inline;
+}
+
+
+h3 {
+    padding: 5px !important;
+    margin: 5px !important;
+}
+
+a:link[role="presentation"],a:visited[role="presentation"] {
+    color: white;
+    padding: 5px 5px !important;
+}
+
+.nav > li > a:focus, .nav > li > a:hover {
+    color: #004876 !important;
+}
+
+.navbar-inverse {
+    background-color: #004876 !important;
+    border-color: #004876 !important;
+}
+
+.navbar-brand {
+    color: white !important;
+}
+
+    .navbar-brand:hover {
+        color: #004876 !important;
+        background: #eee !important;
+    }
+
+#mapDiv { /* Set the responsive map size here */
+    min-height: 80px !important;
+    max-height: 600px !important;
+}
+
+.esriScalebarLabel {
+    font-size: 11px !important;
+    font-style: normal !important;
+    color: #404040 !important;
+}
+
+.esriBasemapGalleryThumbnail {
+    height: 40px !important;
+    width: 40px !important;
+}
+
+
+.clsSectionDetailCFSTEMP_WARN {
+    background-color: lightpink;
+    color: red;
+    /*margin: 20px;*/
+    padding: 10px;
+}
+
+.tab { margin-left: 30px; 
+       margin-right: 30px;
+       padding:5px;
+}
+
+.clsSectionDetailCFSTEMP {
+    background-color: #004876;
+    color: white;
+    /*margin: 20px;*/
+    padding: 10px;
+}
+
+.clsSectionDetailCFSTEMP_Alt {
+    background-color: white;
+    color: black;
+    /*margin: 20px;*/
+    padding: 10px;
+}
+
+
+
+/*.esriBasemapGalleryThumbnail {
+    height: 40px;
+    width: 40px;
+}*/
+
+/*.esriBasemapGalleryNode {
+    width: 40px;
+}*/
+
+.esriBasemapGalleryNode {
+    width: 40px !important;
+}
+
+.esriLegendService { /*between GIS layers*/
+    padding-bottom: 5px !important;
+}
+
+.esriLegendServiceLabel {
+    font-weight: bold !important;
+}
+
+.esriLegendLayerLabel {
+    padding-top: 15px !important;
+}
+
+.esriLegendLayer tr { /*the div with all the symbols*/
+    float: left !important;
+    white-space: nowrap !important;
+    border: none !important;
+    border-width: 0px 0 !important;
+    padding-right: 10px;
+}
+
+.esriLegendLayer {
+    background-color: #BBD1E8 !important;
+}
+
+    .esriLegendLayer tbody { /*the table with all the symbols for a GIS layer*/
+        height: 80% !important;
+        overflow: hidden !important;
+    }
+
+
+
+
+/* The container must be positioned relative: */
+.custom-select {
+	position: relative;
+	font-family: Arial;
+}
+
+	.custom-select select {
+		display: none; /*hide original SELECT element: */
+	}
+
+.select-selected {
+	background-color: #004876;
+}
+
+	/* Style the arrow inside the select element: */
+	.select-selected:after {
+		position: absolute;
+		content: "";
+		top: 14px;
+		right: 10px;
+		width: 0;
+		height: 0;
+		border: 6px solid transparent;
+		border-color: #fff transparent transparent transparent;
+	}
+
+	/* Point the arrow upwards when the select box is open (active): */
+	.select-selected.select-arrow-active:after {
+		border-color: transparent transparent #fff transparent;
+		top: 7px;
+	}
+
+/* style the items (options), including the selected item: */
+.select-items div, .select-selected {
+	color: #ffffff;
+	padding: 8px 16px;
+	border: 1px solid transparent;
+	border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
+	cursor: pointer;
+}
+
+/* Style items (options): */
+.select-items {
+	position: absolute;
+	background-color: #31b0d5;
+	top: 100%;
+	left: 0;
+	right: 0;
+	z-index: 99;
+}
+
+/* Hide the items when the select box is closed: */
+.select-hide {
+	display: none;
+}
+
+.select-items div:hover, .same-as-selected {
+	background-color: rgba(0, 0, 0, 0.1);
+}
