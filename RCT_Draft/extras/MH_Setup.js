@@ -971,21 +971,63 @@ define([
                 },
             };
 
+			var iMapOrientation = app.map.width / app.map.height;
+			app.dblExpandNum = 0.5;
 
-            if (typeof app.H2O_ID != 'undefined') {
-                var iMapOrientation = app.map.width / app.map.height;
-                
-                app.dblExpandNum = 0.5;
-				if ((iMapOrientation > 1.5) & ((app.H2O_ID == "Madison") | (app.H2O_ID == "Boulder") | (app.H2O_ID == "Ruby") | (app.H2O_ID == "Upper Gallatin") | (app.H2O_ID == "Lower Gallatin"))) {
+			if (typeof app.H2O_ID != 'undefined') {
+				if ((iMapOrientation > 1.5) & ((app.H2O_ID == "Madison") |
+					(app.H2O_ID == "Boulder") |
+					(app.H2O_ID == "Ruby") |
+					(app.H2O_ID == "Sun") |
+					(app.H2O_ID == "Blackfoot") |
+					(app.H2O_ID == "Lower Bighorn") |
+					(app.H2O_ID == "Little Bighorn") |
+					(app.H2O_ID == "Little Wind") |
+					(app.H2O_ID == "Lower Wind") |
+					(app.H2O_ID == "Shoshone") |
+					(app.H2O_ID == "North Fork Shoshone") |
+					(app.H2O_ID == "South Fork Shoshone") |
+					(app.H2O_ID == "Upper Wind") |
+					(app.H2O_ID == "Upper Bighorn") |
+					(app.H2O_ID == "Upper Gallatin") |
+					(app.H2O_ID == "Lower Gallatin"))) {
                     app.dblExpandNum = 1;
-				} else if ((app.H2O_ID == "Broadwater") | (app.H2O_ID == "Boulder"))  {
+				} else if ((app.H2O_ID == "Broadwater") |
+					(app.H2O_ID == "Sun") |
+					(app.H2O_ID == "Blackfoot") |
+					(app.H2O_ID == "Shields") |
+					(app.H2O_ID == "Little Bighorn") |
+					(app.H2O_ID == "Little Wind") |
+					(app.H2O_ID == "Lower Wind") |
+					(app.H2O_ID == "Shoshone") |
+					(app.H2O_ID == "North Fork Shoshone") |
+					(app.H2O_ID == "South Fork Shoshone") |
+					(app.H2O_ID == "Upper Wind") |
+					(app.H2O_ID == "Lower Bighorn") |
+					(app.H2O_ID == "Upper Bighorn") |
+					(app.H2O_ID == "Boulder")) {
                     app.dblExpandNum = 1;
                 }
 
                 app.pZoom.qry_Zoom2FeatureLayerExtent(pWatershedsFeatureLayer, "OBJECTID");
             } else {
-                app.dblExpandNum = 0.5;
-                app.pZoom.qry_Zoom2FeatureLayerExtent(pBasinsFeatureLayer, "FID");
+				if (typeof app.Basin_ID != 'undefined') {
+					if ((iMapOrientation > 1.5) & ((app.Basin_ID == "Musselshell") |
+						(app.Basin_ID == "Blackfoot-Sun") |
+						(app.Basin_ID == "Boulder and East Boulder") |
+						(app.Basin_ID == "Bighorn"))) {
+						app.dblExpandNum = 1;
+					} else if ((app.Basin_ID == "Musselshell") |
+						(app.Basin_ID == "Blackfoot-Sun") |
+						(app.Basin_ID == "Boulder and East Boulder") |
+						(app.Basin_ID == "Bighorn")) {
+						app.dblExpandNum = 1;
+					}
+
+					app.pZoom.qry_Zoom2FeatureLayerExtent(pWatershedsFeatureLayer, "OBJECTID");
+				} else {
+					app.pZoom.qry_Zoom2FeatureLayerExtent(pBasinsFeatureLayer, "FID");
+				}
             }
 
             function err(err) {

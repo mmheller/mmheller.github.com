@@ -1133,7 +1133,11 @@ define([
 			}
 	
 			if ((app.pGage.m_arrayDNRC_Sens_Loc == null) | !(blnIsInitialPageLoad)) {  //clear out the symbology and charting
-				m_arrayOIDYellow = m_arrayOIDsRed = m_arrayOIDsPlum = m_arrayOIDsOrange = m_arrayOIDsGold = [];
+				m_arrayOIDYellow = [];
+				m_arrayOIDsRed = [];
+				m_arrayOIDsPlum = [];
+				m_arrayOIDsOrange = [];
+				m_arrayOIDsGold = [];
 				app.pGage.m_arrray_Detail4ChartCFS = [];
 				app.pGage.m_arrray_Detail4ChartTMP = [];
 			}
@@ -1723,7 +1727,6 @@ define([
 
             return [strOverallStatus, strOverallSymbol];
         },
-
 
         err: function (err) {
 			console.log("Failed to get results 1 due to an error: ");
