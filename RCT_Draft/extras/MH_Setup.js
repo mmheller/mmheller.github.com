@@ -449,11 +449,12 @@ define([
 
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/UMHW/FeatureServer/";
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/Main_Map/FeatureServer/";
-			//app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/UMH2/FeatureServer/";  //PRODUCGTION
-			app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/RCT_beta_Spring2021/FeatureServer/";
+			//app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/UMH2/FeatureServer/";  //PRODUCTION
+			app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/RCT_beta_Spring2021/FeatureServer/";  //Melissa dev
 			//app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Temp_RCT/FeatureServer/"
 			
-			this.GetSetHeaderWarningContent(app.strHFL_URL + "12", app.H2O_ID, blnUseAlternateHeader, app.Basin_ID);
+			//this.GetSetHeaderWarningContent(app.strHFL_URL + "12", app.H2O_ID, blnUseAlternateHeader, app.Basin_ID);
+			this.GetSetHeaderWarningContent(app.strHFL_URL + "11", app.H2O_ID, blnUseAlternateHeader, app.Basin_ID);
         },
 
         Phase2: function () {
@@ -640,9 +641,13 @@ define([
             var templateCZM = new InfoTemplate();
             templateCZM.setTitle("<b>Channel Migration Zone</b>");
             templateCZM.setContent("CMZ: ${CMZ}<br>Reach ID: ${RchID}");
-            var pCZMFeatureLayer = new esri.layers.FeatureLayer(app.strHFL_URL + "11",
-                                                        { mode: esri.layers.FeatureLayer.MODE_ONDEMAND, infoTemplate: templateCZM, outFields: ['*'], visible: false });
+            //var pCZMFeatureLayer = new esri.layers.FeatureLayer(app.strHFL_URL + "11",
+            //                                            { mode: esri.layers.FeatureLayer.MODE_ONDEMAND, infoTemplate: templateCZM, outFields: ['*'], visible: false });
 
+			var pCZMFeatureLayer = new esri.layers.FeatureLayer("https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/UMH2/FeatureServer/" + "11",
+				{ mode: esri.layers.FeatureLayer.MODE_ONDEMAND, infoTemplate: templateCZM, outFields: ['*'], visible: false });
+
+			
 
 
             var templateFWPAISAccess = new InfoTemplate();
@@ -763,8 +768,9 @@ define([
             app.pSup.m_pRiverSymbolsFeatureLayer = new esri.layers.FeatureLayer(app.strHFL_URL + "10",
                                                         { mode: esri.layers.FeatureLayer.MODE_ONDEMAND,  visible: true });
             // Use CORS
-            esriConfig.defaults.io.corsEnabledServers.push("docs.google.com"); // supports CORS
-
+			esriConfig.defaults.io.corsEnabledServers.push("docs.google.com"); // supports CORS
+			esriConfig.defaults.io.corsEnabledServers.push("gis.dnrc.mt.gov"); // supports CORS
+			
             var pMonitoringCSVLayer = new CSVLayer("https://docs.google.com/spreadsheets/d/e/2PACX-1vTw0rCwCLxDg2jCLLCscILrMDMGBbInS1KmwH76CPyqVYqFolKdOfw0J4DIaJhWoPDPkwVNQI_Y7OeX/pub?output=csv", {
                 visible:false
             });

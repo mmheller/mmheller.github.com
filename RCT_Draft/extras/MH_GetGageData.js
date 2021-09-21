@@ -799,6 +799,10 @@ define([
             //  var strURL = "https://nwis.waterdata.usgs.gov/nwis/dvstat?&site_no=" + strSiteID + "&agency_cd=USGS&por_" + strSiteID + "_80888=65063,00060,80888,1893-10-01,2017-10-29&stat_cds=mean_va&format=rdb";
 
 			var strURL = strDailyStat_URL;
+			if (strAgency = "MTDNRC") {
+				strURL = "";
+			}
+
 			console.log("retreiving historical information");
 
             $.get(strURL)   //http://api.jquery.com/jquery.getjson/
@@ -1027,7 +1031,8 @@ define([
 			app.map.hideZoomSlider();
 
 			var strURLGagePrefix = "https://gis.dnrc.mt.gov/arcgis/rest/services/WRD/WMB_StAGE/MapServer/3/query";
-			strURLGagePrefix += "?outFields=*&returnGeometry=false&f=json&where=SensorLabel+in+%28%27discharge%27%2C%27water+temp%27%29+and+LocationID+%3D+";
+			strURLGagePrefix += "?outFields=*&returnGeometry=false&f=json&where=SensorLabel+in+%28%27discharge%27%2C%27water+temp%27%29+and+LocationID+in+";
+			//strURLGagePrefix += "?outFields=*&returnGeometry=false&f=json&where=SensorLabel+in+%28%27discharge%27%2C%27water+temp%27%29+and+LocationID+%3D+";
 
 			var arrayProc2 = [];
 			var arraySiteIDsDNRC = [];
