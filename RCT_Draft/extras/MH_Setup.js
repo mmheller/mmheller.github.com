@@ -285,11 +285,12 @@ define([
 				["Sun", "Sun", "Blackfoot-Sun"], ["Lower Musselshell", "Lower Musselshell", "Musselshell"],
 				["Lower Bighorn", "Lower Bighorn", "Bighorn"], ["Little Bighorn", "Little Bighorn", "Bighorn"],
 				["Flatwillow", "Flatwillow", "Musselshell"], ["Shoshone", "Shoshone", "Bighorn"],
-				["Box Elder", "Box Elder", "Musselshell"], ["Blackfoot", "Blackfoot", "Blackfoot-Sun"],
+				//["Box Elder", "Box Elder", "Musselshell"],
+				["Blackfoot", "Blackfoot", "Blackfoot-Sun"],
 				["Little Wind", "Little Wind", "Bighorn"], ["Lower Wind", "Lower Wind", "Bighorn"],
-				["North Fork Shoshone", "North Fork Shoshone", "Bighorn"], ["Big Horn Lake", "Big Horn Lake", "Bighorn"],
+				["North Fork Shoshone", "North Fork Shoshone", "Bighorn"], ["Bighorn Lake", "Bighorn Lake", "Bighorn"],
 				["South Fork Shoshone", "South Fork Shoshone", "Bighorn"], ["Upper Wind", "Upper Wind", "Bighorn"],
-				["Greybull", "Greybull", "Bighorn"], ["Dry", "Dry", "Bighorn"],
+				//["Greybull", "Greybull", "Bighorn"], ["Dry", "Dry", "Bighorn"],
 				["Upper Bighorn", "Upper Bighorn", "Bighorn"], ["Upper Musselshell", "Upper Musselshell", "Musselshell"],
 				["Boulder and East Boulder", "Boulder and East Boulder", "Boulder and East Boulder"],
 				["City of Choteau - Teton River", "Blackfoot-Sun"]
@@ -987,6 +988,7 @@ define([
 					(app.H2O_ID == "Shoshone") |
 					(app.H2O_ID == "North Fork Shoshone") |
 					(app.H2O_ID == "South Fork Shoshone") |
+					(app.H2O_ID == "Bighorn Lake") |
 					(app.H2O_ID == "Upper Wind") |
 					(app.H2O_ID == "Upper Bighorn") |
 					(app.H2O_ID == "Upper Gallatin") |
@@ -1002,6 +1004,7 @@ define([
 					(app.H2O_ID == "Shoshone") |
 					(app.H2O_ID == "North Fork Shoshone") |
 					(app.H2O_ID == "South Fork Shoshone") |
+					(app.H2O_ID == "Bighorn Lake") |
 					(app.H2O_ID == "Upper Wind") |
 					(app.H2O_ID == "Lower Bighorn") |
 					(app.H2O_ID == "Upper Bighorn") |
