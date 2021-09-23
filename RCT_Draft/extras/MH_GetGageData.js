@@ -1572,7 +1572,7 @@ define([
                                         strSiteFlowStatus = "CONSERVATION";
                                 }
                                 if (dblLatestCFS <= iLateFlowClosureValueFlow) {
-                                        strSiteFlowStatus = "UNOFFICIAL RIVER CLOSURE";
+                                        strSiteFlowStatus = "EXPANDED CONSERVATION MEASURES";
                                 }
                             }
 
@@ -1586,7 +1586,7 @@ define([
                                 strNoDataLabel4ChartingTMP = " (No Data)";
                                 dteLatestDateTimeTMP = new Date();
 							} else if ((dblLatestTMP > iTempClosureValue) & ( iTempClosureValue != 0)) {
-                                strSiteTempStatus = "UNOFFICIAL RIVER CLOSURE";
+                                strSiteTempStatus = "EXPANDED CONSERVATION MEASURES";
                             }
 
                             if (itemSectionRefined[1]== null) {  //if no gage id then hardcode 
@@ -1713,13 +1713,13 @@ define([
                 m_arrayOIDsGold.push(iOID);
             }
 
-            if (strSiteFlowStatus == "UNOFFICIAL RIVER CLOSURE") {
-                strOverallStatus = "UNOFFICIAL RIVER CLOSURE";
+            if (strSiteFlowStatus == "EXPANDED CONSERVATION MEASURES") {
+                strOverallStatus = "EXPANDED CONSERVATION MEASURES";
                 strOverallSymbol = "Orange";
                 m_arrayOIDsOrange.push(iOID);
             }
 
-            if (strSiteTempStatus == "UNOFFICIAL RIVER CLOSURE") {
+            if (strSiteTempStatus == "EXPANDED CONSERVATION MEASURES") {
                 strOverallStatus = "PREPARE FOR HOOT-OWL FISHING RESTRICTIONS";
                 strOverallSymbol = "Plum";
                 m_arrayOIDsPlum.push(iOID);
