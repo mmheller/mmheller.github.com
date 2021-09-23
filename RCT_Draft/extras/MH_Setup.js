@@ -757,7 +757,9 @@ define([
             var plabels1 = new LabelLayer({ id: "labels1" });
             plabels1.addFeatureLayer(pWatershedsFeatureLayer, pLabelRenderer1, "{" + strlabelField1 + "}");
 
-            var strlabelField3 = "SectionID";
+			var strlabelField3 = "SectionID";
+			//var strlabelField3 = "SectionName";
+			
             var sampleLabel = new TextSymbol().setColor(
               new Color([0, 0, 128])).setAlign(Font.ALIGN_START).setAngle(45).setFont(new Font("10pt").setWeight(Font.WEIGHT_BOLD).setFamily("arial"));
 
