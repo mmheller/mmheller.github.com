@@ -22,22 +22,22 @@ function stripHTML(html) {
 //Explore drilldown examples https://js.devexpress.com/Demos/WidgetsGallery/Demo/Charts/ChartsDrillDown/Knockout/Light/
 
 define([
-        "esri/tasks/QueryTask",
-        "esri/tasks/query",
-                "esri/geometry/Polyline",
-  "dojo/_base/declare",
-  "dojo/_base/lang",
-  "esri/request",
-  "dojo/promise/all",
-  "dojo/promise/all",
-  "esri/request", "dojo/_base/array", 
-  "dojo/dom",
-  "dojo/dom-class",
-  "dijit/registry",
-  "dojo/on",
+	"esri/rest/query",
+	"esri/rest/support/Query",
+	"esri/geometry/Polyline",
+	"dojo/_base/declare",
+	"dojo/_base/lang",
+	"esri/request",
+	"dojo/promise/all",
+	"dojo/promise/all",
+	"esri/request", "dojo/_base/array", 
+	"dojo/dom",
+	"dojo/dom-class",
+	"dijit/registry",
+	"dojo/on",
 
 ], function (
-           QueryTask, Query, Polyline, declare, lang, esriRequest, all, All, request, dom, domClass, registry, on
+		query, Query, Polyline, declare, lang, esriRequest, all, All, request, dom, domClass, registry, on
 ) {
 
     return declare([], {
@@ -47,16 +47,15 @@ define([
         m_StepThruCounter: 0,
 
 		Start: function (strClickStreamName, strClickSegmentID) {
-            var pQuery = new Query();
-            var queryTask = new QueryTask(app.strHFL_URL + "5");
-            
-            pQuery.where = "(StreamName = '" + strClickStreamName + "') and (SectionID = '" + strClickSegmentID + "')";
-            pQuery.returnGeometry = true;
-            pQuery.outFields = ["OBJECTID"];
-            pQuery.outSpatialReference = {"wkid": 102100};
-            //pQuery.geometry = sectionGeometries;
-            //pQuery.spatialRelationship = Query.SPATIAL_REL_INTERSECTS;
-            queryTask.execute(pQuery, this.GetSectionGeometryResults1, this.GetSectionGeometryError1);
+			let queryObject = new Query();
+			queryObject.where = "(StreamName = '" + strClickStreamName + "') and (SectionID = '" + strClickSegmentID + "')";
+			queryObject.outSpatialReference = { wkid: 102100 };
+			queryObject.returnGeometry = true;
+			queryObject.outFields = ["*"];
+			queryObject.spatialRelationship = "intersects";  // this is the default
+
+			query.executeQueryJSON(app.strHFL_URL + app.idx11[5], queryObject).then(
+							this.GetSectionGeometryResults1, this.GetSectionGeometryError1);
         },
 
         ClearVars: function () {
@@ -71,7 +70,7 @@ define([
 
             var resultCount = pSectionGeometryFeatures.length;
             if (resultCount > 0) {
-                var sectionGeometries = new Polyline(app.map.spatialReference);
+				var sectionGeometries = new Polyline(app.view.spatialReference);
                 for (var i = 0; i < pSectionGeometryFeatures.length; i++) {
                     var paths = pSectionGeometryFeatures[i].geometry.paths;
                     for (var j = 0; j < paths.length; j++) { //needed for multi part lines  
@@ -79,11 +78,6 @@ define([
                     }
                 }
                 this.app.pGetHistWarn.FindFWPWarnFeaturesOverlappingSections2(sectionGeometries);
-
-                //var x = document.getElementById("divFWPAlert");
-                //if (x.style.visibility === "hidden") {
-                //    x.style.visibility = 'visible';
-                //}
             }
         },
 
@@ -95,13 +89,12 @@ define([
         
         FindFWPWarnFeaturesOverlappingSections2: function (pGeometry) {
             var pQuery = new Query();
-            var queryTask = new QueryTask(app.strFWPURL);
             pQuery.returnGeometry = false;
             pQuery.outFields = ["TITLE", "LOCATION", "DESCRIPTION", "PRESSRELEASE", "PUBLISHDATE", "ARCHIVEDATE"];
             pQuery.outSpatialReference = {"wkid": 102100};
             pQuery.geometry = pGeometry;
             pQuery.spatialRelationship = Query.SPATIAL_REL_INTERSECTS;
-            queryTask.execute(pQuery, this.GetFWPWarnResults2, this.GetFWPWarnResultsError2);
+			query.executeQueryJSON(app.strFWPURL, pQuery).then(this.GetFWPWarnResults2, this.GetFWPWarnResultsError2);
 		},
 
 		GetFWPWarnResults2: function (results) {
