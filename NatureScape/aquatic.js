@@ -268,35 +268,70 @@ function (Color, esriConfig, HomeButton, Legend, OpacitySlider, PopupTemplate, s
 				
 		
 				on (featureLayer,"selection-complete", function (results,method) {
+					//var graphics = featureLayer.getSelectedFeatures();
+					//var objectids = new Array;
+					//graphics.forEach( function (feature) {
+					//	objectids.push(feature.attributes.OBJECTID);
+					//});
+					//relatedDataQuery.objectIds = objectids;
+					//featureLayer.queryRelatedFeatures(relatedDataQuery, null, function (err) {
+					//	console.log("related query error: ", err);
+					//});
 					var graphics = featureLayer.getSelectedFeatures();
-					var objectids = new Array;
-					
-					//console.log("Selection query is finished");
-					//console.log("graphics = ", graphics);
-					//console.log("graphics.length = " + graphics.length);
-					
-					graphics.forEach( function (feature) {
-						//console.log("feature = ", feature);
-						//console.log("feature.attributes = " + Object.keys(feature.attributes));
-						//console.log("feature.attributes.objectid = " + feature.attributes.objectid);
-						objectids.push(feature.attributes.OBJECTID);
+					_Objectids = new Array;
+
+					graphics.forEach(function (feature) {
+						_Objectids.push(feature.attributes.OBJECTID);
 					});
-					//console.log("objectids = ", objectids);
-					
-					relatedDataQuery.objectIds = objectids;
-					featureLayer.queryRelatedFeatures(relatedDataQuery, null, function(err) {
+					let strObjectIDstring = _Objectids.join(",");
+					console.log(_Objectids.length.toString() + " objectids = " + strObjectIDstring);
+
+					_iRangeOfFeatures2Proc = 150;  //sets the amount of features to pass for the relate then repeats if more features than this variable,  this prevents maxing out the relate
+					_iIterations = Math.ceil(_Objectids.length / _iRangeOfFeatures2Proc);
+					_iStep = 1;
+					_features4Summary = undefined;
+					_slicedObjectids = _Objectids.slice(((_iStep * _iRangeOfFeatures2Proc) - _iRangeOfFeatures2Proc), (_iStep * _iRangeOfFeatures2Proc));
+					_iTotalFeaturesWithNoRelatedRecord = 0
+					relatedDataQuery.objectIds = _slicedObjectids;
+
+					featureLayer.queryRelatedFeatures(relatedDataQuery, null, function (err) {
 						console.log("related query error: ", err);
 					});
+
 
 				});
 				
 				on (featureLayer,"query-related-features-complete", function (results) {
-					var features = results.featureSets;
-					//console.log("results = ", results);
-					var objectids = new Array;
-					//console.log("Related query is finished.");
-					//console.log("Related features = ", features);
-					summerizeSpeciesAmounts(features);
+					//var features = results.featureSets;
+					//var objectids = new Array;
+					//summerizeSpeciesAmounts(features);
+					let featuresTemp = results.featureSets;
+					if (_features4Summary == undefined) {
+						_features4Summary = featuresTemp;
+					} else {
+						for (let is = 0; is < _slicedObjectids.length; is++) {
+							if (featuresTemp[_slicedObjectids[is]] != undefined) {
+								_features4Summary[_slicedObjectids[is]] = featuresTemp[_slicedObjectids[is]];
+							} else {
+								console.log("no related data for objectid=" + _slicedObjectids[is]);
+								_iTotalFeaturesWithNoRelatedRecord += 1;
+							}
+						}
+					}
+					if (_iStep < _iIterations) {
+						_iStep += 1;
+						_slicedObjectids = _Objectids.slice(((_iStep * _iRangeOfFeatures2Proc) - _iRangeOfFeatures2Proc), (_iStep * _iRangeOfFeatures2Proc));
+						relatedDataQuery.objectIds = _slicedObjectids;
+						featureLayer.queryRelatedFeatures(relatedDataQuery, null, function (err) {
+							console.log("related query error: ", err);
+						});
+
+						dom.byId("totalFeaturesSelected-1").innerHTML = "Processing Features: " +
+							_iStep.toString() * _iRangeOfFeatures2Proc.toString() + " of " + _Objectids.length.toString()
+					} else {
+						summerizeSpeciesAmounts(_features4Summary);
+						console.log("number of feature with no related records: " + _iTotalFeaturesWithNoRelatedRecord.toString());
+					}
 				});
 
 			}
