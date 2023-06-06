@@ -1,11 +1,4 @@
 ﻿
-function showLoading() {
-    //esri.show(app.loading);
-    //app.map.disableMapNavigation();
-    //app.map.hideZoomSlider();
-    $("#loadingImg").show();
-}
-
 function getPageWidth() {
     var body = document.body,
         html = document.documentElement;
@@ -34,13 +27,6 @@ function closeAllSelect(elmnt) {
 			x[i].classList.add("select-hide");
 		}
 	}
-}
-
-function hideLoading(error) {
-    //esri.hide(app.loading);
-    //app.map.enableMapNavigation();
-    //app.map.showZoomSlider();
-    $("#loadingImg").hide();
 }
 
 function getTokens() {
@@ -176,6 +162,8 @@ define([
                 renderer: app.pSup.m_StreamStatusRenderer
             });
             app.map.layers.add(featureLayer, 5);
+            console.log("Add Stream Condition FeatureLayer and custom legend complete")
+
          },
 
         GetSetHeaderWarningContent: function (strAGSIndexTableURL, strH2OID, blnUseAlternateHeader, strBasinID) {
@@ -189,8 +177,6 @@ define([
             query.outFields = [strURLFieldName];
             let queryTask = new QueryTask(strAGSIndexTableURL);
             query.where = "Name = '" + strH2OID + "'";
-            //queryTask.execute(query, showHeaderWarningContentResults);
-
             queryTask.execute(query).then(showHeaderWarningContentResults);
 
 			function showHeaderWarningContentResults(results) {
@@ -201,7 +187,6 @@ define([
                     var featureAttributes = results.features[i].attributes;
 					var strGoogleSheetURL = featureAttributes[strURLFieldName];
                 }
-
 				strGoogleSheetURL += "&key=AIzaSyA2E5MNl-Hqoy36tbqHpccVpsSPYbnL5BA";
 
                 $.get(strGoogleSheetURL)
@@ -331,7 +316,12 @@ define([
                 ["Rock Creek", "Rock Creek", "Clarks Fork Yellowstone"],
                 ["South Fork Flathead", "South Fork Flathead", "Flathead"],
                 //["Sweet Grass Creek", "Sweet Grass Creek", "test"],
-                ["Stillwater", "Stillwater", "Flathead"]
+                ["Stillwater", "Stillwater", "Flathead"],
+                ["Lower Clark Fork", "Lower Clark Fork", "Lower Clark Fork"],
+                ["Green Mountain Conservation District", "Green Mountain Conservation District", "Lower Clark Fork"],
+                ["Eastern Sanders Conservation District", "Eastern Sanders Conservation District", "Lower Clark Fork"],
+                ["Mancos", "Mancos", "Southwest Colorado"]
+
 
             ];
 
@@ -369,7 +359,9 @@ define([
 
 			var arrayNavListBasin = [["Upper Missouri Headwaters", "UMH"],
 									["Upper Yellowstone/Shields", "UY_Shields"],
-									["Musselshell", "Musselshell"],
+                                    ["Southwest Colorado", "Southwest Colorado"],
+                                    ["Musselshell", "Musselshell"],
+                                    ["Lower Clark Fork", "Lower Clark Fork"],
                                     ["Flathead", "Flathead"],
                                     ["Clarks Fork Yellowstone", "Clarks Fork Yellowstone"],
                                     ["Boulder and East Boulder", "Boulder and East Boulder"],
@@ -490,11 +482,11 @@ define([
 
             
 			//app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support/FeatureServer/";  //PRODUCTION
-            app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22/FeatureServer/";  //PRODUCTION
+            //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
+
+            app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/RCT_LCF/FeatureServer/";  //Jo's dev
             app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
 
-            //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/RCT_2022_Initial_Update/FeatureServer/";  //Melissa dev
-            //app.idx11 = ["0", "1", "2", "3", "6", "9", "8", "10", "11", "12", "13", "15"];  //Melissa dev
 
             this.GetSetHeaderWarningContent(app.strHFL_URL + app.idx11[11], app.H2O_ID, blnUseAlternateHeader, app.Basin_ID);
         },
@@ -561,15 +553,7 @@ define([
                 unit: "dual"
             });
             
-            app.loading = dojo.byId("loadingImg");  //loading image. id
-
-            app.view.watch('updating', function (evt) {
-                if (evt === true) {
-                    showLoading();
-                } else {
-                    hideLoading();
-                }
-            })
+        
 
             let template = new PopupTemplate();
             template.title = "Gage (Watershed:{Watershed})";
@@ -761,7 +745,7 @@ define([
 
             let templateNOAA = new PopupTemplate();
             templateNOAA.title = "<b>Weather Station</b>";
-            templateNOAA.content = "<b>{STNNAME}</b>({OWNER})<br><a href={URL} target='_blank'>More info...</a>";
+            templateNOAA.content = "<b>{Station_Na}</b><br><a href={URL} target='_blank'>More info...</a>";
 
             const NOAA_labelClass = {// autocasts as new LabelClass()
                 symbol: {
@@ -769,12 +753,14 @@ define([
                     font: { family: "arial", size: 9, weight: "bold" }
                 },
                 labelPlacement: "above-center",
-                labelExpressionInfo: { expression: "$feature.STNNAME" }
+                labelExpressionInfo: { expression: "$feature.Station_Na" }
             };
             let pNOAAFeatureLayer = new FeatureLayer({
-                url: "https://nowcoast.noaa.gov/arcgis/rest/services/nowcoast/obs_meteoceanhydro_insitu_pts_geolinks/MapServer/1",
+                //url: "https://nowcoast.noaa.gov/arcgis/rest/services/nowcoast/obs_meteoceanhydro_insitu_pts_geolinks/MapServer/1",
+                url: "https://maps1.arcgisonline.com/arcgis/rest/services/NWS_Weather_Stations/MapServer/4",
                 popupTemplate: templateNOAA,
                 visible: false,
+                minScale: 5000000,
                 labelingInfo: [NOAA_labelClass]
             });
 
@@ -837,7 +823,7 @@ define([
                 minScale: 2000000
             };
 
-            var templateMTSP= new PopupTemplate();
+            var templateMTSP = new PopupTemplate();
             templateMTSP.title = "Montana State Parks";
             templateMTSP.content = "{NAME} <a href={WEB_PAGE} target='_blank'>(link here)</a></br>{BOAT_FAC}</br>{STATUS}</b>";
 
@@ -847,6 +833,24 @@ define([
                 renderer: sfsr_MTSP, "opacity": 0.9, autoGeneralize: true,
                 outFields: [strlabelField11], labelingInfo: [MTSP_labelClass], popupTemplate: templateMTSP
             });
+
+            if (app.Basin_ID == "Flathead") {
+                var templateDist2WaterTableFlathead = new PopupTemplate();
+                templateDist2WaterTableFlathead.title = "Depth to Water Table, Flathead River (feet)";
+                templateDist2WaterTableFlathead.content = "{DEPTH}";
+
+                var pDist2WaterTableFlathead = new FeatureLayer({
+                    url: "https://services.arcgis.com/QVENGdaPbd4LUkLV/ArcGIS/rest/services/Flathead_River_Watershed_Layers/FeatureServer/4",
+                    "opacity": 0.5, autoGeneralize: true,
+                    popupTemplate: templateDist2WaterTableFlathead, visible: false
+                });
+
+                var p1964FloodFlathead = new FeatureLayer({
+                    url: "https://services.arcgis.com/QVENGdaPbd4LUkLV/ArcGIS/rest/services/Flathead_River_Watershed_Layers/FeatureServer/0",
+                    "opacity": 0.5, autoGeneralize: true, visible: false
+                });    
+            }
+
 
             //////////////////////////
 
@@ -957,15 +961,21 @@ define([
                 pMonitoringCSVLayer.visible = "True";
             }
 
-
-
             app.graphicsLayer = new GraphicsLayer();
 
-            app.map.layers.addMany([app.pSup.m_pRiverSymbolsFeatureLayer, pWatershedsMaskFeatureLayer, pBasinsMaskFeatureLayer,
+
+            let arrayLayer2add = [app.pSup.m_pRiverSymbolsFeatureLayer, pWatershedsMaskFeatureLayer, pBasinsMaskFeatureLayer,
                 pWatershedsFeatureLayer, pBasinsFeatureLayer, pMTSPFeatureLayer, pCartoFeatureLayer, pCartoFeatureLayerPoly,
                 pSectionsFeatureLayer, pSNOTELFeatureLayer, pNOAAFeatureLayer, pFWPAISAccessFeatureLayer, pFWPFeatureLayer,
                 pBLMFeatureLayer, pFASFeatureLayer, pGageFeatureLayer, pEPointsFeatureLayer,
-                pMonitoringCSVLayer, app.graphicsLayer]);
+                pMonitoringCSVLayer, app.graphicsLayer];
+
+            if (app.Basin_ID == "Flathead") {
+                arrayLayer2add.push(pDist2WaterTableFlathead);
+                arrayLayer2add.push(p1964FloodFlathead);
+            }
+
+            app.map.layers.addMany(arrayLayer2add);
 
             app.pZoom = new MH_Zoom2FeatureLayers({}); // instantiate the class
             app.dblExpandNum = 0.5;
@@ -984,6 +994,12 @@ define([
             legendLayers.push({ layer: pEPointsFeatureLayer, title: 'Start/End Section Locations' });
             legendLayers.push({ layer: pGageFeatureLayer, title: 'Gages' });
             legendLayers.push({ layer: app.pSup.m_pRiverSymbolsFeatureLayer, title: 'River Status' });
+
+            if (app.Basin_ID == "Flathead") {
+                legendLayers.push({ layer: pDist2WaterTableFlathead, title: 'Depth to Water Table, Flathead River (ft)' });
+                legendLayers.push({ layer: p1964FloodFlathead, title: '1964 Flood, Flathead River' });
+            }
+
 
             if (app.test) {
                 legendLayers.push({ layer: app.pSup.m_pFWPFeatureLayer, title: 'Test Condition Messaging' });
@@ -1006,7 +1022,13 @@ define([
             cbxLayers.push({ layers: [pFWPAISAccessFeatureLayer, pFWPAISAccessFeatureLayer], title: 'MT AIS Watercraft Access' });
             cbxLayers.push({ layers: [pMonitoringCSVLayer, pMonitoringCSVLayer], title: 'Monitoring Locations' });
             cbxLayers.push({ layers: [pMTSPFeatureLayer, pMTSPFeatureLayer], title: 'MT State Parks' });
-            /*cbxLayers.push({ layers: [pCZMFeatureLayer, pCZMFeatureLayer], title: 'Channel Migration Zones' });*/
+
+            if (app.Basin_ID == "Flathead") {
+                cbxLayers.push({ layers: [pDist2WaterTableFlathead, pDist2WaterTableFlathead], title: 'Depth to Water Table, Flathead River' });
+                cbxLayers.push({ layers: [p1964FloodFlathead, p1964FloodFlathead], title: '1964 Flood, Flathead River' });
+            }
+
+
             
 			this.LayerCheckBoxSetup(cbxLayers);
 

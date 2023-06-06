@@ -17,7 +17,8 @@ define([
     "esri/symbols/SimpleLineSymbol",
     "esri/symbols/support/cimSymbolUtils"
 ], function (
-        declare, lang, esriRequest, all, FeatureLayer, Query, QueryTask,
+    declare, lang, esriRequest, all, FeatureLayer, Query,
+    QueryTask,
     Polygon, dom, domClass, registry, on, Map, GraphicsLayer, Graphic, SimpleLineSymbol, cimSymbolUtils
 ) {
 

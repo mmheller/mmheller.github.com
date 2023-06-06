@@ -52,12 +52,19 @@ define([
 				queryObject.returnGeometry = true;
 				queryObject.outFields = ["*"];
 				queryObject.geometry = sectionGeometries;
+				//queryObject.distance = 20
+				//queryObject.units = "meters";
+
+				console.log(app.strFWPQuery.toString(), app.strFWPQuery);
+				console.log(sectionGeometries.toString(), sectionGeometries);
+				
 				queryObject.spatialRelationship = "intersects";  // this is the default
 
 				query.executeQueryJSON(app.strFWPURL, queryObject).then(function (results) {
 					this.m_FWPWarnFeatures = results.features;
 					var resultCount = this.m_FWPWarnFeatures.length;
 					if (resultCount > 0) {
+						console.log(resultCount.toString() + " total warnings found");
 						var pFeature = results.features[this.app.pGetWarn.m_StepThruCounter];
 						this.app.pGetWarn.FindSectionsOverlappingFWPWarnFeatures2(pFeature.geometry);
 						var x = document.getElementById("divFWPAlert");
@@ -107,28 +114,6 @@ define([
 				m_strSteamSectionQuery = "";
 				m_FWPWarnFeatures = [];
 				m_StepThruCounter = 0;
-			},
-
-			GetFWPWarnResults1: function (results) {     //results from selecting all the possible state warning info
-				this.m_FWPWarnFeatures = results.features;
-				var resultCount = this.m_FWPWarnFeatures.length;
-				if (resultCount > 0) {
-					var pFeature = results.features[this.app.pGetWarn.m_StepThruCounter];
-					this.app.pGetWarn.FindSectionsOverlappingFWPWarnFeatures2(pFeature.geometry);
-					var x = document.getElementById("divFWPAlert");
-					if (x.style.visibility === "hidden") {
-						x.style.visibility = 'visible';
-					}
-				} else {
-					this.app.pGage.SectionsReceived(app.pGetWarn.m_streamSectionArrray, "", "", "", "", false, null);  //if an error go continue with getting seciton detail and display
-					this.app.pGetWarn.ClearVars();
-				}
-			},
-
-			GetFWPWarnResultsError1: function (results) {
-				alert("Error with query on FWS warn layer1");
-				this.app.pGage.SectionsReceived(streamSectionArrray, "", "", "", "", false, null);  //if an error go continue with getting seciton detail and display
-				this.app.pGetWarn.ClearVars();
 			},
 
 			FindSectionsOverlappingFWPWarnFeatures2: function (pFeature) {
@@ -207,7 +192,7 @@ define([
         },
 
         GetFWPWarnResultsError2: function (results) {
-            console.log("Failed to get results from Sections Layer when querying by FWP Warn polygon due to an error: ", err);
+			console.log("Failed to get results from Sections Layer when querying by FWP Warn polygon due to an error: ", results);
             alert("Error with query on FWS warn layer2");
 			this.app.pGage.SectionsReceived(streamSectionArrray, "", "", "", "", false, null);  //if an error go continue with getting seciton detail and display
             this.app.pGetWarn.ClearVars();

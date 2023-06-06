@@ -115,9 +115,11 @@ define([
         "dojo/dom-class",
         "dijit/registry",
         "dojo/on",
+        "esri/geometry/geometryEngine"
+
 
 ], function (
-           QueryTask, Query, Polyline, declare, lang, esriRequest, All, request, dom, domClass, registry, on
+           QueryTask, Query, Polyline, declare, lang, esriRequest, All, request, dom, domClass, registry, on, geometryEngine
 ) {
 
 		return declare([], {
@@ -431,14 +433,15 @@ define([
                     return a[0]> b[0]? 1: -1;
                 });
 
-            var sectionGeometries = new Polyline(app.view.spatialReference);
+            let sectionGeometries = new Polyline(app.view.spatialReference);
             for (var i = 0; i < items[0].features.length; i++) {
                 var paths = items[0].features[i].geometry.paths;
                 for (var j = 0; j < paths.length; j++) { //needed for multi part lines  
                     sectionGeometries.addPath(paths[j]);
             }
             }
-			app.pGetWarn.Start(sectionGeometries, streamSectionArrray);
+            
+            app.pGetWarn.Start(sectionGeometries, streamSectionArrray);
         },
 
 		getArray2Process: function (strURL, strQuery) {// Class to represent a row in the gage values grid
@@ -1868,9 +1871,6 @@ define([
                             }
 
 
-
-
-
                             arrayJSONValues2 =[]; //clear out the array
 
 							if ((temperatureItem != "") | (itemFoundTemp.length > 0)) {
@@ -1896,7 +1896,8 @@ define([
 									}
 
                                     var strNoData = "";
-									if (iTempValue != -999999) {
+                                    if (iTempValue > -10) {
+                                    //if (iTempValue != -999999) {
                                         blnRealValues = true;
                                         var obj = {};
                                         obj["id"]= strStreamName + "," +iSectionID;
