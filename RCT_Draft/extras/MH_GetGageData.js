@@ -280,7 +280,7 @@ define([
                 return result;
             });
             var streamSectionArrray = [];
-            var arrayDuplicateCheck = [];
+            //var arrayDuplicateCheck = [];
             var found = false;
 
             var strStreamName = "";
@@ -368,6 +368,9 @@ define([
 				iOID = itemSection.attributes.OBJECTID;
 				strWatershed = itemSection.attributes.Watershed;
 
+                var arrayGages4Section = [];
+
+                var blnGageFound = false;
 				dom.map(items[1].features, function (itemGage) { //loop through the gages that match the sections
 					//query by     Watershed , StreamName, Section_ID
 					if ((itemGage.attributes.Watershed === itemSection.attributes.Watershed) &
@@ -375,14 +378,25 @@ define([
 						(itemGage.attributes.Section_ID === itemSection.attributes.SectionID) &
 						(itemGage.attributes.Symbology === "TRIGGER MEASURE LOCATION")) {
 
-						strGageID_Source = itemGage.attributes.GageID_Source;
-						strTempCollected = itemGage.attributes.TempCollected;
-						strAgency = itemGage.attributes.Agency;
-						if (strGageID_Source != null) {
-							DailyStat_URL = itemGage.attributes.DailyStat_URL;
-						}
+                        arrayGages4Section.push({
+                            GageID_Source: itemGage.attributes.GageID_Source,
+                            TempCollected: itemGage.attributes.TempCollected,
+                            Agency: itemGage.attributes.Agency,
+                            DailyStat_URL: itemGage.attributes.DailyStat_URL
+                        });
+
+                        blnGageFound = true;
 					}
                 })
+
+                if (!(blnGageFound)) {
+                    arrayGages4Section.push({
+                        GageID_Source: "",
+                        TempCollected: "",
+                        Agency: "",
+                        DailyStat_URL: ""
+                    });
+                }
 
 				dom.map(items[2].features, function (itemEndpoint) {  //loop through the endpoints
 					//query by     Watershed , StreamName, Section_ID
@@ -401,28 +415,33 @@ define([
                     }
                 })
 
-                streamSectionArrray.push([strStreamName, strGageID_Source,
-                    strSectionID, strCFS_Prep4Conserv, strCFS_Conserv, strCFS_NotOfficialClosure, iConsvTemp,
-					"Temperature Conservation Target Start Date: year round", "Temperature Conservation Target End Date: year round", "someval", "somenote",
-                    iCFS_Note_Prep4Conserv, iCFS_Note_Conserv, iCFS_Note_NotOfficialClosure,
-                    strTempCollected, iOID, DailyStat_URL,
-                    "", //Placeholder for FWP ward description
-                    "", //Placeholder for FWP ward location
-                    "", //Placeholder for FWP ward Press Release
-                    "", //Placeholder for FWP ward Publish date
-                    "", //Placeholder for FWP ward Title,
-                    "", //Placeholder for FWP warning,
-                    strStartEndpoint,
-					strEndEndpoint,
-					strWatershed,
-                    strSectionName_,
-                    strHt_Prep4Conserv, strHt_Conserv, strHt_NotOfficialClosure,
-                    iHt_Note_Prep4Conserv, iHt_Note_Conserv, iHt_Note_NotOfficialClosure,
-                    strAgency
-                ]);
+                dom.map(arrayGages4Section, function (itemGage2) { //loop through the gages that match the sections
+                    let strSectionNameSuffix = "";
+                    if (arrayGages4Section.length > 1) {
+                        strSectionNameSuffix = " - NOTE: " + arrayGages4Section.length.toString() + " SUMMARY GAGES FOR THIS SECTION"
+                    }
 
-                arrayDuplicateCheck.push(itemSection.attributes.StreamName + itemSection.attributes.SectionID);
-               
+                    streamSectionArrray.push([strStreamName, itemGage2.GageID_Source,
+                        strSectionID, strCFS_Prep4Conserv, strCFS_Conserv, strCFS_NotOfficialClosure, iConsvTemp,
+                        "Temperature Conservation Target Start Date: year round", "Temperature Conservation Target End Date: year round", "someval", "somenote",
+                        iCFS_Note_Prep4Conserv, iCFS_Note_Conserv, iCFS_Note_NotOfficialClosure,
+                        itemGage2.TempCollected, iOID, itemGage2.DailyStat_URL,
+                        "", //Placeholder for FWP ward description
+                        "", //Placeholder for FWP ward location
+                        "", //Placeholder for FWP ward Press Release
+                        "", //Placeholder for FWP ward Publish date
+                        "", //Placeholder for FWP ward Title,
+                        "", //Placeholder for FWP warning,
+                        strStartEndpoint,
+                        strEndEndpoint,
+                        strWatershed,
+                        strSectionName_ + strSectionNameSuffix,
+                        strHt_Prep4Conserv, strHt_Conserv, strHt_NotOfficialClosure,
+                        iHt_Note_Prep4Conserv, iHt_Note_Conserv, iHt_Note_NotOfficialClosure,
+                        itemGage2.Agency
+                    ]);
+                })
+
             })
 
             streamSectionArrray.sort(
@@ -1104,6 +1123,7 @@ define([
         StreamSectionSummaryUIAdditions: function (blnIsInitialPageLoad) {
             console.log("Stream Section Summary UI Additions");
             if (blnIsInitialPageLoad) {
+                app.blnZoom = true; //this controls zooming to sections if user clicks a summary or if clicks on map
                 var vm = new app.pGage.readingsViewModel();
                 ko.applyBindings(vm, document.getElementById("entriesCon_div"));
                 ko.applyBindings(vm, document.getElementById("divSectionDetail_A"));
@@ -1181,14 +1201,12 @@ define([
 													iCFSTarget1, iCFSTarget2, iCFSTarget3, strDailyStat_URL, 
                                                 iTempCloseValue, strAgency, iHtTarget1, iHtTarget2, iHtTarget3);
 
-                        let blnZoom = true;
+                        
                         let pGFeature = null;
-
-                        if (blnZoom) {
-                            app.pZoom.qry_Zoom2FeatureLayerByQuery(app.strHFL_URL + app.idx11[5], "(StreamName = '" + strClickStreamName + "') and " +
-								 								"(SectionID = '" + strClickSegmentID + "') and " +
-																"(Watershed = '" + strWatershed + "')");
-                        }
+                        app.pZoom.qry_Zoom2FeatureLayerByQuery(app.strHFL_URL + app.idx11[5], "(StreamName = '" + strClickStreamName + "') and " +
+								 							"(SectionID = '" + strClickSegmentID + "') and " +
+                                                            "(Watershed = '" + strWatershed + "')", app.blnZoom);
+                        app.blnZoom = true; //this controls zooming to sections if user clicks a summary or if clicks on map
                     });
 
                     var strTempText2 = (elements)[i].innerHTML;
@@ -1378,16 +1396,23 @@ define([
                 strMONTHDAYEarlyHtFromDroughtManagementTarget = strMONTHDAYEarlyHtoDroughtManagementTarget =
                 iEarlyHtDroughtManagementTarget = strEarlyHtDroughtManagementTargetMessage = null;
 
-			var arrayDNRC_Sens_Loc = null;
-			var blnIsInitialPageLoad = false;
+            var arrayDNRC_Sens_Loc = null;
+
+            var blnIsInitialPageLoad = app.blnIsInitialPageLoad;
 			var blnSingleSelect_DNRC = false;
-			if (arrayProc[0].length > 4) {
-				blnIsInitialPageLoad = true
-			} else if ((arrayProc[0].length == 4) & (arrayProc.length == 1) & (arrayProc[0][3] == "MTDNRC")) {
+            if ((arrayProc[0].length == 4) & (arrayProc.length == 1) & (arrayProc[0][3] == "MTDNRC")) {
 				var blnSingleSelect_DNRC = true;
 				arrayDNRC_Sens_Loc = app.pGage.m_arrayDNRC_Sens_Loc;
 			}
-	
+
+            //var blnIsInitialPageLoad = false;
+            //if (arrayProc[0].length > 4) {
+            //    blnIsInitialPageLoad = true
+            //} else if ((arrayProc[0].length == 4) & (arrayProc.length == 1) & (arrayProc[0][3] == "MTDNRC")) {
+            //    var blnSingleSelect_DNRC = true;
+            //    arrayDNRC_Sens_Loc = app.pGage.m_arrayDNRC_Sens_Loc;
+            //}
+
 			if ((app.pGage.m_arrayDNRC_Sens_Loc == null) | !(blnIsInitialPageLoad)) {  //clear out the symbology and charting
 				m_arrayOIDYellow = [];
 				m_arrayOIDsRed = [];
@@ -1654,6 +1679,10 @@ define([
                             strLateFlowClosureValueHt = itemSectionRefined[32];
                             strAgency = itemSectionRefined[33];
 
+                            if (strStreamName == "Thompson River") {
+                                console.log("t River");
+                            }
+
                             var itemFound, itemFoundTemp, itemFoundDischarge, itemFoundHt;
 							itemFound = [];
 							itemFoundTemp = [];
@@ -1693,6 +1722,9 @@ define([
                             var dblLatestHt = "";
 
                             var strID = "";
+
+
+
 
 							if ((itemFound.length > 0) | (itemFoundTemp.length > 0) | (itemFoundDischarge.length > 0)) {
                                     iLateFlowPref4ConsvValue = itemSectionRefined[3];
@@ -2133,7 +2165,8 @@ define([
                         if ((blnQuery1AtaTime) & (app.pGage.mIDXQuery1AtaTime < arrayProc.length)) {
                             app.pGage.SectionsReceived(arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3,
                                 iTMPTarget1, blnQuery1AtaTime, iHtTarget1, iHtTarget2, iHtTarget3)
-						} else if ((arraySiteIDsDNRC.length > 0) & (arrayDNRC_Sens_Loc == null)) {
+						
+                        } else if ((arraySiteIDsDNRC.length > 0) & (arrayDNRC_Sens_Loc == null)) {
                             app.pGage.DNRCSectionsReceived(arraySiteIDsDNRC, "", "", "", "", false, null, blnIsInitialPageLoad,
                                 iHtTarget1, iHtTarget2, iHtTarget3)
 						}

@@ -62,7 +62,7 @@ define([
 
         },
 
-        qry_Zoom2FeatureLayerByQuery: function (strURL, strQuery1) {
+        qry_Zoom2FeatureLayerByQuery: function (strURL, strQuery1, blnZoom) {
             let pQuery1 = new Query();
             let pQueryT1 = new QueryTask(strURL); //sections layer
 
@@ -149,9 +149,7 @@ define([
                     app.view.graphics.add(graphic);
                 }
 
-                if (resultFeatures.length > 0) {
-                    /*app.view.goTo(resultFeatures);*/
-
+                if ((resultFeatures.length > 0) & blnZoom) {    ///turning zoom to stream segement from call in MH_GetGateData.js-StreamSectionSummaryUIAdditions
                     var extent = resultFeatures[0].geometry.extent;
                     resultFeatures.forEach(function (feature) {
                         extent = extent.union(feature.geometry.extent);
@@ -160,9 +158,6 @@ define([
                     app.view.goTo({
                         target: extent
                     });
-
-                    //app.view.goTo(polyline);
-                    console.log("test");
                 }
 
                 else {                    // do nothing                }

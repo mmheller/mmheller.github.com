@@ -50,7 +50,7 @@ define([
     "esri/widgets/BasemapGallery", "esri/widgets/BasemapGallery/support/PortalBasemapsSource", "esri/widgets/ScaleBar", "dojo",
     "esri/PopupTemplate", "esri/layers/FeatureLayer", "esri/Color", "esri/renderers/SimpleRenderer", "esri/layers/CSVLayer",
     "extras/MH_Zoom2FeatureLayers", "esri/renderers/UniqueValueRenderer",
-    "esri/widgets/Legend", "esri/widgets/Locate", "esri/layers/GraphicsLayer",
+    "esri/widgets/Legend", "esri/widgets/Locate", "esri/layers/GraphicsLayer", "esri/Graphic",
     "esri/core/watchUtils",
     "dojo/dom", "dojo/dom-style",
 ], function (
@@ -58,7 +58,7 @@ define([
     webMercatorUtils, BasemapGallery, PortalSource, ScaleBar, dojo,
     PopupTemplate, FeatureLayer, Color,
     SimpleRenderer, CSVLayer,
-    MH_Zoom2FeatureLayers, UniqueValueRenderer, Legend, Locate, GraphicsLayer, watchUtils, dom, domStyle
+    MH_Zoom2FeatureLayers, UniqueValueRenderer, Legend, Locate, GraphicsLayer, Graphic, watchUtils, dom, domStyle
 ) {
 
     return declare([], {
@@ -164,6 +164,7 @@ define([
             app.map.layers.add(featureLayer, 5);
             console.log("Add Stream Condition FeatureLayer and custom legend complete")
 
+            app.blnIsInitialPageLoad = false;
          },
 
         GetSetHeaderWarningContent: function (strAGSIndexTableURL, strH2OID, blnUseAlternateHeader, strBasinID) {
@@ -262,7 +263,9 @@ define([
             });
         },
 
-		Phase1: function () {
+        Phase1: function () {
+            app.blnIsInitialPageLoad = true;
+
             console.log("MH_setup Phase1");
 
             app.H2O_ID = getTokens()['H2O_ID'];
@@ -480,13 +483,14 @@ define([
                 ulist.appendChild(newItem);
             }
 
-            
 			//app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support/FeatureServer/";  //PRODUCTION
             //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
 
             app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/RCT_LCF/FeatureServer/";  //Jo's dev
             app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
 
+            //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22_multi/FeatureServer/";  //dev to test multi-gage per section
+            //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
 
             this.GetSetHeaderWarningContent(app.strHFL_URL + app.idx11[11], app.H2O_ID, blnUseAlternateHeader, app.Basin_ID);
         },
@@ -553,18 +557,16 @@ define([
                 unit: "dual"
             });
             
-        
-
             let template = new PopupTemplate();
             template.title = "Gage (Watershed:{Watershed})";
             template.content = "<b>{GageTitle}</b><br><a href={GageURL} target='_blank'>Link to gage at {Agency} website</a>";
-            //var pGageFeatureLayer = new FeatureLayer({ url: app.strHFL_URL + "1", popupTemplate: template });
             var pGageFeatureLayer = new FeatureLayer({ url: app.strHFL_URL + app.idx11[1], popupTemplate: template });
-            
 
-            var templateEPOINT = new PopupTemplate();
-            templateEPOINT.title = "<b>Start/End Section Locations</b>";
-            templateEPOINT.content = "Placename:{Endpoint_Name}<br>Section:{Start_End} of {Section_Name}<br>Stream:{Stream_Name}<br>";
+
+
+            //var templateEPOINT = new PopupTemplate();
+            //templateEPOINT.title = "<b>Start/End Section Locations</b>";
+            //templateEPOINT.content = "Placename:{Endpoint_Name}<br>Section:{Start_End} of {Section_Name}<br>Stream:{Stream_Name}<br>";
 
             const EndPoints_labelClass = {// autocasts as new LabelClass()
                 symbol: {
@@ -586,7 +588,7 @@ define([
             pEPointsFeatureLayer = new FeatureLayer({
                 //url: app.strHFL_URL + "0",
                 url: app.strHFL_URL + app.idx11[0],
-                popupTemplate: templateEPOINT,
+                /*popupTemplate: templateEPOINT,*/
                 minScale: 1000000,
                 labelingInfo: [EndPoints_labelClass]
             });
@@ -632,7 +634,6 @@ define([
                                     " AND (" + " Name_Alternate2 <> '" + app.H2O_ID + "' OR (Name_Alternate1 is Null))";
             }
 
-            //let strlabelField3 = "SectionID";
             let strlabelField3 = "SectionName";
             const Secitons_labelClass = {// autocasts as new LabelClass()
                 symbol: {
@@ -650,20 +651,145 @@ define([
             app.SectionQryStringGetGageData = strQueryDef2;
             pEPointsFeatureLayer.definitionExpression = strQueryDef1;
 
+
+            //let templateSections = new PopupTemplate();
+            //templateSections.title = "Stream Section (Watershed:{Watershed})";
+            //templateSections.content = "<b>{StreamName}</b>:{SectionName} (id:{SectionID})<br>";
+
             pSectionsFeatureLayer = new FeatureLayer({
-                //url: app.strHFL_URL + "5",
                 url: app.strHFL_URL + app.idx11[5],
                 opacity: 0.9,
                 labelingInfo: [Secitons_labelClass], outFields: ["StreamName", "SectionID", "SectionName"]
+                //,
+                //popupTemplate: templateSections
             });
             pSectionsFeatureLayer.definitionExpression = strQueryDef2;
             app.pGetWarn.m_strSteamSectionQuery = strQueryDef2;
+
+
+            app.view.when(() => {      /// this code adds popup content on the fly
+                // Watch for when features are selected
+                app.view.popup.watch("selectedFeature", (graphic) => {
+                    console.log(app.view.popup.featureCount.toString() + " featureCount");
+                    //console.log(app.view.popup.features.length.toString() + " featureCount");
+                    let pFeatures = app.view.popup.features;   //determine if multiple gages or multiple sections selected to minimize the duplication of current data
+                    let iGageCount = 0;
+                    let iSectionCount = 0;
+                    let iOtherCount = 0;
+                    for (var iF = 0; iF < pFeatures.length; iF++) {
+                        let pFeature = pFeatures[iF];
+                        if (pFeature.attributes.GageURL) {
+                            iGageCount += 1;
+                        } else if (pFeature.attributes.SectionName) {
+                            iSectionCount += 1;
+                        } else {
+                            iOtherCount += 1;
+                        }
+                    }
+                    //console.log(app.view.popup.featureCount.toString() + " featureCount---" +
+                    //                                    "gagecount = " + iGageCount.toString() +
+                    //                                    "section count = " + iSectionCount.toString());
+
+                    if (graphic) {
+                        let atts = graphic.attributes;
+                        if (atts.GageURL) {        ///this looks for stream gage features and adds content
+                            const graphicTemplate = graphic.getEffectivePopupTemplate();
+                            let strAdditionalPopup = "";
+                            let strImageURLPrefix = document.location.href;                           //grabbing the URL due to images not visible via relative pathing
+                            if (strImageURLPrefix.indexOf("?") > 0) {
+                                strImageURLPrefix = strImageURLPrefix.slice(0, strImageURLPrefix.lastIndexOf("?") + 0);
+                            }
+                            strImageURLPrefix = strImageURLPrefix.replace("/index.html", "");
+
+                            if (iGageCount > 1) {
+                                strAdditionalPopup = "<br><i>Note: Selecting 1 stream gage will provide details (zoom into map for detail)</i>";
+                            } else {
+
+                                let vm1 = new app.pGage.readingsViewModel();
+                                for (var i = 0; i < vm1.gageRecords().length; i++) {
+                                    let strSelectedGageURL = atts.GageURL.toUpperCase();
+                                    let strGage2Compare = vm1.gageRecords()[i].Hyperlink;
+                                    if (strGage2Compare.indexOf("/location/") > 0) {     //removing /location/ text becuase some of the DNRC gage hyperlinks differ from the gageURL
+                                        strGage2Compare = strGage2Compare.replace("/location/", "/");
+                                    }
+                                    strGage2Compare = strGage2Compare.toUpperCase();
+
+                                    //console.log(strGage2Compare + ":vs:" + strSelectedGageURL);
+                                    if (strGage2Compare == strSelectedGageURL) {
+                                        strAdditionalPopup = '<br>Discharge:' + vm1.gageRecords()[i].Discharge + ' CFS <img height="15px"  src="' + strImageURLPrefix + '/' + vm1.gageRecords()[i].Day3CFSTrend + '" alt="3 day Flow Trend"><br>' +
+                                            'Water Temp: ' + vm1.gageRecords()[i].WaterTemp + ' F <img height="15px"  src="' + strImageURLPrefix + '/' + vm1.gageRecords()[i].Day3TMPTrend + '" alt="3 day Temp Trend"><br>' +
+                                            'Gage Height: ' + vm1.gageRecords()[i].GageHt + ' ft <img height="15px"  src="' + strImageURLPrefix + '/' + vm1.gageRecords()[i].Day3HtTrend + '" alt="3 day Height Trend">';
+                                        break
+                                    }
+                                }
+                            }
+                            if (strAdditionalPopup == "") {
+                                strAdditionalPopup = "<br><i>Note: Selected gage is not a summary (trigger) measure locaton in the filtered area</i>";
+                            }
+                            let pGraphicTempContent = graphicTemplate.content;
+                            pGraphicTempContent = pGraphicTempContent.slice(0, pGraphicTempContent.lastIndexOf("</a>") + 4);  //remove the custom onthefly content that was added
+                            graphicTemplate.content = pGraphicTempContent + strAdditionalPopup;
+                        }
+
+
+                        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++having issues with setting template information due to multiple calls if multiple feature classes/layers on popup tool.
+                        //if (atts.SectionName) {        ///this looks for stream gage features and adds content
+                        //    const graphicTemplate2 = graphic.getEffectivePopupTemplate();
+                        //    let strAdditionalPopup2 = "";
+
+                        //    let strImageURLPrefix = document.location.href;                           //grabbing the URL due to images not visible via relative pathing
+                        //    if (strImageURLPrefix.indexOf("?") > 0) {
+                        //        strImageURLPrefix = strImageURLPrefix.slice(0, strImageURLPrefix.lastIndexOf("?") + 0);
+                        //    }
+                        //    strImageURLPrefix = strImageURLPrefix.replace("/index.html", "");
+
+                        //    if (iSectionCount > 1) {
+                        //        strAdditionalPopup2 = "<br><i>Selecting 1 stream section will provide details</i>";
+                        //    } else {
+                        //        let vm2 = new app.pGage.readingsViewModel();
+                        //        for (var iG2 = 0; iG2 < vm2.gageRecords().length; iG2++) {
+                        //            //console.log(vm2.gageRecords()[iG2].StreamName + ":vs:" + atts.StreamName + " &&&& " + vm2.gageRecords()[iG2].SectionID + ":vs:" + atts.SectionID);
+
+                        //            if ((vm2.gageRecords()[iG2].StreamName.toUpperCase() == atts.StreamName.toUpperCase()) & (vm2.gageRecords()[iG2].SectionID.toUpperCase() == atts.SectionID.toUpperCase())) {
+                        //                if (vm2.gageRecords()[iG2].strSiteID != ""){
+                        //                    strAdditionalPopup2 = 'Discharge:' + vm2.gageRecords()[iG2].Discharge + ' CFS '
+                        //                    if (vm2.gageRecords()[iG2].Day3CFSTrend != undefined) {
+                        //                        strAdditionalPopup2 += '<img height="15px" src="' + strImageURLPrefix + '/' + vm2.gageRecords()[iG2].Day3CFSTrend + '" alt="3 day Flow Trend">';
+                        //                    }
+                        //                    strAdditionalPopup2 += "<br>";
+
+                        //                    strAdditionalPopup2 += 'Water Temp: ' + vm2.gageRecords()[iG2].WaterTemp + ' F '
+                        //                    if (vm2.gageRecords()[iG2].Day3TMPTrend != undefined) {
+                        //                        strAdditionalPopup2 += '<img height="15px" src="' + strImageURLPrefix + '/' + vm2.gageRecords()[iG2].Day3TMPTrend + '" alt="3 day Temp Trend">'
+                        //                    }
+                        //                    strAdditionalPopup2 += "<br>";
+
+                        //                    strAdditionalPopup2 += 'Gage Height: ' + vm2.gageRecords()[iG2].GageHt + ' ft '
+                        //                    if (vm2.gageRecords()[iG2].Day3HtTrend != undefined) {
+                        //                        strAdditionalPopup2 += '<img height="15px" src="' + strImageURLPrefix + '/' + vm2.gageRecords()[iG2].Day3HtTrend + '" alt="3 day Height Trend">'
+                        //                    }
+                        //                    strAdditionalPopup2 += "<br>";
+
+                        //                    strAdditionalPopup2 += 'Status: ' + vm2.gageRecords()[iG2].overallStatus;
+                        //                }
+                        //                break
+                        //            }
+                        //        }
+                        //    }
+
+                        //    let pGraphicTempContent2 = graphicTemplate2.content;
+                        //    pGraphicTempContent2 = pGraphicTempContent2.slice(0, pGraphicTempContent2.lastIndexOf(")<br>") + 5);  //remove the custom onthefly content that was added
+                        //    graphicTemplate2.content = pGraphicTempContent2 + strAdditionalPopup2;
+                        //}
+                    }
+                });
+            });
+
 
             pBasinsFeatureLayer = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[8],
                 opacity: 0.5
             });
-            //pBasinsFeatureLayer = new FeatureLayer({ url: app.strHFL_URL + "8", opacity: 0.5 });
             
 
             if (app.Basin_ID != undefined) {
@@ -1307,8 +1433,12 @@ define([
             }
 
 			function showResults(pFeatures) {
-				console.log("showResults from click")
-                dojo.forEach(pFeatures, function (feature) {
+                console.log("showResults from click")
+                app.blnZoom = false; //this controls zooming to sections if user clicks a summary or if clicks on map
+                //dojo.forEach(pFeatures, function (feature) {
+                if (pFeatures.length > 0) {
+                    var feature = pFeatures[0];
+
                     var strStreamName = feature.graphic.attributes.StreamName;
                     var strSectionID = feature.graphic.attributes.SectionID;
                     var elements = document.getElementsByTagName('tr');  //Sets the click event for the row
@@ -1320,27 +1450,14 @@ define([
                         var strClickSegmentID = strTempText.substring(0, strTempText.indexOf("</span>"));
                         
                         if ((strStreamName == strClickStreamName) & (strClickSegmentID == strSectionID)) {
-                            //var graphic = feature.graphic;
-                            //const lineSymbol = {
-                            //    type: "simple-line", // autocasts as new SimpleFillSymbol()
-                            //    color: [232, 104, 80], width: 18
-                            //};
-                            //graphic.Symbol = lineSymbol;
-                            //graphic.attributes = { streamsectionClicked: true };
-                            //setInterval(() => {
-                            //    graphic.visible = !graphic.visible;
-                            //}, 1000);
-
-                            //app.view.graphics.removeAll(); // make sure to remmove previous highlighted feature
-                            //app.view.graphics.add(graphic);
-
                             (elements)[i].click();
 
                             break;
                         }
-
+                        
                     }
-                });
+                }
+                //});
             }
 
         },
@@ -1386,16 +1503,26 @@ define([
                     //strURL = "https://hazards-fema.maps.arcgis.com/apps/webappviewer/index.html?id=8b0adb51996444d4879338b5529aa9cd&extent=";
                     blnAddCoords = false;
                     pSR_WKID = pExtent.spatialReference.wkid;
-                    strURL = "https://dashboard.waterdata.usgs.gov/app/nwd/?view=%7B%22basemap%22%3A%22EsriTopo%22,%22bounds%22%3A%22";
+                    //strURL = "https://dashboard.waterdata.usgs.gov/app/nwd/?view=%7B%22basemap%22%3A%22EsriTopo%22,%22bounds%22%3A%22";
+
+                    strURL = "https://dashboard.waterdata.usgs.gov/app/nwd/en/?aoi=default&view=%7B%22basemap%22%3A%22EsriTopo%22%2C%22bounds%22%3A%22";
+
                     var pGeogExtent = webMercatorUtils.webMercatorToGeographic(pExtent);  //the map is in web mercator but display coordinates in geographic (lat, long)
                     strURL += Math.round(pGeogExtent.xmin * 100) / 100 + ",";
                     strURL += Math.round(pGeogExtent.ymin * 100) / 100 + ",";
                     strURL += Math.round(pGeogExtent.xmax * 100) / 100 + ",";
                     strURL += Math.round(pGeogExtent.ymax * 100) / 100;
-                    strURL += '","panelRange"%3A"0%3A1.0,1%3A1.0,2%3A1.0,3%3A1.0,4%3A1.0,5%3A1.0,6%3A1.0,7%3A0.8,8%3A0.3,9%3A0.5,10%3A0.5,11%3A0.5,12%3A0.5,13%3A0.5,14%3A0.5,15%3A0.5,16%3A1.0,17%3A1.0,18%3A1.0,19%3A1.0"';
-                    //strURL += ',"panelSelect"%3A"0%3A0,1%3A0,2%3A0,3%3A0,4%3A0,5%3A0,6%3A0,7%3A0,8%3A0,9%3A0,10%3A0,11%3A0,12%3A0,13%3A0,14%3A0,15%3A0,16%3A0,17%3A0,18%3A0"';
-                    strURL += ',"panelCheckbox"%3A"0,9,19,20,21,22"';
-                    strURL += '%7D&aoi=default';
+
+                    //strURL += '","panelRange"%3A"0%3A1.0,1%3A1.0,2%3A1.0,3%3A1.0,4%3A1.0,5%3A1.0,6%3A1.0,7%3A0.8,8%3A0.3,9%3A0.5,10%3A0.5,11%3A0.5,12%3A0.5,13%3A0.5,14%3A0.5,15%3A0.5,16%3A1.0,17%3A1.0,18%3A1.0,19%3A1.0"';
+
+                    strURL += '%22%2C%22insetMap%22%3Afalse%2C%22panel%22%3A%7B%22checkbox%22%3A%220%2C9%2C19%2C20%2C21%2C22%22%2C%22range%22%3A%220%3A1.0%2C1%3A1.0%2C2%3A1.0%2C3%3A1.0%2C4%3A1.0%2C5%3A1.0%2C6%3A1.0%2C7%3A0.8%2C8%3A0.3%2C9%3A0.5%2C10%3A0.5%2C11%3A0.5%2C12%3A0.5%2C13%3A0.5%2C14%3A0.5%2C15%3A0.5%2C16%3A1.0%2C17%3A1.0%2C18%3A1.0%2C19%3A1.0%22%2C%22select%22%3A%220%3A0%2C1%3A0%2C2%3A0%2C3%3A0%2C4%3A0%2C5%3A0%2C6%3A0%2C7%3A0%2C8%3A0%2C9%3A0%2C10%3A0%2C11%3A0%2C12%3A0%2C13%3A0%2C14%3A0%2C15%3A0%2C16%3A0%2C17%3A0%2C18%3A0%22%7D%7D';
+
+                    // strURL += '","panelRange"%3A"0%3A1.0,1%3A1.0,2%3A1.0,3%3A1.0,4%3A1.0,5%3A1.0,6%3A1.0,7%3A0.8,8%3A0.3,9%3A0.5,10%3A0.5,11%3A0.5,12%3A0.5,13%3A0.5,14%3A0.5,15%3A0.5,16%3A1.0,17%3A1.0,18%3A1.0,19%3A1.0"';
+
+
+
+                    //strURL += ',"panelCheckbox"%3A"0,9,19,20,21,22"';
+                    //strURL += '%7D&aoi=default';
                     //strURL += '","insetmap"%3Afalse,"panelRange"%3A"0%3A1.0,1%3A1.0,2%3A1.0,3%3A1.0,4%3A1.0,5%3A1.0,6%3A1.0,7%3A0.8,8%3A0.3,9%3A0.5,10%3A0.5,11%3A0.5,12%3A0.5,13%3A0.5,14%3A0.5,15%3A0.5,16%3A1.0,17%3A1.0,18%3A1.0,19%3A1.0","panelSelect"%3A"0%3A0,1%3A0,2%3A0,3%3A0,4%3A0,5%3A0,6%3A0,7%3A0,8%3A0,9%3A0,10%3A0,11%3A0,12%3A0,13%3A0,14%3A0,15%3A0,16%3A0,17%3A0,18%3A0","panelCheckbox"%3A"0,9,19,20,21,22"%7D&aoi=default';
                 }
 
@@ -1426,41 +1553,6 @@ define([
 
                 window.open(strURL);
             });
-
-
-			//$("#btnJump2FEMA").click(function () {
-   //             var pExtent = app.view.extent;
-			//	pSR_WKID = pExtent.spatialReference.wkid;
-			//	var strURL = "https://hazards-fema.maps.arcgis.com/apps/webappviewer/index.html?id=8b0adb51996444d4879338b5529aa9cd&extent=";
-			//	strURL += pExtent.xmin + ",";
-			//	strURL += pExtent.ymin + ",";
-			//	strURL += pExtent.xmax + ",";
-			//	strURL += pExtent.ymax + ",";
-			//	strURL += pSR_WKID.toString();
-			//	window.open(strURL);
-			//});
-
-
-			
-			//$("#btnJump2GYIAIS").click(function () {
-			//	var pExtent = app.map.extent;
-			//	pSR_WKID = pExtent.spatialReference.wkid;
-			//	var strURL = "https://gagecarto.github.io/aquaticInvasiveExplorer/index.html#bnds=";
-			//	var pGeogExtent = webMercatorUtils.webMercatorToGeographic(pExtent);  //the map is in web mercator but display coordinates in geographic (lat, long)
-			//	strURL += Math.round(pGeogExtent.xmin * 100) / 100 + ",";
-			//	strURL += Math.round(pGeogExtent.ymin * 100) / 100 + ",";
-			//	strURL += Math.round(pGeogExtent.xmax * 100) / 100 + ",";
-			//	strURL += Math.round(pGeogExtent.ymax * 100) / 100;
-			//	//strURL += pSR_WKID.toString();
-			//	window.open(strURL);
-			//});
-
-			//$("#btnJump2FWP").click(function () {
-			//	var pExtent = app.map.extent;
-			//	pSR_WKID = pExtent.spatialReference.wkid;
-			//	var strURL = "http://fwp.mt.gov/gis/maps/fishingGuide/index.html";
-			//	window.open(strURL);
-			//});
 
 		},
 
