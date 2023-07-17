@@ -141,6 +141,8 @@ define([
 			mIDXQuery1AtaTime: 0,
 			m_blnQuery4DNRCGages: false,
 			m_arrayDNRC_Sens_Loc: null,
+            m_blnQuery4CODWRGages: false,
+            m_arrayCODWR_Sens_Loc: null,
 
             gageReadings: function (strSiteName,
                                     strHyperlinkURL,
@@ -1066,7 +1068,7 @@ define([
             //  var strURL = "https://nwis.waterdata.usgs.gov/nwis/dvstat?&site_no=" + strSiteID + "&agency_cd=USGS&por_" + strSiteID + "_80888=65063,00060,80888,1893-10-01,2017-10-29&stat_cds=mean_va&format=rdb";
 
 			var strURL = strDailyStat_URL;
-			if (strAgency == "MTDNRC") {
+            if ((strAgency == "MTDNRC") | (strAgency == "CODWR")) {
 				strURL = "";
 			}
 
@@ -1258,6 +1260,12 @@ define([
                 var dateA = new Date(a.gagedatetime), dateB = new Date(b.gagedatetime)
                 return dateA - dateB //sort by date ascending
             })
+
+            app.pGage.m_arrray_Detail4ChartHt.sort(function (a, b) {
+                var dateA = new Date(a.gagedatetime), dateB = new Date(b.gagedatetime)
+                return dateA - dateB //sort by date ascending
+            })
+
             var ViewModel2CFS_model = new app.pGage.ViewModel2CFS();
             var elementCFS = $('#ViewModel2CFSBinding_div')[0];
             var ViewModel2TMP_model = new app.pGage.ViewModel2TMP();
@@ -1364,6 +1372,73 @@ define([
 
 		},
 
+
+            CODWRSectionsReceived: function (arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, blnQuery1AtaTime, blnIsInitialPageLoad,
+                iHtTarget1, iHtTarget2, iHtTarget3) {  //this is needed to get the SensorID for each location
+                console.log("CODWRSectionsReceived start");
+                //https://dwr.state.co.us/Rest/GET/api/v2/telemetrystations/telemetrytimeserieshour/?startDate=-3days&abbrev=MANCHICO%2CMANMANCO
+                var strURLGagePrefix = "https://dwr.state.co.us/Rest/GET/api/v2/telemetrystations/telemetrystation/?abbrev=";
+                var arrayProc2 = [];
+                var arraySiteIDsCODWR = [];
+
+                for (var ii in arrayProc) {
+                    if (arrayProc[ii][1] != null) {
+                        strAgency = arrayProc[ii][(arrayProc[ii].length - 1)];  //the agency will be the last element in the array.  If loading all sections then array is long, if single click then array is short
+                        if (strAgency == "CODWR") {
+                            arraySiteIDsCODWR.push(arrayProc[ii][1]);
+                        }
+                    }
+                }
+                arrayProc2 = arrayProc;
+                strSiteIDs = arraySiteIDsCODWR.join("%2C");
+                strURLGagePrefix += strSiteIDs;
+                app.strURLGage = strURLGagePrefix;
+
+                var arrayCODWR_Sens_Loc = [];
+
+                $.getJSON(app.strURLGage)   //http://api.jquery.com/jquery.getjson/
+                    .done(function (jsonResult) {
+                        arrayJSONValues = jsonResult.ResultList;
+                        for (var i = 0; i < arrayJSONValues.length; i++) {
+                            arrayCODWR_Sens_Loc.push([arrayJSONValues[i].abbrev,
+                                arrayJSONValues[i].stationName,
+                                arrayJSONValues[i].gnisId,
+                                arrayJSONValues[i].abbrev,
+                                null,
+                                null]
+                            );
+                        }
+                        app.pGage.m_arrayCODWR_Sens_Loc = arrayCODWR_Sens_Loc;
+                        app.pGage.SectionsReceived(arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, blnQuery1AtaTime,
+                            iHtTarget1, iHtTarget2, iHtTarget3)
+                    })
+
+                    .fail(function (jqxhr, textStatus, error) {
+                        var err = textStatus + ", " + app.strURLGage + ", " + error;
+                        //alert("Initial query for USGS gage data failed, trying again");
+                        document.getElementById("divLoadingUSGS").innerHTML = "Loading Gage Data, again";
+                        console.log("Request Failed: " + err);
+
+                        if (!blnQuery1AtaTime) {  //if the USGS api is erroring out try the refactored method
+                            app.pGage.SectionsReceived(arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, true,
+                                iHtTarget1, iHtTarget2, iHtTarget3)
+                        }
+                    })
+                    .always(function () {
+                        if ((!(blnIsInitialPageLoad)) & (app.pGage.m_arrray_StationIDsCFS.length == 0)) {  // in the case of no gage station do the following for the graphing
+                            dom.map(arrayProc2, function (itemSectionRefined) {  //loop through the sections  //run through the elements in the section array to pick out the relevant JSON elements
+                                iSectionID = itemSectionRefined[2];
+                                strStreamName = itemSectionRefined[0];
+                                app.pGage.m_arrray_StationIDsTMP.push("(No Data) " + strStreamName + "," + iSectionID);  // using this array of station id's to pivot the table for charting
+                                app.pGage.m_arrray_StationIDsCFS.push("(No Data) " + strStreamName + "," + iSectionID);  // using this array of station id's to pivot the table for charting
+                                app.pGage.m_arrray_StationIDsHt.push("(No Data) " + strStreamName + "," + iSectionID);  // using this array of station id's to pivot the table for charting
+                                app.pGage.StreamSectionSummaryUIAdditions(blnIsInitialPageLoad);
+                            })
+                        }
+                    });
+
+            },
+
         SectionsReceived: function (arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1,
                                         blnQuery1AtaTime, iHtTarget1, iHtTarget2, iHtTarget3) {
 			console.log("SectionsReceived1");
@@ -1397,23 +1472,23 @@ define([
                 iEarlyHtDroughtManagementTarget = strEarlyHtDroughtManagementTargetMessage = null;
 
             var arrayDNRC_Sens_Loc = null;
+            var arrayCODWR_Sens_Loc = null;
 
             var blnIsInitialPageLoad = app.blnIsInitialPageLoad;
-			var blnSingleSelect_DNRC = false;
+            var blnSingleSelect_DNRC = false;
+            var blnSingleSelect_CODWR = false;
+
             if ((arrayProc[0].length == 4) & (arrayProc.length == 1) & (arrayProc[0][3] == "MTDNRC")) {
-				var blnSingleSelect_DNRC = true;
+				var blnSingleSelect_CODWR = true;
 				arrayDNRC_Sens_Loc = app.pGage.m_arrayDNRC_Sens_Loc;
 			}
+            if ((arrayProc[0].length == 4) & (arrayProc.length == 1) & (arrayProc[0][3] == "CODWR")) {
+                var blnSingleSelect_CODWR = true;
+                arrayCODWR_Sens_Loc = app.pGage.m_arrayCODWR_Sens_Loc;
+            }
 
-            //var blnIsInitialPageLoad = false;
-            //if (arrayProc[0].length > 4) {
-            //    blnIsInitialPageLoad = true
-            //} else if ((arrayProc[0].length == 4) & (arrayProc.length == 1) & (arrayProc[0][3] == "MTDNRC")) {
-            //    var blnSingleSelect_DNRC = true;
-            //    arrayDNRC_Sens_Loc = app.pGage.m_arrayDNRC_Sens_Loc;
-            //}
-
-			if ((app.pGage.m_arrayDNRC_Sens_Loc == null) | !(blnIsInitialPageLoad)) {  //clear out the symbology and charting
+            if (((app.pGage.m_arrayDNRC_Sens_Loc == null) | !(blnIsInitialPageLoad)) &
+                ((app.pGage.m_arrayCODWR_Sens_Loc == null) | !(blnIsInitialPageLoad))) {  //clear out the symbology and charting
 				m_arrayOIDYellow = [];
 				m_arrayOIDsRed = [];
 				m_arrayOIDsPlum = [];
@@ -1427,14 +1502,29 @@ define([
 			if ((app.pGage.m_arrayDNRC_Sens_Loc != null) & (blnIsInitialPageLoad)) {
 				arrayDNRC_Sens_Loc = app.pGage.m_arrayDNRC_Sens_Loc;
 			}
+            if ((app.pGage.m_arrayCODWR_Sens_Loc != null) & (blnIsInitialPageLoad)) {
+                arrayCODWR_Sens_Loc = app.pGage.m_arrayCODWR_Sens_Loc;
+            }
 
-			if ((arrayDNRC_Sens_Loc == null) & !(blnSingleSelect_DNRC)) {
+            if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null) & !(blnSingleSelect_DNRC)) {
 				var strURLGagePrefix = "https://nwis.waterservices.usgs.gov/nwis/iv/";
 				strURLGagePrefix += "?format=json&indent=on&siteStatus=all";
 				strURLGagePrefix += "&startDT=" + this.dteStartDay2Check;    //start date
 				strURLGagePrefix += "&endDT=" + this.dteEndDay2Check;      //end date
                 strURLGagePrefix += "&parameterCd=" + "00010,00060,00065";
-			} else {
+            } else if (arrayCODWR_Sens_Loc != null) {
+                var strURLGagePrefix = "https://dwr.state.co.us/Rest/GET/api/v2/telemetrystations/telemetrytimeserieshour/";
+                //var strURLGagePrefix = "https://dwr.state.co.us/Rest/GET/api/v2/telemetrystations/telemetrytimeseriesraw/";
+                //strURLGagePrefix += "?startDate=-84hours&abbrev=";
+                strURLGagePrefix += "?startDate=" + this.dteStartDay2Check + "&abbrev=";
+
+                var arrayTempCODWRIDs = [];
+                for (var iS = 0; iS < arrayCODWR_Sens_Loc.length; iS++) {  //getting the sensor id's passed through the arrays
+                    arrayTempCODWRIDs.push(arrayCODWR_Sens_Loc[iS][3])
+                }
+                strTempCODWIDs = arrayTempCODWRIDs.join("%2C");
+                app.strURLGage = strURLGagePrefix + strTempCODWIDs;
+            } else {
 				var strURLGagePrefix = "https://gis.dnrc.mt.gov/arcgis/rest/services/WRD/WMB_StAGE/MapServer/2/query"
 				strURLGagePrefix += "?f=pjson&outFields=SensorID%2CTimestamp%2CRecordedValue&where="
 				strURLGagePrefix += "Timestamp > date '" + this.dteStartDay2Check + " 00:00:00'"; 
@@ -1455,14 +1545,17 @@ define([
 				arrayProc2 = [arrayProc[app.pGage.mIDXQuery1AtaTime]];
 			} else {
 				var arraySiteIDs = [];
-				var arraySiteIDsDNRC = [];
+                var arraySiteIDsDNRC = [];
+                var arraySiteIDsCODWR = [];
 
                 for (var ii in arrayProc) {
 					if (arrayProc[ii][1] != null) {
 						strAgency = arrayProc[ii][(arrayProc[ii].length - 1)];  //the agency will be the last element in the array.  If loading all sections then array is long, if single click then array is short
 						if (strAgency == "USGS") {
 							arraySiteIDs.push(arrayProc[ii][1]);
-						} else {  //useful for initial delineation of USGS and DNRC gages
+                        } else if (strAgency == "CODWR") {  //useful for initial delineation of USGS and DNRC gages
+                            arraySiteIDsCODWR.push(arrayProc[ii]);
+                        } else {  //useful for initial delineation of USGS and DNRC gages
 							arraySiteIDsDNRC.push(arrayProc[ii]);
 
 							//1. Query the Datasets feature by LocationID to get a list of available sensors(measurement types).
@@ -1476,18 +1569,15 @@ define([
                     }
 				}
 
-				if (arrayDNRC_Sens_Loc == null) {
+                if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
 					strSiteIDs = arraySiteIDs.join(",");
-				}
+                }
                 arrayProc2 = arrayProc;
             }
 
-			if (arrayDNRC_Sens_Loc == null) {
+            if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
 				app.strURLGage = strURLGagePrefix + "&sites=" + strSiteIDs;
 			}
-
-			console.log("Stream Gage values URL:" + app.strURLGage);
-
 
 			
             if ((blnQuery1AtaTime) & (strSiteIDs == null)) {   //due to intermittent errors with the USGS gage api when quering on mulitple sites at the same time, added this work around as an option if ERROR occurs
@@ -1619,12 +1709,15 @@ define([
                 $.getJSON(app.strURLGage)   //http://api.jquery.com/jquery.getjson/
 					.done(function (jsonResult) {
 
-						if (arrayDNRC_Sens_Loc == null) {
+                        if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
 							arrayJSONValues = jsonResult.value.timeSeries;
-						} else {
+                        } else if (arrayCODWR_Sens_Loc != null) {
+                            arrayJSONValues = jsonResult.ResultList;
+                        }
+                        else {
 							arrayJSONValues = jsonResult.features;
 						}
-                
+               
                         dom.map(arrayProc2, function (itemSectionRefined) {  //loop through the sections  //run through the elements in the section array to pick out the relevant JSON elements
 							var strSiteName = "";
 
@@ -1679,22 +1772,27 @@ define([
                             strLateFlowClosureValueHt = itemSectionRefined[32];
                             strAgency = itemSectionRefined[33];
 
-                            if (strStreamName == "Thompson River") {
-                                console.log("t River");
-                            }
-
                             var itemFound, itemFoundTemp, itemFoundDischarge, itemFoundHt;
 							itemFound = [];
 							itemFoundTemp = [];
                             itemFoundDischarge = [];
                             itemFoundHt = [];
 
-							if (arrayDNRC_Sens_Loc == null) {
+                            if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
 								var itemFound = arrayJSONValues.filter(function (itemArraySearch) {
 									return typeof itemArraySearch.name == 'string' && itemArraySearch.name.indexOf(strSiteID) > -1;
 								});
-							} else {
-
+                            } else if (arrayCODWR_Sens_Loc != null) {
+                                var itemFoundTemp = arrayJSONValues.filter(function (itemArraySearch) {
+                                    return typeof itemArraySearch.abbrev == 'string' && itemArraySearch.abbrev.indexOf(strSiteID) > -1 && (itemArraySearch.parameter == "AIRTEMP");
+                                });
+                                var itemFoundDischarge = arrayJSONValues.filter(function (itemArraySearch) {
+                                    return typeof itemArraySearch.abbrev == 'string' && itemArraySearch.abbrev.indexOf(strSiteID) > -1 && (itemArraySearch.parameter == "DISCHRG");
+                                });
+                                var itemFoundHt = arrayJSONValues.filter(function (itemArraySearch) {
+                                    return typeof itemArraySearch.abbrev == 'string' && itemArraySearch.abbrev.indexOf(strSiteID) > -1 && (itemArraySearch.parameter == "GAGE_HT");
+                                });
+                            } else {
 								var itemFoundTemp = arrayJSONValues.filter(function (itemArraySearch) {
 									return typeof itemArraySearch.attributes.SensorID == 'string' && itemArraySearch.attributes.SensorID.indexOf(strTempSensorID) > -1 ;
 								});
@@ -1720,19 +1818,14 @@ define([
                             var dteGreatestTMP = "";
                             var dblLatestCFS = "";
                             var dblLatestHt = "";
-
                             var strID = "";
 
-
-
-
-							if ((itemFound.length > 0) | (itemFoundTemp.length > 0) | (itemFoundDischarge.length > 0)) {
+							if ((itemFound.length > 0) | (itemFoundTemp.length > 0) | (itemFoundDischarge.length > 0)) {  //set the some base variable values
                                     iLateFlowPref4ConsvValue = itemSectionRefined[3];
                                     iLateFlowConsvValue = itemSectionRefined[4];
                                     iLateFlowClosureValueFlow = itemSectionRefined[5];
                                     iTempClosureValue = itemSectionRefined[6];
 
-								
                                     if (blnIsInitialPageLoad) {
                                         if (app.test) {
                                             if (iLateFlowPref4ConsvValue == 9999) {  // this is for testing only!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -1746,13 +1839,13 @@ define([
                                             }
                                             iTempClosureValue = 50;
                                         } else {
-                                            if (iLateFlowPref4ConsvValue == 9999) {  // this is for testing only!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                            if (iLateFlowPref4ConsvValue == 9999) {  
                                                 iLateFlowPref4ConsvValue = 0;
                                             }
-                                            if (iLateFlowConsvValue == 9999) {  // this is for testing only!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                            if (iLateFlowConsvValue == 9999) {  
                                                 iLateFlowConsvValue = 0;
                                             }
-                                            if (iLateFlowClosureValueFlow == 9999) {  // this is for testing only!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                            if (iLateFlowClosureValueFlow == 9999) {  
                                                 iLateFlowClosureValueFlow = 0;
                                             }
 										}
@@ -1761,10 +1854,12 @@ define([
                                         var strSiteTempStatus = "OPEN";//OPEN, HOOT-OWL FISHING RESTRICTIONS CRITERIA, RIVER CLOSURE (CLOSED TO FISHING) CRITERIA
                                         var strSiteHtStatus = "OPEN";
 
-									if (arrayDNRC_Sens_Loc == null) {
+                                    if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
 										strHyperlinkURL = strURLGagePrefix + "&sites=" + strSiteID;        //siteID
 										strHyperlinkURL = returnURL4GSgage(strHyperlinkURL);
-									} else {
+                                    } else if (arrayCODWR_Sens_Loc != null) {
+                                        strHyperlinkURL = "https://dwr.state.co.us/tools/Stations/" + strSiteID;
+                                    } else {
 										strHyperlinkURL = "https://gis.dnrc.mt.gov/apps/stage/gage-report/location/" + strDNRCLocID;
 									}
                                     blnRealValues = false;
@@ -1776,44 +1871,52 @@ define([
                             var CFSItem = "";
                             var HtItem = "";
 							var temperatureItem = "";
-							if (arrayDNRC_Sens_Loc == null) {
-								for (var iv = 0; iv < itemFound.length; iv++) {//determine if the JSON element is a temperature or discharge reading
-									if (itemFound[iv].variable.variableDescription == "Temperature, water, degrees Celsius") {
-										temperatureItem = itemFound[iv];
-									}
-									if (itemFound[iv].variable.variableDescription == "Discharge, cubic feet per second") {
-										CFSItem = itemFound[iv];
-									}
+
+                            if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
+                                for (var iv = 0; iv < itemFound.length; iv++) {//determine if the JSON element is a temperature or discharge reading
+                                    if (itemFound[iv].variable.variableDescription == "Temperature, water, degrees Celsius") {
+                                        temperatureItem = itemFound[iv];
+                                    }
+                                    if (itemFound[iv].variable.variableDescription == "Discharge, cubic feet per second") {
+                                        CFSItem = itemFound[iv];
+                                    }
                                     if (itemFound[iv].variable.variableDescription == "Gage height, feet") {
                                         HtItem = itemFound[iv];
                                     }
                                 }
-							}
+                            } 
 
-							if ((CFSItem != "") | (itemFoundDischarge.length > 0)) {
-								if (arrayDNRC_Sens_Loc == null) {
+                            if ((CFSItem != "") | (itemFoundDischarge.length > 0)) {                                       //run through each gage discharge record
+                                if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)){
 									arrayJSONValues2 = CFSItem.values[0].value;
-								} else {
+                                } else if (arrayCODWR_Sens_Loc != null) {
+                                    arrayJSONValues2 = itemFoundDischarge;
+                                } else {
 									arrayJSONValues2 = itemFoundDischarge;
 								}
 
 								jQuery.each(arrayJSONValues2, function (k, item2) {
-									if (arrayDNRC_Sens_Loc == null) {
+                                    if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
 										var dteDateTime = new Date(item2.dateTime);
-									} else {
+                                    } else if (arrayCODWR_Sens_Loc != null) {
+                                        var dteDateTime = new Date(item2.measDate);
+                                        //dteDateTime.setHours(dteDateTime.getHours() + 6);
+                                    } else {
 										var dteDateTime = new Date(item2.attributes.Timestamp);
 										dteDateTime.setHours(dteDateTime.getHours() + 6);
-
 									}
                                     var strNoData = "";
 									var iCFSValue;
-									if (arrayDNRC_Sens_Loc == null) {
-										iCFSValue = parseFloat(item2.value);
-									} else {
-										iCFSValue = Math.round(parseFloat(item2.attributes.RecordedValue)*10)/10;
+
+                                    if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
+                                        iCFSValue = parseFloat(item2.value);
+                                    } else if (arrayCODWR_Sens_Loc != null) {
+                                        iCFSValue = Math.round(parseFloat(item2.measValue) * 10) / 10;
+                                    } else {
+                                        iCFSValue = Math.round(parseFloat(item2.attributes.RecordedValue) * 10) / 10;
 									}
 
-                                    if (item2.value != -999999) {
+                                    if (iCFSValue != -999999) {
                                         blnRealValues = true;
                                         var obj = {};
                                         obj["id"]= strStreamName + "," +iSectionID;
@@ -1846,25 +1949,28 @@ define([
                                 }
                             }
 
-                            if ((HtItem != "") | (itemFoundHt.length > 0)) {
-                                if (arrayDNRC_Sens_Loc == null) {
+                            if ((HtItem != "") | (itemFoundHt.length > 0)) {                                    //run through each gage height record
+                                if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
                                     arrayJSONValues2Ht = HtItem.values[0].value;
                                 } else {
                                     arrayJSONValues2Ht = itemFoundHt;
                                 }
 
                                 jQuery.each(arrayJSONValues2Ht, function (k, item2Ht) {
-                                    if (arrayDNRC_Sens_Loc == null) {
+                                    if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
                                         var dteDateTime = new Date(item2Ht.dateTime);
+                                    } else if (arrayCODWR_Sens_Loc != null) {
+                                        var dteDateTime = new Date(item2Ht.measDate);
                                     } else {
                                         var dteDateTime = new Date(item2Ht.attributes.Timestamp);
                                         dteDateTime.setHours(dteDateTime.getHours() + 6);
-
                                     }
                                     var strNoData = "";
                                     var iHtValue;
-                                    if (arrayDNRC_Sens_Loc == null) {
+                                    if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
                                         iHtValue = parseFloat(item2Ht.value);
+                                    } else if (arrayCODWR_Sens_Loc != null) {
+                                        iHtValue = Math.round(parseFloat(item2Ht.measValue) * 10) / 10;
                                     } else {
                                         iHtValue = Math.round(parseFloat(item2Ht.attributes.RecordedValue) * 10) / 10;
                                     }
@@ -1905,38 +2011,39 @@ define([
 
                             arrayJSONValues2 =[]; //clear out the array
 
-							if ((temperatureItem != "") | (itemFoundTemp.length > 0)) {
-								if (arrayDNRC_Sens_Loc == null) {
+                            if ((temperatureItem != "") | (itemFoundTemp.length > 0)) {                                    //run through each gage temperature record
+                                if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
 									arrayJSONValues22 = temperatureItem.values[0].value;
 								} else {
 									arrayJSONValues22 = itemFoundTemp;
 								}
 
                                 jQuery.each(arrayJSONValues22, function (k, item22) {
-									if (arrayDNRC_Sens_Loc == null) {
+                                    if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
 										var dteDateTime = new Date(item22.dateTime);
-									} else {
+                                    } else if (arrayCODWR_Sens_Loc != null) {
+                                        var dteDateTime = new Date(item22.measDate);
+                                        //dteDateTime.setHours(dteDateTime.getHours() + 6);
+                                    } else {
 										var dteDateTime = new Date(item22.attributes.Timestamp);
 										dteDateTime.setHours(dteDateTime.getHours() + 6);
 									}
-
 									var iTempValue;
-									if (arrayDNRC_Sens_Loc == null) {
-										iTempValue = Math.round((parseFloat(item22.value) * 9 / 5 + 32)*10)/10;
-									} else {
+                                    if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
+                                        iTempValue = Math.round((parseFloat(item22.value) * 9 / 5 + 32) * 10) / 10;
+                                    } else if (arrayCODWR_Sens_Loc != null) {
+                                        iTempValue = item22.measValue;
+                                    } else {
 										iTempValue = Math.round((parseFloat(item22.attributes.RecordedValue) * 9 / 5 + 32)*10)/10;
 									}
-
                                     var strNoData = "";
                                     if (iTempValue > -10) {
-                                    //if (iTempValue != -999999) {
                                         blnRealValues = true;
                                         var obj = {};
                                         obj["id"]= strStreamName + "," +iSectionID;
                                         obj["date"] = dteDateTime.getFullYear() + "-" +("0" + (dteDateTime.getMonth() + 1)).slice(-2) + "-" +("0" +dteDateTime.getDate()).slice(-2);
                                         obj["time"]= dteDateTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false});
 										obj["TMP"] = iTempValue;
-										//obj["TMP"] = Math.round(parseFloat(item22.value) * 9 / 5 + 32);
 										obj["gagedatetime"] = dteDateTime;
 										if (iTMPTarget1 != 0) {
 											obj["TMPTarget1"] = iTMPTarget1;  //this are only used in single charting situations
@@ -1973,13 +2080,13 @@ define([
                             temperatureItem = "";
                         }
 
-							if (arrayDNRC_Sens_Loc == null) {
+                            //if (arrayDNRC_Sens_Loc == null) {
+                            if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
 								if (itemFound.length > 0) {
 									var item = itemFound[0];
 									strSiteName = item.sourceInfo.siteName;
 								}
 							}
-
 
                             var strNoDataLabel4ChartingHt = "";
                             if (dblLatestHt == -999999) {
@@ -2064,6 +2171,28 @@ define([
                                     }
                                 }
                             }
+
+                            if (arrayCODWR_Sens_Loc != null) {
+                                for (var iSL = 0; iSL < app.pGage.m_arrray_StationIDsTMP.length; iSL++) {  //remove placeholder sections if entered
+                                    if (app.pGage.m_arrray_StationIDsTMP[iSL] == "(No Data) " + strStreamName + "," + iSectionID) {
+                                        app.pGage.m_arrray_StationIDsTMP.splice(iSL, 1);
+                                        break;
+                                    }
+                                }
+                                for (var iSL2 = 0; iSL2 < app.pGage.m_arrray_StationIDsCFS.length; iSL2++) {  //remove placeholder sections if entered
+                                    if (app.pGage.m_arrray_StationIDsCFS[iSL2] == "(No Data) " + strStreamName + "," + iSectionID) {
+                                        app.pGage.m_arrray_StationIDsCFS.splice(iSL2, 1);
+                                        break;
+                                    }
+                                }
+                                for (var iSL2Ht = 0; iSL2Ht < app.pGage.m_arrray_StationIDsHt.length; iSL2Ht++) {  //remove placeholder sections if entered
+                                    if (app.pGage.m_arrray_StationIDsHt[iSL2Ht] == "(No Data) " + strStreamName + "," + iSectionID) {
+                                        app.pGage.m_arrray_StationIDsHt.splice(iSL2Ht, 1);
+                                        break;
+                                    }
+                                }
+                            }
+
                             app.pGage.m_arrray_StationIDsTMP.push(strNoDataLabel4ChartingTMP + strStreamName + "," + iSectionID);  // using this array of station id's to pivot the table for charting
                             app.pGage.m_arrray_StationIDsCFS.push(strNoDataLabel4ChartingCFS + strStreamName + "," + iSectionID);  // using this array of station id's to pivot the table for charting
                             app.pGage.m_arrray_StationIDsHt.push(strNoDataLabel4ChartingHt + strStreamName + "," + iSectionID);  // using this array of station id's to pivot the table for charting
@@ -2097,6 +2226,14 @@ define([
 										}
 									}
 								}
+                                if (arrayCODWR_Sens_Loc != null) {
+                                    for (var iSL3 = 0; iSL3 < app.pGage.m_arrray_RiverSectionStatus.length; iSL3++) {  //remove placeholder sections if entered
+                                        if ((app.pGage.m_arrray_RiverSectionStatus[iSL3][9] == strStreamName) & (app.pGage.m_arrray_RiverSectionStatus[iSL3][10] == iSectionID)) {
+                                            app.pGage.m_arrray_RiverSectionStatus.splice(iSL3, 1);
+                                            break;
+                                        }
+                                    }
+                                }
 
                                 app.pGage.m_arrray_RiverSectionStatus.push([streamSectionDispalyName, //add to array that populates the river sections summary div
                                             strHyperlinkURL,
@@ -2169,7 +2306,10 @@ define([
                         } else if ((arraySiteIDsDNRC.length > 0) & (arrayDNRC_Sens_Loc == null)) {
                             app.pGage.DNRCSectionsReceived(arraySiteIDsDNRC, "", "", "", "", false, null, blnIsInitialPageLoad,
                                 iHtTarget1, iHtTarget2, iHtTarget3)
-						}
+                        } else if ((arraySiteIDsCODWR.length > 0) & (arrayCODWR_Sens_Loc == null)) {
+                            app.pGage.CODWRSectionsReceived(arraySiteIDsCODWR, "", "", "", "", false, null, blnIsInitialPageLoad,
+                                iHtTarget1, iHtTarget2, iHtTarget3)
+                        }
 						else {
                             app.pGage.StreamSectionSummaryUIAdditions(blnIsInitialPageLoad);
                             app.pGage.mIDXQuery1AtaTime = 0;

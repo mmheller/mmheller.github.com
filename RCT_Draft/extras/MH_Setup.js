@@ -269,17 +269,24 @@ define([
             console.log("MH_setup Phase1");
 
             app.H2O_ID = getTokens()['H2O_ID'];
+
+            ////testing  here
+            //if (app.H2O_ID == undefined) {
+            //    app.H2O_ID = "Mancos";
+            //}
+
 			app.Basin_ID = getTokens()['Basin_ID'];
 
 			if (app.Basin_ID == "UY_Shields") {
 				app.Basin_ID = "Upper Yellowstone Headwaters";
 			}
 
-
-            
             $("#dropDownId").append("<li><a data-value='American Whitewater Difficulty and Flow'>American Whitewater Difficulty and Flow</a></li>")
             $("#dropDownId").append("<li><a data-value='FEMA Flood Layer Hazard Viewer'>FEMA Flood Layer Hazard Viewer</a></li>")
+            $("#dropDownId").append("<li><a data-value='CO DWR Surface Water Stations'>CO DWR Surface Water Stations</a></li>")
+
             $("#dropDownId").append("<li><a data-value='GYE Aquatic Invasives'>GYE Aquatic Invasives</a></li>")
+
             $("#dropDownId").append("<li><a data-value='MT Channel Migration Zones'>Channel Migration Zones</a></li>")
             $("#dropDownId").append("<li><a data-value='MT DNRC Stream and Gage Explorer'>MT DNRC Stream and Gage Explorer</a></li>")
             $("#dropDownId").append("<li><a data-value='Official MT FWP (closures, etc.)'>Official MT FWP (closures, etc.)</a></li>")
@@ -324,8 +331,6 @@ define([
                 ["Green Mountain Conservation District", "Green Mountain Conservation District", "Lower Clark Fork"],
                 ["Eastern Sanders Conservation District", "Eastern Sanders Conservation District", "Lower Clark Fork"],
                 ["Mancos", "Mancos", "Southwest Colorado"]
-
-
             ];
 
 			if ((app.H2O_ID == undefined) & (app.Basin_ID == undefined)) {
@@ -991,8 +996,9 @@ define([
             let strlabelField1 = "Name";
             var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
             const Watershed_labelClass = {// autocasts as new LabelClass()
-                symbol: { type: "text", color: vGreyColor, font: { family: "arial", size: 10 }},
-                labelExpressionInfo: { expression: "$feature." + strlabelField1 }
+                symbol: { type: "text", color: vGreyColor, font: { family: "arial", size: 10 } },
+                labelExpressionInfo: { expression: "$feature." + strlabelField1 },
+                "deconflictionStrategy": "none",
             };
 
             let pWatershedsFeatureLayer = new FeatureLayer({
@@ -1539,6 +1545,12 @@ define([
                     strURL += Math.round(pGeogExtent.ymin * 100) / 100 + ",";
                     strURL += Math.round(pGeogExtent.xmax * 100) / 100 + ",";
                     strURL += Math.round(pGeogExtent.ymax * 100) / 100;
+                }
+
+
+                if (strSelectedText == "CO DWR Surface Water Stations") {
+                    strURL = "https://data.colorado.gov/Water/DWR-Surface-Water-Stations-Map-Statewide-/8kgh-vbea";
+                    blnAddCoords = false;
                 }
                 
 
