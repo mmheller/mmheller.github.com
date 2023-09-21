@@ -1180,9 +1180,11 @@ define([
                         //app.dblExpandNum = 1.5;
                         app.dblExpandNum = 0.8;
 
-						$("#btnGetHistoricRestrctions").show();
+                        if (app.StateArea.indexOf("MT") > -1) {  //since the historical function is only applicable to MT, only show if in MT
+                            $("#btnGetHistoricRestrctions").show();
+                        }
 
-						if ($("#ViewModelHistoricRestrctions_div").attr("aria-expanded")) {
+                        if ($("#ViewModelHistoricRestrctions_div").attr("aria-expanded")) {
 							$("#divHistoricRecordText").html("");
 							$("#ViewModelHistoricRestrctions_div").collapse("hide");
 						}
@@ -1553,9 +1555,9 @@ define([
 						strAgency = arrayProc[ii][(arrayProc[ii].length - 1)];  //the agency will be the last element in the array.  If loading all sections then array is long, if single click then array is short
 						if (strAgency == "USGS") {
 							arraySiteIDs.push(arrayProc[ii][1]);
-                        } else if (strAgency == "CODWR") {  //useful for initial delineation of USGS and DNRC gages
+                        } else if ((strAgency == "CODWR") | (app.StateArea.indexOf("CO") > -1) & (strAgency == "")) {  //useful for initial delineation of USGS,CODWR and DNRC gages
                             arraySiteIDsCODWR.push(arrayProc[ii]);
-                        } else {  //useful for initial delineation of USGS and DNRC gages
+                        } else if ((strAgency == "MTDNRC") | (app.StateArea.indexOf("CO") < -0) & (strAgency == "")) {  //useful for initial delineation of USGS,CODWR and DNRC gages
 							arraySiteIDsDNRC.push(arrayProc[ii]);
 
 							//1. Query the Datasets feature by LocationID to get a list of available sensors(measurement types).
@@ -1576,11 +1578,21 @@ define([
             }
 
             if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
-				app.strURLGage = strURLGagePrefix + "&sites=" + strSiteIDs;
+                if (strSiteIDs == "") {
+                    strSiteIDs = "06023100";  // this is to prevent the issues if no USGS sites (i.e. Rio Grande area) but maybe state gages
+                }
+
+                app.strURLGage = strURLGagePrefix + "&sites=" + strSiteIDs;
+
 			}
 
-			
+            //if (((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) & ((strSiteIDs.length == 0) & (arraySiteIDsCODWR.length > 0))) {  // this is to prevent trying to run usgs gages when there is no usgs gages
+            //    app.pGage.CODWRSectionsReceived(arraySiteIDsCODWR, "", "", "", "", false, null, blnIsInitialPageLoad, iHtTarget1, iHtTarget2, iHtTarget3);
+
+            //} else if ((blnQuery1AtaTime) & (strSiteIDs == null)) {   //due to intermittent errors with the USGS gage api when quering on mulitple sites at the same time, added this work around as an option if ERROR occurs
+
             if ((blnQuery1AtaTime) & (strSiteIDs == null)) {   //due to intermittent errors with the USGS gage api when quering on mulitple sites at the same time, added this work around as an option if ERROR occurs
+
                 strSiteID = arrayProc2[0][1];  //since some sections do not have readings all the time setting this before finding data in the JSON
                 strStreamName = arrayProc2[0][0];  //since some sections do not have readings all the time setting this before finding data in the JSON
                 iSectionID = arrayProc2[0][2];  //since some sections do not have readings all the time setting this before finding data in the JSON
@@ -1778,11 +1790,16 @@ define([
                             itemFoundDischarge = [];
                             itemFoundHt = [];
 
-                            if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
-								var itemFound = arrayJSONValues.filter(function (itemArraySearch) {
-									return typeof itemArraySearch.name == 'string' && itemArraySearch.name.indexOf(strSiteID) > -1;
-								});
+                            if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {  //these itemFound arrays house all the data that is found in the data arrays with all gage data
+                                var itemFound = arrayJSONValues.filter(function (itemArraySearch) {
+                                    return typeof itemArraySearch.name == 'string' && itemArraySearch.name.indexOf(strSiteID) > -1 && strSiteID != "";
+                                });
+                                
                             } else if (arrayCODWR_Sens_Loc != null) {
+                                if (strSiteID == "") {
+                                    strSiteID = "no site id specified";
+                                }
+
                                 var itemFoundTemp = arrayJSONValues.filter(function (itemArraySearch) {
                                     return typeof itemArraySearch.abbrev == 'string' && itemArraySearch.abbrev.indexOf(strSiteID) > -1 && (itemArraySearch.parameter == "AIRTEMP");
                                 });
@@ -1826,46 +1843,50 @@ define([
                                     iLateFlowClosureValueFlow = itemSectionRefined[5];
                                     iTempClosureValue = itemSectionRefined[6];
 
-                                    if (blnIsInitialPageLoad) {
-                                        if (app.test) {
-                                            if (iLateFlowPref4ConsvValue == 9999) {  // this is for testing only!!!!!!!!!!!!!!!!!!!!!!!!!!
-                                                iLateFlowPref4ConsvValue = 400;
-                                            }
-                                            if (iLateFlowConsvValue == 9999) {  // this is for testing only!!!!!!!!!!!!!!!!!!!!!!!!!!
-                                                iLateFlowConsvValue = 300;
-                                            }
-                                            if (iLateFlowClosureValueFlow == 9999) {  // this is for testing only!!!!!!!!!!!!!!!!!!!!!!!!!!
-                                                    iLateFlowClosureValueFlow = 200;
-                                            }
-                                            iTempClosureValue = 50;
-                                        } else {
-                                            if (iLateFlowPref4ConsvValue == 9999) {  
-                                                iLateFlowPref4ConsvValue = 0;
-                                            }
-                                            if (iLateFlowConsvValue == 9999) {  
-                                                iLateFlowConsvValue = 0;
-                                            }
-                                            if (iLateFlowClosureValueFlow == 9999) {  
-                                                iLateFlowClosureValueFlow = 0;
-                                            }
-										}
+                                if (blnIsInitialPageLoad) {
+                                    if (app.test) {
+                                        if (iLateFlowPref4ConsvValue == 9999) {  // this is for testing only!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                            iLateFlowPref4ConsvValue = 400;
+                                        }
+                                        if (iLateFlowConsvValue == 9999) {  // this is for testing only!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                            iLateFlowConsvValue = 300;
+                                        }
+                                        if (iLateFlowClosureValueFlow == 9999) {  // this is for testing only!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                            iLateFlowClosureValueFlow = 200;
+                                        }
+                                        iTempClosureValue = 50;
+                                    } else {
+                                        if (iLateFlowPref4ConsvValue == 9999) {
+                                            iLateFlowPref4ConsvValue = 0;
+                                        }
+                                        if (iLateFlowConsvValue == 9999) {
+                                            iLateFlowConsvValue = 0;
+                                        }
+                                        if (iLateFlowClosureValueFlow == 9999) {
+                                            iLateFlowClosureValueFlow = 0;
+                                        }
+                                    }
 
-                                        var strSiteFlowStatus = "OPEN"; //OPEN, PREPARE FOR CONSERVATION, CONSERVATION, RIVER CLOSURE (CLOSED TO FISHING)
-                                        var strSiteTempStatus = "OPEN";//OPEN, HOOT-OWL FISHING RESTRICTIONS CRITERIA, RIVER CLOSURE (CLOSED TO FISHING) CRITERIA
-                                        var strSiteHtStatus = "OPEN";
+                                    var strSiteFlowStatus = "OPEN"; //OPEN, PREPARE FOR CONSERVATION, CONSERVATION, RIVER CLOSURE (CLOSED TO FISHING)
+                                    var strSiteTempStatus = "OPEN";//OPEN, HOOT-OWL FISHING RESTRICTIONS CRITERIA, RIVER CLOSURE (CLOSED TO FISHING) CRITERIA
+                                    var strSiteHtStatus = "OPEN";
 
                                     if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
-										strHyperlinkURL = strURLGagePrefix + "&sites=" + strSiteID;        //siteID
-										strHyperlinkURL = returnURL4GSgage(strHyperlinkURL);
+                                        strHyperlinkURL = strURLGagePrefix + "&sites=" + strSiteID;        //siteID
+                                        strHyperlinkURL = returnURL4GSgage(strHyperlinkURL);
                                     } else if (arrayCODWR_Sens_Loc != null) {
                                         strHyperlinkURL = "https://dwr.state.co.us/tools/Stations/" + strSiteID;
                                     } else {
-										strHyperlinkURL = "https://gis.dnrc.mt.gov/apps/stage/gage-report/location/" + strDNRCLocID;
-									}
+                                        strHyperlinkURL = "https://gis.dnrc.mt.gov/apps/stage/gage-report/location/" + strDNRCLocID;
+                                    }
                                     blnRealValues = false;
                                     var str3DayCFSTrendCFS = "images/blank.png";
                                     var str3DayCFSTrendTMP = "images/blank.png";
                                     var str3DayCFSTrendHt = "images/blank.png";
+                            } else {
+                                    iLateFlowPref4ConsvValue = 0;
+                                    iLateFlowConsvValue = 0;
+                                    iLateFlowClosureValueFlow = 0;
                             }
 
                             var CFSItem = "";
@@ -2191,6 +2212,7 @@ define([
                                         break;
                                     }
                                 }
+                                console.log("breakpoint 1111111");
                             }
 
                             app.pGage.m_arrray_StationIDsTMP.push(strNoDataLabel4ChartingTMP + strStreamName + "," + iSectionID);  // using this array of station id's to pivot the table for charting

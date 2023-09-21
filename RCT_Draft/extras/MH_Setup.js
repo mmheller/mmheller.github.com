@@ -281,16 +281,7 @@ define([
 				app.Basin_ID = "Upper Yellowstone Headwaters";
 			}
 
-            $("#dropDownId").append("<li><a data-value='American Whitewater Difficulty and Flow'>American Whitewater Difficulty and Flow</a></li>")
-            $("#dropDownId").append("<li><a data-value='FEMA Flood Layer Hazard Viewer'>FEMA Flood Layer Hazard Viewer</a></li>")
-            $("#dropDownId").append("<li><a data-value='CO DWR Surface Water Stations'>CO DWR Surface Water Stations</a></li>")
 
-            $("#dropDownId").append("<li><a data-value='GYE Aquatic Invasives'>GYE Aquatic Invasives</a></li>")
-
-            $("#dropDownId").append("<li><a data-value='MT Channel Migration Zones'>Channel Migration Zones</a></li>")
-            $("#dropDownId").append("<li><a data-value='MT DNRC Stream and Gage Explorer'>MT DNRC Stream and Gage Explorer</a></li>")
-            $("#dropDownId").append("<li><a data-value='Official MT FWP (closures, etc.)'>Official MT FWP (closures, etc.)</a></li>")
-            $("#dropDownId").append("<li><a data-value='USGS National Water Dashboard'>USGS National Water Dashboard</a></li>")
 
 			//array [watershed listed on website, watershed in layer, basin name in website]
 			app.arrayEntireList = [["Beaverhead/Centennial", "Beaverhead", "UMH"],
@@ -330,7 +321,15 @@ define([
                 ["Lower Clark Fork", "Lower Clark Fork", "Lower Clark Fork"],
                 ["Green Mountain Conservation District", "Green Mountain Conservation District", "Lower Clark Fork"],
                 ["Eastern Sanders Conservation District", "Eastern Sanders Conservation District", "Lower Clark Fork"],
-                ["Mancos", "Mancos", "Southwest Colorado"]
+                ["Mancos", "Mancos", "Southwest Colorado"],
+
+                ["Alamosa-Trinchera", "Alamosa-Trinchera", "Upper Rio Grande"],
+                ["Conejos", "Conejos", "Upper Rio Grande"],
+                ["Rio Chama", "Rio Chama", "Upper Rio Grande"],
+                ["Rio Grande Headwaters", "Rio Grande Headwaters", "Upper Rio Grande"],
+                ["Saguache", "Saguache", "Upper Rio Grande"],
+                ["San Luis", "San Luis", "Upper Rio Grande"],
+                ["Upper Rio Grande", "Upper Rio Grande", "Upper Rio Grande"]
             ];
 
 			if ((app.H2O_ID == undefined) & (app.Basin_ID == undefined)) {
@@ -365,17 +364,19 @@ define([
 				}
 			}
 
-			var arrayNavListBasin = [["Upper Missouri Headwaters", "UMH"],
-									["Upper Yellowstone/Shields", "UY_Shields"],
-                                    ["Southwest Colorado", "Southwest Colorado"],
-                                    ["Musselshell", "Musselshell"],
-                                    ["Lower Clark Fork", "Lower Clark Fork"],
-                                    ["Flathead", "Flathead"],
-                                    ["Clarks Fork Yellowstone", "Clarks Fork Yellowstone"],
-                                    ["Boulder and East Boulder", "Boulder and East Boulder"],
-                                    ["Blackfoot-Sun", "Blackfoot-Sun"],
-                                    ["Bitterroot", "Bitter Root"],
-                                    ["Bighorn", "Bighorn"],
+			var arrayNavListBasin = [["Upper Missouri Headwaters", "UMH", "MT"],
+                                    //["Upper Yellowstone/Shields", "UY_Shields", "MT"],
+                                    ["Upper Rio Grande", "Upper Rio Grande", "CO"],
+                                    ["Upper Yellowstone Headwaters", "UY_Shields", "MT"],
+                                    ["Southwest Colorado", "Southwest Colorado", "CO"],
+                                    ["Musselshell", "Musselshell", "MT"],
+                                    ["Lower Clark Fork", "Lower Clark Fork", "MT"],
+                                    ["Flathead", "Flathead", "MT"],
+                                    ["Clarks Fork Yellowstone", "Clarks Fork Yellowstone", "MT"],
+                                    ["Boulder and East Boulder", "Boulder and East Boulder", "MT"],
+                                    ["Blackfoot-Sun", "Blackfoot-Sun", "MT"],
+                                    ["Bitterroot", "Bitter Root", "MT"],
+                                    ["Bighorn", "Bighorn", "MTWY"],
                                     ["All", "all"]
 			];
 
@@ -395,10 +396,27 @@ define([
 				newItem.appendChild(a);
 				selBasin.add(newItem, i+1);
 
-				if (arrayNavListBasin[i][1] == app.Basin_ID) {				//set the region/basin in the dropdown!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-					selBasin.options[i+1].selected = true;
+                if ((arrayNavListBasin[i][1] == app.Basin_ID) | (arrayNavListBasin[i][0] == app.Basin_ID)) {				//set the region/basin in the dropdown!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                    selBasin.options[i + 1].selected = true;
+                    app.StateArea = arrayNavListBasin[i][2];
 				}
 			}
+
+            $("#dropDownId").append("<li><a data-value='American Whitewater Difficulty and Flow'>American Whitewater Difficulty and Flow</a></li>")
+            $("#dropDownId").append("<li><a data-value='FEMA Flood Layer Hazard Viewer'>FEMA Flood Layer Hazard Viewer</a></li>")
+
+            if (app.StateArea.indexOf("CO") > -1) {
+                $("#dropDownId").append("<li><a data-value='BOR Basin Status Maps'>BOR Basin Status Maps</a></li>")
+                $("#dropDownId").append("<li><a data-value='CO DWR Surface Water Stations'>CO DWR Surface Water Stations</a></li>")
+            }
+            if (app.StateArea.indexOf("MT") > -1) {
+                $("#dropDownId").append("<li><a data-value='GYE Aquatic Invasives'>GYE Aquatic Invasives</a></li>")
+                $("#dropDownId").append("<li><a data-value='MT Channel Migration Zones'>Channel Migration Zones</a></li>")
+                $("#dropDownId").append("<li><a data-value='MT DNRC Stream and Gage Explorer'>MT DNRC Stream and Gage Explorer</a></li>")
+                $("#dropDownId").append("<li><a data-value='Official MT FWP (closures, etc.)'>Official MT FWP (closures, etc.)</a></li>")
+            }
+
+            $("#dropDownId").append("<li><a data-value='USGS National Water Dashboard'>USGS National Water Dashboard</a></li>")
 
 			var x, i, j, l, ll, selElmnt, a, b, c;
 			/*look for any elements with the class "custom-select":*/
@@ -806,29 +824,12 @@ define([
 			}
 
             let vColor22 = new Color("#3F3F40");
-
-            let templateFAS = new PopupTemplate();
-            templateFAS.title = "MT FAS (Fishing Access Site)";
-            templateFAS.content = "<b>{NAME}</b><br>{BOAT_FAC}<br><a href={WEB_PAGE} target='_blank'>Link to Fish Access Site</a>";
-            const FAS_labelClass = {// autocasts as new LabelClass()
-                symbol: {type: "text", color: vColor22,
-                            font: { family: "arial", size: 9, weight: "bold" }
-                },
-                labelPlacement: "above-center",
-                labelExpressionInfo: {expression: "$feature.NAME"}
-            };
-            let pFASFeatureLayer = new FeatureLayer({url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/arcgis/rest/services/FWPLND_FAS_POINTS/FeatureServer/0",
-                popupTemplate: templateFAS,
-                opacity: 0.5,
-                visible: false,
-                labelingInfo: [FAS_labelClass]
-            });
-
             let vDarkGreyColor = new Color("#3F3F40");
+            var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
 
             let templateBLM = new PopupTemplate();
             templateBLM.title = "<b>BLM Facility</b>";
-            templateBLM.content = "{Facility_Name}<br><a href={URL} target='_blank'>Link to BLM Facility</a>";
+            templateBLM.content = "{FacilityName}<br><a href={BLMFacURL} target='_blank'>Link to BLM Facility</a>";
             const BLM_labelClass = {// autocasts as new LabelClass()
                 symbol: {
                     type: "text",  // autocasts as new TextSymbol()
@@ -836,27 +837,119 @@ define([
                     font: { family: "arial", size: 9}
                 },
                 labelPlacement: "above-center",
-                labelExpressionInfo: { expression: "$feature.Facility_Name" }
+                labelExpressionInfo: { expression: "$feature.FacilityName" }
             };
             let pBLMFeatureLayer = new FeatureLayer({
-                //url: app.strHFL_URL + "2",
-                url: app.strHFL_URL + app.idx11[2],
+                url: "https://gis.blm.gov/arcgis/rest/services/recreation/BLM_Natl_Recreation_Sites_Facilities/MapServer/0",
                 popupTemplate: templateBLM, opacity: 0.5,
                 visible: false, labelingInfo: [BLM_labelClass]
             });
 
-            var templateFWPAISAccess = new PopupTemplate();
-            templateFWPAISAccess.title = "Montana AIS Watercraft Access";
-            templateFWPAISAccess.content = "{SITENAME}</br>{ACCESSTYPE}</br>{WATERBODY}</br>{STATUS}</b>";
-            var pFWPAISAccessFeatureLayer = new FeatureLayer({
-                url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/arcgis/rest/services/FISH_AIS_WATERCRAFT_ACCESS/FeatureServer/0",
-                popupTemplate: templateFWPAISAccess, minScale: 5200000, visible: false });
+            let templateBLM_Rec = new PopupTemplate();
+            templateBLM_Rec.title = "<b>BLM Rec. Site</b>";
+            templateBLM_Rec.content = "{RecAreaName}<br><a href={BLMRecURL} target='_blank'>Link to BLM Rec. Site</a>";
+            const BLM_Rec_labelClass = {// autocasts as new LabelClass()
+                symbol: {
+                    type: "text",  // autocasts as new TextSymbol()
+                    color: vDarkGreyColor,
+                    font: { family: "arial", size: 9 }
+                },
+                labelPlacement: "above-center",
+                labelExpressionInfo: { expression: "$feature.RecAreaName" }
+            };
+            let pBLM_RecFeatureLayer = new FeatureLayer({
+                url: "https://gis.blm.gov/arcgis/rest/services/recreation/BLM_Natl_Recreation_Sites_Facilities/MapServer/3",
+                popupTemplate: templateBLM_Rec, opacity: 0.5,
+                visible: false, labelingInfo: [BLM_Rec_labelClass]
+            });
 
 
-            var templateSNOTEL = new PopupTemplate();
-            templateSNOTEL.title = "<b>{Name} {SitePageURL} SNOTEL Site</b>";
-            var strSNOTELGraphURL = "https://wcc.sc.egov.usda.gov/nwcc/view?intervalType=+View+Current+&report=WYGRAPH&timeseries=Daily&format=plot&sitenum={stationID}&interval=WATERYEAR";
-            templateSNOTEL.content = "<a href={SitePageURL} target='_blank'>Link to SNOTEL Site Page</a><br><a href=" + strSNOTELGraphURL + " target='_blank'>Link to SWE Current/Historical Graphs</a> ";
+            if (app.StateArea.indexOf("CO") > -1) {
+                let templateCOFAC = new PopupTemplate();
+                templateCOFAC.title = "<b>CPW Facility</b>";
+                templateCOFAC.content = "{PROPNAME} - {d_FAC_TYPE}";
+                const COFAC_labelClass = {// autocasts as new LabelClass()
+                    symbol: {
+                        type: "text",  // autocasts as new TextSymbol()
+                        color: vDarkGreyColor,
+                        font: { family: "arial", size: 9 }
+                    },
+                    labelPlacement: "above-center",
+                    labelExpressionInfo: { expression: "$feature.PROPNAME + ' - ' + $feature.d_FAC_TYPE" }
+                };
+                var pCOFACFeatureLayer = new FeatureLayer({
+                    url: "https://services1.arcgis.com/Ezk9fcjSUkeadg6u/ArcGIS/rest/services/Colorado_Parks_and_Wildlife_Facilities/FeatureServer/0",
+                    popupTemplate: templateCOFAC, opacity: 0.5,
+                    visible: false, labelingInfo: [COFAC_labelClass]
+                });
+
+            }
+
+
+            if (app.StateArea.indexOf("MT") > -1) {
+                var templateFWPAISAccess = new PopupTemplate();
+                templateFWPAISAccess.title = "Montana AIS Watercraft Access";
+                templateFWPAISAccess.content = "{SITENAME}</br>{ACCESSTYPE}</br>{WATERBODY}</br>{STATUS}</b>";
+                var pFWPAISAccessFeatureLayer = new FeatureLayer({
+                    url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/arcgis/rest/services/FISH_AIS_WATERCRAFT_ACCESS/FeatureServer/0",
+                    popupTemplate: templateFWPAISAccess, minScale: 5200000, visible: false
+                });
+
+                var templateSNOTEL = new PopupTemplate();
+                templateSNOTEL.title = "<b>{Name} {SitePageURL} SNOTEL Site</b>";
+                var strSNOTELGraphURL = "https://wcc.sc.egov.usda.gov/nwcc/view?intervalType=+View+Current+&report=WYGRAPH&timeseries=Daily&format=plot&sitenum={stationID}&interval=WATERYEAR";
+                templateSNOTEL.content = "<a href={SitePageURL} target='_blank'>Link to SNOTEL Site Page</a><br><a href=" + strSNOTELGraphURL + " target='_blank'>Link to SWE Current/Historical Graphs</a> ";
+
+
+                let templateFAS = new PopupTemplate();
+                templateFAS.title = "MT FAS (Fishing Access Site)";
+                templateFAS.content = "<b>{NAME}</b><br>{BOAT_FAC}<br><a href={WEB_PAGE} target='_blank'>Link to Fish Access Site</a>";
+                const FAS_labelClass = {// autocasts as new LabelClass()
+                    symbol: {
+                        type: "text", color: vColor22,
+                        font: { family: "arial", size: 9, weight: "bold" }
+                    },
+                    labelPlacement: "above-center",
+                    labelExpressionInfo: { expression: "$feature.NAME" }
+                };
+                var pFASFeatureLayer = new FeatureLayer({
+                    url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/arcgis/rest/services/FWPLND_FAS_POINTS/FeatureServer/0",
+                    popupTemplate: templateFAS,
+                    opacity: 0.5,
+                    visible: false,
+                    labelingInfo: [FAS_labelClass]
+                });
+                //////////////////////////
+                let sfsr_MTSP = {
+                    type: "simple",  // autocasts as new SimpleRenderer()
+                    symbol: { // autocasts as new SimpleFillSymbol()
+                        type: "simple-fill",  // autocasts as new SimpleFillSymbol()
+                        color: [57, 168, 87, 0.45],
+                        style: "solid",
+                        outline: {  // autocasts as new SimpleLineSymbol()
+                            color: [29, 112, 52],
+                            width: 0.1
+                        }
+                    },
+                };
+                let strlabelField11 = "Name";
+                const MTSP_labelClass = {// autocasts as new LabelClass()
+                    symbol: { type: "text", color: [29, 112, 52], font: { family: "arial", size: 9 } },
+                    labelExpressionInfo: { expression: "$feature." + strlabelField11 },
+                    minScale: 2000000
+                };
+
+                var templateMTSP = new PopupTemplate();
+                templateMTSP.title = "Montana State Parks";
+                templateMTSP.content = "{NAME} <a href={WEB_PAGE} target='_blank'>(link here)</a></br>{BOAT_FAC}</br>{STATUS}</b>";
+
+                var pMTSPFeatureLayer = new FeatureLayer({
+                    url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/ArcGIS/rest/services/FWPLND_STATEPARKS/FeatureServer/0",
+                    renderer: sfsr_MTSP, "opacity": 0.9, autoGeneralize: true,
+                    outFields: [strlabelField11], labelingInfo: [MTSP_labelClass], popupTemplate: templateMTSP
+                });
+
+            }
 
             const SNOTEL_labelClass = {// autocasts as new LabelClass()
                 symbol: {
@@ -932,38 +1025,7 @@ define([
             let pCartoFeatureLayerPoly = new FeatureLayer({ url: app.strHFL_URL + app.idx11[6], "opacity": 0.9, autoGeneralize: true});
 
 
-            //////////////////////////
-            let sfsr_MTSP = {
-                type: "simple",  // autocasts as new SimpleRenderer()
-                symbol: { // autocasts as new SimpleFillSymbol()
-                    type: "simple-fill",  // autocasts as new SimpleFillSymbol()
-                    color: [57, 168, 87, 0.45],
-                    style: "solid",
-                    outline: {  // autocasts as new SimpleLineSymbol()
-                        color: [29, 112, 52],
-                        width: 0.1
-                    }
-                },
-            };
 
-            let strlabelField11 = "Name";
-            var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
-            const MTSP_labelClass = {// autocasts as new LabelClass()
-                symbol: { type: "text", color: [29, 112, 52], font: { family: "arial", size: 9 }},
-                labelExpressionInfo: { expression: "$feature." + strlabelField11 },
-                minScale: 2000000
-            };
-
-            var templateMTSP = new PopupTemplate();
-            templateMTSP.title = "Montana State Parks";
-            templateMTSP.content = "{NAME} <a href={WEB_PAGE} target='_blank'>(link here)</a></br>{BOAT_FAC}</br>{STATUS}</b>";
-
-
-            let pMTSPFeatureLayer = new FeatureLayer({
-                url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/ArcGIS/rest/services/FWPLND_STATEPARKS/FeatureServer/0",
-                renderer: sfsr_MTSP, "opacity": 0.9, autoGeneralize: true,
-                outFields: [strlabelField11], labelingInfo: [MTSP_labelClass], popupTemplate: templateMTSP
-            });
 
             if (app.Basin_ID == "Flathead") {
                 var templateDist2WaterTableFlathead = new PopupTemplate();
@@ -1097,10 +1159,20 @@ define([
 
 
             let arrayLayer2add = [app.pSup.m_pRiverSymbolsFeatureLayer, pWatershedsMaskFeatureLayer, pBasinsMaskFeatureLayer,
-                pWatershedsFeatureLayer, pBasinsFeatureLayer, pMTSPFeatureLayer, pCartoFeatureLayer, pCartoFeatureLayerPoly,
-                pSectionsFeatureLayer, pSNOTELFeatureLayer, pNOAAFeatureLayer, pFWPAISAccessFeatureLayer, pFWPFeatureLayer,
-                pBLMFeatureLayer, pFASFeatureLayer, pGageFeatureLayer, pEPointsFeatureLayer,
+                pWatershedsFeatureLayer, pBasinsFeatureLayer, pCartoFeatureLayer, pCartoFeatureLayerPoly,
+                pSectionsFeatureLayer, pSNOTELFeatureLayer, pNOAAFeatureLayer, pFWPFeatureLayer,
+                pBLMFeatureLayer, pBLM_RecFeatureLayer, pGageFeatureLayer, pEPointsFeatureLayer,
                 pMonitoringCSVLayer, app.graphicsLayer];
+
+            if (app.StateArea.indexOf("MT") > -1) {
+                arrayLayer2add.push(pFWPAISAccessFeatureLayer);
+                arrayLayer2add.push(pFASFeatureLayer);
+                arrayLayer2add.push(pMTSPFeatureLayer);
+            }
+
+            if (app.StateArea.indexOf("CO") > -1) {
+                arrayLayer2add.push(pCOFACFeatureLayer);
+            }
 
             if (app.Basin_ID == "Flathead") {
                 arrayLayer2add.push(pDist2WaterTableFlathead);
@@ -1117,12 +1189,21 @@ define([
 
             let legendLayers = [];
             legendLayers.push({ layer: pMonitoringCSVLayer, title: 'Monitoring Locations' });
-            legendLayers.push({ layer: pFWPAISAccessFeatureLayer, title: 'MT AIS Watercraft Access' });
-            legendLayers.push({ layer: pMTSPFeatureLayer, title: 'MT State Parks' });
             legendLayers.push({ layer: pSNOTELFeatureLayer, title: 'SNOTEL Sites' });
             legendLayers.push({ layer: pNOAAFeatureLayer, title: 'Weather Stations' });
-            legendLayers.push({ layer: pFASFeatureLayer, title: 'FWP Fish Access Sites' });
+
+            if (app.StateArea.indexOf("CO") > -1) {
+                legendLayers.push({ layer: pCOFACFeatureLayer, title: 'CPW Facilities' });
+            }
+
+            if (app.StateArea.indexOf("MT") > -1) {
+                legendLayers.push({ layer: pFWPAISAccessFeatureLayer, title: 'MT AIS Watercraft Access' });
+                legendLayers.push({ layer: pMTSPFeatureLayer, title: 'MT State Parks' });
+                legendLayers.push({ layer: pFASFeatureLayer, title: 'FWP Fish Access Sites' });
+            }
             legendLayers.push({ layer: pBLMFeatureLayer, title: 'BLM Access Sites' });
+            legendLayers.push({ layer: pBLM_RecFeatureLayer, title: 'BLM Recreation Boating Sites' });
+            
             legendLayers.push({ layer: pEPointsFeatureLayer, title: 'Start/End Section Locations' });
             legendLayers.push({ layer: pGageFeatureLayer, title: 'Gages' });
             legendLayers.push({ layer: app.pSup.m_pRiverSymbolsFeatureLayer, title: 'River Status' });
@@ -1148,12 +1229,20 @@ define([
 
             var cbxLayers = [];
             cbxLayers.push({ layers: [pBLMFeatureLayer, pBLMFeatureLayer], title: 'BLM Access Sites' });
-            cbxLayers.push({ layers: [pFASFeatureLayer, pFASFeatureLayer], title: 'MT FWP Fishing Access Sites' });
+            cbxLayers.push({ layers: [pBLM_RecFeatureLayer, pBLM_RecFeatureLayer], title: 'BLM Recreation Boating Sites' });
+
+            if (app.StateArea.indexOf("CO") > -1) {
+                cbxLayers.push({ layers: [pCOFACFeatureLayer, pCOFACFeatureLayer], title: 'CPW Facilities' });
+            }
+            if (app.StateArea.indexOf("MT") > -1) {
+                cbxLayers.push({ layers: [pFASFeatureLayer, pFASFeatureLayer], title: 'MT FWP Fishing Access Sites' });
+                cbxLayers.push({ layers: [pMTSPFeatureLayer, pMTSPFeatureLayer], title: 'MT State Parks' });
+                cbxLayers.push({ layers: [pFWPAISAccessFeatureLayer, pFWPAISAccessFeatureLayer], title: 'MT AIS Watercraft Access' });
+            }
+
             cbxLayers.push({ layers: [pSNOTELFeatureLayer, pSNOTELFeatureLayer], title: 'SNOTEL Sites' });
             cbxLayers.push({ layers: [pNOAAFeatureLayer, pNOAAFeatureLayer], title: 'Weather Stations' });
-            cbxLayers.push({ layers: [pFWPAISAccessFeatureLayer, pFWPAISAccessFeatureLayer], title: 'MT AIS Watercraft Access' });
             cbxLayers.push({ layers: [pMonitoringCSVLayer, pMonitoringCSVLayer], title: 'Monitoring Locations' });
-            cbxLayers.push({ layers: [pMTSPFeatureLayer, pMTSPFeatureLayer], title: 'MT State Parks' });
 
             if (app.Basin_ID == "Flathead") {
                 cbxLayers.push({ layers: [pDist2WaterTableFlathead, pDist2WaterTableFlathead], title: 'Depth to Water Table, Flathead River' });
@@ -1504,6 +1593,13 @@ define([
                     strURL = "https://www.americanwhitewater.org/content/River/view/river-index";
                     blnAddCoords = false;
                 }
+
+                if (strSelectedText == "BOR Basin Status Maps") {
+                    strURL = "https://www.usbr.gov/uc/water/hydrodata/status_maps/";
+                    blnAddCoords = false;
+                }
+
+                
 
                 if (strSelectedText == "USGS National Water Dashboard") {
                     //strURL = "https://hazards-fema.maps.arcgis.com/apps/webappviewer/index.html?id=8b0adb51996444d4879338b5529aa9cd&extent=";
