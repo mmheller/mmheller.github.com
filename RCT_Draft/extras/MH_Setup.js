@@ -895,12 +895,6 @@ define([
                     popupTemplate: templateFWPAISAccess, minScale: 5200000, visible: false
                 });
 
-                var templateSNOTEL = new PopupTemplate();
-                templateSNOTEL.title = "<b>{Name} {SitePageURL} SNOTEL Site</b>";
-                var strSNOTELGraphURL = "https://wcc.sc.egov.usda.gov/nwcc/view?intervalType=+View+Current+&report=WYGRAPH&timeseries=Daily&format=plot&sitenum={stationID}&interval=WATERYEAR";
-                templateSNOTEL.content = "<a href={SitePageURL} target='_blank'>Link to SNOTEL Site Page</a><br><a href=" + strSNOTELGraphURL + " target='_blank'>Link to SWE Current/Historical Graphs</a> ";
-
-
                 let templateFAS = new PopupTemplate();
                 templateFAS.title = "MT FAS (Fishing Access Site)";
                 templateFAS.content = "<b>{NAME}</b><br>{BOAT_FAC}<br><a href={WEB_PAGE} target='_blank'>Link to Fish Access Site</a>";
@@ -950,6 +944,12 @@ define([
                 });
 
             }
+
+            var templateSNOTEL = new PopupTemplate();
+            templateSNOTEL.title = "<b>{Name} SNOTEL Site</b>";
+            //templateSNOTEL.title = "<b>{Name} {SitePageURL} SNOTEL Site</b>";
+            var strSNOTELGraphURL = "https://wcc.sc.egov.usda.gov/nwcc/view?intervalType=+View+Current+&report=WYGRAPH&timeseries=Daily&format=plot&sitenum={stationID}&interval=WATERYEAR";
+            templateSNOTEL.content = "<a href={SitePageURL} target='_blank'>Link to SNOTEL Site Page</a><br><a href=" + strSNOTELGraphURL + " target='_blank'>Link to SWE Current/Historical Graphs</a> ";
 
             const SNOTEL_labelClass = {// autocasts as new LabelClass()
                 symbol: {
