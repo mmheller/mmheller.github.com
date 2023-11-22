@@ -322,7 +322,6 @@ define([
                 ["Green Mountain Conservation District", "Green Mountain Conservation District", "Lower Clark Fork"],
                 ["Eastern Sanders Conservation District", "Eastern Sanders Conservation District", "Lower Clark Fork"],
                 ["Mancos", "Mancos", "Southwest Colorado"],
-
                 ["Alamosa-Trinchera", "Alamosa-Trinchera", "Upper Rio Grande"],
                 ["Conejos", "Conejos", "Upper Rio Grande"],
                 ["Rio Chama", "Rio Chama", "Upper Rio Grande"],
