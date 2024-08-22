@@ -52,8 +52,6 @@ define([
 				queryObject.returnGeometry = true;
 				queryObject.outFields = ["*"];
 				queryObject.geometry = sectionGeometries;
-				//queryObject.distance = 20
-				//queryObject.units = "meters";
 
 				console.log(app.strFWPQuery.toString(), app.strFWPQuery);
 				console.log(sectionGeometries.toString(), sectionGeometries);
@@ -80,6 +78,47 @@ define([
 				});;
 			},
 
+
+
+			Start4Reservoirs: function (rEservoirsGeometries, rEservoirsArrray) {
+				console.log("Get warn Start Reservoirs");
+				this.m_ReservoirsArrray = rEservoirsArrray;
+
+				let queryObject = new Query();
+				queryObject.where = app.strFWPQuery;
+				queryObject.outSpatialReference = { wkid: 102100 };
+				queryObject.returnGeometry = true;
+				queryObject.outFields = ["*"];
+				queryObject.geometry = rEservoirsGeometries;
+
+				console.log(app.strFWPQuery.toString(), app.strFWPQuery);
+				console.log(rEservoirsGeometries.toString(), rEservoirsGeometries);
+
+				queryObject.spatialRelationship = "intersects";  // this is the default
+
+				query.executeQueryJSON(app.strFWPURL, queryObject).then(function (results) {
+					this.m_FWPWarnFeatures = results.features;
+					var resultCount = this.m_FWPWarnFeatures.length;
+					if (resultCount > 0) {
+						console.log(resultCount.toString() + " total warnings found");
+						var pFeature = results.features[this.app.pGetWarn.m_StepThruCounter];
+						this.app.pGetWarn.FindSectionsOverlappingFWPWarnFeatures2(pFeature.geometry);
+						var x = document.getElementById("divFWPAlert");
+						if (x.style.visibility === "hidden") {
+							x.style.visibility = 'visible';
+						}
+					} else {
+						//this.app.pGageRes.ReservoirsReceived(app.pGetWarn.m_ReservoirsArrray, "", "", "", "", false, null);  //if an error go continue with getting seciton detail and display
+						//this.app.pGageRes.BOR_mb_ReservoirsReceived(app.pGetWarn.m_ReservoirsArrray, "", "", "", "", false, null);  //if an error go continue with getting seciton detail and display
+						this.app.pGageRes.USACE_NWD_ReservoirsReceived(app.pGetWarn.m_ReservoirsArrray, false, null);  //if an error go continue with getting seciton detail and display
+						
+
+						this.app.pGetWarn.ClearVars();
+					}
+				}).catch(function (error) {
+					console.log("informative error message at 'Get warn Start': ", error.message);
+				});;
+			},
 			padTo2Digits: function (num) {
 				return num.toString().padStart(2, '0');
 			},

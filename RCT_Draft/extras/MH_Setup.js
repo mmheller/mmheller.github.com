@@ -7,6 +7,8 @@ function getPageWidth() {
     return width;
 }
 
+
+
 function closeAllSelect(elmnt) {
 	/*a function that will close all select boxes in the document,
 	except the current select box:*/
@@ -44,17 +46,17 @@ function getTokens() {
 }
 
 define([
-    "esri/config", "esri/Map", "esri/views/MapView", "dojo/_base/declare",
+    "esri/config", "esri/Map", "esri/views/MapView", "dojo/_base/declare", "esri/rest/query",
     "esri/rest/support/Query", "esri/tasks/QueryTask", "esri/rest/geometryService",
     "esri/geometry/support/webMercatorUtils",
     "esri/widgets/BasemapGallery", "esri/widgets/BasemapGallery/support/PortalBasemapsSource", "esri/widgets/ScaleBar", "dojo",
     "esri/PopupTemplate", "esri/layers/FeatureLayer", "esri/Color", "esri/renderers/SimpleRenderer", "esri/layers/CSVLayer",
     "extras/MH_Zoom2FeatureLayers", "esri/renderers/UniqueValueRenderer",
-    "esri/widgets/Legend", "esri/widgets/Locate", "esri/layers/GraphicsLayer", "esri/Graphic",
+    "esri/widgets/Legend", "esri/widgets/Locate", "esri/layers/GraphicsLayer", "esri/Graphic", 
     "esri/core/watchUtils",
     "dojo/dom", "dojo/dom-style",
 ], function (
-    esriConfig, Map, MapView, declare, Query, QueryTask, geometryService,
+    esriConfig, Map, MapView, declare, query, Query, QueryTask, geometryService,
     webMercatorUtils, BasemapGallery, PortalSource, ScaleBar, dojo,
     PopupTemplate, FeatureLayer, Color,
     SimpleRenderer, CSVLayer,
@@ -65,11 +67,107 @@ define([
         m_pRiverSymbolsFeatureLayer: null,
         m_StreamStatusRenderer: null,
 
-        addStreamConditionFeatureLayer: function (arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange,
-            arrayOIDPlum, arrayOIDsRed) {
+        addReservoirConditionFeatureLayer: function (arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum, arrayOIDsRed) {
+            let arrayofArrays = [arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum];////// for each array, red takes presedence so remove OID's from non-red arrays if in Red arra
+            let nonRedOID = null;
+            let arrayItems2remove = [];
+            let index2Remove = null;
+            for (let i = 0; i < arrayofArrays.length; i++) {
+                for (let iColor = 0; iColor < arrayofArrays[i].length; iColor++) {
+                    nonRedOID = arrayofArrays[i][iColor];
+                    for (let iRedOID = 0; iRedOID < arrayOIDsRed.length; iRedOID++) {
+                        if (nonRedOID == arrayOIDsRed[iRedOID]) {  //remove the OID from the non-red array
+                            arrayItems2remove.push(nonRedOID);
+                            break;
+                        }
+                    }
+                }
+                for (let iRemove = 0; iRemove < arrayItems2remove.length; iRemove++) {
+                    index2Remove = arrayofArrays[i].indexOf(arrayItems2remove[iRemove]);
+                    if (index2Remove > -1) {
+                        arrayofArrays[i].splice(index2Remove, 1); // 2nd parameter means remove one item only
+                    }
+                }
+                arrayItems2remove = [];
+            }
+            //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+            console.log("add Stream Condition FeatureLayer and custom legend")
+            let strValueExpression = "";
+            let arrayValueExpression = [];
 
-            ////// for each array, red takes presedence so remove OID's from non-red arrays if in Red arra
-            let arrayofArrays = [arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum];
+            let defaultUniqueSymbolRenderer = {
+                type: "unique-value",  // autocasts as new UniqueValueRenderer()
+                defaultSymbol: {
+                    type: "simple-line", color: [0, 169, 230], width: 1
+                }  // autocasts as new SimplelineSymbol()
+            };
+
+            app.pSup.m_StreamStatusRenderer = defaultUniqueSymbolRenderer;
+            app.pSup.m_StreamStatusRenderer.defaultLabel = "Stream Section (Open)";
+
+            let ArrayUniqueVals2Add = []
+
+            if (arrayOIDYellow.length > 0) {
+                arrayValueExpression.push("Includes([" + arrayOIDYellow.join(", ") + "], $feature.OBJECTID), 'Yellow'");
+                ArrayUniqueVals2Add.push({
+                    value: 'Yellow',
+                    symbol: { type: "simple-line", color: [255, 255, 0], width: 18 },
+                    label: "Prepare"
+                });
+            }
+
+            if (arrayOIDsGold.length > 0) {
+                arrayValueExpression.push("Includes([" + arrayOIDsGold.join(", ") + "], $feature.OBJECTID), 'Gold'");
+                ArrayUniqueVals2Add.push({
+                    value: 'Gold',
+                    symbol: { type: "simple-line", color: [249, 166, 2], width: 18 },
+                    label: "Conservation Actions"
+                });
+            }
+            if (arrayOIDsOrange.length > 0) {
+                arrayValueExpression.push("Includes([" + arrayOIDsOrange.join(", ") + "], $feature.OBJECTID), 'Orange'");
+                ArrayUniqueVals2Add.push({
+                    value: 'Orange',
+                    symbol: { type: "simple-line", color: [253, 106, 2], width: 18 },
+                    label: "Unofficial Closure"
+                });
+            }
+            if (arrayOIDPlum.length > 0) {
+                arrayValueExpression.push("Includes([" + arrayOIDPlum.join(", ") + "], $feature.OBJECTID), 'Plum'");
+                ArrayUniqueVals2Add.push({
+                    value: 'Plum',
+                    symbol: { type: "simple-line", color: [221, 160, 221], width: 18 },
+                    label: "Hoot Owl and/or Conservation Measures"
+                });
+            }
+            if (arrayOIDsRed.length > 0) {
+                arrayValueExpression.push("Includes([" + arrayOIDsRed.join(", ") + "], $feature.OBJECTID), 'Red'");
+                ArrayUniqueVals2Add.push({
+                    value: 'Red',
+                    symbol: { type: "simple-line", color: [255, 0, 0], width: 18 },
+                    label: "Offical Restriction"
+                });
+            }
+
+            if (ArrayUniqueVals2Add.length > 0) {  //getting an error when trying to use addUniqueValueInfo, I think due to the google chart api conflict, so using universal adding to an array then adding to the unique value renderer dictionary
+                strValueExpression = "When(" + arrayValueExpression.join(", ") + ", 'other')";
+                app.pSup.m_StreamStatusRenderer["valueExpression"] = strValueExpression;
+                app.pSup.m_StreamStatusRenderer["uniqueValueInfos"] = ArrayUniqueVals2Add;
+            }
+
+            let featureLayer = new FeatureLayer({
+                url: app.strHFL_URL + app.idx11[5],
+                outFields: ["OBJECTID"],
+                renderer: app.pSup.m_StreamStatusRenderer
+            });
+            app.map.layers.add(featureLayer, 5);
+            console.log("Completed: Add Stream Condition FeatureLayer and custom legend")
+
+            app.blnIsInitialPageLoad_Reservoir = false;
+        },
+
+        addStreamConditionFeatureLayer: function (arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum, arrayOIDsRed) {
+            let arrayofArrays = [arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum];////// for each array, red takes presedence so remove OID's from non-red arrays if in Red arra
             let nonRedOID = null;
             let arrayItems2remove = [];
             let index2Remove = null;
@@ -162,7 +260,7 @@ define([
                 renderer: app.pSup.m_StreamStatusRenderer
             });
             app.map.layers.add(featureLayer, 5);
-            console.log("Add Stream Condition FeatureLayer and custom legend complete")
+            console.log("Completed: Add Stream Condition FeatureLayer and custom legend")
 
             app.blnIsInitialPageLoad = false;
          },
@@ -265,17 +363,19 @@ define([
 
         Phase1: function () {
             app.blnIsInitialPageLoad = true;
+            app.blnIsInitialPageLoad_Reservoir = true;
 
             console.log("MH_setup Phase1");
 
             app.H2O_ID = getTokens()['H2O_ID'];
+            app.Basin_ID = getTokens()['Basin_ID'];
 
-            ////testing  here
-            //if (app.H2O_ID == undefined) {
-            //    app.H2O_ID = "Mancos";
+            //testing  here
+            //if ((app.H2O_ID == undefined) & (app.Basin_ID == undefined)) {
+            //    app.H2O_ID = "Lower Clark Fork";
             //}
 
-			app.Basin_ID = getTokens()['Basin_ID'];
+
 
 			if (app.Basin_ID == "UY_Shields") {
 				app.Basin_ID = "Upper Yellowstone Headwaters";
@@ -321,14 +421,39 @@ define([
                 ["Lower Clark Fork", "Lower Clark Fork", "Lower Clark Fork"],
                 ["Green Mountain Conservation District", "Green Mountain Conservation District", "Lower Clark Fork"],
                 ["Eastern Sanders Conservation District", "Eastern Sanders Conservation District", "Lower Clark Fork"],
+
+
+                ["Blackfoot", "Blackfoot", "Upper Clark Fork"],
+                ["Flint-Rock", "Flint-Rock", "Upper Clark Fork"],
+                ["Upper Clark Fork", "Upper Clark Fork", "Upper Clark Fork"],
+
+                ["Smith", "Smith", "Smith"],
+                
+
+                ["Lower San Juan-Four Corners", "Lower San Juan-Four Corners", "Southwest Colorado"],
                 ["Mancos", "Mancos", "Southwest Colorado"],
+                ["McElmo", "McElmo", "Southwest Colorado"],
+                ["Montezuma", "Montezuma", "Southwest Colorado"],
+                ["Upper Dolores", "Upper Dolores", "Southwest Colorado"],
+
                 ["Alamosa-Trinchera", "Alamosa-Trinchera", "Upper Rio Grande"],
                 ["Conejos", "Conejos", "Upper Rio Grande"],
                 ["Rio Chama", "Rio Chama", "Upper Rio Grande"],
                 ["Rio Grande Headwaters", "Rio Grande Headwaters", "Upper Rio Grande"],
                 ["Saguache", "Saguache", "Upper Rio Grande"],
                 ["San Luis", "San Luis", "Upper Rio Grande"],
-                ["Upper Rio Grande", "Upper Rio Grande", "Upper Rio Grande"]
+                ["Upper Rio Grande", "Upper Rio Grande", "Upper Rio Grande"],
+
+                ["Alamosa-Trinchera", "Alamosa-Trinchera", "Upper Rio Grand - New Mexico"],
+                ["Conejos", "Conejos", "Upper Rio Grand - New Mexico"],
+                ["Elephant Butte Reservoir", "Elephant Butte Reservoir", "Upper Rio Grand - New Mexico"],
+                ["Jemez", "Jemez", "Upper Rio Grand - New Mexico"],
+                ["Rio Chama", "Rio Chama", "Upper Rio Grand - New Mexico"],
+                ["Rio Grande-Albuquerque", "Rio Grande-Albuquerque", "Upper Rio Grand - New Mexico"],
+                ["Rio Grande-Santa Fe", "Rio Grande-Santa Fe", "Upper Rio Grand - New Mexico"],
+                ["Rio Puerco", "Rio Puerco", "Upper Rio Grand - New Mexico"],
+                ["Upper Rio Grande", "Upper Rio Grande", "Upper Rio Grand - New Mexico"]
+
             ];
 
 			if ((app.H2O_ID == undefined) & (app.Basin_ID == undefined)) {
@@ -364,9 +489,11 @@ define([
 			}
 
 			var arrayNavListBasin = [["Upper Missouri Headwaters", "UMH", "MT"],
-                                    //["Upper Yellowstone/Shields", "UY_Shields", "MT"],
-                                    ["Upper Rio Grande", "Upper Rio Grande", "CO"],
+                                    ["Upper Rio Grande - Colorado", "Upper Rio Grande", "CO"],
+                                    ["Upper Rio Grande - New Mexico", "Upper Rio Grand - New Mexico", "NM"],
                                     ["Upper Yellowstone Headwaters", "UY_Shields", "MT"],
+                                    ["Upper Clark Fork", "Upper Clark Fork", "MT"],
+                                    ["Smith", "Smith", "MT"],
                                     ["Southwest Colorado", "Southwest Colorado", "CO"],
                                     ["Musselshell", "Musselshell", "MT"],
                                     ["Lower Clark Fork", "Lower Clark Fork", "MT"],
@@ -411,10 +538,12 @@ define([
             if (app.StateArea.indexOf("MT") > -1) {
                 $("#dropDownId").append("<li><a data-value='GYE Aquatic Invasives'>GYE Aquatic Invasives</a></li>")
                 $("#dropDownId").append("<li><a data-value='MT Channel Migration Zones'>Channel Migration Zones</a></li>")
+                $("#dropDownId").append("<li><a data-value='MT DNRC Fire Map'>MT DNRC Fire Map</a></li>")
                 $("#dropDownId").append("<li><a data-value='MT DNRC Stream and Gage Explorer'>MT DNRC Stream and Gage Explorer</a></li>")
                 $("#dropDownId").append("<li><a data-value='Official MT FWP (closures, etc.)'>Official MT FWP (closures, etc.)</a></li>")
             }
 
+            $("#dropDownId").append("<li><a data-value='NRCS iMap-Basin Snow Water Equivalent'>NRCS iMap-Basin Snow Water Equivalent</a></li>")
             $("#dropDownId").append("<li><a data-value='USGS National Water Dashboard'>USGS National Water Dashboard</a></li>")
 
 			var x, i, j, l, ll, selElmnt, a, b, c;
@@ -506,15 +635,37 @@ define([
             }
 
 			//app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support/FeatureServer/";  //PRODUCTION
-            //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
+   //         app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
 
-            app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/RCT_LCF/FeatureServer/";  //Jo's dev
-            app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
+            //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/RCT_LCF/FeatureServer/";  //Jo's dev
+            //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  ////Jo's dev
+
+            app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Aug15Call/FeatureServer/";  //Vaughn's Dev
+            app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];    //Vaughn's Dev
+            
 
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22_multi/FeatureServer/";  //dev to test multi-gage per section
             //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
 
-            this.GetSetHeaderWarningContent(app.strHFL_URL + app.idx11[11], app.H2O_ID, blnUseAlternateHeader, app.Basin_ID);
+            //////////////////////////////////////////determine if gaged reservoirs exist/////////////////////////////
+            //////////////////////////////////////////determine if gaged reservoirs exist/////////////////////////////
+            let queryObject = new Query();
+            let strReservoirQuery = this.getQueryDefs1_4()[4];// this is strQueryDef2
+            queryObject.where = strReservoirQuery;
+            queryObject.returnGeometry = false;
+            queryObject.outFields = ["*"];
+            query.executeQueryJSON(app.strHFL_URL + app.idx11[7], queryObject).then(function (results) {
+                let blnFeaturesExist = false;
+                let pFeatures = results.features;
+                var resultCount = pFeatures.length;
+                if (resultCount > 0) {
+                    blnFeaturesExist = true;
+                }
+                app.blnReservoirGagesExist = blnFeaturesExist;
+                this.app.pSup.GetSetHeaderWarningContent(app.strHFL_URL + app.idx11[11], app.H2O_ID, blnUseAlternateHeader, app.Basin_ID);  //this will eventually trigger Phase2
+            }).catch(function (error) {
+                console.log("ReturnFeaturesExist_YesNo, error: ", error.message);
+            });;
         },
 
         Phase2: function () {
@@ -585,11 +736,6 @@ define([
             var pGageFeatureLayer = new FeatureLayer({ url: app.strHFL_URL + app.idx11[1], popupTemplate: template });
 
 
-
-            //var templateEPOINT = new PopupTemplate();
-            //templateEPOINT.title = "<b>Start/End Section Locations</b>";
-            //templateEPOINT.content = "Placename:{Endpoint_Name}<br>Section:{Start_End} of {Section_Name}<br>Stream:{Stream_Name}<br>";
-
             const EndPoints_labelClass = {// autocasts as new LabelClass()
                 symbol: {
                     type: "text",  // autocasts as new TextSymbol()
@@ -614,47 +760,12 @@ define([
                 minScale: 1000000,
                 labelingInfo: [EndPoints_labelClass]
             });
-            let strQueryDef1 = "1=1";
-            let strQueryDef2 = "1=1";
-            let strQueryDef3 = "";
-            let strQueryDef4 = "Name in ('')";
-			arrayTmp4Query3 = [];
-			if ((app.Basin_ID == undefined) & (typeof app.H2O_ID == 'undefined')) {
-				for (var ib2 = 0; ib2 < app.arrayEntireList.length; ib2++) { 							//if a watershed is passed, determine the correspoinding watersheds
-						arrayTmp4Query3.push(app.arrayEntireList[ib2][1]);
-				}
-				strQueryDef3 = "Name in ('" + arrayTmp4Query3.join("','") + "')";
-			} else if ((app.Basin_ID != undefined) & (typeof app.H2O_ID == 'undefined')) {
-				for (var ib2 = 0; ib2 < app.arrayEntireList.length; ib2++) { 							//if a watershed is passed, determine the correspoinding watersheds
-					if (app.Basin_ID == app.arrayEntireList[ib2][2]) {
-						arrayTmp4Query3.push(app.arrayEntireList[ib2][1]);
-					}
-				}
-				strQueryDef1 = "(Watershed_Name in ('" + arrayTmp4Query3.join("','") +
-					"')) OR (WatershedName_Alt1 in ('" + arrayTmp4Query3.join("','") +
-					"')) OR (WatershedName_Alt2 in ('" + arrayTmp4Query3.join("','") + "'))";
 
-				strQueryDef2 = "(Watershed in ('" + arrayTmp4Query3.join("','") +
-					"')) OR (WatershedName_Alt1 in ('" + arrayTmp4Query3.join("','") +
-					"')) OR (WatershedName_Alt2 in ('" + arrayTmp4Query3.join("','") + "'))";
-
-				strQueryDef3 = "(Name in ('" + arrayTmp4Query3.join("','") +
-					"')) OR (Name_Alternate1 in ('" + arrayTmp4Query3.join("','") +
-					"')) OR (Name_Alternate2 in ('" + arrayTmp4Query3.join("','") + "'))";
-
-				strQueryDef4 = "(NOT(Name in ('" + arrayTmp4Query3.join("','") + "'))) AND " +
-							  "((NOT(Name_Alternate1 in ('" + arrayTmp4Query3.join("','") + "'))) OR (Name_Alternate1 is Null)) AND" +
-					          "((NOT(Name_Alternate2 in ('" + arrayTmp4Query3.join("','") + "'))) OR (Name_Alternate1 is Null))";
-
-			} else if (typeof app.H2O_ID != 'undefined') {
-                strQueryDef1 = "Watershed_Name = '" + app.H2O_ID + "'" + " OR " + " WatershedName_Alt1 = '" + app.H2O_ID + "'" + " OR " + " WatershedName_Alt2 = '" + app.H2O_ID + "'";
-                strQueryDef2 = "Watershed = '" + app.H2O_ID + "'" + " OR " + " WatershedName_Alt1 = '" + app.H2O_ID + "'" + " OR " + " WatershedName_Alt2 = '" + app.H2O_ID + "'";
-                strQueryDef3 = "Name = '" + app.H2O_ID + "'" + " OR " + " Name_Alternate1 = '" + app.H2O_ID + "'" + " OR " + " Name_Alternate2 = '" + app.H2O_ID + "'"
-                //strQueryDef4 = "Name <> '" + app.H2O_ID + "'" + " OR " + " Name_Alternate1 <> '" + app.H2O_ID + "'" + " OR " + " Name_Alternate2 <> '" + app.H2O_ID + "'";
-                strQueryDef4 = "Name <> '" + app.H2O_ID + "'" + 
-                                    " AND (" + " Name_Alternate1 <> '" + app.H2O_ID + "' OR (Name_Alternate1 is Null))" + 
-                                    " AND (" + " Name_Alternate2 <> '" + app.H2O_ID + "' OR (Name_Alternate1 is Null))";
-            }
+            let strQueryDef1 = this.getQueryDefs1_4()[0];
+            let strQueryDef2 = this.getQueryDefs1_4()[1];
+            let strQueryDef3 = this.getQueryDefs1_4()[2];
+            let strQueryDef4 = this.getQueryDefs1_4()[3];
+            let strQueryDef5 = this.getQueryDefs1_4()[4];
 
             let strlabelField3 = "SectionName";
             const Secitons_labelClass = {// autocasts as new LabelClass()
@@ -671,12 +782,9 @@ define([
             };
 
             app.SectionQryStringGetGageData = strQueryDef2;
+            app.ReservoirQryStringGetGageData = strQueryDef5;
             pEPointsFeatureLayer.definitionExpression = strQueryDef1;
 
-
-            //let templateSections = new PopupTemplate();
-            //templateSections.title = "Stream Section (Watershed:{Watershed})";
-            //templateSections.content = "<b>{StreamName}</b>:{SectionName} (id:{SectionID})<br>";
 
             pSectionsFeatureLayer = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[5],
@@ -688,6 +796,16 @@ define([
             pSectionsFeatureLayer.definitionExpression = strQueryDef2;
             app.pGetWarn.m_strSteamSectionQuery = strQueryDef2;
 
+
+            pLakeResFeatureLayer = new FeatureLayer({
+                url: app.strHFL_URL + app.idx11[7],
+                opacity: 0.9,
+                outFields: ["Lake_Reservoir_Name", "ResFlood_ft", "Agency", "GageURL1", "GageURL2", "Gage_Name ", "Watershed", "Basin", "StreamSystem", "TeaCupURL"]
+                //,
+                //popupTemplate: templateSections
+            });
+            pLakeResFeatureLayer.definitionExpression = strQueryDef2;
+            
 
             app.view.when(() => {      /// this code adds popup content on the fly
                 // Watch for when features are selected
@@ -735,9 +853,9 @@ define([
                                         strGage2Compare = strGage2Compare.replace("/location/", "/");
                                     }
                                     strGage2Compare = strGage2Compare.toUpperCase();
-
                                     //console.log(strGage2Compare + ":vs:" + strSelectedGageURL);
-                                    if (strGage2Compare == strSelectedGageURL) {
+                                    if ((strGage2Compare == strSelectedGageURL) |
+                                        (strGage2Compare.replace("STAGE/GAGE-REPORT/","STAGE/GAGE-REPORT/LOCATION/") == strSelectedGageURL)){
                                         strAdditionalPopup = '<br>Discharge:' + vm1.gageRecords()[i].Discharge + ' CFS <img height="15px"  src="' + strImageURLPrefix + '/' + vm1.gageRecords()[i].Day3CFSTrend + '" alt="3 day Flow Trend"><br>' +
                                             'Water Temp: ' + vm1.gageRecords()[i].WaterTemp + ' F <img height="15px"  src="' + strImageURLPrefix + '/' + vm1.gageRecords()[i].Day3TMPTrend + '" alt="3 day Temp Trend"><br>' +
                                             'Gage Height: ' + vm1.gageRecords()[i].GageHt + ' ft <img height="15px"  src="' + strImageURLPrefix + '/' + vm1.gageRecords()[i].Day3HtTrend + '" alt="3 day Height Trend">';
@@ -752,57 +870,6 @@ define([
                             pGraphicTempContent = pGraphicTempContent.slice(0, pGraphicTempContent.lastIndexOf("</a>") + 4);  //remove the custom onthefly content that was added
                             graphicTemplate.content = pGraphicTempContent + strAdditionalPopup;
                         }
-
-
-                        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++having issues with setting template information due to multiple calls if multiple feature classes/layers on popup tool.
-                        //if (atts.SectionName) {        ///this looks for stream gage features and adds content
-                        //    const graphicTemplate2 = graphic.getEffectivePopupTemplate();
-                        //    let strAdditionalPopup2 = "";
-
-                        //    let strImageURLPrefix = document.location.href;                           //grabbing the URL due to images not visible via relative pathing
-                        //    if (strImageURLPrefix.indexOf("?") > 0) {
-                        //        strImageURLPrefix = strImageURLPrefix.slice(0, strImageURLPrefix.lastIndexOf("?") + 0);
-                        //    }
-                        //    strImageURLPrefix = strImageURLPrefix.replace("/index.html", "");
-
-                        //    if (iSectionCount > 1) {
-                        //        strAdditionalPopup2 = "<br><i>Selecting 1 stream section will provide details</i>";
-                        //    } else {
-                        //        let vm2 = new app.pGage.readingsViewModel();
-                        //        for (var iG2 = 0; iG2 < vm2.gageRecords().length; iG2++) {
-                        //            //console.log(vm2.gageRecords()[iG2].StreamName + ":vs:" + atts.StreamName + " &&&& " + vm2.gageRecords()[iG2].SectionID + ":vs:" + atts.SectionID);
-
-                        //            if ((vm2.gageRecords()[iG2].StreamName.toUpperCase() == atts.StreamName.toUpperCase()) & (vm2.gageRecords()[iG2].SectionID.toUpperCase() == atts.SectionID.toUpperCase())) {
-                        //                if (vm2.gageRecords()[iG2].strSiteID != ""){
-                        //                    strAdditionalPopup2 = 'Discharge:' + vm2.gageRecords()[iG2].Discharge + ' CFS '
-                        //                    if (vm2.gageRecords()[iG2].Day3CFSTrend != undefined) {
-                        //                        strAdditionalPopup2 += '<img height="15px" src="' + strImageURLPrefix + '/' + vm2.gageRecords()[iG2].Day3CFSTrend + '" alt="3 day Flow Trend">';
-                        //                    }
-                        //                    strAdditionalPopup2 += "<br>";
-
-                        //                    strAdditionalPopup2 += 'Water Temp: ' + vm2.gageRecords()[iG2].WaterTemp + ' F '
-                        //                    if (vm2.gageRecords()[iG2].Day3TMPTrend != undefined) {
-                        //                        strAdditionalPopup2 += '<img height="15px" src="' + strImageURLPrefix + '/' + vm2.gageRecords()[iG2].Day3TMPTrend + '" alt="3 day Temp Trend">'
-                        //                    }
-                        //                    strAdditionalPopup2 += "<br>";
-
-                        //                    strAdditionalPopup2 += 'Gage Height: ' + vm2.gageRecords()[iG2].GageHt + ' ft '
-                        //                    if (vm2.gageRecords()[iG2].Day3HtTrend != undefined) {
-                        //                        strAdditionalPopup2 += '<img height="15px" src="' + strImageURLPrefix + '/' + vm2.gageRecords()[iG2].Day3HtTrend + '" alt="3 day Height Trend">'
-                        //                    }
-                        //                    strAdditionalPopup2 += "<br>";
-
-                        //                    strAdditionalPopup2 += 'Status: ' + vm2.gageRecords()[iG2].overallStatus;
-                        //                }
-                        //                break
-                        //            }
-                        //        }
-                        //    }
-
-                        //    let pGraphicTempContent2 = graphicTemplate2.content;
-                        //    pGraphicTempContent2 = pGraphicTempContent2.slice(0, pGraphicTempContent2.lastIndexOf(")<br>") + 5);  //remove the custom onthefly content that was added
-                        //    graphicTemplate2.content = pGraphicTempContent2 + strAdditionalPopup2;
-                        //}
                     }
                 });
             });
@@ -966,9 +1033,47 @@ define([
                 labelingInfo: [SNOTEL_labelClass]
             });
 
-            let templateNOAA = new PopupTemplate();
-            templateNOAA.title = "<b>Weather Station</b>";
-            templateNOAA.content = "<b>{Station_Na}</b><br><a href={URL} target='_blank'>More info...</a>";
+
+            const templateNOAA = { //auto cast of PopupTemplate
+                title: "{STATION_NAME} ({ICAO}) Weather",
+                content: populationChange,
+                fieldInfos: [
+                    { fieldName: "STATION_NAME", format: { digitSeparator: true, places: 0 } },
+                    { fieldName: "TEMP", format: { digitSeparator: true, places: 0 } },
+                    { fieldName: "WIND_SPEED", format: { digitSeparator: true, places: 0 }}, 
+                    {fieldName:  "WIND_DIRECT", format: {digitSeparator: true, places: 2}
+                }]
+            };
+
+            function populationChange(feature) {
+                const div = document.createElement("div");
+                let iMPH = Math.round(feature.graphic.attributes.WIND_SPEED * 0.6214);
+                let iDegreesTemp = feature.graphic.attributes.WIND_DIRECT;
+                let iDegreesDispaly;
+
+                let strDirection;
+                if (iDegreesTemp == null) {
+                    strDirection = "not reported";
+                    iDegreesDispaly = "";
+                } else {
+                    const directions = ['Northerly', 'Northeasterly', 'Easterly', 'Southeasterly', 'Southerly', 'Southwesterly', 'Westerly', 'Northwesterly'];  // Define array of directions
+                    iDegreesTemp = iDegreesTemp * 8 / 360;  // Split into the 8 directions
+                    iDegreesTemp = Math.round(iDegreesTemp, 0);  // round to nearest integer.
+                    iDegreesTemp = (iDegreesTemp + 8) % 8; // Ensure it's within 0-7
+                    strDirection = directions[iDegreesTemp] +",";
+
+                    iDegreesDispaly = feature.graphic.attributes.WIND_DIRECT + String.fromCharCode(176);
+                }
+
+                div.innerHTML =
+                    "Temperature: <b>" + Math.round(feature.graphic.attributes.TEMP) + String.fromCharCode(176) + " F</b> <br>" +
+                    "Windspeed: <b>" + iMPH + " mph / " + Math.round(feature.graphic.attributes.WIND_SPEED) + " kph" + "<br></b>" +
+                    "Wind Direction <b>" + strDirection + "</b> " + iDegreesDispaly + "<br/> <br/>" +
+                    "<a href='https://forecast.weather.gov/zipcity.php?inputstring=" + feature.graphic.attributes.ICAO + "' target='_blank'>Link to NOAA/NWS Forecast</a > <br/>" +
+                    "<a href='https://w1.weather.gov/data/obhistory/" + feature.graphic.attributes.ICAO + ".html' target='_blank'>Link to NOAA/NWS Observations</a > <br/>" +
+                    "<a href='https://www.windy.com/airport/" + feature.graphic.attributes.ICAO + "' target='_blank'>Link to Wind</a >";
+                return div;
+            };
 
             const NOAA_labelClass = {// autocasts as new LabelClass()
                 symbol: {
@@ -976,13 +1081,16 @@ define([
                     font: { family: "arial", size: 9, weight: "bold" }
                 },
                 labelPlacement: "above-center",
-                labelExpressionInfo: { expression: "$feature.Station_Na" }
+                labelExpressionInfo: { expression: "$feature.STATION_NAME + textformatting.NewLine + 'Weather'" }
             };
+
             let pNOAAFeatureLayer = new FeatureLayer({
                 //url: "https://nowcoast.noaa.gov/arcgis/rest/services/nowcoast/obs_meteoceanhydro_insitu_pts_geolinks/MapServer/1",
-                url: "https://maps1.arcgisonline.com/arcgis/rest/services/NWS_Weather_Stations/MapServer/4",
+                //url: "https://maps1.arcgisonline.com/arcgis/rest/services/NWS_Weather_Stations/MapServer/4",
+                url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/NOAA_METAR_current_wind_speed_direction_v1/FeatureServer/0",
                 popupTemplate: templateNOAA,
                 visible: false,
+                outFields:["*"],
                 minScale: 5000000,
                 labelingInfo: [NOAA_labelClass]
             });
@@ -992,14 +1100,14 @@ define([
             templateFWP.content = "<b>{TITLE}</b><br>{WATERBODY}<br>{DESCRIPTION} Publish Date:{PUBLISHDATE}";
             app.strFWPURL = "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/ArcGIS/rest/services/FISH_WATERBODY_RESTRICTIONS/FeatureServer/0";
 
-			var dteDateTime = new Date();
-			var strDateTime = dteDateTime.getFullYear() + "-" + ("0" + (dteDateTime.getMonth() + 1)).slice(-2) + "-" + ("0" + dteDateTime.getDate()).slice(-2);
-			var strDateTimeUserFreindly = (dteDateTime.getMonth() + 1) + "/" + dteDateTime.getDate() + "/" + dteDateTime.getFullYear();
-			var dteDateTimeMinus3 = new Date();
-			dteDateTimeMinus3.setDate(dteDateTimeMinus3.getDate() - 3);
-			var strDateTimeMinus3 = dteDateTimeMinus3.getFullYear() + "-" + ("0" + (dteDateTimeMinus3.getMonth() + 1)).slice(-2) + "-" + ("0" + dteDateTimeMinus3.getDate()).slice(-2);
-			var strDateTimeMinus3UserFreindly = (dteDateTimeMinus3.getMonth() + 1) + "/" + dteDateTimeMinus3.getDate() + "/" + dteDateTimeMinus3.getFullYear();
+			//let dteDateTime = new Date();
+            let strDateTime = app.pGage.GetDatesForRunningRCT()[1];
+            let strDateTimeUserFreindly = app.pGage.GetDatesForRunningRCT()[3];;
+            let strDateTimeMinus3 = app.pGage.GetDatesForRunningRCT()[0];
+            let strDateTimeMinus3UserFreindly = app.pGage.GetDatesForRunningRCT()[2] ;
 
+            console.log(app.pGage.GetDatesForRunningRCT()[0] + " " + app.pGage.GetDatesForRunningRCT()[1] + " " + app.pGage.GetDatesForRunningRCT()[2] + " " + app.pGage.GetDatesForRunningRCT()[3]);
+            
             if (app.test) {                //app.strFWPURL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/TestH2ORest/FeatureServer/0";
                 app.strFWPQuery = "(PUBLISHDATE > '7/15/2017') AND (PUBLISHDATE < '7/20/2017')";
             } else {
@@ -1144,12 +1252,14 @@ define([
             var pCSVTemplate = new PopupTemplate();
             pCSVTemplate.title = "<b>Monitoring Sites</b>";
             pCSVTemplate.content = "Station Name: {STATION_NAME}<br>Drainage Name: {Drainage_Name}<br><a href={URL} target='_blank'> Link monitoring data</a>";
-            let pMonitoringCSVLayer = new CSVLayer({
-                url: "https://docs.google.com/spreadsheets/d/e/2PACX-1vTw0rCwCLxDg2jCLLCscILrMDMGBbInS1KmwH76CPyqVYqFolKdOfw0J4DIaJhWoPDPkwVNQI_Y7OeX/pub?output=csv",
+
+            let pMonitoringCSVLayer = new FeatureLayer({
+                url: "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Monitoring_Sites/FeatureServer/0",
                 visible: false,
                 renderer: CSV_Renderer,
                 popupTemplate: pCSVTemplate
             });
+
             if (app.Basin_ID == "Flathead") {
                 pMonitoringCSVLayer.visible = "True";
             }
@@ -1158,7 +1268,7 @@ define([
 
 
             let arrayLayer2add = [app.pSup.m_pRiverSymbolsFeatureLayer, pWatershedsMaskFeatureLayer, pBasinsMaskFeatureLayer,
-                pWatershedsFeatureLayer, pBasinsFeatureLayer, pCartoFeatureLayer, pCartoFeatureLayerPoly,
+                pWatershedsFeatureLayer, pBasinsFeatureLayer, pLakeResFeatureLayer, pCartoFeatureLayer, pCartoFeatureLayerPoly,
                 pSectionsFeatureLayer, pSNOTELFeatureLayer, pNOAAFeatureLayer, pFWPFeatureLayer,
                 pBLMFeatureLayer, pBLM_RecFeatureLayer, pGageFeatureLayer, pEPointsFeatureLayer,
                 pMonitoringCSVLayer, app.graphicsLayer];
@@ -1183,8 +1293,16 @@ define([
             app.pZoom = new MH_Zoom2FeatureLayers({}); // instantiate the class
             app.dblExpandNum = 0.5;
 
-            document.getElementById("txtFromToDate").innerHTML = "Conditions based on the last 3 days (" + strDateTimeMinus3UserFreindly.toString() + "-" + strDateTimeUserFreindly.toString() + ")";
-            app.pGage.Start(strDateTimeMinus3, strDateTime);
+            document.getElementById("txtFromToDate").innerHTML = "Conditions/information based on provisional gage readings of the last 3 days (" + strDateTimeMinus3UserFreindly.toString() + "-" + strDateTimeUserFreindly.toString() + ")";
+
+            //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+            //|||||||||||||||||||||||||||||||     This starts retevial of gage data         ||||||||||||||||||||||||||||||||||||||||||||||||||||
+            //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+            console.log("app.blnReservoirGagesExist: " + app.blnReservoirGagesExist.toString());
+            app.pGage.Start(strDateTimeMinus3, strDateTime);   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+            //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+            //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+            //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
             let legendLayers = [];
             legendLayers.push({ layer: pMonitoringCSVLayer, title: 'Monitoring Locations' });
@@ -1247,13 +1365,11 @@ define([
                 cbxLayers.push({ layers: [pDist2WaterTableFlathead, pDist2WaterTableFlathead], title: 'Depth to Water Table, Flathead River' });
                 cbxLayers.push({ layers: [p1964FloodFlathead, p1964FloodFlathead], title: '1964 Flood, Flathead River' });
             }
-
-
-            
+                        
 			this.LayerCheckBoxSetup(cbxLayers);
 
-
             SetupStreamClick();
+            SetupReservoirClick();
 
             ko.bindingHandlers.googleBarChart = {
                 init: function (element, valueAccessor, allBindingsAccesor, viewModel, bindingContext) {
@@ -1296,6 +1412,9 @@ define([
                     }
                     else if ((value.getColumnLabel(0) == "DatetimeHt") | (value.getColumnLabel(0) == "DatetimeHtSingle")) {
                         strTitle = "Gage Height (ft)"
+                    }
+                    else if ((value.getColumnLabel(0) == "DatetimeFB") | (value.getColumnLabel(0) == "DatetimeFBSingle")) {
+                        strTitle = "Reservoir Pool Height (ft)"
                     }
 
 
@@ -1516,45 +1635,138 @@ define([
                     const opts = {
                         include: pSectionsFeatureLayer// only include graphics from pSectionsFeatureLayer in the hitTest
                     }
-
                     app.view.hitTest(event, opts).then((response) => {
                         if (response.results.length) {// check if a feature is returned from the pSectionsFeatureLayer
                             showResults(response.results);
                         }
                     });
                 });
-
             }
+
+            function SetupReservoirClick() {
+                app.view.on("pointer-down", (event) => {
+                    const opts = {
+                        include: pLakeResFeatureLayer// only include graphics from pLakeResFeatureLayer in the hitTest
+                    }
+                    app.view.hitTest(event, opts).then((response) => {
+                        if (response.results.length) {// check if a feature is returned from the pLakeResFeatureLayer
+                            showResults(response.results);
+                        }
+                    });
+                });
+            }
+
 
 			function showResults(pFeatures) {
                 console.log("showResults from click")
                 app.blnZoom = false; //this controls zooming to sections if user clicks a summary or if clicks on map
-                //dojo.forEach(pFeatures, function (feature) {
                 if (pFeatures.length > 0) {
                     var feature = pFeatures[0];
 
-                    var strStreamName = feature.graphic.attributes.StreamName;
-                    var strSectionID = feature.graphic.attributes.SectionID;
-                    var elements = document.getElementsByTagName('tr');  //Sets the click event for the row
-                    for (var i = 0; i < elements.length; i++) {
-                        var strTempText = (elements)[i].innerHTML;  //parse the section summary text to set var's for charting and zooming
-                        strTempText = strTempText.substring(strTempText.indexOf("StreamName") + ("StreamName".length + 2), strTempText.length);
-                        var strClickStreamName = strTempText.substring(0, strTempText.indexOf("</span>"));
-                        strTempText = strTempText.substring(strTempText.indexOf("SectionID") + ("SectionID".length + 2), strTempText.length);
-                        var strClickSegmentID = strTempText.substring(0, strTempText.indexOf("</span>"));
+
+                    let strSearchField1, strSearchField2, strSearchValue1, strSearchValue2, table, strTempText, strFoundValue1, strFoundValue2;
+
+                    if (feature.graphic.layer.geometryType == "polygon") {  //assuming the poly layer is the reservoir layer
+                        strSearchField1 = "SiteName";
+                        strSearchField2 = "Lake_Reservoir_Name_";
+
+                        strSearchValue1 = feature.graphic.attributes.Gage_Name;
+                        strSearchValue2 = feature.graphic.attributes.Lake_Reservoir_Name;
+
+                        table = document.getElementById("entriesReservoir");
+
+                    } else {
+                        strSearchField1 = "StreamName";
+                        strSearchField2 = "SectionID";
+
+                        strSearchValue1 = feature.graphic.attributes.StreamName;
+                        strSearchValue2 = feature.graphic.attributes.SectionID;
+
+                        table = document.getElementById("entries");
+                    }
+
+                    var rows = table.getElementsByTagName("tr");
+
+                    for (var i = 0; i < rows.length; i++) {
+                        strTempText = (rows)[i].innerHTML;  //parse the section summary text to set var's for charting and zooming
+                        strTempText = strTempText.substring(strTempText.indexOf(strSearchField1) + (strSearchField1.length + 2), strTempText.length);
+                        strFoundValue1 = strTempText.substring(0, strTempText.indexOf("</span>"));
+                        strTempText = strTempText.substring(strTempText.indexOf(strSearchField2) + (strSearchField2.length + 2), strTempText.length);
+                        strFoundValue2 = strTempText.substring(0, strTempText.indexOf("</span>"));
                         
-                        if ((strStreamName == strClickStreamName) & (strClickSegmentID == strSectionID)) {
-                            (elements)[i].click();
+                        if ((strSearchValue1 == strFoundValue1) & (strSearchValue2 == strFoundValue2)) {
+                            (rows)[i].click();
 
                             break;
                         }
-                        
                     }
                 }
-                //});
             }
-
         },
+
+
+
+        getQueryDefs1_4: function () {
+
+            let strQueryDef1 = "1=1";
+            let strQueryDef2 = "1=1";
+            let strQueryDef3 = "";
+            let strQueryDef4 = "Name in ('')";
+            let strQueryDef = "1=1";
+            arrayTmp4Query3 =[];
+            if((app.Basin_ID == undefined) & (typeof app.H2O_ID == 'undefined')) {
+            for (var ib2 = 0; ib2 < app.arrayEntireList.length; ib2++) { 							//if a watershed is passed, determine the correspoinding watersheds
+                arrayTmp4Query3.push(app.arrayEntireList[ib2][1]);
+            }
+            strQueryDef3 = "Name in ('" + arrayTmp4Query3.join("','") + "')";
+            } else if ((app.Basin_ID != undefined) & (typeof app.H2O_ID == 'undefined')) {
+                for (var ib2 = 0; ib2 < app.arrayEntireList.length; ib2++) { 							//if a watershed is passed, determine the correspoinding watersheds
+                    if (app.Basin_ID == app.arrayEntireList[ib2][2]) {
+                        arrayTmp4Query3.push(app.arrayEntireList[ib2][1]);
+                    }
+                }
+                strQueryDef1 = "(Watershed_Name in ('" + arrayTmp4Query3.join("','") +
+                    "')) OR (WatershedName_Alt1 in ('" + arrayTmp4Query3.join("','") +
+                    "')) OR (WatershedName_Alt2 in ('" + arrayTmp4Query3.join("','") + "'))";
+
+                strQueryDef2 = "(Watershed in ('" + arrayTmp4Query3.join("','") +
+                    "')) OR (WatershedName_Alt1 in ('" + arrayTmp4Query3.join("','") +
+                    "')) OR (WatershedName_Alt2 in ('" + arrayTmp4Query3.join("','") + "'))";
+
+                strQueryDef3 = "(Name in ('" + arrayTmp4Query3.join("','") +
+                    "')) OR (Name_Alternate1 in ('" + arrayTmp4Query3.join("','") +
+                    "')) OR (Name_Alternate2 in ('" + arrayTmp4Query3.join("','") + "'))";
+
+                strQueryDef4 = "(NOT(Name in ('" + arrayTmp4Query3.join("','") + "'))) AND " +
+                    "((NOT(Name_Alternate1 in ('" + arrayTmp4Query3.join("','") + "'))) OR (Name_Alternate1 is Null)) AND" +
+                    "((NOT(Name_Alternate2 in ('" + arrayTmp4Query3.join("','") + "'))) OR (Name_Alternate1 is Null)) AND" +
+                    "((NOT(NoShowIfBasin in ('" + app.Basin_ID + "'))) OR (NoShowIfBasin is Null))";
+
+                strQueryDef5 = "((Watershed in ('" + arrayTmp4Query3.join("','") +
+                    "')) OR (WatershedName_Alt1 in ('" + arrayTmp4Query3.join("','") +
+                    "')) OR (WatershedName_Alt2 in ('" + arrayTmp4Query3.join("','") + "')))" +
+                    " And (LiveDataAvailable = 'True')";
+
+            } else if (typeof app.H2O_ID != 'undefined') {
+                strQueryDef1 = "Watershed_Name = '" + app.H2O_ID + "'" + " OR " + " WatershedName_Alt1 = '" + app.H2O_ID + "'" + " OR " + " WatershedName_Alt2 = '" + app.H2O_ID + "'";
+                strQueryDef2 = "Watershed = '" + app.H2O_ID + "'" + " OR " + " WatershedName_Alt1 = '" + app.H2O_ID + "'" + " OR " + " WatershedName_Alt2 = '" + app.H2O_ID + "'";
+
+                strQueryDef3 = "(Name = '" + app.H2O_ID + "'" + " OR " + " Name_Alternate1 = '" +
+                    app.H2O_ID + "'" + " OR " + " Name_Alternate2 = '" + app.H2O_ID + "')";
+
+                strQueryDef4 = "Name <> '" + app.H2O_ID + "'" +
+                    " AND (" + " Name_Alternate1 <> '" + app.H2O_ID + "' OR (Name_Alternate1 is Null))" +
+                    " AND (" + " Name_Alternate2 <> '" + app.H2O_ID + "' OR (Name_Alternate1 is Null))" +
+                    " AND (" + " NoShowIfBasin <> '" + app.Basin_ID + "' OR (NoShowIfBasin is Null))";
+
+                strQueryDef5 = "(Watershed = '" + app.H2O_ID + "'" + " OR " + " WatershedName_Alt1 = '" + app.H2O_ID + "'" + " OR " + " WatershedName_Alt2 = '" + app.H2O_ID + "')" +
+                                " AND (LiveDataAvailable = 'True')";
+
+            }
+            return [strQueryDef1, strQueryDef2, strQueryDef3, strQueryDef4, strQueryDef5];
+        },
+
+
 
         Phase3: function (pArrayOIDYellow, pArrayOIDsGold, pArrayOIDsOrange, pArrayOIDsPlum, pArrayOIDsRed) {  //creating this phase 3 to create legend items for river status based on the summarized data
             try {
@@ -1578,6 +1790,12 @@ define([
                     strURL = "https://montana.maps.arcgis.com/home/webmap/viewer.html?webmap=f59d958f8ec94e70b5a0bff9bb7dacae&extent=";
                     blnAddCoords = true;
                 }
+
+                if (strSelectedText == "MT DNRC Fire Map") {
+                    strURL = "https://mtdnrc.maps.arcgis.com/apps/webappviewer/index.html?id=6bea18851bec440d9260cb0d28f53281&extent=";
+                    blnAddCoords = true;
+                }
+                
                 if (strSelectedText == "FEMA Flood Layer Hazard Viewer") {
                     strURL = "https://hazards-fema.maps.arcgis.com/apps/webappviewer/index.html?id=8b0adb51996444d4879338b5529aa9cd&extent=";
                     blnAddCoords = true;
@@ -1598,14 +1816,10 @@ define([
                     blnAddCoords = false;
                 }
 
-                
-
                 if (strSelectedText == "USGS National Water Dashboard") {
                     //strURL = "https://hazards-fema.maps.arcgis.com/apps/webappviewer/index.html?id=8b0adb51996444d4879338b5529aa9cd&extent=";
                     blnAddCoords = false;
                     pSR_WKID = pExtent.spatialReference.wkid;
-                    //strURL = "https://dashboard.waterdata.usgs.gov/app/nwd/?view=%7B%22basemap%22%3A%22EsriTopo%22,%22bounds%22%3A%22";
-
                     strURL = "https://dashboard.waterdata.usgs.gov/app/nwd/en/?aoi=default&view=%7B%22basemap%22%3A%22EsriTopo%22%2C%22bounds%22%3A%22";
 
                     var pGeogExtent = webMercatorUtils.webMercatorToGeographic(pExtent);  //the map is in web mercator but display coordinates in geographic (lat, long)
@@ -1613,18 +1827,53 @@ define([
                     strURL += Math.round(pGeogExtent.ymin * 100) / 100 + ",";
                     strURL += Math.round(pGeogExtent.xmax * 100) / 100 + ",";
                     strURL += Math.round(pGeogExtent.ymax * 100) / 100;
-
-                    //strURL += '","panelRange"%3A"0%3A1.0,1%3A1.0,2%3A1.0,3%3A1.0,4%3A1.0,5%3A1.0,6%3A1.0,7%3A0.8,8%3A0.3,9%3A0.5,10%3A0.5,11%3A0.5,12%3A0.5,13%3A0.5,14%3A0.5,15%3A0.5,16%3A1.0,17%3A1.0,18%3A1.0,19%3A1.0"';
-
                     strURL += '%22%2C%22insetMap%22%3Afalse%2C%22panel%22%3A%7B%22checkbox%22%3A%220%2C9%2C19%2C20%2C21%2C22%22%2C%22range%22%3A%220%3A1.0%2C1%3A1.0%2C2%3A1.0%2C3%3A1.0%2C4%3A1.0%2C5%3A1.0%2C6%3A1.0%2C7%3A0.8%2C8%3A0.3%2C9%3A0.5%2C10%3A0.5%2C11%3A0.5%2C12%3A0.5%2C13%3A0.5%2C14%3A0.5%2C15%3A0.5%2C16%3A1.0%2C17%3A1.0%2C18%3A1.0%2C19%3A1.0%22%2C%22select%22%3A%220%3A0%2C1%3A0%2C2%3A0%2C3%3A0%2C4%3A0%2C5%3A0%2C6%3A0%2C7%3A0%2C8%3A0%2C9%3A0%2C10%3A0%2C11%3A0%2C12%3A0%2C13%3A0%2C14%3A0%2C15%3A0%2C16%3A0%2C17%3A0%2C18%3A0%22%7D%7D';
+                }
 
-                    // strURL += '","panelRange"%3A"0%3A1.0,1%3A1.0,2%3A1.0,3%3A1.0,4%3A1.0,5%3A1.0,6%3A1.0,7%3A0.8,8%3A0.3,9%3A0.5,10%3A0.5,11%3A0.5,12%3A0.5,13%3A0.5,14%3A0.5,15%3A0.5,16%3A1.0,17%3A1.0,18%3A1.0,19%3A1.0"';
+                if (strSelectedText == "NRCS iMap-Basin Snow Water Equivalent") {
+                    //https://nwcc-apps.sc.egov.usda.gov/imap/#version=169&elements=&networks=!&states=!&basins=!&hucs=&minElevation=&maxElevation=&elementSelectType=any&activeOnly=true&activeForecastPointsOnly=false&hucLabels=false&hucIdLabels=false&hucParameterLabels=true&stationLabels=&overlays=&hucOverlays=&basinOpacity=75&basinNoDataOpacity=25&basemapOpacity=100&maskOpacity=0&mode=data&openSections=dataElement,parameter,date,basin,options,elements,location,networks&controlsOpen=true&popup=&popupMulti=&popupBasin=&base=esriNgwm&displayType=basin&basinType=6&dataElement=WTEQ&depth=-8&parameter=PCTMED&frequency=DAILY&duration=I&customDuration=&dayPart=E&monthPart=E&forecastPubDay=1&forecastExceedance=50&useMixedPast=true&seqColor=1&divColor=7&scaleType=D&scaleMin=&scaleMax=&referencePeriodType=POR&referenceBegin=1991&referenceEnd=2020&minimumYears=20&hucAssociations=true&relativeDate=-1&lat=44.961&lon=-110.220&zoom=7.0
+                    blnAddCoords = false;
+                    pSR_WKID = pExtent.spatialReference.wkid;
+                    strURL = "https://nwcc-apps.sc.egov.usda.gov/imap/#version=169&elements=&networks=!&states=!&basins=!&hucs=&minElevation=&maxElevation=&elementSelectType=any&activeOnly=true&activeForecastPointsOnly=false&hucLabels=false&hucIdLabels=false&hucParameterLabels=true&stationLabels=&overlays=&hucOverlays=&basinOpacity=75&basinNoDataOpacity=25&basemapOpacity=100&maskOpacity=0&mode=data&openSections=dataElement,parameter,date,basin,options,elements,location,networks&controlsOpen=true&popup=&popupMulti=&popupBasin=&base=esriNgwm&displayType=basin&basinType=6&dataElement=WTEQ&depth=-8&parameter=PCTMED&frequency=DAILY&duration=I&customDuration=&dayPart=E&monthPart=E&forecastPubDay=1&forecastExceedance=50&useMixedPast=true&seqColor=1&divColor=7&scaleType=D&scaleMin=&scaleMax=&referencePeriodType=POR&referenceBegin=1991&referenceEnd=2020&minimumYears=20&hucAssociations=true&relativeDate=-1";
 
+                    var pGeogExtent = webMercatorUtils.webMercatorToGeographic(pExtent);  //the map is in web mercator but display coordinates in geographic (lat, long)
+                    strURL += "&lat=" + (Math.round(pGeogExtent.center.y.toString() * 100) / 100).toString();
+                    strURL += "&lon=" + (Math.round(pGeogExtent.center.x.toString() * 100) / 100).toString();
 
+                    dblExtentWidth = pGeogExtent.xmax - pGeogExtent.xmin;
 
-                    //strURL += ',"panelCheckbox"%3A"0,9,19,20,21,22"';
-                    //strURL += '%7D&aoi=default';
-                    //strURL += '","insetmap"%3Afalse,"panelRange"%3A"0%3A1.0,1%3A1.0,2%3A1.0,3%3A1.0,4%3A1.0,5%3A1.0,6%3A1.0,7%3A0.8,8%3A0.3,9%3A0.5,10%3A0.5,11%3A0.5,12%3A0.5,13%3A0.5,14%3A0.5,15%3A0.5,16%3A1.0,17%3A1.0,18%3A1.0,19%3A1.0","panelSelect"%3A"0%3A0,1%3A0,2%3A0,3%3A0,4%3A0,5%3A0,6%3A0,7%3A0,8%3A0,9%3A0,10%3A0,11%3A0,12%3A0,13%3A0,14%3A0,15%3A0,16%3A0,17%3A0,18%3A0","panelCheckbox"%3A"0,9,19,20,21,22"%7D&aoi=default';
+                    if (dblExtentWidth > 3.750001) {
+                        strURL += "&zoom=6.0";
+                    }
+
+                    if ((dblExtentWidth > 2.750001) & (dblExtentWidth < 3.75)) {
+                        strURL += "&zoom=7.0";
+                    }
+
+                    if ((dblExtentWidth > 2.30001) & (dblExtentWidth < 2.75)) {
+                        strURL += "&zoom=9.2";
+                    }
+
+                    if ((dblExtentWidth > 1.30001) & (dblExtentWidth < 2.3)) {
+                        strURL += "&zoom=9.7";
+                    }
+
+                    if ((dblExtentWidth > 0.75001) & (dblExtentWidth < 1.3)) {
+                        strURL += "&zoom=10.2";
+                    }
+
+                    if ((dblExtentWidth > 0.5001) & (dblExtentWidth < 0.75)) {
+                        strURL += "&zoom=10.5";
+                    }
+
+                    if ((dblExtentWidth > 0.25001) & (dblExtentWidth < 0.5)) {
+                        strURL += "&zoom=11.8";
+                    }
+
+                    if (dblExtentWidth < 0.25) {
+                        strURL += "&zoom=12.8";
+                    }
+
                 }
 
                 if (strSelectedText == "Official MT FWP (closures, etc.)") {
@@ -1641,7 +1890,6 @@ define([
                     strURL += Math.round(pGeogExtent.xmax * 100) / 100 + ",";
                     strURL += Math.round(pGeogExtent.ymax * 100) / 100;
                 }
-
 
                 if (strSelectedText == "CO DWR Surface Water Stations") {
                     strURL = "https://data.colorado.gov/Water/DWR-Surface-Water-Stations-Map-Statewide-/8kgh-vbea";
