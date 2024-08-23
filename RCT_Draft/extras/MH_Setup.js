@@ -374,17 +374,13 @@ define([
             //if ((app.H2O_ID == undefined) & (app.Basin_ID == undefined)) {
             //    app.H2O_ID = "Lower Clark Fork";
             //}
-
-
-
+            
 			if (app.Basin_ID == "UY_Shields") {
 				app.Basin_ID = "Upper Yellowstone Headwaters";
 			}
-
-
-
-			//array [watershed listed on website, watershed in layer, basin name in website]
-			app.arrayEntireList = [["Beaverhead/Centennial", "Beaverhead", "UMH"],
+            
+			
+            app.arrayEntireList = [["Beaverhead/Centennial", "Beaverhead", "UMH"],          //array [watershed listed on website, watershed in layer, basin name in website]
 				["Big Hole", "Big Hole", "UMH"],
 				["Boulder", "Boulder", "UMH"], ["Broadwater", "Broadwater", "UMH"], 
 				["Gallatin-Lower", "Lower Gallatin", "UMH"], ["Gallatin-Upper", "Upper Gallatin", "UMH"], ["Jefferson", "Jefferson", "UMH"],
@@ -433,18 +429,17 @@ define([
                 ["Lower San Juan-Four Corners", "Lower San Juan-Four Corners", "Southwest Colorado"],
                 ["Mancos", "Mancos", "Southwest Colorado"],
                 ["McElmo", "McElmo", "Southwest Colorado"],
-                ["Montezuma", "Montezuma", "Southwest Colorado"],
                 ["Upper Dolores", "Upper Dolores", "Southwest Colorado"],
 
                 ["Alamosa-Trinchera", "Alamosa-Trinchera", "Upper Rio Grande"],
                 ["Conejos", "Conejos", "Upper Rio Grande"],
-                ["Rio Chama", "Rio Chama", "Upper Rio Grande"],
+                //["Rio Chama", "Rio Chama", "Upper Rio Grande"],
                 ["Rio Grande Headwaters", "Rio Grande Headwaters", "Upper Rio Grande"],
                 ["Saguache", "Saguache", "Upper Rio Grande"],
                 ["San Luis", "San Luis", "Upper Rio Grande"],
-                ["Upper Rio Grande", "Upper Rio Grande", "Upper Rio Grande"],
+                //["Upper Rio Grande", "Upper Rio Grande", "Upper Rio Grande"],
 
-                ["Alamosa-Trinchera", "Alamosa-Trinchera", "Upper Rio Grand - New Mexico"],
+                
                 ["Conejos", "Conejos", "Upper Rio Grand - New Mexico"],
                 ["Elephant Butte Reservoir", "Elephant Butte Reservoir", "Upper Rio Grand - New Mexico"],
                 ["Jemez", "Jemez", "Upper Rio Grand - New Mexico"],
@@ -488,9 +483,10 @@ define([
 				}
 			}
 
-			var arrayNavListBasin = [["Upper Missouri Headwaters", "UMH", "MT"],
-                                    ["Upper Rio Grande - Colorado", "Upper Rio Grande", "CO"],
-                                    ["Upper Rio Grande - New Mexico", "Upper Rio Grand - New Mexico", "NM"],
+            var arrayNavListBasin = [["Upper Missouri Headwaters", "UMH", "MT"],
+
+                                    ["Upper Rio Grande - CO", "Upper Rio Grande", "CO"],
+                                    ["Upper Rio Grande - NM", "Upper Rio Grand - New Mexico", "NM"],
                                     ["Upper Yellowstone Headwaters", "UY_Shields", "MT"],
                                     ["Upper Clark Fork", "Upper Clark Fork", "MT"],
                                     ["Smith", "Smith", "MT"],
@@ -629,7 +625,22 @@ define([
                 var newItem = document.createElement("li");
                 a.textContent = arrayNavList[i][0];
                 a.setAttribute('role', "presentation");
-                a.setAttribute('href', strURLPrefix + arrayNavList[i][1] + strURLSuffix);
+
+                let strWatershedClickURL = strURLPrefix + arrayNavList[i][1] + strURLSuffix;
+
+                //determine of watershed found in multiple basins
+                iBCounter = 0;
+                for (var iB = 0; iB < app.arrayEntireList.length; iB++) {
+                    if (arrayNavList[i][1] == app.arrayEntireList[iB][1]) {
+                        iBCounter += 1;
+                    }
+                }
+                if (iBCounter > 1) {
+                    strWatershedClickURL += "&Basin_ID=" + app.Basin_ID;
+                }
+                
+                a.setAttribute('href', strWatershedClickURL);
+
                 newItem.appendChild(a);
                 ulist.appendChild(newItem);
             }
