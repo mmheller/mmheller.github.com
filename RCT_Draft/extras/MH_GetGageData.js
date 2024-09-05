@@ -381,14 +381,21 @@ define([
                 var arrayGages4Section = [];
 
                 var blnGageFound = false;
-				dom.map(items[1].features, function (itemGage) { //loop through the gages that match the sections
-					//query by     Watershed , StreamName, Section_ID
-					if ((itemGage.attributes.Watershed === itemSection.attributes.Watershed) &
-						(itemGage.attributes.StreamName === itemSection.attributes.StreamName) &
-						(itemGage.attributes.Section_ID === itemSection.attributes.SectionID) &
-						(itemGage.attributes.Symbology === "TRIGGER MEASURE LOCATION")) {
+                dom.map(items[1].features, function (itemGage) { //loop through the gages that match the sections
+                    //query by     Watershed , StreamName, Section_ID
+                    //if (itemGage.attributes.Watershed == "Smith") {
+                    //    console.log("pause");
+                    //}
+                    //if (itemSection.attributes.Watershed == "Smith") {
+                    //    console.log("pause");
+                    //}
 
-                        console.log("Gage/Section Match: " + itemGage.attributes.StreamName + ":" + itemGage.attributes.Section_ID + ":" + itemGage.attributes.Agency)
+                    if ((itemGage.attributes.Watershed === itemSection.attributes.Watershed) &
+                        (itemGage.attributes.StreamName === itemSection.attributes.StreamName) &
+                        (itemGage.attributes.Section_ID === itemSection.attributes.SectionID) &
+                        (itemGage.attributes.Symbology === "TRIGGER MEASURE LOCATION")) {
+
+                        console.log("Gage/Section Match: " + itemGage.attributes.StreamName + ":" + itemGage.attributes.Section_ID + ":" + itemGage.attributes.Agency);
 
                         arrayGages4Section.push({
                             GageID_Source: itemGage.attributes.GageID_Source,
@@ -415,7 +422,9 @@ define([
                         }
 
                         blnGageFound = true;
-					}
+                    } else {
+                        //console.log("test");
+                    }
                 })
 
                 if (!(blnGageFound)) {
