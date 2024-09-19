@@ -284,7 +284,8 @@ define([
                 var resultCount = results.features.length;
                 for (var i = 0; i < resultCount; i++) {
                     var featureAttributes = results.features[i].attributes;
-					var strGoogleSheetURL = featureAttributes[strURLFieldName];
+                    var strGoogleSheetURL = featureAttributes[strURLFieldName];  
+                    strGoogleSheetURL = strGoogleSheetURL.replace("   ", "");
                 }
 				strGoogleSheetURL += "&key=AIzaSyA2E5MNl-Hqoy36tbqHpccVpsSPYbnL5BA";
 
