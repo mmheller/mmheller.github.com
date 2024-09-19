@@ -652,7 +652,8 @@ define([
             //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  ////Jo's dev
 
             //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Aug28Meet/FeatureServer/";  //Vaughn's Dev
-            app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Sept4_Update/FeatureServer/";  //Vaughn's Dev
+            app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Sept20_Call_Overview/FeatureServer/";  //Vaughn's Dev
+            //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Sept4_Update/FeatureServer/";  //Vaughn's Dev
             //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Aug15Call/FeatureServer/";  //Vaughn's Dev
             app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];    //Vaughn's Dev
             
@@ -1142,9 +1143,33 @@ define([
             pFWPFeatureLayer.definitionExpression = app.strFWPQuery;
 
             let pCartoFeatureLayer = new FeatureLayer({ url: app.strHFL_URL + app.idx11[4],  "opacity": 0.9, autoGeneralize: true});
-            let pCartoFeatureLayerPoly = new FeatureLayer({ url: app.strHFL_URL + app.idx11[6], "opacity": 0.9, autoGeneralize: true});
 
 
+            const pCartoPoly_labelClass = {// autocasts as new LabelClass()
+                symbol: {
+                    type: "text", color: [127, 50, 168, 255], //purple
+                    font: { family: "arial", size: 11, weight: "bold" },
+                    haloColor: [255, 255, 255, 255],  // white
+                    haloSize: 1
+                },
+                labelPlacement: "above-center",
+                //labelPlacement: "above-center",
+                labelExpressionInfo: { expression: "$feature.Label" },
+                minScale: 2000000
+            };
+            pCartoPoly_labelClass.deconflictionStrategy = "none";
+
+            let sfsr_CartoPoly = {
+                type: "simple",  // autocasts as new SimpleRenderer()
+                symbol: {
+                    type: "simple-fill", color: [195, 2, 219, 0.5], style: "solid",
+                    outline: { color: [186, 2, 209], width: 2 }
+                },
+            };
+
+            let pCartoFeatureLayerPoly = new FeatureLayer({
+                url: app.strHFL_URL + app.idx11[6], "opacity": 0.9,
+                labelingInfo: [pCartoPoly_labelClass], renderer: sfsr_CartoPoly, autoGeneralize: true });
 
 
             if (app.Basin_ID == "Flathead") {
@@ -1337,6 +1362,11 @@ define([
             legendLayers.push({ layer: pEPointsFeatureLayer, title: 'Start/End Section Locations' });
             legendLayers.push({ layer: pGageFeatureLayer, title: 'Gages' });
             legendLayers.push({ layer: app.pSup.m_pRiverSymbolsFeatureLayer, title: 'River Status' });
+
+
+            if ((app.Basin_ID == "UMH") | (app.Basin_ID == "Upper Clark Fork")) {
+                legendLayers.push({ layer: pCartoFeatureLayerPoly, title: 'Special Areas of Interest' });
+            }
 
             if (app.Basin_ID == "Flathead") {
                 legendLayers.push({ layer: pDist2WaterTableFlathead, title: 'Depth to Water Table, Flathead River (ft)' });
