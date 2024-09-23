@@ -1015,7 +1015,14 @@ define([
                         ((item.iLateFlowClosureValueFlow == null) | (item.iLateFlowClosureValueFlow == 0))) {
                         document.getElementById("divCFSTargetDefinitions").style.display = 'none';
                     } else {
-                        document.getElementById("divCFSTargetDefinitions").style.display = 'inline';
+                        if (app.Basin_ID = "Smith") {
+                            document.getElementById("divCFSTargetDefinitions").style.display = 'none';
+                            document.getElementById("divCFSTargetDefinitionsREC").style.display = 'inline';
+
+                        } else {
+                            document.getElementById("divCFSTargetDefinitions").style.display = 'inline';
+                            document.getElementById("divCFSTargetDefinitionsREC").style.display = 'none';
+                        }
                     }
 
 
@@ -2374,6 +2381,7 @@ define([
                                 strNoDataLabel4ChartingCFS = "(No Data) ";
                                 dteLatestDateTimeCFS = new Date();
                             } else {//determine the site's status based on discharge
+
                                 if ((dblLatestCFS <= iLateFlowPref4ConsvValue) & (dblLatestCFS > iLateFlowConsvValue)) {
                                     strSiteFlowStatus = "PREPARE FOR CONSERVATION";
                                 }
@@ -2382,7 +2390,11 @@ define([
                                         strSiteFlowStatus = "CONSERVATION";
                                 }
                                 if (dblLatestCFS <= iLateFlowClosureValueFlow) {
+                                    if (strStreamName == "Smith River") {
+                                        strSiteFlowStatus = "POTENTIAL RECREATION ISSUES";
+                                    } else {
                                         strSiteFlowStatus = "EXPANDED CONSERVATION MEASURES";
+                                    }
                                 }
                             }
                             var strNoDataLabel4ChartingTMP = "";
@@ -2679,6 +2691,14 @@ define([
                 strOverallSymbol = "Orange";
                 m_arrayOIDsOrange.push(iOID);
             }
+
+
+            if (strSiteFlowStatus == "POTENTIAL RECREATION ISSUES") {
+                strOverallStatus = "POTENTIAL RECREATION ISSUES (click for details and see table below for more info)";
+                strOverallSymbol = "Red";
+                m_arrayOIDsRed.push(iOID);
+            }
+
 
             if ((strSiteTempStatus == "EXPANDED CONSERVATION MEASURES") &
                 ((strWatershed == "North Fork Flathead") |

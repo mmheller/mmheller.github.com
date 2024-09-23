@@ -1146,31 +1146,33 @@ define([
             let pCartoFeatureLayer = new FeatureLayer({ url: app.strHFL_URL + app.idx11[4],  "opacity": 0.9, autoGeneralize: true});
 
 
-            const pCartoPoly_labelClass = {// autocasts as new LabelClass()
-                symbol: {
-                    type: "text", color: [127, 50, 168, 255], //purple
-                    font: { family: "arial", size: 11, weight: "bold" },
-                    haloColor: [255, 255, 255, 255],  // white
-                    haloSize: 1
-                },
-                labelPlacement: "above-center",
-                //labelPlacement: "above-center",
-                labelExpressionInfo: { expression: "$feature.Label" },
-                minScale: 2000000
-            };
-            pCartoPoly_labelClass.deconflictionStrategy = "none";
+            //const pCartoPoly_labelClass = {// autocasts as new LabelClass()
+            //    symbol: {
+            //        type: "text", color: [127, 50, 168, 255], //purple
+            //        font: { family: "arial", size: 11, weight: "bold" },
+            //        haloColor: [255, 255, 255, 255],  // white
+            //        haloSize: 1
+            //    },
+            //    labelPlacement: "above-center",
+            //    //labelPlacement: "above-center",
+            //    labelExpressionInfo: { expression: "$feature.Label" },
+            //    minScale: 2000000
+            //};
+            //pCartoPoly_labelClass.deconflictionStrategy = "none";
 
-            let sfsr_CartoPoly = {
-                type: "simple",  // autocasts as new SimpleRenderer()
-                symbol: {
-                    type: "simple-fill", color: [195, 2, 219, 0.5], style: "solid",
-                    outline: { color: [186, 2, 209], width: 2 }
-                },
-            };
+            //let sfsr_CartoPoly = {
+            //    type: "simple",  // autocasts as new SimpleRenderer()
+            //    symbol: {
+            //        type: "simple-fill", color: [195, 2, 219, 0.5], style: "solid",
+            //        outline: { color: [186, 2, 209], width: 2 }
+            //    },
+            //};
+            //let pCartoFeatureLayerPoly = new FeatureLayer({url: app.strHFL_URL + app.idx11[6], "opacity": 0.9,labelingInfo: [pCartoPoly_labelClass], renderer: sfsr_CartoPoly, autoGeneralize: true});
+
 
             let pCartoFeatureLayerPoly = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[6], "opacity": 0.9,
-                labelingInfo: [pCartoPoly_labelClass], renderer: sfsr_CartoPoly, autoGeneralize: true });
+                autoGeneralize: true });
 
 
             if (app.Basin_ID == "Flathead") {
