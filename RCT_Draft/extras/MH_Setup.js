@@ -653,7 +653,8 @@ define([
             //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  ////Jo's dev
 
             //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Aug28Meet/FeatureServer/";  //Vaughn's Dev
-            app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Sept20_Call_Overview/FeatureServer/";  //Vaughn's Dev
+            app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Oct4_Update/FeatureServer/";  //Vaughn's Dev
+            //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Sept20_Call_Overview/FeatureServer/";  //Vaughn's Dev
             //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Sept4_Update/FeatureServer/";  //Vaughn's Dev
             //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Aug15Call/FeatureServer/";  //Vaughn's Dev
             app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];    //Vaughn's Dev
@@ -1160,19 +1161,20 @@ define([
             //};
             //pCartoPoly_labelClass.deconflictionStrategy = "none";
 
-            //let sfsr_CartoPoly = {
-            //    type: "simple",  // autocasts as new SimpleRenderer()
-            //    symbol: {
-            //        type: "simple-fill", color: [195, 2, 219, 0.5], style: "solid",
-            //        outline: { color: [186, 2, 209], width: 2 }
-            //    },
-            //};
+            let sfsr_CartoPoly = {
+                type: "simple",  // autocasts as new SimpleRenderer()
+                symbol: {
+                    type: "simple-fill", color: [195, 2, 219, 0.1], style: "solid",
+                    outline: { color: [50, 50, 50], width: 1 }
+                },
+            };
+            let pCartoFeatureLayerPoly = new FeatureLayer({ url: app.strHFL_URL + app.idx11[6], minScale: 1500000, "opacity": 0.9, renderer: sfsr_CartoPoly, autoGeneralize: true});
             //let pCartoFeatureLayerPoly = new FeatureLayer({url: app.strHFL_URL + app.idx11[6], "opacity": 0.9,labelingInfo: [pCartoPoly_labelClass], renderer: sfsr_CartoPoly, autoGeneralize: true});
 
 
-            let pCartoFeatureLayerPoly = new FeatureLayer({
-                url: app.strHFL_URL + app.idx11[6], "opacity": 0.9,
-                autoGeneralize: true });
+            //let pCartoFeatureLayerPoly = new FeatureLayer({
+            //    url: app.strHFL_URL + app.idx11[6], "opacity": 0.9,
+            //    autoGeneralize: true });
 
 
             if (app.Basin_ID == "Flathead") {
