@@ -752,6 +752,53 @@ define([
             var pGageFeatureLayer = new FeatureLayer({ url: app.strHFL_URL + app.idx11[1], popupTemplate: template });
 
 
+            if (app.Basin_ID == "Upper Clark Fork") {
+                let HighlightedGage_Renderer = {
+                    type: "simple",  // autocasts as new SimpleRenderer()
+                    symbol: {
+                        type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+                        //path: "M16,3.5c-4.142,0-7.5,3.358-7.5,7.5c0,4.143,7.5,18.121,7.5,18.121S23.5,15.143,23.5,11C23.5,6.858,20.143,3.5,16,3.5z M16,14.584c-1.979,0-3.584-1.604-3.584-3.584S14.021,7.416,16,7.416S19.584,9.021,19.584,11S17.979,14.584,16,14.584z",
+                        size: 30,
+                        color: [186, 85, 255, 0.5], //crocus
+                        outline: {  // autocasts as new SimpleLineSymbol()
+                            width: 0.5,
+                            color: "white"
+                        }
+                    }
+                };
+
+                const EndPoints_labelClass = {// autocasts as new LabelClass()
+                    symbol: {
+                        type: "text",  // autocasts as new TextSymbol()
+                        color: [60, 0, 100],
+                        haloColor: "white",
+                        haloSize: 1,
+                        font: {  // autocast as new Font()
+                            family: "arial",
+                            size: 15,
+                            weight: "bold"
+                        }
+                    },
+                    labelPlacement: "right-center",
+                    labelExpressionInfo: {
+                        expression: "'Turah Gage'"
+                    },
+                    //minScale: 600000
+                };
+                
+                var pGageFeatureLayerHighlighted = new FeatureLayer({
+                    url: app.strHFL_URL + app.idx11[1],
+                    renderer: HighlightedGage_Renderer,
+                    labelingInfo: [EndPoints_labelClass],
+                    popupTemplate: template
+                });
+
+
+
+                pGageFeatureLayerHighlighted.definitionExpression = "GageTitle = 'Clark Fork at Turah Bridge nr Bonner MT'";
+            }
+
+
             const EndPoints_labelClass = {// autocasts as new LabelClass()
                 symbol: {
                     type: "text",  // autocasts as new TextSymbol()
@@ -1316,6 +1363,10 @@ define([
                 pBLMFeatureLayer, pBLM_RecFeatureLayer, pGageFeatureLayer, pEPointsFeatureLayer,
                 pMonitoringCSVLayer, app.graphicsLayer];
 
+            if (app.Basin_ID == "Upper Clark Fork") {
+                arrayLayer2add.push(pGageFeatureLayerHighlighted);
+            }
+
             if (app.StateArea.indexOf("MT") > -1) {
                 arrayLayer2add.push(pFWPAISAccessFeatureLayer);
                 arrayLayer2add.push(pFASFeatureLayer);
@@ -1366,6 +1417,11 @@ define([
             
             legendLayers.push({ layer: pEPointsFeatureLayer, title: 'Start/End Section Locations' });
             legendLayers.push({ layer: pGageFeatureLayer, title: 'Gages' });
+
+            if (app.Basin_ID == "Upper Clark Fork") {
+                legendLayers.push({ layer: pGageFeatureLayerHighlighted, title: 'Gages' });
+            }
+
             legendLayers.push({ layer: app.pSup.m_pRiverSymbolsFeatureLayer, title: 'River Status' });
 
 
