@@ -653,7 +653,7 @@ define([
             //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  ////Jo's dev
 
             //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Aug28Meet/FeatureServer/";  //Vaughn's Dev
-            app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Oct4_Update/FeatureServer/";  //Vaughn's Dev
+            app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Oct17_NewLayer/FeatureServer/";  //Vaughn's Dev
             //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Sept20_Call_Overview/FeatureServer/";  //Vaughn's Dev
             //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Sept4_Update/FeatureServer/";  //Vaughn's Dev
             //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Aug15Call/FeatureServer/";  //Vaughn's Dev
@@ -1073,13 +1073,21 @@ define([
                 });
 
             }
+            
 
-            var templateSNOTEL = new PopupTemplate();
-            templateSNOTEL.title = "<b>{Name} SNOTEL Site</b>";
-            //templateSNOTEL.title = "<b>{Name} {SitePageURL} SNOTEL Site</b>";
-            var strSNOTELGraphURL = "https://wcc.sc.egov.usda.gov/nwcc/view?intervalType=+View+Current+&report=WYGRAPH&timeseries=Daily&format=plot&sitenum={stationID}&interval=WATERYEAR";
-            templateSNOTEL.content = "<a href={SitePageURL} target='_blank'>Link to SNOTEL Site Page</a><br><a href=" + strSNOTELGraphURL + " target='_blank'>Link to SWE Current/Historical Graphs</a> ";
-
+            const strSNOTELSitePageURL = "https://wcc.sc.egov.usda.gov/nwcc/site?sitenum=";
+            const strSNOTELGraphURL = "https://wcc.sc.egov.usda.gov/nwcc/view?intervalType=+View+Current+&report=WYGRAPH&timeseries=Daily&format=plot&sitenum=";
+            const templateSNOTEL = {
+                title: "<b>{Name} SNOTEL Site</b>",
+                expressionInfos: [{
+                    name: "snoTelInfo",
+                    title: "% of population 16+ participating in the labor force",
+                    expression: "Left($feature.stationTriplet, 3)"
+                }],
+                content: "<a href=" + strSNOTELSitePageURL + "{expression/snoTelInfo}" + " target='_blank'>Link to SNOTEL Site Page</a><br>" +
+                         "<a href=" + strSNOTELGraphURL + "{expression/snoTelInfo}" + "&interval=WATERYEAR target='_blank'>Link to SWE Current/Historical Graphs</a>"
+                
+            };
             const SNOTEL_labelClass = {// autocasts as new LabelClass()
                 symbol: {
                     type: "text",  // autocasts as new TextSymbol()
@@ -1090,8 +1098,7 @@ define([
                 labelExpressionInfo: { expression: "$feature.Name" }
             };
             let pSNOTELFeatureLayer = new FeatureLayer({
-                //url: app.strHFL_URL + "3",
-                url: app.strHFL_URL + app.idx11[3],
+                url: "https://services.arcgis.com/SXbDpmb7xQkk44JV/arcgis/rest/services/stations_SNTL_ACTIVE/FeatureServer/0",
                 popupTemplate: templateSNOTEL, visible: false,
                 labelingInfo: [SNOTEL_labelClass]
             });
