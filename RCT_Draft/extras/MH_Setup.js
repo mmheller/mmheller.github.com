@@ -1097,10 +1097,25 @@ define([
                 labelPlacement: "above-center",
                 labelExpressionInfo: { expression: "$feature.Name" }
             };
+
+            let snoTel_Renderer = {
+                type: "simple",  // autocasts as new SimpleRenderer()
+                symbol: {
+                    type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+                    size: 15,
+                    color: [255, 255, 255, 0.75],
+                    outline: {  // autocasts as new SimpleLineSymbol()
+                        width: 0.5,
+                        color: "black"
+                    }
+                }
+            };
+
             let pSNOTELFeatureLayer = new FeatureLayer({
                 url: "https://services.arcgis.com/SXbDpmb7xQkk44JV/arcgis/rest/services/stations_SNTL_ACTIVE/FeatureServer/0",
                 popupTemplate: templateSNOTEL, visible: false,
-                labelingInfo: [SNOTEL_labelClass]
+                labelingInfo: [SNOTEL_labelClass],
+                renderer: snoTel_Renderer
             });
 
 
