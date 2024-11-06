@@ -507,18 +507,29 @@ define([
             let q_Layer1 = new Query();
             let qt_Layer1 = new QueryTask(strURL + app.idx11[5]); //sections layer
             let q_Layer2 = new Query();
-            let qt_Layer2 = new QueryTask(strURL + app.idx11[1]); //sections layer
+            let qt_Layer2 = new QueryTask(strURL + app.idx11[1]); //gages layer
             let q_Layer3 = new Query();
-            let qt_Layer3 = new QueryTask(strURL + app.idx11[0]); //sections layer
+            let qt_Layer3 = new QueryTask(strURL + app.idx11[0]); //endpoints layer
 
             q_Layer1.returnGeometry = q_Layer2.returnGeometry = true;
             q_Layer1.outFields = q_Layer2.outFields = ["*"];
             q_Layer3.outFields = ["*"];
 
-            q_Layer1.where = strQuery;
-			q_Layer2.where = strQuery;
-			var strQuery2 = strQuery.replace("Watershed in", "Watershed_Name in").replace("Watershed =", "Watershed_Name =")
-			q_Layer3.where = strQuery2;
+
+            let strQuery1 = strQuery;
+            if ((app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork")) { //since the Turah gage is used for a conservation target for all, add this gage and stream data
+                strQuery1 = strQuery + " OR ((StreamName = 'Clark Fork River') AND ((SectionID = '5') OR (SectionID = '6')))"
+            }
+            q_Layer1.where = strQuery1;
+
+            let strQuery2 = strQuery;
+            if ((app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork")) {
+                strQuery2 += " OR (GageID_Source = '12334550')"
+            }                        
+            q_Layer2.where = strQuery2;
+
+            let strQuery3 = strQuery.replace("Watershed in", "Watershed_Name in").replace("Watershed =", "Watershed_Name =")
+			q_Layer3.where = strQuery3;
 
             var pLayer1, pLayer2, pLayer3, pPromises;
             pLayer1 = qt_Layer1.execute(q_Layer1);

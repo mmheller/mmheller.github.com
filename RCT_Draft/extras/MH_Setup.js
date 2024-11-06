@@ -145,7 +145,7 @@ define([
                 ArrayUniqueVals2Add.push({
                     value: 'Red',
                     symbol: { type: "simple-line", color: [255, 0, 0], width: 18 },
-                    label: "Offical Restriction"
+                    label: "Official Restriction"
                 });
             }
 
@@ -240,11 +240,15 @@ define([
                 });
             }
             if (arrayOIDsRed.length > 0) {
+                let strRedLabel = "Official Restriction";
+                if (app.Basin_ID == "Smith") {
+                    strRedLabel = "Low Flows";
+                }
                 arrayValueExpression.push("Includes([" + arrayOIDsRed.join(", ") + "], $feature.OBJECTID), 'Red'");
                 ArrayUniqueVals2Add.push({
                     value: 'Red',
                     symbol: { type: "simple-line", color: [255, 0, 0], width: 18 },
-                    label: "Offical Restriction"
+                    label: strRedLabel
                 });
             }
 
@@ -646,21 +650,13 @@ define([
                 ulist.appendChild(newItem);
             }
 
-			//app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support/FeatureServer/";  //PRODUCTION
-   //         app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
 
-            //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/RCT_LCF/FeatureServer/";  //Jo's dev
-            //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  ////Jo's dev
+            app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
+			//app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support/FeatureServer/";  //PRODUCTION backup
+            //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22/FeatureServer/";//PRODUCTION
 
-            //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Aug28Meet/FeatureServer/";  //Vaughn's Dev
-            //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Oct17_NewLayer/FeatureServer/";  //Vaughn's Dev
-
-            app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Oct29_NewLayer/FeatureServer/";
-
-            //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Sept20_Call_Overview/FeatureServer/";  //Vaughn's Dev
-            //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Sept4_Update/FeatureServer/";  //Vaughn's Dev
-            //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Aug15Call/FeatureServer/";  //Vaughn's Dev
-            app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];    //Vaughn's Dev
+            app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Oct29_NewLayer/FeatureServer/";  //Vaughn's Dev
+            //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];    //Vaughn's Dev
             
 
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22_multi/FeatureServer/";  //dev to test multi-gage per section
@@ -755,7 +751,7 @@ define([
             var pGageFeatureLayer = new FeatureLayer({ url: app.strHFL_URL + app.idx11[1], popupTemplate: template });
 
 
-            if (app.Basin_ID == "Upper Clark Fork") {
+            if ((app.Basin_ID == "Upper Clark Fork") | (app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork")) {  //since the Turah gage is used for a conservation target for all, add this gage
                 let HighlightedGage_Renderer = {
                     type: "simple",  // autocasts as new SimpleRenderer()
                     symbol: {
@@ -827,11 +823,14 @@ define([
                 labelingInfo: [EndPoints_labelClass]
             });
 
-            let strQueryDef1 = this.getQueryDefs1_4()[0];
-            let strQueryDef2 = this.getQueryDefs1_4()[1];
-            let strQueryDef3 = this.getQueryDefs1_4()[2];
-            let strQueryDef4 = this.getQueryDefs1_4()[3];
-            let strQueryDef5 = this.getQueryDefs1_4()[4];
+            let strQueryDef1 = this.getQueryDefs1_4()[0]; //endpoints
+            let strQueryDef2 = this.getQueryDefs1_4()[1]; //stream sections
+            let strQueryDef3 = this.getQueryDefs1_4()[2]; //watersheds
+            let strQueryDef4 = this.getQueryDefs1_4()[3]; //watershed mask
+            let strQueryDef5 = this.getQueryDefs1_4()[4]; //Reservoir
+
+
+
 
             let strlabelField3 = "SectionName";
             const Secitons_labelClass = {// autocasts as new LabelClass()
@@ -900,6 +899,10 @@ define([
                         let atts = graphic.attributes;
                         if (atts.GageURL) {        ///this looks for stream gage features and adds content
                             const graphicTemplate = graphic.getEffectivePopupTemplate();
+
+                            let strSelectedGageid = atts.GageURL.replace("https://waterdata.usgs.gov/monitoring-location/", "");
+                            strSelectedGageid = strSelectedGageid.substring(0, strSelectedGageid.search("/"));
+
                             let strAdditionalPopup = "";
                             let strImageURLPrefix = document.location.href;                           //grabbing the URL due to images not visible via relative pathing
                             if (strImageURLPrefix.indexOf("?") > 0) {
@@ -919,8 +922,9 @@ define([
                                         strGage2Compare = strGage2Compare.replace("/location/", "/");
                                     }
                                     strGage2Compare = strGage2Compare.toUpperCase();
-                                    //console.log(strGage2Compare + ":vs:" + strSelectedGageURL);
+                                    console.log(strGage2Compare + ":vs:" + strSelectedGageURL + "-----" + strGage2Compare.search(strSelectedGageid).toString());
                                     if ((strGage2Compare == strSelectedGageURL) |
+                                        (strGage2Compare.search(strSelectedGageid) > -1) |
                                         (strGage2Compare.replace("STAGE/GAGE-REPORT/","STAGE/GAGE-REPORT/LOCATION/") == strSelectedGageURL)){
                                         strAdditionalPopup = '<br>Discharge:' + vm1.gageRecords()[i].Discharge + ' CFS <img height="15px"  src="' + strImageURLPrefix + '/' + vm1.gageRecords()[i].Day3CFSTrend + '" alt="3 day Flow Trend"><br>' +
                                             'Water Temp: ' + vm1.gageRecords()[i].WaterTemp + ' F <img height="15px"  src="' + strImageURLPrefix + '/' + vm1.gageRecords()[i].Day3TMPTrend + '" alt="3 day Temp Trend"><br>' +
@@ -1444,13 +1448,13 @@ define([
             legendLayers.push({ layer: pGageFeatureLayer, title: 'Gages' });
 
             if (app.Basin_ID == "Upper Clark Fork") {
-                legendLayers.push({ layer: pGageFeatureLayerHighlighted, title: 'Gages' });
+                legendLayers.push({ layer: pGageFeatureLayerHighlighted, title: 'Turah Gage' });
             }
 
             legendLayers.push({ layer: app.pSup.m_pRiverSymbolsFeatureLayer, title: 'River Status' });
 
 
-            if ((app.Basin_ID == "UMH") | (app.Basin_ID == "Upper Clark Fork")) {
+            if (app.Basin_ID == "UMH") {
                 legendLayers.push({ layer: pCartoFeatureLayerPoly, title: 'Special Areas of Interest' });
             }
 
