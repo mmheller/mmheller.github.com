@@ -270,16 +270,18 @@ define([
          },
 
         GetSetHeaderWarningContent: function (strAGSIndexTableURL, strH2OID, blnUseAlternateHeader, strBasinID) {
+            let strBasinOrWatershed = "Watershed";
 			if ((typeof strH2OID == 'undefined') & (typeof strBasinID == 'undefined')) {
                 strH2OID = "UMH";
-			} else if ((typeof strH2OID == 'undefined') & (typeof strBasinID != 'undefined')) {
+            } else if ((typeof strH2OID == 'undefined') & (typeof strBasinID != 'undefined')) {
+                strBasinOrWatershed = "Basin";
 				strH2OID = strBasinID;
 			} 
             strURLFieldName = "URL";
             let query = new Query();
             query.outFields = [strURLFieldName];
             let queryTask = new QueryTask(strAGSIndexTableURL);
-            query.where = "Name = '" + strH2OID + "'";
+            query.where = "(BasinOrWatershed = '" + strBasinOrWatershed + "') AND (Name = '" + strH2OID + "')";
             queryTask.execute(query).then(showHeaderWarningContentResults);
 
 			function showHeaderWarningContentResults(results) {
@@ -828,9 +830,7 @@ define([
             let strQueryDef3 = this.getQueryDefs1_4()[2]; //watersheds
             let strQueryDef4 = this.getQueryDefs1_4()[3]; //watershed mask
             let strQueryDef5 = this.getQueryDefs1_4()[4]; //Reservoir
-
-
-
+            
 
             let strlabelField3 = "SectionName";
             const Secitons_labelClass = {// autocasts as new LabelClass()
@@ -1846,6 +1846,9 @@ define([
             let strQueryDef3 = "";
             let strQueryDef4 = "Name in ('')";
             let strQueryDef = "1=1";
+            let strQueryDef5 = "";
+            let strQueryDef6 = "";
+
             arrayTmp4Query3 =[];
             if((app.Basin_ID == undefined) & (typeof app.H2O_ID == 'undefined')) {
             for (var ib2 = 0; ib2 < app.arrayEntireList.length; ib2++) { 							//if a watershed is passed, determine the correspoinding watersheds
@@ -1896,7 +1899,12 @@ define([
                                 " AND (LiveDataAvailable = 'True')";
 
             }
-            return [strQueryDef1, strQueryDef2, strQueryDef3, strQueryDef4, strQueryDef5];
+            strQueryDef6 = "(Watershed in ('" + arrayTmp4Query3.join("','") +
+                                "')) OR (WatershedName_Alt1 in ('" + arrayTmp4Query3.join("','") +
+                                "')) OR (WatershedName_Alt2 in ('" + arrayTmp4Query3.join("','") + "'))" +
+                                " OR ((StreamName = 'Clark Fork River') AND ((SectionID = '5') OR (SectionID = '6')))"
+
+            return [strQueryDef1, strQueryDef2, strQueryDef3, strQueryDef4, strQueryDef5, strQueryDef6];
         },
 
 

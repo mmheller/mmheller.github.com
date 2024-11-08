@@ -105,6 +105,7 @@ function sortFunction10Column(a, b) {
 define([
         "esri/tasks/QueryTask",
         "esri/rest/support/Query",
+        "esri/rest/query",
         "esri/geometry/Polyline",
         "dojo/_base/declare",
         "dojo/_base/lang",
@@ -119,7 +120,7 @@ define([
 
 
 ], function (
-           QueryTask, Query, Polyline, declare, lang, esriRequest, All, request, dom, domClass, registry, on, geometryEngine
+           QueryTask, Query, query, Polyline, declare, lang, esriRequest, All, request, dom, domClass, registry, on, geometryEngine
 ) {
 
 		return declare([], {
@@ -2509,6 +2510,7 @@ define([
                                     streamSectionDispalyName = "(" + streamSectionDispalyName + ")";
                                 }
 
+
                                 OverallStatusAndColor = app.pGage.DivyUpStatusandColors(iOID, strSiteFlowStatus,
                                     strSiteTempStatus, strFWPTITLE,
                                     strFWPDESCRIPTION, strFWPLOCATION, strFWPPRESSRELEASE,
@@ -2542,6 +2544,43 @@ define([
                                         }
                                     }
                                 }
+
+                                if (strSiteID == "12334550") { //if the Turah gage then repeat
+                                    console.log("turah")
+                                    //m_arrayOIDsRed.push(iOID);
+                                    let queryObject = new Query();
+                                    //let strRelatedStreamsQuery = app.pSup.getQueryDefs1_4()[1];// this query def for other watershed stream sections
+                                    //console.log(strRelatedStreamsQuery);
+                                    //strRelatedStreamsQuery = "(Watershed in ('Blackfoot','Flint-Rock','Upper Clark Fork')) OR (WatershedName_Alt1 in ('Blackfoot','Flint-Rock','Upper Clark Fork')) OR (WatershedName_Alt2 in ('Blackfoot','Flint-Rock','Upper Clark Fork'))";
+
+                                    strRelatedStreamsQuery = app.pSup.getQueryDefs1_4()[5];
+
+                                    console.log(strRelatedStreamsQuery);
+
+                                    queryObject.where = strRelatedStreamsQuery;
+                                    queryObject.returnGeometry = false;
+                                    queryObject.outFields = ["*"];
+                                    query.executeQueryJSON(app.strHFL_URL + app.idx11[5], queryObject).then(function (results) {
+                                        let blnFeaturesExist = false;
+                                        let pFeatures = results.features;
+                                        var resultCount = pFeatures.length;
+                                        if (resultCount > 0) {
+
+                                            dom.map(pFeatures, function (pRelatedStream) {  //loop through the endpoints
+                                                console.log(pRelatedStream.attributes.OBJECTID);
+
+                                                m_arrayOIDsOrange.push(pRelatedStream.attributes.OBJECTID);
+                                            })
+
+
+                                            console.log("turah2")
+                                        }
+                                        
+                                    }).catch(function (error) {
+                                        console.log("ReturnFeaturesExist_YesNo, error: ", error.message);
+                                    });;
+                                }
+
 
                                 app.pGage.m_arrray_RiverSectionStatus.push([streamSectionDispalyName, //add to array that populates the river sections summary div
                                             strHyperlinkURL,
