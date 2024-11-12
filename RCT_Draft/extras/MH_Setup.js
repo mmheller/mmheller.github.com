@@ -546,6 +546,10 @@ define([
                 $("#dropDownId").append("<li><a data-value='Official MT FWP (closures, etc.)'>Official MT FWP (closures, etc.)</a></li>")
             }
 
+            if (app.Basin_ID == "Upper Clark Fork") {
+                $("#dropDownId").append("<li><a data-value='MT DNRC Header ControllerUpper Clark Fork & Blackfoot Water Rights'>MT DNRC Header ControllerUpper Clark Fork & Blackfoot Water Rights</a></li>")
+            }
+
             $("#dropDownId").append("<li><a data-value='NRCS iMap-Basin Snow Water Equivalent'>NRCS iMap-Basin Snow Water Equivalent</a></li>")
             $("#dropDownId").append("<li><a data-value='USGS National Water Dashboard'>USGS National Water Dashboard</a></li>")
 
@@ -1899,10 +1903,16 @@ define([
                                 " AND (LiveDataAvailable = 'True')";
 
             }
-            strQueryDef6 = "(Watershed in ('" + arrayTmp4Query3.join("','") +
-                                "')) OR (WatershedName_Alt1 in ('" + arrayTmp4Query3.join("','") +
-                                "')) OR (WatershedName_Alt2 in ('" + arrayTmp4Query3.join("','") + "'))" +
-                                " OR ((StreamName = 'Clark Fork River') AND ((SectionID = '5') OR (SectionID = '6')))"
+
+            if ((app.Basin_ID == "Upper Clark Fork") | (app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork")) {
+                strQueryDef6 = "(SectionName in ('Clark Fork Section 1','Clark Fork Section 2','Clark Fork Section 3','Clark Fork Section 4','Clark Fork Section 5','Clark Fork Section 6','Rock Creek Section 1'))" +                                    //Turah gage functionality
+                    " OR (StreamName in ('Blackfoot River', 'Little Blackfoot River','Gold Creek','Flint Creek','Middle Fork Rock Creek','East Fork Rock Creek','Silver Bow Creek','Clearwater River','North Fork Blackfoot River','Nevada Creek'))";
+            } else if ((app.Basin_ID == "UMH") | (app.H2O_ID == "Big Hole")) {
+                strQueryDef6 = "(SectionName in ('Big Hole River Section 3', 'Big Hole River Section 4'))" +                                    //Turah gage functionality
+                    " OR (StreamName in (''))";
+            }
+
+            //strQueryDef6 = "(Basin in ('Upper Clark Fork')) OR (Watershed in ('Blackfoot'))";                                                                 //Turah / Big Hole River Section 4' gage functionality
 
             return [strQueryDef1, strQueryDef2, strQueryDef3, strQueryDef4, strQueryDef5, strQueryDef6];
         },
@@ -1931,6 +1941,15 @@ define([
                     strURL = "https://montana.maps.arcgis.com/home/webmap/viewer.html?webmap=f59d958f8ec94e70b5a0bff9bb7dacae&extent=";
                     blnAddCoords = true;
                 }
+
+
+                
+                if (strSelectedText == "MT DNRC Header ControllerUpper Clark Fork & Blackfoot Water Rights") {
+                    strURL = "https://mtdnrc.maps.arcgis.com/apps/webappviewer/index.html?id=a49c3c9c95a046449ed785bd63edda4c&extent=";
+                    blnAddCoords = true;
+                }
+
+
 
                 if (strSelectedText == "MT DNRC Fire Map") {
                     strURL = "https://mtdnrc.maps.arcgis.com/apps/webappviewer/index.html?id=6bea18851bec440d9260cb0d28f53281&extent=";
