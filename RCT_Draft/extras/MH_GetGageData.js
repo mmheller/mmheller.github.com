@@ -1021,11 +1021,25 @@ define([
                             blnFound = true;
                         }
                         if (blnFound) {
+
+                            let strConcatSpecialMessage = "";
+                            let strSpecialMessage = "";
+
+                            if ((app.Basin_ID == "Upper Clark Fork") | (app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork")) {
+                                strConcatSpecialMessage = ", Click the Clark Fork Section 6/Turah gage for more information";
+                                strSpecialMessage = " due to the Clark Fork Section 6/Turah gage (Click Clark Fork Section 6 for more information)";
+                            } else if ((app.Basin_ID == "UMH") | (app.H2O_ID == "Big Hole")) {
+                                strConcatSpecialMessage = ", Click the Big Hole Seciton 4 summaries for more information";
+                                strSpecialMessage = " due to one of the Big Hole Seciton 4 gages (Click Big Hole Seciton 4 summaries for more information)";
+                            }
+
+
+
                             if (app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][7] != "OPEN") {
-                                app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][30] += ", Click the Clark Fork Section 6/Turah gage for more information (Click Clark Fork Section 6 for more information)";
+                                app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][30] += strConcatSpecialMessage;
                             } else {
                                 app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][7] = strConsMessage;
-                                app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][30] = strConsMessage + " due to the Clark Fork Section 6/Turah gage (Click Clark Fork Section 6 for more information)";
+                                app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][30] = strConsMessage + strSpecialMessage;
                                 app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31] = strColor;
                             }
                         }
