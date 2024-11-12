@@ -547,7 +547,7 @@ define([
             }
 
             if (app.Basin_ID == "Upper Clark Fork") {
-                $("#dropDownId").append("<li><a data-value='MT DNRC Header ControllerUpper Clark Fork & Blackfoot Water Rights'>MT DNRC Header ControllerUpper Clark Fork & Blackfoot Water Rights</a></li>")
+                $("#dropDownId").append("<li><a data-value='MT DNRC Upper Clark Fork & Blackfoot Water Rights'>MT DNRC Upper Clark Fork & Blackfoot Water Rights</a></li>")
             }
 
             $("#dropDownId").append("<li><a data-value='NRCS iMap-Basin Snow Water Equivalent'>NRCS iMap-Basin Snow Water Equivalent</a></li>")
@@ -1944,7 +1944,7 @@ define([
 
 
                 
-                if (strSelectedText == "MT DNRC Header ControllerUpper Clark Fork & Blackfoot Water Rights") {
+                if (strSelectedText == "MT DNRC Upper Clark Fork & Blackfoot Water Rights") {
                     strURL = "https://mtdnrc.maps.arcgis.com/apps/webappviewer/index.html?id=a49c3c9c95a046449ed785bd63edda4c&extent=";
                     blnAddCoords = true;
                 }
