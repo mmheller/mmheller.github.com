@@ -12,6 +12,7 @@
 	<script src="extras/tablelist.js" type="text/javascript"></script>
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
 	<!--<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>-->
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
@@ -24,6 +25,13 @@
 	<script>
 		google.charts.load('current', { packages: ['corechart'] });
 	</script>
+
+
+	<!--<script>
+		$(function () {
+			$("#datepicker").datepicker();
+		});
+	</script>-->
 
 
 	<script type="text/javascript">
@@ -52,6 +60,9 @@
 
 	<!--<link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" media="screen">-->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+	<script type="module" src=https://js.arcgis.com/calcite-components/2.13.0/calcite.esm.js></script>
+	<link rel="stylesheet" type="text/css" href=https://js.arcgis.com/calcite-components/2.13.0/calcite.css />
 
 
 	<style>
@@ -380,9 +391,9 @@
 								<div style="margin-left:30px"> <u>Waterflow target definitions for this stream section</u></div>
 								<div class="tab">
 									<table>
-										<tr><td>LIMITED RECREATION:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateFlowPref4ConsvValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateFlowPref4ConsvValue'></span></td></tr>
-										<tr><td>OPTIMUM RECREATION:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateFlowConsvValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateFlowConsvValue'></span></td></tr>
-										<tr><td>POTENTIAL RECREATION ISSUES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateFlowClosureValueFlow'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateFlowClosureValueFlow'></span></td></tr>
+										<tr><td>LIMITED RECREATION:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iCFS_Rec_Low'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateFlowPref4ConsvValue'></span></td></tr>
+										<tr><td>OPTIMUM RECREATION:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iCFS_Rec_IdealMin'></span> (cfs) <span data-bind='text: $root.CurrentDisplayGageRecord().iCFS_Rec_IdealMax'></span>  :<span data-bind='text: $root.CurrentDisplayGageRecord().strLateFlowConsvValue'></span></td></tr>
+										<tr><td>POTENTIAL RECREATION ISSUES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iCFS_Rec_High'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateFlowClosureValueFlow'></span></td></tr>
 									</table>
 								</div>
 							</div>
@@ -524,6 +535,20 @@
 				<h2>Summary of Conditions</h2>
 				<p><i>Click section listed below or on Map for detail display below the Map Legend</i></p>
 				<p id="txtFromToDate"></p>
+				<!--<button type="button" class="btn btn-info" id="btnShowDateChanger" style="position:relative; font-size:12px; left:1px; margin-bottom:5px; padding-top:1px; padding-bottom:1px; vertical-align:text-top;" data-toggle="collapse" data-target="#divShowHideDateChangerBtns">Show/Hide Date Range</button>-->
+				<!--<div id="divShowHideDateChangerBtns" class="collapse  in">-->
+				<!--<div id="divShowHideDateChangerBtns" class="collapse">-->
+				<calcite-label>
+					<!--Observation duration-->
+					<calcite-input-date-picker id="input-date-picker" range>
+					</calcite-input-date-picker>
+				</calcite-label>
+
+				<button type="button" class="btn btn-info" id="btnChangeDateRange" style="position:relative; font-size:12px; left:1px; margin-bottom:5px; padding-top:1px; padding-bottom:1px; vertical-align:text-top;" data-toggle="collapse">Update Date Range</button>
+
+				<!--</div>-->
+
+
 				<p id="txtLastRefresh"></p>
 
 				<img id="loadingImg2" src="images/loading.gif" />
@@ -610,6 +635,12 @@
 
 								<div><span data-bind='text: strDailyStat_URL'></span></div>
 								<div><span data-bind='text: overallSymbol'></span></div>
+
+								<div><span data-bind='text: iCFS_Rec_Low'></span></div>
+								<div><span data-bind='text: iCFS_Rec_IdealMin'></span></div>
+								<div><span data-bind='text: iCFS_Rec_IdealMax'></span></div>
+								<div><span data-bind='text: iCFS_Rec_High'></span></div>
+
 								<div><span data-bind='text: strWatershed'></span></div>
 								<div><span data-bind='text: strAgency'></span></div>
 							</td>
@@ -705,7 +736,7 @@
 			<div id='footer_content' style="display: flex;">
 				<div id="RCT_logo" style="float:left"><img src="images/RCT_logo_color_70.png" alt="River Conditions Tool Logo"></div>
 				<div id="RCTfooter_text" style="float: left; margin-top: 10px; margin-left: 10px;">
-					Hosted by the <a href="https://uppermissouriheadwaters.org/" target="_blank"> Upper Missouri Headwaters</a> via <a href="https://katearpin.com/" target="_blank">Kate Arpin Graphics & Web Design</a>.  Developed by the USFWS (Region 6, Science Applications) and Montana State University (<a href="https://www.montana.edu/earthsciences/directory/2139973/eric-sproles" target="_blank">Eric Sproles</a>) in cooperation with <a href="http://dnrc.mt.gov/" target="_blank">Montana DNRC</a> and associated watershed groups of Colorado, Montana and Wyoming.  Version: 2.4.417
+					Hosted by the <a href="https://uppermissouriheadwaters.org/" target="_blank"> Upper Missouri Headwaters</a> via <a href="https://katearpin.com/" target="_blank">Kate Arpin Graphics & Web Design</a>.  Developed by the USFWS (Region 6, Science Applications) and Montana State University (<a href="https://www.montana.edu/earthsciences/directory/2139973/eric-sproles" target="_blank">Eric Sproles</a>) in cooperation with <a href="http://dnrc.mt.gov/" target="_blank">Montana DNRC</a> and associated watershed groups of Colorado, Montana and Wyoming.  Version: 2.4.418
 				</div>
 			</div>
 			<!--<p><div><img src="images/RCT_logo_color.png" alt="River Conditions Tool Logo" height="60"></div> Hosted by the <a href="https://uppermissouriheadwaters.org/" target="_blank"> Upper Missouri Headwaters</a> via <a href="https://katearpin.com/" target="_blank">Kate Arpin Graphics & Web Design</a>.  Developed by the USFWS (Region 6, Science Applications) and Montana State University (<a href="https://www.montana.edu/earthsciences/directory/2139973/eric-sproles" target="_blank">Eric Sproles</a>) in cooperation with <a href="http://dnrc.mt.gov/" target="_blank">Montana DNRC</a> and associated watershed groups of Colorado, Montana and Wyoming.  Version: 2.3.3</p>-->
@@ -729,6 +760,8 @@
 			"extras/MH_GetWarningData",
 			"extras/MH_GetHistoricWarningData",
 			"dojo/domReady!"],
+
+
 
 			function (Map, MapView, MH_Setup, MH_GetGageData, MH_GetGageData_Reservoir, esriConfig, parser, MH_GetWarningData, MH_GetHistoricWarningData) {
 				parser.parse();

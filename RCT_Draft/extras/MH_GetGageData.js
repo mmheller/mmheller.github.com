@@ -138,7 +138,9 @@ define([
         m_arrayOIDsGold: [],
         m_arrayOIDsOrange: [],
         m_arrayOIDsPlum: [],
+        m_arrayOIDsPurple: [],
         m_arrayOIDsRed: [],
+        m_arrayOIDsGreen: [],
         mIDXQuery1AtaTime: 0,
         //m_blnQuery4DNRCGages: false,
         m_arrayDNRC_Sens_Loc: null,
@@ -199,6 +201,13 @@ define([
             strLateHtPref4ConsvValue,
             strLateHtConsvValue,
             strLateHtClosureValue,
+                         iCFS_Rec_IdealMin,
+                         iCFS_Rec_IdealMax,
+                         strCFS_Rec_Ideal_Note,
+                         iCFS_Rec_High,
+                         strCFS_Rec_High_Note,
+                         iCFS_Rec_Low,
+                         strCFS_Rec_Low_Note,
             strAgency
             //            , dteLatestDateTimeHt, dteLatestHt, str3DayHtTrend
         ) {// Class to represent a row in the gage values grid
@@ -283,6 +292,14 @@ define([
             self.strLateHtConsvValue = strLateHtConsvValue;
             self.strLateHtClosureValue = strLateHtClosureValue;
 
+                self.iCFS_Rec_IdealMin = iCFS_Rec_IdealMin;
+                self.iCFS_Rec_IdealMax = iCFS_Rec_IdealMax;
+                self.strCFS_Rec_Ideal_Note = strCFS_Rec_Ideal_Note;
+                self.iCFS_Rec_High = iCFS_Rec_High;
+                self.strCFS_Rec_High_Note = strCFS_Rec_High_Note;
+                self.iCFS_Rec_Low = iCFS_Rec_Low;
+                self.strCFS_Rec_Low_Note = strCFS_Rec_Low_Note;
+                
             self.strAgency = strAgency;
         },
 
@@ -319,6 +336,14 @@ define([
             var strStartEndpoint = "";
             var strEndEndpoint = "";
 
+            var iCFS_Rec_IdealMin = 99999;
+            var iCFS_Rec_IdealMax = 99999;
+            var strCFS_Rec_Ideal_Note = "";
+            var iCFS_Rec_High = 99999;
+            var strCFS_Rec_High_Note = "";
+            var iCFS_Rec_Low = 99999;
+            var strCFS_Rec_Low_Note = "";
+            
             dom.map(items[0].features, function (itemSection) {  //loop through the sections!!!!
                 //console.log("handleSectionGageResults2");
                 var strGageID_Source = null;
@@ -354,6 +379,15 @@ define([
                 strWatershed = "";
                 //strAgency = "";
 
+                iCFS_Rec_IdealMin = 99999;
+                iCFS_Rec_IdealMax = 99999;
+                strCFS_Rec_Ideal_Note = "";
+                iCFS_Rec_High = 99999;
+                strCFS_Rec_High_Note = "";
+                iCFS_Rec_Low = 99999;
+                strCFS_Rec_Low_Note = "";
+
+
                 strStreamName = itemSection.attributes.StreamName;
                 strSectionID = itemSection.attributes.SectionID;
                 strSectionName_ = itemSection.attributes.SectionName;
@@ -378,19 +412,20 @@ define([
 
                 iOID = itemSection.attributes.OBJECTID;
                 strWatershed = itemSection.attributes.Watershed;
+                
+                CFS_Rec_IdealMin = itemSection.attributes.CFS_Rec_IdealMin;
+                CFS_Rec_IdealMax = itemSection.attributes.CFS_Rec_IdealMax;
+                CFS_Rec_Ideal_Note = itemSection.attributes.CFS_Rec_Ideal_Note;
+                CFS_Rec_High = itemSection.attributes.CFS_Rec_High;
+                CFS_Rec_High_Note = itemSection.attributes.CFS_Rec_High_Note;
+                CFS_Rec_Low = itemSection.attributes.CFS_Rec_Low;
+                CFS_Rec_Low_Note = itemSection.attributes.CFS_Rec_Low_Note;
+
 
                 var arrayGages4Section = [];
 
                 var blnGageFound = false;
                 dom.map(items[1].features, function (itemGage) { //loop through the gages that match the sections
-                    //query by     Watershed , StreamName, Section_ID
-                    //if (itemGage.attributes.Watershed == "Smith") {
-                    //    console.log("pause");
-                    //}
-                    //if (itemSection.attributes.Watershed == "Smith") {
-                    //    console.log("pause");
-                    //}
-
                     if ((itemGage.attributes.Watershed === itemSection.attributes.Watershed) &
                         (itemGage.attributes.StreamName === itemSection.attributes.StreamName) &
                         (itemGage.attributes.Section_ID === itemSection.attributes.SectionID) &
@@ -477,6 +512,13 @@ define([
                         strSectionName_ + strSectionNameSuffix,
                         strHt_Prep4Conserv, strHt_Conserv, strHt_NotOfficialClosure,
                         iHt_Note_Prep4Conserv, iHt_Note_Conserv, iHt_Note_NotOfficialClosure,
+                        CFS_Rec_IdealMin,
+                        CFS_Rec_IdealMax,
+                        CFS_Rec_Ideal_Note,
+                        CFS_Rec_High,
+                        CFS_Rec_High_Note,
+                        CFS_Rec_Low,
+                        CFS_Rec_Low_Note,
                         itemGage2.Agency
                     ]);
                 })
@@ -693,6 +735,44 @@ define([
                                 iChart_CFS_ColumnNames.push(icfsTarget3.toString() + "Consv. Target");
                             }
                         }
+
+                        var iCFS_Rec_Low = app.pGage.m_arrray_Detail4ChartCFS[0].iCFS_Rec_Low;
+                        if (!(isNaN(iCFS_Rec_Low))) {
+                            iCFS_Rec_Low = Number(iCFS_Rec_Low)
+                            if (iCFS_Rec_Low != 0) {
+                                iChart_CFS_ColumnNames.push(iCFS_Rec_Low.toString() + "Consv. Target");
+                            }
+                        }
+                        var iCFS_Rec_IdealMin = app.pGage.m_arrray_Detail4ChartCFS[0].iCFS_Rec_IdealMin;
+                        if (!(isNaN(iCFS_Rec_IdealMin))) {
+                            iCFS_Rec_IdealMin = Number(iCFS_Rec_IdealMin)
+                            if (iCFS_Rec_IdealMin != 0) {
+                                iChart_CFS_ColumnNames.push(iCFS_Rec_IdealMin.toString() + "Consv. Target");
+                            }
+                        }
+                        var iCFS_Rec_IdealMax = app.pGage.m_arrray_Detail4ChartCFS[0].iCFS_Rec_IdealMax;
+                        if (!(isNaN(iCFS_Rec_IdealMax))) {
+                            iCFS_Rec_IdealMax = Number(iCFS_Rec_IdealMax)
+                            if (iCFS_Rec_IdealMax != 0) {
+                                iChart_CFS_ColumnNames.push(iCFS_Rec_Low.toString() + "Consv. Target");
+                            }
+                        }
+                        var iCFS_Rec_Low = app.pGage.m_arrray_Detail4ChartCFS[0].iCFS_Rec_Low;
+                        if (!(isNaN(iCFS_Rec_Low))) {
+                            iCFS_Rec_Low = Number(iCFS_Rec_Low)
+                            if (iCFS_Rec_Low != 0) {
+                                iChart_CFS_ColumnNames.push(iCFS_Rec_Low.toString() + "Consv. Target");
+                            }
+                        }
+                        var iCFS_Rec_High = app.pGage.m_arrray_Detail4ChartCFS[0].iCFS_Rec_High;
+                        if (!(isNaN(iCFS_Rec_High))) {
+                            iCFS_Rec_High = Number(iCFS_Rec_High)
+                            if (iCFS_Rec_High != 0) {
+                                iChart_CFS_ColumnNames.push(iCFS_Rec_High.toString() + "Consv. Target");
+                            }
+                        }
+
+
                         //iChart_CFS_ColumnNames = [icfsTarget1.toString() + "Consv. Target", icfsTarget2.toString() + "Consv. Target", icfsTarget3.toString() + "Consv. Target"];
                     }
                 } else if (app.pGage.m_arrray_Detail4ChartHistoryCFS.length > 0) {  //if historical data AND NO CURRNET DATA, only gathered for single sections, then add the the datatable
@@ -749,39 +829,50 @@ define([
                                 if (icfsTarget3 != 0) {
                                     arrayPrelimData_2.push(icfsTarget3);
                                 }
+
+
+                                if (iCFS_Rec_Low != 0) {
+                                    arrayPrelimData_2.push(iCFS_Rec_Low);
+                                }
+                                if (iCFS_Rec_IdealMin != 0) {
+                                    arrayPrelimData_2.push(iCFS_Rec_IdealMin);
+                                }
+                                if (iCFS_Rec_IdealMax != 0) {
+                                    arrayPrelimData_2.push(iCFS_Rec_IdealMax);
+                                }
+                                if (iCFS_Rec_High != 0) {
+                                    arrayPrelimData_2.push(iCFS_Rec_High);
+                                }
+
+
                             }
                         }
 
                         if (app.pGage.m_arrray_Detail4ChartHistoryCFS.length > 0) {  //if historical data, only gathered for single sections, then add the the datatable
-                            if ((iHours == 12) & (iMinutes == 00)) {
+                            if ((iHours == 12) & (iMinutes == 0)) {
+                                let blnFoundHistory = false;
                                 for (var ih = 0; ih < app.pGage.m_arrray_Detail4ChartHistoryCFS.length; ih++) {
                                     var dteDate4ChartingHistorycheck = dteDateTime.getFullYear() + "-" + ("0" + (dteDateTime.getMonth() + 1)).slice(-2) + "-" + ("0" + dteDateTime.getDate()).slice(-2);
-
                                     if (app.pGage.m_arrray_Detail4ChartHistoryCFS[ih].date == dteDate4ChartingHistorycheck) {  //At the New Year, this does get messed up for a few days for USGS gages
                                         arrayPrelimData_2.push(Number(app.pGage.m_arrray_Detail4ChartHistoryCFS[ih].cfs))  //convert the string value to number type
+                                        blnFoundHistory = true;
                                         break;  //if found then don't check for more for this date/time
                                     }
                                 }
+                                if (!(blnFoundHistory)){  //if cannot find a match then add a null value to match number of columns
+                                    arrayPrelimData_2.push(null);
+                                }
                             } else {
-                                arrayPrelimData_2.push(null)
+                                arrayPrelimData_2.push(null);
                             }
-                            //console.log("History found for");
                         } else {
-                            //console.log("no history found for");
+                            //do nothing
                         }
 
                         arrayPrelimData_3.push(arrayPrelimData_2);
                         arrayPrelimData_1 = [];
                     }
-
-                    //edited on 1/12/2024
-                    //var obj22 = {};       // build a temporary array of all the cfs values to use when the date/time switches and will grabe appropriate values based on station id as a key
-                    //obj22["id"] = strID;
-                    //obj22["cfs"] = iCFSVal;
-                    //obj22["gagedatetime"] = dteDateTime;
-                    //arrayPrelimData_1.push(obj22);
-
-
+                    
                     strIDTemp = strID;
                     dteDateTimeTemp = dteDateTime;
                 }
@@ -942,16 +1033,26 @@ define([
             });
         },
 
+        getDaysBetweenDates: function (date1, date2) {
+            const oneDay = 24 * 60 * 60 * 1000; // milliseconds in a day
+            const diffInMs = Math.abs(date2.getTime() - date1.getTime());// Convert dates to milliseconds and get the absolute difference
+            return Math.round(diffInMs / oneDay);// Calculate the number of days
+        },
+
 
         GetDatesForRunningRCT: function () {
-            let dteDateTime = new Date();
+            let dteDateTime = app.pSup.m_EndDateTime;
             let strDateTime = dteDateTime.getFullYear() + "-" + ("0" + (dteDateTime.getMonth() + 1)).slice(-2) + "-" + ("0" + dteDateTime.getDate()).slice(-2);
             let strDateTimeUserFreindly = (dteDateTime.getMonth() + 1) + "/" + dteDateTime.getDate() + "/" + dteDateTime.getFullYear();
-            let dteDateTimeMinus3 = new Date();
-            dteDateTimeMinus3.setDate(dteDateTimeMinus3.getDate() - 3);
+            let dteDateTimeMinus3 = app.pSup.m_StartDateTime;
             let strDateTimeMinus3 = dteDateTimeMinus3.getFullYear() + "-" + ("0" + (dteDateTimeMinus3.getMonth() + 1)).slice(-2) + "-" + ("0" + dteDateTimeMinus3.getDate()).slice(-2);
             let strDateTimeMinus3UserFreindly = (dteDateTimeMinus3.getMonth() + 1) + "/" + dteDateTimeMinus3.getDate() + "/" + dteDateTimeMinus3.getFullYear();
-            return [strDateTimeMinus3, strDateTime, strDateTimeMinus3UserFreindly, strDateTimeUserFreindly];
+
+            let iNumberofDays = app.pGage.getDaysBetweenDates(app.pSup.m_StartDateTime, app.pSup.m_EndDateTime);
+
+
+
+            return [strDateTimeMinus3, strDateTime, strDateTimeMinus3UserFreindly, strDateTimeUserFreindly, iNumberofDays];
         },
 
         readingsViewModel: function () {
@@ -1029,8 +1130,8 @@ define([
                                 strConcatSpecialMessage = ", Click the Clark Fork Section 6/Turah gage for more information";
                                 strSpecialMessage = " due to the Clark Fork Section 6/Turah gage (Click Clark Fork Section 6 for more information)";
                             } else if ((app.Basin_ID == "UMH") | (app.H2O_ID == "Big Hole")) {
-                                strConcatSpecialMessage = ", Click the Big Hole Seciton 4 summaries for more information";
-                                strSpecialMessage = " due to one of the Big Hole Seciton 4 gages (Click Big Hole Seciton 4 summaries for more information)";
+                                strConcatSpecialMessage = ", Click the Big Hole Section 4 summaries for more information";
+                                strSpecialMessage = " due to one of the Big Hole Section 4 gages (Click Big Hole Section 4 summaries for more information)";
                             }
 
 
@@ -1051,7 +1152,7 @@ define([
 
 
             app.pGage.m_arrray_RiverSectionStatus =
-                app.pGage.m_arrray_RiverSectionStatus.sort(function (a, b) { return a[9]+a[10] > b[9]+b[10] ? 1 : -1; }); //sorting by contcatonating stream name and secitonID
+                app.pGage.m_arrray_RiverSectionStatus.sort(function (a, b) { return a[9]+a[10] > b[9]+b[10] ? 1 : -1; }); //sorting by contcatonating stream name and sectionID
 
             if (typeof app.pGage.m_arrray_RiverSectionStatus !== "undefined") {//this feed then gageReadings: function 
                 var arrayKOTemp = [];
@@ -1102,7 +1203,14 @@ define([
                                                                 app.pGage.m_arrray_RiverSectionStatus[i][43],
                                                                 app.pGage.m_arrray_RiverSectionStatus[i][44],
                                                                 app.pGage.m_arrray_RiverSectionStatus[i][45],
-                                                                app.pGage.m_arrray_RiverSectionStatus[i][46]));
+                                                                app.pGage.m_arrray_RiverSectionStatus[i][46],
+                                                                app.pGage.m_arrray_RiverSectionStatus[i][47],
+                                                                app.pGage.m_arrray_RiverSectionStatus[i][48],
+                                                                app.pGage.m_arrray_RiverSectionStatus[i][49],
+                                                                app.pGage.m_arrray_RiverSectionStatus[i][50],
+                                                                app.pGage.m_arrray_RiverSectionStatus[i][51],
+                                                                app.pGage.m_arrray_RiverSectionStatus[i][52],
+                                                                app.pGage.m_arrray_RiverSectionStatus[i][53]));
 
                 self.gageRecords = ko.observableArray(arrayKOTemp);
                 
@@ -1206,7 +1314,7 @@ define([
         },
 
 		GraphSingleSEction: function (strStreamName, iSectionID, strSiteID, iCFSTarget1, iCFSTarget2, iCFSTarget3,
-            strDailyStat_URL, iTMPTarget1, strAgency, iHtTarget1, iHtTarget2, iHtTarget3) {
+            strDailyStat_URL, iTMPTarget1, strAgency, iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High) {
             app.pGage.m_arrray_StationIDsTMP = [];
             app.pGage.m_arrray_StationIDsCFS = [];
             app.pGage.m_arrray_StationIDsHt = [];
@@ -1218,25 +1326,35 @@ define([
             app.pGage.m_arrray_Detail4ChartHistoryHt = [];
 
 
-            var dteDateTimeMinus0 = new Date();
-            dteDateTimeMinus0.setDate(dteDateTimeMinus0.getDate() - 0);
-            var dteDateTimeMinus1 = new Date();
-            dteDateTimeMinus1.setDate(dteDateTimeMinus1.getDate() - 1);
-            var dteDateTimeMinus2 = new Date();
-            dteDateTimeMinus2.setDate(dteDateTimeMinus2.getDate() - 2);
-            var dteDateTimeMinus3 = new Date();
-            dteDateTimeMinus3.setDate(dteDateTimeMinus3.getDate() - 3);
 
-            var idxMonth = 0;
-            var idxMonth2 = 0;
-            var idxDay = 0;
-            var idxDay2 = 0;
-            var idxMean = 0;
+            //var dteDateTimeMinus1 = new Date(app.pSup.m_EndDateTime.valueOf());
+            //dteDateTimeMinus1.setDate(dteDateTimeMinus1.getDate() - 1);
+            //var dteDateTimeMinus2 = new Date(app.pSup.m_EndDateTime.valueOf());
+            //dteDateTimeMinus2.setDate(dteDateTimeMinus2.getDate() - 2);
+            //var dteDateTimeMinus3 = new Date(app.pSup.m_EndDateTime.valueOf());
+            //dteDateTimeMinus3.setDate(dteDateTimeMinus3.getDate() - 3);
 
-            var arrayMonthsDays = [[(dteDateTimeMinus3.getMonth() + 1).toString(), dteDateTimeMinus3.getDate().toString()],
-                                    [(dteDateTimeMinus2.getMonth() + 1).toString(), dteDateTimeMinus2.getDate().toString()],
-                                    [(dteDateTimeMinus1.getMonth() + 1).toString(), dteDateTimeMinus1.getDate().toString()],
-                                    [(dteDateTimeMinus0.getMonth() + 1).toString(), dteDateTimeMinus0.getDate().toString()]];
+            //build the query string based on the number of days in the date range
+            let iNumberOdays = app.pGage.GetDatesForRunningRCT()[0];
+            let dteDateTimeMinus;
+            let idxMonth = 0;
+            let idxMonth2 = 0;
+            let idxDay = 0;
+            let idxDay2 = 0;
+            let idxMean = 0;
+            var arrayMonthsDays = [];
+
+            for (idays = 0; idays < iNumberOdays.length; idays++) {  //add the columns with no data to the back of the array
+                dteDateTimeMinus = new Date(app.pSup.m_EndDateTime.valueOf());
+                dteDateTimeMinus.setDate(dteDateTimeMinus.getDate() - idays);
+                arrayMonthsDays.push([(dteDateTimeMinus.getMonth() + 1).toString(), dteDateTimeMinus.getDate().toString()]);
+                //var arrayMonthsDays = [[(dteDateTimeMinus3.getMonth() + 1).toString(), dteDateTimeMinus3.getDate().toString()],
+                //[(dteDateTimeMinus2.getMonth() + 1).toString(), dteDateTimeMinus2.getDate().toString()],
+                //[(dteDateTimeMinus1.getMonth() + 1).toString(), dteDateTimeMinus1.getDate().toString()],
+                //[(dteDateTimeMinus0.getMonth() + 1).toString(), dteDateTimeMinus0.getDate().toString()]];
+            }
+            
+
             var iMean = 0;
             
             //get the summary output USGS daily mean data, unfortunately this is not available in JSON format
@@ -1265,9 +1383,9 @@ define([
                                 } else {
                                     var tempArrayMonthDay = [arrayTabs[idxMonth], arrayTabs[idxDay]];
                                     
-                                    for (var i = 0, len = arrayMonthsDays.length; i < len; i++) {  //loop through the days we're looking for, if on of the last 3 days then push into an array
+                                    for (var i = 0, len = arrayMonthsDays.length; i < len; i++) {  //loop through the days we're looking for, if on of the days then push into an array
                                         if ((arrayMonthsDays[i][0] === arrayTabs[idxMonth]) & (arrayMonthsDays[i][1] === arrayTabs[idxDay])) {
-                                            var dteDate4Charting = new Date(dteDateTimeMinus0.getFullYear(), (arrayTabs[idxMonth] - 1), arrayTabs[idxDay], 12, 0, 0, 0);
+                                            var dteDate4Charting = new Date(dteDateTimeMinus.getFullYear(), (arrayTabs[idxMonth] - 1), arrayTabs[idxDay], 12, 0, 0, 0);
                                             var obj = {};
                                             obj["id"] = strStreamName + "," + iSectionID;
                                             obj["date"] = dteDate4Charting.getFullYear() + "-" + ("0" + (dteDate4Charting.getMonth() + 1)).slice(-2) + "-" + ("0" + dteDate4Charting.getDate()).slice(-2);
@@ -1286,10 +1404,8 @@ define([
 					var streamSectionArrray = [];
 					streamSectionArrray.push([strStreamName, strSiteID, iSectionID, strAgency]);
                     app.pGage.SectionsReceived(streamSectionArrray, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, false,
-                        iHtTarget1, iHtTarget2, iHtTarget3);
+                        iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High);
 
-                    //app.map.enableMapNavigation();
-                    //app.map.showZoomSlider();
                 })
                 .fail(function (jqxhr, textStatus, error) {
                     var err = textStatus + ", " + error;
@@ -1347,6 +1463,16 @@ define([
                         strTempText = strTempText.substring(strTempText.indexOf("strDailyStat_URL") + ("strDailyStat_URL".length + 2), strTempText.length);
                         let strDailyStat_URL = strTempText.substring(0, strTempText.indexOf("</span>"));
 
+
+                        strTempText = strTempText.substring(strTempText.indexOf("iCFS_Rec_Low") + ("iCFS_Rec_Low".length + 2), strTempText.length);
+                        let iCFS_Rec_Low = strTempText.substring(0, strTempText.indexOf("</span>"));
+                        strTempText = strTempText.substring(strTempText.indexOf("iCFS_Rec_IdealMin") + ("iCFS_Rec_IdealMin".length + 2), strTempText.length);
+                        let iCFS_Rec_IdealMin = strTempText.substring(0, strTempText.indexOf("</span>"));
+                        strTempText = strTempText.substring(strTempText.indexOf("iCFS_Rec_IdealMax") + ("iCFS_Rec_IdealMax".length + 2), strTempText.length);
+                        let iCFS_Rec_IdealMax = strTempText.substring(0, strTempText.indexOf("</span>"));
+                        strTempText = strTempText.substring(strTempText.indexOf("iCFS_Rec_High") + ("iCFS_Rec_High".length + 2), strTempText.length);
+                        let iCFS_Rec_High = strTempText.substring(0, strTempText.indexOf("</span>"));
+
 						strTempText = strTempText.substring(strTempText.indexOf("Watershed") + ("Watershed".length + 2), strTempText.length);
                         let strWatershed = strTempText.substring(0, strTempText.indexOf("</span>"));
 
@@ -1379,7 +1505,7 @@ define([
 
 						app.pGage.GraphSingleSEction(strClickStreamName, strClickSegmentID, strClickSiteID,
 													iCFSTarget1, iCFSTarget2, iCFSTarget3, strDailyStat_URL, 
-                                                iTempCloseValue, strAgency, iHtTarget1, iHtTarget2, iHtTarget3);
+                                                    iTempCloseValue, strAgency, iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High);
 
                         
                         let pGFeature = null;
@@ -1422,8 +1548,10 @@ define([
                     }
                 }
 
-                app.pSup.addStreamConditionFeatureLayer(m_arrayOIDYellow, m_arrayOIDsGold, m_arrayOIDsOrange, m_arrayOIDsPlum, m_arrayOIDsRed);
-                app.pSup.Phase3(m_arrayOIDYellow, m_arrayOIDsGold, m_arrayOIDsOrange, m_arrayOIDsPlum, m_arrayOIDsRed);
+
+                //app.pSup.addStreamConditionFeatureLayeraddStreamConditionFeatureLayer(m_arrayOIDYellow, m_arrayOIDsGold, m_arrayOIDsOrange, m_arrayOIDsPlum, m_arrayOIDsRed, m_arrayOIDsGreen, m_arrayOIDsPurple);
+                app.pSup.addStreamConditionFeatureLayer(m_arrayOIDYellow, m_arrayOIDsGold, m_arrayOIDsOrange, m_arrayOIDsPlum, m_arrayOIDsRed, m_arrayOIDsGreen, m_arrayOIDsPurple);
+                app.pSup.Phase3(m_arrayOIDYellow, m_arrayOIDsGold, m_arrayOIDsOrange, m_arrayOIDsPlum, m_arrayOIDsRed, m_arrayOIDsGreen, m_arrayOIDsPurple);
                 tableHighlightRow();
                 document.getElementById("loadingImg2").style.display = "none";
                 document.getElementById("divLoadingUSGS").style.display = "none";
@@ -1477,7 +1605,7 @@ define([
         },
 
         DNRCSectionsReceived: function (arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, blnQuery1AtaTime, blnIsInitialPageLoad,
-                                                iHtTarget1, iHtTarget2, iHtTarget3) {  //this is needed to get the SensorID for each location
+                                        iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High) {  //this is needed to get the SensorID for each location
             console.log("DNRCSectionsReceived start");
             app.bln_MTDNRC_Src_NeedsProc = false;
 
@@ -1523,7 +1651,7 @@ define([
 					}
 					app.pGage.m_arrayDNRC_Sens_Loc = arrayDNRC_Sens_Loc;
                     app.pGage.SectionsReceived(arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, blnQuery1AtaTime,
-                        iHtTarget1, iHtTarget2, iHtTarget3)
+                        iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High)
 				})
 
 				.fail(function (jqxhr, textStatus, error) {
@@ -1534,7 +1662,7 @@ define([
 
 					if (!blnQuery1AtaTime) {  //if the USGS api is erroring out try the refactored method
                         app.pGage.SectionsReceived(arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, true,
-                            iHtTarget1, iHtTarget2, iHtTarget3)
+                            iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High)
 					}
 				})
 				.always(function () {
@@ -1554,7 +1682,7 @@ define([
 
 
         CODWRSectionsReceived: function (arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, blnQuery1AtaTime, blnIsInitialPageLoad,
-                                            iHtTarget1, iHtTarget2, iHtTarget3) {  //this is needed to get the SensorID for each location
+                                        iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High) {  //this is needed to get the SensorID for each location
                 console.log("CODWRSectionsReceived start");
 
                 app.bln_CODWR_Src_NeedsProc = false;
@@ -1593,7 +1721,7 @@ define([
                         }
                         app.pGage.m_arrayCODWR_Sens_Loc = arrayCODWR_Sens_Loc;
                         app.pGage.SectionsReceived(arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, blnQuery1AtaTime,
-                            iHtTarget1, iHtTarget2, iHtTarget3)
+                            iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High)
                     })
 
                     .fail(function (jqxhr, textStatus, error) {
@@ -1604,7 +1732,7 @@ define([
 
                         if (!blnQuery1AtaTime) {  //if the USGS api is erroring out try the refactored method
                             app.pGage.SectionsReceived(arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, true,
-                                iHtTarget1, iHtTarget2, iHtTarget3)
+                                iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High)
                         }
                     })
                     .always(function () {
@@ -1622,7 +1750,8 @@ define([
 
             },
 
-            USACE_NWD_SectionsReceived: function (arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, blnQuery1AtaTime, blnIsInitialPageLoad, iHtTarget1, iHtTarget2, iHtTarget3) {  //this is needed to get the SensorID for each location
+        USACE_NWD_SectionsReceived: function (arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, blnQuery1AtaTime, blnIsInitialPageLoad,
+                                            iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High) {  //this is needed to get the SensorID for each location
                 console.log("USACE_NWD_SectionsReceived start");
                 app.bln_USACE_NWD_Src_NeedsProc = false;
 
@@ -1654,7 +1783,7 @@ define([
 
                             app.pGage.m_arrayUSACE_NWD_Sens_Loc = arrayUSACE_NWD_Sens_Loc;
                             app.pGage.SectionsReceived(arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, blnQuery1AtaTime,
-                                iHtTarget1, iHtTarget2, iHtTarget3)
+                                iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High)
 
 
                             if ((!(blnIsInitialPageLoad)) & (app.pGage.m_arrray_StationIDsCFS.length == 0)) {  // in the case of no gage station do the following for the graphing
@@ -1667,43 +1796,6 @@ define([
                                     app.pGage.StreamSectionSummaryUIAdditions(blnIsInitialPageLoad);
                                 })
                             }
-
-
-                            //$.getJSON(app.strURLGage)   //http://api.jquery.com/jquery.getjson/
-                            //    .done(function (jsonResult) {
-                            //        arrayUSACE_NWD_Sens_Loc.push([jsonResult.name,
-                            //            jsonResult.name,
-                            //            jsonResult["long-name"],
-                            //            jsonResult.name,
-                            //            null, null]
-                            //        );
-
-                            //        app.pGage.m_arrayUSACE_NWD_Sens_Loc = arrayUSACE_NWD_Sens_Loc;
-                            //        app.pGage.SectionsReceived(arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, blnQuery1AtaTime,
-                            //            iHtTarget1, iHtTarget2, iHtTarget3)
-                         
-                            //    })
-                            //    .fail(function (jqxhr, textStatus, error) {
-                            //        var err = textStatus + ", " + app.strURLGage + ", " + error;
-                            //        document.getElementById("divLoadingUSGS").innerHTML = "Loading Gage Data, again";
-                            //        console.log("Request Failed: " + err);
-                            //        if (!blnQuery1AtaTime) {  //if the USGS api is erroring out try the refactored method
-                            //            app.pGage.SectionsReceived(arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, true,
-                            //                iHtTarget1, iHtTarget2, iHtTarget3)
-                            //        }
-                            //    })
-                            //    .always(function () {
-                            //        if ((!(blnIsInitialPageLoad)) & (app.pGage.m_arrray_StationIDsCFS.length == 0)) {  // in the case of no gage station do the following for the graphing
-                            //            dom.map(arrayProc2, function (itemSectionRefined) {  //loop through the sections  //run through the elements in the section array to pick out the relevant JSON elements
-                            //                iSectionID = itemSectionRefined[2];
-                            //                strStreamName = itemSectionRefined[0];
-                            //                app.pGage.m_arrray_StationIDsTMP.push("(No Data) " + strStreamName + "," + iSectionID);  // using this array of station id's to pivot the table for charting
-                            //                app.pGage.m_arrray_StationIDsCFS.push("(No Data) " + strStreamName + "," + iSectionID);  // using this array of station id's to pivot the table for charting
-                            //                app.pGage.m_arrray_StationIDsHt.push("(No Data) " + strStreamName + "," + iSectionID);  // using this array of station id's to pivot the table for charting
-                            //                app.pGage.StreamSectionSummaryUIAdditions(blnIsInitialPageLoad);
-                            //            })
-                            //        }
-                            //    });
                         }
                     }
                 }
@@ -1711,7 +1803,7 @@ define([
             },
 
         SectionsReceived: function (arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1,
-                                        blnQuery1AtaTime, iHtTarget1, iHtTarget2, iHtTarget3) {
+                                    blnQuery1AtaTime, iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High) {
 			console.log("SectionsReceived1");
 
             var iCounterTemperature = 0;
@@ -1727,7 +1819,8 @@ define([
                 strLateFlowPref4ConsvValue = strLateFlowConsvValue = strLateFlowClosureValueFlow =
                 strDailyStat_URL = strFWPWarn = strStartEndpoint = strEndEndpoint = strAgency =
                 iLateHtPref4ConsvValue = iLateHtConsvValue = strLateHtClosureValue =
-                strLateHtPref4ConsvValue = strLateHtConsvValue = strLateFlowClosureValueHt = "";
+                strLateHtPref4ConsvValue = strLateHtConsvValue = strLateFlowClosureValueHt =
+                iCFS_Rec_Low = iCFS_Rec_IdealMin = iCFS_Rec_IdealMax = iCFS_Rec_High = "";
 
             var iProcIndex, arraySiteIDInfo, strStreamName, strSiteID, iSectionID, iLateFlowHootValue,
                 strHootMessage, iTempClosureValue,
@@ -1771,7 +1864,11 @@ define([
 				m_arrayOIDsRed = [];
 				m_arrayOIDsPlum = [];
 				m_arrayOIDsOrange = [];
-				m_arrayOIDsGold = [];
+                m_arrayOIDsGold = [];
+
+                m_arrayOIDsPurple = [];
+                m_arrayOIDsGreen = [];
+
 				app.pGage.m_arrray_Detail4ChartCFS = [];
                 app.pGage.m_arrray_Detail4ChartTMP = [];
                 app.pGage.m_arrray_Detail4ChartHt = [];
@@ -1819,8 +1916,13 @@ define([
             } else {
 				var strURLGagePrefix = "https://gis.dnrc.mt.gov/arcgis/rest/services/WRD/WMB_StAGE/MapServer/2/query"
 				strURLGagePrefix += "?f=pjson&outFields=SensorID%2CTimestamp%2CRecordedValue&where="
-				strURLGagePrefix += "Timestamp > date '" + this.dteStartDay2Check + " 00:00:00'"; 
-				strURLGagePrefix += "+ and + SensorID+in+%28%27"; 
+                strURLGagePrefix += "Timestamp > date '" + this.dteStartDay2Check + " 00:00:00'";
+                strURLGagePrefix += "+ and + Timestamp < date '" + this.dteEndDay2Check + " 23:59:00'"; 
+
+                //strURLGagePrefix += "Timestamp > date '" + this.dteStartDay2Check + " 00:00:00'";
+                //strURLGagePrefix += "+ and + Timestamp < date '" + this.dteEndDay2Check + " 00:00:00'"; 
+
+                strURLGagePrefix += "+ and + SensorID+in+%28%27"; 
 
 				var arrayTempDNRCIDs = [];
 				for (var iS = 0; iS < arrayDNRC_Sens_Loc.length; iS++) {  //getting the sensor id's passed through the arrays
@@ -2006,12 +2108,19 @@ define([
                                             strLateHtPref4ConsvValue,
                                             strLateHtConsvValue,
                                             strLateFlowClosureValueHt,
+                                            iCFS_Rec_IdealMin = 99999,
+                                            iCFS_Rec_IdealMax = 99999,
+                                            strCFS_Rec_Ideal_Note = "",
+                                            iCFS_Rec_High = 99999,
+                                            strCFS_Rec_High_Note = "",
+                                            iCFS_Rec_Low = 99999,
+                                            strCFS_Rec_Low_Note = "",
                                             strAgency]);
 
                 app.pGage.mIDXQuery1AtaTime += 1;
                 if ((blnQuery1AtaTime) & (app.pGage.mIDXQuery1AtaTime < arrayProc.length)) {
                     app.pGage.SectionsReceived(arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, blnQuery1AtaTime,
-                        iHtTarget1, iHtTarget2, iHtTarget3)
+                        iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High)
                 } else {
                     app.pGage.StreamSectionSummaryUIAdditions(blnIsInitialPageLoad);
                     app.pGage.mIDXQuery1AtaTime = 0;
@@ -2093,7 +2202,16 @@ define([
                             strLateHtPref4ConsvValue = itemSectionRefined[30];
                             strLateHtConsvValue = itemSectionRefined[31];
                             strLateFlowClosureValueHt = itemSectionRefined[32];
-                            strAgency = itemSectionRefined[33];
+
+                            iCFS_Rec_IdealMin = itemSectionRefined[33];
+                            iCFS_Rec_IdealMax = itemSectionRefined[34];
+                            strCFS_Rec_Ideal_Note = itemSectionRefined[35];
+                            iCFS_Rec_High = itemSectionRefined[36];
+                            strCFS_Rec_High_Note = itemSectionRefined[37];
+                            iCFS_Rec_Low = itemSectionRefined[38];
+                            strCFS_Rec_Low_Note = itemSectionRefined[39];
+
+                            strAgency = itemSectionRefined[40];
 
                             var itemFound, itemFoundTemp, itemFoundDischarge, itemFoundHt;
 							itemFound = [];
@@ -2162,6 +2280,12 @@ define([
                                     iLateFlowClosureValueFlow = itemSectionRefined[5];
                                     iTempClosureValue = itemSectionRefined[6];
 
+                                    iCFS_Rec_Low = itemSectionRefined[38];
+                                    iCFS_Rec_IdealMin = itemSectionRefined[33];
+                                    iCFS_Rec_IdealMax = itemSectionRefined[34];
+                                    iCFS_Rec_High = itemSectionRefined[36];
+
+
                                 if (blnIsInitialPageLoad) {
                                     if (app.test) {
                                         if (iLateFlowPref4ConsvValue == 9999) {  // this is for testing only!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -2210,6 +2334,12 @@ define([
                                     iLateFlowPref4ConsvValue = 0;
                                     iLateFlowConsvValue = 0;
                                     iLateFlowClosureValueFlow = 0;
+
+
+                                    iCFS_Rec_Low = 0;
+                                    iCFS_Rec_IdealMin = 0;
+                                    iCFS_Rec_IdealMax = 0;
+                                    iCFS_Rec_High = 0;
                             }
 
                             var CFSItem = "";
@@ -2286,7 +2416,12 @@ define([
 
                                         obj["cfsTarget1"]= iCFSTarget1;  //this are only used in single charting situations
                                         obj["cfsTarget2"]= iCFSTarget2;  //this are only used in single charting situations
-                                        obj["cfsTarget3"]= iCFSTarget3;  //this are only used in single charting situations
+                                        obj["cfsTarget3"] = iCFSTarget3;  //this are only used in single charting situations
+
+                                        obj["iCFS_Rec_Low"] = iCFS_Rec_Low;
+                                        obj["iCFS_Rec_IdealMin"] = iCFS_Rec_IdealMin;
+                                        obj["iCFS_Rec_IdealMax"] = iCFS_Rec_IdealMax;
+                                        obj["iCFS_Rec_High"] = iCFS_Rec_High;
 
                                         app.pGage.m_arrray_Detail4ChartCFS.push(obj);//populate the array that contains the data for charting
                                         obj["EPOCH"]= Date.parse(dteDateTime);
@@ -2484,20 +2619,36 @@ define([
                                 dteLatestDateTimeCFS = new Date();
                             } else {//determine the site's status based on discharge
 
+                                if ((iCFS_Rec_High != null) & (iCFS_Rec_High != 0)) {
+                                    if (dblLatestCFS >= iCFS_Rec_High) {
+                                        strSiteFlowStatus = "HIGH FLOW";
+                                    }
+                                }
+
                                 if ((dblLatestCFS <= iLateFlowPref4ConsvValue) & (dblLatestCFS > iLateFlowConsvValue)) {
                                     strSiteFlowStatus = "PREPARE FOR CONSERVATION";
                                 }
+
+                                if ((iCFS_Rec_IdealMax != null) & (iCFS_Rec_IdealMin != null) & (iCFS_Rec_IdealMax != 0) & (iCFS_Rec_IdealMin != 0)) {
+                                    if ((dblLatestCFS <= iCFS_Rec_IdealMax) & (dblLatestCFS > iCFS_Rec_IdealMin)) {
+                                        strSiteFlowStatus = "IDEAL FLOW";
+                                    }
+                                }
+
 
                                 if ((dblLatestCFS <= iLateFlowConsvValue) & (dblLatestCFS > iLateFlowClosureValueFlow)) {
                                         strSiteFlowStatus = "CONSERVATION";
                                 }
                                 if (dblLatestCFS <= iLateFlowClosureValueFlow) {
-                                    if (strStreamName == "Smith River") {
-                                        strSiteFlowStatus = "POTENTIAL RECREATION ISSUES";
-                                    } else {
-                                        strSiteFlowStatus = "EXPANDED CONSERVATION MEASURES";
+                                     strSiteFlowStatus = "EXPANDED CONSERVATION MEASURES";
+                                }
+
+                                if ((iCFS_Rec_Low != null) & (iCFS_Rec_Low != 0)) {
+                                    if (dblLatestCFS < iCFS_Rec_Low) {
+                                        strSiteFlowStatus = "LOW FLOW";
                                     }
                                 }
+
                             }
                             var strNoDataLabel4ChartingTMP = "";
                             if (dteGreatestTMP == - 999999) {
@@ -2580,7 +2731,7 @@ define([
                                         break;
                                     }
                                 }
-                                console.log("breakpoint 1111111");
+                                //console.log("breakpoint 1111111");
                             }
 
                             app.pGage.m_arrray_StationIDsTMP.push(strNoDataLabel4ChartingTMP + strStreamName + "," + iSectionID);  // using this array of station id's to pivot the table for charting
@@ -2715,6 +2866,13 @@ define([
                                             strLateHtPref4ConsvValue,
                                             strLateHtConsvValue,
                                             strLateFlowClosureValueHt,
+                                                iCFS_Rec_IdealMin,
+                                                iCFS_Rec_IdealMax,
+                                                strCFS_Rec_Ideal_Note,
+                                                iCFS_Rec_High,
+                                                strCFS_Rec_High_Note,
+                                                iCFS_Rec_Low,
+                                                strCFS_Rec_Low_Note,
                                             strAgency]);
                             }
 
@@ -2740,13 +2898,13 @@ define([
                         /////////////////////     USACE 4nd if exists
                         //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         if ((blnQuery1AtaTime) & (app.pGage.mIDXQuery1AtaTime < arrayProc.length)) {
-                            app.pGage.SectionsReceived(arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, blnQuery1AtaTime, iHtTarget1, iHtTarget2, iHtTarget3)
+                            app.pGage.SectionsReceived(arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, blnQuery1AtaTime, iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High)
                         } else if ((arraySiteIDsDNRC.length > 0) & (app.bln_MTDNRC_Src_NeedsProc)) {
-                            app.pGage.DNRCSectionsReceived(arraySiteIDsDNRC, "", "", "", "", false, null, blnIsInitialPageLoad, iHtTarget1, iHtTarget2, iHtTarget3)
+                            app.pGage.DNRCSectionsReceived(arraySiteIDsDNRC, "", "", "", "", false, null, blnIsInitialPageLoad, iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High)
                         } else if ((arraySiteIDsCODWR.length > 0) & (app.bln_CODWR_Src_NeedsProc)) {
-                            app.pGage.CODWRSectionsReceived(arraySiteIDsCODWR, "", "", "", "", false, null, blnIsInitialPageLoad, iHtTarget1, iHtTarget2, iHtTarget3)
+                            app.pGage.CODWRSectionsReceived(arraySiteIDsCODWR, "", "", "", "", false, null, blnIsInitialPageLoad, iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High)
                         } else if ((arraySiteIDsUSACE_NWD.length > 0) & (app.bln_USACE_NWD_Src_NeedsProc)) {
-                            app.pGage.USACE_NWD_SectionsReceived(arraySiteIDsUSACE_NWD, "", "", "", "", false, null, blnIsInitialPageLoad, iHtTarget1, iHtTarget2, iHtTarget3)
+                            app.pGage.USACE_NWD_SectionsReceived(arraySiteIDsUSACE_NWD, "", "", "", "", false, null, blnIsInitialPageLoad, iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High)
                         }
                         else {
 
@@ -2768,7 +2926,7 @@ define([
 
                         if (!blnQuery1AtaTime) {  //if the USGS api is erroring out try the refactored method
                             app.pGage.SectionsReceived(arrayProc, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1, true,
-                                iHtTarget1, iHtTarget2, iHtTarget3)
+                                iHtTarget1, iHtTarget2, iHtTarget3,iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High)
                         }
                     })
                     .always(function () {
@@ -2830,13 +2988,22 @@ define([
             }
 
 
-            if (strSiteFlowStatus == "POTENTIAL RECREATION ISSUES") {
-                strOverallStatus = "POTENTIAL RECREATION ISSUES (click for details and see table below for more info)";
+            if (strSiteFlowStatus == "LOW FLOW") {
+                strOverallStatus = "LOW FLOW (click for details and see table below for more info)";
                 strOverallSymbol = "Red";
                 m_arrayOIDsRed.push(iOID);
             }
-
-
+            if (strSiteFlowStatus == "IDEAL FLOW") {
+                strOverallStatus = "IDEAL FLOW (click for details and see table below for more info)";
+                strOverallSymbol = "Green";
+                m_arrayOIDsGreen.push(iOID);
+            }
+            if (strSiteFlowStatus == "HIGH FLOW") {
+                strOverallStatus = "HIGH FLOW (click for details and see table below for more info)";
+                strOverallSymbol = "Purple";
+                m_arrayOIDsPurple.push(iOID);
+            }
+            
             if ((strSiteTempStatus == "EXPANDED CONSERVATION MEASURES") &
                 ((strWatershed == "North Fork Flathead") |
                     (strWatershed == "Mainstem Flathead") |

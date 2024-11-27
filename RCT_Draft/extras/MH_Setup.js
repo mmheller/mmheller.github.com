@@ -36,12 +36,15 @@ function getTokens() {
     var query = location.search;
     query = query.slice(1);
     query = query.split('&');
-    $.each(query, function (i, value) {
-        var token = value.split('=');
-        var key = decodeURIComponent(token[0]);
-        var data = decodeURIComponent(token[1]);
-        tokens[key] = data;
-    });
+
+    if (query[0] != '') {
+        $.each(query, function (i, value) {
+            var token = value.split('=');
+            var key = decodeURIComponent(token[0]);
+            var data = decodeURIComponent(token[1]);
+            tokens[key] = data;
+        });
+    }
     return tokens;
 }
 
@@ -54,18 +57,21 @@ define([
     "extras/MH_Zoom2FeatureLayers", "esri/renderers/UniqueValueRenderer",
     "esri/widgets/Legend", "esri/widgets/Locate", "esri/layers/GraphicsLayer", "esri/Graphic", 
     "esri/core/watchUtils",
+    "esri/widgets/support/DatePicker",
     "dojo/dom", "dojo/dom-style",
 ], function (
     esriConfig, Map, MapView, declare, query, Query, QueryTask, geometryService,
     webMercatorUtils, BasemapGallery, PortalSource, ScaleBar, dojo,
     PopupTemplate, FeatureLayer, Color,
     SimpleRenderer, CSVLayer,
-    MH_Zoom2FeatureLayers, UniqueValueRenderer, Legend, Locate, GraphicsLayer, Graphic, watchUtils, dom, domStyle
+    MH_Zoom2FeatureLayers, UniqueValueRenderer, Legend, Locate, GraphicsLayer, Graphic, watchUtils, DatePicker, dom, domStyle
 ) {
 
     return declare([], {
         m_pRiverSymbolsFeatureLayer: null,
         m_StreamStatusRenderer: null,
+        m_StartDateTime: null,
+        m_EndDateTime: null,
 
         addReservoirConditionFeatureLayer: function (arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum, arrayOIDsRed) {
             let arrayofArrays = [arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum];////// for each array, red takes presedence so remove OID's from non-red arrays if in Red arra
@@ -166,8 +172,8 @@ define([
             app.blnIsInitialPageLoad_Reservoir = false;
         },
 
-        addStreamConditionFeatureLayer: function (arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum, arrayOIDsRed) {
-            let arrayofArrays = [arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum];////// for each array, red takes presedence so remove OID's from non-red arrays if in Red arra
+        addStreamConditionFeatureLayer: function (arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum, arrayOIDsRed, arrayOIDsGreen, arrayOIDsPurple) {
+            let arrayofArrays = [arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum, arrayOIDsGreen, arrayOIDsPurple];////// for each array, red takes presedence so remove OID's from non-red arrays if in Red arra
             let nonRedOID = null;
             let arrayItems2remove = [];
             let index2Remove = null;
@@ -239,6 +245,26 @@ define([
                     label: "Hoot Owl and/or Conservation Measures"
                 });
             }
+
+            if (arrayOIDsGreen.length > 0) {
+                arrayValueExpression.push("Includes([" + arrayOIDPlum.join(", ") + "], $feature.OBJECTID), 'Green'");
+                ArrayUniqueVals2Add.push({
+                    value: 'Green',
+                    symbol: { type: "simple-line", color: [0, 255, 0], width: 18 },
+                    label: "Ideal Flows"
+                });
+            }
+
+            if (arrayOIDsPurple.length > 0) {
+                arrayValueExpression.push("Includes([" + arrayOIDPlum.join(", ") + "], $feature.OBJECTID), 'Purple'");
+                ArrayUniqueVals2Add.push({
+                    value: 'Purple',
+                    symbol: { type: "simple-line", color: [160, 32, 240], width: 18 },
+                    label: "High Flows"
+                });
+            }
+
+
             if (arrayOIDsRed.length > 0) {
                 let strRedLabel = "Official Restriction";
                 if (app.Basin_ID == "Smith") {
@@ -284,7 +310,7 @@ define([
             query.where = "(BasinOrWatershed = '" + strBasinOrWatershed + "') AND (Name = '" + strH2OID + "')";
             queryTask.execute(query).then(showHeaderWarningContentResults);
 
-			function showHeaderWarningContentResults(results) {
+			function showHeaderWarningContentResults(results) {  //get banner / header content
 				console.log("showHeaderWarningContentResults");
                 var resultItems = [];
                 var resultCount = results.features.length;
@@ -369,11 +395,87 @@ define([
         },
 
         Phase1: function () {
+            console.log("MH_setup Phase1");
+
             app.blnIsInitialPageLoad = true;
             app.blnIsInitialPageLoad_Reservoir = true;
 
-            console.log("MH_setup Phase1");
 
+            //////////////////////////////////////////////////////////////////////////////
+            let dteTempCurrentDate = new Date();
+            let currentHours = dteTempCurrentDate.getHours();
+            currentHoursEnd = ("0" + currentHours).slice(-2);
+            let currentMinutes = dteTempCurrentDate.getMinutes();
+            currentMinutes = ("0" + currentMinutes).slice(-2);
+            let currentSectonds = dteTempCurrentDate.getSeconds();
+            currentSectonds = ("0" + currentSectonds).slice(-2);
+            let strTempTimeOnly = "T" + currentHoursEnd + ":" + currentMinutes + ":" + currentSectonds;
+
+
+            if (getTokens()['endDate'] == undefined) {
+                app.pSup.m_EndDateTime = new Date();
+            } else {
+                let dteTempEndDate1 = new Date(getTokens()['endDate']);
+                let dteTempEndDate1B = addHoursToDate(dteTempEndDate1, 7);;  //convert day/time to local
+                function addHoursToDate(date, hours) {
+                    return new Date(new Date(date).setHours(date.getHours() + hours));
+                }
+
+                let strEndMonth = dteTempEndDate1B.getMonth() + 1;
+                strEndMonth = ("0" + strEndMonth).slice(-2);
+                let strEndDay = dteTempEndDate1B.getDate();
+                strEndDay = ("0" + strEndDay).slice(-2);
+
+                app.pSup.m_EndDateTime = new Date(dteTempEndDate1B.getFullYear().toString() + "-" + strEndMonth + "-" + strEndDay + strTempTimeOnly);
+            }
+            if (getTokens()['startDate'] == undefined) {
+                app.pSup.m_StartDateTime = new Date();
+                app.pSup.m_StartDateTime.setDate(app.pSup.m_StartDateTime.getDate() - 3);
+            } else {
+                let dteTempStartDate1 = new Date(getTokens()['startDate']);
+                let dteTempStartDate1B = addHoursToDate(dteTempStartDate1, 7);;  //convert day/time to local
+
+                let strStartMonth = dteTempStartDate1B.getMonth() + 1;
+                strStartMonth = ("0" + strStartMonth).slice(-2);
+                let strStartDay = dteTempStartDate1B.getDate();
+                strStartDay = ("0" + strStartDay).slice(-2);
+
+                app.pSup.m_StartDateTime = new Date(dteTempStartDate1B.getFullYear().toString() + "-" + strStartMonth + "-" + strStartDay + strTempTimeOnly);
+            }
+            
+            const inputDatePicker = document.getElementById("input-date-picker");
+            if (inputDatePicker) {
+                inputDatePicker.value = [app.pSup.m_StartDateTime, app.pSup.m_EndDateTime];  ////////set the values in the date range picker
+            };
+
+            var btnChangeDateRange = document.getElementById('btnChangeDateRange');
+            btnChangeDateRange.onclick = function () {
+                let strRCTURL = window.location.href;
+                let str2Remove = "";
+                // string manipulation to ensure the new URL is correct
+                if (strRCTURL.indexOf("startDate") > -1) {
+                    str2Remove = strRCTURL.slice(strRCTURL.indexOf("startDate") -1, strRCTURL.indexOf("&endDate"));  //get the start date and value to remove
+                    strRCTURL = strRCTURL.replace(str2Remove, "");
+                }
+                if (strRCTURL.indexOf("endDate") > -1) {
+                    str2Remove = strRCTURL.slice(strRCTURL.indexOf("&endDate="), strRCTURL.length);  //get the end date and value to remove
+                    strRCTURL = strRCTURL.replace(str2Remove, "");
+                }
+                let strURLPrefix = "";
+                if (strRCTURL.indexOf("index.html") == -1) {
+                    strURLPrefix = "index.html";
+                }
+                if (strRCTURL.indexOf("?") == -1) {
+                    strURLPrefix += "?";
+                } else {
+                    strURLPrefix += "&";
+                }
+                
+                strRCTURL += strURLPrefix + "startDate=" + inputDatePicker.value[0] + "&endDate=" + inputDatePicker.value[1];
+                window.open(strRCTURL, "_self");
+            };
+            //////////////////////////////////////////////////////
+            
             app.H2O_ID = getTokens()['H2O_ID'];
             app.Basin_ID = getTokens()['Basin_ID'];
 
@@ -658,10 +760,10 @@ define([
 
 
             app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
-			//app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support/FeatureServer/";  //PRODUCTION backup
-            //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22/FeatureServer/";//PRODUCTION
+			app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support/FeatureServer/";  //PRODUCTION RCT Core Layers
+            //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22/FeatureServer/";//PRODUCTION RCT Support FY22
 
-            app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Oct29_NewLayer/FeatureServer/";  //Vaughn's Dev
+            //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Oct29_NewLayer/FeatureServer/";  //Vaughn's Dev
             //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];    //Vaughn's Dev
             
 
@@ -1420,7 +1522,12 @@ define([
             app.pZoom = new MH_Zoom2FeatureLayers({}); // instantiate the class
             app.dblExpandNum = 0.5;
 
-            document.getElementById("txtFromToDate").innerHTML = "Conditions/information based on provisional gage readings of the last 3 days (" + strDateTimeMinus3UserFreindly.toString() + "-" + strDateTimeUserFreindly.toString() + ")";
+
+            let diffTime = Math.abs(app.pSup.m_EndDateTime - app.pSup.m_StartDateTime);
+            let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); 
+
+            document.getElementById("txtFromToDate").innerHTML = "Conditions/information based on provisional gage readings of the last " + diffDays.toString() +
+                                                                " days "
 
             //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
             //|||||||||||||||||||||||||||||||     This starts retevial of gage data         ||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -1919,7 +2026,7 @@ define([
 
 
 
-        Phase3: function (pArrayOIDYellow, pArrayOIDsGold, pArrayOIDsOrange, pArrayOIDsPlum, pArrayOIDsRed) {  //creating this phase 3 to create legend items for river status based on the summarized data
+        Phase3: function (pArrayOIDYellow, pArrayOIDsGold, pArrayOIDsOrange, pArrayOIDsPlum, pArrayOIDsRed, m_arrayOIDsGreen, m_arrayOIDsPurple) {  //creating this phase 3 to create legend items for river status based on the summarized data
             try {
                 app.pSup.m_pRiverSymbolsFeatureLayer.renderer = app.pSup.m_StreamStatusRenderer;
 			}
@@ -1927,6 +2034,8 @@ define([
 				console.log("Phase3 legendlayers issue::", err.message);
 				$("#divShowHideLegendBtn").hide;
 			}
+
+
 
 
             $('#dropDownId a').click(function () {

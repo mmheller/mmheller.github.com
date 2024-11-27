@@ -70,7 +70,7 @@ define([
 							x.style.visibility = 'visible';
 						}
 					} else {
-						this.app.pGage.SectionsReceived(app.pGetWarn.m_streamSectionArrray, "", "", "", "", false, null);  //if an error go continue with getting seciton detail and display
+						this.app.pGage.SectionsReceived(app.pGetWarn.m_streamSectionArrray, "", "", "", "", false, null, "", "", "", "");  //if an error go continue with getting seciton detail and display
 						this.app.pGetWarn.ClearVars();
 					}
 				}).catch(function (error) {
@@ -222,7 +222,7 @@ define([
             this.app.pGetWarn.m_StepThruCounter += 1;
 
             if (this.app.pGetWarn.m_StepThruCounter == this.m_FWPWarnFeatures.length) {
-				this.app.pGage.SectionsReceived(app.pGetWarn.m_streamSectionArrray, "", "", "", "", false, null);  //if an error go continue with getting seciton detail and display
+				this.app.pGage.SectionsReceived(app.pGetWarn.m_streamSectionArrray, "", "", "", "", false, null, "", "", "", "");  //if an error go continue with getting seciton detail and display
                 this.app.pGetWarn.ClearVars();
             } else {
                 var pNextFWPFeature = this.m_FWPWarnFeatures[this.app.pGetWarn.m_StepThruCounter];
@@ -233,7 +233,7 @@ define([
         GetFWPWarnResultsError2: function (results) {
 			console.log("Failed to get results from Sections Layer when querying by FWP Warn polygon due to an error: ", results);
             alert("Error with query on FWS warn layer2");
-			this.app.pGage.SectionsReceived(streamSectionArrray, "", "", "", "", false, null);  //if an error go continue with getting seciton detail and display
+			this.app.pGage.SectionsReceived(streamSectionArrray, "", "", "", "", false, null, "", "", "", "");  //if an error go continue with getting section detail and display
             this.app.pGetWarn.ClearVars();
         }
     });
