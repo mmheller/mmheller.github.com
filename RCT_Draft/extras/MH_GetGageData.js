@@ -2723,7 +2723,7 @@ define([
 
 
                                     if ((dblLatestCFS <= iLateRec_IdealMaxValue) & (dblLatestCFS > iLateRec_IdealMinValue)) {
-                                        strSiteFlowStatus = "IDEAL FLOW (Flow)";
+                                        strSiteFlowStatus = "IDEAL FLOW";
                                     }
 
 
