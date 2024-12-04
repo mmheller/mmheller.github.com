@@ -48,6 +48,8 @@
 			paths: { extras: package_path + "/extras" }
 		};
 	</script>
+
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
 	<script src="assets/knockout.simpleGrid.3.0.js"></script>
 
@@ -391,9 +393,9 @@
 								<div style="margin-left:30px"> <u>Waterflow target definitions for this stream section</u></div>
 								<div class="tab">
 									<table>
-										<tr><td>LIMITED RECREATION:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iCFS_Rec_Low'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateFlowPref4ConsvValue'></span></td></tr>
-										<tr><td>OPTIMUM RECREATION:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iCFS_Rec_IdealMin'></span> (cfs) <span data-bind='text: $root.CurrentDisplayGageRecord().iCFS_Rec_IdealMax'></span>  :<span data-bind='text: $root.CurrentDisplayGageRecord().strLateFlowConsvValue'></span></td></tr>
-										<tr><td>POTENTIAL RECREATION ISSUES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iCFS_Rec_High'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateFlowClosureValueFlow'></span></td></tr>
+										<tr><td>POTENTIAL WATER TRAVEL AND CONSERVATION ISSUES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_LowValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_LowValue'></span></td></tr>
+										<tr><td>OPTIMUM WATER TRAVEL:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_IdealMinValue'></span> (cfs) to <span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_IdealMaxValue'></span>:<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_IdealMaxValue'></span></td></tr>
+										<tr><td>POTENTIAL WATER TRAVEL ISSUES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_HighValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_HighValue'></span></td></tr>
 									</table>
 								</div>
 							</div>
@@ -452,6 +454,8 @@
 								</table>
 							</div>
 						</div>
+
+
 					</div>
 				</div>
 
@@ -636,10 +640,15 @@
 								<div><span data-bind='text: strDailyStat_URL'></span></div>
 								<div><span data-bind='text: overallSymbol'></span></div>
 
-								<div><span data-bind='text: iCFS_Rec_Low'></span></div>
-								<div><span data-bind='text: iCFS_Rec_IdealMin'></span></div>
-								<div><span data-bind='text: iCFS_Rec_IdealMax'></span></div>
-								<div><span data-bind='text: iCFS_Rec_High'></span></div>
+								<div><span data-bind='text: iLateRec_LowValue'></span></div>
+								<div><span data-bind='text: iLateRec_IdealMinValue'></span></div>
+								<div><span data-bind='text: iLateRec_IdealMaxValue'></span></div>
+								<div><span data-bind='text: iLateRec_HighValue'></span></div>
+
+								<div><span data-bind='text: strLateRec_LowValue'></span></div>
+								<div><span data-bind='text: strLateRec_IdealMinValue'></span></div>
+								<div><span data-bind='text: strLateRec_IdealMaxValue'></span></div>
+								<div><span data-bind='text: strLateRec_HighValue'></span></div>
 
 								<div><span data-bind='text: strWatershed'></span></div>
 								<div><span data-bind='text: strAgency'></span></div>
@@ -801,10 +810,11 @@
 			</thead>
 			<tbody data-bind="foreach: itemsOnCurrentPage">
 				<tr data-bind="foreach: $parent.columns">
-					<td><button data-bind="click:rowText.action($parent)">Official Link</button></td>
 					<td data-bind="text: typeof rowText == 'function' ? rowText($parent) : $parent[rowText] "></td>
+
 				</tr>
 			</tbody>
+
 		</table>
 	</script>
 

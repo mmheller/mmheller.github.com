@@ -68,8 +68,12 @@ define([
 ) {
 
     return declare([], {
-        m_pRiverSymbolsFeatureLayer: null,
-        m_StreamStatusRenderer: null,
+        m_pRiverSymbolsFeatureLayerCFS: null,
+        m_pRiverSymbolsFeatureLayerTemp: null,
+        //m_pRiverSymbolsFeatureLayerHt: null,
+        m_StreamStatusRendererCFS: null,
+        m_StreamStatusRendererTemp: null,
+        m_StreamStatusRendererHT: null,
         m_StartDateTime: null,
         m_EndDateTime: null,
 
@@ -101,17 +105,35 @@ define([
             let strValueExpression = "";
             let arrayValueExpression = [];
 
-            let defaultUniqueSymbolRenderer = {
+            let arrayValueExpressionTemp = [];
+
+
+            let defaultUniqueSymbolRendererCFS = {
                 type: "unique-value",  // autocasts as new UniqueValueRenderer()
                 defaultSymbol: {
                     type: "simple-line", color: [0, 169, 230], width: 1
                 }  // autocasts as new SimplelineSymbol()
             };
 
-            app.pSup.m_StreamStatusRenderer = defaultUniqueSymbolRenderer;
-            app.pSup.m_StreamStatusRenderer.defaultLabel = "Stream Section (Open)";
+            let defaultUniqueSymbolRendererTemp = {
+                type: "unique-value",  // autocasts as new UniqueValueRenderer()
+                defaultSymbol: {
+                    type: "simple-line", color: [0, 169, 230], width: 1
+                }  // autocasts as new SimplelineSymbol()
+            };
+
+            app.pSup.m_StreamStatusRendererCFS = defaultUniqueSymbolRendererTemp;
+            app.pSup.m_StreamStatusRendererCFS.defaultLabel = "Stream Section (Open)";
+
+            app.pSup.m_StreamStatusRendererTemp = defaultUniqueSymbolRenderer;
+            app.pSup.m_StreamStatusRendererTemp.defaultLabel = "Stream Section (Open)";
+
+            //app.pSup.m_StreamStatusRendererHT = defaultUniqueSymbolRenderer;
+            //app.pSup.m_StreamStatusRendererHT.defaultLabel = "Stream Section (Open)";
+
 
             let ArrayUniqueVals2Add = []
+            let ArrayUniqueVals2AddTemp = []
 
             if (arrayOIDYellow.length > 0) {
                 arrayValueExpression.push("Includes([" + arrayOIDYellow.join(", ") + "], $feature.OBJECTID), 'Yellow'");
@@ -138,14 +160,7 @@ define([
                     label: "Unofficial Closure"
                 });
             }
-            if (arrayOIDPlum.length > 0) {
-                arrayValueExpression.push("Includes([" + arrayOIDPlum.join(", ") + "], $feature.OBJECTID), 'Plum'");
-                ArrayUniqueVals2Add.push({
-                    value: 'Plum',
-                    symbol: { type: "simple-line", color: [221, 160, 221], width: 18 },
-                    label: "Hoot Owl and/or Conservation Measures"
-                });
-            }
+
             if (arrayOIDsRed.length > 0) {
                 arrayValueExpression.push("Includes([" + arrayOIDsRed.join(", ") + "], $feature.OBJECTID), 'Red'");
                 ArrayUniqueVals2Add.push({
@@ -155,18 +170,56 @@ define([
                 });
             }
 
-            if (ArrayUniqueVals2Add.length > 0) {  //getting an error when trying to use addUniqueValueInfo, I think due to the google chart api conflict, so using universal adding to an array then adding to the unique value renderer dictionary
-                strValueExpression = "When(" + arrayValueExpression.join(", ") + ", 'other')";
-                app.pSup.m_StreamStatusRenderer["valueExpression"] = strValueExpression;
-                app.pSup.m_StreamStatusRenderer["uniqueValueInfos"] = ArrayUniqueVals2Add;
+            if (arrayOIDPlum.length > 0) {
+                arrayValueExpressionTemp.push("Includes([" + arrayOIDPlum.join(", ") + "], $feature.OBJECTID), 'Plum'");
+                ArrayUniqueVals2AddTemp.push({
+                    value: 'Plum',
+                    symbol: { type: "simple-line", color: [221, 160, 221], width: 18 },
+                    label: "Hoot Owl and/or Conservation Measures"
+                });
             }
 
-            let featureLayer = new FeatureLayer({
+
+            if (ArrayUniqueVals2Add.length > 0) {  //getting an error when trying to use addUniqueValueInfo, I think due to the google chart api conflict, so using universal adding to an array then adding to the unique value renderer dictionary
+                strValueExpression = "When(" + arrayValueExpression.join(", ") + ", 'other')";
+                app.pSup.m_StreamStatusRendererCFS["valueExpression"] = strValueExpression;
+                app.pSup.m_StreamStatusRendererCFS["uniqueValueInfos"] = ArrayUniqueVals2Add;
+
+                //app.pSup.m_StreamStatusRendererHT["valueExpression"] = strValueExpression;
+                //app.pSup.m_StreamStatusRendererHT["uniqueValueInfos"] = ArrayUniqueVals2Add;
+            }
+
+            if (ArrayUniqueVals2AddTemp.length > 0) {  //getting an error when trying to use addUniqueValueInfo, I think due to the google chart api conflict, so using universal adding to an array then adding to the unique value renderer dictionary
+                strValueExpression = "When(" + arrayValueExpressionTemp.join(", ") + ", 'other')";
+
+                app.pSup.m_StreamStatusRendererTemp["valueExpression"] = strValueExpression;
+                app.pSup.m_StreamStatusRendererTemp["uniqueValueInfos"] = ArrayUniqueVals2AddTemp;
+            }
+
+            let featureLayerCFS = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[5],
                 outFields: ["OBJECTID"],
-                renderer: app.pSup.m_StreamStatusRenderer
+                renderer: app.pSup.m_StreamStatusRendererCFS
             });
-            app.map.layers.add(featureLayer, 5);
+
+            let featureLayerTemp = new FeatureLayer({
+                url: app.strHFL_URL + app.idx11[5],
+                outFields: ["OBJECTID"],
+                renderer: app.pSup.m_StreamStatusRendererTemp
+            });
+
+            //let featureLayerHT = new FeatureLayer({
+            //    url: app.strHFL_URL + app.idx11[5],
+            //    outFields: ["OBJECTID"],
+            //    renderer: app.pSup.m_StreamStatusRendererHT
+            //});
+
+
+            app.map.layers.add(featureLayerCFS, 5);
+            app.map.layers.add(featureLayerTemp, 5);
+            //app.map.layers.add(featureLayerHT, 5);
+
+
             console.log("Completed: Add Stream Condition FeatureLayer and custom legend")
 
             app.blnIsInitialPageLoad_Reservoir = false;
@@ -177,40 +230,91 @@ define([
             let nonRedOID = null;
             let arrayItems2remove = [];
             let index2Remove = null;
-            for (let i = 0; i < arrayofArrays.length; i++) {
-                for (let iColor = 0; iColor < arrayofArrays[i].length; iColor++) {
-                    nonRedOID = arrayofArrays[i][iColor];
-                    for (let iRedOID = 0; iRedOID < arrayOIDsRed.length; iRedOID++) {
-                        if (nonRedOID == arrayOIDsRed[iRedOID]) {  //remove the OID from the non-red array
-                            arrayItems2remove.push(nonRedOID);
-                            break;
-                        }
-                    }
-                }
-                for (let iRemove = 0; iRemove < arrayItems2remove.length; iRemove++) {
-                    index2Remove = arrayofArrays[i].indexOf(arrayItems2remove[iRemove]);
-                    if (index2Remove > -1) {
-                        arrayofArrays[i].splice(index2Remove, 1); // 2nd parameter means remove one item only
-                    }
-                }
-                arrayItems2remove = [];
-            }
+
+
+            //for (let i = 0; i < arrayofArrays.length; i++) {
+            //    for (let iColor = 0; iColor < arrayofArrays[i].length; iColor++) {
+            //        nonRedOID = arrayofArrays[i][iColor];
+            //        for (let iRedOID = 0; iRedOID < arrayOIDsRed.length; iRedOID++) {
+            //            if (nonRedOID == arrayOIDsRed[iRedOID]) {  //remove the OID from the non-red array
+            //                arrayItems2remove.push(nonRedOID);
+            //                break;
+            //            }
+            //        }
+            //    }
+            //    for (let iRemove = 0; iRemove < arrayItems2remove.length; iRemove++) {
+            //        index2Remove = arrayofArrays[i].indexOf(arrayItems2remove[iRemove]);
+            //        if (index2Remove > -1) {
+            //            arrayofArrays[i].splice(index2Remove, 1); // 2nd parameter means remove one item only
+            //        }
+            //    }
+            //    arrayItems2remove = [];
+            //}
+
+
+
             //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
             console.log("add Stream Condition FeatureLayer and custom legend")
             let strValueExpression = "";
             let arrayValueExpression = [];
+            let arrayValueExpressionTemp = [];
 
-            let defaultUniqueSymbolRenderer = {
+            let defaultUniqueSymbolRendererCFS = {
                 type: "unique-value",  // autocasts as new UniqueValueRenderer()
                 defaultSymbol: {
                     type: "simple-line", color: [0, 169, 230], width: 1
                 }  // autocasts as new SimplelineSymbol()
             };
 
-            app.pSup.m_StreamStatusRenderer = defaultUniqueSymbolRenderer;
-            app.pSup.m_StreamStatusRenderer.defaultLabel = "Stream Section (Open)";
+            let defaultUniqueSymbolRendererTemp = {
+                type: "unique-value",  // autocasts as new UniqueValueRenderer()
+                defaultSymbol: {
+                    type: "simple-line", color: [0, 169, 230], width: 1
+                }  // autocasts as new SimplelineSymbol()
+            };
+
+            app.pSup.m_StreamStatusRendererCFS = defaultUniqueSymbolRendererCFS;
+            app.pSup.m_StreamStatusRendererCFS.defaultLabel = "Stream Section (Open symbolized otherwise)";
+
+            app.pSup.m_StreamStatusRendererTemp = defaultUniqueSymbolRendererTemp;
+            app.pSup.m_StreamStatusRendererTemp.defaultLabel = "Stream Section (Open unless symbolized otherwise)";
+
+            //app.pSup.m_StreamStatusRendererHT = defaultUniqueSymbolRenderer;
+            //app.pSup.m_StreamStatusRendererHT.defaultLabel = "Stream Section (Open)";
+
           
             let ArrayUniqueVals2Add = []
+            let ArrayUniqueVals2AddTemp = []
+
+            ////////////////////////work with the Temp layer first since that needs to be displayed ontop of the CFS/Ht layer
+            if (arrayOIDPlum.length > 0) {
+                arrayValueExpressionTemp.push("Includes([" + arrayOIDPlum.join(", ") + "], $feature.OBJECTID), 'Plum'");
+                ArrayUniqueVals2AddTemp.push({
+                    value: 'Plum',
+                    symbol: { type: "simple-line", color: [221, 160, 221], width: 12 },
+                    label: "Hoot Owl and/or Conservation Measures"
+                });
+            }
+
+
+            if (ArrayUniqueVals2AddTemp.length > 0) {  //getting an error when trying to use addUniqueValueInfo, I think due to the google chart api conflict, so using universal adding to an array then adding to the unique value renderer dictionary
+                strValueExpression = "When(" + arrayValueExpressionTemp.join(", ") + ", 'other')";
+
+                app.pSup.m_StreamStatusRendererTemp["valueExpression"] = strValueExpression;
+                app.pSup.m_StreamStatusRendererTemp["uniqueValueInfos"] = ArrayUniqueVals2AddTemp;
+
+                let featureLayerTemp = new FeatureLayer({
+                    url: app.strHFL_URL + app.idx11[5],
+                    outFields: ["OBJECTID"],
+                    renderer: app.pSup.m_StreamStatusRendererTemp
+                });
+
+                app.map.layers.add(featureLayerTemp, 5);
+            }
+
+
+
+
 
             if (arrayOIDYellow.length > 0) {
                 arrayValueExpression.push("Includes([" + arrayOIDYellow.join(", ") + "], $feature.OBJECTID), 'Yellow'");
@@ -233,21 +337,16 @@ define([
                 arrayValueExpression.push("Includes([" + arrayOIDsOrange.join(", ") + "], $feature.OBJECTID), 'Orange'");
                 ArrayUniqueVals2Add.push({
                     value: 'Orange',
-                    symbol: { type: "simple-line", color: [253, 106, 2], width: 18 },
+                    symbol: {
+                        type: "simple-line", color: [253, 106, 2], width: 18
+                    },
                     label: "Unofficial Closure"
                 });
             }
-            if (arrayOIDPlum.length > 0) {
-                arrayValueExpression.push("Includes([" + arrayOIDPlum.join(", ") + "], $feature.OBJECTID), 'Plum'");
-                ArrayUniqueVals2Add.push({
-                    value: 'Plum',
-                    symbol: { type: "simple-line", color: [221, 160, 221], width: 18 },
-                    label: "Hoot Owl and/or Conservation Measures"
-                });
-            }
+
 
             if (arrayOIDsGreen.length > 0) {
-                arrayValueExpression.push("Includes([" + arrayOIDPlum.join(", ") + "], $feature.OBJECTID), 'Green'");
+                arrayValueExpression.push("Includes([" + arrayOIDsGreen.join(", ") + "], $feature.OBJECTID), 'Green'");
                 ArrayUniqueVals2Add.push({
                     value: 'Green',
                     symbol: { type: "simple-line", color: [0, 255, 0], width: 18 },
@@ -256,7 +355,7 @@ define([
             }
 
             if (arrayOIDsPurple.length > 0) {
-                arrayValueExpression.push("Includes([" + arrayOIDPlum.join(", ") + "], $feature.OBJECTID), 'Purple'");
+                arrayValueExpression.push("Includes([" + arrayOIDsPurple.join(", ") + "], $feature.OBJECTID), 'Purple'");
                 ArrayUniqueVals2Add.push({
                     value: 'Purple',
                     symbol: { type: "simple-line", color: [160, 32, 240], width: 18 },
@@ -280,16 +379,31 @@ define([
 
             if (ArrayUniqueVals2Add.length > 0) {  //getting an error when trying to use addUniqueValueInfo, I think due to the google chart api conflict, so using universal adding to an array then adding to the unique value renderer dictionary
                 strValueExpression = "When(" + arrayValueExpression.join(", ") + ", 'other')";
-                app.pSup.m_StreamStatusRenderer["valueExpression"] = strValueExpression;
-                app.pSup.m_StreamStatusRenderer["uniqueValueInfos"] = ArrayUniqueVals2Add;
+                app.pSup.m_StreamStatusRendererCFS["valueExpression"] = strValueExpression;
+                app.pSup.m_StreamStatusRendererCFS["uniqueValueInfos"] = ArrayUniqueVals2Add;
+                //app.pSup.m_StreamStatusRendererHT["valueExpression"] = strValueExpression;
+                //app.pSup.m_StreamStatusRendererHT["uniqueValueInfos"] = ArrayUniqueVals2Add;
             }
 
-            let featureLayer = new FeatureLayer({
+            let featureLayerCFS = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[5],
                 outFields: ["OBJECTID"],
-                renderer: app.pSup.m_StreamStatusRenderer
+                renderer: app.pSup.m_StreamStatusRendererCFS
             });
-            app.map.layers.add(featureLayer, 5);
+            //let featureLayerHt = new FeatureLayer({
+            //    url: app.strHFL_URL + app.idx11[5],
+            //    outFields: ["OBJECTID"],
+            //    renderer: app.pSup.m_StreamStatusRendererHT
+            //});
+
+            app.map.layers.add(featureLayerCFS, 5);
+
+            //app.map.layers.add(featureLayerHt, 5);
+
+
+           
+            
+
             console.log("Completed: Add Stream Condition FeatureLayer and custom legend")
 
             app.blnIsInitialPageLoad = false;
@@ -886,9 +1000,11 @@ define([
                             weight: "bold"
                         }
                     },
-                    labelPlacement: "right-center",
+                    labelPlacement: "center-right",
+                    //labelPlacement: "right-center",
                     labelExpressionInfo: {
-                        expression: "'Turah Gage'"
+                        expression: "Replace(Replace(Replace(Replace(Replace($feature.GageTitle, 'Blackfoot River near ',''), 'Clark Fork at ',''),' Bridge nr Bonner ',''),' MT',''), 'MT','') + ' Gage'"
+                        //expression: "'Turah Gage'"
                     },
                     //minScale: 600000
                 };
@@ -902,7 +1018,7 @@ define([
 
 
 
-                pGageFeatureLayerHighlighted.definitionExpression = "GageTitle = 'Clark Fork at Turah Bridge nr Bonner MT'";
+                pGageFeatureLayerHighlighted.definitionExpression = "(GageTitle = 'Clark Fork at Turah Bridge nr Bonner MT') OR (GageTitle = 'Blackfoot River near Bonner MT')";
             }
 
 
@@ -1298,18 +1414,28 @@ define([
             templateFWP.content = "<b>{TITLE}</b><br>{WATERBODY}<br>{DESCRIPTION} Publish Date:{PUBLISHDATE}";
             app.strFWPURL = "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/ArcGIS/rest/services/FISH_WATERBODY_RESTRICTIONS/FeatureServer/0";
 
-			//let dteDateTime = new Date();
             let strDateTime = app.pGage.GetDatesForRunningRCT()[1];
             let strDateTimeUserFreindly = app.pGage.GetDatesForRunningRCT()[3];;
             let strDateTimeMinus3 = app.pGage.GetDatesForRunningRCT()[0];
-            let strDateTimeMinus3UserFreindly = app.pGage.GetDatesForRunningRCT()[2] ;
+            let strDateTimeMinus3UserFreindly = app.pGage.GetDatesForRunningRCT()[2];
+            let strStartDateTimeUserFreindly = app.pGage.GetDatesForRunningRCT()[5];
 
             console.log(app.pGage.GetDatesForRunningRCT()[0] + " " + app.pGage.GetDatesForRunningRCT()[1] + " " + app.pGage.GetDatesForRunningRCT()[2] + " " + app.pGage.GetDatesForRunningRCT()[3]);
             
             if (app.test) {                //app.strFWPURL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/TestH2ORest/FeatureServer/0";
                 app.strFWPQuery = "(PUBLISHDATE > '7/15/2017') AND (PUBLISHDATE < '7/20/2017')";
             } else {
-				app.strFWPQuery = "(ARCHIVEDATE IS NULL) OR (ARCHIVEDATE > '" + strDateTimeUserFreindly + "')";
+                //if dealing with an earier date then consider the start and end dates, otherwise look for the open Official Closure
+                let dteToday = new Date();
+                dteToday.setDate(dteToday.getDate() - 1);  //round to yesterdays date 
+
+                if (app.pSup.m_EndDateTime < dteToday) {  
+                    app.strFWPQuery = "(ARCHIVEDATE > '" + strStartDateTimeUserFreindly + "') AND (ARCHIVEDATE < '" + strDateTimeUserFreindly + "')";
+                } else {
+                    app.strFWPQuery = "(ARCHIVEDATE IS NULL) OR (ARCHIVEDATE > '" + strDateTimeUserFreindly + "')";
+                }
+
+				
             }
 			            
             let sfsr_FWP = {
@@ -1456,11 +1582,24 @@ define([
             });
             pBasinsMaskFeatureLayer.definitionExpression = "Basin IS NULL";
             
-            app.pSup.m_pRiverSymbolsFeatureLayer = new FeatureLayer({
+            app.pSup.m_pRiverSymbolsFeatureLayerCFS = new FeatureLayer({
                 //url: app.strHFL_URL + "10",
                 url: app.strHFL_URL + app.idx11[10],
                 visible: true
             });
+
+            app.pSup.m_pRiverSymbolsFeatureLayerTemp = new FeatureLayer({
+                //url: app.strHFL_URL + "10",
+                url: app.strHFL_URL + app.idx11[10],
+                visible: true
+            });
+
+            //app.pSup.m_pRiverSymbolsFeatureLayerHt = new FeatureLayer({
+            //    //url: app.strHFL_URL + "10",
+            //    url: app.strHFL_URL + app.idx11[10],
+            //    visible: true
+            //});
+
 
             let CSV_Renderer = {
                 type: "simple",  // autocasts as new SimpleRenderer()
@@ -1491,8 +1630,9 @@ define([
 
             app.graphicsLayer = new GraphicsLayer();
 
-
-            let arrayLayer2add = [app.pSup.m_pRiverSymbolsFeatureLayer, pWatershedsMaskFeatureLayer, pBasinsMaskFeatureLayer,
+            //let arrayLayer2add = [app.pSup.m_pRiverSymbolsFeatureLayerHt, app.pSup.m_pRiverSymbolsFeatureLayerTemp, app.pSup.m_pRiverSymbolsFeatureLayerCFS,
+            let arrayLayer2add = [app.pSup.m_pRiverSymbolsFeatureLayerTemp, app.pSup.m_pRiverSymbolsFeatureLayerCFS,
+                pWatershedsMaskFeatureLayer, pBasinsMaskFeatureLayer,
                 pWatershedsFeatureLayer, pBasinsFeatureLayer, pLakeResFeatureLayer, pCartoFeatureLayer, pCartoFeatureLayerPoly,
                 pSectionsFeatureLayer, pSNOTELFeatureLayer, pNOAAFeatureLayer, pFWPFeatureLayer,
                 pBLMFeatureLayer, pBLM_RecFeatureLayer, pGageFeatureLayer, pEPointsFeatureLayer,
@@ -1559,10 +1699,12 @@ define([
             legendLayers.push({ layer: pGageFeatureLayer, title: 'Gages' });
 
             if (app.Basin_ID == "Upper Clark Fork") {
-                legendLayers.push({ layer: pGageFeatureLayerHighlighted, title: 'Turah Gage' });
+                legendLayers.push({ layer: pGageFeatureLayerHighlighted, title: 'Turah and Bonner Gages' });
             }
 
-            legendLayers.push({ layer: app.pSup.m_pRiverSymbolsFeatureLayer, title: 'River Status' });
+            legendLayers.push({ layer: app.pSup.m_pRiverSymbolsFeatureLayerCFS, title: 'River Status' });
+            legendLayers.push({ layer: app.pSup.m_pRiverSymbolsFeatureLayerTemp, title: 'River Status (Temp)' });
+            //legendLayers.push({ layer: app.pSup.m_pRiverSymbolsFeatureLayerHt, title: 'River Status (Ht)' });
 
 
             if (app.Basin_ID == "UMH") {
@@ -1651,7 +1793,7 @@ define([
                     if ((value.getColumnLabel(0) == "DatetimeTMP") | (value.getColumnLabel(0) == "DatetimeTMPSingle")) {
                         strTitle = "Stream Temperature (F)"
                     }
-                    else if ((value.getColumnLabel(0) == "DatetimeCFS") | (value.getColumnLabel(0) == "DatetimeCFSSingle")) {
+                    else if ((value.getColumnLabel(0) == "DatetimeCFS") | (value.getColumnLabel(0) == "DatetimeCFSSingle") | (value.getColumnLabel(0) == "DatetimeCFSRecSingle")) {
                         strTitle = "Stream Section Discharge (CFS)"
                     }
                     else if ((value.getColumnLabel(0) == "DatetimeHt") | (value.getColumnLabel(0) == "DatetimeHtSingle")) {
@@ -1699,9 +1841,7 @@ define([
                             '#df7206'];  //dark orange
                         options.series = optionsSeries;
                         options.colors = optionsSeriesColors;
-                    //}
-                    //else if (value.getColumnLabel(0) == "DatetimeHt") {
-                    //    options.trendlines = { 0: {} };
+
                     } else if (value.getColumnLabel(0) == "DatetimeTMPSingle") {
                         var options4ChartAreaTrendlines = {
                             0: {
@@ -1719,8 +1859,81 @@ define([
                                                     '#919191'];  //medium grey
                         options.series = optionsSeries;
                         options.colors = optionsSeriesColors;
-                    } else if ((value.getColumnLabel(0) == "DatetimeHtSingle") |
-                                                        (value.getColumnLabel(0) == "DatetimeCFSSingle")) {
+                    } else if (value.getColumnLabel(0) == "DatetimeCFSRecSingle") {
+                        var optionsSeries = null;
+                        var optionsSeriesColors = null;
+
+                        if (value.getNumberOfColumns() == 7) {
+                            optionsSeries = {
+                                0: { lineWidth: 3 }, //blue
+                                1: { lineWidth: 10, lineDashStyle: [1, 1] },  //light grey
+                                2: { lineWidth: 10, lineDashStyle: [1, 1] },  //medium grey
+                                3: { lineWidth: 10, lineDashStyle: [1, 1] },  //medium grey
+                                4: { lineWidth: 10, lineDashStyle: [1, 1] }, //dark grey
+                                5: { lineWidth: 8 }  //dark orange
+                            };
+                            optionsSeriesColors = ['#3385ff', //blue
+                                '#ccced0',  //light grey
+                                '#919191',  //medium grey
+                                '#919191',  //medium grey
+                                '#61605f', //dark grey
+                                '#df7206'];  //dark orange
+                        } else if (value.getNumberOfColumns() == 6) {
+                            optionsSeries = {
+                                0: { lineWidth: 3 }, //blue
+                                1: { lineWidth: 10, lineDashStyle: [1, 1] },  //medium grey
+                                2: { lineWidth: 10, lineDashStyle: [1, 1] }, //dark grey
+                                3: { lineWidth: 8 }  //dark orange
+                            };
+                            optionsSeriesColors = ['#3385ff', //blue
+                                '#919191',  //medium grey
+                                '#61605f', //dark grey
+                                '#df7206'];  //dark orange
+                        } else if (value.getNumberOfColumns() == 4) {
+                            optionsSeries = {
+                                0: { lineWidth: 3 }, //blue
+                                1: { lineWidth: 10, lineDashStyle: [1, 1] }, //dark grey
+                                2: { lineWidth: 8 }  //dark orange
+                            };
+                            optionsSeriesColors = ['#3385ff', //blue
+                                '#61605f', //dark grey
+                                '#df7206'];  //dark orange
+                        } else if ((value.getNumberOfColumns() == 3) & (value.getColumnLabel(0) == "DatetimeCFSSingle")) {
+                            optionsSeries = {
+                                0: { lineWidth: 3 }, //blue
+                                1: { lineWidth: 8 }  //dark orange
+                                //1: { lineWidth: 10, lineDashStyle: [1, 1] }, //dark grey
+                            };
+                            optionsSeriesColors = ['#3385ff', //blue
+                                '#df7206', ////dark orange
+                                '#61605f']; ///dark grey
+                        } else if ((value.getNumberOfColumns() == 3) & (value.getColumnLabel(0) == "DatetimeHtSingle")) {
+                            optionsSeries = {
+                                0: { lineWidth: 3 }, //blue
+                                //1: { lineWidth: 8 }  //dark orange
+                                1: { lineWidth: 10, lineDashStyle: [1, 1] }, //dark grey
+                            };
+                            optionsSeriesColors = ['#3385ff', //blue
+                                '#61605f', //dark grey
+                                '#df7206'];  //dark orange
+                        }
+
+                        let strTrendLinePrefix = "Gage Ht";
+                        if ((value.getColumnLabel(0) == "DatetimeCFSSingle") | (value.getColumnLabel(0) == "DatetimeCFSRecSingle")) {
+                            strTrendLinePrefix = "CFS";
+                        }
+
+                        var options4ChartAreaTrendlines = {
+                            0: {
+                                labelInLegend: strTrendLinePrefix + ' Trend Line',
+                                visibleInLegend: true,
+                            }
+                        };
+                        options.trendlines = options4ChartAreaTrendlines;
+                        options.series = optionsSeries;
+                        options.colors = optionsSeriesColors;
+                    }else if ((value.getColumnLabel(0) == "DatetimeHtSingle") |
+                                        (value.getColumnLabel(0) == "DatetimeCFSSingle")) {
                         var optionsSeries = null;
                         var optionsSeriesColors = null;
 
@@ -1778,7 +1991,7 @@ define([
                         }
 
                         let strTrendLinePrefix = "Gage Ht";
-                        if (value.getColumnLabel(0) == "DatetimeCFSSingle") {
+                        if ((value.getColumnLabel(0) == "DatetimeCFSSingle") | (value.getColumnLabel(0) == "DatetimeCFSRecSingle")) {
                             strTrendLinePrefix = "CFS";
                         }
 
@@ -1959,6 +2172,7 @@ define([
             let strQueryDef = "1=1";
             let strQueryDef5 = "";
             let strQueryDef6 = "";
+            let strQueryDef7 = "";
 
             arrayTmp4Query3 =[];
             if((app.Basin_ID == undefined) & (typeof app.H2O_ID == 'undefined')) {
@@ -2011,32 +2225,42 @@ define([
 
             }
 
-            if ((app.Basin_ID == "Upper Clark Fork") | (app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork")) {
-                strQueryDef6 = "(SectionName in ('Clark Fork Section 1','Clark Fork Section 2','Clark Fork Section 3','Clark Fork Section 4','Clark Fork Section 5','Clark Fork Section 6','Rock Creek Section 1'))" +                                    //Turah gage functionality
-                    " OR (StreamName in ('Blackfoot River', 'Little Blackfoot River','Gold Creek','Flint Creek','Middle Fork Rock Creek','East Fork Rock Creek','Silver Bow Creek','Clearwater River','North Fork Blackfoot River','Nevada Creek'))";
+            if ((app.Basin_ID == "Upper Clark Fork") | (app.H2O_ID == "Upper Clark Fork")) {
+                strQueryDef6 = "(SectionName in ('Clark Fork Section 1','Clark Fork Section 2','Clark Fork Section 3','Clark Fork Section 4','Clark Fork Section 5','Clark Fork Section 6','Rock Creek Section 1'))" +                                    //Turah gage propogate functionality
+                    " OR (StreamName in ('Little Blackfoot River','Gold Creek','Flint Creek','Middle Fork Rock Creek','East Fork Rock Creek','Silver Bow Creek'))";
+
+                strQueryDef6 = "(SectionName in ('Clark Fork Section 1','Clark Fork Section 2','Clark Fork Section 3','Clark Fork Section 4','Clark Fork Section 5','Clark Fork Section 6','Rock Creek Section 1'))" +                                    //Turah gage propogate functionality
+                    " OR (StreamName in ('Little Blackfoot River','Gold Creek','Flint Creek','Middle Fork Rock Creek','East Fork Rock Creek','Silver Bow Creek','Clearwater River','North Fork Blackfoot River','Nevada Creek'))";
+
             } else if ((app.Basin_ID == "UMH") | (app.H2O_ID == "Big Hole")) {
-                strQueryDef6 = "(SectionName in ('Big Hole River Section 3', 'Big Hole River Section 4'))" +                                    //Turah gage functionality
+                strQueryDef6 = "(SectionName in ('Big Hole River Section 3', 'Big Hole River Section 4'))" +                                    //Big hole propogate  functionality
                     " OR (StreamName in (''))";
             }
 
             //strQueryDef6 = "(Basin in ('Upper Clark Fork')) OR (Watershed in ('Blackfoot'))";                                                                 //Turah / Big Hole River Section 4' gage functionality
 
-            return [strQueryDef1, strQueryDef2, strQueryDef3, strQueryDef4, strQueryDef5, strQueryDef6];
+            if ((app.Basin_ID == "Upper Clark Fork") | (app.H2O_ID == "Blackfoot")) {
+                strQueryDef7 = "(SectionName in ('nothing'))" +                                    //Turah gage propogate functionality
+                    " OR (StreamName in ('Blackfoot River','Clearwater River','North Fork Blackfoot River','Nevada Creek'))";
+            }
+
+
+            return [strQueryDef1, strQueryDef2, strQueryDef3, strQueryDef4, strQueryDef5, strQueryDef6, strQueryDef7];
         },
 
 
 
         Phase3: function (pArrayOIDYellow, pArrayOIDsGold, pArrayOIDsOrange, pArrayOIDsPlum, pArrayOIDsRed, m_arrayOIDsGreen, m_arrayOIDsPurple) {  //creating this phase 3 to create legend items for river status based on the summarized data
             try {
-                app.pSup.m_pRiverSymbolsFeatureLayer.renderer = app.pSup.m_StreamStatusRenderer;
+                app.pSup.m_pRiverSymbolsFeatureLayerCFS.renderer = app.pSup.m_StreamStatusRendererCFS;
+                app.pSup.m_pRiverSymbolsFeatureLayerTemp.renderer = app.pSup.m_StreamStatusRendererTemp;
+                //app.pSup.m_pRiverSymbolsFeatureLayerHt.renderer = app.pSup.m_StreamStatusRendererHT;
 			}
 			catch (err) {
 				console.log("Phase3 legendlayers issue::", err.message);
 				$("#divShowHideLegendBtn").hide;
 			}
-
-
-
+            
 
             $('#dropDownId a').click(function () {
                 let strSelectedText = $(this).text();

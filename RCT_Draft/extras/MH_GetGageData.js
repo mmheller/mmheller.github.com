@@ -142,18 +142,14 @@ define([
         m_arrayOIDsRed: [],
         m_arrayOIDsGreen: [],
         mIDXQuery1AtaTime: 0,
-        //m_blnQuery4DNRCGages: false,
+
         m_arrayDNRC_Sens_Loc: null,
-        //m_blnQuery4CODWRGages: false,
+
         m_arrayCODWR_Sens_Loc: null,
 
-        //m_blnQuery4USACE_NWDGages: false,
+
         m_arrayUSACE_NWD_Sens_Loc: null,
 
-        //m_bln_USGS_Src_NeedsProc: false,
-        //m_bln_CODWR_Src_NeedsProc: false,
-        //m_bln_MTDNRC_Src_NeedsProc: false,
-        //m_bln_USACE_NWD_Src_NeedsProc: false,
 
         gageReadings: function (strSiteName,
             strHyperlinkURL,
@@ -201,13 +197,14 @@ define([
             strLateHtPref4ConsvValue,
             strLateHtConsvValue,
             strLateHtClosureValue,
-                         iCFS_Rec_IdealMin,
-                         iCFS_Rec_IdealMax,
-                         strCFS_Rec_Ideal_Note,
-                         iCFS_Rec_High,
-                         strCFS_Rec_High_Note,
-                         iCFS_Rec_Low,
-                         strCFS_Rec_Low_Note,
+                iLateRec_LowValue,
+                iLateRec_IdealMinValue,
+                iLateRec_IdealMaxValue,
+                iLateRec_HighValue,
+                strLateRec_LowValue,
+                strLateRec_IdealMinValue,
+                strLateRec_IdealMaxValue,
+                strLateRec_HighValue,
             strAgency
             //            , dteLatestDateTimeHt, dteLatestHt, str3DayHtTrend
         ) {// Class to represent a row in the gage values grid
@@ -291,15 +288,17 @@ define([
             self.strLateHtPref4ConsvValue = strLateHtPref4ConsvValue;
             self.strLateHtConsvValue = strLateHtConsvValue;
             self.strLateHtClosureValue = strLateHtClosureValue;
+            
+            self.iLateRec_LowValue = iLateRec_LowValue;
+            self.iLateRec_IdealMinValue = iLateRec_IdealMinValue;
+            self.iLateRec_IdealMaxValue = iLateRec_IdealMaxValue;
+            self.iLateRec_HighValue = iLateRec_HighValue;
 
-                self.iCFS_Rec_IdealMin = iCFS_Rec_IdealMin;
-                self.iCFS_Rec_IdealMax = iCFS_Rec_IdealMax;
-                self.strCFS_Rec_Ideal_Note = strCFS_Rec_Ideal_Note;
-                self.iCFS_Rec_High = iCFS_Rec_High;
-                self.strCFS_Rec_High_Note = strCFS_Rec_High_Note;
-                self.iCFS_Rec_Low = iCFS_Rec_Low;
-                self.strCFS_Rec_Low_Note = strCFS_Rec_Low_Note;
-                
+            self.strLateRec_LowValue = strLateRec_LowValue;
+            self.strLateRec_IdealMinValue = strLateRec_IdealMinValue;
+            self.strLateRec_IdealMaxValue = strLateRec_IdealMaxValue;
+            self.strLateRec_HighValue = strLateRec_HighValue;
+            
             self.strAgency = strAgency;
         },
 
@@ -317,10 +316,13 @@ define([
             var strCFS_Prep4Conserv = "";
             var strCFS_Conserv = "";
             var strCFS_NotOfficialClosure = "";
+            var strCFS_Rec_Ideal_Note = "";
+            var strCFS_Rec_High_Note = "";
+            var strCFS_Rec_Low_Note = "";
             var strHt_Prep4Conserv = "";
             var strHt_Conserv = "";
             var strHt_NotOfficialClosure = "";
-
+            
             var iConsvTemp = 0;
             var strStratDate = "";
             var strtoDate = "";
@@ -336,13 +338,10 @@ define([
             var strStartEndpoint = "";
             var strEndEndpoint = "";
 
-            var iCFS_Rec_IdealMin = 99999;
-            var iCFS_Rec_IdealMax = 99999;
-            var strCFS_Rec_Ideal_Note = "";
-            var iCFS_Rec_High = 99999;
-            var strCFS_Rec_High_Note = "";
-            var iCFS_Rec_Low = 99999;
-            var strCFS_Rec_Low_Note = "";
+            var iCFS_Note_Rec_IdealMin = 99999;
+            var iCFS_Note_Rec_IdealMax = 99999;
+            var iCFS_Note_Rec_High = 99999;
+            var iCFS_Note_Rec_Low = 99999;
             
             dom.map(items[0].features, function (itemSection) {  //loop through the sections!!!!
                 //console.log("handleSectionGageResults2");
@@ -357,6 +356,9 @@ define([
                 strCFS_Prep4Conserv = "";
                 strCFS_Conserv = "";
                 strCFS_NotOfficialClosure = "";
+                strCFS_Rec_Ideal = "";
+                strCFS_Rec_High = "";
+                strCFS_Rec_Low = "";
                 strHt_Prep4Conserv = "";
                 strHt_Conserv = "";
                 strHt_NotOfficialClosure = "";
@@ -369,6 +371,10 @@ define([
                 iCFS_Note_Prep4Conserv = 99999;
                 iCFS_Note_Conserv = 99999;
                 iCFS_Note_NotOfficialClosure = 99999;
+                iCFS_Note_Rec_IdealMin = 99999;
+                iCFS_Note_Rec_IdealMax = 99999;
+                iCFS_Note_Rec_High = 99999;
+                iCFS_Note_Rec_Low = 99999;
                 iHt_Note_Prep4Conserv = 99999;
                 iHt_Note_Conserv = 99999;
                 iHt_Note_NotOfficialClosure = 99999;
@@ -377,34 +383,35 @@ define([
                 strStartEndpoint = "";
                 strEndEndpoint = "";
                 strWatershed = "";
-                //strAgency = "";
-
-                iCFS_Rec_IdealMin = 99999;
-                iCFS_Rec_IdealMax = 99999;
-                strCFS_Rec_Ideal_Note = "";
-                iCFS_Rec_High = 99999;
-                strCFS_Rec_High_Note = "";
-                iCFS_Rec_Low = 99999;
-                strCFS_Rec_Low_Note = "";
-
-
+                
                 strStreamName = itemSection.attributes.StreamName;
                 strSectionID = itemSection.attributes.SectionID;
                 strSectionName_ = itemSection.attributes.SectionName;
                 strCFS_Prep4Conserv = itemSection.attributes.CFS_Prep4Conserv;
                 strCFS_Conserv = itemSection.attributes.CFS_Conserv;
                 strCFS_NotOfficialClosure = itemSection.attributes.CFS_NotOfficialClosure;
-
+                
                 strHt_Prep4Conserv = itemSection.attributes.Ht_Prep4Conserv;
                 strHt_Conserv = itemSection.attributes.Ht_Conserv;
                 strHt_NotOfficialClosure = itemSection.attributes.Ht_NotOfficialClosure;
 
                 iConsvTemp = itemSection.attributes.ConsvTemp,
 
-                    iCFS_Note_Prep4Conserv = itemSection.attributes.CFS_Note_Prep4Conserv;
+                iCFS_Note_Prep4Conserv = itemSection.attributes.CFS_Note_Prep4Conserv;
                 iCFS_Note_Conserv = itemSection.attributes.CFS_Note_Conserv;
                 iCFS_Note_NotOfficialClosure = itemSection.attributes.CFS_Note_NotOfficialClosure;
 
+
+                strCFS_Rec_Low = itemSection.attributes.CFS_Rec_Low;
+                strCFS_Rec_IdealMin = itemSection.attributes.CFS_Rec_IdealMin;
+                strCFS_Rec_IdealMax = itemSection.attributes.CFS_Rec_IdealMax;
+                strCFS_Rec_High = itemSection.attributes.CFS_Rec_High;
+
+                iCFS_Note_Rec_Low = itemSection.attributes.CFS_Rec_Low_Note;
+                iCFS_Note_Rec_IdealMin = itemSection.attributes.CFS_Rec_Ideal_Note;
+                iCFS_Note_Rec_IdealMax = itemSection.attributes.CFS_Rec_Ideal_Note;
+                iCFS_Note_Rec_High = itemSection.attributes.CFS_Rec_High_Note;
+                
                 iHt_Note_Prep4Conserv = itemSection.attributes.Ht_Note_Prep4Conserv;
                 iHt_Note_Conserv = itemSection.attributes.Ht_Note_Conserv;
                 iHt_Note_NotOfficialClosure = itemSection.attributes.Ht_Note_NotOfficialClosure;
@@ -412,15 +419,6 @@ define([
 
                 iOID = itemSection.attributes.OBJECTID;
                 strWatershed = itemSection.attributes.Watershed;
-                
-                CFS_Rec_IdealMin = itemSection.attributes.CFS_Rec_IdealMin;
-                CFS_Rec_IdealMax = itemSection.attributes.CFS_Rec_IdealMax;
-                CFS_Rec_Ideal_Note = itemSection.attributes.CFS_Rec_Ideal_Note;
-                CFS_Rec_High = itemSection.attributes.CFS_Rec_High;
-                CFS_Rec_High_Note = itemSection.attributes.CFS_Rec_High_Note;
-                CFS_Rec_Low = itemSection.attributes.CFS_Rec_Low;
-                CFS_Rec_Low_Note = itemSection.attributes.CFS_Rec_Low_Note;
-
 
                 var arrayGages4Section = [];
 
@@ -474,7 +472,6 @@ define([
 
                 dom.map(items[2].features, function (itemEndpoint) {  //loop through the endpoints
                     //query by     Watershed , StreamName, Section_ID
-                    //console.log("handleSectionGageResults4");
                     if ((itemEndpoint.attributes.Watershed_Name === itemSection.attributes.Watershed) &
                         (itemEndpoint.attributes.Stream_Name === itemSection.attributes.StreamName) &
                         ((itemEndpoint.attributes.Section_ID === itemSection.attributes.SectionID) | (itemEndpoint.attributes.Section_Name === itemSection.attributes.SectionID) | (itemEndpoint.attributes.Section_Name === itemSection.attributes.SectionName)) &
@@ -512,13 +509,14 @@ define([
                         strSectionName_ + strSectionNameSuffix,
                         strHt_Prep4Conserv, strHt_Conserv, strHt_NotOfficialClosure,
                         iHt_Note_Prep4Conserv, iHt_Note_Conserv, iHt_Note_NotOfficialClosure,
-                        CFS_Rec_IdealMin,
-                        CFS_Rec_IdealMax,
-                        CFS_Rec_Ideal_Note,
-                        CFS_Rec_High,
-                        CFS_Rec_High_Note,
-                        CFS_Rec_Low,
-                        CFS_Rec_Low_Note,
+                        strCFS_Rec_Low,
+                        strCFS_Rec_IdealMin,
+                        strCFS_Rec_IdealMax,
+                        strCFS_Rec_High,
+                        iCFS_Note_Rec_Low,
+                        iCFS_Note_Rec_IdealMin,
+                        iCFS_Note_Rec_IdealMax,
+                        iCFS_Note_Rec_High,
                         itemGage2.Agency
                     ]);
                 })
@@ -560,9 +558,13 @@ define([
 
 
             let strQuery1 = strQuery;
-            if ((app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork")) { //since the Turah gage is used for a conservation target for all, add this gage and stream data
+            //if ((app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork")) { //since the Turah gage is used for a conservation target for all, add this gage and stream data
+            //    strQuery1 = strQuery + " OR ((StreamName = 'Clark Fork River') AND ((SectionID = '5') OR (SectionID = '6')))"
+            //}
+            if (app.H2O_ID == "Upper Clark Fork") { //since the Turah gage is used for a conservation target for all, add this gage and stream data, no need to do this for the Bonner gage since all propogating will be in the Blackfoot watershed
                 strQuery1 = strQuery + " OR ((StreamName = 'Clark Fork River') AND ((SectionID = '5') OR (SectionID = '6')))"
             }
+                        
             q_Layer1.where = strQuery1;
 
             let strQuery2 = strQuery;
@@ -718,62 +720,54 @@ define([
                         if (!(isNaN(icfsTarget1))) {
                             icfsTarget1 = Number(icfsTarget1)
                             if (icfsTarget1 != 0) {
-                                iChart_CFS_ColumnNames.push(icfsTarget1.toString() + "Consv. Target");
+                                iChart_CFS_ColumnNames.push(icfsTarget1.toString() + " Consv. Target");
                             }
                         }
                         var icfsTarget2 = app.pGage.m_arrray_Detail4ChartCFS[0].cfsTarget2;
                         if (!(isNaN(icfsTarget2))) {
                             icfsTarget2 = Number(icfsTarget2)
                             if (icfsTarget2 != 0) {
-                                iChart_CFS_ColumnNames.push(icfsTarget2.toString() + "Consv. Target");
+                                iChart_CFS_ColumnNames.push(icfsTarget2.toString() + " Consv. Target");
                             }
                         }
                         var icfsTarget3 = app.pGage.m_arrray_Detail4ChartCFS[0].cfsTarget3;
                         if (!(isNaN(icfsTarget3))) {
                             icfsTarget3 = Number(icfsTarget3)
                             if (icfsTarget3 != 0) {
-                                iChart_CFS_ColumnNames.push(icfsTarget3.toString() + "Consv. Target");
+                                iChart_CFS_ColumnNames.push(icfsTarget3.toString() + " Consv. Target");
                             }
                         }
 
-                        var iCFS_Rec_Low = app.pGage.m_arrray_Detail4ChartCFS[0].iCFS_Rec_Low;
+                        var iCFS_Rec_Low = app.pGage.m_arrray_Detail4ChartCFS[0].CFS_Rec_Low;
                         if (!(isNaN(iCFS_Rec_Low))) {
                             iCFS_Rec_Low = Number(iCFS_Rec_Low)
                             if (iCFS_Rec_Low != 0) {
-                                iChart_CFS_ColumnNames.push(iCFS_Rec_Low.toString() + "Consv. Target");
+                                iChart_CFS_ColumnNames.push(iCFS_Rec_Low.toString() + " Low Target");
                             }
                         }
-                        var iCFS_Rec_IdealMin = app.pGage.m_arrray_Detail4ChartCFS[0].iCFS_Rec_IdealMin;
+                        var iCFS_Rec_IdealMin = app.pGage.m_arrray_Detail4ChartCFS[0].CFS_Rec_IdealMin;
                         if (!(isNaN(iCFS_Rec_IdealMin))) {
                             iCFS_Rec_IdealMin = Number(iCFS_Rec_IdealMin)
                             if (iCFS_Rec_IdealMin != 0) {
-                                iChart_CFS_ColumnNames.push(iCFS_Rec_IdealMin.toString() + "Consv. Target");
+                                iChart_CFS_ColumnNames.push(iCFS_Rec_IdealMin.toString() + " Min Ideal Range");
                             }
                         }
-                        var iCFS_Rec_IdealMax = app.pGage.m_arrray_Detail4ChartCFS[0].iCFS_Rec_IdealMax;
+                        var iCFS_Rec_IdealMax = app.pGage.m_arrray_Detail4ChartCFS[0].CFS_Rec_IdealMax;
                         if (!(isNaN(iCFS_Rec_IdealMax))) {
                             iCFS_Rec_IdealMax = Number(iCFS_Rec_IdealMax)
                             if (iCFS_Rec_IdealMax != 0) {
-                                iChart_CFS_ColumnNames.push(iCFS_Rec_Low.toString() + "Consv. Target");
+                                iChart_CFS_ColumnNames.push(iCFS_Rec_IdealMax.toString() + " Max Ideal Range");
                             }
                         }
-                        var iCFS_Rec_Low = app.pGage.m_arrray_Detail4ChartCFS[0].iCFS_Rec_Low;
-                        if (!(isNaN(iCFS_Rec_Low))) {
-                            iCFS_Rec_Low = Number(iCFS_Rec_Low)
-                            if (iCFS_Rec_Low != 0) {
-                                iChart_CFS_ColumnNames.push(iCFS_Rec_Low.toString() + "Consv. Target");
-                            }
-                        }
-                        var iCFS_Rec_High = app.pGage.m_arrray_Detail4ChartCFS[0].iCFS_Rec_High;
+
+                        var iCFS_Rec_High = app.pGage.m_arrray_Detail4ChartCFS[0].CFS_Rec_High;
                         if (!(isNaN(iCFS_Rec_High))) {
                             iCFS_Rec_High = Number(iCFS_Rec_High)
                             if (iCFS_Rec_High != 0) {
-                                iChart_CFS_ColumnNames.push(iCFS_Rec_High.toString() + "Consv. Target");
+                                iChart_CFS_ColumnNames.push(iCFS_Rec_High.toString() + " High Target");
                             }
                         }
 
-
-                        //iChart_CFS_ColumnNames = [icfsTarget1.toString() + "Consv. Target", icfsTarget2.toString() + "Consv. Target", icfsTarget3.toString() + "Consv. Target"];
                     }
                 } else if (app.pGage.m_arrray_Detail4ChartHistoryCFS.length > 0) {  //if historical data AND NO CURRNET DATA, only gathered for single sections, then add the the datatable
                     for (var ih = 0; ih < app.pGage.m_arrray_Detail4ChartHistoryCFS.length; ih++) {
@@ -877,10 +871,18 @@ define([
                     dteDateTimeTemp = dteDateTime;
                 }
 
-                var data = new google.visualization.DataTable();
-                var strDateColumnName = "DatetimeCFS";
+                let data = new google.visualization.DataTable();
+
+                let strDateColumnName = "DatetimeCFS";
+                                
                 if (blnSingleCharting) {
                     strDateColumnName += "Single";
+
+                    if (iCFS_Rec_Low != undefined){
+                        if (iCFS_Rec_Low > 0) {
+                            strDateColumnName = "DatetimeCFSRecSingle";
+                        }
+                    }
                 }
 
                 data.addColumn('date', strDateColumnName);
@@ -1050,9 +1052,9 @@ define([
 
             let iNumberofDays = app.pGage.getDaysBetweenDates(app.pSup.m_StartDateTime, app.pSup.m_EndDateTime);
 
+            let strStartDateTimeUserFreindly = (app.pSup.m_StartDateTime.getMonth() + 1) + "/" + app.pSup.m_StartDateTime.getDate() + "/" + app.pSup.m_StartDateTime.getFullYear();
 
-
-            return [strDateTimeMinus3, strDateTime, strDateTimeMinus3UserFreindly, strDateTimeUserFreindly, iNumberofDays];
+            return [strDateTimeMinus3, strDateTime, strDateTimeMinus3UserFreindly, strDateTimeUserFreindly, iNumberofDays, strStartDateTimeUserFreindly];
         },
 
         readingsViewModel: function () {
@@ -1062,9 +1064,11 @@ define([
 
 
 
-            for (var iPropogate = 0; iPropogate < app.pGage.m_arrray_RiverSectionStatus.length; iPropogate++) {   ///// propogate summary symbol color and conservatin message if special use case (i.e., Turah, Big Hole Section 4)
-                if (((app.pGage.m_arrray_RiverSectionStatus[iPropogate][0] == "(Clark Fork at Turah Bridge nr Bonner MT)") | (app.pGage.m_arrray_RiverSectionStatus[iPropogate][22] == "06026210") | (app.pGage.m_arrray_RiverSectionStatus[iPropogate][22] == "06025500")) &
-                    (["EXPANDED CONSERVATION MEASURES", "PREPARE FOR CONSERVATION", "CONSERVATION"].includes(app.pGage.m_arrray_RiverSectionStatus[iPropogate][7]))) {
+            for (var iPropogate = 0; iPropogate < app.pGage.m_arrray_RiverSectionStatus.length; iPropogate++) {   ///// propogate summary symbol color and conservatin message if special use case (i.e., Turah, Big Hole Section 4, Bonner, Big hole)
+                if (((app.pGage.m_arrray_RiverSectionStatus[iPropogate][0] == "(Clark Fork at Turah Bridge nr Bonner MT)") |
+                            (app.pGage.m_arrray_RiverSectionStatus[iPropogate][0] == "( near Bonner MT)") |
+                            (app.pGage.m_arrray_RiverSectionStatus[iPropogate][22] == "06026210") | (app.pGage.m_arrray_RiverSectionStatus[iPropogate][22] == "06025500")) &
+                            (["EXPANDED CONSERVATION MEASURES (Flow)", "PREPARE FOR CONSERVATION (Flow)", "CONSERVATION (Flow)"].includes(app.pGage.m_arrray_RiverSectionStatus[iPropogate][7]))) {
                         
                     let strConsMessage = app.pGage.m_arrray_RiverSectionStatus[iPropogate][7];
                     let strColor = app.pGage.m_arrray_RiverSectionStatus[iPropogate][31];
@@ -1075,7 +1079,11 @@ define([
                     let ArrayStreamName2Check = [];
                     let ArrayStreamSection2Check = [];
 
-                    strRelatedStreamsQuery = app.pSup.getQueryDefs1_4()[5];
+                    if (app.pGage.m_arrray_RiverSectionStatus[iPropogate][0] == "( near Bonner MT)") {  //if the Bonner Gage then pick the [6] query def, otherwise (i.e. Upper CF, Big Hole) choose the [5] query def
+                        strRelatedStreamsQuery = app.pSup.getQueryDefs1_4()[6];
+                    } else {
+                        strRelatedStreamsQuery = app.pSup.getQueryDefs1_4()[5];
+                    }
                     strRelatedStreamsQuery = strRelatedStreamsQuery.replaceAll("'", "");  //remove the single quotes, to make sure string conditional statement works below
                     
                     let strSearchString = "SectionName in ";
@@ -1127,8 +1135,13 @@ define([
                             let strSpecialMessage = "";
 
                             if ((app.Basin_ID == "Upper Clark Fork") | (app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork")) {
-                                strConcatSpecialMessage = ", Click the Clark Fork Section 6/Turah gage for more information";
-                                strSpecialMessage = " due to the Clark Fork Section 6/Turah gage (Click Clark Fork Section 6 for more information)";
+                                if (app.pGage.m_arrray_RiverSectionStatus[iPropogate][22] == "Blackfoot") {
+                                    strConcatSpecialMessage = ", Click the Clark Fork Section 6/Turah gage for more information";
+                                    strSpecialMessage = " due to the Clark Fork Section 6/Turah gage (Click Clark Fork Section 6 for more information)";
+                                } else {
+                                    strConcatSpecialMessage = ", Click the Blackfoot Section/Bonner gage for more information";
+                                    strSpecialMessage = " due to the Blackfoot Section/Bonner gage (Click Clark Fork Section 6 for more information)";
+                                }
                             } else if ((app.Basin_ID == "UMH") | (app.H2O_ID == "Big Hole")) {
                                 strConcatSpecialMessage = ", Click the Big Hole Section 4 summaries for more information";
                                 strSpecialMessage = " due to one of the Big Hole Section 4 gages (Click Big Hole Section 4 summaries for more information)";
@@ -1141,7 +1154,18 @@ define([
                             } else {
                                 app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][7] = strConsMessage;
                                 app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][30] = strConsMessage + strSpecialMessage;
-                                app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31] = strColor;
+
+                                if ((app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31].includes("Plum")) & (strColor.includes("Plum"))) {  
+                                    app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31] = strColor;                           //if the origial segment has a flow waring and the sourc of propogation has flow warning
+                                } else if ((!(app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31].includes("Plum"))) & (strColor.includes("Plum"))) {
+                                    app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31] = strColor.replace(",Plum","");       //if the origial segment DOES NOT have a flow waring and the sourc of propogation has flow warning
+                                } else if ((app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31].includes("Plum")) & (!(strColor.includes("Plum")))) {
+                                    app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31] = strColor += ",Plum";       //if the origial segment has a flow waring and the sourc of propogation DOES NOT have flow warning
+                                }
+
+                                //console.log(app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][35]);
+                                //console.log(strColor);
+                                //console.log(strColor);
                             }
                         }
                     };
@@ -1210,7 +1234,8 @@ define([
                                                                 app.pGage.m_arrray_RiverSectionStatus[i][50],
                                                                 app.pGage.m_arrray_RiverSectionStatus[i][51],
                                                                 app.pGage.m_arrray_RiverSectionStatus[i][52],
-                                                                app.pGage.m_arrray_RiverSectionStatus[i][53]));
+                                                                app.pGage.m_arrray_RiverSectionStatus[i][53],
+                                                                app.pGage.m_arrray_RiverSectionStatus[i][54]));
 
                 self.gageRecords = ko.observableArray(arrayKOTemp);
                 
@@ -1225,15 +1250,19 @@ define([
                         ((item.iLateFlowClosureValueFlow == null) | (item.iLateFlowClosureValueFlow == 0))) {
                         document.getElementById("divCFSTargetDefinitions").style.display = 'none';
                     } else {
-                        if (app.Basin_ID == "Smith") {
-                            document.getElementById("divCFSTargetDefinitions").style.display = 'none';
-                            document.getElementById("divCFSTargetDefinitionsREC").style.display = 'inline';
-
-                        } else {
-                            document.getElementById("divCFSTargetDefinitions").style.display = 'inline';
-                            document.getElementById("divCFSTargetDefinitionsREC").style.display = 'none';
-                        }
+                        document.getElementById("divCFSTargetDefinitions").style.display = 'inline';
                     }
+
+
+                    if (((item.iLateRec_LowValue == null) | (item.iLateRec_LowValue == 0)) &
+                        ((item.iLateRec_IdealMaxValue == null) | (item.iLateRec_IdealMaxValue == 0)) &
+                        ((item.iLateRec_HighValue == null) | (item.iLateRec_HighValue == 0))) {
+                        document.getElementById("divCFSTargetDefinitionsREC").style.display = 'none';
+                    } else {
+                        document.getElementById("divCFSTargetDefinitionsREC").style.display = 'inline';
+                    }
+
+
 
 
                     if (((item.iLateHtPref4ConsvValue == null) | (item.iLateHtPref4ConsvValue == 0)) &
@@ -1464,13 +1493,13 @@ define([
                         let strDailyStat_URL = strTempText.substring(0, strTempText.indexOf("</span>"));
 
 
-                        strTempText = strTempText.substring(strTempText.indexOf("iCFS_Rec_Low") + ("iCFS_Rec_Low".length + 2), strTempText.length);
+                        strTempText = strTempText.substring(strTempText.indexOf("iLateRec_LowValue") + ("iLateRec_LowValue".length + 2), strTempText.length);
                         let iCFS_Rec_Low = strTempText.substring(0, strTempText.indexOf("</span>"));
-                        strTempText = strTempText.substring(strTempText.indexOf("iCFS_Rec_IdealMin") + ("iCFS_Rec_IdealMin".length + 2), strTempText.length);
+                        strTempText = strTempText.substring(strTempText.indexOf("iLateRec_IdealMinValue") + ("iLateRec_IdealMinValue".length + 2), strTempText.length);
                         let iCFS_Rec_IdealMin = strTempText.substring(0, strTempText.indexOf("</span>"));
-                        strTempText = strTempText.substring(strTempText.indexOf("iCFS_Rec_IdealMax") + ("iCFS_Rec_IdealMax".length + 2), strTempText.length);
+                        strTempText = strTempText.substring(strTempText.indexOf("iLateRec_IdealMaxValue") + ("iLateRec_IdealMaxValue".length + 2), strTempText.length);
                         let iCFS_Rec_IdealMax = strTempText.substring(0, strTempText.indexOf("</span>"));
-                        strTempText = strTempText.substring(strTempText.indexOf("iCFS_Rec_High") + ("iCFS_Rec_High".length + 2), strTempText.length);
+                        strTempText = strTempText.substring(strTempText.indexOf("iLateRec_HighValue") + ("iLateRec_HighValue".length + 2), strTempText.length);
                         let iCFS_Rec_High = strTempText.substring(0, strTempText.indexOf("</span>"));
 
 						strTempText = strTempText.substring(strTempText.indexOf("Watershed") + ("Watershed".length + 2), strTempText.length);
@@ -1520,25 +1549,41 @@ define([
                     var str_overallSymbool = "";
                     str_overallSymbool = strTempText2.substring(0, strTempText2.indexOf("</span>"));
 
-                    if (str_overallSymbool == "Red") {
+                    if (str_overallSymbool.includes("Red")) {
                         (rows)[i].style.color = 'white';
                         (rows)[i].style.backgroundColor = "rgb(255, 0, 0)";
+                        if (str_overallSymbool.includes("Plum")) {                  //if streamtemp conservation message also exists then make change the boarder color of the cell
+                            (rows)[i].style.borderColor = "rgb(221, 160, 221)";
+                            (rows)[i].style.borderWidth = "10px";
+                        }
                     }
-                    if (str_overallSymbool == "Orange") {
+                    if (str_overallSymbool.includes("Orange")) {
                         (rows)[i].style.color = 'white';
                         (rows)[i].style.backgroundColor = "rgb(253, 106, 2)";
+                        if (str_overallSymbool.includes("Plum")) {                  //if streamtemp conservation message also exists then make change the boarder color of the cell
+                            (rows)[i].style.borderColor = "rgb(221, 160, 221)";
+                            (rows)[i].style.borderWidth = "10px";
+                        }
                     }
-                    if (str_overallSymbool == "Gold") {
+                    if (str_overallSymbool.includes("Gold")) {
                         (rows)[i].style.color = 'white';
                         (rows)[i].style.backgroundColor = "rgb(249, 166, 2)";
+                        if (str_overallSymbool.includes("Plum")) {                  //if streamtemp conservation message also exists then make change the boarder color of the cell
+                            (rows)[i].style.borderColor = "rgb(221, 160, 221)";
+                            (rows)[i].style.borderWidth = "10px";
+                        }
                     }
                     if (str_overallSymbool == "Plum") {
                         (rows)[i].style.color = 'black';
                         (rows)[i].style.backgroundColor = "rgb(221, 160, 221)";
                     }
-                    if (str_overallSymbool == "Yellow") {
+                    if (str_overallSymbool.includes("Yellow")) {
                         (rows)[i].style.color = 'black';
                         (rows)[i].style.backgroundColor = "rgb(255, 255, 0)";
+                        if (str_overallSymbool.includes("Plum")) {                  //if streamtemp conservation message also exists then make change the boarder color of the cell
+                            (rows)[i].style.borderColor = "rgb(221, 160, 221)";
+                            (rows)[i].style.borderWidth = "10px";
+                        }
                     }
                     if (str_overallSymbool == "Grey") {
                         (rows)[i].style.color = "rgb(128, 128, 128)";
@@ -1546,9 +1591,26 @@ define([
                     if (str_overallSymbool == "White") {
                         (rows)[i].style.color = 'black';
                     }
+
+                    if (str_overallSymbool.includes("Green")) {
+                        (rows)[i].style.color = 'black';
+                        (rows)[i].style.backgroundColor = "rgb(0, 255, 0)";
+                        if (str_overallSymbool.includes("Plum")) {                  //if streamtemp conservation message also exists then make change the boarder color of the cell
+                            (rows)[i].style.borderColor = "rgb(221, 160, 221)";
+                            (rows)[i].style.borderWidth = "10px";
+                        }
+                    }
+
+                    if (str_overallSymbool.includes("Purple")) {
+                        (rows)[i].style.color = 'White';
+                        (rows)[i].style.backgroundColor = "rgb(128, 0, 128)";
+                        if (str_overallSymbool.includes("Plum")) {                  //if streamtemp conservation message also exists then make change the boarder color of the cell
+                            (rows)[i].style.borderColor = "rgb(221, 160, 221)";
+                            (rows)[i].style.borderWidth = "10px";
+                        }
+                    }
                 }
-
-
+                
                 //app.pSup.addStreamConditionFeatureLayeraddStreamConditionFeatureLayer(m_arrayOIDYellow, m_arrayOIDsGold, m_arrayOIDsOrange, m_arrayOIDsPlum, m_arrayOIDsRed, m_arrayOIDsGreen, m_arrayOIDsPurple);
                 app.pSup.addStreamConditionFeatureLayer(m_arrayOIDYellow, m_arrayOIDsGold, m_arrayOIDsOrange, m_arrayOIDsPlum, m_arrayOIDsRed, m_arrayOIDsGreen, m_arrayOIDsPurple);
                 app.pSup.Phase3(m_arrayOIDYellow, m_arrayOIDsGold, m_arrayOIDsOrange, m_arrayOIDsPlum, m_arrayOIDsRed, m_arrayOIDsGreen, m_arrayOIDsPurple);
@@ -1813,14 +1875,18 @@ define([
                 strLateFlowPref4ConsvValue, strLateFlowConsvValue, strLateFlowClosureValueFlow,
                 strDailyStat_URL, strFWPWarn, strStartEndpoint, strEndEndpoint, strAgency,
                 iLateHtPref4ConsvValue, iLateHtConsvValue, strLateHtClosureValue,
-                strLateHtPref4ConsvValue, strLateHtConsvValue, strLateHtClosureValue;
+                strLateHtPref4ConsvValue, strLateHtConsvValue, strLateHtClosureValue,
+                iLateRec_LowValue, iLateRec_IdealMinValue, iLateRec_IdealMaxValue, iLateRec_HighValue,
+                strLateRec_LowValue, strLateRec_IdealMinValue, strLateRec_IdealMaxValue, strLateRec_HighValue;
+
             EntiretrHTML = strHyperlinkURL = strSiteIDs =
                 iLateFlowPref4ConsvValue = iLateFlowConsvValue = iLateFlowClosureValueFlow =
                 strLateFlowPref4ConsvValue = strLateFlowConsvValue = strLateFlowClosureValueFlow =
                 strDailyStat_URL = strFWPWarn = strStartEndpoint = strEndEndpoint = strAgency =
                 iLateHtPref4ConsvValue = iLateHtConsvValue = strLateHtClosureValue =
                 strLateHtPref4ConsvValue = strLateHtConsvValue = strLateFlowClosureValueHt =
-                iCFS_Rec_Low = iCFS_Rec_IdealMin = iCFS_Rec_IdealMax = iCFS_Rec_High = "";
+                iLateRec_LowValue = iLateRec_IdealMinValue = iLateRec_IdealMaxValue = iLateRec_HighValue = ""
+                strLateRec_LowValue = strLateRec_IdealMinValue = strLateRec_IdealMaxValue = strLateRec_HighValue;
 
             var iProcIndex, arraySiteIDInfo, strStreamName, strSiteID, iSectionID, iLateFlowHootValue,
                 strHootMessage, iTempClosureValue,
@@ -2007,9 +2073,7 @@ define([
                 strMONTHDAYEarlyFlowToDroughtManagementTarget = arrayProc2[0][8];
                 iEarlyFlowDroughtManagementTarget = arrayProc2[0][9];
                 strEarlyFlowDroughtManagementTargetMessage = arrayProc2[0][10];
-                strLateFlowPref4ConsvValue = arrayProc2[0][11];
-                strLateFlowConsvValue = arrayProc2[0][12];
-                strLateFlowClosureValueFlow = arrayProc2[0][13];
+                
                 strTempCollected = arrayProc2[0][14];
                 iOID = arrayProc2[0][15];
                 strDailyStat_URL = arrayProc2[0][16];
@@ -2034,8 +2098,22 @@ define([
                 strAgency = arrayProc2[0][33];
 
                 iLateFlowPref4ConsvValue = arrayProc2[0][3];
+                strLateFlowPref4ConsvValue = arrayProc2[0][11];
                 iLateFlowConsvValue = arrayProc2[0][4];
+                strLateFlowConsvValue = arrayProc2[0][12];
                 iLateFlowClosureValueFlow = arrayProc2[0][5];
+                strLateFlowClosureValueFlow = arrayProc2[0][13];
+
+                iLateRec_LowValue = arrayProc2[0][13];
+                iLateRec_IdealMinValue = arrayProc2[0][13];
+                iLateRec_IdealMaxValue = arrayProc2[0][13];
+                iLateRec_HighValue = arrayProc2[0][13];
+
+                strLateRec_LowValue = arrayProc2[0][13];
+                strLateRec_IdealMinValue = arrayProc2[0][13];
+                strLateRec_IdealMaxValue = arrayProc2[0][13];
+                strLateRec_HighValue = arrayProc2[0][13];
+                
                 dblLatestTMP = "No gage exists";
                 dblLatestCFS = "No gage exists";
                 dblLatestHt = "No gage exists";
@@ -2108,13 +2186,14 @@ define([
                                             strLateHtPref4ConsvValue,
                                             strLateHtConsvValue,
                                             strLateFlowClosureValueHt,
-                                            iCFS_Rec_IdealMin = 99999,
-                                            iCFS_Rec_IdealMax = 99999,
-                                            strCFS_Rec_Ideal_Note = "",
-                                            iCFS_Rec_High = 99999,
-                                            strCFS_Rec_High_Note = "",
-                                            iCFS_Rec_Low = 99999,
-                                            strCFS_Rec_Low_Note = "",
+                                                iLateCFS_Rec_Low,
+                                                iLateCFS_Rec_IdealMin,
+                                                iLateCFS_Rec_IdealMax,
+                                                iLateCFS_Rec_High,
+                                                strLateCFS_Rec_LowValue,
+                                                strLateCFS_Rec_IdealMinValue,
+                                                strLateCFS_Rec_IdealMaxValue,
+                                                strLateCFS_Rec_HighValue,
                                             strAgency]);
 
                 app.pGage.mIDXQuery1AtaTime += 1;
@@ -2128,11 +2207,9 @@ define([
 
             } else {
                 console.log("just before the gage query");
-                //perform the trigger comparison and other sorting and tasks
-                $.getJSON(app.strURLGage)   //http://api.jquery.com/jquery.getjson/
+                $.getJSON(app.strURLGage)   //http://api.jquery.com/jquery.getjson/  //perform the trigger comparison and other sorting and tasks
 					.done(function (jsonResult) {
 
-                        //if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
                         if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null) & (arrayUSACE_NWD_Sens_Loc == null)) {
 							arrayJSONValues = jsonResult.value.timeSeries;
                         } else if (arrayCODWR_Sens_Loc != null) {
@@ -2203,15 +2280,18 @@ define([
                             strLateHtConsvValue = itemSectionRefined[31];
                             strLateFlowClosureValueHt = itemSectionRefined[32];
 
-                            iCFS_Rec_IdealMin = itemSectionRefined[33];
-                            iCFS_Rec_IdealMax = itemSectionRefined[34];
-                            strCFS_Rec_Ideal_Note = itemSectionRefined[35];
-                            iCFS_Rec_High = itemSectionRefined[36];
-                            strCFS_Rec_High_Note = itemSectionRefined[37];
-                            iCFS_Rec_Low = itemSectionRefined[38];
-                            strCFS_Rec_Low_Note = itemSectionRefined[39];
+                            iLateRec_LowValue = itemSectionRefined[33];
+                            iLateRec_IdealMinValue = itemSectionRefined[34];
+                            iLateRec_IdealMaxValue = itemSectionRefined[35];
+                            iLateRec_HighValue = itemSectionRefined[36];
 
-                            strAgency = itemSectionRefined[40];
+                            strLateRec_LowValue = itemSectionRefined[37];
+                            strLateRec_IdealMinValue = itemSectionRefined[39];
+                            strLateRec_IdealMaxValue = itemSectionRefined[39];
+                            strLateRec_HighValue = itemSectionRefined[38];
+
+
+                            strAgency = itemSectionRefined[41];
 
                             var itemFound, itemFoundTemp, itemFoundDischarge, itemFoundHt;
 							itemFound = [];
@@ -2280,10 +2360,10 @@ define([
                                     iLateFlowClosureValueFlow = itemSectionRefined[5];
                                     iTempClosureValue = itemSectionRefined[6];
 
-                                    iCFS_Rec_Low = itemSectionRefined[38];
-                                    iCFS_Rec_IdealMin = itemSectionRefined[33];
-                                    iCFS_Rec_IdealMax = itemSectionRefined[34];
-                                    iCFS_Rec_High = itemSectionRefined[36];
+                                    iLateRec_LowValue = itemSectionRefined[33];
+                                    iLateRec_IdealMinValue = itemSectionRefined[34];
+                                    iLateRec_IdealMaxValue = itemSectionRefined[35];
+                                    iLateRec_HighValue = itemSectionRefined[36];
 
 
                                 if (blnIsInitialPageLoad) {
@@ -2307,6 +2387,19 @@ define([
                                         }
                                         if (iLateFlowClosureValueFlow == 9999) {
                                             iLateFlowClosureValueFlow = 0;
+                                        }
+
+                                        if (iLateRec_LowValue == 9999) {
+                                            iLateRec_LowValue = 0;
+                                        }
+                                        if (iLateRec_IdealMinValue == 9999) {
+                                            iLateRec_IdealMinValue = 0;
+                                        }
+                                        if (iLateRec_IdealMaxValue == 9999) {
+                                            iLateRec_IdealMaxValue = 0;
+                                        }
+                                        if (iLateRec_HighValue == 9999) {
+                                            iLateRec_High = 0;
                                         }
                                     }
 
@@ -2334,12 +2427,11 @@ define([
                                     iLateFlowPref4ConsvValue = 0;
                                     iLateFlowConsvValue = 0;
                                     iLateFlowClosureValueFlow = 0;
-
-
-                                    iCFS_Rec_Low = 0;
-                                    iCFS_Rec_IdealMin = 0;
-                                    iCFS_Rec_IdealMax = 0;
-                                    iCFS_Rec_High = 0;
+                                    
+                                    iLateRec_LowValue = 0;
+                                    iLateRec_IdealMinValue = 0;
+                                    iLateRec_IdealMaxValue = 0;
+                                    iLateRec_HighValue = 0;
                             }
 
                             var CFSItem = "";
@@ -2418,10 +2510,10 @@ define([
                                         obj["cfsTarget2"]= iCFSTarget2;  //this are only used in single charting situations
                                         obj["cfsTarget3"] = iCFSTarget3;  //this are only used in single charting situations
 
-                                        obj["iCFS_Rec_Low"] = iCFS_Rec_Low;
-                                        obj["iCFS_Rec_IdealMin"] = iCFS_Rec_IdealMin;
-                                        obj["iCFS_Rec_IdealMax"] = iCFS_Rec_IdealMax;
-                                        obj["iCFS_Rec_High"] = iCFS_Rec_High;
+                                        obj["CFS_Rec_Low"] = iCFS_Rec_Low;
+                                        obj["CFS_Rec_IdealMin"] = iCFS_Rec_IdealMin;
+                                        obj["CFS_Rec_IdealMax"] = iCFS_Rec_IdealMax;
+                                        obj["CFS_Rec_High"] = iCFS_Rec_High;
 
                                         app.pGage.m_arrray_Detail4ChartCFS.push(obj);//populate the array that contains the data for charting
                                         obj["EPOCH"]= Date.parse(dteDateTime);
@@ -2619,35 +2711,35 @@ define([
                                 dteLatestDateTimeCFS = new Date();
                             } else {//determine the site's status based on discharge
 
-                                if ((iCFS_Rec_High != null) & (iCFS_Rec_High != 0)) {
-                                    if (dblLatestCFS >= iCFS_Rec_High) {
+                                if (iLateRec_HighValue != null){
+                                    if(dblLatestCFS >= iLateRec_HighValue) {
                                         strSiteFlowStatus = "HIGH FLOW";
                                     }
                                 }
 
                                 if ((dblLatestCFS <= iLateFlowPref4ConsvValue) & (dblLatestCFS > iLateFlowConsvValue)) {
-                                    strSiteFlowStatus = "PREPARE FOR CONSERVATION";
+                                    strSiteFlowStatus = "PREPARE FOR CONSERVATION (Flow)";
                                 }
 
-                                if ((iCFS_Rec_IdealMax != null) & (iCFS_Rec_IdealMin != null) & (iCFS_Rec_IdealMax != 0) & (iCFS_Rec_IdealMin != 0)) {
-                                    if ((dblLatestCFS <= iCFS_Rec_IdealMax) & (dblLatestCFS > iCFS_Rec_IdealMin)) {
-                                        strSiteFlowStatus = "IDEAL FLOW";
+
+                                    if ((dblLatestCFS <= iLateRec_IdealMaxValue) & (dblLatestCFS > iLateRec_IdealMinValue)) {
+                                        strSiteFlowStatus = "IDEAL FLOW (Flow)";
                                     }
-                                }
+
 
 
                                 if ((dblLatestCFS <= iLateFlowConsvValue) & (dblLatestCFS > iLateFlowClosureValueFlow)) {
-                                        strSiteFlowStatus = "CONSERVATION";
+                                    strSiteFlowStatus = "CONSERVATION (Flow)";
                                 }
                                 if (dblLatestCFS <= iLateFlowClosureValueFlow) {
-                                     strSiteFlowStatus = "EXPANDED CONSERVATION MEASURES";
+                                     strSiteFlowStatus = "EXPANDED CONSERVATION MEASURES (Flow)";
                                 }
 
-                                if ((iCFS_Rec_Low != null) & (iCFS_Rec_Low != 0)) {
-                                    if (dblLatestCFS < iCFS_Rec_Low) {
+
+                                    if (dblLatestCFS < iLateRec_LowValue) {
                                         strSiteFlowStatus = "LOW FLOW";
                                     }
-                                }
+
 
                             }
                             var strNoDataLabel4ChartingTMP = "";
@@ -2787,10 +2879,20 @@ define([
                                 }
 
 
-                                if (((strSiteID == "12334550") | (strSiteID == "06025500") | (strSiteID == "06026210")) & (["EXPANDED CONSERVATION MEASURES", "PREPARE FOR CONSERVATION", "CONSERVATION"].includes(strSiteFlowStatus))) {   ///////////////////propogate symbology to other lines if meets special use case (i.e. Turah, and Big hole section 4)
+                                if (((strSiteID == "12334550") |  //Turah      ///////////////////propogate symbology to other lines if meets special use case (i.e. Turah, and Big hole section 4)
+                                    (strSiteID == "12340000") | //Bonner
+                                    (strSiteID == "06025500") | //Big hole
+                                    (strSiteID == "06026210")) &  //Big hole
+                                    (["EXPANDED CONSERVATION MEASURES (Flow)", "PREPARE FOR CONSERVATION (Flow)", "CONSERVATION (Flow)"].includes(strSiteFlowStatus))) {   
                                     let queryObject = new Query();
-                                    strRelatedStreamsQuery = app.pSup.getQueryDefs1_4()[5];
-                                    
+
+                                    if (strSiteID == "12340000") {  //bonner
+                                        strRelatedStreamsQuery = app.pSup.getQueryDefs1_4()[6];
+                                    } else {
+                                        strRelatedStreamsQuery = app.pSup.getQueryDefs1_4()[5];
+                                    } 
+
+
                                     queryObject.where = strRelatedStreamsQuery;
                                     queryObject.returnGeometry = false;
                                     queryObject.outFields = ["*"];
@@ -2803,11 +2905,11 @@ define([
                                             dom.map(pFeatures, function (pRelatedStream) {  //loop through the endpoints
                                                 if (!(m_arrayOIDsOrange.includes(pRelatedStream.attributes.OBJECTID)) | (m_arrayOIDsGold.includes(pRelatedStream.attributes.OBJECTID)) | (m_arrayOIDYellow.includes(pRelatedStream.attributes.OBJECTID)) ) {  /// don't change the symbology if already set
 
-                                                    if (strSiteFlowStatus == "EXPANDED CONSERVATION MEASURES") {
+                                                    if (strSiteFlowStatus == "EXPANDED CONSERVATION MEASURES (Flow)") {
                                                         m_arrayOIDsOrange.push(pRelatedStream.attributes.OBJECTID);
-                                                    } else if (strSiteFlowStatus == "CONSERVATION") {
+                                                    } else if (strSiteFlowStatus == "CONSERVATION (Flow)") {
                                                         m_arrayOIDsGold.push(pRelatedStream.attributes.OBJECTID);
-                                                    } else if (strSiteFlowStatus == "PREPARE FOR CONSERVATION") {
+                                                    } else if (strSiteFlowStatus == "PREPARE FOR CONSERVATION (Flow)") {
                                                         m_arrayOIDYellow.push(pRelatedStream.attributes.OBJECTID);
                                                     }
                                                 }
@@ -2866,13 +2968,14 @@ define([
                                             strLateHtPref4ConsvValue,
                                             strLateHtConsvValue,
                                             strLateFlowClosureValueHt,
-                                                iCFS_Rec_IdealMin,
-                                                iCFS_Rec_IdealMax,
-                                                strCFS_Rec_Ideal_Note,
-                                                iCFS_Rec_High,
-                                                strCFS_Rec_High_Note,
-                                                iCFS_Rec_Low,
-                                                strCFS_Rec_Low_Note,
+                                                iLateRec_LowValue,
+                                                iLateRec_IdealMinValue,
+                                                iLateRec_IdealMaxValue,
+                                                iLateRec_HighValue,
+                                                strLateRec_LowValue,
+                                                strLateRec_IdealMinValue,
+                                                strLateRec_IdealMaxValue,
+                                                strLateRec_HighValue,
                                             strAgency]);
                             }
 
@@ -2968,26 +3071,23 @@ define([
                 strOverallSymbol = "Orange";
                 m_arrayOIDsOrange.push(iOID);
             }
-
-
-           
-            if (strSiteFlowStatus == "PREPARE FOR CONSERVATION") {
+            
+            if (strSiteFlowStatus == "PREPARE FOR CONSERVATION (Flow)") {
                 strOverallStatus = "PREPARE FOR CONSERVATION (click for details and see table below for more info)";
                 strOverallSymbol = "Yellow";
                 m_arrayOIDYellow.push(iOID);
             }
-            if (strSiteFlowStatus == "CONSERVATION") {
+            if (strSiteFlowStatus == "CONSERVATION (Flow)") {
                 strOverallStatus = "CONSERVATION (click for details and see table below for more info)";
                 strOverallSymbol = "Gold";
                 m_arrayOIDsGold.push(iOID);
             }
-            if (strSiteFlowStatus == "EXPANDED CONSERVATION MEASURES") {
+            if (strSiteFlowStatus == "EXPANDED CONSERVATION MEASURES (Flow)") {
                 strOverallStatus = "EXPANDED CONSERVATION MEASURES (click for details and see table below for more info)";
                 strOverallSymbol = "Orange";
                 m_arrayOIDsOrange.push(iOID);
             }
-
-
+            
             if (strSiteFlowStatus == "LOW FLOW") {
                 strOverallStatus = "LOW FLOW (click for details and see table below for more info)";
                 strOverallSymbol = "Red";
@@ -3003,6 +3103,13 @@ define([
                 strOverallSymbol = "Purple";
                 m_arrayOIDsPurple.push(iOID);
             }
+
+            if (strFWPWarn != "") {
+                strSiteFlowStatus = "MT FWS Restriction (click for details)";
+                strOverallStatus = "MT FWP Official Restriction (click for details)";
+                strOverallSymbol = "Red";
+                m_arrayOIDsRed.push(iOID);
+            }
             
             if ((strSiteTempStatus == "EXPANDED CONSERVATION MEASURES") &
                 ((strWatershed == "North Fork Flathead") |
@@ -3013,23 +3120,27 @@ define([
                     (strWatershed == "South Fork Flathead") |
                     (strWatershed == "Middle Fork Flathead")
                 )) {
-                strOverallStatus = "RECOMMENDED CONSERVATION MEASURES (click for details and see temp. section below for more info)";
-                strOverallSymbol = "Plum";
+
+                if (strOverallStatus == "Open") {
+                    strOverallStatus = "RECOMMENDED CONSERVATION MEASURES (click for details and see temp. section below for more info)";
+                    strOverallSymbol = "Plum";
+                } else {
+                    strOverallStatus += " & RECOMMENDED CONSERVATION MEASURES (click for details and see temp. section below for more info)";
+                    strOverallSymbol += ",Plum";
+                }
                 m_arrayOIDsPlum.push(iOID);
             }
             else if (strSiteTempStatus == "EXPANDED CONSERVATION MEASURES") {
-                strOverallStatus = "PREPARE FOR HOOT-OWL FISHING RESTRICTIONS (click for details and see temp. section below for more info)";
-                strOverallSymbol = "Plum";
+                if (strOverallStatus == "Open") {
+                    strOverallStatus = "PREPARE FOR HOOT-OWL FISHING RESTRICTIONS (click for details and see temp. section below for more info)";
+                    strOverallSymbol = "Plum";
+                } else {
+                    strOverallStatus += " & PREPARE FOR HOOT-OWL FISHING RESTRICTIONS (click for details and see temp. section below for more info)";
+                    strOverallSymbol += ",Plum";
+                }
                 m_arrayOIDsPlum.push(iOID);
             }
-
-            if (strFWPWarn != "") {
-                strSiteFlowStatus = "MT FWS Restriction (click for details)";
-                strOverallStatus = "MT FWP Official Restriction (click for details)";
-                strOverallSymbol = "Red";
-                m_arrayOIDsRed.push(iOID);
-            }
-
+            
             return [strOverallStatus, strOverallSymbol];
         },
 

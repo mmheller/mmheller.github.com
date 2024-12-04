@@ -155,23 +155,29 @@ define([
 					columns: [
 						{ headerText: "Title", rowText: "TITLE" },
 						{ headerText: "Description", rowText: "DESCRIPTION" },
+						{ headerText: "PRESSRELEASE", rowText: "PRESSRELEASE" },
 						{ headerText: "Location", rowText: "LOCATION" },
 						{ headerText: "Publish Date", rowText: "PUBLISHDATE" },
-						{ headerText: "Archive Date", rowText: "ARCHIVEDATE" },
-						{
-							headerText: "Official Link", rowText: {
-								action: function (item) {
-									return function () {
-										window.open(item.PRESSRELEASE);
-										//alert(item.selected());
-									}
-								}
-							}
-						}
+						{ headerText: "Archive Date", rowText: "ARCHIVEDATE" }
+						//,
+						
+						//{
+						//	headerText: "Official Link", rowText: {
+						//		action: function (item) {
+						//			return function () {
+						//				window.open(item.PRESSRELEASE);
+						//				//alert(item.selected());
+						//			}
+						//		}
+						//	}
+						//}
 					],
 					pageSize: 10
 				});
 			};
+
+
+
 
 			//clear out the model array if exists
 			var elementHistoric = $('#ViewModelHistoricRestrctions_div')[0];
