@@ -18,6 +18,76 @@ function multiDimensionalUnique(arr) {
 	return uniques;
 }
 
+
+
+function AllValuesByDayandAverageWithinRange(arrray_Detail4Analysis, strValueKey, iFromValue, iToValue, dteMustBeGreaterThan, strDateKey, iNumDaysAllowedOutsideRange) {
+    let blnResult = true;
+    let strPreviousDate = null;
+    let strObjDate = null;
+    let iCounter = 0;
+    let numTotal = 0;
+    let numAvg = 0;
+    let iTotalDaysOutsideRange = 0;
+
+    for (var i = 0, l = arrray_Detail4Analysis.length; i < l; i++) {                   //incoming data is sorted by datetime
+        let pObj = arrray_Detail4Analysis[i];
+       
+
+        if ((pObj[strDateKey] > dteMustBeGreaterThan) & (pObj[strDateKey] != null)) {  // make sure record value date is within analysis time and not null
+            strObjDate = new Date(pObj[strDateKey]).toDateString();                    // get the record date
+            if (strPreviousDate == null) {                                             // if the day for analysis is not set, set it 
+                strPreviousDate = strObjDate;                                         
+            }
+            if (strObjDate == strPreviousDate) {                                       // if the record date is is the same as the day for analysis, add to value/variable sums
+                numTotal += pObj[strValueKey];
+                iCounter += 1;
+            }
+
+            if (strObjDate != strPreviousDate) {                                       //day switched so find average value
+                numAvg = (numTotal / iCounter);
+                if (!((numAvg >= iFromValue) & (numAvg <= iToValue))) {                      //determine if avg/mean value is out of range
+                    iTotalDaysOutsideRange += 1;
+                }
+                if (iTotalDaysOutsideRange > iNumDaysAllowedOutsideRange) {
+                    blnResult = false;
+                    break;
+                }
+
+                numAvg = 0;
+
+                strPreviousDate = strObjDate;                                          //move onto the next day
+                numTotal = pObj[strValueKey];
+                iCounter = 1;
+                numAvg = 0;
+                
+            }
+        }
+    }
+
+    return blnResult;
+}
+
+function AllValuesWithinRange(arrray_Detail4Analysis, strValueKey, iFromValue, iToValue, dteMustBeGreaterThan, strDateKey) {
+    let blnResult = true;
+
+    for (var i = 0, l = arrray_Detail4Analysis.length; i < l; i++) {
+        let pObj = arrray_Detail4Analysis[i];
+
+        if (pObj[strDateKey] > dteMustBeGreaterThan) {
+            if (!((pObj[strValueKey] >= iFromValue) & (pObj[strValueKey] <= iToValue))) {
+                blnResult = false;
+                break;
+            }
+        }
+    }
+
+    return blnResult;
+}
+
+
+
+
+
 function ProcLinearRegression(arrray_Detail4Interpolation, strValueKey) {
     var str3DayCFSTrend = "images/blank.png";
     arrayX = [];
@@ -1312,6 +1382,73 @@ define([
 
                     
                     self.CurrentDisplayGageRecord(item);
+                    ///////////////// color the stream status text/////////////////////////////////////////////////////////////////////////////////////////////////////////
+                    if (item.overallSymbol.includes("Red")) {                                           
+                        if (item.strSiteTempStatusHt == "OPEN") {
+                            $('#divCFSFlowStatus').css('background-color', '');
+                            $('#divCFSFlowStatus').css('background-color', 'rgb(255, 0, 0)');
+                        } else {
+                            $('#divHTStatus').css('background-color', '');
+                            $('#divHTStatus').css('background-color', 'rgb(255, 0, 0)');
+                        }
+                    }
+                    if (item.overallSymbol.includes("Orange")) {
+                        if (item.strSiteTempStatusHt == "OPEN") {
+                            $('#divCFSFlowStatus').css('background-color', '');
+                            $('#divCFSFlowStatus').css('background-color', 'rgb(253, 106, 2)');
+                        } else {
+                            $('#divHTStatus').css('background-color', '');
+                            $('#divHTStatus').css('background-color', 'rgb(253, 106, 2)');
+                        }
+                    }
+                    if (item.overallSymbol.includes("Gold")) {
+                        if (item.strSiteTempStatusHt == "OPEN") {
+                            $('#divCFSFlowStatus').css('background-color', '');
+                            $('#divCFSFlowStatus').css('background-color', 'rgb(249, 166, 2');
+                        } else {
+                            $('#divHTStatus').css('background-color', '');
+                            $('#divHTStatus').css('background-color', 'rgb(249, 166, 2');
+                        }
+                    }
+                    if (item.overallSymbol.includes("Plum")) {
+                        if (item.strSiteTempStatusHt == "OPEN") {
+                            $('#divTEMPFlowStatus').css('background-color', '');
+                            $('#divTEMPFlowStatus').css('background-color', 'rgb(221, 160, 221');
+                        } else {
+                            $('#divHTStatus').css('background-color', '');
+                            $('#divHTStatus').css('background-color', 'rgb(221, 160, 221');
+                        }
+                    }
+                    if (item.overallSymbol.includes("Yellow")) {
+                        if (item.strSiteTempStatusHt == "OPEN") {
+                            $('#divCFSFlowStatus').css('background-color', '');
+                            $('#divCFSFlowStatus').css('background-color', 'rgb(255, 255, 0)');
+                        } else {
+                            $('#divHTStatus').css('background-color', '');
+                            $('#divHTStatus').css('background-color', 'rgb(255, 255, 0)');
+                        }
+                    }
+                    if (item.overallSymbol.includes("Green")) {
+                        if (item.strSiteTempStatusHt == "OPEN") {
+                            $('#divCFSFlowStatus').css('background-color', '');
+                            $('#divCFSFlowStatus').css('background-color', 'rgb(221, 160, 221)');
+                        } else {
+                            $('#divHTStatus').css('background-color', '');
+                            $('#divHTStatus').css('background-color', 'rgb(221, 160, 221)');
+                        }
+                    }
+                    if (item.overallSymbol.includes("Purple")) {
+                        if (item.strSiteTempStatusHt == "OPEN") {
+                            $('#divCFSFlowStatus').css('background-color', '');
+                            $('#divCFSFlowStatus').css('background-color', 'rgb(128, 0, 128)');
+                        } else {
+                            $('#divHTStatus').css('background-color', '');
+                            $('#divHTStatus').css('background-color', 'rgb(128, 0, 128)');
+                        }
+                    }
+
+
+
                 };
                 self.avgTemp = ko.computed(function () {
                     var total = 0;
@@ -1535,8 +1672,7 @@ define([
 						app.pGage.GraphSingleSEction(strClickStreamName, strClickSegmentID, strClickSiteID,
 													iCFSTarget1, iCFSTarget2, iCFSTarget3, strDailyStat_URL, 
                                                     iTempCloseValue, strAgency, iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High);
-
-                        
+                                                    
                         let pGFeature = null;
                         app.pZoom.qry_Zoom2FeatureLayerByQuery(app.strHFL_URL + app.idx11[5], "(StreamName = '" + strClickStreamName + "') and " +
 								 							"(SectionID = '" + strClickSegmentID + "') and " +
@@ -1595,6 +1731,7 @@ define([
                     if (str_overallSymbool.includes("Green")) {
                         (rows)[i].style.color = 'black';
                         (rows)[i].style.backgroundColor = "rgb(0, 255, 0)";
+
                         if (str_overallSymbool.includes("Plum")) {                  //if streamtemp conservation message also exists then make change the boarder color of the cell
                             (rows)[i].style.borderColor = "rgb(221, 160, 221)";
                             (rows)[i].style.borderWidth = "10px";
@@ -2454,29 +2591,23 @@ define([
                             } 
 
                             if ((CFSItem != "") | (itemFoundDischarge.length > 0)) {                                       //run through each gage discharge record
-                                //if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
                                 if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null) & (arrayUSACE_NWD_Sens_Loc == null)) {
 									arrayJSONValues2 = CFSItem.values[0].value;
                                 } else if (arrayCODWR_Sens_Loc != null) {
                                     arrayJSONValues2 = itemFoundDischarge;
                                 } else if (arrayUSACE_NWD_Sens_Loc != null) {
                                     arrayJSONValues2 = itemFoundDischarge;
-                                    //var iCounter4USACE_NWD = 0;
                                 } else {
 									arrayJSONValues2 = itemFoundDischarge;
 								}
-
                                 
 								jQuery.each(arrayJSONValues2, function (k, item2) {
-                                    //if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
                                     if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null) & (arrayUSACE_NWD_Sens_Loc == null)) {
 										var dteDateTime = new Date(item2.dateTime);
                                     } else if (arrayCODWR_Sens_Loc != null) {
                                         var dteDateTime = new Date(item2.measDate);
                                     } else if (arrayUSACE_NWD_Sens_Loc != null) {
                                         var dteDateTime = new Date(item2[0]);
-                                        //iCounter4USACE_NWD += 1; //increment the counter
-
                                     } else {
 										var dteDateTime = new Date(item2.attributes.Timestamp);
 										dteDateTime.setHours(dteDateTime.getHours() + 6);
@@ -2505,11 +2636,9 @@ define([
 										obj["time"] = dteDateTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: false });
 										obj["cfs"] = iCFSValue;
                                         obj["gagedatetime"]= dteDateTime;
-
                                         obj["cfsTarget1"]= iCFSTarget1;  //this are only used in single charting situations
                                         obj["cfsTarget2"]= iCFSTarget2;  //this are only used in single charting situations
                                         obj["cfsTarget3"] = iCFSTarget3;  //this are only used in single charting situations
-
                                         obj["CFS_Rec_Low"] = iCFS_Rec_Low;
                                         obj["CFS_Rec_IdealMin"] = iCFS_Rec_IdealMin;
                                         obj["CFS_Rec_IdealMax"] = iCFS_Rec_IdealMax;
@@ -2517,10 +2646,7 @@ define([
 
                                         app.pGage.m_arrray_Detail4ChartCFS.push(obj);//populate the array that contains the data for charting
                                         obj["EPOCH"]= Date.parse(dteDateTime);
-
                                         arrray_Detail4InterpolationCFS.push(obj);  //populate the array that is used to determing the flow trend
-
-                                        //console.log("cfs reading added");
                                     }
                                 });
 
@@ -2611,7 +2737,6 @@ define([
 										var dteDateTime = new Date(item22.dateTime);
                                     } else if (arrayCODWR_Sens_Loc != null) {
                                         var dteDateTime = new Date(item22.measDate);
-                                        //dteDateTime.setHours(dteDateTime.getHours() + 6);
                                     } else {
 										var dteDateTime = new Date(item22.attributes.Timestamp);
 										dteDateTime.setHours(dteDateTime.getHours() + 6);
@@ -2711,37 +2836,64 @@ define([
                                 dteLatestDateTimeCFS = new Date();
                             } else {//determine the site's status based on discharge
 
-                                if (iLateRec_HighValue != null){
-                                    if(dblLatestCFS >= iLateRec_HighValue) {
+                                /////////////////////////////////////////////////////////////////////////////////////////////////// the ORDER OF this PREPARE FOR CONSERVATION, CONSERVATION , EXPANDED CONSERVATION MEASURES is necessary is necessary
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////
+                                /////////////////////////////////////////////////////////////////////////////////////////////////// 
+                                if ((iLateFlowPref4ConsvValue != null) & (iLateFlowPref4ConsvValue != 0)) {
+                                    if (app.pSup.m_CFSAnlaysisType == "4of5Average") {
+                                        if (AllValuesByDayandAverageWithinRange(arrray_Detail4InterpolationCFS, "cfs", 1, iLateFlowPref4ConsvValue, app.pSup.m_StartDateTimeAnalysis, "gagedatetime", 1)) {
+                                            strSiteFlowStatus = "PREPARE FOR CONSERVATION (Flow)";
+                                        }
+                                    } else {
+                                        if (AllValuesWithinRange(arrray_Detail4InterpolationCFS, "cfs", 1, iLateFlowPref4ConsvValue, app.pSup.m_StartDateTimeAnalysis, "gagedatetime")) {
+                                            strSiteFlowStatus = "PREPARE FOR CONSERVATION (Flow)";
+                                        }
+                                    }
+                                }
+                                if ((iLateFlowConsvValue != null) & (iLateFlowConsvValue != 0)) {
+                                    if (app.pSup.m_CFSAnlaysisType == "4of5Average") {
+                                        if (AllValuesByDayandAverageWithinRange(arrray_Detail4InterpolationCFS, "cfs", 1, iLateFlowConsvValue, app.pSup.m_StartDateTimeAnalysis, "gagedatetime", 1)) {
+                                            strSiteFlowStatus = "CONSERVATION (Flow)";
+                                        }
+                                    } else {
+                                        if (AllValuesWithinRange(arrray_Detail4InterpolationCFS, "cfs", 1, iLateFlowConsvValue, app.pSup.m_StartDateTimeAnalysis, "gagedatetime")) {
+                                            strSiteFlowStatus = "CONSERVATION (Flow)";
+                                        }
+                                    }
+                                }
+                                if ((iLateFlowClosureValueFlow != null) & (iLateFlowClosureValueFlow != 0)) {
+                                    if (app.pSup.m_CFSAnlaysisType == "4of5Average") {
+                                        if (AllValuesByDayandAverageWithinRange(arrray_Detail4InterpolationCFS, "cfs", 1, iLateFlowClosureValueFlow, app.pSup.m_StartDateTimeAnalysis, "gagedatetime", 1)) {
+                                            strSiteFlowStatus = "EXPANDED CONSERVATION MEASURES (Flow)";
+                                        }
+                                    } else {
+                                        if (AllValuesWithinRange(arrray_Detail4InterpolationCFS, "cfs", 1, iLateFlowClosureValueFlow, app.pSup.m_StartDateTimeAnalysis, "gagedatetime")) {
+                                            strSiteFlowStatus = "EXPANDED CONSERVATION MEASURES (Flow)";
+                                        }
+                                    }
+                                }
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////
+                                ///////////////////////////////////////////////////////////////////////////////////////////////////
+                                /////////////////////////////////////////////////////////////////////////////////////////////////// 
+
+
+                                if (iLateRec_HighValue != null) {                       //////////////// Status based on latest value!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                    if (dblLatestCFS >= iLateRec_HighValue) {
                                         strSiteFlowStatus = "HIGH FLOW";
                                     }
                                 }
-
-                                if ((dblLatestCFS <= iLateFlowPref4ConsvValue) & (dblLatestCFS > iLateFlowConsvValue)) {
-                                    strSiteFlowStatus = "PREPARE FOR CONSERVATION (Flow)";
+                                if ((dblLatestCFS <= iLateRec_IdealMaxValue) & (dblLatestCFS > iLateRec_IdealMinValue)) {                       //////////////// Status based on latest value!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                    strSiteFlowStatus = "IDEAL FLOW";
                                 }
-
-
-                                    if ((dblLatestCFS <= iLateRec_IdealMaxValue) & (dblLatestCFS > iLateRec_IdealMinValue)) {
-                                        strSiteFlowStatus = "IDEAL FLOW";
-                                    }
-
-
-
-                                if ((dblLatestCFS <= iLateFlowConsvValue) & (dblLatestCFS > iLateFlowClosureValueFlow)) {
-                                    strSiteFlowStatus = "CONSERVATION (Flow)";
+                                if (dblLatestCFS < iLateRec_LowValue) {                       //////////////// Status based on latest value!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                                    strSiteFlowStatus = "LOW FLOW";
                                 }
-                                if (dblLatestCFS <= iLateFlowClosureValueFlow) {
-                                     strSiteFlowStatus = "EXPANDED CONSERVATION MEASURES (Flow)";
-                                }
+                            } 
 
 
-                                    if (dblLatestCFS < iLateRec_LowValue) {
-                                        strSiteFlowStatus = "LOW FLOW";
-                                    }
 
 
-                            }
+
                             var strNoDataLabel4ChartingTMP = "";
                             if (dteGreatestTMP == - 999999) {
                                 dblLatestTMP = "Not Available"

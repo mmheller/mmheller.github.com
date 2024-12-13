@@ -374,7 +374,7 @@
 
 							<div id="divCFSTargetDefinitions" style="display:none;background-color:#eee !important; margin-top:0;margin-bottom:0;">
 
-								<div style="margin:10px;">Stream status based on waterflow (cfs) targets:  <span data-bind='text: $root.CurrentDisplayGageRecord().SiteFlowStatus'></span></div>
+								<div id="divCFSFlowStatus" style="margin:10px;">Stream status based on waterflow (cfs) targets:  <span data-bind='text: $root.CurrentDisplayGageRecord().SiteFlowStatus'></span></div>
 								<br />
 								<div style="margin-left:30px"> <u>Waterflow target definitions for this stream section</u></div>
 								<div class="tab">
@@ -420,7 +420,7 @@
 						<div style="margin-left:10px;">
 							<div>Current Water Temperature (F): <span data-bind='text: $root.CurrentDisplayGageRecord().WaterTemp'></span> as of <span data-bind='text: $root.CurrentDisplayGageRecord().formattedWaterTempDateTime'></span></div>
 							<div id="divDay3TMPTrend">(3 day trend <img height="26px" data-bind="attr:{src: $root.CurrentDisplayGageRecord().Day3TMPTrend}" />)</div>
-							<div>Stream status based on temperature target: <span data-bind='text: $root.CurrentDisplayGageRecord().SiteTempStatus'></span></div>
+							<div id="divTEMPFlowStatus">Stream status based on temperature target: <span data-bind='text: $root.CurrentDisplayGageRecord().SiteTempStatus'></span></div>
 							<br />
 							<div><u>Temperature target definition for this stream section</u></div>
 							<div>Temperature Closure Target: <span data-bind='text: $root.CurrentDisplayGageRecord().iTempClosureValue'></span></div>
@@ -447,7 +447,7 @@
 							<div id="divDay3HtTrend">(3 day trend <img height="26px" data-bind="attr:{src: $root.CurrentDisplayGageRecord().Day3HtTrend}" />)</div>
 						</div>
 						<div id="divHtTargetDefinitions" style="display:none;background-color:#eee !important; margin-top:0;margin-bottom:0;">
-							<div>Stream status based on Gage Height target: <span data-bind='text: $root.CurrentDisplayGageRecord().SiteHtStatus'></span></div>
+							<div id="divHTStatus">Stream status based on Gage Height target: <span data-bind='text: $root.CurrentDisplayGageRecord().SiteHtStatus'></span></div>
 							<br />
 							<div style="margin-left:30px"> <u>Gage Height definitions for this stream section</u></div>
 							<div class="tab">

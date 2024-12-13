@@ -75,7 +75,9 @@ define([
         m_StreamStatusRendererTemp: null,
         m_StreamStatusRendererHT: null,
         m_StartDateTime: null,
+        m_StartDateTimeAnalysis: null,
         m_EndDateTime: null,
+        m_CFSAnlaysisType: null,
 
         addReservoirConditionFeatureLayer: function (arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum, arrayOIDsRed) {
             let arrayofArrays = [arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum];////// for each array, red takes presedence so remove OID's from non-red arrays if in Red arra
@@ -226,30 +228,32 @@ define([
         },
 
         addStreamConditionFeatureLayer: function (arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum, arrayOIDsRed, arrayOIDsGreen, arrayOIDsPurple) {
-            let arrayofArrays = [arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum, arrayOIDsGreen, arrayOIDsPurple];////// for each array, red takes presedence so remove OID's from non-red arrays if in Red arra
+            let arrayofArrays = [arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange];////// for each array, red takes presedence so remove OID's from non-red arrays if in Red arra
+            //let arrayofArrays = [arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum, arrayOIDsGreen, arrayOIDsPurple];////// for each array, red takes presedence so remove OID's from non-red arrays if in Red arra
+
             let nonRedOID = null;
             let arrayItems2remove = [];
             let index2Remove = null;
 
 
-            //for (let i = 0; i < arrayofArrays.length; i++) {
-            //    for (let iColor = 0; iColor < arrayofArrays[i].length; iColor++) {
-            //        nonRedOID = arrayofArrays[i][iColor];
-            //        for (let iRedOID = 0; iRedOID < arrayOIDsRed.length; iRedOID++) {
-            //            if (nonRedOID == arrayOIDsRed[iRedOID]) {  //remove the OID from the non-red array
-            //                arrayItems2remove.push(nonRedOID);
-            //                break;
-            //            }
-            //        }
-            //    }
-            //    for (let iRemove = 0; iRemove < arrayItems2remove.length; iRemove++) {
-            //        index2Remove = arrayofArrays[i].indexOf(arrayItems2remove[iRemove]);
-            //        if (index2Remove > -1) {
-            //            arrayofArrays[i].splice(index2Remove, 1); // 2nd parameter means remove one item only
-            //        }
-            //    }
-            //    arrayItems2remove = [];
-            //}
+            for (let i = 0; i < arrayofArrays.length; i++) {
+                for (let iColor = 0; iColor < arrayofArrays[i].length; iColor++) {
+                    nonRedOID = arrayofArrays[i][iColor];
+                    for (let iRedOID = 0; iRedOID < arrayOIDsRed.length; iRedOID++) {
+                        if (nonRedOID == arrayOIDsRed[iRedOID]) {  //remove the OID from the non-red array
+                            arrayItems2remove.push(nonRedOID);
+                            break;
+                        }
+                    }
+                }
+                for (let iRemove = 0; iRemove < arrayItems2remove.length; iRemove++) {
+                    index2Remove = arrayofArrays[i].indexOf(arrayItems2remove[iRemove]);
+                    if (index2Remove > -1) {
+                        arrayofArrays[i].splice(index2Remove, 1); // 2nd parameter means remove one item only
+                    }
+                }
+                arrayItems2remove = [];
+            }
 
 
 
@@ -515,81 +519,12 @@ define([
             app.blnIsInitialPageLoad_Reservoir = true;
 
 
+            
+
+
             //////////////////////////////////////////////////////////////////////////////
-            let dteTempCurrentDate = new Date();
-            let currentHours = dteTempCurrentDate.getHours();
-            currentHoursEnd = ("0" + currentHours).slice(-2);
-            let currentMinutes = dteTempCurrentDate.getMinutes();
-            currentMinutes = ("0" + currentMinutes).slice(-2);
-            let currentSectonds = dteTempCurrentDate.getSeconds();
-            currentSectonds = ("0" + currentSectonds).slice(-2);
-            let strTempTimeOnly = "T" + currentHoursEnd + ":" + currentMinutes + ":" + currentSectonds;
-
-
-            if (getTokens()['endDate'] == undefined) {
-                app.pSup.m_EndDateTime = new Date();
-            } else {
-                let dteTempEndDate1 = new Date(getTokens()['endDate']);
-                let dteTempEndDate1B = addHoursToDate(dteTempEndDate1, 7);;  //convert day/time to local
-                function addHoursToDate(date, hours) {
-                    return new Date(new Date(date).setHours(date.getHours() + hours));
-                }
-
-                let strEndMonth = dteTempEndDate1B.getMonth() + 1;
-                strEndMonth = ("0" + strEndMonth).slice(-2);
-                let strEndDay = dteTempEndDate1B.getDate();
-                strEndDay = ("0" + strEndDay).slice(-2);
-
-                app.pSup.m_EndDateTime = new Date(dteTempEndDate1B.getFullYear().toString() + "-" + strEndMonth + "-" + strEndDay + strTempTimeOnly);
-            }
-            if (getTokens()['startDate'] == undefined) {
-                app.pSup.m_StartDateTime = new Date();
-                app.pSup.m_StartDateTime.setDate(app.pSup.m_StartDateTime.getDate() - 3);
-            } else {
-                let dteTempStartDate1 = new Date(getTokens()['startDate']);
-                let dteTempStartDate1B = addHoursToDate(dteTempStartDate1, 7);;  //convert day/time to local
-
-                let strStartMonth = dteTempStartDate1B.getMonth() + 1;
-                strStartMonth = ("0" + strStartMonth).slice(-2);
-                let strStartDay = dteTempStartDate1B.getDate();
-                strStartDay = ("0" + strStartDay).slice(-2);
-
-                app.pSup.m_StartDateTime = new Date(dteTempStartDate1B.getFullYear().toString() + "-" + strStartMonth + "-" + strStartDay + strTempTimeOnly);
-            }
-            
-            const inputDatePicker = document.getElementById("input-date-picker");
-            if (inputDatePicker) {
-                inputDatePicker.value = [app.pSup.m_StartDateTime, app.pSup.m_EndDateTime];  ////////set the values in the date range picker
-            };
-
-            var btnChangeDateRange = document.getElementById('btnChangeDateRange');
-            btnChangeDateRange.onclick = function () {
-                let strRCTURL = window.location.href;
-                let str2Remove = "";
-                // string manipulation to ensure the new URL is correct
-                if (strRCTURL.indexOf("startDate") > -1) {
-                    str2Remove = strRCTURL.slice(strRCTURL.indexOf("startDate") -1, strRCTURL.indexOf("&endDate"));  //get the start date and value to remove
-                    strRCTURL = strRCTURL.replace(str2Remove, "");
-                }
-                if (strRCTURL.indexOf("endDate") > -1) {
-                    str2Remove = strRCTURL.slice(strRCTURL.indexOf("&endDate="), strRCTURL.length);  //get the end date and value to remove
-                    strRCTURL = strRCTURL.replace(str2Remove, "");
-                }
-                let strURLPrefix = "";
-                if (strRCTURL.indexOf("index.html") == -1) {
-                    strURLPrefix = "index.html";
-                }
-                if (strRCTURL.indexOf("?") == -1) {
-                    strURLPrefix += "?";
-                } else {
-                    strURLPrefix += "&";
-                }
-                
-                strRCTURL += strURLPrefix + "startDate=" + inputDatePicker.value[0] + "&endDate=" + inputDatePicker.value[1];
-                window.open(strRCTURL, "_self");
-            };
-            //////////////////////////////////////////////////////
-            
+            //////////////////////////////Basins & Watersheds///////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////
             app.H2O_ID = getTokens()['H2O_ID'];
             app.Basin_ID = getTokens()['Basin_ID'];
 
@@ -746,6 +681,102 @@ define([
                     app.StateArea = arrayNavListBasin[i][2];
 				}
 			}
+
+
+
+
+            //////////////////////////////////////////////////////////////////////////////
+            //////////////////////////////dates///////////////////////////////////////
+            //////////////////////////////////////////////////////////////////////////////
+            let dteTempCurrentDate = new Date();
+            let currentHours = dteTempCurrentDate.getHours();
+            currentHoursEnd = ("0" + currentHours).slice(-2);
+            let currentMinutes = dteTempCurrentDate.getMinutes();
+            currentMinutes = ("0" + currentMinutes).slice(-2);
+            let currentSectonds = dteTempCurrentDate.getSeconds();
+            currentSectonds = ("0" + currentSectonds).slice(-2);
+            let strTempTimeOnly = "T" + currentHoursEnd + ":" + currentMinutes + ":" + currentSectonds;
+
+
+            if (getTokens()['endDate'] == undefined) {
+                app.pSup.m_EndDateTime = new Date();
+            } else {
+                let dteTempEndDate1 = new Date(getTokens()['endDate']);
+                let dteTempEndDate1B = addHoursToDate(dteTempEndDate1, 7);;  //convert day/time to local
+                function addHoursToDate(date, hours) {
+                    return new Date(new Date(date).setHours(date.getHours() + hours));
+                }
+
+                let strEndMonth = dteTempEndDate1B.getMonth() + 1;
+                strEndMonth = ("0" + strEndMonth).slice(-2);
+                let strEndDay = dteTempEndDate1B.getDate();
+                strEndDay = ("0" + strEndDay).slice(-2);
+
+                app.pSup.m_EndDateTime = new Date(dteTempEndDate1B.getFullYear().toString() + "-" + strEndMonth + "-" + strEndDay + strTempTimeOnly);
+            }
+
+            app.Days4Analisis = 3;
+            if ((app.Basin_ID == "Upper Clark Fork") | (app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork")) {
+                app.Days4Analisis = 5;
+                app.pSup.m_CFSAnlaysisType = "4of5Average";
+            }
+            document.getElementById("txtFromToDate").innerHTML = "Gage readings may be provisional, Conditions based on gage readings of the last " + app.Days4Analisis.toString() + " days "
+
+            if (getTokens()['startDate'] == undefined) {
+                app.pSup.m_StartDateTime = new Date();
+                app.pSup.m_StartDateTime.setDate(app.pSup.m_StartDateTime.getDate() - app.Days4Analisis);
+                app.pSup.m_StartDateTimeAnalysis = new Date(app.pSup.m_StartDateTime);
+            } else {
+                let dteTempStartDate1 = new Date(getTokens()['startDate']);
+                let dteTempStartDate1B = addHoursToDate(dteTempStartDate1, 7);;  //convert day/time to local
+
+                let strStartMonth = dteTempStartDate1B.getMonth() + 1;
+                strStartMonth = ("0" + strStartMonth).slice(-2);
+                let strStartDay = dteTempStartDate1B.getDate();
+                strStartDay = ("0" + strStartDay).slice(-2);
+
+                app.pSup.m_StartDateTime = new Date(dteTempStartDate1B.getFullYear().toString() + "-" + strStartMonth + "-" + strStartDay + strTempTimeOnly);
+            }
+
+
+            let diffTime = Math.abs(app.pSup.m_EndDateTime - app.pSup.m_StartDateTime);
+            let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+            const inputDatePicker = document.getElementById("input-date-picker");
+            if (inputDatePicker) {
+                inputDatePicker.value = [app.pSup.m_StartDateTime, app.pSup.m_EndDateTime];  ////////set the values in the date range picker
+            };
+
+            var btnChangeDateRange = document.getElementById('btnChangeDateRange');
+            btnChangeDateRange.onclick = function () {
+                let strRCTURL = window.location.href;
+                let str2Remove = "";
+                // string manipulation to ensure the new URL is correct
+                if (strRCTURL.indexOf("startDate") > -1) {
+                    str2Remove = strRCTURL.slice(strRCTURL.indexOf("startDate") - 1, strRCTURL.indexOf("&endDate"));  //get the start date and value to remove
+                    strRCTURL = strRCTURL.replace(str2Remove, "");
+                }
+                if (strRCTURL.indexOf("endDate") > -1) {
+                    str2Remove = strRCTURL.slice(strRCTURL.indexOf("&endDate="), strRCTURL.length);  //get the end date and value to remove
+                    strRCTURL = strRCTURL.replace(str2Remove, "");
+                }
+                let strURLPrefix = "";
+                if (strRCTURL.indexOf("index.html") == -1) {
+                    strURLPrefix = "index.html";
+                }
+                if (strRCTURL.indexOf("?") == -1) {
+                    strURLPrefix += "?";
+                } else {
+                    strURLPrefix += "&";
+                }
+
+                strRCTURL += strURLPrefix + "startDate=" + inputDatePicker.value[0] + "&endDate=" + inputDatePicker.value[1];
+                window.open(strRCTURL, "_self");
+            };
+            //////////////////////////////////////////////////////
+
+
+
 
             $("#dropDownId").append("<li><a data-value='American Whitewater Difficulty and Flow'>American Whitewater Difficulty and Flow</a></li>")
             $("#dropDownId").append("<li><a data-value='FEMA Flood Layer Hazard Viewer'>FEMA Flood Layer Hazard Viewer</a></li>")
@@ -1664,10 +1695,15 @@ define([
 
 
             let diffTime = Math.abs(app.pSup.m_EndDateTime - app.pSup.m_StartDateTime);
-            let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); 
+            let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+            //let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
 
-            document.getElementById("txtFromToDate").innerHTML = "Conditions/information based on provisional gage readings of the last " + diffDays.toString() +
-                                                                " days "
+            let strDaysNoteSuffix = "";
+            if (app.Days4Analisis != diffDays) {
+                strDaysNoteSuffix = " of the " + diffDays.toString() + " day range";
+            }
+
+            document.getElementById("txtFromToDate").innerHTML = "Gage readings may be provisional, conditions based on gage readings of the last " + app.Days4Analisis.toString() + " days" + strDaysNoteSuffix;
 
             //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
             //|||||||||||||||||||||||||||||||     This starts retevial of gage data         ||||||||||||||||||||||||||||||||||||||||||||||||||||
