@@ -719,6 +719,7 @@ define([
             if ((app.Basin_ID == "Upper Clark Fork") | (app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork")) {
                 app.Days4Analisis = 5;
                 app.pSup.m_CFSAnlaysisType = "4of5Average";
+                $("#strFlowStatusMethod").html("Status Method: if daily average flow falls below daily enforceable flow rate during 4 out of 5 consecutive days");
             }
             document.getElementById("txtFromToDate").innerHTML = "Gage readings may be provisional, Conditions based on gage readings of the last " + app.Days4Analisis.toString() + " days "
 

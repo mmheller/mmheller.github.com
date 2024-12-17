@@ -20,6 +20,46 @@ function multiDimensionalUnique(arr) {
 
 
 
+function MaxValueByDayAboveTarget(arrray_Detail4Analysis, strValueKey, numTarget, dteMustBeGreaterThan, strDateKey, iNumDaysAllowedOutsideRange) {
+    let blnResult = false;
+    let strPreviousDate = null;
+    let strObjDate = null;
+    let numPerviousValue = 0;
+    let iTotalDaysOutsideRange = 0;
+
+    for (var i = 0, l = arrray_Detail4Analysis.length; i < l; i++) {                   //incoming data is sorted by datetime
+        let pObj = arrray_Detail4Analysis[i];
+        
+        if ((pObj[strDateKey] > dteMustBeGreaterThan) & (pObj[strDateKey] != null)) {  // make sure record value date is within analysis time and not null
+            strObjDate = new Date(pObj[strDateKey]).toDateString();                    // get the record date
+            if (strPreviousDate == null) {                                             // if the day for analysis is not set, set it 
+                strPreviousDate = strObjDate;
+            }
+            if (strObjDate == strPreviousDate) {                                       // if the record date is is the same as the day for analysis, add to value/variable sums
+                if (pObj[strValueKey] > numPerviousValue) {
+                    numPerviousValue = pObj[strValueKey];
+                }
+            }
+
+            if (strObjDate != strPreviousDate) {                                       //day switched so determine if day's max value is greater than target
+                if (numPerviousValue > numTarget) {                      
+                    iTotalDaysOutsideRange += 1;
+                }
+                if (iTotalDaysOutsideRange >= iNumDaysAllowedOutsideRange) {
+                    blnResult = true;
+                    break;
+                }
+
+                numPerviousValue = pObj[strValueKey];                                               //reset number to compare move onto the next day
+                strPreviousDate = strObjDate;                                          
+            }
+        }
+    }
+
+    return blnResult;
+}
+
+
 function AllValuesByDayandAverageWithinRange(arrray_Detail4Analysis, strValueKey, iFromValue, iToValue, dteMustBeGreaterThan, strDateKey, iNumDaysAllowedOutsideRange) {
     let blnResult = true;
     let strPreviousDate = null;
@@ -32,7 +72,6 @@ function AllValuesByDayandAverageWithinRange(arrray_Detail4Analysis, strValueKey
     for (var i = 0, l = arrray_Detail4Analysis.length; i < l; i++) {                   //incoming data is sorted by datetime
         let pObj = arrray_Detail4Analysis[i];
        
-
         if ((pObj[strDateKey] > dteMustBeGreaterThan) & (pObj[strDateKey] != null)) {  // make sure record value date is within analysis time and not null
             strObjDate = new Date(pObj[strDateKey]).toDateString();                    // get the record date
             if (strPreviousDate == null) {                                             // if the day for analysis is not set, set it 
@@ -52,14 +91,10 @@ function AllValuesByDayandAverageWithinRange(arrray_Detail4Analysis, strValueKey
                     blnResult = false;
                     break;
                 }
-
-                numAvg = 0;
-
                 strPreviousDate = strObjDate;                                          //move onto the next day
                 numTotal = pObj[strValueKey];
                 iCounter = 1;
                 numAvg = 0;
-                
             }
         }
     }
@@ -2889,10 +2924,7 @@ define([
                                     strSiteFlowStatus = "LOW FLOW";
                                 }
                             } 
-
-
-
-
+                            
 
                             var strNoDataLabel4ChartingTMP = "";
                             if (dteGreatestTMP == - 999999) {
@@ -2903,9 +2935,16 @@ define([
                                 dblLatestTMP = "*Not collected"
                                 strNoDataLabel4ChartingTMP = "(No Data) ";
                                 dteLatestDateTimeTMP = new Date();
-                            } else if ((dteGreatestTMP > iTempClosureValue) & (iTempClosureValue != 0)) {
+                            } else if ((MaxValueByDayAboveTarget(arrray_Detail4InterpolationTMP, "TMP", iTempClosureValue, app.pSup.m_StartDateTimeAnalysis, "gagedatetime", 3)) &
+                                                        (iTempClosureValue != 0)) {
                                 strSiteTempStatus = "EXPANDED CONSERVATION MEASURES";
-                            }
+                            } 
+                            //else if ((dteGreatestTMP > iTempClosureValue) & (iTempClosureValue != 0)) {
+                            //    strSiteTempStatus = "EXPANDED CONSERVATION MEASURES";
+                            //} 
+
+
+                            ///
 
                             if (itemSectionRefined[1]== null) {  //if no gage id then hardcode 
                                 dblLatestTMP = "No gage exists";

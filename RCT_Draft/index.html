@@ -383,9 +383,13 @@
 										<tr><td>CONSERVATION:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateFlowConsvValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateFlowConsvValue'></span></td></tr>
 										<tr><td>EXPANDED CONSERVATION MEASURES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateFlowClosureValueFlow'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateFlowClosureValueFlow'></span></td></tr>
 									</table>
-								</div>
-							</div>
 
+									<div id="strFlowStatusMethod">
+										Status Method: if current gage reading reaches or exceeds waterflow target(s)
+									</div>
+								</div>
+
+							</div>
 
 							<div id="divCFSTargetDefinitionsREC" style="display:none;background-color:#eee !important; margin-top:0;margin-bottom:0;">
 								<div style="margin:10px;">Stream status based on waterflow (cfs) targets:  <span data-bind='text: $root.CurrentDisplayGageRecord().SiteFlowStatus'></span></div>
@@ -398,8 +402,8 @@
 										<tr><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_HighValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_HighValue'></span></td></tr>
 
 										<!--<tr><td>POTENTIAL WATER TRAVEL AND CONSERVATION ISSUES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_LowValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_LowValue'></span></td></tr>
-										<tr><td>OPTIMUM WATER TRAVEL:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_IdealMinValue'></span> (cfs) to <span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_IdealMaxValue'></span>:<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_IdealMaxValue'></span></td></tr>
-										<tr><td>POTENTIAL WATER TRAVEL ISSUES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_HighValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_HighValue'></span></td></tr>-->
+				<tr><td>OPTIMUM WATER TRAVEL:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_IdealMinValue'></span> (cfs) to <span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_IdealMaxValue'></span>:<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_IdealMaxValue'></span></td></tr>
+				<tr><td>POTENTIAL WATER TRAVEL ISSUES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_HighValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_HighValue'></span></td></tr>-->
 									</table>
 								</div>
 							</div>
@@ -420,13 +424,15 @@
 						<div style="margin-left:10px;">
 							<div>Current Water Temperature (F): <span data-bind='text: $root.CurrentDisplayGageRecord().WaterTemp'></span> as of <span data-bind='text: $root.CurrentDisplayGageRecord().formattedWaterTempDateTime'></span></div>
 							<div id="divDay3TMPTrend">(3 day trend <img height="26px" data-bind="attr:{src: $root.CurrentDisplayGageRecord().Day3TMPTrend}" />)</div>
-							<div id="divTEMPFlowStatus">Stream status based on temperature target: <span data-bind='text: $root.CurrentDisplayGageRecord().SiteTempStatus'></span></div>
+							<div id="divTEMPFlowStatus">
+								Stream status based on temperature target: <span data-bind='text: $root.CurrentDisplayGageRecord().SiteTempStatus'></span>
+							</div>
 							<br />
 							<div><u>Temperature target definition for this stream section</u></div>
 							<div>Temperature Closure Target: <span data-bind='text: $root.CurrentDisplayGageRecord().iTempClosureValue'></span></div>
-							<!--<div>Temperature Collected: <span data-bind='text: $root.CurrentDisplayGageRecord().strTempCollected'></span></div>-->
-							<!--<div><span data-bind='text: $root.CurrentDisplayGageRecord().strMONTHDAYEarlyFlowFromDroughtManagementTarget'></span></div>
-				<div><span data-bind='text: $root.CurrentDisplayGageRecord().strMONTHDAYEarlyFlowToDroughtManagementTarget'></span></div>-->
+							<div>
+								Status Method: if daily maximum water temperature reaches or exceeds temperature closure target for 3 consecutive days
+							</div>
 						</div>
 					</div>
 				</div>
@@ -437,28 +443,29 @@
 					</div>
 				</div>
 
-
-
 				<div id="divSectionDetail_C" style="display:none; margin-bottom:0;">
 					<div id="detailSection5" style="background-color:#eee !important;">
 						<div><h3>Gage Height Data</h3></div>
 						<div style="margin-left:10px;">
 							<div>Current Gage Height (ft): <span data-bind='text: $root.CurrentDisplayGageRecord().GageHt'></span> as of <span data-bind='text: $root.CurrentDisplayGageRecord().formattedGageHtDateTime'></span></div>
 							<div id="divDay3HtTrend">(3 day trend <img height="26px" data-bind="attr:{src: $root.CurrentDisplayGageRecord().Day3HtTrend}" />)</div>
-						</div>
-						<div id="divHtTargetDefinitions" style="display:none;background-color:#eee !important; margin-top:0;margin-bottom:0;">
-							<div id="divHTStatus">Stream status based on Gage Height target: <span data-bind='text: $root.CurrentDisplayGageRecord().SiteHtStatus'></span></div>
-							<br />
-							<div style="margin-left:30px"> <u>Gage Height definitions for this stream section</u></div>
-							<div class="tab">
-								<table>
-									<tr><td>RECOMMENDED CONSERVATION MEASURES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateHtPref4ConsvValue'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateHtPref4ConsvValue'></span></td></tr>
-									<tr><td>CONSERVATION:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateHtConsvValue'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateHtConsvValue'></span></td></tr>
-									<tr><td>EXPANDED CONSERVATION MEASURES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateHtClosureValueFlow'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateHtClosureValueFlow'></span></td></tr>
-								</table>
+
+							<div id="divHtTargetDefinitions" style="display:none;background-color:#eee !important; margin-top:0;margin-bottom:0;">
+								<div id="divHTStatus">Stream status based on Gage Height target: <span data-bind='text: $root.CurrentDisplayGageRecord().SiteHtStatus'></span></div>
+								<br />
+								<div style="margin-left:30px"> <u>Gage Height definitions for this stream section</u></div>
+								<div class="tab">
+									<table>
+										<tr><td>RECOMMENDED CONSERVATION MEASURES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateHtPref4ConsvValue'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateHtPref4ConsvValue'></span></td></tr>
+										<tr><td>CONSERVATION:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateHtConsvValue'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateHtConsvValue'></span></td></tr>
+										<tr><td>EXPANDED CONSERVATION MEASURES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateHtClosureValueFlow'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateHtClosureValueFlow'></span></td></tr>
+									</table>
+								</div>
+								<div>
+									Status Method: if current gage reading reaches or exceeds height closure target
+								</div>
 							</div>
 						</div>
-
 
 					</div>
 				</div>
