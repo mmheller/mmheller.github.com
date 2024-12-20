@@ -921,9 +921,7 @@ define([
 
                 arrayProc2 = arrayProc;
             }
-
-   
-
+            
             
                 var arrayRES_URLs = [];
 
@@ -955,43 +953,47 @@ define([
 
                                 let a_resp = arrayResponses[iR];
                                 if (a_resp) {
-                                    resQueryInfoTmp = a_resp[0]["time-series"]["query-info"]["requested-items"][0].name;
+                                    if (a_resp[0]["time-series"] != undefined) {
+                                        resQueryInfoTmp = a_resp[0]["time-series"]["query-info"]["requested-items"][0].name;
 
-                                    let blnProceed = false;
+                                        let blnProceed = false;
 
-                                    if (a_resp[0]["time-series"]["time-series"].length > 0) {  
-                                        blnProceed = true;
-                                    }
+                                        if (a_resp[0]["time-series"]["time-series"].length > 0) {
+                                            blnProceed = true;
+                                        }
 
-                                    if (blnProceed) {                                                           // if time-series exist then proceed
-                                        let arrayTimeSeries1;
-                                        arrayTimeSeries1 = a_resp[0]["time-series"];   //get the info about the gage and what data queried
+                                        if (blnProceed) {                                                           // if time-series exist then proceed
+                                            let arrayTimeSeries1;
+                                            arrayTimeSeries1 = a_resp[0]["time-series"];   //get the info about the gage and what data queried
 
-                                        for (let iTimeSeries = 0; iTimeSeries < arrayTimeSeries1["time-series"].length; iTimeSeries++) {        // loop through the time series
-                                            let jsonTimeSeries = arrayTimeSeries1["time-series"][iTimeSeries];
-                                            let strUnits = jsonTimeSeries["regular-interval-values"].unit;                                              //not needed for the website but good to confirm the units for development
+                                            for (let iTimeSeries = 0; iTimeSeries < arrayTimeSeries1["time-series"].length; iTimeSeries++) {        // loop through the time series
+                                                let jsonTimeSeries = arrayTimeSeries1["time-series"][iTimeSeries];
+                                                let strUnits = jsonTimeSeries["regular-interval-values"].unit;                                              //not needed for the website but good to confirm the units for development
 
-                                            for (let iSegment = 0; iSegment < jsonTimeSeries["regular-interval-values"].segments.length; iSegment++) {             //loop through the time segments
-                                                let jsonSegment = jsonTimeSeries["regular-interval-values"].segments[iSegment];
-                                                let strUSACE_NWD_1stTimeUTC = jsonSegment["first-time"];
-                                                let dteUSACE_NWD_1stTimeUTC = Date.parse(strUSACE_NWD_1stTimeUTC);
-                                                let dteUSACE_NWD_1stTimeLOCAL = new Date(dteUSACE_NWD_1stTimeUTC);
+                                                for (let iSegment = 0; iSegment < jsonTimeSeries["regular-interval-values"].segments.length; iSegment++) {             //loop through the time segments
+                                                    let jsonSegment = jsonTimeSeries["regular-interval-values"].segments[iSegment];
+                                                    let strUSACE_NWD_1stTimeUTC = jsonSegment["first-time"];
+                                                    let dteUSACE_NWD_1stTimeUTC = Date.parse(strUSACE_NWD_1stTimeUTC);
+                                                    let dteUSACE_NWD_1stTimeLOCAL = new Date(dteUSACE_NWD_1stTimeUTC);
 
-                                                let dteTempDate4USACEValue = dteUSACE_NWD_1stTimeLOCAL;
-                                                arrayJSONValues = jsonSegment.values;
+                                                    let dteTempDate4USACEValue = dteUSACE_NWD_1stTimeLOCAL;
+                                                    arrayJSONValues = jsonSegment.values;
 
-                                                //console.log("Segment # " + iSegment.toString() + ", " + arrayJSONValues.length.toString() + " time-series values in this array");
-                                                for (let iResponseVal = 0; iResponseVal < arrayJSONValues.length; iResponseVal++) {
-                                                    if (iResponseVal > 0) {
-                                                        dteTempDate4USACEValue = new Date(dteTempDate4USACEValue.setTime(dteTempDate4USACEValue.getTime() + (1 * 60 * 60 * 1000)));//USACE_NWD returns values that are hourly but have to build the time value
+                                                    //console.log("Segment # " + iSegment.toString() + ", " + arrayJSONValues.length.toString() + " time-series values in this array");
+                                                    for (let iResponseVal = 0; iResponseVal < arrayJSONValues.length; iResponseVal++) {
+                                                        if (iResponseVal > 0) {
+                                                            dteTempDate4USACEValue = new Date(dteTempDate4USACEValue.setTime(dteTempDate4USACEValue.getTime() + (1 * 60 * 60 * 1000)));//USACE_NWD returns values that are hourly but have to build the time value
+                                                        }
+                                                        jsonFineValueArray = { 'Name': resQueryInfoTmp, 'value': arrayJSONValues[iResponseVal][0], "DateTimeReading": dteTempDate4USACEValue };
+                                                        jsonGagesReadingsValueArray.push(jsonFineValueArray);
+                                                        //console.log("dteUSACE_NWD_LastTimeLOCAL = " + dteUSACE_NWD_LastTimeLOCAL.toString() + "-------- dteTempDate4USACEValue" + dteTempDate4USACEValue.toString());
                                                     }
-                                                    jsonFineValueArray = { 'Name': resQueryInfoTmp, 'value': arrayJSONValues[iResponseVal][0], "DateTimeReading": dteTempDate4USACEValue };
-                                                    jsonGagesReadingsValueArray.push(jsonFineValueArray);
-                                                    //console.log("dteUSACE_NWD_LastTimeLOCAL = " + dteUSACE_NWD_LastTimeLOCAL.toString() + "-------- dteTempDate4USACEValue" + dteTempDate4USACEValue.toString());
+                                                    //console.log("values for segment completed");
                                                 }
-                                                //console.log("values for segment completed");
                                             }
                                         }
+                                    } else {
+                                        console.log("NO JSON Data response # " + iR.toString());
                                     }
                                 } else {
                                     console.log("NO JSON Data response # " + iR.toString());

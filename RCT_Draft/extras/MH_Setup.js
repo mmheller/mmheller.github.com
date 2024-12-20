@@ -127,7 +127,7 @@ define([
             app.pSup.m_StreamStatusRendererCFS = defaultUniqueSymbolRendererTemp;
             app.pSup.m_StreamStatusRendererCFS.defaultLabel = "Stream Section (Open)";
 
-            app.pSup.m_StreamStatusRendererTemp = defaultUniqueSymbolRenderer;
+            app.pSup.m_StreamStatusRendererTemp = defaultUniqueSymbolRendererCFS;
             app.pSup.m_StreamStatusRendererTemp.defaultLabel = "Stream Section (Open)";
 
             //app.pSup.m_StreamStatusRendererHT = defaultUniqueSymbolRenderer;
@@ -716,7 +716,7 @@ define([
             }
 
             app.Days4Analisis = 3;
-            if ((app.Basin_ID == "Upper Clark Fork") | (app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork")) {
+            if ((app.Basin_ID == "Upper Clark Fork") | (app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork") | (app.H2O_ID == "Flint-Rock")) {                      /////Determine what analysis method and number of days for anlaysis
                 app.Days4Analisis = 5;
                 app.pSup.m_CFSAnlaysisType = "4of5Average";
                 $("#strFlowStatusMethod").html("Status Method: if daily average flow falls below daily enforceable flow rate during 4 out of 5 consecutive days");
@@ -750,34 +750,39 @@ define([
 
             var btnChangeDateRange = document.getElementById('btnChangeDateRange');
             btnChangeDateRange.onclick = function () {
-                let strRCTURL = window.location.href;
-                let str2Remove = "";
-                // string manipulation to ensure the new URL is correct
-                if (strRCTURL.indexOf("startDate") > -1) {
-                    str2Remove = strRCTURL.slice(strRCTURL.indexOf("startDate") - 1, strRCTURL.indexOf("&endDate"));  //get the start date and value to remove
-                    strRCTURL = strRCTURL.replace(str2Remove, "");
-                }
-                if (strRCTURL.indexOf("endDate") > -1) {
-                    str2Remove = strRCTURL.slice(strRCTURL.indexOf("&endDate="), strRCTURL.length);  //get the end date and value to remove
-                    strRCTURL = strRCTURL.replace(str2Remove, "");
-                }
-                let strURLPrefix = "";
-                if (strRCTURL.indexOf("index.html") == -1) {
-                    strURLPrefix = "index.html";
-                }
-                if (strRCTURL.indexOf("?") == -1) {
-                    strURLPrefix += "?";
+                let diffTime = Math.abs(new Date(inputDatePicker.value[1]) - new Date(inputDatePicker.value[0]));
+                let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+                if (diffDays > 70) {
+                    $("#txtDateRangeMessage").html("DATE RANGE MUST BE LESS THAN 70 DAYS TO PROCEED"); 
                 } else {
-                    strURLPrefix += "&";
-                }
+                    $("#txtDateRangeMessage").html(""); 
 
-                strRCTURL += strURLPrefix + "startDate=" + inputDatePicker.value[0] + "&endDate=" + inputDatePicker.value[1];
-                window.open(strRCTURL, "_self");
+                    let strRCTURL = window.location.href;
+                    let str2Remove = "";
+                    // string manipulation to ensure the new URL is correct
+                    if (strRCTURL.indexOf("startDate") > -1) {
+                        str2Remove = strRCTURL.slice(strRCTURL.indexOf("startDate") - 1, strRCTURL.indexOf("&endDate"));  //get the start date and value to remove
+                        strRCTURL = strRCTURL.replace(str2Remove, "");
+                    }
+                    if (strRCTURL.indexOf("endDate") > -1) {
+                        str2Remove = strRCTURL.slice(strRCTURL.indexOf("&endDate="), strRCTURL.length);  //get the end date and value to remove
+                        strRCTURL = strRCTURL.replace(str2Remove, "");
+                    }
+                    let strURLPrefix = "";
+                    if (strRCTURL.indexOf("index.html") == -1) {
+                        strURLPrefix = "index.html";
+                    }
+                    if (strRCTURL.indexOf("?") == -1) {
+                        strURLPrefix += "?";
+                    } else {
+                        strURLPrefix += "&";
+                    }
+                    strRCTURL += strURLPrefix + "startDate=" + inputDatePicker.value[0] + "&endDate=" + inputDatePicker.value[1];
+                    window.open(strRCTURL, "_self");
+                }
             };
             //////////////////////////////////////////////////////
-
-
-
+            
 
             $("#dropDownId").append("<li><a data-value='American Whitewater Difficulty and Flow'>American Whitewater Difficulty and Flow</a></li>")
             $("#dropDownId").append("<li><a data-value='FEMA Flood Layer Hazard Viewer'>FEMA Flood Layer Hazard Viewer</a></li>")
@@ -931,6 +936,11 @@ define([
                     blnFeaturesExist = true;
                 }
                 app.blnReservoirGagesExist = blnFeaturesExist;
+
+                if (blnFeaturesExist) {
+                    document.getElementById("entriesConRESERVOIR_div").style.display = 'inline';
+                }
+
                 this.app.pSup.GetSetHeaderWarningContent(app.strHFL_URL + app.idx11[11], app.H2O_ID, blnUseAlternateHeader, app.Basin_ID);  //this will eventually trigger Phase2
             }).catch(function (error) {
                 console.log("ReturnFeaturesExist_YesNo, error: ", error.message);
@@ -1005,7 +1015,7 @@ define([
             var pGageFeatureLayer = new FeatureLayer({ url: app.strHFL_URL + app.idx11[1], popupTemplate: template });
 
 
-            if ((app.Basin_ID == "Upper Clark Fork") | (app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork")) {  //since the Turah gage is used for a conservation target for all, add this gage
+            if ((app.Basin_ID == "Upper Clark Fork") | (app.Basin_ID == "Blackfoot-Sun") | (app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork") | (app.H2O_ID == "Flint - Rock")) {  //since the Turah gage is used for a conservation target for all, add this gage
                 let HighlightedGage_Renderer = {
                     type: "simple",  // autocasts as new SimpleRenderer()
                     symbol: {
@@ -1462,12 +1472,10 @@ define([
                 dteToday.setDate(dteToday.getDate() - 1);  //round to yesterdays date 
 
                 if (app.pSup.m_EndDateTime < dteToday) {  
-                    app.strFWPQuery = "(ARCHIVEDATE > '" + strStartDateTimeUserFreindly + "') AND (ARCHIVEDATE < '" + strDateTimeUserFreindly + "')";
+                    app.strFWPQuery = "(PUBLISHDATE < '" + strDateTimeUserFreindly + "') AND (ARCHIVEDATE > '" + strStartDateTimeUserFreindly + "')";                    
                 } else {
                     app.strFWPQuery = "(ARCHIVEDATE IS NULL) OR (ARCHIVEDATE > '" + strDateTimeUserFreindly + "')";
                 }
-
-				
             }
 			            
             let sfsr_FWP = {
@@ -1670,7 +1678,7 @@ define([
                 pBLMFeatureLayer, pBLM_RecFeatureLayer, pGageFeatureLayer, pEPointsFeatureLayer,
                 pMonitoringCSVLayer, app.graphicsLayer];
 
-            if (app.Basin_ID == "Upper Clark Fork") {
+            if ((app.Basin_ID == "Upper Clark Fork") | (app.Basin_ID == "Blackfoot-Sun")) {
                 arrayLayer2add.push(pGageFeatureLayerHighlighted);
             }
 
@@ -1735,7 +1743,7 @@ define([
             legendLayers.push({ layer: pEPointsFeatureLayer, title: 'Start/End Section Locations' });
             legendLayers.push({ layer: pGageFeatureLayer, title: 'Gages' });
 
-            if (app.Basin_ID == "Upper Clark Fork") {
+            if ((app.Basin_ID == "Upper Clark Fork") | (app.Basin_ID == "Blackfoot-Sun")) {
                 legendLayers.push({ layer: pGageFeatureLayerHighlighted, title: 'Turah and Bonner Gages' });
             }
 
@@ -2262,12 +2270,12 @@ define([
 
             }
 
-            if ((app.Basin_ID == "Upper Clark Fork") | (app.H2O_ID == "Upper Clark Fork")) {
+            if ((app.Basin_ID == "Upper Clark Fork") | (app.Basin_ID == "Blackfoot-Sun") | (app.H2O_ID == "Upper Clark Fork") | (app.H2O_ID == "Flint - Rock")) {
                 strQueryDef6 = "(SectionName in ('Clark Fork Section 1','Clark Fork Section 2','Clark Fork Section 3','Clark Fork Section 4','Clark Fork Section 5','Clark Fork Section 6','Rock Creek Section 1'))" +                                    //Turah gage propogate functionality
                     " OR (StreamName in ('Little Blackfoot River','Gold Creek','Flint Creek','Middle Fork Rock Creek','East Fork Rock Creek','Silver Bow Creek'))";
 
-                strQueryDef6 = "(SectionName in ('Clark Fork Section 1','Clark Fork Section 2','Clark Fork Section 3','Clark Fork Section 4','Clark Fork Section 5','Clark Fork Section 6','Rock Creek Section 1'))" +                                    //Turah gage propogate functionality
-                    " OR (StreamName in ('Little Blackfoot River','Gold Creek','Flint Creek','Middle Fork Rock Creek','East Fork Rock Creek','Silver Bow Creek','Clearwater River','North Fork Blackfoot River','Nevada Creek'))";
+                //strQueryDef6 = "(SectionName in ('Clark Fork Section 1','Clark Fork Section 2','Clark Fork Section 3','Clark Fork Section 4','Clark Fork Section 5','Clark Fork Section 6','Rock Creek Section 1'))" +                                    //Turah gage propogate functionality
+                //    " OR (StreamName in ('Little Blackfoot River','Gold Creek','Flint Creek','Middle Fork Rock Creek','East Fork Rock Creek','Silver Bow Creek','Clearwater River','North Fork Blackfoot River','Nevada Creek'))";
 
             } else if ((app.Basin_ID == "UMH") | (app.H2O_ID == "Big Hole")) {
                 strQueryDef6 = "(SectionName in ('Big Hole River Section 3', 'Big Hole River Section 4'))" +                                    //Big hole propogate  functionality
@@ -2276,12 +2284,18 @@ define([
 
             //strQueryDef6 = "(Basin in ('Upper Clark Fork')) OR (Watershed in ('Blackfoot'))";                                                                 //Turah / Big Hole River Section 4' gage functionality
 
-            if ((app.Basin_ID == "Upper Clark Fork") | (app.H2O_ID == "Blackfoot")) {
+            if ((app.Basin_ID == "Upper Clark Fork") | (app.Basin_ID == "Blackfoot-Sun") | (app.H2O_ID == "Blackfoot")) {
                 strQueryDef7 = "(SectionName in ('nothing'))" +                                    //Turah gage propogate functionality
                     " OR (StreamName in ('Blackfoot River','Clearwater River','North Fork Blackfoot River','Nevada Creek'))";
             }
-
-
+            //if (((app.Basin_ID == "Upper Clark Fork") | (app.Basin_ID == "Blackfoot-Sun")) & (app.H2O_ID == "Blackfoot")) {
+            //    strQueryDef7 = "(SectionName in ('nothing'))" +                                    //Turah gage propogate functionality
+            //        " OR (StreamName in ('Blackfoot River','Clearwater River','North Fork Blackfoot River','Nevada Creek'))";
+            //} else if (((app.Basin_ID == "Upper Clark Fork") | (app.Basin_ID == "Blackfoot-Sun")) & (!(app.H2O_ID == "Blackfoot"))) {
+            //    strQueryDef7 = "(SectionName in ('nothing'))" +                                    //Turah gage propogate functionality
+            //        " OR (StreamName in ('nothing'))";
+            //}
+            
             return [strQueryDef1, strQueryDef2, strQueryDef3, strQueryDef4, strQueryDef5, strQueryDef6, strQueryDef7];
         },
 

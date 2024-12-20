@@ -130,9 +130,9 @@ define([
 
 					return (
 						[
-							inputDate.getFullYear(),
 							app.pGetWarn.padTo2Digits(inputDate.getMonth() + 1),
 							app.pGetWarn.padTo2Digits(inputDate.getDate()),
+							inputDate.getFullYear(),
 						].join('/') +
 						' ' +
 						[
@@ -190,9 +190,16 @@ define([
 							//var strLOCATION = pCurrentFWPFeature.attributes["LOCATION"];
 							let strPRESSRELEASE = pCurrentFWPFeature.attributes["PRESSRELEASE"];
 							let strPUBLISHDATE = pCurrentFWPFeature.attributes["PUBLISHDATE"];
-
-
+							let strARCHIVEDATE = pCurrentFWPFeature.attributes["ARCHIVEDATE"];
+							
 							strPUBLISHDATE = app.pGetWarn.FormatDate3(strPUBLISHDATE);
+							strPUBLISHDATE = strPUBLISHDATE.replace(" 00:00:00", "");
+
+
+							if (strARCHIVEDATE != null) {
+								strARCHIVEDATE = app.pGetWarn.FormatDate3(strARCHIVEDATE);
+								strARCHIVEDATE = strARCHIVEDATE.replace(" 00:00:00", "");
+							}
 							let strTITLE = pCurrentFWPFeature.attributes["TITLE"];
 
 							let strSectionName = pSectionSelectedFeature.attributes.StreamName;
@@ -206,8 +213,15 @@ define([
 
 									app.pGetWarn.m_streamSectionArrray[is][17] = strDESCRIPTION;
 									app.pGetWarn.m_streamSectionArrray[is][18] = strLOCATION;
+
 									app.pGetWarn.m_streamSectionArrray[is][19] = strPRESSRELEASE;
-									app.pGetWarn.m_streamSectionArrray[is][20] = strPUBLISHDATE;
+									
+									if (strARCHIVEDATE != null) {
+										app.pGetWarn.m_streamSectionArrray[is][20] = strPUBLISHDATE + ", " + strARCHIVEDATE;;
+									} else {
+										app.pGetWarn.m_streamSectionArrray[is][20] = strPUBLISHDATE;
+									}
+									
 									app.pGetWarn.m_streamSectionArrray[is][21] = strTITLE;
 									app.pGetWarn.m_streamSectionArrray[is][22] = "MT FWP Restriction (click for details)";
 								}

@@ -644,6 +644,7 @@ define([
                 }
             }
 
+
             app.pGetWarn.Start(sectionGeometries, streamSectionArrray);
         },
 
@@ -666,14 +667,14 @@ define([
             //if ((app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork")) { //since the Turah gage is used for a conservation target for all, add this gage and stream data
             //    strQuery1 = strQuery + " OR ((StreamName = 'Clark Fork River') AND ((SectionID = '5') OR (SectionID = '6')))"
             //}
-            if (app.H2O_ID == "Upper Clark Fork") { //since the Turah gage is used for a conservation target for all, add this gage and stream data, no need to do this for the Bonner gage since all propogating will be in the Blackfoot watershed
+            if ((app.H2O_ID == "Upper Clark Fork") | (app.H2O_ID == "Flint-Rock")) { //since the Turah gage is used for a conservation target for all, add this gage and stream data, no need to do this for the Bonner gage since all propogating will be in the Blackfoot watershed
                 strQuery1 = strQuery + " OR ((StreamName = 'Clark Fork River') AND ((SectionID = '5') OR (SectionID = '6')))"
             }
                         
             q_Layer1.where = strQuery1;
 
             let strQuery2 = strQuery;
-            if ((app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork")) {
+            if ((app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork") | (app.H2O_ID == "Flint-Rock")) {
                 strQuery2 += " OR (GageID_Source = '12334550')"
             }
             q_Layer2.where = strQuery2;
@@ -1238,39 +1239,29 @@ define([
 
                             let strConcatSpecialMessage = "";
                             let strSpecialMessage = "";
+                            
+                            strConcatSpecialMessage = ", Click the " + app.pGage.m_arrray_RiverSectionStatus[iPropogate][10] + " " + app.pGage.m_arrray_RiverSectionStatus[iPropogate][0] + " Section summary for more info";
+                            strSpecialMessage = " due to the " + app.pGage.m_arrray_RiverSectionStatus[iPropogate][10] + " " + app.pGage.m_arrray_RiverSectionStatus[iPropogate][0] +
+                                                            " Section gage (Click the " + app.pGage.m_arrray_RiverSectionStatus[iPropogate][10] + " Section summary for more info)";
 
-                            if ((app.Basin_ID == "Upper Clark Fork") | (app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork")) {
-                                if (app.pGage.m_arrray_RiverSectionStatus[iPropogate][22] == "Blackfoot") {
-                                    strConcatSpecialMessage = ", Click the Clark Fork Section 6/Turah gage for more information";
-                                    strSpecialMessage = " due to the Clark Fork Section 6/Turah gage (Click Clark Fork Section 6 for more information)";
+                            if ((app.pGage.m_arrray_RiverSectionStatus[iPropogate][9] != app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][10]) &
+                                (app.pGage.m_arrray_RiverSectionStatus[iPropogate][0] != app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][0])) {  ///if not the same section (via stream name and section name), then proceed
+                                if (app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][7] != "OPEN") {
+                                    app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][30] += strConcatSpecialMessage;
                                 } else {
-                                    strConcatSpecialMessage = ", Click the Blackfoot Section/Bonner gage for more information";
-                                    strSpecialMessage = " due to the Blackfoot Section/Bonner gage (Click Clark Fork Section 6 for more information)";
+                                    app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][7] = strConsMessage;
+                                    app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][30] = strConsMessage + strSpecialMessage;
+
+                                    if ((app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31].includes("Plum")) & (strColor.includes("Plum"))) {
+                                        app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31] = strColor;                           //if the origial segment has a flow waring and the sourc of propogation has flow warning
+                                    } else if ((!(app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31].includes("Plum"))) & (strColor.includes("Plum"))) {
+                                        app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31] = strColor.replace(",Plum", "");       //if the origial segment DOES NOT have a flow waring and the sourc of propogation has flow warning
+                                    } else if ((app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31].includes("Plum")) & (!(strColor.includes("Plum")))) {
+                                        app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31] = strColor += ",Plum";       //if the origial segment has a flow waring and the sourc of propogation DOES NOT have flow warning
+                                    } else {
+                                        app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31] = strColor;
+                                    }
                                 }
-                            } else if ((app.Basin_ID == "UMH") | (app.H2O_ID == "Big Hole")) {
-                                strConcatSpecialMessage = ", Click the Big Hole Section 4 summaries for more information";
-                                strSpecialMessage = " due to one of the Big Hole Section 4 gages (Click Big Hole Section 4 summaries for more information)";
-                            }
-
-
-
-                            if (app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][7] != "OPEN") {
-                                app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][30] += strConcatSpecialMessage;
-                            } else {
-                                app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][7] = strConsMessage;
-                                app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][30] = strConsMessage + strSpecialMessage;
-
-                                if ((app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31].includes("Plum")) & (strColor.includes("Plum"))) {  
-                                    app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31] = strColor;                           //if the origial segment has a flow waring and the sourc of propogation has flow warning
-                                } else if ((!(app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31].includes("Plum"))) & (strColor.includes("Plum"))) {
-                                    app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31] = strColor.replace(",Plum","");       //if the origial segment DOES NOT have a flow waring and the sourc of propogation has flow warning
-                                } else if ((app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31].includes("Plum")) & (!(strColor.includes("Plum")))) {
-                                    app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][31] = strColor += ",Plum";       //if the origial segment has a flow waring and the sourc of propogation DOES NOT have flow warning
-                                }
-
-                                //console.log(app.pGage.m_arrray_RiverSectionStatus[iPropogateEdit][35]);
-                                //console.log(strColor);
-                                //console.log(strColor);
                             }
                         }
                     };
@@ -2387,12 +2378,17 @@ define([
                         } else if (arrayCODWR_Sens_Loc != null) {
                             arrayJSONValues = jsonResult.ResultList;
                         } else if (arrayUSACE_NWD_Sens_Loc != null) {
-                            if (jsonResult["time-series"]["time-series"].length > 0) {
-                                arrayJSONValues = jsonResult["time-series"]["time-series"][0]["irregular-interval-values"].values;
-                                var strUSACE_NWD_1stTime = jsonResult["time-series"]["time-series"][0]["irregular-interval-values"].values[0][0];
-                                var dteUSACE_NWD_1stTime = Date.parse(strUSACE_NWD_1stTime);
-                                var strUSACE_NWD_LastTime = jsonResult["time-series"]["time-series"][0]["irregular-interval-values"].values[(arrayJSONValues.length - 1)][0];
-                                var dteUSACE_NWD_LastTime = Date.parse(strUSACE_NWD_LastTime);
+                            //if (jsonResult["time-series"] != undefined) {
+                            if (jsonResult["values"] != undefined) {
+                                //if (jsonResult["time-series"]["time-series"].length > 0) {
+                                if (jsonResult["values"].length > 0) {
+                                    //arrayJSONValues = jsonResult["time-series"]["time-series"][0]["irregular-interval-values"].values;
+                                    arrayJSONValues = jsonResult["values"];
+                                    //var strUSACE_NWD_1stTime = jsonResult["time-series"]["time-series"][0]["irregular-interval-values"].values[0][0];
+                                    //var dteUSACE_NWD_1stTime = Date.parse(strUSACE_NWD_1stTime);
+                                    //var strUSACE_NWD_LastTime = jsonResult["time-series"]["time-series"][0]["irregular-interval-values"].values[(arrayJSONValues.length - 1)][0];
+                                    //var dteUSACE_NWD_LastTime = Date.parse(strUSACE_NWD_LastTime);
+                                }
                             }
                         }
                         else {
@@ -2460,7 +2456,8 @@ define([
                             strLateRec_LowValue = itemSectionRefined[37];
                             strLateRec_IdealMinValue = itemSectionRefined[39];
                             strLateRec_IdealMaxValue = itemSectionRefined[39];
-                            strLateRec_HighValue = itemSectionRefined[38];
+                            //strLateRec_HighValue = itemSectionRefined[38];
+                            strLateRec_HighValue = itemSectionRefined[40];
 
 
                             strAgency = itemSectionRefined[41];
@@ -2880,7 +2877,8 @@ define([
                                             strSiteFlowStatus = "PREPARE FOR CONSERVATION (Flow)";
                                         }
                                     } else {
-                                        if (AllValuesWithinRange(arrray_Detail4InterpolationCFS, "cfs", 1, iLateFlowPref4ConsvValue, app.pSup.m_StartDateTimeAnalysis, "gagedatetime")) {
+                                        //if (AllValuesWithinRange(arrray_Detail4InterpolationCFS, "cfs", 1, iLateFlowPref4ConsvValue, app.pSup.m_StartDateTimeAnalysis, "gagedatetime")) {
+                                        if (dblLatestCFS < iLateFlowPref4ConsvValue) {
                                             strSiteFlowStatus = "PREPARE FOR CONSERVATION (Flow)";
                                         }
                                     }
@@ -2891,7 +2889,8 @@ define([
                                             strSiteFlowStatus = "CONSERVATION (Flow)";
                                         }
                                     } else {
-                                        if (AllValuesWithinRange(arrray_Detail4InterpolationCFS, "cfs", 1, iLateFlowConsvValue, app.pSup.m_StartDateTimeAnalysis, "gagedatetime")) {
+                                        //if (AllValuesWithinRange(arrray_Detail4InterpolationCFS, "cfs", 1, iLateFlowConsvValue, app.pSup.m_StartDateTimeAnalysis, "gagedatetime")) {
+                                        if (dblLatestCFS < iLateFlowConsvValue) {
                                             strSiteFlowStatus = "CONSERVATION (Flow)";
                                         }
                                     }
@@ -2902,7 +2901,8 @@ define([
                                             strSiteFlowStatus = "EXPANDED CONSERVATION MEASURES (Flow)";
                                         }
                                     } else {
-                                        if (AllValuesWithinRange(arrray_Detail4InterpolationCFS, "cfs", 1, iLateFlowClosureValueFlow, app.pSup.m_StartDateTimeAnalysis, "gagedatetime")) {
+                                        //if (AllValuesWithinRange(arrray_Detail4InterpolationCFS, "cfs", 1, iLateFlowClosureValueFlow, app.pSup.m_StartDateTimeAnalysis, "gagedatetime")) {
+                                        if (dblLatestCFS < iLateFlowClosureValueFlow) {
                                             strSiteFlowStatus = "EXPANDED CONSERVATION MEASURES (Flow)";
                                         }
                                     }

@@ -340,7 +340,7 @@
 							<h3>Montana FWP Closure Information!  Click <a href="https://fwp.mt.gov/news/current-closures-restrictions" target="_blank">here</a> for official restriction information.</h3>
 							<br />
 							<div>Press Release: <span data-bind='html: $root.CurrentDisplayGageRecord().fwpPRESSRELEASE'></span></div>
-							<div>Publish Date: <span data-bind='text: $root.CurrentDisplayGageRecord().fwpPUBLISHDATE'></span></div>
+							<div>Publish Date, Archive Date: <span data-bind='text: $root.CurrentDisplayGageRecord().fwpPUBLISHDATE'></span></div>
 							<br />
 							<div><span data-bind='html: $root.CurrentDisplayGageRecord().fwpTITLE'></span></div>
 							<br />
@@ -561,6 +561,9 @@
 
 				<button type="button" class="btn btn-info" id="btnChangeDateRange" style="position:relative; font-size:12px; left:1px; margin-bottom:5px; padding-top:1px; padding-bottom:1px; vertical-align:text-top;" data-toggle="collapse">Update Date Range</button>
 
+				<div id="txtDateRangeMessage" style="color: red; font-weight: bold">
+				</div>
+
 				<!--</div>-->
 
 
@@ -671,7 +674,7 @@
 				<p><i>* Indicates the reading (streamflow and/or temperature) for this USGS site is not collected.  To find out more information, click a stream section in the summary, next click the "Gage Source Data: Current" web link under "Stream Section Detail"</i></p>
 			</div>
 
-			<div class="col-md-3 col-md-pull-9" style="padding-left: 5px; padding-right: 5px" id="entriesConRESERVOIR_div">
+			<div class="col-md-3 col-md-pull-9" style="padding-left: 5px; display: none; padding-right: 5px" id="entriesConRESERVOIR_div">
 
 				<h2>Summary of Reservoir Conditions</h2>
 				<table class="TableListJS" id="entriesReservoir">
@@ -756,7 +759,7 @@
 			<div id='footer_content' style="display: flex;">
 				<div id="RCT_logo" style="float:left"><img src="images/RCT_logo_color_70.png" alt="River Conditions Tool Logo"></div>
 				<div id="RCTfooter_text" style="float: left; margin-top: 10px; margin-left: 10px;">
-					Hosted by the <a href="https://uppermissouriheadwaters.org/" target="_blank"> Upper Missouri Headwaters</a> via <a href="https://katearpin.com/" target="_blank">Kate Arpin Graphics & Web Design</a>.  Developed by the USFWS (Region 6, Science Applications) and Montana State University (<a href="https://www.montana.edu/earthsciences/directory/2139973/eric-sproles" target="_blank">Eric Sproles</a>) in cooperation with <a href="http://dnrc.mt.gov/" target="_blank">Montana DNRC</a> and associated watershed groups of Colorado, Montana and Wyoming.  Version: 2.4.420
+					Hosted by the <a href="https://uppermissouriheadwaters.org/" target="_blank"> Upper Missouri Headwaters</a> via <a href="https://katearpin.com/" target="_blank">Kate Arpin Graphics & Web Design</a>.  Developed by the USFWS (Region 6, Science Applications) and Montana State University (<a href="https://www.montana.edu/earthsciences/directory/2139973/eric-sproles" target="_blank">Eric Sproles</a>) in cooperation with <a href="http://dnrc.mt.gov/" target="_blank">Montana DNRC</a> and associated watershed groups of Colorado, Montana and Wyoming.  Version: 2.4.430
 				</div>
 			</div>
 			<!--<p><div><img src="images/RCT_logo_color.png" alt="River Conditions Tool Logo" height="60"></div> Hosted by the <a href="https://uppermissouriheadwaters.org/" target="_blank"> Upper Missouri Headwaters</a> via <a href="https://katearpin.com/" target="_blank">Kate Arpin Graphics & Web Design</a>.  Developed by the USFWS (Region 6, Science Applications) and Montana State University (<a href="https://www.montana.edu/earthsciences/directory/2139973/eric-sproles" target="_blank">Eric Sproles</a>) in cooperation with <a href="http://dnrc.mt.gov/" target="_blank">Montana DNRC</a> and associated watershed groups of Colorado, Montana and Wyoming.  Version: 2.3.3</p>-->
