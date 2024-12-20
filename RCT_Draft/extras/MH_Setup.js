@@ -722,11 +722,19 @@ define([
                 $("#strFlowStatusMethod").html("Status Method: if daily average flow falls below daily enforceable flow rate during 4 out of 5 consecutive days");
             }
             document.getElementById("txtFromToDate").innerHTML = "Gage readings may be provisional, Conditions based on gage readings of the last " + app.Days4Analisis.toString() + " days "
+            
+            let diffTime = null;
+            let diffDays = null;
 
             if (getTokens()['startDate'] == undefined) {
                 app.pSup.m_StartDateTime = new Date();
                 app.pSup.m_StartDateTime.setDate(app.pSup.m_StartDateTime.getDate() - app.Days4Analisis);
                 app.pSup.m_StartDateTimeAnalysis = new Date(app.pSup.m_StartDateTime);
+                app.pSup.m_StartDateTimeAnalysisTEMP = new Date(app.pSup.m_StartDateTime);
+
+                diffTime = Math.abs(app.pSup.m_EndDateTime - app.pSup.m_StartDateTime);
+                diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
             } else {
                 let dteTempStartDate1 = new Date(getTokens()['startDate']);
                 let dteTempStartDate1B = addHoursToDate(dteTempStartDate1, 7);;  //convert day/time to local
@@ -737,11 +745,27 @@ define([
                 strStartDay = ("0" + strStartDay).slice(-2);
 
                 app.pSup.m_StartDateTime = new Date(dteTempStartDate1B.getFullYear().toString() + "-" + strStartMonth + "-" + strStartDay + strTempTimeOnly);
+                diffTime = Math.abs(app.pSup.m_EndDateTime - app.pSup.m_StartDateTime);
+                diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+                app.pSup.m_StartDateTimeAnalysisTEMP = new Date(app.pSup.m_StartDateTime);
+
+                if (diffDays > app.Days4Analisis) {                                     ///for FLOW, if the date range is greater than the days4analysis then base the start date from end date
+                    app.pSup.m_StartDateTimeAnalysis = new Date(app.pSup.m_EndDateTime);
+                    app.pSup.m_StartDateTimeAnalysis.setDate(app.pSup.m_StartDateTimeAnalysis.getDate() - app.Days4Analisis);
+                } else {
+                    app.pSup.m_StartDateTimeAnalysis = new Date(app.pSup.m_StartDateTime);
+                }
+
+                if (diffDays > 3) {                                     ///FOR TEMPERATURE, if the date range is greater than the days4analysis then base the start date from end date
+                    app.pSup.m_StartDateTimeAnalysisTEMP = new Date(app.pSup.m_EndDateTime);
+                    app.pSup.m_StartDateTimeAnalysisTEMP.setDate(app.pSup.m_StartDateTimeAnalysisTEMP.getDate() - 3);
+                } else {
+                    app.pSup.m_StartDateTimeAnalysisTEMP = new Date(app.pSup.m_StartDateTime);
+                }
+                                
             }
-
-
-            let diffTime = Math.abs(app.pSup.m_EndDateTime - app.pSup.m_StartDateTime);
-            let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            
 
             const inputDatePicker = document.getElementById("input-date-picker");
             if (inputDatePicker) {

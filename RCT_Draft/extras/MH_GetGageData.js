@@ -2935,7 +2935,7 @@ define([
                                 dblLatestTMP = "*Not collected"
                                 strNoDataLabel4ChartingTMP = "(No Data) ";
                                 dteLatestDateTimeTMP = new Date();
-                            } else if ((MaxValueByDayAboveTarget(arrray_Detail4InterpolationTMP, "TMP", iTempClosureValue, app.pSup.m_StartDateTimeAnalysis, "gagedatetime", 3)) &
+                            } else if ((MaxValueByDayAboveTarget(arrray_Detail4InterpolationTMP, "TMP", iTempClosureValue, app.pSup.m_StartDateTimeAnalysisTEMP, "gagedatetime", 3)) &
                                                         (iTempClosureValue != 0)) {
                                 strSiteTempStatus = "EXPANDED CONSERVATION MEASURES";
                             } 
