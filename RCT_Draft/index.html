@@ -212,8 +212,11 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<!--<a class="navbar-brand" href="index.html">River Conditions Tool Home</a>-->
 				<a class="navbar-brand" href="index.html" style="margin-top: 5px !important; height: 70px"><img src="images/RCT_logo_white_70.png" height="60px" alt="River Conditions Tool Logo"></a>
+				<div>
+					<a class="navbar-brand" href="https://rct-portal-fws.hub.arcgis.com/" style="margin-top: 5px !important; height: 30px; font-size:15px">Learn more at the <i>NEW</i> RCT Portal</a>
+					<!--<p style="color:white;"><a href="https://rct-portal-fws.hub.arcgis.com/">Learn More at the NEW RCT Portal</a></p>-->
+				</div>
 			</div>
 			<div id="navbar2" class="navbar-collapse collapse" style="height:30px !important;">
 				<div style="margin-left:auto; margin-right:0; ">
@@ -228,16 +231,6 @@
 
 					</form>
 				</div>
-				<!--<form class="navbar-form navbar-right" style="margin-top:2px !important; margin-bottom:2px !important; height:25px; margin-right:0px;">
-					<div class="custom-select" style="width:245px; height:25px;">
-						<select id="sel_Basin" style="height:25px;">
-							<option value="0">Select Region/Basin:</option>
-						</select>
-					</div>
-				</form>
-				<form class="navbar-form navbar-right" style="margin-top:2px !important; margin-bottom:2px !important">
-					<ul id="navList" class="nav nav-pills pull-right"></ul>
-				</form>-->
 			</div>
 		</div>
 	</nav>
@@ -261,576 +254,582 @@
 					<a class="navbar-brand" style="padding-top:10px; height:70px; color:#9fd3c7 !important; font-size:14px; font-weight: 700; font-family: Open Sans,Arial,sans-serif !important;" href="https://uppermissouriheadwaters.org/">Home</a>
 				</form>
 			</div>
+
+			<div class="container" style="background-color:blue; padding:5px;">
+				<span style="color: #ffffff; font-size: 12pt;">Montana FWP stream restrictions in this area!! Click section in "Summary of Conditions" below for detailed information and <a href="https://fwp.mt.gov/news/current-closures-restrictions" target="_blank" style="color:white; font-weight:bold;">here for official information...</a></span>
+			</div>
 		</div>
 	</nav>
 
 	<!-- Main jumbotron  -->
 	<div class="jumbotron" style="margin-bottom:-10px; margin-top:0px; padding-bottom:0px; padding-top:5px; padding-left:0px; padding-right:10px;">
-		<div class="container" style="padding:5px;">
-			<div id="divWatershedBasinInfoTop" style="line-height: normal; padding:0px;">
-			</div>
-			<div id="divCustomAlert" style="line-height: normal; background-color: #fa021b;">
-			</div>
-			<div id="divFWPAlert" style="line-height: normal; background-color: #b30000; visibility:hidden; padding:2px;">
-				<span style="color: #ffffff; font-size: 12pt;">Montana FWP stream restrictions in this area!! Click section in "Summary of Conditions" below for detailed information and <a href="https://fwp.mt.gov/news/current-closures-restrictions" target="_blank" style="color:white; font-weight:bold;">here for official information...</a></span>
+
+
+			<div class="container" style="padding:5px;">
+				<div id="divWatershedBasinInfoTop" style="line-height: normal; padding:0px;">
+				</div>
+				<div id="divCustomAlert" style="line-height: normal; background-color: #fa021b;">
+				</div>
+				<div id="divFWPAlert" style="line-height: normal; background-color: #b30000; visibility:hidden; padding:2px;">
+					<span style="color: #ffffff; font-size: 12pt;">Montana FWP stream restrictions in this area!! Click section in "Summary of Conditions" below for detailed information and <a href="https://fwp.mt.gov/news/current-closures-restrictions" target="_blank" style="color:white; font-weight:bold;">here for official information...</a></span>
+				</div>
 			</div>
 		</div>
-	</div>
 
-	<div class="container">
-		<!-- Example row of columns -->
-		<div class="row">
-			<div class="col-md-9 col-md-push-3" style="padding-top:20px; padding-right: 15px; padding-left:5px">
-				<div id="mapDiv" style="z-index:5; width:98% !important;">
-				</div>
+		<div class="container">
+			<!-- Example row of columns -->
+			<div class="row">
+				<div class="col-md-9 col-md-push-3" style="padding-top:20px; padding-right: 15px; padding-left:5px">
+					<div id="mapDiv" style="z-index:5; width:98% !important;">
+					</div>
 
-				<div class="container" style="width: 99% !important;">
-					<div class="row">
-						<div class="col-xs-3">
-							<div id="basemapGallery"></div>
-						</div>
-						<div class="col-xs-3">
-							<p><div id="txt_xyCoords" style="color:#404040; width:200px; font-size:11px">Latitude: -<br>Longitude: -</div></p>
-						</div>
-						<div class="col-xs-1">
-							<p><div id="scaleDiv" style="font-size:11px;"></div></p>
+					<div class="container" style="width: 99% !important;">
+						<div class="row">
+							<div class="col-xs-3">
+								<div id="basemapGallery"></div>
+							</div>
+							<div class="col-xs-3">
+								<p><div id="txt_xyCoords" style="color:#404040; width:200px; font-size:11px">Latitude: -<br>Longitude: -</div></p>
+							</div>
+							<div class="col-xs-1">
+								<p><div id="scaleDiv" style="font-size:11px;"></div></p>
+							</div>
 						</div>
 					</div>
-				</div>
 
-				<div id="toggleLayers" style="font-size:10px;">
-				</div>
+					<div id="toggleLayers" style="font-size:10px;">
+					</div>
 
-				<div class="container" style="width: 99% !important;">
-					<div class="row">
-						<div class="col-xs-7">
-							<button type="button" class="btn btn-info" id="btnShowHideLegend" style="position:relative; font-size:12px; left:10px; margin-bottom:5px; padding-top:1px; padding-bottom:1px; vertical-align:text-top;" data-toggle="collapse" data-target="#divShowHideLegendBtn">Show/Hide Map Legend</button>
-						</div>
-						<div class="col-xs-5">
+					<div class="container" style="width: 99% !important;">
+						<div class="row">
+							<div class="col-xs-7">
+								<button type="button" class="btn btn-info" id="btnShowHideLegend" style="position:relative; font-size:12px; left:10px; margin-bottom:5px; padding-top:1px; padding-bottom:1px; vertical-align:text-top;" data-toggle="collapse" data-target="#divShowHideLegendBtn">Show/Hide Map Legend</button>
+							</div>
+							<div class="col-xs-5">
 
-							<div class="dropup">
-								<button class="btn btn-primary dropdown-toggle"
-										style="position: relative; font-size: 12px; float: right;
+								<div class="dropup">
+									<button class="btn btn-primary dropdown-toggle"
+											style="position: relative; font-size: 12px; float: right;
 										right: 15px; margin-bottom: 5px; padding-top: 1px; padding-bottom: 1px;
 										vertical-align: text-top; background-color: #31b0d5; border-color: #31b0d5"
-										type="button" data-toggle="dropdown">
-									Jump to Map...
-									<span class="caret"></span>
-								</button>
-								<ul class="nav dropdown-menu" id="dropDownId">
-									<!--<li><a href="#">HTML</a></li>
-						<li><a href="#">CSS</a></li>
-						<li><a href="#">JavaScript</a></li>-->
-								</ul>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div id="divShowHideLegendBtn" class="collapse  in">
-					<h2>Map Legend</h2>
-					<div id="legendDiv"></div>
-				</div>
-
-				<div id="divSectionDetail_A" style="display:none; margin-bottom:0px;">
-					<!--<h2>Stream Section Detail</h2>-->
-					<div class="clsSectionDetailCFSTEMP"><h3>Stream Section Detail</h3></div>
-					<div style="margin: 15px 0 0 0;">
-						<div class="clsSectionDetailCFSTEMP_WARN" id="detailSection2">
-							<h3>Montana FWP Closure Information!  Click <a href="https://fwp.mt.gov/news/current-closures-restrictions" target="_blank">here</a> for official restriction information.</h3>
-							<br />
-							<div>Press Release: <span data-bind='html: $root.CurrentDisplayGageRecord().fwpPRESSRELEASE'></span></div>
-							<div>Publish Date, Archive Date: <span data-bind='text: $root.CurrentDisplayGageRecord().fwpPUBLISHDATE'></span></div>
-							<br />
-							<div><span data-bind='html: $root.CurrentDisplayGageRecord().fwpTITLE'></span></div>
-							<br />
-							<div>Description: <span data-bind='text: $root.CurrentDisplayGageRecord().fwpDESCRIPTION'></span></div>
-							<br />
-							<div>Location: <span data-bind='text: $root.CurrentDisplayGageRecord().fwpLOCATION'></span></div>
-						</div>
-
-						<div id="detailSection1">
-							<div>Stream Name: <span data-bind='text: $root.CurrentDisplayGageRecord().StreamName'></span></div>
-							<div>Stream Section Name: <span data-bind='text: $root.CurrentDisplayGageRecord().SectionName_'></span></div>
-							<div>Stream Section Number: <span data-bind='text: $root.CurrentDisplayGageRecord().SectionID'></span></div>
-							<div>Gage Name:  <span data-bind='text: $root.CurrentDisplayGageRecord().SiteName'></span>, Affiliation:  <span data-bind='text: $root.CurrentDisplayGageRecord().strAgency'></span></div>
-							<!--<div>Section Start:  <span data-bind='text: $root.CurrentDisplayGageRecord().StartEndpoint'></span></div>
-				<div>Section End:  <span data-bind='text: $root.CurrentDisplayGageRecord().EndEndpoint'></span></div>-->
-							<hr style="margin-top:5px; margin-bottom:5px;">
-							<div id="detailSectionUSGSCurrent">Gage Source Data: <a data-bind="attr: {href: $root.CurrentDisplayGageRecord().Hyperlink}" target="_blank">Current</a> readings for gage #<span data-bind='text: $root.CurrentDisplayGageRecord().strSiteID'></span> (Note: Some gages may not provide year round current data)</div>
-							<br />
-							<div id="detailSectionUSGSHistorical">Gage Source Data: <a data-bind="attr: {href: $root.CurrentDisplayGageRecord().strDailyStat_URL}" target="_blank">Historical</a> readings for gage #<span data-bind='text: $root.CurrentDisplayGageRecord().strSiteID'></span> (Note: Some gages may not provide year round historical data)</div>
-
-						</div>
-
-
-						<div id="detailSection3" style="background-color:#eee !important; margin-bottom:0;">
-							<div><h3>Streamflow Data</h3></div>
-
-							<div style="margin-left:10px; margin-bottom:0px;">
-								<div>Current Discharge (cfs):  <span data-bind='text: $root.CurrentDisplayGageRecord().Discharge'></span> as of <span data-bind='text: $root.CurrentDisplayGageRecord().formattedDischargeDateTime'></span></div>
-								<div id="divDay3CFSTrend">3 day trend <img height="26px" data-bind="attr:{src: $root.CurrentDisplayGageRecord().Day3CFSTrend}" /></div>
-							</div>
-
-							<div id="divCFSTargetDefinitions" style="display:none;background-color:#eee !important; margin-top:0;margin-bottom:0;">
-
-								<div id="divCFSFlowStatus" style="margin:10px;">Stream status based on waterflow (cfs) targets:  <span data-bind='text: $root.CurrentDisplayGageRecord().SiteFlowStatus'></span></div>
-								<br />
-								<div style="margin-left:30px"> <u>Waterflow target definitions for this stream section</u></div>
-								<div class="tab">
-									<table>
-										<tr><td>PREPARE FOR CONSERVATION:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateFlowPref4ConsvValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateFlowPref4ConsvValue'></span></td></tr>
-										<tr><td>CONSERVATION:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateFlowConsvValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateFlowConsvValue'></span></td></tr>
-										<tr><td>EXPANDED CONSERVATION MEASURES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateFlowClosureValueFlow'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateFlowClosureValueFlow'></span></td></tr>
-									</table>
-
-									<div id="strFlowStatusMethod">
-										Status Method: if current gage reading reaches or exceeds waterflow target(s)
-									</div>
-								</div>
-
-							</div>
-
-							<div id="divCFSTargetDefinitionsREC" style="display:none;background-color:#eee !important; margin-top:0;margin-bottom:0;">
-								<div style="margin:10px;">Stream status based on waterflow (cfs) targets:  <span data-bind='text: $root.CurrentDisplayGageRecord().SiteFlowStatus'></span></div>
-								<br />
-								<div style="margin-left:30px"> <u>Waterflow target definitions for this stream section</u></div>
-								<div class="tab">
-									<table>
-										<tr><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_LowValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_LowValue'></span></td></tr>
-										<tr><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_IdealMinValue'></span> (cfs) to <span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_IdealMaxValue'></span>:<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_IdealMaxValue'></span></td></tr>
-										<tr><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_HighValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_HighValue'></span></td></tr>
-
-										<!--<tr><td>POTENTIAL WATER TRAVEL AND CONSERVATION ISSUES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_LowValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_LowValue'></span></td></tr>
-				<tr><td>OPTIMUM WATER TRAVEL:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_IdealMinValue'></span> (cfs) to <span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_IdealMaxValue'></span>:<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_IdealMaxValue'></span></td></tr>
-				<tr><td>POTENTIAL WATER TRAVEL ISSUES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_HighValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_HighValue'></span></td></tr>-->
-									</table>
-								</div>
-							</div>
-
-						</div>
-					</div>
-				</div>
-
-				<div id="ViewModel2CFSBinding_div" style="background-color:#eee; padding:10px; margin-top:0px; margin-bottom:0px;">
-					<div id="ViewModel2CFS_line_div" data-bind="googleBarChart: new ViewModel2CFS_LineData, chartOptions: {interpolateNulls: true,
-                        legend: { position: 'none' }, chart: { title: 'title-text', subtitle: 'subtitle-text' }}">
-					</div>
-				</div>
-
-				<div id="divSectionDetail_B" style="display:none; margin-bottom:0;">
-					<div id="detailSection4" style="background-color:#eee !important;">
-						<div><h3>Water Temperature Data</h3></div>
-						<div style="margin-left:10px;">
-							<div>Current Water Temperature (F): <span data-bind='text: $root.CurrentDisplayGageRecord().WaterTemp'></span> as of <span data-bind='text: $root.CurrentDisplayGageRecord().formattedWaterTempDateTime'></span></div>
-							<div id="divDay3TMPTrend">(3 day trend <img height="26px" data-bind="attr:{src: $root.CurrentDisplayGageRecord().Day3TMPTrend}" />)</div>
-							<div id="divTEMPFlowStatus">
-								Stream status based on temperature target: <span data-bind='text: $root.CurrentDisplayGageRecord().SiteTempStatus'></span>
-							</div>
-							<br />
-							<div><u>Temperature target definition for this stream section</u></div>
-							<div>Temperature Closure Target: <span data-bind='text: $root.CurrentDisplayGageRecord().iTempClosureValue'></span></div>
-							<div>
-								Status Method: if daily maximum water temperature reaches or exceeds temperature closure target for 3 consecutive days
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div id="ViewModel2TMPBinding_div" style="background-color:#eee; padding:10px; margin-top:0;">
-					<div id="ViewModel2TMP_line_div" data-bind="googleBarChart: new ViewModel2TMP_LineData, chartOptions: {interpolateNulls: true,
-                            legend: { position: 'none' }, chart: { title: 'title-text', subtitle: 'subtitle-text' }}">
-					</div>
-				</div>
-
-				<div id="divSectionDetail_C" style="display:none; margin-bottom:0;">
-					<div id="detailSection5" style="background-color:#eee !important;">
-						<div><h3>Gage Height Data</h3></div>
-						<div style="margin-left:10px;">
-							<div>Current Gage Height (ft): <span data-bind='text: $root.CurrentDisplayGageRecord().GageHt'></span> as of <span data-bind='text: $root.CurrentDisplayGageRecord().formattedGageHtDateTime'></span></div>
-							<div id="divDay3HtTrend">(3 day trend <img height="26px" data-bind="attr:{src: $root.CurrentDisplayGageRecord().Day3HtTrend}" />)</div>
-
-							<div id="divHtTargetDefinitions" style="display:none;background-color:#eee !important; margin-top:0;margin-bottom:0;">
-								<div id="divHTStatus">Stream status based on Gage Height target: <span data-bind='text: $root.CurrentDisplayGageRecord().SiteHtStatus'></span></div>
-								<br />
-								<div style="margin-left:30px"> <u>Gage Height definitions for this stream section</u></div>
-								<div class="tab">
-									<table>
-										<tr><td>RECOMMENDED CONSERVATION MEASURES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateHtPref4ConsvValue'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateHtPref4ConsvValue'></span></td></tr>
-										<tr><td>CONSERVATION:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateHtConsvValue'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateHtConsvValue'></span></td></tr>
-										<tr><td>EXPANDED CONSERVATION MEASURES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateHtClosureValueFlow'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateHtClosureValueFlow'></span></td></tr>
-									</table>
-								</div>
-								<div>
-									Status Method: if current gage reading reaches or exceeds height closure target
+											type="button" data-toggle="dropdown">
+										Jump to Map...
+										<span class="caret"></span>
+									</button>
+									<ul class="nav dropdown-menu" id="dropDownId">
+										<!--<li><a href="#">HTML</a></li>
+									<li><a href="#">CSS</a></li>
+									<li><a href="#">JavaScript</a></li>-->
+									</ul>
 								</div>
 							</div>
 						</div>
-
 					</div>
-				</div>
 
-				<div id="ViewModel2HtBinding_div" style="background-color:#eee; padding:10px; margin-top:0;">
-					<div id="ViewModel2Ht_line_div" data-bind="googleBarChart: new ViewModel2Ht_LineData, chartOptions: {interpolateNulls: true,
-                            legend: { position: 'none' }, chart: { title: 'title-text', subtitle: 'subtitle-text' }}">
+					<div id="divShowHideLegendBtn" class="collapse  in">
+						<h2>Map Legend</h2>
+						<div id="legendDiv"></div>
 					</div>
-				</div>
 
-
-
-
-				<div id="divSectionDetail_RESERVOIR_A" style="display:none; margin-bottom:0;">
-					<div style="margin: 15px 0 0 0;">
-						<div class="clsSectionDetailCFSTEMP"><h3>Reservoir Detail</h3></div>
+					<div id="divSectionDetail_A" style="display:none; margin-bottom:0px;">
+						<!--<h2>Stream Section Detail</h2>-->
+						<div class="clsSectionDetailCFSTEMP"><h3>Stream Section Detail</h3></div>
 						<div style="margin: 15px 0 0 0;">
-							<div id="detailReservoirSection1">
-								<div>Reservoir/Lake Name: <span data-bind='text: $root.CurrentDisplayGageRecord_Res().Lake_Reservoir_Name_'></span></div>
-								<div>Gage Name: <span data-bind='text: $root.CurrentDisplayGageRecord_Res().SiteName'></span> (<span data-bind='text: $root.CurrentDisplayGageRecord_Res().strSiteID'></span>), Affiliation:  <span data-bind='text: $root.CurrentDisplayGageRecord_Res().strAgency'></span></div>
-
-								<div>Stream System Name: <span data-bind='text: $root.CurrentDisplayGageRecord_Res().StreamSystemName'></span></div>
-								<hr style="margin-top:5px; margin-bottom:5px;">
-								<div id="detailSectionResSource">Gage Source Data: <a data-bind="attr: {href: $root.CurrentDisplayGageRecord_Res().strDailyStat_URL}" target="_blank">Current</a> readings for gage #<span data-bind='text: $root.CurrentDisplayGageRecord_Res().strSiteID'></span> (Note: Some gages may not provide year round current data)</div>
-								<div id="detailSectionResSourceTeaCup">Gage TeaCup Diagram: <a data-bind="attr: {href: $root.CurrentDisplayGageRecord_Res().strTeaCupURL}" target="_blank">(if Exists)</a> readings for gage #<span data-bind='text: $root.CurrentDisplayGageRecord_Res().strSiteID'></span></div>
-
-							</div>
-						</div>
-
-						<div id="detailSection5" style="background-color:#eee !important;">
-
-							<div><h3>Reservoir Height Data</h3></div>
-							<div style="margin-left:10px;">
-								<div>Current Gage Height (ft): <span data-bind='text: $root.CurrentDisplayGageRecord_Res().ForeBay'></span> as of <span data-bind='text: $root.CurrentDisplayGageRecord_Res().formattedForeBayDateTime'></span></div>
-								<div id="divDay3FBTrend">(3 day trend <img height="26px" data-bind="attr:{src: $root.CurrentDisplayGageRecord_Res().Day3FBTrend}" />)</div>
-							</div>
-							<div id="divHtTargetDefinitions" style="display:none;background-color:#eee !important; margin-top:0;margin-bottom:0;">
-								<div>Reservoir status based on Gage Height target: <span data-bind='text: $root.CurrentDisplayGageRecord_Res().SiteHtStatus'></span></div>
+							<div class="clsSectionDetailCFSTEMP_WARN" id="detailSection2">
+								<h3>Montana FWP Closure Information!  Click <a href="https://fwp.mt.gov/news/current-closures-restrictions" target="_blank">here</a> for official restriction information.</h3>
 								<br />
-								<div style="margin-left:30px"> <u>Reservoir Height definitions for this stream section</u></div>
-								<div class="tab">
-									<table>
-										<tr><td>RECOMMENDED CONSERVATION MEASURES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord_Res().iLateHtPref4ConsvValue'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord_Res().strLateHtPref4ConsvValue'></span></td></tr>
-										<tr><td>CONSERVATION:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord_Res().iLateHtConsvValue'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord_Res().strLateHtConsvValue'></span></td></tr>
-										<tr><td>EXPANDED CONSERVATION MEASURES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord_Res().iLateHtClosureValueFlow'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord_Res().strLateHtClosureValueFlow'></span></td></tr>
-									</table>
+								<div>Press Release: <span data-bind='html: $root.CurrentDisplayGageRecord().fwpPRESSRELEASE'></span></div>
+								<div>Publish Date, Archive Date: <span data-bind='text: $root.CurrentDisplayGageRecord().fwpPUBLISHDATE'></span></div>
+								<br />
+								<div><span data-bind='html: $root.CurrentDisplayGageRecord().fwpTITLE'></span></div>
+								<br />
+								<div>Description: <span data-bind='text: $root.CurrentDisplayGageRecord().fwpDESCRIPTION'></span></div>
+								<br />
+								<div>Location: <span data-bind='text: $root.CurrentDisplayGageRecord().fwpLOCATION'></span></div>
+							</div>
+
+							<div id="detailSection1">
+								<div>Stream Name: <span data-bind='text: $root.CurrentDisplayGageRecord().StreamName'></span></div>
+								<div>Stream Section Name: <span data-bind='text: $root.CurrentDisplayGageRecord().SectionName_'></span></div>
+								<div>Stream Section Number: <span data-bind='text: $root.CurrentDisplayGageRecord().SectionID'></span></div>
+								<div>Gage Name:  <span data-bind='text: $root.CurrentDisplayGageRecord().SiteName'></span>, Affiliation:  <span data-bind='text: $root.CurrentDisplayGageRecord().strAgency'></span></div>
+								<!--<div>Section Start:  <span data-bind='text: $root.CurrentDisplayGageRecord().StartEndpoint'></span></div>
+							<div>Section End:  <span data-bind='text: $root.CurrentDisplayGageRecord().EndEndpoint'></span></div>-->
+								<hr style="margin-top:5px; margin-bottom:5px;">
+								<div id="detailSectionUSGSCurrent">Gage Source Data: <a data-bind="attr: {href: $root.CurrentDisplayGageRecord().Hyperlink}" target="_blank">Current</a> readings for gage #<span data-bind='text: $root.CurrentDisplayGageRecord().strSiteID'></span> (Note: Some gages may not provide year round current data)</div>
+								<br />
+								<div id="detailSectionUSGSHistorical">Gage Source Data: <a data-bind="attr: {href: $root.CurrentDisplayGageRecord().strDailyStat_URL}" target="_blank">Historical</a> readings for gage #<span data-bind='text: $root.CurrentDisplayGageRecord().strSiteID'></span> (Note: Some gages may not provide year round historical data)</div>
+
+							</div>
+
+
+							<div id="detailSection3" style="background-color:#eee !important; margin-bottom:0;">
+								<div><h3>Streamflow Data</h3></div>
+
+								<div style="margin-left:10px; margin-bottom:0px;">
+									<div>Current Discharge (cfs):  <span data-bind='text: $root.CurrentDisplayGageRecord().Discharge'></span> as of <span data-bind='text: $root.CurrentDisplayGageRecord().formattedDischargeDateTime'></span></div>
+									<div id="divDay3CFSTrend">3 day trend <img height="26px" data-bind="attr:{src: $root.CurrentDisplayGageRecord().Day3CFSTrend}" /></div>
+								</div>
+
+								<div id="divCFSTargetDefinitions" style="display:none;background-color:#eee !important; margin-top:0;margin-bottom:0;">
+
+									<div id="divCFSFlowStatus" style="margin:10px;">Stream status based on waterflow (cfs) targets:  <span data-bind='text: $root.CurrentDisplayGageRecord().SiteFlowStatus'></span></div>
+									<br />
+									<div style="margin-left:30px"> <u>Waterflow target definitions for this stream section</u></div>
+									<div class="tab">
+										<table>
+											<tr><td>PREPARE FOR CONSERVATION:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateFlowPref4ConsvValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateFlowPref4ConsvValue'></span></td></tr>
+											<tr><td>CONSERVATION:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateFlowConsvValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateFlowConsvValue'></span></td></tr>
+											<tr><td>EXPANDED CONSERVATION MEASURES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateFlowClosureValueFlow'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateFlowClosureValueFlow'></span></td></tr>
+										</table>
+
+										<div id="strFlowStatusMethod">
+											Status Method: if current gage reading reaches or exceeds waterflow target(s)
+										</div>
+									</div>
+
+								</div>
+
+								<div id="divCFSTargetDefinitionsREC" style="display:none;background-color:#eee !important; margin-top:0;margin-bottom:0;">
+									<div style="margin:10px;">Stream status based on waterflow (cfs) targets:  <span data-bind='text: $root.CurrentDisplayGageRecord().SiteFlowStatus'></span></div>
+									<br />
+									<div style="margin-left:30px"> <u>Waterflow target definitions for this stream section</u></div>
+									<div class="tab">
+										<table>
+											<tr><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_LowValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_LowValue'></span></td></tr>
+											<tr><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_IdealMinValue'></span> (cfs) to <span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_IdealMaxValue'></span>:<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_IdealMaxValue'></span></td></tr>
+											<tr><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_HighValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_HighValue'></span></td></tr>
+
+											<!--<tr><td>POTENTIAL WATER TRAVEL AND CONSERVATION ISSUES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_LowValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_LowValue'></span></td></tr>
+										<tr><td>OPTIMUM WATER TRAVEL:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_IdealMinValue'></span> (cfs) to <span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_IdealMaxValue'></span>:<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_IdealMaxValue'></span></td></tr>
+										<tr><td>POTENTIAL WATER TRAVEL ISSUES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateRec_HighValue'></span> (cfs):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateRec_HighValue'></span></td></tr>-->
+										</table>
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+
+					<div id="ViewModel2CFSBinding_div" style="background-color:#eee; padding:10px; margin-top:0px; margin-bottom:0px;">
+						<div id="ViewModel2CFS_line_div" data-bind="googleBarChart: new ViewModel2CFS_LineData, chartOptions: {interpolateNulls: true,
+                        legend: { position: 'none' }, chart: { title: 'title-text', subtitle: 'subtitle-text' }}">
+						</div>
+					</div>
+
+					<div id="divSectionDetail_B" style="display:none; margin-bottom:0;">
+						<div id="detailSection4" style="background-color:#eee !important;">
+							<div><h3>Water Temperature Data</h3></div>
+							<div style="margin-left:10px;">
+								<div>Current Water Temperature (F): <span data-bind='text: $root.CurrentDisplayGageRecord().WaterTemp'></span> as of <span data-bind='text: $root.CurrentDisplayGageRecord().formattedWaterTempDateTime'></span></div>
+								<div id="divDay3TMPTrend">(3 day trend <img height="26px" data-bind="attr:{src: $root.CurrentDisplayGageRecord().Day3TMPTrend}" />)</div>
+								<div id="divTEMPFlowStatus">
+									Stream status based on temperature target: <span data-bind='text: $root.CurrentDisplayGageRecord().SiteTempStatus'></span>
+								</div>
+								<br />
+								<div><u>Temperature target definition for this stream section</u></div>
+								<div>Temperature Closure Target: <span data-bind='text: $root.CurrentDisplayGageRecord().iTempClosureValue'></span></div>
+								<div>
+									Status Method: if daily maximum water temperature reaches or exceeds temperature closure target for 3 consecutive days
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div id="ViewModel2FBBinding_div" style="background-color:#eee; padding:10px; margin-top:0;">
-					<div id="ViewModel2FB_line_div" data-bind="googleBarChart: new ViewModel2FB_LineData, chartOptions: {interpolateNulls: true,
-                    legend: { position: 'none' }, chart: { title: 'title-text', subtitle: 'subtitle-text' }}">
+
+					<div id="ViewModel2TMPBinding_div" style="background-color:#eee; padding:10px; margin-top:0;">
+						<div id="ViewModel2TMP_line_div" data-bind="googleBarChart: new ViewModel2TMP_LineData, chartOptions: {interpolateNulls: true,
+                            legend: { position: 'none' }, chart: { title: 'title-text', subtitle: 'subtitle-text' }}">
+						</div>
 					</div>
-				</div>
 
-						<br />
-						<button type="button" class="btn btn-info" id="btnGetHistoricRestrctions" style="position:relative; display: none; font-size:12px; left:25px; margin-bottom:5px; padding-top:1px; padding-bottom:1px; vertical-align:text-top;" data-toggle="collapse" data-target="#ViewModelHistoricRestrctions_div">Retrieve Historic Closure/Restriction Information</button>
-						<br />
+					<div id="divSectionDetail_C" style="display:none; margin-bottom:0;">
+						<div id="detailSection5" style="background-color:#eee !important;">
+							<div><h3>Gage Height Data</h3></div>
+							<div style="margin-left:10px;">
+								<div>Current Gage Height (ft): <span data-bind='text: $root.CurrentDisplayGageRecord().GageHt'></span> as of <span data-bind='text: $root.CurrentDisplayGageRecord().formattedGageHtDateTime'></span></div>
+								<div id="divDay3HtTrend">(3 day trend <img height="26px" data-bind="attr:{src: $root.CurrentDisplayGageRecord().Day3HtTrend}" />)</div>
 
-						<div id="ViewModelHistoricRestrctions_div" class="collapse">
-							<div><h3>Historic Official Waterbody Closures/Restrictions</h3></div>
-							<div id="divHistoricRecordText"></div>
-
-							<div data-bind='simpleGrid: gridViewModel, simpleGridTemplate:"custom_grid_template"'> </div>
-
-							<button id="btnHistsortByName" data-bind='click: sortByName' style="display:none;">
-								Sort by Location
-							</button>
-
-							<button id="btnHistsortByPubDate" data-bind='click: sortByPubDate' style="display:none;">
-								Sort by Publication Date
-							</button>
-							<p><i>Note: Historic waterbody closures/restrictions listed include any historic spatial information that intersects the selected stream section.  The results can include adjacent stream closure/restriction (i.e. stream confluences).</i></p>
+								<div id="divHtTargetDefinitions" style="display:none;background-color:#eee !important; margin-top:0;margin-bottom:0;">
+									<div id="divHTStatus">Stream status based on Gage Height target: <span data-bind='text: $root.CurrentDisplayGageRecord().SiteHtStatus'></span></div>
+									<br />
+									<div style="margin-left:30px"> <u>Gage Height definitions for this stream section</u></div>
+									<div class="tab">
+										<table>
+											<tr><td>RECOMMENDED CONSERVATION MEASURES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateHtPref4ConsvValue'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateHtPref4ConsvValue'></span></td></tr>
+											<tr><td>CONSERVATION:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateHtConsvValue'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateHtConsvValue'></span></td></tr>
+											<tr><td>EXPANDED CONSERVATION MEASURES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord().iLateHtClosureValueFlow'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord().strLateHtClosureValueFlow'></span></td></tr>
+										</table>
+									</div>
+									<div>
+										Status Method: if current gage reading reaches or exceeds height closure target
+									</div>
+								</div>
+							</div>
 
 						</div>
 					</div>
 
+					<div id="ViewModel2HtBinding_div" style="background-color:#eee; padding:10px; margin-top:0;">
+						<div id="ViewModel2Ht_line_div" data-bind="googleBarChart: new ViewModel2Ht_LineData, chartOptions: {interpolateNulls: true,
+                            legend: { position: 'none' }, chart: { title: 'title-text', subtitle: 'subtitle-text' }}">
+						</div>
+					</div>
 
-			<div class="col-md-3 col-md-pull-9" style="padding-left: 5px; padding-right: 5px" id="entriesCon_div">
-				<h2>Summary of Conditions</h2>
-				<p><i>Click section listed below or on Map for detail display below the Map Legend</i></p>
-				<p id="txtFromToDate"></p>
-				<!--<button type="button" class="btn btn-info" id="btnShowDateChanger" style="position:relative; font-size:12px; left:1px; margin-bottom:5px; padding-top:1px; padding-bottom:1px; vertical-align:text-top;" data-toggle="collapse" data-target="#divShowHideDateChangerBtns">Show/Hide Date Range</button>-->
-				<!--<div id="divShowHideDateChangerBtns" class="collapse  in">-->
-				<!--<div id="divShowHideDateChangerBtns" class="collapse">-->
-				<calcite-label>
-					<!--Observation duration-->
-					<calcite-input-date-picker id="input-date-picker" range>
-					</calcite-input-date-picker>
-				</calcite-label>
 
-				<button type="button" class="btn btn-info" id="btnChangeDateRange" style="position:relative; font-size:12px; left:1px; margin-bottom:5px; padding-top:1px; padding-bottom:1px; vertical-align:text-top;" data-toggle="collapse">Update Date Range</button>
 
-				<div id="txtDateRangeMessage" style="color: red; font-weight: bold">
+
+					<div id="divSectionDetail_RESERVOIR_A" style="display:none; margin-bottom:0;">
+						<div style="margin: 15px 0 0 0;">
+							<div class="clsSectionDetailCFSTEMP"><h3>Reservoir Detail</h3></div>
+							<div style="margin: 15px 0 0 0;">
+								<div id="detailReservoirSection1">
+									<div>Reservoir/Lake Name: <span data-bind='text: $root.CurrentDisplayGageRecord_Res().Lake_Reservoir_Name_'></span></div>
+									<div>Gage Name: <span data-bind='text: $root.CurrentDisplayGageRecord_Res().SiteName'></span> (<span data-bind='text: $root.CurrentDisplayGageRecord_Res().strSiteID'></span>), Affiliation:  <span data-bind='text: $root.CurrentDisplayGageRecord_Res().strAgency'></span></div>
+
+									<div>Stream System Name: <span data-bind='text: $root.CurrentDisplayGageRecord_Res().StreamSystemName'></span></div>
+									<hr style="margin-top:5px; margin-bottom:5px;">
+									<div id="detailSectionResSource">Gage Source Data: <a data-bind="attr: {href: $root.CurrentDisplayGageRecord_Res().strDailyStat_URL}" target="_blank">Current</a> readings for gage #<span data-bind='text: $root.CurrentDisplayGageRecord_Res().strSiteID'></span> (Note: Some gages may not provide year round current data)</div>
+									<div id="detailSectionResSourceTeaCup">Gage TeaCup Diagram: <a data-bind="attr: {href: $root.CurrentDisplayGageRecord_Res().strTeaCupURL}" target="_blank">(if Exists)</a> readings for gage #<span data-bind='text: $root.CurrentDisplayGageRecord_Res().strSiteID'></span></div>
+
+								</div>
+							</div>
+
+							<div id="detailSection5" style="background-color:#eee !important;">
+
+								<div><h3>Reservoir Height Data</h3></div>
+								<div style="margin-left:10px;">
+									<div>Current Gage Height (ft): <span data-bind='text: $root.CurrentDisplayGageRecord_Res().ForeBay'></span> as of <span data-bind='text: $root.CurrentDisplayGageRecord_Res().formattedForeBayDateTime'></span></div>
+									<div id="divDay3FBTrend">(3 day trend <img height="26px" data-bind="attr:{src: $root.CurrentDisplayGageRecord_Res().Day3FBTrend}" />)</div>
+								</div>
+								<div id="divHtTargetDefinitions" style="display:none;background-color:#eee !important; margin-top:0;margin-bottom:0;">
+									<div>Reservoir status based on Gage Height target: <span data-bind='text: $root.CurrentDisplayGageRecord_Res().SiteHtStatus'></span></div>
+									<br />
+									<div style="margin-left:30px"> <u>Reservoir Height definitions for this stream section</u></div>
+									<div class="tab">
+										<table>
+											<tr><td>RECOMMENDED CONSERVATION MEASURES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord_Res().iLateHtPref4ConsvValue'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord_Res().strLateHtPref4ConsvValue'></span></td></tr>
+											<tr><td>CONSERVATION:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord_Res().iLateHtConsvValue'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord_Res().strLateHtConsvValue'></span></td></tr>
+											<tr><td>EXPANDED CONSERVATION MEASURES:</td><td><span data-bind='text: $root.CurrentDisplayGageRecord_Res().iLateHtClosureValueFlow'></span> (ft):<span data-bind='text: $root.CurrentDisplayGageRecord_Res().strLateHtClosureValueFlow'></span></td></tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="ViewModel2FBBinding_div" style="background-color:#eee; padding:10px; margin-top:0;">
+						<div id="ViewModel2FB_line_div" data-bind="googleBarChart: new ViewModel2FB_LineData, chartOptions: {interpolateNulls: true,
+                    legend: { position: 'none' }, chart: { title: 'title-text', subtitle: 'subtitle-text' }}">
+						</div>
+					</div>
+
+					<br />
+					<button type="button" class="btn btn-info" id="btnGetHistoricRestrctions" style="position:relative; display: none; font-size:12px; left:25px; margin-bottom:5px; padding-top:1px; padding-bottom:1px; vertical-align:text-top;" data-toggle="collapse" data-target="#ViewModelHistoricRestrctions_div">Retrieve Historic Closure/Restriction Information</button>
+					<br />
+
+					<div id="ViewModelHistoricRestrctions_div" class="collapse">
+						<div><h3>Historic Official Waterbody Closures/Restrictions</h3></div>
+						<div id="divHistoricRecordText"></div>
+
+						<div data-bind='simpleGrid: gridViewModel, simpleGridTemplate:"custom_grid_template"'> </div>
+
+						<button id="btnHistsortByName" data-bind='click: sortByName' style="display:none;">
+							Sort by Location
+						</button>
+
+						<button id="btnHistsortByPubDate" data-bind='click: sortByPubDate' style="display:none;">
+							Sort by Publication Date
+						</button>
+						<p><i>Note: Historic waterbody closures/restrictions listed include any historic spatial information that intersects the selected stream section.  The results can include adjacent stream closure/restriction (i.e. stream confluences).</i></p>
+
+					</div>
 				</div>
 
-				<!--</div>-->
+
+				<div class="col-md-3 col-md-pull-9" style="padding-left: 5px; padding-right: 5px" id="entriesCon_div">
+					<h2>Summary of Conditions</h2>
+					<p><i>Click section listed below or on Map for detail display below the Map Legend</i></p>
+					<p id="txtFromToDate"></p>
+					<!--<button type="button" class="btn btn-info" id="btnShowDateChanger" style="position:relative; font-size:12px; left:1px; margin-bottom:5px; padding-top:1px; padding-bottom:1px; vertical-align:text-top;" data-toggle="collapse" data-target="#divShowHideDateChangerBtns">Show/Hide Date Range</button>-->
+					<!--<div id="divShowHideDateChangerBtns" class="collapse  in">-->
+					<!--<div id="divShowHideDateChangerBtns" class="collapse">-->
+					<calcite-label>
+						<!--Observation duration-->
+						<calcite-input-date-picker id="input-date-picker" range>
+						</calcite-input-date-picker>
+					</calcite-label>
+
+					<button type="button" class="btn btn-info" id="btnChangeDateRange" style="position:relative; font-size:12px; left:1px; margin-bottom:5px; padding-top:1px; padding-bottom:1px; vertical-align:text-top;" data-toggle="collapse">Update Date Range</button>
+
+					<div id="txtDateRangeMessage" style="color: red; font-weight: bold">
+					</div>
+
+					<!--</div>-->
 
 
-				<p id="txtLastRefresh"></p>
+					<p id="txtLastRefresh"></p>
 
-				<img id="loadingImg2" src="images/loading.gif" />
-				<div id="divLoadingUSGS"><i>Loading Gage Data...</i></div>
-				<table class="TableListJS" id="entries">
-					<thead>
-					</thead>
-					<tbody data-bind="foreach: {data: gageRecords}" style="font-size: 13px;">
-						<tr style="cursor:pointer;" data-bind="click: $root.selectThing ">
-							<td>
-								<div class="rTableBody">
-									<div class="rTableRow">
-										<div class="rTableCellFW">
-											Stream
+					<img id="loadingImg2" src="images/loading.gif" />
+					<div id="divLoadingUSGS"><i>Loading Gage Data...</i></div>
+					<table class="TableListJS" id="entries">
+						<thead>
+						</thead>
+						<tbody data-bind="foreach: {data: gageRecords}" style="font-size: 13px;">
+							<tr style="cursor:pointer;" data-bind="click: $root.selectThing ">
+								<td>
+									<div class="rTableBody">
+										<div class="rTableRow">
+											<div class="rTableCellFW">
+												Stream
+											</div>
+											<div class="rTableCell">
+												<span data-bind='text: StreamName'></span>
+											</div>
 										</div>
-										<div class="rTableCell">
-											<span data-bind='text: StreamName'></span>
+										<div class="rTableRow">
+											<div class="rTableCellFW">
+												Section
+											</div>
+											<div class="rTableCell">
+												<span data-bind='text: SectionName_'></span> <span data-bind='text:SiteName'></span>
+											</div>
+										</div>
+										<div class="rTableRow">
+											<div class="rTableCellFW">
+												Streamflow (cfs)
+											</div>
+											<div class="rTableCell">
+												<span data-bind='text: Discharge, attr: {title: formattedDischargeDateTime}'></span>        (3 day trend <img height="16px" data-bind="attr:{src: Day3CFSTrend}" />)
+											</div>
+										</div>
+
+										<div class="rTableRow">
+											<div class="rTableCellFW">
+												H2O Temp (F)
+											</div>
+											<div class="rTableCell">
+												<span data-bind='text: WaterTemp, attr: {title: formattedWaterTempDateTime}'></span>        (3 day trend <img height="16px" data-bind="attr:{src: Day3TMPTrend}" />)
+											</div>
+										</div>
+
+										<div class="rTableRow">
+											<div class="rTableCellFW">
+												Gage Height (ft)
+											</div>
+											<div class="rTableCell">
+												<span data-bind='text: GageHt, attr: {title: formattedGageHtDateTime}'></span>        (3 day trend <img height="16px" data-bind="attr:{src: Day3HtTrend}" />)
+											</div>
+										</div>
+
+										<div class="rTableRow">
+											<div class="rTableCellFW">
+												Status
+											</div>
+											<div class="rTableCell">
+												<span data-bind='text: overallStatus'></span>
+											</div>
 										</div>
 									</div>
-									<div class="rTableRow">
-										<div class="rTableCellFW">
-											Section
+								</td>
+								<td class="htmlRowNotDisplayed">
+									<div><span data-bind='text: strMONTHDAYEarlyFlowFromDroughtManagementTarget'></span></div>
+									<div><span data-bind='text: strMONTHDAYEarlyFlowToDroughtManagementTarget'></span></div>
+									<div><span data-bind='text: iLateFlowPref4ConsvValue'></span></div>
+									<div><span data-bind='text: iLateFlowConsvValue'></span></div>
+									<div><span data-bind='text: iLateFlowClosureValueFlow'></span></div>
+
+									<div><span data-bind='text: iLateHtPref4ConsvValue'></span></div>
+									<div><span data-bind='text: iLateHtConsvValue'></span></div>
+									<div><span data-bind='text: iLateHtClosureValue'></span></div>
+
+									<div><span data-bind='text: strLateFlowPref4ConsvValue'></span></div>
+									<div><span data-bind='text: strLateFlowConsvValue'></span></div>
+									<div><span data-bind='text: strLateFlowClosureValueFlow'></span></div>
+									<div><span data-bind='text: iTempClosureValue'></span></div>
+									<div><span data-bind='text: strTempCollected'></span></div>
+									<div><span data-bind='text: strSiteID'></span></div>
+
+									<div><span data-bind='text: SectionID'></span></div>
+
+									<div><span data-bind='text: strDailyStat_URL'></span></div>
+									<div><span data-bind='text: overallSymbol'></span></div>
+
+									<div><span data-bind='text: iLateRec_LowValue'></span></div>
+									<div><span data-bind='text: iLateRec_IdealMinValue'></span></div>
+									<div><span data-bind='text: iLateRec_IdealMaxValue'></span></div>
+									<div><span data-bind='text: iLateRec_HighValue'></span></div>
+
+									<div><span data-bind='text: strLateRec_LowValue'></span></div>
+									<div><span data-bind='text: strLateRec_IdealMinValue'></span></div>
+									<div><span data-bind='text: strLateRec_IdealMaxValue'></span></div>
+									<div><span data-bind='text: strLateRec_HighValue'></span></div>
+
+									<div><span data-bind='text: strWatershed'></span></div>
+									<div><span data-bind='text: strAgency'></span></div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<p><i>* Indicates the reading (streamflow and/or temperature) for this USGS site is not collected.  To find out more information, click a stream section in the summary, next click the "Gage Source Data: Current" web link under "Stream Section Detail"</i></p>
+				</div>
+
+				<div class="col-md-3 col-md-pull-9" style="padding-left: 5px; display: none; padding-right: 5px" id="entriesConRESERVOIR_div">
+
+					<h2>Summary of Reservoir Conditions</h2>
+					<table class="TableListJS" id="entriesReservoir">
+						<thead>
+						</thead>
+						<tbody data-bind="foreach: {data: gageReservoirRecords}" style="font-size: 13px;">
+							<tr style="cursor:pointer;" data-bind="click: $root.selectThing ">
+								<td>
+									<div class="rTableBody">
+										<div class="rTableRow">
+											<div class="rTableCellFW">
+												Location
+											</div>
+											<div class="rTableCell">
+												<span data-bind='text: SiteName'></span>
+											</div>
 										</div>
-										<div class="rTableCell">
-											<span data-bind='text: SectionName_'></span> <span data-bind='text:SiteName'></span>
+										<div class="rTableRow">
+											<div class="rTableCellFW">
+												Reservoir
+											</div>
+											<div class="rTableCell">
+												<span data-bind='text: Lake_Reservoir_Name_'></span>: <span data-bind='text:StreamSystemName'></span>
+											</div>
+										</div>
+										<div class="rTableRow">
+											<div class="rTableCellFW">
+												Pool Height (ft)
+											</div>
+											<div class="rTableCell">
+												<span data-bind='text: ForeBay, attr: {title: formattedForeBayDateTime}'></span>        (3 day trend <img height="16px" data-bind="attr:{src: Day3FBTrend}" />)
+											</div>
+										</div>
+
+										<div class="rTableRow">
+											<div class="rTableCellFW">
+												Status
+											</div>
+											<div class="rTableCell">
+												<span data-bind='text: overallStatus'></span>
+											</div>
 										</div>
 									</div>
-									<div class="rTableRow">
-										<div class="rTableCellFW">
-											Streamflow (cfs)
-										</div>
-										<div class="rTableCell">
-											<span data-bind='text: Discharge, attr: {title: formattedDischargeDateTime}'></span>        (3 day trend <img height="16px" data-bind="attr:{src: Day3CFSTrend}" />)
-										</div>
-									</div>
-
-									<div class="rTableRow">
-										<div class="rTableCellFW">
-											H2O Temp (F)
-										</div>
-										<div class="rTableCell">
-											<span data-bind='text: WaterTemp, attr: {title: formattedWaterTempDateTime}'></span>        (3 day trend <img height="16px" data-bind="attr:{src: Day3TMPTrend}" />)
-										</div>
-									</div>
-
-									<div class="rTableRow">
-										<div class="rTableCellFW">
-											Gage Height (ft)
-										</div>
-										<div class="rTableCell">
-											<span data-bind='text: GageHt, attr: {title: formattedGageHtDateTime}'></span>        (3 day trend <img height="16px" data-bind="attr:{src: Day3HtTrend}" />)
-										</div>
-									</div>
-
-									<div class="rTableRow">
-										<div class="rTableCellFW">
-											Status
-										</div>
-										<div class="rTableCell">
-											<span data-bind='text: overallStatus'></span>
-										</div>
-									</div>
-								</div>
-							</td>
-							<td class="htmlRowNotDisplayed">
-								<div><span data-bind='text: strMONTHDAYEarlyFlowFromDroughtManagementTarget'></span></div>
-								<div><span data-bind='text: strMONTHDAYEarlyFlowToDroughtManagementTarget'></span></div>
-								<div><span data-bind='text: iLateFlowPref4ConsvValue'></span></div>
-								<div><span data-bind='text: iLateFlowConsvValue'></span></div>
-								<div><span data-bind='text: iLateFlowClosureValueFlow'></span></div>
-
-								<div><span data-bind='text: iLateHtPref4ConsvValue'></span></div>
-								<div><span data-bind='text: iLateHtConsvValue'></span></div>
-								<div><span data-bind='text: iLateHtClosureValue'></span></div>
-
-								<div><span data-bind='text: strLateFlowPref4ConsvValue'></span></div>
-								<div><span data-bind='text: strLateFlowConsvValue'></span></div>
-								<div><span data-bind='text: strLateFlowClosureValueFlow'></span></div>
-								<div><span data-bind='text: iTempClosureValue'></span></div>
-								<div><span data-bind='text: strTempCollected'></span></div>
-								<div><span data-bind='text: strSiteID'></span></div>
-
-								<div><span data-bind='text: SectionID'></span></div>
-
-								<div><span data-bind='text: strDailyStat_URL'></span></div>
-								<div><span data-bind='text: overallSymbol'></span></div>
-
-								<div><span data-bind='text: iLateRec_LowValue'></span></div>
-								<div><span data-bind='text: iLateRec_IdealMinValue'></span></div>
-								<div><span data-bind='text: iLateRec_IdealMaxValue'></span></div>
-								<div><span data-bind='text: iLateRec_HighValue'></span></div>
-
-								<div><span data-bind='text: strLateRec_LowValue'></span></div>
-								<div><span data-bind='text: strLateRec_IdealMinValue'></span></div>
-								<div><span data-bind='text: strLateRec_IdealMaxValue'></span></div>
-								<div><span data-bind='text: strLateRec_HighValue'></span></div>
-
-								<div><span data-bind='text: strWatershed'></span></div>
-								<div><span data-bind='text: strAgency'></span></div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-
-				<p><i>* Indicates the reading (streamflow and/or temperature) for this USGS site is not collected.  To find out more information, click a stream section in the summary, next click the "Gage Source Data: Current" web link under "Stream Section Detail"</i></p>
-			</div>
-
-			<div class="col-md-3 col-md-pull-9" style="padding-left: 5px; display: none; padding-right: 5px" id="entriesConRESERVOIR_div">
-
-				<h2>Summary of Reservoir Conditions</h2>
-				<table class="TableListJS" id="entriesReservoir">
-					<thead>
-					</thead>
-					<tbody data-bind="foreach: {data: gageReservoirRecords}" style="font-size: 13px;">
-						<tr style="cursor:pointer;" data-bind="click: $root.selectThing ">
-							<td>
-								<div class="rTableBody">
-									<div class="rTableRow">
-										<div class="rTableCellFW">
-											Location
-										</div>
-										<div class="rTableCell">
-											<span data-bind='text: SiteName'></span>
-										</div>
-									</div>
-									<div class="rTableRow">
-										<div class="rTableCellFW">
-											Reservoir
-										</div>
-										<div class="rTableCell">
-											<span data-bind='text: Lake_Reservoir_Name_'></span>: <span data-bind='text:StreamSystemName'></span>
-										</div>
-									</div>
-									<div class="rTableRow">
-										<div class="rTableCellFW">
-											Pool Height (ft)
-										</div>
-										<div class="rTableCell">
-											<span data-bind='text: ForeBay, attr: {title: formattedForeBayDateTime}'></span>        (3 day trend <img height="16px" data-bind="attr:{src: Day3FBTrend}" />)
-										</div>
-									</div>
-
-									<div class="rTableRow">
-										<div class="rTableCellFW">
-											Status
-										</div>
-										<div class="rTableCell">
-											<span data-bind='text: overallStatus'></span>
-										</div>
-									</div>
-								</div>
-							</td>
-							<td class="htmlRowNotDisplayed">
-								<!--<div><span data-bind='text: strMONTHDAYEarlyFlowFromDroughtManagementTarget'></span></div>
+								</td>
+								<td class="htmlRowNotDisplayed">
+									<!--<div><span data-bind='text: strMONTHDAYEarlyFlowFromDroughtManagementTarget'></span></div>
 								<div><span data-bind='text: strMONTHDAYEarlyFlowToDroughtManagementTarget'></span></div>-->
 
-								<div><span data-bind='text: iLateFBPref4ConsvValue'></span></div>
-								<div><span data-bind='text: iLateFBConsvValue'></span></div>
-								<div><span data-bind='text: iLateFBClosureValue'></span></div>
+									<div><span data-bind='text: iLateFBPref4ConsvValue'></span></div>
+									<div><span data-bind='text: iLateFBConsvValue'></span></div>
+									<div><span data-bind='text: iLateFBClosureValue'></span></div>
 
-								<div><span data-bind='text: strLateFBPref4ConsvValue'></span></div>
-								<div><span data-bind='text: strLateFBConsvValue'></span></div>
-								<div><span data-bind='text: strLateFBClosureValue'></span></div>
+									<div><span data-bind='text: strLateFBPref4ConsvValue'></span></div>
+									<div><span data-bind='text: strLateFBConsvValue'></span></div>
+									<div><span data-bind='text: strLateFBClosureValue'></span></div>
 
-								<div><span data-bind='text: strSiteID'></span></div>
+									<div><span data-bind='text: strSiteID'></span></div>
 
-								<div><span data-bind='text: strDailyStat_URL'></span></div>
-								<div><span data-bind='text: overallSymbol'></span></div>
-								<div><span data-bind='text: strWatershed'></span></div>
-								<div><span data-bind='text: strTeaCupURL'></span></div>
-								<div><span data-bind='text: iHt_BaseElev'></span></div>
-								<div><span data-bind='text: iHt_Flood'></span></div>
-								<div><span data-bind='text: strAgency'></span></div>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-
-
-
-				<p><i>* Indicates the reading (streamflow and/or temperature) for this USGS site is not collected.  To find out more information, click a stream section in the summary, next click the "Gage Source Data: Current" web link under "Stream Section Detail"</i></p>
-			</div>
+									<div><span data-bind='text: strDailyStat_URL'></span></div>
+									<div><span data-bind='text: overallSymbol'></span></div>
+									<div><span data-bind='text: strWatershed'></span></div>
+									<div><span data-bind='text: strTeaCupURL'></span></div>
+									<div><span data-bind='text: iHt_BaseElev'></span></div>
+									<div><span data-bind='text: iHt_Flood'></span></div>
+									<div><span data-bind='text: strAgency'></span></div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
 
 
-		</div>
 
-		<hr>
-		<footer>
-
-			<div id='footer_content' style="display: flex;">
-				<div id="RCT_logo" style="float:left"><img src="images/RCT_logo_color_70.png" alt="River Conditions Tool Logo"></div>
-				<div id="RCTfooter_text" style="float: left; margin-top: 10px; margin-left: 10px;">
-					Hosted by the <a href="https://uppermissouriheadwaters.org/" target="_blank"> Upper Missouri Headwaters</a> via <a href="https://katearpin.com/" target="_blank">Kate Arpin Graphics & Web Design</a>.  Developed by the USFWS (Region 6, Science Applications) and Montana State University (<a href="https://www.montana.edu/earthsciences/directory/2139973/eric-sproles" target="_blank">Eric Sproles</a>) in cooperation with <a href="http://dnrc.mt.gov/" target="_blank">Montana DNRC</a> and associated watershed groups of Colorado, Montana and Wyoming.  Version: 2.4.430
+					<p><i>* Indicates the reading (streamflow and/or temperature) for this USGS site is not collected.  To find out more information, click a stream section in the summary, next click the "Gage Source Data: Current" web link under "Stream Section Detail"</i></p>
 				</div>
+
+
 			</div>
-			<!--<p><div><img src="images/RCT_logo_color.png" alt="River Conditions Tool Logo" height="60"></div> Hosted by the <a href="https://uppermissouriheadwaters.org/" target="_blank"> Upper Missouri Headwaters</a> via <a href="https://katearpin.com/" target="_blank">Kate Arpin Graphics & Web Design</a>.  Developed by the USFWS (Region 6, Science Applications) and Montana State University (<a href="https://www.montana.edu/earthsciences/directory/2139973/eric-sproles" target="_blank">Eric Sproles</a>) in cooperation with <a href="http://dnrc.mt.gov/" target="_blank">Montana DNRC</a> and associated watershed groups of Colorado, Montana and Wyoming.  Version: 2.3.3</p>-->
-		</footer>
-	</div> <!-- /container -->
+
+			<hr>
+			<footer>
+
+				<div id='footer_content' style="display: flex;">
+					<div id="RCT_logo" style="float:left"><img src="images/RCT_logo_color_70.png" alt="River Conditions Tool Logo"></div>
+					<div id="RCTfooter_text" style="float: left; margin-top: 10px; margin-left: 10px;">
+						Hosted by the <a href="https://uppermissouriheadwaters.org/" target="_blank"> Upper Missouri Headwaters</a> via <a href="https://katearpin.com/" target="_blank">Kate Arpin Graphics & Web Design</a>.  Developed by the USFWS (Region 6, Science Applications) and Montana State University (<a href="https://www.montana.edu/earthsciences/directory/2139973/eric-sproles" target="_blank">Eric Sproles</a>) in cooperation with <a href="http://dnrc.mt.gov/" target="_blank">Montana DNRC</a> and associated watershed groups of Colorado, Montana and Wyoming.  Version: 2.4.430
+					</div>
+				</div>
+				<!--<p><div><img src="images/RCT_logo_color.png" alt="River Conditions Tool Logo" height="60"></div> Hosted by the <a href="https://uppermissouriheadwaters.org/" target="_blank"> Upper Missouri Headwaters</a> via <a href="https://katearpin.com/" target="_blank">Kate Arpin Graphics & Web Design</a>.  Developed by the USFWS (Region 6, Science Applications) and Montana State University (<a href="https://www.montana.edu/earthsciences/directory/2139973/eric-sproles" target="_blank">Eric Sproles</a>) in cooperation with <a href="http://dnrc.mt.gov/" target="_blank">Montana DNRC</a> and associated watershed groups of Colorado, Montana and Wyoming.  Version: 2.3.3</p>-->
+			</footer>
+		</div> <!-- /container -->
 
 
 
-	<script>
-		var editorWidget;
-		var pSrcFeatureLayer;
-		var pFCol;
-		var app = {};
-		require([
-			"esri/Map", "esri/views/MapView",
-			"extras/MH_Setup",
-			"extras/MH_GetGageData",
-			"extras/MH_GetGageData_Reservoir",
-			"esri/config",
-			"dojo/parser",
-			"extras/MH_GetWarningData",
-			"extras/MH_GetHistoricWarningData",
-			"dojo/domReady!"],
+		<script>
+			var editorWidget;
+			var pSrcFeatureLayer;
+			var pFCol;
+			var app = {};
+			require([
+				"esri/Map", "esri/views/MapView",
+				"extras/MH_Setup",
+				"extras/MH_GetGageData",
+				"extras/MH_GetGageData_Reservoir",
+				"esri/config",
+				"dojo/parser",
+				"extras/MH_GetWarningData",
+				"extras/MH_GetHistoricWarningData",
+				"dojo/domReady!"],
 
 
 
-			function (Map, MapView, MH_Setup, MH_GetGageData, MH_GetGageData_Reservoir, esriConfig, parser, MH_GetWarningData, MH_GetHistoricWarningData) {
-				parser.parse();
-				esriConfig.request.proxyUrl = "/proxy/";
+				function (Map, MapView, MH_Setup, MH_GetGageData, MH_GetGageData_Reservoir, esriConfig, parser, MH_GetWarningData, MH_GetHistoricWarningData) {
+					parser.parse();
+					esriConfig.request.proxyUrl = "/proxy/";
 
-				var lastRefresh = new Date(); // If the user just loaded the page you don't want to refresh either
+					var lastRefresh = new Date(); // If the user just loaded the page you don't want to refresh either
 
-				document.getElementById("txtLastRefresh").innerHTML = "Last data refresh: " + lastRefresh.toLocaleDateString('en-US', { hour12: true, month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }).toString() + " <i>(auto refeshed even hours of day)</i>";
+					document.getElementById("txtLastRefresh").innerHTML = "Last data refresh: " + lastRefresh.toLocaleDateString('en-US', { hour12: true, month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }).toString() + " <i>(auto refeshed even hours of day)</i>";
 
-				setInterval(function () {
-					var now = new Date();//check time, if the hour is even (i.e. midnight,2am,4am,6am,8am,10am,noon,2pm,etc.) reload the page
-					let iEvenOrOdd = now.getHours() % 2;
-					if ((iEvenOrOdd == 0) && (new Date() - lastRefresh > 1000 * 60 * 60 * 6)) {
-						location.reload();
+					setInterval(function () {
+						var now = new Date();//check time, if the hour is even (i.e. midnight,2am,4am,6am,8am,10am,noon,2pm,etc.) reload the page
+						let iEvenOrOdd = now.getHours() % 2;
+						if ((iEvenOrOdd == 0) && (new Date() - lastRefresh > 1000 * 60 * 60 * 6)) {
+							location.reload();
 
-						document.getElementById("txtLastRefresh").innerHTML = "Last data refresh: " + now.toLocaleDateString('en-US', { hour12: true, month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }).toString() + " <i>(auto refeshed even hours of day)</i>";
-					}
-				}, 60000);  //run every minute
+							document.getElementById("txtLastRefresh").innerHTML = "Last data refresh: " + now.toLocaleDateString('en-US', { hour12: true, month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' }).toString() + " <i>(auto refeshed even hours of day)</i>";
+						}
+					}, 60000);  //run every minute
 
-				app.pSup = new MH_Setup({}); // instantiate the class
-				app.pGetWarn = new MH_GetWarningData({}); // instantiate the class
-				app.pGetHistWarn = new MH_GetHistoricWarningData({}); // instantiate the class
-				app.pGage = new MH_GetGageData({}); // instantiate the class
-				app.pGageRes = new MH_GetGageData_Reservoir({}); // instantiate the class
-				app.pSup.Phase1();
-			});
+					app.pSup = new MH_Setup({}); // instantiate the class
+					app.pGetWarn = new MH_GetWarningData({}); // instantiate the class
+					app.pGetHistWarn = new MH_GetHistoricWarningData({}); // instantiate the class
+					app.pGage = new MH_GetGageData({}); // instantiate the class
+					app.pGageRes = new MH_GetGageData_Reservoir({}); // instantiate the class
+					app.pSup.Phase1();
+				});
 
-	</script>
+		</script>
 
 
-	<script id="custom_grid_template" type="text/html">
-		<table class="ko-grid" cellspacing="0">
-			<thead>
-				<tr data-bind="foreach: columns">
-					<th data-bind="text: headerText"></th>
-				</tr>
-			</thead>
-			<tbody data-bind="foreach: itemsOnCurrentPage">
-				<tr data-bind="foreach: $parent.columns">
-					<td data-bind="text: typeof rowText == 'function' ? rowText($parent) : $parent[rowText] "></td>
+		<script id="custom_grid_template" type="text/html">
+			<table class="ko-grid" cellspacing="0">
+				<thead>
+					<tr data-bind="foreach: columns">
+						<th data-bind="text: headerText"></th>
+					</tr>
+				</thead>
+				<tbody data-bind="foreach: itemsOnCurrentPage">
+					<tr data-bind="foreach: $parent.columns">
+						<td data-bind="text: typeof rowText == 'function' ? rowText($parent) : $parent[rowText] "></td>
 
-				</tr>
-			</tbody>
+					</tr>
+				</tbody>
 
-		</table>
-	</script>
+			</table>
+		</script>
 
 </body>
 
