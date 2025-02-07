@@ -1450,7 +1450,7 @@ define([
                     "Windspeed: <b>" + iMPH + " mph / " + Math.round(feature.graphic.attributes.WIND_SPEED) + " kph" + "<br></b>" +
                     "Wind Direction <b>" + strDirection + "</b> " + iDegreesDispaly + "<br/> <br/>" +
                     "<a href='https://forecast.weather.gov/zipcity.php?inputstring=" + feature.graphic.attributes.ICAO + "' target='_blank'>Link to NOAA/NWS Forecast</a > <br/>" +
-                    "<a href='https://w1.weather.gov/data/obhistory/" + feature.graphic.attributes.ICAO + ".html' target='_blank'>Link to NOAA/NWS Observations</a > <br/>" +
+                    "<a href='https://forecast.weather.gov/data/obhistory/" + feature.graphic.attributes.ICAO + ".html' target='_blank'>Link to NOAA/NWS Observations</a > <br/>" +
                     "<a href='https://www.windy.com/airport/" + feature.graphic.attributes.ICAO + "' target='_blank'>Link to Wind</a >";
                 return div;
             };
@@ -1461,7 +1461,8 @@ define([
                     font: { family: "arial", size: 9, weight: "bold" }
                 },
                 labelPlacement: "above-center",
-                labelExpressionInfo: { expression: "$feature.STATION_NAME + textformatting.NewLine + 'Weather'" }
+                labelExpressionInfo: { expression: "$feature.ICAO + textformatting.NewLine + 'Weather'" }
+                //labelExpressionInfo: { expression: "$feature.STATION_NAME + textformatting.NewLine + 'Weather'" }
             };
 
             let pNOAAFeatureLayer = new FeatureLayer({
