@@ -34,7 +34,8 @@ define([
             var strQuery1 = pFeatureLayer1.definitionExpression;
 
             if (strQuery1 == undefined) {
-                strQuery1 = strQueryField + " > -1";
+                //strQuery1 = strQueryField + " > -1";
+                strQuery1 = "1=1";
             }
             pQuery1.where = strQuery1;
 

@@ -518,25 +518,16 @@ define([
             app.blnIsInitialPageLoad = true;
             app.blnIsInitialPageLoad_Reservoir = true;
 
-
             
-
 
             //////////////////////////////////////////////////////////////////////////////
             //////////////////////////////Basins & Watersheds///////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////
             app.H2O_ID = getTokens()['H2O_ID'];
             app.Basin_ID = getTokens()['Basin_ID'];
-
-            //testing  here
-            //if ((app.H2O_ID == undefined) & (app.Basin_ID == undefined)) {
-            //    app.H2O_ID = "Lower Clark Fork";
-            //}
-            
 			if (app.Basin_ID == "UY_Shields") {
 				app.Basin_ID = "Upper Yellowstone Headwaters";
 			}
-            
 			
             app.arrayEntireList = [["Beaverhead/Centennial", "Beaverhead", "UMH"],          //array [watershed listed on website, watershed in layer, basin name in website]
 				["Big Hole", "Big Hole", "UMH"],
@@ -610,14 +601,23 @@ define([
             ];
 
 			if ((app.H2O_ID == undefined) & (app.Basin_ID == undefined)) {
-				app.Basin_ID = "UMH";
+                //app.Basin_ID = "UMH";
+                app.Basin_ID = "all"
 			}
 
-			var arrayNavList = [];
-			if (app.Basin_ID == "all") {
+            var arrayNavList = [];
+
+            app.blnPickArea = false;  //this turns on picking of an area, hides some UI elements, and controls whether or not to run summaries
+
+            if (app.Basin_ID == "all") {
+                document.getElementById("navList").style.display = "none";
+                document.getElementById("entriesCon_div").style.display = "none";
+                document.getElementById("NoAreaSelected_Div").style.display = "inline";
+
 				arrayNavList = app.arrayEntireList;
 				app.H2O_ID = undefined;
                 app.Basin_ID = undefined;
+                app.blnPickArea = true;    
 
                 document.getElementById("bdy1").style["paddingTop"] = "130px";
 			} else if (app.Basin_ID != undefined) {
@@ -641,7 +641,7 @@ define([
 				}
 			}
 
-            var arrayNavListBasin = [["Upper Missouri Headwaters", "UMH", "MT"],
+            app.arrayNavListBasin = [["Upper Missouri Headwaters", "UMH", "MT"],
 
                                     ["Upper Rio Grande - CO", "Upper Rio Grande", "CO"],
                                     ["Upper Rio Grande - NM", "Upper Rio Grand - New Mexico", "NM"],
@@ -656,8 +656,9 @@ define([
                                     ["Boulder and East Boulder", "Boulder and East Boulder", "MT"],
                                     ["Blackfoot-Sun", "Blackfoot-Sun", "MT"],
                                     ["Bitterroot", "Bitter Root", "MT"],
-                                    ["Bighorn", "Bighorn", "MTWY"],
-                                    ["All", "all"]
+                                    ["Bighorn", "Bighorn", "MTWY"]
+                                    //,
+                                    //["All", "all"]
 			];
 
 			var strURLPrefix = "index.html?H2O_ID=";
@@ -666,25 +667,22 @@ define([
 			document.addEventListener("click", closeAllSelect);
 
 			var selBasin = document.getElementById("sel_Basin");
-			for (var i = 0; i < arrayNavListBasin.length; i++) {
+            for (var i = 0; i < app.arrayNavListBasin.length; i++) {
 				var a = document.createElement("a");
 				var newItem = document.createElement("option");
-				a.textContent = arrayNavListBasin[i][0];
+                a.textContent = app.arrayNavListBasin[i][0];
 				a.setAttribute('role', "presentation");
 
-				a.setAttribute('href', strURLPrefixBasin + arrayNavListBasin[i][1] + strURLSuffix);
+                a.setAttribute('href', strURLPrefixBasin + app.arrayNavListBasin[i][1] + strURLSuffix);
 				newItem.appendChild(a);
 				selBasin.add(newItem, i+1);
 
-                if ((arrayNavListBasin[i][1] == app.Basin_ID) | (arrayNavListBasin[i][0] == app.Basin_ID)) {				//set the region/basin in the dropdown!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                if ((app.arrayNavListBasin[i][1] == app.Basin_ID) | (app.arrayNavListBasin[i][0] == app.Basin_ID)) {				//set the region/basin in the dropdown!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     selBasin.options[i + 1].selected = true;
-                    app.StateArea = arrayNavListBasin[i][2];
+                    app.StateArea = app.arrayNavListBasin[i][2];
 				}
 			}
-
-
-
-
+            
             //////////////////////////////////////////////////////////////////////////////
             //////////////////////////////dates///////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////
@@ -811,22 +809,24 @@ define([
             $("#dropDownId").append("<li><a data-value='American Whitewater Difficulty and Flow'>American Whitewater Difficulty and Flow</a></li>")
             $("#dropDownId").append("<li><a data-value='FEMA Flood Layer Hazard Viewer'>FEMA Flood Layer Hazard Viewer</a></li>")
 
-            if (app.StateArea.indexOf("CO") > -1) {
-                $("#dropDownId").append("<li><a data-value='BOR Basin Status Maps'>BOR Basin Status Maps</a></li>")
-                $("#dropDownId").append("<li><a data-value='CO DWR Surface Water Stations'>CO DWR Surface Water Stations</a></li>")
-            }
-            if (app.StateArea.indexOf("MT") > -1) {
-                $("#dropDownId").append("<li><a data-value='GYE Aquatic Invasives'>GYE Aquatic Invasives</a></li>")
-                $("#dropDownId").append("<li><a data-value='MT Channel Migration Zones'>Channel Migration Zones</a></li>")
-                $("#dropDownId").append("<li><a data-value='MT DNRC Fire Map'>MT DNRC Fire Map</a></li>")
-                $("#dropDownId").append("<li><a data-value='MT DNRC Stream and Gage Explorer'>MT DNRC Stream and Gage Explorer</a></li>")
-                $("#dropDownId").append("<li><a data-value='Official MT FWP (closures, etc.)'>Official MT FWP (closures, etc.)</a></li>")
-            }
+            if (!(app.blnPickArea)){
 
-            if (app.Basin_ID == "Upper Clark Fork") {
-                $("#dropDownId").append("<li><a data-value='MT DNRC Upper Clark Fork & Blackfoot Water Rights'>MT DNRC Upper Clark Fork & Blackfoot Water Rights</a></li>")
-            }
+                if (app.StateArea.indexOf("CO") > -1) {
+                    $("#dropDownId").append("<li><a data-value='BOR Basin Status Maps'>BOR Basin Status Maps</a></li>")
+                    $("#dropDownId").append("<li><a data-value='CO DWR Surface Water Stations'>CO DWR Surface Water Stations</a></li>")
+                }
+                if (app.StateArea.indexOf("MT") > -1) {
+                    $("#dropDownId").append("<li><a data-value='GYE Aquatic Invasives'>GYE Aquatic Invasives</a></li>")
+                    $("#dropDownId").append("<li><a data-value='MT Channel Migration Zones'>Channel Migration Zones</a></li>")
+                    $("#dropDownId").append("<li><a data-value='MT DNRC Fire Map'>MT DNRC Fire Map</a></li>")
+                    $("#dropDownId").append("<li><a data-value='MT DNRC Stream and Gage Explorer'>MT DNRC Stream and Gage Explorer</a></li>")
+                    $("#dropDownId").append("<li><a data-value='Official MT FWP (closures, etc.)'>Official MT FWP (closures, etc.)</a></li>")
+                }
 
+                if (app.Basin_ID == "Upper Clark Fork") {
+                    $("#dropDownId").append("<li><a data-value='MT DNRC Upper Clark Fork & Blackfoot Water Rights'>MT DNRC Upper Clark Fork & Blackfoot Water Rights</a></li>")
+                }
+            }
             $("#dropDownId").append("<li><a data-value='NRCS iMap-Basin Snow Water Equivalent'>NRCS iMap-Basin Snow Water Equivalent</a></li>")
             $("#dropDownId").append("<li><a data-value='USGS National Water Dashboard'>USGS National Water Dashboard</a></li>")
 
@@ -940,35 +940,40 @@ define([
 
             //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Oct29_NewLayer/FeatureServer/";  //Vaughn's Dev
             //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];    //Vaughn's Dev
-            
+
 
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22_multi/FeatureServer/";  //dev to test multi-gage per section
             //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
 
             //////////////////////////////////////////determine if gaged reservoirs exist/////////////////////////////
             //////////////////////////////////////////determine if gaged reservoirs exist/////////////////////////////
-            let queryObject = new Query();
-            let strReservoirQuery = this.getQueryDefs1_4()[4];// this is strQueryDef2
-            queryObject.where = strReservoirQuery;
-            queryObject.returnGeometry = false;
-            queryObject.outFields = ["*"];
-            query.executeQueryJSON(app.strHFL_URL + app.idx11[7], queryObject).then(function (results) {
-                let blnFeaturesExist = false;
-                let pFeatures = results.features;
-                var resultCount = pFeatures.length;
-                if (resultCount > 0) {
-                    blnFeaturesExist = true;
-                }
-                app.blnReservoirGagesExist = blnFeaturesExist;
+            if (!(app.blnPickArea)) {  // run if area specified
+                let queryObject = new Query();
+                let strReservoirQuery = this.getQueryDefs1_4()[4];// this is strQueryDef2
+                queryObject.where = strReservoirQuery;
+                queryObject.returnGeometry = false;
+                queryObject.outFields = ["*"];
+                query.executeQueryJSON(app.strHFL_URL + app.idx11[7], queryObject).then(function (results) {
+                    let blnFeaturesExist = false;
+                    let pFeatures = results.features;
+                    var resultCount = pFeatures.length;
+                    if (resultCount > 0) {
+                        blnFeaturesExist = true;
+                    }
+                    app.blnReservoirGagesExist = blnFeaturesExist;
 
-                if (blnFeaturesExist) {
-                    document.getElementById("entriesConRESERVOIR_div").style.display = 'inline';
-                }
+                    if (blnFeaturesExist) {
+                        document.getElementById("entriesConRESERVOIR_div").style.display = 'inline';
+                    }
 
-                this.app.pSup.GetSetHeaderWarningContent(app.strHFL_URL + app.idx11[11], app.H2O_ID, blnUseAlternateHeader, app.Basin_ID);  //this will eventually trigger Phase2
-            }).catch(function (error) {
-                console.log("ReturnFeaturesExist_YesNo, error: ", error.message);
-            });;
+                    this.app.pSup.GetSetHeaderWarningContent(app.strHFL_URL + app.idx11[11], app.H2O_ID, blnUseAlternateHeader, app.Basin_ID);  //this will eventually trigger Phase2
+                }).catch(function (error) {
+                    console.log("ReturnFeaturesExist_YesNo, error: ", error.message);
+                });;
+            }
+            else {
+                app.pSup.Phase2();
+            }
         },
 
         Phase2: function () {
@@ -1179,9 +1184,6 @@ define([
                             iOtherCount += 1;
                         }
                     }
-                    //console.log(app.view.popup.featureCount.toString() + " featureCount---" +
-                    //                                    "gagecount = " + iGageCount.toString() +
-                    //                                    "section count = " + iSectionCount.toString());
 
                     if (graphic) {
                         let atts = graphic.attributes;
@@ -1199,7 +1201,9 @@ define([
                             strImageURLPrefix = strImageURLPrefix.replace("/index.html", "");
 
                             if (iGageCount > 1) {
-                                strAdditionalPopup = "<br><i>Note: Selecting 1 stream gage will provide details (zoom into map for detail)</i>";
+                                if (!(app.blnPickArea)) {
+                                    strAdditionalPopup = "<br><i>Note: Selecting 1 stream gage will provide details (zoom into map for detail)</i>";
+                                }
                             } else {
 
                                 let vm1 = new app.pGage.readingsViewModel();
@@ -1222,7 +1226,9 @@ define([
                                 }
                             }
                             if (strAdditionalPopup == "") {
-                                strAdditionalPopup = "<br><i>Note: Selected gage is not a summary (trigger) measure locaton in the filtered area</i>";
+                                if (!(app.blnPickArea)){
+                                    strAdditionalPopup = "<br><i>Note: Selected gage is not a summary (trigger) measure locaton in the filtered area</i>";
+                                }
                             }
                             let pGraphicTempContent = graphicTemplate.content;
                             pGraphicTempContent = pGraphicTempContent.slice(0, pGraphicTempContent.lastIndexOf("</a>") + 4);  //remove the custom onthefly content that was added
@@ -1235,17 +1241,16 @@ define([
 
             pBasinsFeatureLayer = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[8],
-                opacity: 0.5
+                opacity: 0.5, id: "Basins", outFields: ["*"]
             });
-            
-
             if (app.Basin_ID != undefined) {
 				if (app.Basin_ID == "UMH") {
                     pBasinsFeatureLayer.definitionExpression = "Name = 'Upper Missouri Headwaters'";
 				} else {
                     pBasinsFeatureLayer.definitionExpression = "Name = '" + app.Basin_ID + "'";
 				}
-			}
+            }
+
 
             let vColor22 = new Color("#3F3F40");
             let vDarkGreyColor = new Color("#3F3F40");
@@ -1287,88 +1292,86 @@ define([
                 visible: false, labelingInfo: [BLM_Rec_labelClass]
             });
 
+            if (!(app.blnPickArea)) {
+                if (app.StateArea.indexOf("CO") > -1) {
+                    let templateCOFAC = new PopupTemplate();
+                    templateCOFAC.title = "<b>CPW Facility</b>";
+                    templateCOFAC.content = "{PROPNAME} - {d_FAC_TYPE}";
+                    const COFAC_labelClass = {// autocasts as new LabelClass()
+                        symbol: {
+                            type: "text",  // autocasts as new TextSymbol()
+                            color: vDarkGreyColor,
+                            font: { family: "arial", size: 9 }
+                        },
+                        labelPlacement: "above-center",
+                        labelExpressionInfo: { expression: "$feature.PROPNAME + ' - ' + $feature.d_FAC_TYPE" }
+                    };
+                    var pCOFACFeatureLayer = new FeatureLayer({
+                        url: "https://services1.arcgis.com/Ezk9fcjSUkeadg6u/ArcGIS/rest/services/Colorado_Parks_and_Wildlife_Facilities/FeatureServer/0",
+                        popupTemplate: templateCOFAC, opacity: 0.5,
+                        visible: false, labelingInfo: [COFAC_labelClass]
+                    });
+                }
+                
+                if (app.StateArea.indexOf("MT") > -1) {
+                    var templateFWPAISAccess = new PopupTemplate();
+                    templateFWPAISAccess.title = "Montana AIS Watercraft Access";
+                    templateFWPAISAccess.content = "{SITENAME}</br>{ACCESSTYPE}</br>{WATERBODY}</br>{STATUS}</b>";
+                    var pFWPAISAccessFeatureLayer = new FeatureLayer({
+                        url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/arcgis/rest/services/FISH_AIS_WATERCRAFT_ACCESS/FeatureServer/0",
+                        popupTemplate: templateFWPAISAccess, minScale: 5200000, visible: false
+                    });
 
-            if (app.StateArea.indexOf("CO") > -1) {
-                let templateCOFAC = new PopupTemplate();
-                templateCOFAC.title = "<b>CPW Facility</b>";
-                templateCOFAC.content = "{PROPNAME} - {d_FAC_TYPE}";
-                const COFAC_labelClass = {// autocasts as new LabelClass()
-                    symbol: {
-                        type: "text",  // autocasts as new TextSymbol()
-                        color: vDarkGreyColor,
-                        font: { family: "arial", size: 9 }
-                    },
-                    labelPlacement: "above-center",
-                    labelExpressionInfo: { expression: "$feature.PROPNAME + ' - ' + $feature.d_FAC_TYPE" }
-                };
-                var pCOFACFeatureLayer = new FeatureLayer({
-                    url: "https://services1.arcgis.com/Ezk9fcjSUkeadg6u/ArcGIS/rest/services/Colorado_Parks_and_Wildlife_Facilities/FeatureServer/0",
-                    popupTemplate: templateCOFAC, opacity: 0.5,
-                    visible: false, labelingInfo: [COFAC_labelClass]
-                });
+                    let templateFAS = new PopupTemplate();
+                    templateFAS.title = "MT FAS (Fishing Access Site)";
+                    templateFAS.content = "<b>{NAME}</b><br>{BOAT_FAC}<br><a href={WEB_PAGE} target='_blank'>Link to Fish Access Site</a>";
+                    const FAS_labelClass = {// autocasts as new LabelClass()
+                        symbol: {
+                            type: "text", color: vColor22,
+                            font: { family: "arial", size: 9, weight: "bold" }
+                        },
+                        labelPlacement: "above-center",
+                        labelExpressionInfo: { expression: "$feature.NAME" }
+                    };
+                    var pFASFeatureLayer = new FeatureLayer({
+                        url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/arcgis/rest/services/FWPLND_FAS_POINTS/FeatureServer/0",
+                        popupTemplate: templateFAS,
+                        opacity: 0.5,
+                        visible: false,
+                        labelingInfo: [FAS_labelClass]
+                    });
+                    //////////////////////////
+                    let sfsr_MTSP = {
+                        type: "simple",  // autocasts as new SimpleRenderer()
+                        symbol: { // autocasts as new SimpleFillSymbol()
+                            type: "simple-fill",  // autocasts as new SimpleFillSymbol()
+                            color: [57, 168, 87, 0.45],
+                            style: "solid",
+                            outline: {  // autocasts as new SimpleLineSymbol()
+                                color: [29, 112, 52],
+                                width: 0.1
+                            }
+                        },
+                    };
+                    let strlabelField11 = "Name";
+                    const MTSP_labelClass = {// autocasts as new LabelClass()
+                        symbol: { type: "text", color: [29, 112, 52], font: { family: "arial", size: 9 } },
+                        labelExpressionInfo: { expression: "$feature." + strlabelField11 },
+                        minScale: 2000000
+                    };
 
+                    var templateMTSP = new PopupTemplate();
+                    templateMTSP.title = "Montana State Parks";
+                    templateMTSP.content = "{NAME} <a href={WEB_PAGE} target='_blank'>(link here)</a></br>{BOAT_FAC}</br>{STATUS}</b>";
+
+                    var pMTSPFeatureLayer = new FeatureLayer({
+                        url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/ArcGIS/rest/services/FWPLND_STATEPARKS/FeatureServer/0",
+                        renderer: sfsr_MTSP, "opacity": 0.9, autoGeneralize: true,
+                        outFields: [strlabelField11], labelingInfo: [MTSP_labelClass], popupTemplate: templateMTSP
+                    });
+
+                }
             }
-
-
-            if (app.StateArea.indexOf("MT") > -1) {
-                var templateFWPAISAccess = new PopupTemplate();
-                templateFWPAISAccess.title = "Montana AIS Watercraft Access";
-                templateFWPAISAccess.content = "{SITENAME}</br>{ACCESSTYPE}</br>{WATERBODY}</br>{STATUS}</b>";
-                var pFWPAISAccessFeatureLayer = new FeatureLayer({
-                    url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/arcgis/rest/services/FISH_AIS_WATERCRAFT_ACCESS/FeatureServer/0",
-                    popupTemplate: templateFWPAISAccess, minScale: 5200000, visible: false
-                });
-
-                let templateFAS = new PopupTemplate();
-                templateFAS.title = "MT FAS (Fishing Access Site)";
-                templateFAS.content = "<b>{NAME}</b><br>{BOAT_FAC}<br><a href={WEB_PAGE} target='_blank'>Link to Fish Access Site</a>";
-                const FAS_labelClass = {// autocasts as new LabelClass()
-                    symbol: {
-                        type: "text", color: vColor22,
-                        font: { family: "arial", size: 9, weight: "bold" }
-                    },
-                    labelPlacement: "above-center",
-                    labelExpressionInfo: { expression: "$feature.NAME" }
-                };
-                var pFASFeatureLayer = new FeatureLayer({
-                    url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/arcgis/rest/services/FWPLND_FAS_POINTS/FeatureServer/0",
-                    popupTemplate: templateFAS,
-                    opacity: 0.5,
-                    visible: false,
-                    labelingInfo: [FAS_labelClass]
-                });
-                //////////////////////////
-                let sfsr_MTSP = {
-                    type: "simple",  // autocasts as new SimpleRenderer()
-                    symbol: { // autocasts as new SimpleFillSymbol()
-                        type: "simple-fill",  // autocasts as new SimpleFillSymbol()
-                        color: [57, 168, 87, 0.45],
-                        style: "solid",
-                        outline: {  // autocasts as new SimpleLineSymbol()
-                            color: [29, 112, 52],
-                            width: 0.1
-                        }
-                    },
-                };
-                let strlabelField11 = "Name";
-                const MTSP_labelClass = {// autocasts as new LabelClass()
-                    symbol: { type: "text", color: [29, 112, 52], font: { family: "arial", size: 9 } },
-                    labelExpressionInfo: { expression: "$feature." + strlabelField11 },
-                    minScale: 2000000
-                };
-
-                var templateMTSP = new PopupTemplate();
-                templateMTSP.title = "Montana State Parks";
-                templateMTSP.content = "{NAME} <a href={WEB_PAGE} target='_blank'>(link here)</a></br>{BOAT_FAC}</br>{STATUS}</b>";
-
-                var pMTSPFeatureLayer = new FeatureLayer({
-                    url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/ArcGIS/rest/services/FWPLND_STATEPARKS/FeatureServer/0",
-                    renderer: sfsr_MTSP, "opacity": 0.9, autoGeneralize: true,
-                    outFields: [strlabelField11], labelingInfo: [MTSP_labelClass], popupTemplate: templateMTSP
-                });
-
-            }
-            
 
             const strSNOTELSitePageURL = "https://wcc.sc.egov.usda.gov/nwcc/site?sitenum=";
             const strSNOTELGraphURL = "https://wcc.sc.egov.usda.gov/nwcc/view?intervalType=+View+Current+&report=WYGRAPH&timeseries=Daily&format=plot&sitenum=";
@@ -1643,7 +1646,7 @@ define([
 
             var pBasinsMaskFeatureLayer = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[9],
-                "opacity": 0.7, autoGeneralize: true, renderer: sfsr_BasinMask
+                "opacity": 0.7, autoGeneralize: true, renderer: sfsr_BasinMask, minScale: 5000000,
             });
             pBasinsMaskFeatureLayer.definitionExpression = "Basin IS NULL";
             
@@ -1707,14 +1710,15 @@ define([
                 arrayLayer2add.push(pGageFeatureLayerHighlighted);
             }
 
-            if (app.StateArea.indexOf("MT") > -1) {
-                arrayLayer2add.push(pFWPAISAccessFeatureLayer);
-                arrayLayer2add.push(pFASFeatureLayer);
-                arrayLayer2add.push(pMTSPFeatureLayer);
-            }
-
-            if (app.StateArea.indexOf("CO") > -1) {
-                arrayLayer2add.push(pCOFACFeatureLayer);
+            if (!(app.blnPickArea)) {
+                if (app.StateArea.indexOf("MT") > -1) {
+                    arrayLayer2add.push(pFWPAISAccessFeatureLayer);
+                    arrayLayer2add.push(pFASFeatureLayer);
+                    arrayLayer2add.push(pMTSPFeatureLayer);
+                }
+                if (app.StateArea.indexOf("CO") > -1) {
+                    arrayLayer2add.push(pCOFACFeatureLayer);
+                }
             }
 
             if (app.Basin_ID == "Flathead") {
@@ -1742,8 +1746,10 @@ define([
             //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
             //|||||||||||||||||||||||||||||||     This starts retevial of gage data         ||||||||||||||||||||||||||||||||||||||||||||||||||||
             //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-            console.log("app.blnReservoirGagesExist: " + app.blnReservoirGagesExist.toString());
-            app.pGage.Start(strDateTimeMinus3, strDateTime);   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+            if (!(app.blnPickArea)) {
+                console.log("app.blnReservoirGagesExist: " + app.blnReservoirGagesExist.toString());
+                app.pGage.Start(strDateTimeMinus3, strDateTime);   //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+            }
             //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
             //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
             //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -1753,14 +1759,16 @@ define([
             legendLayers.push({ layer: pSNOTELFeatureLayer, title: 'SNOTEL Sites' });
             legendLayers.push({ layer: pNOAAFeatureLayer, title: 'Weather Stations' });
 
-            if (app.StateArea.indexOf("CO") > -1) {
-                legendLayers.push({ layer: pCOFACFeatureLayer, title: 'CPW Facilities' });
-            }
+            if (!(app.blnPickArea)) {
+                if (app.StateArea.indexOf("CO") > -1) {
+                    legendLayers.push({ layer: pCOFACFeatureLayer, title: 'CPW Facilities' });
+                }
 
-            if (app.StateArea.indexOf("MT") > -1) {
-                legendLayers.push({ layer: pFWPAISAccessFeatureLayer, title: 'MT AIS Watercraft Access' });
-                legendLayers.push({ layer: pMTSPFeatureLayer, title: 'MT State Parks' });
-                legendLayers.push({ layer: pFASFeatureLayer, title: 'FWP Fish Access Sites' });
+                if (app.StateArea.indexOf("MT") > -1) {
+                    legendLayers.push({ layer: pFWPAISAccessFeatureLayer, title: 'MT AIS Watercraft Access' });
+                    legendLayers.push({ layer: pMTSPFeatureLayer, title: 'MT State Parks' });
+                    legendLayers.push({ layer: pFASFeatureLayer, title: 'FWP Fish Access Sites' });
+                }
             }
             legendLayers.push({ layer: pBLMFeatureLayer, title: 'BLM Access Sites' });
             legendLayers.push({ layer: pBLM_RecFeatureLayer, title: 'BLM Recreation Boating Sites' });
@@ -1804,15 +1812,16 @@ define([
             cbxLayers.push({ layers: [pBLMFeatureLayer, pBLMFeatureLayer], title: 'BLM Access Sites' });
             cbxLayers.push({ layers: [pBLM_RecFeatureLayer, pBLM_RecFeatureLayer], title: 'BLM Recreation Boating Sites' });
 
-            if (app.StateArea.indexOf("CO") > -1) {
-                cbxLayers.push({ layers: [pCOFACFeatureLayer, pCOFACFeatureLayer], title: 'CPW Facilities' });
+            if (!(app.blnPickArea)) {
+                if (app.StateArea.indexOf("CO") > -1) {
+                    cbxLayers.push({ layers: [pCOFACFeatureLayer, pCOFACFeatureLayer], title: 'CPW Facilities' });
+                }
+                if (app.StateArea.indexOf("MT") > -1) {
+                    cbxLayers.push({ layers: [pFASFeatureLayer, pFASFeatureLayer], title: 'MT FWP Fishing Access Sites' });
+                    cbxLayers.push({ layers: [pMTSPFeatureLayer, pMTSPFeatureLayer], title: 'MT State Parks' });
+                    cbxLayers.push({ layers: [pFWPAISAccessFeatureLayer, pFWPAISAccessFeatureLayer], title: 'MT AIS Watercraft Access' });
+                }
             }
-            if (app.StateArea.indexOf("MT") > -1) {
-                cbxLayers.push({ layers: [pFASFeatureLayer, pFASFeatureLayer], title: 'MT FWP Fishing Access Sites' });
-                cbxLayers.push({ layers: [pMTSPFeatureLayer, pMTSPFeatureLayer], title: 'MT State Parks' });
-                cbxLayers.push({ layers: [pFWPAISAccessFeatureLayer, pFWPAISAccessFeatureLayer], title: 'MT AIS Watercraft Access' });
-            }
-
             cbxLayers.push({ layers: [pSNOTELFeatureLayer, pSNOTELFeatureLayer], title: 'SNOTEL Sites' });
             cbxLayers.push({ layers: [pNOAAFeatureLayer, pNOAAFeatureLayer], title: 'Weather Stations' });
             cbxLayers.push({ layers: [pMonitoringCSVLayer, pMonitoringCSVLayer], title: 'Monitoring Locations' });
@@ -1824,8 +1833,12 @@ define([
                         
 			this.LayerCheckBoxSetup(cbxLayers);
 
-            SetupStreamClick();
-            SetupReservoirClick();
+            if (!(app.blnPickArea)) {
+                SetupStreamClick();
+                SetupReservoirClick();
+            } else {
+                SetupBasinClick();
+            }
 
             ko.bindingHandlers.googleBarChart = {
                 init: function (element, valueAccessor, allBindingsAccesor, viewModel, bindingContext) {
@@ -2139,7 +2152,7 @@ define([
 
 					app.pZoom.qry_Zoom2FeatureLayerExtent(pWatershedsFeatureLayer, "OBJECTID");
 				} else {
-					app.pZoom.qry_Zoom2FeatureLayerExtent(pBasinsFeatureLayer, "FID");
+                    app.pZoom.qry_Zoom2FeatureLayerExtent(pBasinsFeatureLayer, "OBJECTID");
 				}
             }
 
@@ -2156,6 +2169,20 @@ define([
                 }); //after map loads, connect to listen to mouse move & drag events
                 console.log("maploaded")
             }
+
+            function SetupBasinClick() {
+                app.view.on("pointer-down", (event) => {
+                    const opts = {
+                        include: pBasinsFeatureLayer// only include graphics from pSectionsFeatureLayer in the hitTest
+                    }
+                    app.view.hitTest(event, opts).then((response) => {
+                        if (response.results.length) {// check if a feature is returned from the pSectionsFeatureLayer
+                            showResults(response.results);
+                        }
+                    });
+                });
+            }
+
 
             function SetupStreamClick() {
                 app.view.on("pointer-down", (event) => {
@@ -2189,42 +2216,64 @@ define([
                 app.blnZoom = false; //this controls zooming to sections if user clicks a summary or if clicks on map
                 if (pFeatures.length > 0) {
                     var feature = pFeatures[0];
+                    if (feature.graphic.layer.id == "Basins") {                     //if no geographiy is specified, handle clicking on a basin area
+                        let strBasinName = feature.graphic.attributes.Name;
 
+                        iBasinIndex1 = 0
+                        iBasinIndex2 = 1
 
-                    let strSearchField1, strSearchField2, strSearchValue1, strSearchValue2, table, strTempText, strFoundValue1, strFoundValue2;
+                        if (strBasinName.search("Upper Rio") > -1) {
+                            strBasinName = strBasinName.replace("Grande-New", "Grand - New");
+                            iBasinIndex1 = 1
+                            iBasinIndex2 = 1
+                        }
 
-                    if (feature.graphic.layer.geometryType == "polygon") {  //assuming the poly layer is the reservoir layer
-                        strSearchField1 = "SiteName";
-                        strSearchField2 = "Lake_Reservoir_Name_";
+                        let strBasinName2;
+                        for (var iB = 0; iB < app.arrayNavListBasin.length; iB++) { // the basin polygon attributes may be worded slightly different than what's needed for the URL parameter, this loop gets the expexted basin name for URLs
+                            if (strBasinName == app.arrayNavListBasin[iB][iBasinIndex1]){
+                                strBasinName2 = app.arrayNavListBasin[iB][iBasinIndex2];
+                                break;
+                            }
+                        }
 
-                        strSearchValue1 = feature.graphic.attributes.Gage_Name;
-                        strSearchValue2 = feature.graphic.attributes.Lake_Reservoir_Name;
-
-                        table = document.getElementById("entriesReservoir");
-
-                    } else {
-                        strSearchField1 = "StreamName";
-                        strSearchField2 = "SectionID";
-
-                        strSearchValue1 = feature.graphic.attributes.StreamName;
-                        strSearchValue2 = feature.graphic.attributes.SectionID;
-
-                        table = document.getElementById("entries");
-                    }
-
-                    var rows = table.getElementsByTagName("tr");
-
-                    for (var i = 0; i < rows.length; i++) {
-                        strTempText = (rows)[i].innerHTML;  //parse the section summary text to set var's for charting and zooming
-                        strTempText = strTempText.substring(strTempText.indexOf(strSearchField1) + (strSearchField1.length + 2), strTempText.length);
-                        strFoundValue1 = strTempText.substring(0, strTempText.indexOf("</span>"));
-                        strTempText = strTempText.substring(strTempText.indexOf(strSearchField2) + (strSearchField2.length + 2), strTempText.length);
-                        strFoundValue2 = strTempText.substring(0, strTempText.indexOf("</span>"));
+                        let strURL4Basin = 'index.html?Basin_ID=' + strBasinName2;
                         
-                        if ((strSearchValue1 == strFoundValue1) & (strSearchValue2 == strFoundValue2)) {
-                            (rows)[i].click();
+                        window.open(strURL4Basin, "_self");
+                    } else {
+                        let strSearchField1, strSearchField2, strSearchValue1, strSearchValue2, table, strTempText, strFoundValue1, strFoundValue2;
+                        if (feature.graphic.layer.geometryType == "polygon") {  //assuming the poly layer is the reservoir layer
+                            strSearchField1 = "SiteName";
+                            strSearchField2 = "Lake_Reservoir_Name_";
 
-                            break;
+                            strSearchValue1 = feature.graphic.attributes.Gage_Name;
+                            strSearchValue2 = feature.graphic.attributes.Lake_Reservoir_Name;
+
+                            table = document.getElementById("entriesReservoir");
+
+                        } else {
+                            strSearchField1 = "StreamName";
+                            strSearchField2 = "SectionID";
+
+                            strSearchValue1 = feature.graphic.attributes.StreamName;
+                            strSearchValue2 = feature.graphic.attributes.SectionID;
+
+                            table = document.getElementById("entries");
+                        }
+
+                        var rows = table.getElementsByTagName("tr");
+
+                        for (var i = 0; i < rows.length; i++) {
+                            strTempText = (rows)[i].innerHTML;  //parse the section summary text to set var's for charting and zooming
+                            strTempText = strTempText.substring(strTempText.indexOf(strSearchField1) + (strSearchField1.length + 2), strTempText.length);
+                            strFoundValue1 = strTempText.substring(0, strTempText.indexOf("</span>"));
+                            strTempText = strTempText.substring(strTempText.indexOf(strSearchField2) + (strSearchField2.length + 2), strTempText.length);
+                            strFoundValue2 = strTempText.substring(0, strTempText.indexOf("</span>"));
+
+                            if ((strSearchValue1 == strFoundValue1) & (strSearchValue2 == strFoundValue2)) {
+                                (rows)[i].click();
+
+                                break;
+                            }
                         }
                     }
                 }
