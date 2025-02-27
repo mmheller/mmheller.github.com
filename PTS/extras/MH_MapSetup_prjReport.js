@@ -56,7 +56,8 @@ define([
           Phase1: function () {
               app.loading = dojo.byId("loadingImg");  //loading image. id
               var customExtentAndSR = new esri.geometry.Extent(-14900000, 5200000, -11500000, 7600000, new esri.SpatialReference({ "wkid": 3857 }));
-              app.mapPrjReport = new esri.Map("mapPrjReport", { basemap: "topo", logo: false, extent: customExtentAndSR });
+              app.mapPrjReport = new esri.Map("mapPrjReport", { basemap: "osm", logo: false, extent: customExtentAndSR });
+              //app.mapPrjReport = new esri.Map("mapPrjReport", { basemap: "topo", logo: false, extent: customExtentAndSR });
               app.strTheme1_URL = app.gCQD.GetMasterAGSMapservicURL();
 
 //              dojo.connect(app.mapPrjReport, "onUpdateStart", showLoading);
