@@ -988,7 +988,9 @@ define([
                         
             esriConfig.apiKey = "AAPK47ae32508072459cb3fa84646f0f3928F7dRMTNaroq-OYC7WBC-O1R3frCJVtlOtnnJ-hSUIKUXJPaglsAO9sQ4AxRYBPy_";
 
-            app.map = new Map({ basemap: "arcgis-topographic" }); // Basemap layer
+            app.map = new Map({ basemap: "" }); // Basemap layer
+            //app.map = new Map({ basemap: "arcgis-national-geographic" }); // Basemap layer
+            app.map = new Map({ basemap: "osm" }); // Basemap layer
             app.view = new MapView({  //app.map = BootstrapMap.create("mapDiv", { basemap: "topo", center: arrayCenterZoom, zoom: izoomVal, scrollWheelZoom: false});// Get a reference to the ArcGIS Map class
                 map: app.map,
                 center: arrayCenterZoom,
@@ -1022,7 +1024,8 @@ define([
                 mapLoaded();
             })
             
-            const allowedBasemapTitles = ["Imagery Hybrid", "Topographic", "Dark Gray Canvas"];
+            const allowedBasemapTitles = ["Imagery Hybrid", "Topographic (Vector)", "Dark Gray Canvas"];
+            //const allowedBasemapTitles = ["Imagery Hybrid", "Topographic", "Dark Gray Canvas"];
             const source = new PortalSource({                // filtering portal basemaps
                 filterFunction: (basemap) => allowedBasemapTitles.indexOf(basemap.portalItem.title) > -1
             });
