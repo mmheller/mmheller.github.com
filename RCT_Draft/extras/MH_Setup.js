@@ -571,6 +571,14 @@ define([
                 ["Blackfoot", "Blackfoot", "Upper Clark Fork"],
                 ["Flint-Rock", "Flint-Rock", "Upper Clark Fork"],
                 ["Upper Clark Fork", "Upper Clark Fork", "Upper Clark Fork"],
+                ["Granite Flint-Rock", "Granite Flint-Rock", "Upper Clark Fork"],
+
+
+                ["Upper Green", "Upper Green", "Upper Green"],
+                ["Upper Green-Slate", "Upper Green-Slate", "Upper Green"],
+                ["Big Sandy", "Big Sandy", "Upper Green"],
+
+
 
                 ["Smith", "Smith", "Smith"],
                 
@@ -646,6 +654,7 @@ define([
                                     ["Upper Rio Grande - CO", "Upper Rio Grande", "CO"],
                                     ["Upper Rio Grande - NM", "Upper Rio Grand - New Mexico", "NM"],
                                     ["Upper Yellowstone Headwaters", "UY_Shields", "MT"],
+                                    ["Upper Green", "Upper Green", "WY"],
                                     ["Upper Clark Fork", "Upper Clark Fork", "MT"],
                                     ["Smith", "Smith", "MT"],
                                     ["Southwest Colorado", "Southwest Colorado", "CO"],
@@ -935,8 +944,12 @@ define([
 
 
             app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
-			app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support/FeatureServer/";  //PRODUCTION "RCT Core Geospatial" Layers
+			//app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support/FeatureServer/";  //PRODUCTION "RCT Core Geospatial" Layers
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22/FeatureServer/";//PRODUCTION RCT Support FY22
+
+
+            app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Edits_Tyler_view/FeatureServer/"; //Tyler Dev Edit
+
 
             //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Oct29_NewLayer/FeatureServer/";  //Vaughn's Dev
             //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];    //Vaughn's Dev
@@ -1024,7 +1037,7 @@ define([
                 mapLoaded();
             })
             
-            const allowedBasemapTitles = ["Imagery Hybrid", "Topographic (Vector)", "Dark Gray Canvas"];
+            const allowedBasemapTitles = ["Imagery Hybrid", "OpenStreetMap", "Dark Gray Canvas"];
             //const allowedBasemapTitles = ["Imagery Hybrid", "Topographic", "Dark Gray Canvas"];
             const source = new PortalSource({                // filtering portal basemaps
                 filterFunction: (basemap) => allowedBasemapTitles.indexOf(basemap.portalItem.title) > -1
