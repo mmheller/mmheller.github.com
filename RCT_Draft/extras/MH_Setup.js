@@ -2335,7 +2335,7 @@ define([
 
                 strQueryDef4 = "(NOT(Name in ('" + arrayTmp4Query3.join("','") + "'))) AND " +
                     "((NOT(Name_Alternate1 in ('" + arrayTmp4Query3.join("','") + "'))) OR (Name_Alternate1 is Null)) AND" +
-                    "((NOT(Name_Alternate2 in ('" + arrayTmp4Query3.join("','") + "'))) OR (Name_Alternate1 is Null)) AND" +
+                    "((NOT(Name_Alternate2 in ('" + arrayTmp4Query3.join("','") + "'))) OR (Name_Alternate2 is Null)) AND" +
                     "((NOT(NoShowIfBasin in ('" + app.Basin_ID + "'))) OR (NoShowIfBasin is Null))";
 
                 strQueryDef5 = "((Watershed in ('" + arrayTmp4Query3.join("','") +
@@ -2352,7 +2352,7 @@ define([
 
                 strQueryDef4 = "Name <> '" + app.H2O_ID + "'" +
                     " AND (" + " Name_Alternate1 <> '" + app.H2O_ID + "' OR (Name_Alternate1 is Null))" +
-                    " AND (" + " Name_Alternate2 <> '" + app.H2O_ID + "' OR (Name_Alternate1 is Null))" +
+                    " AND (" + " Name_Alternate2 <> '" + app.H2O_ID + "' OR (Name_Alternate2 is Null))" +
                     " AND (" + " NoShowIfBasin <> '" + app.Basin_ID + "' OR (NoShowIfBasin is Null))";
 
                 strQueryDef5 = "(Watershed = '" + app.H2O_ID + "'" + " OR " + " WatershedName_Alt1 = '" + app.H2O_ID + "'" + " OR " + " WatershedName_Alt2 = '" + app.H2O_ID + "')" +
