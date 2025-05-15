@@ -571,15 +571,13 @@ define([
                 ["Blackfoot", "Blackfoot", "Upper Clark Fork"],
                 ["Flint-Rock", "Flint-Rock", "Upper Clark Fork"],
                 ["Upper Clark Fork", "Upper Clark Fork", "Upper Clark Fork"],
-                ["Granite Flint-Rock", "Granite Flint-Rock", "Upper Clark Fork"],
+                ["Granite Headwaters", "Granite Flint-Rock", "Upper Clark Fork"],
 
 
                 ["Upper Green", "Upper Green", "Upper Green"],
                 ["Upper Green-Slate", "Upper Green-Slate", "Upper Green"],
                 ["Big Sandy", "Big Sandy", "Upper Green"],
-
-
-
+                
                 ["Smith", "Smith", "Smith"],
                 
 
