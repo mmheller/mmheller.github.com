@@ -834,6 +834,8 @@ define([
                     $("#dropDownId").append("<li><a data-value='MT DNRC Upper Clark Fork & Blackfoot Water Rights'>MT DNRC Upper Clark Fork & Blackfoot Water Rights</a></li>")
                 }
             }
+            $("#dropDownId").append("<li><a data-value='National Water Prediction Service'>National Water Prediction Service</a></li>")
+
             $("#dropDownId").append("<li><a data-value='NRCS iMap-Basin Snow Water Equivalent'>NRCS iMap-Basin Snow Water Equivalent</a></li>")
             $("#dropDownId").append("<li><a data-value='USGS National Water Dashboard'>USGS National Water Dashboard</a></li>")
 
@@ -2449,17 +2451,70 @@ define([
                 }
 
                 if (strSelectedText == "USGS National Water Dashboard") {
-                    //strURL = "https://hazards-fema.maps.arcgis.com/apps/webappviewer/index.html?id=8b0adb51996444d4879338b5529aa9cd&extent=";
+                    // https://dashboard.waterdata.usgs.gov/app/nwd/en/?aoi=bbox-%5B-119.94824%2C44.56204%2C-108.64438%2C48.39114
+                    // https://dashboard.waterdata.usgs.gov/app/nwd/en/?aoi=bbox-%5B-119.94824%2C44.56204%2C-108.64438%2C48.39114%5D&view=%7B%22basemap%22%3A%22EsriTopo%22%2C%22bounds%22%3A%22-119.94823983103537%2C44.56203899517036%2C-108.64437909334788%2C48.39113519331582%22%2C%22insetMap%22%3Afalse%2C%22panel%22%3A%7B%22id%22%3A%22ViewerTools%22%2C%22open%22%3Atrue%2C%22checkbox%22%3A%220%2C10%2C20%2C21%2C22%2C23%22%2C%22range%22%3A%220%3A1.0%2C1%3A1.0%2C2%3A1.0%2C3%3A1.0%2C4%3A1.0%2C5%3A1.0%2C6%3A1.0%2C7%3A1.0%2C8%3A0.8%2C9%3A0.3%2C10%3A0.5%2C11%3A0.5%2C12%3A0.5%2C13%3A0.5%2C14%3A0.5%2C15%3A0.5%2C16%3A0.5%2C17%3A1.0%2C18%3A1.0%2C19%3A1.0%2C20%3A1.0%22%2C%22select%22%3A%220%3A0%2C1%3A0%2C2%3A0%2C3%3A0%2C4%3A0%2C5%3A0%2C6%3A0%2C7%3A0%2C8%3A0%2C9%3A0%2C10%3A0%2C11%3A0%2C12%3A0%2C13%3A0%2C14%3A0%2C15%3A0%2C16%3A0%2C17%3A0%2C18%3A0%2C19%3A0%22%7D%7D
                     blnAddCoords = false;
                     pSR_WKID = pExtent.spatialReference.wkid;
-                    strURL = "https://dashboard.waterdata.usgs.gov/app/nwd/en/?aoi=default&view=%7B%22basemap%22%3A%22EsriTopo%22%2C%22bounds%22%3A%22";
+                    //strURL = "https://dashboard.waterdata.usgs.gov/app/nwd/en/?aoi=default&view=%7B%22basemap%22%3A%22EsriTopo%22%2C%22bounds%22%3A%22";
+                    strURL = "https://dashboard.waterdata.usgs.gov/app/nwd/en/?aoi=bbox-%5B";
 
                     var pGeogExtent = webMercatorUtils.webMercatorToGeographic(pExtent);  //the map is in web mercator but display coordinates in geographic (lat, long)
                     strURL += Math.round(pGeogExtent.xmin * 100) / 100 + ",";
                     strURL += Math.round(pGeogExtent.ymin * 100) / 100 + ",";
                     strURL += Math.round(pGeogExtent.xmax * 100) / 100 + ",";
                     strURL += Math.round(pGeogExtent.ymax * 100) / 100;
-                    strURL += '%22%2C%22insetMap%22%3Afalse%2C%22panel%22%3A%7B%22checkbox%22%3A%220%2C9%2C19%2C20%2C21%2C22%22%2C%22range%22%3A%220%3A1.0%2C1%3A1.0%2C2%3A1.0%2C3%3A1.0%2C4%3A1.0%2C5%3A1.0%2C6%3A1.0%2C7%3A0.8%2C8%3A0.3%2C9%3A0.5%2C10%3A0.5%2C11%3A0.5%2C12%3A0.5%2C13%3A0.5%2C14%3A0.5%2C15%3A0.5%2C16%3A1.0%2C17%3A1.0%2C18%3A1.0%2C19%3A1.0%22%2C%22select%22%3A%220%3A0%2C1%3A0%2C2%3A0%2C3%3A0%2C4%3A0%2C5%3A0%2C6%3A0%2C7%3A0%2C8%3A0%2C9%3A0%2C10%3A0%2C11%3A0%2C12%3A0%2C13%3A0%2C14%3A0%2C15%3A0%2C16%3A0%2C17%3A0%2C18%3A0%22%7D%7D';
+                    //strURL += '%22%2C%22insetMap%22%3Afalse%2C%22panel%22%3A%7B%22checkbox%22%3A%220%2C9%2C19%2C20%2C21%2C22%22%2C%22range%22%3A%220%3A1.0%2C1%3A1.0%2C2%3A1.0%2C3%3A1.0%2C4%3A1.0%2C5%3A1.0%2C6%3A1.0%2C7%3A0.8%2C8%3A0.3%2C9%3A0.5%2C10%3A0.5%2C11%3A0.5%2C12%3A0.5%2C13%3A0.5%2C14%3A0.5%2C15%3A0.5%2C16%3A1.0%2C17%3A1.0%2C18%3A1.0%2C19%3A1.0%22%2C%22select%22%3A%220%3A0%2C1%3A0%2C2%3A0%2C3%3A0%2C4%3A0%2C5%3A0%2C6%3A0%2C7%3A0%2C8%3A0%2C9%3A0%2C10%3A0%2C11%3A0%2C12%3A0%2C13%3A0%2C14%3A0%2C15%3A0%2C16%3A0%2C17%3A0%2C18%3A0%22%7D%7D';
+                }
+
+                if (strSelectedText == "National Water Prediction Service") {
+                    //https://water.noaa.gov/#@=-110.809092,45.7854252,5.1024202
+                    blnAddCoords = false;
+                    pSR_WKID = pExtent.spatialReference.wkid;
+                    strURL = "https://water.noaa.gov/#@=";
+
+                    var pGeogExtent = webMercatorUtils.webMercatorToGeographic(pExtent);  //the map is in web mercator but display coordinates in geographic (lat, long)
+
+                    strURL += (Math.round(pGeogExtent.center.x.toString() * 100) / 100).toString();//longitude
+                    strURL += "," + (Math.round(pGeogExtent.center.y.toString() * 100) / 100).toString();//latitude
+
+                    dblExtentWidth = pGeogExtent.xmax - pGeogExtent.xmin;
+
+                    if (dblExtentWidth > 3.750001) {
+                        strURL += ",4.75";
+                    }
+
+                    if ((dblExtentWidth > 3.500001) & (dblExtentWidth < 3.75)) {
+                        strURL += ",5.96";
+                    }
+
+                    if ((dblExtentWidth > 2.750001) & (dblExtentWidth < 3.5)) {
+                        strURL += ",7.87";
+                    }
+
+                    if ((dblExtentWidth > 2.30001) & (dblExtentWidth < 2.75)) {
+                        strURL += ",8.19";
+                    }
+
+                    if ((dblExtentWidth > 1.30001) & (dblExtentWidth < 2.3)) {
+                        strURL += ",8.5";
+                    }
+
+                    if ((dblExtentWidth > 0.75001) & (dblExtentWidth < 1.3)) {
+                        strURL += ",8.9";
+                    }
+
+                    if ((dblExtentWidth > 0.5001) & (dblExtentWidth < 0.75)) {
+                        strURL += ",9.25";
+                    }
+
+                    if ((dblExtentWidth > 0.25001) & (dblExtentWidth < 0.5)) {
+                        strURL += ",10.4";
+                    }
+
+                    if (dblExtentWidth < 0.25) {
+                        strURL += ",11";
+                    }
+
                 }
 
                 if (strSelectedText == "NRCS iMap-Basin Snow Water Equivalent") {
