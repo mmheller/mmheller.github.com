@@ -2480,7 +2480,7 @@ define([
                                 }
 
                                 var itemFoundTemp = arrayJSONValues.filter(function (itemArraySearch) {
-                                    return typeof itemArraySearch.abbrev == 'string' && itemArraySearch.abbrev.indexOf(strSiteID) > -1 && (itemArraySearch.parameter == "AIRTEMP");
+                                    return typeof itemArraySearch.abbrev == 'string' && itemArraySearch.abbrev.indexOf(strSiteID) > -1 && (itemArraySearch.parameter == "WATTEMP");
                                 });
                                 var itemFoundDischarge = arrayJSONValues.filter(function (itemArraySearch) {
                                     return typeof itemArraySearch.abbrev == 'string' && itemArraySearch.abbrev.indexOf(strSiteID) > -1 && (itemArraySearch.parameter == "DISCHRG");
@@ -2757,7 +2757,7 @@ define([
 
                             arrayJSONValues2 =[]; //clear out the array
 
-                            if ((temperatureItem != "") | (itemFoundTemp.length > 0)) {                                    //run through each gage temperature record
+                            if ((temperatureItem != "") | (itemFoundTemp.length > 0)) {    //run through each gage temperature record
                                 if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null)) {
 									arrayJSONValues22 = temperatureItem.values[0].value;
 								} else {
