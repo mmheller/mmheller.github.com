@@ -53,7 +53,7 @@ define([
     "esri/rest/support/Query", "esri/tasks/QueryTask", "esri/rest/geometryService",
     "esri/geometry/support/webMercatorUtils",
     "esri/widgets/BasemapGallery", "esri/widgets/BasemapGallery/support/PortalBasemapsSource", "esri/widgets/ScaleBar", "dojo",
-    "esri/PopupTemplate", "esri/layers/FeatureLayer", "esri/Color", "esri/renderers/SimpleRenderer", "esri/layers/CSVLayer",
+    "esri/PopupTemplate", "esri/layers/FeatureLayer", "esri/Color", "esri/renderers/SimpleRenderer", "esri/layers/CSVLayer", "esri/layers/GeoJSONLayer",
     "extras/MH_Zoom2FeatureLayers", "esri/renderers/UniqueValueRenderer",
     "esri/widgets/Legend", "esri/widgets/Locate", "esri/layers/GraphicsLayer", "esri/Graphic", 
     "esri/core/watchUtils",
@@ -63,7 +63,7 @@ define([
     esriConfig, Map, MapView, declare, query, Query, QueryTask, geometryService,
     webMercatorUtils, BasemapGallery, PortalSource, ScaleBar, dojo,
     PopupTemplate, FeatureLayer, Color,
-    SimpleRenderer, CSVLayer,
+    SimpleRenderer, CSVLayer, GeoJSONLayer,
     MH_Zoom2FeatureLayers, UniqueValueRenderer, Legend, Locate, GraphicsLayer, Graphic, watchUtils, DatePicker, dom, domStyle
 ) {
 
@@ -514,6 +514,9 @@ define([
 
         Phase1: function () {
             console.log("MH_setup Phase1");
+
+
+
 
             app.blnIsInitialPageLoad = true;
             app.blnIsInitialPageLoad_Reservoir = true;
@@ -1432,6 +1435,50 @@ define([
                 renderer: snoTel_Renderer
             });
 
+            const pNOAAUSDMtemplate = {
+                title: "U.S. Drought Monitor",
+                content: "Drought & Dryness Category D{DM}, U.S. Area % {US_PRCNT}" + "<br />" +
+                    "<a href ='https://www.drought.gov/national'>National Drought Status</a>"
+                //content: "Drought & Dryness Category D{DM} U.S. Area {US_AREA} U.S. Area % {US_PRCNT}",
+            };
+            
+            let pNOAAUSDMrenderer = {
+                type: "unique-value",  // autocasts as new UniqueValueRenderer()
+                field: "DM",  // contains values referenced in uniqueValueInfos
+                uniqueValueInfos: [
+                    {
+                        value: "0",  
+                        label: "D0 - Abnormally Dry",
+                        symbol: {type: "simple-fill", color: new Color("#ffff00")}
+                    }, {
+                        value: "1",  
+                        label: "D1 - Moderate Drought",
+                        symbol: {type: "simple-fill", color: new Color("#fcd37f")}
+                    }, {
+                        value: "2",  
+                        label: "D2 - Sever Drought",
+                        symbol: {type: "simple-fill", color: new Color("#ffaa00")}
+                    }, {
+                        value: "3",  
+                        label: "D3 - Extreme Drought",
+                        symbol: {type: "simple-fill", color: new Color("#e60000")}
+                    }, {
+                        value: "4",  
+                        label: "D4 - Exceptional Drought",
+                        symbol: {type: "simple-fill", color: new Color("#730000")}
+                    }
+                ]
+            };
+            
+            let pNOAAUSDMFeatureLayer = new GeoJSONLayer({
+                url: "https://www.ncei.noaa.gov/pub/data/nidis/geojson/us/usdm/USDM-current.geojson",
+                copyright: "U.S. Drought Monitor",
+                popupTemplate: pNOAAUSDMtemplate,
+                renderer: pNOAAUSDMrenderer,
+                visible: false,
+                opacity: 0.5
+            });
+
 
             const templateNOAA = { //auto cast of PopupTemplate
                 title: "{STATION_NAME} ({ICAO}) Weather",
@@ -1717,7 +1764,7 @@ define([
             //let arrayLayer2add = [app.pSup.m_pRiverSymbolsFeatureLayerHt, app.pSup.m_pRiverSymbolsFeatureLayerTemp, app.pSup.m_pRiverSymbolsFeatureLayerCFS,
             let arrayLayer2add = [app.pSup.m_pRiverSymbolsFeatureLayerTemp, app.pSup.m_pRiverSymbolsFeatureLayerCFS,
                 pWatershedsMaskFeatureLayer, pBasinsMaskFeatureLayer,
-                pWatershedsFeatureLayer, pBasinsFeatureLayer, pLakeResFeatureLayer, pCartoFeatureLayer, pCartoFeatureLayerPoly,
+                pWatershedsFeatureLayer, pBasinsFeatureLayer, pLakeResFeatureLayer, pNOAAUSDMFeatureLayer, pCartoFeatureLayer, pCartoFeatureLayerPoly,
                 pSectionsFeatureLayer, pSNOTELFeatureLayer, pNOAAFeatureLayer, pFWPFeatureLayer,
                 pBLMFeatureLayer, pBLM_RecFeatureLayer, pGageFeatureLayer, pEPointsFeatureLayer,
                 pMonitoringCSVLayer, app.graphicsLayer];
@@ -1810,7 +1857,8 @@ define([
                 legendLayers.push({ layer: p1964FloodFlathead, title: '1964 Flood, Flathead River' });
             }
 
-
+            legendLayers.push({ layer: pNOAAUSDMFeatureLayer, title: 'U.S. Drought Monitor' });
+            
             if (app.test) {
                 legendLayers.push({ layer: app.pSup.m_pFWPFeatureLayer, title: 'Test Condition Messaging' });
             }
@@ -1841,6 +1889,9 @@ define([
             cbxLayers.push({ layers: [pSNOTELFeatureLayer, pSNOTELFeatureLayer], title: 'SNOTEL Sites' });
             cbxLayers.push({ layers: [pNOAAFeatureLayer, pNOAAFeatureLayer], title: 'Weather Stations' });
             cbxLayers.push({ layers: [pMonitoringCSVLayer, pMonitoringCSVLayer], title: 'Monitoring Locations' });
+
+            cbxLayers.push({ layers: [pNOAAUSDMFeatureLayer, pNOAAUSDMFeatureLayer], title: 'U.S. Drought Monitor' });
+            
 
             if (app.Basin_ID == "Flathead") {
                 cbxLayers.push({ layers: [pDist2WaterTableFlathead, pDist2WaterTableFlathead], title: 'Depth to Water Table, Flathead River' });
@@ -2595,6 +2646,8 @@ define([
 
                 window.open(strURL);
             });
+
+
 
 		},
 
