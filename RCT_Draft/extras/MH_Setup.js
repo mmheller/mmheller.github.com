@@ -579,7 +579,7 @@ define([
 
                 ["Upper Green", "Upper Green", "Upper Green"],
                 ["Upper Green-Slate", "Upper Green-Slate", "Upper Green"],
-                ["Big Sandy", "Big Sandy", "Upper Green"],
+                ["Big Sandy", "Big Sandy WY", "Upper Green"],
                 
                 ["Smith", "Smith", "Smith"],
                 
@@ -1538,7 +1538,7 @@ define([
                 popupTemplate: templateNOAA,
                 visible: false,
                 outFields:["*"],
-                minScale: 5000000,
+                //minScale: 5000000,
                 labelingInfo: [NOAA_labelClass]
             });
 
