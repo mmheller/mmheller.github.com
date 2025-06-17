@@ -515,9 +515,8 @@ define([
         Phase1: function () {
             console.log("MH_setup Phase1");
 
-
-
-
+            
+            
             app.blnIsInitialPageLoad = true;
             app.blnIsInitialPageLoad_Reservoir = true;
 
@@ -612,6 +611,36 @@ define([
 			if ((app.H2O_ID == undefined) & (app.Basin_ID == undefined)) {
                 //app.Basin_ID = "UMH";
                 app.Basin_ID = "all"
+
+
+                ///////////////////////////////Test
+                //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD005_table.json"; //Belly River near Mountain View
+                //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD003_table.json"; // Waterton River near Waterton Park - WSC | Table Data
+                //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD017_table.json"; //Mountain View Irrigation District Canal
+                //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_11AA001_table.json"; //North Milk River near International Boundary
+                //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AE924_table.json"; //St. Mary River above St. Mary Reservoir
+                strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AE002_table.json"; //Lee Creek at Cardston
+                //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD042_table.json"; //Yarrow Creek at Spread Eagle Road
+
+
+
+                fetch(strTest777URL)
+                    .then(response => response.json())
+                    .then(data => {
+                        //console.log(data[0][data]); // Process the JSON data
+                        console.log(data[0]['data']); // Process the JSON data
+                        console.log(data[0]['data'][0][0] + " " + data[0]['data'][0][1] + " " + data[0]['data'][0][2]); // Process the JSON data
+                        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); // Process the JSON data
+                        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); // Process the JSON data
+                        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); // Process the JSON data
+                    })
+                    .catch(error => {
+                        console.error('Error fetching JSON:', error);
+                    });
+
+
+
+
 			}
 
             var arrayNavList = [];
