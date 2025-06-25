@@ -2144,10 +2144,27 @@ define([
                 app.strURLGage = strURLGagePrefix + strTempUSACE_NWD_IDs + strURLGageSuffix;
             } else {
 				var strURLGagePrefix = "https://gis.dnrc.mt.gov/arcgis/rest/services/WRD/WMB_StAGE/MapServer/2/query"
-				strURLGagePrefix += "?f=pjson&outFields=SensorID%2CTimestamp%2CRecordedValue&where="
+                strURLGagePrefix += "?f=pjson&outFields=SensorID%2CTimestamp%2CRecordedValue&where="
+
+                //*******************************************************************************************************************************************************************
+                //**********filter out some of the records with particular minue values to deal with the MTDNRC web layer's 10,000 record limit*******************************
+                //********************************************************************************************************************************************************************
+                if ((arrayDNRC_Sens_Loc.length > 5) & (arrayDNRC_Sens_Loc.length <= 7)) {
+                    strURLGagePrefix += "EXTRACT(MINUTE FROM Timestamp) NOT in (15) and ";
+                }
+                if ((arrayDNRC_Sens_Loc.length > 7) & (arrayDNRC_Sens_Loc.length <= 13)) {
+                    strURLGagePrefix += "EXTRACT(MINUTE FROM Timestamp) NOT in (15, 30) and ";
+                }
+                if (arrayDNRC_Sens_Loc.length > 13) {
+                    strURLGagePrefix += "EXTRACT%28MINUTE+FROM+Timestamp%29+NOT+in+%2815%2C+45%2C+30%29+and+";
+                    //strURLGagePrefix += " and EXTRACT(MINUTE FROM Timestamp) NOT in (15, 45, 30)"
+                }
+                //********************************************************************************************************************************************************************
+                //********************************************************************************************************************************************************************
+                //********************************************************************************************************************************************************************
+
                 strURLGagePrefix += "Timestamp > date '" + this.dteStartDay2Check + " 00:00:00'";
                 strURLGagePrefix += "+ and + Timestamp < date '" + this.dteEndDay2Check + " 23:59:00'"; 
-
                 //strURLGagePrefix += "Timestamp > date '" + this.dteStartDay2Check + " 00:00:00'";
                 //strURLGagePrefix += "+ and + Timestamp < date '" + this.dteEndDay2Check + " 00:00:00'"; 
 
@@ -2156,9 +2173,12 @@ define([
 				var arrayTempDNRCIDs = [];
 				for (var iS = 0; iS < arrayDNRC_Sens_Loc.length; iS++) {  //getting the sensor id's passed through the arrays
 					arrayTempDNRCIDs.push(arrayDNRC_Sens_Loc[iS][3])
-				}
-				strTempDNRCIDs = arrayTempDNRCIDs.join("','");
-				app.strURLGage = strURLGagePrefix + strTempDNRCIDs + "')" ;
+                }
+
+                strTempDNRCIDs = arrayTempDNRCIDs.join("','");
+                strURLGagePrefix += strTempDNRCIDs + "')"
+                                				
+                app.strURLGage = strURLGagePrefix;
 			}
 
 			var arrayProc2 = [];

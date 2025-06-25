@@ -579,7 +579,19 @@ define([
                 ["Upper Green", "Upper Green", "Upper Green"],
                 ["Upper Green-Slate", "Upper Green-Slate", "Upper Green"],
                 ["Big Sandy", "Big Sandy WY", "Upper Green"],
+
+
+                ["Big Muddy", "Big Muddy", "Big Muddy"],
+
+
+                ["Lower Marais Des Cygnes", "Lower Marais Des Cygnes", "Lower Marais Des Cygnes"],
+                ["Neosho Headwaters", "Neosho Headwaters", "Lower Marais Des Cygnes"],
+                ["Upper Marais Des Cygnes", "Upper Marais Des Cygnes", "Lower Marais Des Cygnes"],
+                ["Upper Neosho", "Upper Marais Des Cygnes", "Lower Marais Des Cygnes"],
                 
+
+
+
                 ["Smith", "Smith", "Smith"],
                 
 
@@ -619,28 +631,25 @@ define([
                 //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD017_table.json"; //Mountain View Irrigation District Canal
                 //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_11AA001_table.json"; //North Milk River near International Boundary
                 //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AE924_table.json"; //St. Mary River above St. Mary Reservoir
-                strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AE002_table.json"; //Lee Creek at Cardston
+                //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AE002_table.json"; //Lee Creek at Cardston
                 //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD042_table.json"; //Yarrow Creek at Spread Eagle Road
 
 
 
-                fetch(strTest777URL)
-                    .then(response => response.json())
-                    .then(data => {
-                        //console.log(data[0][data]); // Process the JSON data
-                        console.log(data[0]['data']); // Process the JSON data
-                        console.log(data[0]['data'][0][0] + " " + data[0]['data'][0][1] + " " + data[0]['data'][0][2]); // Process the JSON data
-                        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); // Process the JSON data
-                        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); // Process the JSON data
-                        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); // Process the JSON data
-                    })
-                    .catch(error => {
-                        console.error('Error fetching JSON:', error);
-                    });
-
-
-
-
+                //fetch(strTest777URL)
+                //    .then(response => response.json())
+                //    .then(data => {
+                //        //console.log(data[0][data]); // Process the JSON data
+                //        console.log(data[0]['data']); // Process the JSON data
+                //        console.log(data[0]['data'][0][0] + " " + data[0]['data'][0][1] + " " + data[0]['data'][0][2]); // Process the JSON data
+                //        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); // Process the JSON data
+                //        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); // Process the JSON data
+                //        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); // Process the JSON data
+                //    })
+                //    .catch(error => {
+                //        console.error('Error fetching JSON:', error);
+                //    });
+                    
 			}
 
             var arrayNavList = [];
@@ -679,8 +688,10 @@ define([
 				}
 			}
 
-            app.arrayNavListBasin = [["Upper Missouri Headwaters", "UMH", "MT"],
-
+            app.arrayNavListBasin = [
+                ["Big Muddy", "Big Muddy", "MT"],
+                ["Lower Marais Des Cygnes", "Lower Marais Des Cygnes", "KS"],
+                                    ["Upper Missouri Headwaters", "UMH", "MT"],
                                     ["Upper Rio Grande - CO", "Upper Rio Grande", "CO"],
                                     ["Upper Rio Grande - NM", "Upper Rio Grand - New Mexico", "NM"],
                                     ["Upper Yellowstone Headwaters", "UY_Shields", "MT"],
