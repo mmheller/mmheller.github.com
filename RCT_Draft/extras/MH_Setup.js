@@ -587,7 +587,7 @@ define([
                 ["Lower Marais Des Cygnes", "Lower Marais Des Cygnes", "Lower Marais Des Cygnes"],
                 ["Neosho Headwaters", "Neosho Headwaters", "Lower Marais Des Cygnes"],
                 ["Upper Marais Des Cygnes", "Upper Marais Des Cygnes", "Lower Marais Des Cygnes"],
-                ["Upper Neosho", "Upper Marais Des Cygnes", "Lower Marais Des Cygnes"],
+                ["Upper Neosho", "Upper Neosho", "Lower Marais Des Cygnes"],
                 
 
 
@@ -691,11 +691,11 @@ define([
             app.arrayNavListBasin = [
                 ["Big Muddy", "Big Muddy", "MT"],
                 ["Lower Marais Des Cygnes", "Lower Marais Des Cygnes", "KS"],
+                ["Upper Green", "Upper Green", "WY"],
                                     ["Upper Missouri Headwaters", "UMH", "MT"],
                                     ["Upper Rio Grande - CO", "Upper Rio Grande", "CO"],
                                     ["Upper Rio Grande - NM", "Upper Rio Grand - New Mexico", "NM"],
                                     ["Upper Yellowstone Headwaters", "UY_Shields", "MT"],
-                                    ["Upper Green", "Upper Green", "WY"],
                                     ["Upper Clark Fork", "Upper Clark Fork", "MT"],
                                     ["Smith", "Smith", "MT"],
                                     ["Southwest Colorado", "Southwest Colorado", "CO"],
