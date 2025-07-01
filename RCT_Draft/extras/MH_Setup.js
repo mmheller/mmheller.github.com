@@ -634,7 +634,7 @@ define([
                 //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AE002_table.json"; //Lee Creek at Cardston
                 //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD042_table.json"; //Yarrow Creek at Spread Eagle Road
 
-
+                //strTest777URL = "https://api.water.noaa.gov/nwps/v1/gauges/JRLK1/stageflow/observed"
 
                 //fetch(strTest777URL)
                 //    .then(response => response.json())
@@ -649,7 +649,7 @@ define([
                 //    .catch(error => {
                 //        console.error('Error fetching JSON:', error);
                 //    });
-                    
+    
 			}
 
             var arrayNavList = [];

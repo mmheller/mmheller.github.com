@@ -128,8 +128,11 @@ function ProcLinearRegression(arrray_Detail4Interpolation, strValueKey) {
     arrayX = [];
     arrayY = [];
     for (var ilr = 0; ilr < arrray_Detail4Interpolation.length; ilr++) {
-        arrayX.push(arrray_Detail4Interpolation[ilr].EPOCH);
-        arrayY.push(arrray_Detail4Interpolation[ilr][strValueKey]);
+
+        if (!(Number.isNaN(arrray_Detail4Interpolation[ilr][strValueKey]))){
+            arrayX.push(arrray_Detail4Interpolation[ilr].EPOCH);
+            arrayY.push(arrray_Detail4Interpolation[ilr][strValueKey]);
+        }
     }
     var lr = linearRegression(arrayY, arrayX);
 

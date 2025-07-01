@@ -837,12 +837,10 @@ define([
                 var blnSingleSelect_USACE_NWD = true;
 
                 for (var irr = 0; irr < app.pGageRes.m_arrayRes_USACE_NWD_Sens_Loc.length; irr++) {
-                    if (arrayProc[0][0] == app.pGageRes.m_arrayRes_USACE_NWD_Sens_Loc[irr][0]) {
+                    if (arrayProc[0][0] == app.pGageRes.m_arrayRes_USACE_NWD_Sens_Loc[irr][0].replace("MT00223", "NOX")) {  ///doing this repalce because the NOX sensor has a different name
                         array_RES_USACE_NWD_Sens_Loc = [app.pGageRes.m_arrayRes_USACE_NWD_Sens_Loc[irr]];
                     }
                 }
-
-                //array_RES_USACE_NWD_Sens_Loc = app.pGageRes.m_arrayRes_USACE_NWD_Sens_Loc;
             }
 
 			m_arrayOIDYellow = [];
@@ -952,45 +950,30 @@ define([
                                 let resQueryInfoData = "";
 
                                 let a_resp = arrayResponses[iR];
-                                if (a_resp) {
-                                    if (a_resp[0]["time-series"] != undefined) {
-                                        resQueryInfoTmp = a_resp[0]["time-series"]["query-info"]["requested-items"][0].name;
-
+                                let pResp = arrayResponses[iR];
+                                if (pResp) {
+                                    if (pResp[0]["name"] != undefined) {
+                                        resQueryInfoTmp = pResp[0]["name"];
                                         let blnProceed = false;
 
-                                        if (a_resp[0]["time-series"]["time-series"].length > 0) {
+                                        if (pResp[0]["values"].length > 0) {
                                             blnProceed = true;
                                         }
 
                                         if (blnProceed) {                                                           // if time-series exist then proceed
                                             let arrayTimeSeries1;
-                                            arrayTimeSeries1 = a_resp[0]["time-series"];   //get the info about the gage and what data queried
+                                            arrayTimeSeries1 = pResp[0]["values"];   //get the info about the gage and what data queried
+                                            let strUnits = pResp[0].units;                                              //not needed for the website but good to confirm the units for development
 
-                                            for (let iTimeSeries = 0; iTimeSeries < arrayTimeSeries1["time-series"].length; iTimeSeries++) {        // loop through the time series
-                                                let jsonTimeSeries = arrayTimeSeries1["time-series"][iTimeSeries];
-                                                let strUnits = jsonTimeSeries["regular-interval-values"].unit;                                              //not needed for the website but good to confirm the units for development
-
-                                                for (let iSegment = 0; iSegment < jsonTimeSeries["regular-interval-values"].segments.length; iSegment++) {             //loop through the time segments
-                                                    let jsonSegment = jsonTimeSeries["regular-interval-values"].segments[iSegment];
-                                                    let strUSACE_NWD_1stTimeUTC = jsonSegment["first-time"];
-                                                    let dteUSACE_NWD_1stTimeUTC = Date.parse(strUSACE_NWD_1stTimeUTC);
-                                                    let dteUSACE_NWD_1stTimeLOCAL = new Date(dteUSACE_NWD_1stTimeUTC);
-
-                                                    let dteTempDate4USACEValue = dteUSACE_NWD_1stTimeLOCAL;
-                                                    arrayJSONValues = jsonSegment.values;
-
-                                                    //console.log("Segment # " + iSegment.toString() + ", " + arrayJSONValues.length.toString() + " time-series values in this array");
-                                                    for (let iResponseVal = 0; iResponseVal < arrayJSONValues.length; iResponseVal++) {
-                                                        if (iResponseVal > 0) {
-                                                            dteTempDate4USACEValue = new Date(dteTempDate4USACEValue.setTime(dteTempDate4USACEValue.getTime() + (1 * 60 * 60 * 1000)));//USACE_NWD returns values that are hourly but have to build the time value
-                                                        }
-                                                        jsonFineValueArray = { 'Name': resQueryInfoTmp, 'value': arrayJSONValues[iResponseVal][0], "DateTimeReading": dteTempDate4USACEValue };
-                                                        jsonGagesReadingsValueArray.push(jsonFineValueArray);
-                                                        //console.log("dteUSACE_NWD_LastTimeLOCAL = " + dteUSACE_NWD_LastTimeLOCAL.toString() + "-------- dteTempDate4USACEValue" + dteTempDate4USACEValue.toString());
-                                                    }
-                                                    //console.log("values for segment completed");
-                                                }
+                                            for (let iTimeSeries = 0; iTimeSeries < arrayTimeSeries1.length; iTimeSeries++) {        // loop through the time series
+                                                jsonFineValueArray = {
+                                                    'Name': resQueryInfoTmp,
+                                                    'value': arrayTimeSeries1[iTimeSeries][1],
+                                                    "DateTimeReading": new Date(arrayTimeSeries1[[iTimeSeries]][0])
+                                                };
+                                                jsonGagesReadingsValueArray.push(jsonFineValueArray);
                                             }
+                                            console.log("values for segment completed");
                                         }
                                     } else {
                                         console.log("NO JSON Data response # " + iR.toString());
@@ -1001,7 +984,6 @@ define([
                             }
                             arrayJSONValues = jsonGagesReadingsValueArray;
                             jsonGagesReadingsValueArray = new Array();
-                            //console.log(jsonGagesReadingsValueArray.length.toString() + " time-series values in this array");
                         } else if (arrayCODWR_Sens_Loc != null) {
                             arrayJSONValues = jsonResult.ResultList;
                         }
@@ -1056,6 +1038,9 @@ define([
                                 }
 
                                 var itemFoundForeBay = arrayJSONValues.filter(function (itemArraySearch) {
+
+                                    strSiteID = strSiteID.replace("MT00223", "NOX"); //renameing a site id 
+
                                     return typeof itemArraySearch.Name == 'string' && itemArraySearch.Name.indexOf(strSiteID) > -1 && strSiteID != "";
                                 });
                             }
