@@ -2467,7 +2467,7 @@ define([
 
             if ((app.Basin_ID == "Upper Clark Fork") | (app.Basin_ID == "Blackfoot-Sun") | (app.H2O_ID == "Blackfoot")) {
                 strQueryDef7 = "(SectionName in ('nothing'))" +                                    //Turah gage propogate functionality
-                    " OR (StreamName in ('Blackfoot River','Clearwater River','North Fork Blackfoot River','Nevada Creek'))";
+                    " OR (StreamName in ('Blackfoot River','Clearwater River','North Fork Blackfoot River','Nevada Creek','Monture Creek'))";
             }
             //if (((app.Basin_ID == "Upper Clark Fork") | (app.Basin_ID == "Blackfoot-Sun")) & (app.H2O_ID == "Blackfoot")) {
             //    strQueryDef7 = "(SectionName in ('nothing'))" +                                    //Turah gage propogate functionality
