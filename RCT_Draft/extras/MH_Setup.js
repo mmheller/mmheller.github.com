@@ -558,6 +558,7 @@ define([
                 ["Mainstem Flathead", "Mainstem Flathead", "Flathead"],
                 ["Swan", "Swan", "Flathead"],
                 ["Bitterroot", "Bitterroot", "Bitter Root"],
+                ["Lolo Creek", "Lolo Creek", "Bitter Root"],
                 ["Lower Flathead", "Lower Flathead", "Flathead"],
                 ["Middle Fork Flathead", "Middle Fork Flathead", "Flathead"],
                 ["Clarks Fork Yellowstone", "Clarks Fork Yellowstone", "Clarks Fork Yellowstone"],
