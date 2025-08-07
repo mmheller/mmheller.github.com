@@ -727,7 +727,7 @@ define([
             app.arrayNavListBasin = [
                 //Dev and Production Edit
                 ["Crown of the Continent", "Crown of the Continent", "MT"],
-                ["Poplar", "Poplar", "MT"],
+                ["Poplar-Big Muddy", "Poplar", "MT"],
                 ["Eastern Kansas", "Lower Marais Des Cygnes", "KS"],
                 ["Milk", "Milk", "MT"],
                 ["Poplar", "Poplar", "MT"],
