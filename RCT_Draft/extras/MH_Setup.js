@@ -577,12 +577,47 @@ define([
                 ["Granite Headwaters", "Granite Flint-Rock", "Upper Clark Fork"],
 
 
+
+                //DEV and Production edit******************************************
+
+                ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent"], 
+                ["Upper Milk", "Upper Milk", "Crown of the Continent"], 
+                ["Belly - Can", "Belly", "Crown of the Continent"], 
+                ["Cut Bank", "Cut Bank", "Crown of the Continent"], 
+                ["Elbow - Can", "Elbow", "Crown of the Continent"], 
+                ["Elk - Can", "Elk", "Crown of the Continent"], 
+                ["Headwaters Columbia River - Can", "Headwaters Columbia River", "Crown of the Continent"], 
+                ["Headwaters Kootenai River - Can", "Headwaters Kootenai River", "Crown of the Continent"], 
+                ["Highwood - Can", "Highwood", "Crown of the Continent"], 
+                ["Kananaskis - Can", "Kananaskis", "Crown of the Continent"], 
+                ["Little Bow - Can", "Little Bow", "Crown of the Continent"], 
+                ["Lower Kootenai - Can", "Lower Kootenai", "Crown of the Continent"], 
+                ["Marias", "Marias", "Crown of the Continent"], 
+                ["Middle Kootenai - Can", "Middle Kootenai", "Crown of the Continent"], 
+                ["Oldman River-Willow Creek", "Oldman River-Willow Creek", "Crown of the Continent"], 
+                ["St. Marys", "St. Marys", "Crown of the Continent"], 
+                ["Teton", "Teton", "Crown of the Continent"], 
+                ["Two Medicine", "Two Medicine", "Crown of the Continent"], 
+                ["Upper Kootenai River - Can", "Upper Kootenai River", "Crown of the Continent"], 
+                ["Upper Oldman River - Can", "Upper Oldman River", "Crown of the Continent"], 
+
+
+
+
+
                 ["Upper Green", "Upper Green", "Upper Green"],
                 ["Upper Green-Slate", "Upper Green-Slate", "Upper Green"],
                 ["Big Sandy", "Big Sandy WY", "Upper Green"],
 
 
-                ["Big Muddy", "Big Muddy", "Big Muddy"],
+                ["Big Muddy", "Big Muddy", "Poplar"],
+                ["Charlie-Little Muddy", "Charlie-Little Muddy", "Poplar"],
+                ["Prairie Elk-Wolf", "Prairie Elk-Wolf", "Poplar"],
+                ["Poplar", "Poplar", "Poplar"],
+
+
+                ["Middle Milk", "Middle Milk", "Milk"],
+                ["Lower Milk", "Lower Milk", "Milk"],
 
 
                 ["Lower Marais Des Cygnes", "Lower Marais Des Cygnes", "Lower Marais Des Cygnes"],
@@ -690,8 +725,12 @@ define([
 			}
 
             app.arrayNavListBasin = [
-                ["Big Muddy", "Big Muddy", "MT"],
-                ["Lower Marais Des Cygnes", "Lower Marais Des Cygnes", "KS"],
+                //Dev and Production Edit
+                ["Crown of the Continent", "Crown of the Continent", "MT"],
+                ["Poplar", "Poplar", "MT"],
+                ["Eastern Kansas", "Lower Marais Des Cygnes", "KS"],
+                ["Milk", "Milk", "MT"],
+                ["Poplar", "Poplar", "MT"],
                 ["Upper Green", "Upper Green", "WY"],
                                     ["Upper Missouri Headwaters", "UMH", "MT"],
                                     ["Upper Rio Grande - CO", "Upper Rio Grande", "CO"],
@@ -992,12 +1031,7 @@ define([
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22/FeatureServer/";//PRODUCTION RCT Support FY22
 
 
-            app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Edits_Tyler_view/FeatureServer/"; //Tyler Dev Edit
-
-
-            //app.strHFL_URL = "https://services.arcgis.com/9ecg2KpMLcsUv1Oh/arcgis/rest/services/Oct29_NewLayer/FeatureServer/";  //Vaughn's Dev
-            //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];    //Vaughn's Dev
-
+            app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Edits_Tyler_view/FeatureServer/"; //Eddie Dev Edit
 
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22_multi/FeatureServer/";  //dev to test multi-gage per section
             //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
