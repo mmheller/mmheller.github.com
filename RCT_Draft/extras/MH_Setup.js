@@ -593,15 +593,27 @@ define([
                 ["Little Bow - Can", "Little Bow", "Crown of the Continent"], 
                 ["Lower Kootenai - Can", "Lower Kootenai", "Crown of the Continent"], 
                 ["Marias", "Marias", "Crown of the Continent"], 
+
+                ["Middle Clark Fork", "Middle Clark Fork", "Crown of the Continent"], 
+
                 ["Middle Kootenai - Can", "Middle Kootenai", "Crown of the Continent"], 
+
+                ["Moyie", "Moyie", "Crown of the Continent"], 
+
                 ["Oldman River-Willow Creek", "Oldman River-Willow Creek", "Crown of the Continent"], 
+
+                ["Pakowki Lake", "Pakowki Lake", "Crown of the Continent"], 
+
+
                 ["St. Marys", "St. Marys", "Crown of the Continent"], 
                 ["Teton", "Teton", "Crown of the Continent"], 
                 ["Two Medicine", "Two Medicine", "Crown of the Continent"], 
+                ["Upper Missouri-Dearborn", "Upper Missouri-Dearborn", "Crown of the Continent"], 
                 ["Upper Kootenai River - Can", "Upper Kootenai River", "Crown of the Continent"], 
+                ["Upper Missouri", "Upper Missouri", "Crown of the Continent"], 
                 ["Upper Oldman River - Can", "Upper Oldman River", "Crown of the Continent"], 
 
-
+                ["Yaak", "Yaak", "Crown of the Continent"], 
 
 
 
