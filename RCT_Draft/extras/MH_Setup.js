@@ -580,43 +580,58 @@ define([
 
                 //DEV and Production edit******************************************
 
-                ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent"], 
-                ["Upper Milk", "Upper Milk", "Crown of the Continent"], 
-                ["Belly - Can", "Belly", "Crown of the Continent"], 
+                ["Belly", "Belly", "Crown of the Continent - CAN"], 
+                ["Elbow - Can", "Elbow", "Crown of the Continent - CAN"], 
+                ["Elk", "Elk", "Crown of the Continent - CAN"], 
+                ["Headwaters Columbia River", "Headwaters Columbia River", "Crown of the Continent - CAN"],
+                ["Headwaters Kootenai River", "Headwaters Kootenai River", "Crown of the Continent - CAN"], 
+                ["Highwood", "Highwood", "Crown of the Continent - CAN"], 
+                ["Kananaskis", "Kananaskis", "Crown of the Continent - CAN"], 
+                ["Little Bow", "Little Bow", "Crown of the Continent - CAN"], 
+                ["Lower Kootenai", "Lower Kootenai", "Crown of the Continent - CAN"], 
+                ["Middle Kootenai", "Middle Kootenai", "Crown of the Continent - CAN"], 
+                ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - CAN"], 
+                ["Moyie", "Moyie", "Crown of the Continent - CAN"], 
+                ["North Fork Flathead", "North Fork Flathead", "Crown of the Continent - CAN"], 
+                ["Oldman River-Willow Creek", "Oldman River-Willow Creek", "Crown of the Continent - CAN"], 
+                ["Pakowki Lake", "Pakowki Lake", "Crown of the Continent - CAN"], 
+                ["St. Marys", "St. Marys", "Crown of the Continent - CAN"], 
+                ["Upper Kootenai River", "Upper Kootenai River", "Crown of the Continent - CAN"], 
+                ["Upper Milk", "Upper Milk", "Crown of the Continent - CAN"], 
+                ["Upper Oldman River", "Upper Oldman River", "Crown of the Continent - CAN"], 
+
+
+                ["Belly", "Belly", "Crown of the Continent"], 
+                ["Bitterroot", "Bitterroot", "Crown of the Continent"], 
+                /*["Blackfoot", "Blackfoot", "Crown of the Continent"], */
                 ["Cut Bank", "Cut Bank", "Crown of the Continent"], 
-                ["Elbow - Can", "Elbow", "Crown of the Continent"], 
-                ["Elk - Can", "Elk", "Crown of the Continent"], 
-                ["Headwaters Columbia River - Can", "Headwaters Columbia River", "Crown of the Continent"], 
-                ["Headwaters Kootenai River - Can", "Headwaters Kootenai River", "Crown of the Continent"], 
-                ["Highwood - Can", "Highwood", "Crown of the Continent"], 
-                ["Kananaskis - Can", "Kananaskis", "Crown of the Continent"], 
-                ["Little Bow - Can", "Little Bow", "Crown of the Continent"], 
-                ["Lower Kootenai - Can", "Lower Kootenai", "Crown of the Continent"], 
+                ["Fisher", "Fisher", "Crown of the Continent"], 
+                /*["Flint-Rock", "Flint-Rock", "Crown of the Continent"], */
+                ["Lower Flathead", "Lower Flathead", "Crown of the Continent"], 
+                ["Lower Kootenai", "Lower Kootenai", "Crown of the Continent"], 
+                ["Mainstem Flathead", "Mainstem Flathead", "Crown of the Continent"], 
                 ["Marias", "Marias", "Crown of the Continent"], 
-
                 ["Middle Clark Fork", "Middle Clark Fork", "Crown of the Continent"], 
-
-                ["Middle Kootenai - Can", "Middle Kootenai", "Crown of the Continent"], 
-
+                ["Middle Fork Flathead", "Middle Fork Flathead", "Crown of the Continent"], 
+                ["Middle Kootenai", "Middle Kootenai", "Crown of the Continent"], 
+                ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent"], 
                 ["Moyie", "Moyie", "Crown of the Continent"], 
-
-                ["Oldman River-Willow Creek", "Oldman River-Willow Creek", "Crown of the Continent"], 
-
-                ["Pakowki Lake", "Pakowki Lake", "Crown of the Continent"], 
-
-
+                ["North Fork Flathead", "North Fork Flathead", "Crown of the Continent"], 
+                ["Smith", "Smith", "Crown of the Continent"], 
+                ["South Fork Flathead", "South Fork Flathead", "Crown of the Continent"], 
                 ["St. Marys", "St. Marys", "Crown of the Continent"], 
+                ["Stillwater", "Stillwater", "Crown of the Continent"], 
+                ["Sun", "Sun", "Crown of the Continent"], 
+                ["Swan", "Swan", "Crown of the Continent"], 
                 ["Teton", "Teton", "Crown of the Continent"], 
                 ["Two Medicine", "Two Medicine", "Crown of the Continent"], 
-                ["Upper Missouri-Dearborn", "Upper Missouri-Dearborn", "Crown of the Continent"], 
-                ["Upper Kootenai River - Can", "Upper Kootenai River", "Crown of the Continent"], 
+                ["Upper Clark Fork", "Upper Clark Fork", "Crown of the Continent"], 
                 ["Upper Missouri", "Upper Missouri", "Crown of the Continent"], 
-                ["Upper Oldman River - Can", "Upper Oldman River", "Crown of the Continent"], 
-
+                ["Upper Missouri-Dearborn", "Upper Missouri-Dearborn", "Crown of the Continent"], 
                 ["Yaak", "Yaak", "Crown of the Continent"], 
 
 
-
+                
                 ["Upper Green", "Upper Green", "Upper Green"],
                 ["Upper Green-Slate", "Upper Green-Slate", "Upper Green"],
                 ["Big Sandy", "Big Sandy WY", "Upper Green"],
@@ -739,6 +754,7 @@ define([
             app.arrayNavListBasin = [
                 //Dev and Production Edit
                 ["Crown of the Continent", "Crown of the Continent", "MT"],
+                ["Crown of the Continent - CAN", "Crown of the Continent - CAN", "AB"],
                 ["Poplar-Big Muddy", "Poplar", "MT"],
                 ["Eastern Kansas", "Lower Marais Des Cygnes", "KS"],
                 ["Milk", "Milk", "MT"],
@@ -1694,7 +1710,18 @@ define([
                     outline: { color: [50, 50, 50], width: 1 }
                 },
             };
-            let pCartoFeatureLayerPoly = new FeatureLayer({ url: app.strHFL_URL + app.idx11[6], minScale: 1500000, "opacity": 0.9, renderer: sfsr_CartoPoly, autoGeneralize: true});
+            let pCartoFeatureLayerPoly = new FeatureLayer({
+                url: app.strHFL_URL + app.idx11[6],
+                "opacity": 0.9, renderer: sfsr_CartoPoly, autoGeneralize: true
+            });
+
+            //let pCartoFeatureLayerPoly = new FeatureLayer({
+            //    url: app.strHFL_URL + app.idx11[6],
+            //    minScale: 1500000, "opacity": 0.9, renderer: sfsr_CartoPoly, autoGeneralize: true
+            //});
+
+
+
             //let pCartoFeatureLayerPoly = new FeatureLayer({url: app.strHFL_URL + app.idx11[6], "opacity": 0.9,labelingInfo: [pCartoPoly_labelClass], renderer: sfsr_CartoPoly, autoGeneralize: true});
 
 
@@ -1937,6 +1964,10 @@ define([
 
             if (app.Basin_ID == "UMH") {
                 legendLayers.push({ layer: pCartoFeatureLayerPoly, title: 'Special Areas of Interest' });
+            }
+
+            if ((app.Basin_ID == "Crown of the Continent - CAN") | (app.Basin_ID == "Crown of the Continent")) {
+                legendLayers.push({ layer: pCartoFeatureLayerPoly, title: 'Crown of the Continent' });
             }
 
             if (app.Basin_ID == "Flathead") {
