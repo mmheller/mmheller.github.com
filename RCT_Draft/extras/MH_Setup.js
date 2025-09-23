@@ -580,57 +580,54 @@ define([
 
                 //DEV and Production edit******************************************
 
-                ["Belly", "Belly", "Crown of the Continent - CAN"], 
-                ["Elbow - Can", "Elbow", "Crown of the Continent - CAN"], 
-                ["Elk", "Elk", "Crown of the Continent - CAN"], 
-                ["Headwaters Columbia River", "Headwaters Columbia River", "Crown of the Continent - CAN"],
-                ["Headwaters Kootenai River", "Headwaters Kootenai River", "Crown of the Continent - CAN"], 
-                ["Highwood", "Highwood", "Crown of the Continent - CAN"], 
-                ["Kananaskis", "Kananaskis", "Crown of the Continent - CAN"], 
-                ["Little Bow", "Little Bow", "Crown of the Continent - CAN"], 
-                ["Lower Kootenai", "Lower Kootenai", "Crown of the Continent - CAN"], 
-                ["Middle Kootenai", "Middle Kootenai", "Crown of the Continent - CAN"], 
-                ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - CAN"], 
-                ["Moyie", "Moyie", "Crown of the Continent - CAN"], 
-                ["North Fork Flathead", "North Fork Flathead", "Crown of the Continent - CAN"], 
-                ["Oldman River-Willow Creek", "Oldman River-Willow Creek", "Crown of the Continent - CAN"], 
-                ["Pakowki Lake", "Pakowki Lake", "Crown of the Continent - CAN"], 
-                ["St. Marys", "St. Marys", "Crown of the Continent - CAN"], 
-                ["Upper Kootenai River", "Upper Kootenai River", "Crown of the Continent - CAN"], 
-                ["Upper Milk", "Upper Milk", "Crown of the Continent - CAN"], 
-                ["Upper Oldman River", "Upper Oldman River", "Crown of the Continent - CAN"], 
 
 
-                ["Belly", "Belly", "Crown of the Continent"], 
-                ["Bitterroot", "Bitterroot", "Crown of the Continent"], 
-                /*["Blackfoot", "Blackfoot", "Crown of the Continent"], */
-                ["Cut Bank", "Cut Bank", "Crown of the Continent"], 
-                ["Fisher", "Fisher", "Crown of the Continent"], 
-                /*["Flint-Rock", "Flint-Rock", "Crown of the Continent"], */
-                ["Lower Flathead", "Lower Flathead", "Crown of the Continent"], 
-                ["Lower Kootenai", "Lower Kootenai", "Crown of the Continent"], 
-                ["Mainstem Flathead", "Mainstem Flathead", "Crown of the Continent"], 
-                ["Marias", "Marias", "Crown of the Continent"], 
-                ["Middle Clark Fork", "Middle Clark Fork", "Crown of the Continent"], 
-                ["Middle Fork Flathead", "Middle Fork Flathead", "Crown of the Continent"], 
-                ["Middle Kootenai", "Middle Kootenai", "Crown of the Continent"], 
-                ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent"], 
-                ["Moyie", "Moyie", "Crown of the Continent"], 
-                ["North Fork Flathead", "North Fork Flathead", "Crown of the Continent"], 
-                ["Smith", "Smith", "Crown of the Continent"], 
-                ["South Fork Flathead", "South Fork Flathead", "Crown of the Continent"], 
-                ["St. Marys", "St. Marys", "Crown of the Continent"], 
-                ["Stillwater", "Stillwater", "Crown of the Continent"], 
-                ["Sun", "Sun", "Crown of the Continent"], 
-                ["Swan", "Swan", "Crown of the Continent"], 
-                ["Teton", "Teton", "Crown of the Continent"], 
-                ["Two Medicine", "Two Medicine", "Crown of the Continent"], 
-                ["Upper Clark Fork", "Upper Clark Fork", "Crown of the Continent"], 
-                ["Upper Missouri", "Upper Missouri", "Crown of the Continent"], 
-                ["Upper Missouri-Dearborn", "Upper Missouri-Dearborn", "Crown of the Continent"], 
+                ["Belly", "Belly", "Crown of the Continent - NE"], 
+                ["Little Bow", "Little Bow", "Crown of the Continent - NE"], 
+                ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - NE"], 
+                ["Oldman River-Willow Creek", "Oldman River-Willow Creek", "Crown of the Continent - NE"], 
+                ["Pakowki Lake", "Pakowki Lake", "Crown of the Continent - NE"], 
+                ["St. Marys", "St. Marys", "Crown of the Continent - NE"], 
+                ["Upper Milk", "Upper Milk", "Crown of the Continent - NE"], 
+                ["Upper Oldman River", "Upper Oldman River", "Crown of the Continent - NE"], 
+
+                ["Elbow - Can", "Elbow", "Crown of the Continent - NW"], 
+                ["Elk", "Elk", "Crown of the Continent - NW"], 
+                ["Headwaters Kootenai River", "Headwaters Kootenai River", "Crown of the Continent - NW"], 
+                ["Highwood", "Highwood", "Crown of the Continent - NW"], 
+                ["Kananaskis", "Kananaskis", "Crown of the Continent - NW"], 
+                ["Lower Kootenai", "Lower Kootenai", "Crown of the Continent - NW"], 
+                ["Middle Kootenai", "Middle Kootenai", "Crown of the Continent - NW"], 
+                ["Moyie", "Moyie", "Crown of the Continent - NW"], 
+                ["North Fork Flathead", "North Fork Flathead", "Crown of the Continent - NW"], 
+                ["Upper Kootenai River", "Upper Kootenai River", "Crown of the Continent - NW"], 
                 ["Yaak", "Yaak", "Crown of the Continent"], 
+                
+                ["Bitterroot", "Bitterroot", "Crown of the Continent - SW"], 
+                ["Fisher", "Fisher", "Crown of the Continent - SW"], 
+                ["Middle Clark Fork", "Middle Clark Fork", "Crown of the Continent - SW"], 
+                ["Lower Flathead", "Lower Flathead", "Crown of the Continent - SW"], 
+                ["Mainstem Flathead", "Mainstem Flathead", "Crown of the Continent - SW"], 
+                ["Middle Fork Flathead", "Middle Fork Flathead", "Crown of the Continent - SW"], 
+                ["South Fork Flathead", "South Fork Flathead", "Crown of the Continent - SW"],
+                ["Stillwater", "Stillwater", "Crown of the Continent - SW"],
+                ["Swan", "Swan", "Crown of the Continent - SW"], 
+                ["Upper Clark Fork", "Upper Clark Fork", "Crown of the Continent - SW"], 
 
+                ["Cut Bank", "Cut Bank", "Crown of the Continent - SE"], 
+                ["Marias", "Marias", "Crown of the Continent - SE"],
+                ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - SE"], 
+                ["Smith", "Smith", "Crown of the Continent - SE"], 
 
+                ["St. Marys", "St. Marys", "Crown of the Continent - SE"], 
+                ["Sun", "Sun", "Crown of the Continent - SE"], 
+                ["Teton", "Teton", "Crown of the Continent - SE"], 
+                ["Two Medicine", "Two Medicine", "Crown of the Continent - SE"], 
+                ["Upper Missouri", "Upper Missouri", "Crown of the Continent - SE"],
+                ["Upper Missouri-Dearborn", "Upper Missouri-Dearborn", "Crown of the Continent - SE"], 
+                
+                /*["Blackfoot", "Blackfoot", "Crown of the Continent"], */
+                /*["Flint-Rock", "Flint-Rock", "Crown of the Continent"], */
                 
                 ["Upper Green", "Upper Green", "Upper Green"],
                 ["Upper Green-Slate", "Upper Green-Slate", "Upper Green"],
@@ -753,12 +750,13 @@ define([
 
             app.arrayNavListBasin = [
                 //Dev and Production Edit
-                ["Crown of the Continent", "Crown of the Continent", "MT"],
-                ["Crown of the Continent - CAN", "Crown of the Continent - CAN", "AB"],
+                ["Crown of the Continent - NE", "Crown of the Continent - NE", "BC"],
+                ["Crown of the Continent - NW", "Crown of the Continent - NW", "AB"],
+                ["Crown of the Continent - SE", "Crown of the Continent - SE", "MT"],
+                ["Crown of the Continent - SW", "Crown of the Continent - SW", "MT"],
                 ["Poplar-Big Muddy", "Poplar", "MT"],
                 ["Eastern Kansas", "Lower Marais Des Cygnes", "KS"],
                 ["Milk", "Milk", "MT"],
-                ["Poplar", "Poplar", "MT"],
                 ["Upper Green", "Upper Green", "WY"],
                                     ["Upper Missouri Headwaters", "UMH", "MT"],
                                     ["Upper Rio Grande - CO", "Upper Rio Grande", "CO"],
@@ -939,6 +937,10 @@ define([
                     $("#dropDownId").append("<li><a data-value='MT DNRC Fire Map'>MT DNRC Fire Map</a></li>")
                     $("#dropDownId").append("<li><a data-value='MT DNRC Stream and Gage Explorer'>MT DNRC Stream and Gage Explorer</a></li>")
                     $("#dropDownId").append("<li><a data-value='Official MT FWP (closures, etc.)'>Official MT FWP (closures, etc.)</a></li>")
+                }
+
+                if (app.Basin_ID == "Poplar") {
+                    $("#dropDownId").append("<li><a data-value='Clear Lake Aquifer Project'>Clear Lake Aquifer Project</a></li>")
                 }
 
                 if (app.Basin_ID == "Upper Clark Fork") {
@@ -1712,22 +1714,35 @@ define([
             };
             let pCartoFeatureLayerPoly = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[6],
-                "opacity": 0.9, renderer: sfsr_CartoPoly, autoGeneralize: true
+                "opacity": 0.9, renderer: sfsr_CartoPoly, autoGeneralize: true, visible: false
             });
+            
 
-            //let pCartoFeatureLayerPoly = new FeatureLayer({
-            //    url: app.strHFL_URL + app.idx11[6],
-            //    minScale: 1500000, "opacity": 0.9, renderer: sfsr_CartoPoly, autoGeneralize: true
-            //});
-
-
-
-            //let pCartoFeatureLayerPoly = new FeatureLayer({url: app.strHFL_URL + app.idx11[6], "opacity": 0.9,labelingInfo: [pCartoPoly_labelClass], renderer: sfsr_CartoPoly, autoGeneralize: true});
+            
+            if (app.Basin_ID == "Poplar") {
+                var templateMonitoringWellsClearLake = new PopupTemplate();
+                templateMonitoringWellsClearLake.title = "Monitoring Well: " + "{ site_name }";
+                templateMonitoringWellsClearLake.content = "<b>{site_name}</b><br><a href={report_link} target='_blank'>Link to report</a><br>Total Depth: {total_depth}";
 
 
-            //let pCartoFeatureLayerPoly = new FeatureLayer({
-            //    url: app.strHFL_URL + app.idx11[6], "opacity": 0.9,
-            //    autoGeneralize: true });
+   
+
+
+
+
+                var pClearLakeMonitoringWells = new FeatureLayer({
+                    url: "https://mbmgmap.mtech.edu/server/rest/services/Water_Resources/GWAP_ClearLakeAquifer/FeatureServer/11",
+                    "opacity": 0.5, autoGeneralize: true,
+                    popupTemplate: templateMonitoringWellsClearLake, visible: true
+                });
+
+                var pClearLakePermitType = new FeatureLayer({
+                    url: "https://mbmgmap.mtech.edu/server/rest/services/Water_Resources/GWAP_ClearLakeAquifer/FeatureServer/3",
+                    "opacity": 0.5, autoGeneralize: true, visible: true
+                });
+            }
+
+
 
 
             if (app.Basin_ID == "Flathead") {
@@ -1903,6 +1918,11 @@ define([
                 arrayLayer2add.push(p1964FloodFlathead);
             }
 
+            if (app.Basin_ID == "Poplar") {
+                arrayLayer2add.push(pClearLakeMonitoringWells);
+                arrayLayer2add.push(pClearLakePermitType);
+            }
+
             app.map.layers.addMany(arrayLayer2add);
 
             app.pZoom = new MH_Zoom2FeatureLayers({}); // instantiate the class
@@ -1964,16 +1984,24 @@ define([
 
             if (app.Basin_ID == "UMH") {
                 legendLayers.push({ layer: pCartoFeatureLayerPoly, title: 'Special Areas of Interest' });
+                pCartoFeatureLayerPoly.title = 'Special Areas of Interest';
             }
 
             if ((app.Basin_ID == "Crown of the Continent - CAN") | (app.Basin_ID == "Crown of the Continent")) {
                 legendLayers.push({ layer: pCartoFeatureLayerPoly, title: 'Crown of the Continent' });
+                pCartoFeatureLayerPoly.title = 'Crown of the Continent';
             }
 
             if (app.Basin_ID == "Flathead") {
                 legendLayers.push({ layer: pDist2WaterTableFlathead, title: 'Depth to Water Table, Flathead River (ft)' });
                 legendLayers.push({ layer: p1964FloodFlathead, title: '1964 Flood, Flathead River' });
             }
+
+            if (app.Basin_ID == "Poplar") {
+                legendLayers.push({ layer: pClearLakeMonitoringWells, title: 'ClearLake Aquifer Project: Monitoring Wells' });
+                legendLayers.push({ layer: pClearLakePermitType, title: 'ClearLake Aquifer Project: Permit Types' });
+            }
+
 
             legendLayers.push({ layer: pNOAAUSDMFeatureLayer, title: 'U.S. Drought Monitor' });
             
@@ -1993,6 +2021,15 @@ define([
             var cbxLayers = [];
             cbxLayers.push({ layers: [pBLMFeatureLayer, pBLMFeatureLayer], title: 'BLM Access Sites' });
             cbxLayers.push({ layers: [pBLM_RecFeatureLayer, pBLM_RecFeatureLayer], title: 'BLM Recreation Boating Sites' });
+
+
+            if ((app.Basin_ID == "Crown of the Continent - CAN") |
+                (app.Basin_ID == "Crown of the Continent") |
+                (app.Basin_ID == "UMH") |
+                (app.Basin_ID == "Flathead")) {
+                pCartoFeatureLayerPoly.visible = true;
+                cbxLayers.push({ layers: [pCartoFeatureLayerPoly, pCartoFeatureLayerPoly], title: pCartoFeatureLayerPoly.title });
+            }
 
             if (!(app.blnPickArea)) {
                 if (app.StateArea.indexOf("CO") > -1) {
@@ -2014,6 +2051,11 @@ define([
             if (app.Basin_ID == "Flathead") {
                 cbxLayers.push({ layers: [pDist2WaterTableFlathead, pDist2WaterTableFlathead], title: 'Depth to Water Table, Flathead River' });
                 cbxLayers.push({ layers: [p1964FloodFlathead, p1964FloodFlathead], title: '1964 Flood, Flathead River' });
+            }
+
+            if (app.Basin_ID == "Poplar") {
+                cbxLayers.push({ layers: [pClearLakeMonitoringWells, pClearLakeMonitoringWells], title: 'ClearLake Aquifer Project: Monitoring Wells' });
+                cbxLayers.push({ layers: [pClearLakePermitType, pClearLakePermitType], title: 'ClearLake Aquifer Project: Permit Types' });
             }
                         
 			this.LayerCheckBoxSetup(cbxLayers);
@@ -2584,9 +2626,17 @@ define([
                     strURL = "https://montana.maps.arcgis.com/home/webmap/viewer.html?webmap=f59d958f8ec94e70b5a0bff9bb7dacae&extent=";
                     blnAddCoords = true;
                 }
-
-
                 
+
+                if (strSelectedText == "Clear Lake Aquifer Project") {
+                    blnAddCoords = false;
+                    pSR_WKID = pExtent.spatialReference.wkid;
+                    strURL = "https://gis-data-hub-mbmg.hub.arcgis.com/apps/e6c4ab546b5e49eb894e3ff5b18ac52f/explore";
+
+                    var pGeogExtent = webMercatorUtils.webMercatorToGeographic(pExtent);  //the map is in web mercator but display coordinates in geographic (lat, long)
+                }
+
+
                 if (strSelectedText == "MT DNRC Upper Clark Fork & Blackfoot Water Rights") {
                     strURL = "https://mtdnrc.maps.arcgis.com/apps/webappviewer/index.html?id=a49c3c9c95a046449ed785bd63edda4c&extent=";
                     blnAddCoords = true;
