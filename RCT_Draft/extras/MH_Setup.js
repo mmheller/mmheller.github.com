@@ -1,4 +1,9 @@
 ﻿
+
+
+
+
+
 function getPageWidth() {
     var body = document.body,
         html = document.documentElement;
@@ -79,6 +84,10 @@ define([
         m_EndDateTime: null,
         m_CFSAnlaysisType: null,
 
+
+
+
+
         addReservoirConditionFeatureLayer: function (arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum, arrayOIDsRed) {
             let arrayofArrays = [arrayOIDYellow, arrayOIDsGold, arrayOIDsOrange, arrayOIDPlum];////// for each array, red takes presedence so remove OID's from non-red arrays if in Red arra
             let nonRedOID = null;
@@ -103,14 +112,14 @@ define([
                 arrayItems2remove = [];
             }
             //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-            console.log("add Stream Condition FeatureLayer and custom legend")
+            console.log("add Stream Condition FeatureLayer and custom legend - Reservoir")
             let strValueExpression = "";
             let arrayValueExpression = [];
 
             let arrayValueExpressionTemp = [];
 
 
-            let defaultUniqueSymbolRendererCFS = {
+            let defaultUniqueSymbolRendererCFSRes = {
                 type: "unique-value",  // autocasts as new UniqueValueRenderer()
                 defaultSymbol: {
                     type: "simple-line", color: [0, 169, 230], width: 1
@@ -124,11 +133,11 @@ define([
                 }  // autocasts as new SimplelineSymbol()
             };
 
-            app.pSup.m_StreamStatusRendererCFS = defaultUniqueSymbolRendererTemp;
-            app.pSup.m_StreamStatusRendererCFS.defaultLabel = "Stream Section (Open)";
+            app.pSup.m_StreamStatusRendererCFSRes = defaultUniqueSymbolRendererTemp;
+            app.pSup.m_StreamStatusRendererCFSRes.defaultLabel = "Stream Section (Open)";
 
-            app.pSup.m_StreamStatusRendererTemp = defaultUniqueSymbolRendererCFS;
-            app.pSup.m_StreamStatusRendererTemp.defaultLabel = "Stream Section (Open)";
+            app.pSup.m_StreamStatusRendererTempRes = defaultUniqueSymbolRendererCFSRes;
+            app.pSup.m_StreamStatusRendererTempRes.defaultLabel = "Stream Section (Open)";
 
             //app.pSup.m_StreamStatusRendererHT = defaultUniqueSymbolRenderer;
             //app.pSup.m_StreamStatusRendererHT.defaultLabel = "Stream Section (Open)";
@@ -184,8 +193,8 @@ define([
 
             if (ArrayUniqueVals2Add.length > 0) {  //getting an error when trying to use addUniqueValueInfo, I think due to the google chart api conflict, so using universal adding to an array then adding to the unique value renderer dictionary
                 strValueExpression = "When(" + arrayValueExpression.join(", ") + ", 'other')";
-                app.pSup.m_StreamStatusRendererCFS["valueExpression"] = strValueExpression;
-                app.pSup.m_StreamStatusRendererCFS["uniqueValueInfos"] = ArrayUniqueVals2Add;
+                app.pSup.m_StreamStatusRendererCFSRes["valueExpression"] = strValueExpression;
+                app.pSup.m_StreamStatusRendererCFSRes["uniqueValueInfos"] = ArrayUniqueVals2Add;
 
                 //app.pSup.m_StreamStatusRendererHT["valueExpression"] = strValueExpression;
                 //app.pSup.m_StreamStatusRendererHT["uniqueValueInfos"] = ArrayUniqueVals2Add;
@@ -194,20 +203,22 @@ define([
             if (ArrayUniqueVals2AddTemp.length > 0) {  //getting an error when trying to use addUniqueValueInfo, I think due to the google chart api conflict, so using universal adding to an array then adding to the unique value renderer dictionary
                 strValueExpression = "When(" + arrayValueExpressionTemp.join(", ") + ", 'other')";
 
-                app.pSup.m_StreamStatusRendererTemp["valueExpression"] = strValueExpression;
-                app.pSup.m_StreamStatusRendererTemp["uniqueValueInfos"] = ArrayUniqueVals2AddTemp;
+                app.pSup.m_StreamStatusRendererTempRes["valueExpression"] = strValueExpression;
+                app.pSup.m_StreamStatusRendererTempRes["uniqueValueInfos"] = ArrayUniqueVals2AddTemp;
             }
 
             let featureLayerCFS = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[5],
-                outFields: ["OBJECTID"],
-                renderer: app.pSup.m_StreamStatusRendererCFS
+                outFields: ["OBJECTID"], 
+                id:"5555",
+                renderer: app.pSup.m_StreamStatusRendererCFSRes
             });
 
             let featureLayerTemp = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[5],
                 outFields: ["OBJECTID"],
-                renderer: app.pSup.m_StreamStatusRendererTemp
+                id: "6666",
+                renderer: app.pSup.m_StreamStatusRendererTempRes
             });
 
             //let featureLayerHT = new FeatureLayer({
@@ -222,7 +233,7 @@ define([
             //app.map.layers.add(featureLayerHT, 5);
 
 
-            console.log("Completed: Add Stream Condition FeatureLayer and custom legend")
+            console.log("Completed: Add Stream Condition FeatureLayer and custom legend - Reservoir 2")
 
             app.blnIsInitialPageLoad_Reservoir = false;
         },
@@ -258,24 +269,33 @@ define([
 
 
             //\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-            console.log("add Stream Condition FeatureLayer and custom legend")
+            console.log("add Stream Condition FeatureLayer and custom legend - Streams")
             let strValueExpression = "";
             let arrayValueExpression = [];
             let arrayValueExpressionTemp = [];
 
             let defaultUniqueSymbolRendererCFS = {
                 type: "unique-value",  // autocasts as new UniqueValueRenderer()
+                /*field: "OBJECTID",*/
                 defaultSymbol: {
                     type: "simple-line", color: [0, 169, 230], width: 1
                 }  // autocasts as new SimplelineSymbol()
             };
+            if ((arrayOIDsRed.length == 0) & (arrayOIDYellow.length == 0) & (arrayOIDsGold.length == 0) & (arrayOIDsOrange.length == 0) & (arrayOIDsGreen.length == 0) & (arrayOIDsPurple.length == 0)){   ///only add if unique value arrays are blank, otherwise need to specify the "field" in the dictionary to avoid error
+                defaultUniqueSymbolRendererCFS["field"] = "OBJECTID";
+            }
+
 
             let defaultUniqueSymbolRendererTemp = {
                 type: "unique-value",  // autocasts as new UniqueValueRenderer()
+                //field: "OBJECTID",
                 defaultSymbol: {
                     type: "simple-line", color: [0, 169, 230], width: 1
                 }  // autocasts as new SimplelineSymbol()
             };
+            if (arrayOIDPlum.length == 0) {  ///only add if unique value arrays are blank, otherwise need to specify the "field" in the dictionary to avoid error
+                defaultUniqueSymbolRendererTemp["field"] = "OBJECTID";
+            }
 
             app.pSup.m_StreamStatusRendererCFS = defaultUniqueSymbolRendererCFS;
             app.pSup.m_StreamStatusRendererCFS.defaultLabel = "Stream Section (Open symbolized otherwise)";
@@ -310,6 +330,7 @@ define([
                 let featureLayerTemp = new FeatureLayer({
                     url: app.strHFL_URL + app.idx11[5],
                     outFields: ["OBJECTID"],
+                    id:"TemperatureSymbollayer",
                     renderer: app.pSup.m_StreamStatusRendererTemp
                 });
 
@@ -392,20 +413,12 @@ define([
             let featureLayerCFS = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[5],
                 outFields: ["OBJECTID"],
+                id: "CFSSymbollayer",
                 renderer: app.pSup.m_StreamStatusRendererCFS
             });
-            //let featureLayerHt = new FeatureLayer({
-            //    url: app.strHFL_URL + app.idx11[5],
-            //    outFields: ["OBJECTID"],
-            //    renderer: app.pSup.m_StreamStatusRendererHT
-            //});
 
             app.map.layers.add(featureLayerCFS, 5);
-
-            //app.map.layers.add(featureLayerHt, 5);
-
-
-           
+          
             
 
             console.log("Completed: Add Stream Condition FeatureLayer and custom legend")
@@ -459,6 +472,7 @@ define([
                             $("#divCustomAlert").html(strAlertTxt);
                         }
                     })
+
 					.always(function (data) {
                         app.pSup.Phase2();  //starting up the map and other content becuase the header content can mess up the content dimiensions if done prior
                     });
@@ -470,45 +484,48 @@ define([
                 console.log("resources in the MapView have loaded"); // when the resources in the MapView have loaded.
                 var des = document.getElementById('toggleLayers');
 
-                dojo.forEach(cbxLayers, function (playerset) {
-                    var strLayerName = playerset.title;
-                    var clayer0 = playerset.layers[0];
-                    var clayer1 = playerset.layers[1];
-                    var pID0 = clayer0.id;
-                    var pID1 = clayer1.id;
 
-                    var blnCheckIt = false;  // determine if checkbox will be on/off
-                    if (clayer0.visible) {
-                        blnCheckIt = true;
-                    }
 
-                    var checkboxHTML = document.createElement('input');
-                    checkboxHTML.type = "checkbox";
-                    checkboxHTML.name = strLayerName;
-                    checkboxHTML.value = [clayer0, clayer1];
-                    checkboxHTML.id = pID0 + pID1;
-                    checkboxHTML.checked = blnCheckIt;
+                    dojo.forEach(cbxLayers, function (playerset) {
+                        var strLayerName = playerset.title;
+                        var clayer0 = playerset.layers[0];
+                        var clayer1 = playerset.layers[1];
+                        var pID0 = clayer0.id;
+                        var pID1 = clayer1.id;
 
-                    checkboxHTML.onchange = function (evt) {
+                        var blnCheckIt = false;  // determine if checkbox will be on/off
                         if (clayer0.visible) {
-                            clayer0.visible = false;
-                            clayer1.visible = false;
-                        } else {
-                            clayer0.visible = true;
-                            clayer1.visible = true;
+                            blnCheckIt = true;
                         }
-                        this.checked = clayer0.visible;
-                    }
 
-                    var label = document.createElement('label')
-                    label.htmlFor = pID0 + pID1;
-                    label.appendChild(document.createTextNode(strLayerName));
+                        var checkboxHTML = document.createElement('input');
+                        checkboxHTML.type = "checkbox";
+                        checkboxHTML.name = strLayerName;
+                        checkboxHTML.value = [clayer0, clayer1];
+                        checkboxHTML.id = pID0 + pID1;
+                        checkboxHTML.checked = blnCheckIt;
 
-                    des.appendChild(checkboxHTML);
-                    des.appendChild(document.createTextNode('\u00A0'))
-                    des.appendChild(label);
-                    des.appendChild(document.createTextNode('\u00A0\u00A0\u00A0\u00A0'));
-                });
+                        checkboxHTML.onchange = function (evt) {
+                            if (clayer0.visible) {
+                                clayer0.visible = false;
+                                clayer1.visible = false;
+                            } else {
+                                clayer0.visible = true;
+                                clayer1.visible = true;
+                            }
+                            this.checked = clayer0.visible;
+                        }
+
+                        var label = document.createElement('label')
+                        label.htmlFor = pID0 + pID1;
+                        label.appendChild(document.createTextNode(strLayerName));
+
+                        des.appendChild(checkboxHTML);
+                        des.appendChild(document.createTextNode('\u00A0'))
+                        des.appendChild(label);
+                        des.appendChild(document.createTextNode('\u00A0\u00A0\u00A0\u00A0'));
+                    });
+
             });
         },
 
@@ -1095,6 +1112,9 @@ define([
             else {
                 app.pSup.Phase2();
             }
+
+
+
         },
 
         Phase2: function () {
@@ -1109,9 +1129,9 @@ define([
                         
             esriConfig.apiKey = "AAPK47ae32508072459cb3fa84646f0f3928F7dRMTNaroq-OYC7WBC-O1R3frCJVtlOtnnJ-hSUIKUXJPaglsAO9sQ4AxRYBPy_";
 
-            app.map = new Map({ basemap: "" }); // Basemap layer
-            //app.map = new Map({ basemap: "arcgis-national-geographic" }); // Basemap layer
-            app.map = new Map({ basemap: "osm" }); // Basemap layer
+            //app.map = new Map({ basemap: "" }); // Basemap layer 
+            app.map = new Map({ basemap: "topo-vector" }); // Basemap layer
+            //app.map = new Map({ basemap: "osm" }); // Basemap layer
             app.view = new MapView({  //app.map = BootstrapMap.create("mapDiv", { basemap: "topo", center: arrayCenterZoom, zoom: izoomVal, scrollWheelZoom: false});// Get a reference to the ArcGIS Map class
                 map: app.map,
                 center: arrayCenterZoom,
@@ -1145,8 +1165,9 @@ define([
                 mapLoaded();
             })
             
-            const allowedBasemapTitles = ["Imagery Hybrid", "OpenStreetMap", "Dark Gray Canvas"];
-            //const allowedBasemapTitles = ["Imagery Hybrid", "Topographic", "Dark Gray Canvas"];
+            //const allowedBasemapTitles = ["Imagery Hybrid", "OpenStreetMap Style (with Relief)", "Dark Gray Canvas"];
+            //const allowedBasemapTitles = ["Imagery Hybrid", "OpenStreetMap Style", "Dark Gray Canvas"];
+            const allowedBasemapTitles = ["Imagery Hybrid", "Topographic", "Dark Gray Canvas"];
             const source = new PortalSource({                // filtering portal basemaps
                 filterFunction: (basemap) => allowedBasemapTitles.indexOf(basemap.portalItem.title) > -1
             });
@@ -1165,7 +1186,11 @@ define([
             let template = new PopupTemplate();
             template.title = "Gage (Watershed:{Watershed})";
             template.content = "<b>{GageTitle}</b><br><a href={GageURL} target='_blank'>Link to gage at {Agency} website</a>";
-            var pGageFeatureLayer = new FeatureLayer({ url: app.strHFL_URL + app.idx11[1], popupTemplate: template });
+            var pGageFeatureLayer = new FeatureLayer({
+                url: app.strHFL_URL + app.idx11[1],
+                id: "gages",
+                popupTemplate: template
+            });
 
 
             if ((app.Basin_ID == "Upper Clark Fork") | (app.Basin_ID == "Blackfoot-Sun") | (app.H2O_ID == "Blackfoot") | (app.H2O_ID == "Upper Clark Fork") | (app.H2O_ID == "Flint - Rock")) {  //since the Turah gage is used for a conservation target for all, add this gage
@@ -1206,6 +1231,7 @@ define([
                 
                 var pGageFeatureLayerHighlighted = new FeatureLayer({
                     url: app.strHFL_URL + app.idx11[1],
+                    id:"gagesHighlighted",
                     renderer: HighlightedGage_Renderer,
                     labelingInfo: [EndPoints_labelClass],
                     popupTemplate: template
@@ -1239,6 +1265,7 @@ define([
                 url: app.strHFL_URL + app.idx11[0],
                 /*popupTemplate: templateEPOINT,*/
                 minScale: 1000000,
+                id:"endpoints",
                 labelingInfo: [EndPoints_labelClass]
             });
 
@@ -1270,6 +1297,7 @@ define([
 
             pSectionsFeatureLayer = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[5],
+                id: "sections",
                 opacity: 0.9,
                 labelingInfo: [Secitons_labelClass], outFields: ["StreamName", "SectionID", "SectionName"]
                 //,
@@ -1281,6 +1309,7 @@ define([
 
             pLakeResFeatureLayer = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[7],
+                id:"lakesRes",
                 opacity: 0.9,
                 outFields: ["Lake_Reservoir_Name", "ResFlood_ft", "Agency", "GageURL1", "GageURL2", "Gage_Name ", "Watershed", "Basin", "StreamSystem", "TeaCupURL"]
                 //,
@@ -1365,6 +1394,7 @@ define([
 
             pBasinsFeatureLayer = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[8],
+                id: "basins",
                 opacity: 0.5, id: "Basins", outFields: ["*"]
             });
             if (app.Basin_ID != undefined) {
@@ -1395,6 +1425,7 @@ define([
             let pBLMFeatureLayer = new FeatureLayer({
                 url: "https://gis.blm.gov/arcgis/rest/services/recreation/BLM_Natl_Recreation_Sites_Facilities/MapServer/0",
                 popupTemplate: templateBLM, opacity: 0.5,
+                id: "BLM",
                 visible: false, labelingInfo: [BLM_labelClass]
             });
 
@@ -1413,6 +1444,7 @@ define([
             let pBLM_RecFeatureLayer = new FeatureLayer({
                 url: "https://gis.blm.gov/arcgis/rest/services/recreation/BLM_Natl_Recreation_Sites_Facilities/MapServer/3",
                 popupTemplate: templateBLM_Rec, opacity: 0.5,
+                id:"BLMRec",
                 visible: false, labelingInfo: [BLM_Rec_labelClass]
             });
 
@@ -1433,6 +1465,7 @@ define([
                     var pCOFACFeatureLayer = new FeatureLayer({
                         url: "https://services1.arcgis.com/Ezk9fcjSUkeadg6u/ArcGIS/rest/services/Colorado_Parks_and_Wildlife_Facilities/FeatureServer/0",
                         popupTemplate: templateCOFAC, opacity: 0.5,
+                        id:"COFAC",
                         visible: false, labelingInfo: [COFAC_labelClass]
                     });
                 }
@@ -1443,7 +1476,7 @@ define([
                     templateFWPAISAccess.content = "{SITENAME}</br>{ACCESSTYPE}</br>{WATERBODY}</br>{STATUS}</b>";
                     var pFWPAISAccessFeatureLayer = new FeatureLayer({
                         url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/arcgis/rest/services/FISH_AIS_WATERCRAFT_ACCESS/FeatureServer/0",
-                        popupTemplate: templateFWPAISAccess, minScale: 5200000, visible: false
+                        id:"FWPAISaccess", popupTemplate: templateFWPAISAccess, minScale: 5200000, visible: false
                     });
 
                     let templateFAS = new PopupTemplate();
@@ -1460,6 +1493,7 @@ define([
                     var pFASFeatureLayer = new FeatureLayer({
                         url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/arcgis/rest/services/FWPLND_FAS_POINTS/FeatureServer/0",
                         popupTemplate: templateFAS,
+                        id:"FWPFAS",
                         opacity: 0.5,
                         visible: false,
                         labelingInfo: [FAS_labelClass]
@@ -1491,7 +1525,9 @@ define([
                     var pMTSPFeatureLayer = new FeatureLayer({
                         url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/ArcGIS/rest/services/FWPLND_STATEPARKS/FeatureServer/0",
                         renderer: sfsr_MTSP, "opacity": 0.9, autoGeneralize: true,
-                        outFields: [strlabelField11], labelingInfo: [MTSP_labelClass], popupTemplate: templateMTSP
+                        id:"MTSP",
+                        outFields: [strlabelField11], labelingInfo: [MTSP_labelClass],
+                        popupTemplate: templateMTSP
                     });
 
                 }
@@ -1536,6 +1572,7 @@ define([
             let pSNOTELFeatureLayer = new FeatureLayer({
                 url: "https://services.arcgis.com/SXbDpmb7xQkk44JV/arcgis/rest/services/stations_SNTL_ACTIVE/FeatureServer/0",
                 popupTemplate: templateSNOTEL, visible: false,
+                id:"SnowTel",
                 labelingInfo: [SNOTEL_labelClass],
                 renderer: snoTel_Renderer
             });
@@ -1578,6 +1615,7 @@ define([
             let pNOAAUSDMFeatureLayer = new GeoJSONLayer({
                 url: "https://www.ncei.noaa.gov/pub/data/nidis/geojson/us/usdm/USDM-current.geojson",
                 copyright: "U.S. Drought Monitor",
+                id:"NOAAAUSDM",
                 popupTemplate: pNOAAUSDMtemplate,
                 renderer: pNOAAUSDMrenderer,
                 visible: false,
@@ -1641,6 +1679,7 @@ define([
                 //url: "https://maps1.arcgisonline.com/arcgis/rest/services/NWS_Weather_Stations/MapServer/4",
                 url: "https://services9.arcgis.com/RHVPKKiFTONKtxq3/arcgis/rest/services/NOAA_METAR_current_wind_speed_direction_v1/FeatureServer/0",
                 popupTemplate: templateNOAA,
+                id:"NOAA",
                 visible: false,
                 outFields:["*"],
                 //minScale: 5000000,
@@ -1684,11 +1723,15 @@ define([
 
             let pFWPFeatureLayer = new FeatureLayer({
                 url: app.strFWPURL,
+                id:"FWP2",
                 popupTemplate: templateFWP, "opacity": 0.6, renderer: sfsr_FWP, visible: true
             });
             pFWPFeatureLayer.definitionExpression = app.strFWPQuery;
 
-            let pCartoFeatureLayer = new FeatureLayer({ url: app.strHFL_URL + app.idx11[4],  "opacity": 0.9, autoGeneralize: true});
+            let pCartoFeatureLayer = new FeatureLayer({
+                url: app.strHFL_URL + app.idx11[4],
+                id:"Carto", "opacity": 0.9, autoGeneralize: true
+            });
 
 
             //const pCartoPoly_labelClass = {// autocasts as new LabelClass()
@@ -1714,6 +1757,7 @@ define([
             };
             let pCartoFeatureLayerPoly = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[6],
+                id:"CartoPoly",
                 "opacity": 0.9, renderer: sfsr_CartoPoly, autoGeneralize: true, visible: false
             });
             
@@ -1733,12 +1777,13 @@ define([
                 var pClearLakeMonitoringWells = new FeatureLayer({
                     url: "https://mbmgmap.mtech.edu/server/rest/services/Water_Resources/GWAP_ClearLakeAquifer/FeatureServer/11",
                     "opacity": 0.5, autoGeneralize: true,
+                    id:"clearLakeMonitoringWells",
                     popupTemplate: templateMonitoringWellsClearLake, visible: true
                 });
 
                 var pClearLakePermitType = new FeatureLayer({
                     url: "https://mbmgmap.mtech.edu/server/rest/services/Water_Resources/GWAP_ClearLakeAquifer/FeatureServer/3",
-                    "opacity": 0.5, autoGeneralize: true, visible: true
+                    id:"clearLakePermit","opacity": 0.5, autoGeneralize: true, visible: true
                 });
             }
 
@@ -1753,12 +1798,13 @@ define([
                 var pDist2WaterTableFlathead = new FeatureLayer({
                     url: "https://services.arcgis.com/QVENGdaPbd4LUkLV/ArcGIS/rest/services/Flathead_River_Watershed_Layers/FeatureServer/4",
                     "opacity": 0.5, autoGeneralize: true,
+                    id:"dist2Water",
                     popupTemplate: templateDist2WaterTableFlathead, visible: false
                 });
 
                 var p1964FloodFlathead = new FeatureLayer({
                     url: "https://services.arcgis.com/QVENGdaPbd4LUkLV/ArcGIS/rest/services/Flathead_River_Watershed_Layers/FeatureServer/0",
-                    "opacity": 0.5, autoGeneralize: true, visible: false
+                    id:"1964flood", "opacity": 0.5, autoGeneralize: true, visible: false
                 });    
             }
 
@@ -1783,6 +1829,7 @@ define([
 
             let pWatershedsFeatureLayer = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[9],
+                id:"watersheds",
                 renderer: sfsr_Waterhsed, "opacity": 0.9, autoGeneralize: true,
                 outFields: [strlabelField1], labelingInfo: [Watershed_labelClass]
             });
@@ -1817,6 +1864,7 @@ define([
 
             let pWatershedsMaskFeatureLayer = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[9],
+                id:"watershedMask",
                 renderer: sfsr_Mask, "opacity": 0.5, autoGeneralize: true,
                 outFields: [strlabelField1],
                 labelingInfo: [WaterShedMask_labelClass]
@@ -1838,21 +1886,45 @@ define([
 
             var pBasinsMaskFeatureLayer = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[9],
+                id:"basinMask",
                 "opacity": 0.7, autoGeneralize: true, renderer: sfsr_BasinMask, minScale: 5000000,
             });
             pBasinsMaskFeatureLayer.definitionExpression = "Basin IS NULL";
-            
-            app.pSup.m_pRiverSymbolsFeatureLayerCFS = new FeatureLayer({
-                //url: app.strHFL_URL + "10",
-                url: app.strHFL_URL + app.idx11[10],
-                visible: true
-            });
 
-            app.pSup.m_pRiverSymbolsFeatureLayerTemp = new FeatureLayer({
-                //url: app.strHFL_URL + "10",
-                url: app.strHFL_URL + app.idx11[10],
-                visible: true
-            });
+
+            if (document.location.host.indexOf("localhost") > -1) {
+                app.pSup.m_pRiverSymbolsFeatureLayerCFS = new FeatureLayer({
+                    //url: app.strHFL_URL + "10",
+                    url: app.strHFL_URL + app.idx11[5],
+                    id: "RiverSymbolsCFS",
+                    visible: true
+                });
+            } else {
+                app.pSup.m_pRiverSymbolsFeatureLayerCFS = new FeatureLayer({
+                    //url: app.strHFL_URL + "10",
+                    url: app.strHFL_URL + app.idx11[10],
+                    id: "RiverSymbolsCFS",
+                    visible: true
+                });
+            }
+
+
+            if (document.location.host.indexOf("localhost") > -1) {
+                app.pSup.m_pRiverSymbolsFeatureLayerTemp = new FeatureLayer({
+                    //url: app.strHFL_URL + "10",
+                    url: app.strHFL_URL + app.idx11[5],
+                    id: "riverSymbolsTemp",
+                    visible: true
+                });
+            } else {
+                app.pSup.m_pRiverSymbolsFeatureLayerTemp = new FeatureLayer({
+                    //url: app.strHFL_URL + "10",
+                    url: app.strHFL_URL + app.idx11[10],
+                    id: "riverSymbolsTemp",
+                    visible: true
+                });
+            }
+            
 
             //app.pSup.m_pRiverSymbolsFeatureLayerHt = new FeatureLayer({
             //    //url: app.strHFL_URL + "10",
@@ -1881,6 +1953,7 @@ define([
                 url: "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Monitoring_Sites/FeatureServer/0",
                 visible: false,
                 renderer: CSV_Renderer,
+                id:"Montitoring",
                 popupTemplate: pCSVTemplate
             });
 
@@ -2066,6 +2139,8 @@ define([
             } else {
                 SetupBasinClick();
             }
+
+            SetupJump2Map();
 
             ko.bindingHandlers.googleBarChart = {
                 init: function (element, valueAccessor, allBindingsAccesor, viewModel, bindingContext) {
@@ -2397,6 +2472,214 @@ define([
                 console.log("maploaded")
             }
 
+
+            function SetupJump2Map() {
+                $('#dropDownId a').click(function () {
+                    let strSelectedText = $(this).text();
+                    //$('#selected').text($(this).text());
+                    let blnAddCoords = false;
+                    let blnAddCoordsUSGS = false;
+                    let strURL;
+                    var pExtent = app.view.extent;
+
+                    if (strSelectedText == "Channel Migration Zones") {
+                        strURL = "https://montana.maps.arcgis.com/home/webmap/viewer.html?webmap=f59d958f8ec94e70b5a0bff9bb7dacae&extent=";
+                        blnAddCoords = true;
+                    }
+
+
+                    if (strSelectedText == "Clear Lake Aquifer Project") {
+                        blnAddCoords = false;
+                        pSR_WKID = pExtent.spatialReference.wkid;
+                        strURL = "https://gis-data-hub-mbmg.hub.arcgis.com/apps/e6c4ab546b5e49eb894e3ff5b18ac52f/explore";
+
+                        var pGeogExtent = webMercatorUtils.webMercatorToGeographic(pExtent);  //the map is in web mercator but display coordinates in geographic (lat, long)
+                    }
+
+
+                    if (strSelectedText == "MT DNRC Upper Clark Fork & Blackfoot Water Rights") {
+                        strURL = "https://mtdnrc.maps.arcgis.com/apps/webappviewer/index.html?id=a49c3c9c95a046449ed785bd63edda4c&extent=";
+                        blnAddCoords = true;
+                    }
+
+
+
+                    if (strSelectedText == "MT DNRC Fire Map") {
+                        strURL = "https://mtdnrc.maps.arcgis.com/apps/webappviewer/index.html?id=6bea18851bec440d9260cb0d28f53281&extent=";
+                        blnAddCoords = true;
+                    }
+
+                    if (strSelectedText == "FEMA Flood Layer Hazard Viewer") {
+                        strURL = "https://hazards-fema.maps.arcgis.com/apps/webappviewer/index.html?id=8b0adb51996444d4879338b5529aa9cd&extent=";
+                        blnAddCoords = true;
+                    }
+
+                    if (strSelectedText == "MT DNRC Stream and Gage Explorer") {
+                        strURL = "https://gis.dnrc.mt.gov/apps/StAGE/index.html?extent=";
+                        blnAddCoords = true;
+                    }
+
+                    if (strSelectedText == "American Whitewater Difficulty and Flow") {
+                        strURL = "https://www.americanwhitewater.org/content/River/view/river-index";
+                        blnAddCoords = false;
+                    }
+
+                    if (strSelectedText == "BOR Basin Status Maps") {
+                        strURL = "https://www.usbr.gov/uc/water/hydrodata/status_maps/";
+                        blnAddCoords = false;
+                    }
+
+                    if (strSelectedText == "USGS National Water Dashboard") {
+                        // https://dashboard.waterdata.usgs.gov/app/nwd/en/?aoi=bbox-%5B-119.94824%2C44.56204%2C-108.64438%2C48.39114
+                        // https://dashboard.waterdata.usgs.gov/app/nwd/en/?aoi=bbox-%5B-119.94824%2C44.56204%2C-108.64438%2C48.39114%5D&view=%7B%22basemap%22%3A%22EsriTopo%22%2C%22bounds%22%3A%22-119.94823983103537%2C44.56203899517036%2C-108.64437909334788%2C48.39113519331582%22%2C%22insetMap%22%3Afalse%2C%22panel%22%3A%7B%22id%22%3A%22ViewerTools%22%2C%22open%22%3Atrue%2C%22checkbox%22%3A%220%2C10%2C20%2C21%2C22%2C23%22%2C%22range%22%3A%220%3A1.0%2C1%3A1.0%2C2%3A1.0%2C3%3A1.0%2C4%3A1.0%2C5%3A1.0%2C6%3A1.0%2C7%3A1.0%2C8%3A0.8%2C9%3A0.3%2C10%3A0.5%2C11%3A0.5%2C12%3A0.5%2C13%3A0.5%2C14%3A0.5%2C15%3A0.5%2C16%3A0.5%2C17%3A1.0%2C18%3A1.0%2C19%3A1.0%2C20%3A1.0%22%2C%22select%22%3A%220%3A0%2C1%3A0%2C2%3A0%2C3%3A0%2C4%3A0%2C5%3A0%2C6%3A0%2C7%3A0%2C8%3A0%2C9%3A0%2C10%3A0%2C11%3A0%2C12%3A0%2C13%3A0%2C14%3A0%2C15%3A0%2C16%3A0%2C17%3A0%2C18%3A0%2C19%3A0%22%7D%7D
+                        blnAddCoords = false;
+                        pSR_WKID = pExtent.spatialReference.wkid;
+                        //strURL = "https://dashboard.waterdata.usgs.gov/app/nwd/en/?aoi=default&view=%7B%22basemap%22%3A%22EsriTopo%22%2C%22bounds%22%3A%22";
+                        strURL = "https://dashboard.waterdata.usgs.gov/app/nwd/en/?aoi=bbox-%5B";
+
+                        var pGeogExtent = webMercatorUtils.webMercatorToGeographic(pExtent);  //the map is in web mercator but display coordinates in geographic (lat, long)
+                        strURL += Math.round(pGeogExtent.xmin * 100) / 100 + ",";
+                        strURL += Math.round(pGeogExtent.ymin * 100) / 100 + ",";
+                        strURL += Math.round(pGeogExtent.xmax * 100) / 100 + ",";
+                        strURL += Math.round(pGeogExtent.ymax * 100) / 100;
+                        //strURL += '%22%2C%22insetMap%22%3Afalse%2C%22panel%22%3A%7B%22checkbox%22%3A%220%2C9%2C19%2C20%2C21%2C22%22%2C%22range%22%3A%220%3A1.0%2C1%3A1.0%2C2%3A1.0%2C3%3A1.0%2C4%3A1.0%2C5%3A1.0%2C6%3A1.0%2C7%3A0.8%2C8%3A0.3%2C9%3A0.5%2C10%3A0.5%2C11%3A0.5%2C12%3A0.5%2C13%3A0.5%2C14%3A0.5%2C15%3A0.5%2C16%3A1.0%2C17%3A1.0%2C18%3A1.0%2C19%3A1.0%22%2C%22select%22%3A%220%3A0%2C1%3A0%2C2%3A0%2C3%3A0%2C4%3A0%2C5%3A0%2C6%3A0%2C7%3A0%2C8%3A0%2C9%3A0%2C10%3A0%2C11%3A0%2C12%3A0%2C13%3A0%2C14%3A0%2C15%3A0%2C16%3A0%2C17%3A0%2C18%3A0%22%7D%7D';
+                    }
+
+                    if (strSelectedText == "National Water Prediction Service") {
+                        //https://water.noaa.gov/#@=-110.809092,45.7854252,5.1024202
+                        blnAddCoords = false;
+                        pSR_WKID = pExtent.spatialReference.wkid;
+                        strURL = "https://water.noaa.gov/#@=";
+
+                        var pGeogExtent = webMercatorUtils.webMercatorToGeographic(pExtent);  //the map is in web mercator but display coordinates in geographic (lat, long)
+
+                        strURL += (Math.round(pGeogExtent.center.x.toString() * 100) / 100).toString();//longitude
+                        strURL += "," + (Math.round(pGeogExtent.center.y.toString() * 100) / 100).toString();//latitude
+
+                        dblExtentWidth = pGeogExtent.xmax - pGeogExtent.xmin;
+
+                        if (dblExtentWidth > 3.750001) {
+                            strURL += ",4.75";
+                        }
+
+                        if ((dblExtentWidth > 3.500001) & (dblExtentWidth < 3.75)) {
+                            strURL += ",5.96";
+                        }
+
+                        if ((dblExtentWidth > 2.750001) & (dblExtentWidth < 3.5)) {
+                            strURL += ",7.87";
+                        }
+
+                        if ((dblExtentWidth > 2.30001) & (dblExtentWidth < 2.75)) {
+                            strURL += ",8.19";
+                        }
+
+                        if ((dblExtentWidth > 1.30001) & (dblExtentWidth < 2.3)) {
+                            strURL += ",8.5";
+                        }
+
+                        if ((dblExtentWidth > 0.75001) & (dblExtentWidth < 1.3)) {
+                            strURL += ",8.9";
+                        }
+
+                        if ((dblExtentWidth > 0.5001) & (dblExtentWidth < 0.75)) {
+                            strURL += ",9.25";
+                        }
+
+                        if ((dblExtentWidth > 0.25001) & (dblExtentWidth < 0.5)) {
+                            strURL += ",10.4";
+                        }
+
+                        if (dblExtentWidth < 0.25) {
+                            strURL += ",11";
+                        }
+
+                    }
+
+                    if (strSelectedText == "NRCS iMap-Basin Snow Water Equivalent") {
+                        //https://nwcc-apps.sc.egov.usda.gov/imap/#version=169&elements=&networks=!&states=!&basins=!&hucs=&minElevation=&maxElevation=&elementSelectType=any&activeOnly=true&activeForecastPointsOnly=false&hucLabels=false&hucIdLabels=false&hucParameterLabels=true&stationLabels=&overlays=&hucOverlays=&basinOpacity=75&basinNoDataOpacity=25&basemapOpacity=100&maskOpacity=0&mode=data&openSections=dataElement,parameter,date,basin,options,elements,location,networks&controlsOpen=true&popup=&popupMulti=&popupBasin=&base=esriNgwm&displayType=basin&basinType=6&dataElement=WTEQ&depth=-8&parameter=PCTMED&frequency=DAILY&duration=I&customDuration=&dayPart=E&monthPart=E&forecastPubDay=1&forecastExceedance=50&useMixedPast=true&seqColor=1&divColor=7&scaleType=D&scaleMin=&scaleMax=&referencePeriodType=POR&referenceBegin=1991&referenceEnd=2020&minimumYears=20&hucAssociations=true&relativeDate=-1&lat=44.961&lon=-110.220&zoom=7.0
+                        blnAddCoords = false;
+                        pSR_WKID = pExtent.spatialReference.wkid;
+                        strURL = "https://nwcc-apps.sc.egov.usda.gov/imap/#version=169&elements=&networks=!&states=!&basins=!&hucs=&minElevation=&maxElevation=&elementSelectType=any&activeOnly=true&activeForecastPointsOnly=false&hucLabels=false&hucIdLabels=false&hucParameterLabels=true&stationLabels=&overlays=&hucOverlays=&basinOpacity=75&basinNoDataOpacity=25&basemapOpacity=100&maskOpacity=0&mode=data&openSections=dataElement,parameter,date,basin,options,elements,location,networks&controlsOpen=true&popup=&popupMulti=&popupBasin=&base=esriNgwm&displayType=basin&basinType=6&dataElement=WTEQ&depth=-8&parameter=PCTMED&frequency=DAILY&duration=I&customDuration=&dayPart=E&monthPart=E&forecastPubDay=1&forecastExceedance=50&useMixedPast=true&seqColor=1&divColor=7&scaleType=D&scaleMin=&scaleMax=&referencePeriodType=POR&referenceBegin=1991&referenceEnd=2020&minimumYears=20&hucAssociations=true&relativeDate=-1";
+
+                        var pGeogExtent = webMercatorUtils.webMercatorToGeographic(pExtent);  //the map is in web mercator but display coordinates in geographic (lat, long)
+                        strURL += "&lat=" + (Math.round(pGeogExtent.center.y.toString() * 100) / 100).toString();
+                        strURL += "&lon=" + (Math.round(pGeogExtent.center.x.toString() * 100) / 100).toString();
+
+                        dblExtentWidth = pGeogExtent.xmax - pGeogExtent.xmin;
+
+                        if (dblExtentWidth > 3.750001) {
+                            strURL += "&zoom=6.0";
+                        }
+
+                        if ((dblExtentWidth > 2.750001) & (dblExtentWidth < 3.75)) {
+                            strURL += "&zoom=7.0";
+                        }
+
+                        if ((dblExtentWidth > 2.30001) & (dblExtentWidth < 2.75)) {
+                            strURL += "&zoom=9.2";
+                        }
+
+                        if ((dblExtentWidth > 1.30001) & (dblExtentWidth < 2.3)) {
+                            strURL += "&zoom=9.7";
+                        }
+
+                        if ((dblExtentWidth > 0.75001) & (dblExtentWidth < 1.3)) {
+                            strURL += "&zoom=10.2";
+                        }
+
+                        if ((dblExtentWidth > 0.5001) & (dblExtentWidth < 0.75)) {
+                            strURL += "&zoom=10.5";
+                        }
+
+                        if ((dblExtentWidth > 0.25001) & (dblExtentWidth < 0.5)) {
+                            strURL += "&zoom=11.8";
+                        }
+
+                        if (dblExtentWidth < 0.25) {
+                            strURL += "&zoom=12.8";
+                        }
+
+                    }
+
+                    if (strSelectedText == "Official MT FWP (closures, etc.)") {
+                        strURL = "https://experience.arcgis.com/experience/ba378e9a50ec4d53bbe92e406b647d3e";
+                        blnAddCoords = false;
+                    }
+                    if (strSelectedText == "GYE Aquatic Invasives") {
+                        blnAddCoords = false;
+                        pSR_WKID = pExtent.spatialReference.wkid;
+                        strURL = "https://gagecarto.github.io/aquaticInvasiveExplorer/index.html#bnds=";
+                        var pGeogExtent = webMercatorUtils.webMercatorToGeographic(pExtent);  //the map is in web mercator but display coordinates in geographic (lat, long)
+                        strURL += Math.round(pGeogExtent.xmin * 100) / 100 + ",";
+                        strURL += Math.round(pGeogExtent.ymin * 100) / 100 + ",";
+                        strURL += Math.round(pGeogExtent.xmax * 100) / 100 + ",";
+                        strURL += Math.round(pGeogExtent.ymax * 100) / 100;
+                    }
+
+                    if (strSelectedText == "CO DWR Surface Water Stations") {
+                        strURL = "https://data.colorado.gov/Water/DWR-Surface-Water-Stations-Map-Statewide-/8kgh-vbea";
+                        blnAddCoords = false;
+                    }
+
+
+                    if (blnAddCoords) {
+                        pSR_WKID = pExtent.spatialReference.wkid;
+                        strURL += pExtent.xmin + ",";
+                        strURL += pExtent.ymin + ",";
+                        strURL += pExtent.xmax + ",";
+                        strURL += pExtent.ymax + ",";
+                        strURL += pSR_WKID.toString();
+                    }
+
+                    window.open(strURL);
+                });
+
+            }
+
+
+
+
             function SetupBasinClick() {
                 app.view.on("pointer-down", (event) => {
                     const opts = {
@@ -2613,208 +2896,7 @@ define([
 				$("#divShowHideLegendBtn").hide;
 			}
             
-
-            $('#dropDownId a').click(function () {
-                let strSelectedText = $(this).text();
-                //$('#selected').text($(this).text());
-                let blnAddCoords = false;
-                let blnAddCoordsUSGS = false;
-                let strURL;
-                var pExtent = app.view.extent;
-
-                if (strSelectedText == "Channel Migration Zones") {
-                    strURL = "https://montana.maps.arcgis.com/home/webmap/viewer.html?webmap=f59d958f8ec94e70b5a0bff9bb7dacae&extent=";
-                    blnAddCoords = true;
-                }
-                
-
-                if (strSelectedText == "Clear Lake Aquifer Project") {
-                    blnAddCoords = false;
-                    pSR_WKID = pExtent.spatialReference.wkid;
-                    strURL = "https://gis-data-hub-mbmg.hub.arcgis.com/apps/e6c4ab546b5e49eb894e3ff5b18ac52f/explore";
-
-                    var pGeogExtent = webMercatorUtils.webMercatorToGeographic(pExtent);  //the map is in web mercator but display coordinates in geographic (lat, long)
-                }
-
-
-                if (strSelectedText == "MT DNRC Upper Clark Fork & Blackfoot Water Rights") {
-                    strURL = "https://mtdnrc.maps.arcgis.com/apps/webappviewer/index.html?id=a49c3c9c95a046449ed785bd63edda4c&extent=";
-                    blnAddCoords = true;
-                }
-
-
-
-                if (strSelectedText == "MT DNRC Fire Map") {
-                    strURL = "https://mtdnrc.maps.arcgis.com/apps/webappviewer/index.html?id=6bea18851bec440d9260cb0d28f53281&extent=";
-                    blnAddCoords = true;
-                }
-                
-                if (strSelectedText == "FEMA Flood Layer Hazard Viewer") {
-                    strURL = "https://hazards-fema.maps.arcgis.com/apps/webappviewer/index.html?id=8b0adb51996444d4879338b5529aa9cd&extent=";
-                    blnAddCoords = true;
-                }
-
-                if (strSelectedText == "MT DNRC Stream and Gage Explorer") {
-                    strURL = "https://gis.dnrc.mt.gov/apps/StAGE/index.html?extent=";
-                    blnAddCoords = true;
-                }
-
-                if (strSelectedText == "American Whitewater Difficulty and Flow") {
-                    strURL = "https://www.americanwhitewater.org/content/River/view/river-index";
-                    blnAddCoords = false;
-                }
-
-                if (strSelectedText == "BOR Basin Status Maps") {
-                    strURL = "https://www.usbr.gov/uc/water/hydrodata/status_maps/";
-                    blnAddCoords = false;
-                }
-
-                if (strSelectedText == "USGS National Water Dashboard") {
-                    // https://dashboard.waterdata.usgs.gov/app/nwd/en/?aoi=bbox-%5B-119.94824%2C44.56204%2C-108.64438%2C48.39114
-                    // https://dashboard.waterdata.usgs.gov/app/nwd/en/?aoi=bbox-%5B-119.94824%2C44.56204%2C-108.64438%2C48.39114%5D&view=%7B%22basemap%22%3A%22EsriTopo%22%2C%22bounds%22%3A%22-119.94823983103537%2C44.56203899517036%2C-108.64437909334788%2C48.39113519331582%22%2C%22insetMap%22%3Afalse%2C%22panel%22%3A%7B%22id%22%3A%22ViewerTools%22%2C%22open%22%3Atrue%2C%22checkbox%22%3A%220%2C10%2C20%2C21%2C22%2C23%22%2C%22range%22%3A%220%3A1.0%2C1%3A1.0%2C2%3A1.0%2C3%3A1.0%2C4%3A1.0%2C5%3A1.0%2C6%3A1.0%2C7%3A1.0%2C8%3A0.8%2C9%3A0.3%2C10%3A0.5%2C11%3A0.5%2C12%3A0.5%2C13%3A0.5%2C14%3A0.5%2C15%3A0.5%2C16%3A0.5%2C17%3A1.0%2C18%3A1.0%2C19%3A1.0%2C20%3A1.0%22%2C%22select%22%3A%220%3A0%2C1%3A0%2C2%3A0%2C3%3A0%2C4%3A0%2C5%3A0%2C6%3A0%2C7%3A0%2C8%3A0%2C9%3A0%2C10%3A0%2C11%3A0%2C12%3A0%2C13%3A0%2C14%3A0%2C15%3A0%2C16%3A0%2C17%3A0%2C18%3A0%2C19%3A0%22%7D%7D
-                    blnAddCoords = false;
-                    pSR_WKID = pExtent.spatialReference.wkid;
-                    //strURL = "https://dashboard.waterdata.usgs.gov/app/nwd/en/?aoi=default&view=%7B%22basemap%22%3A%22EsriTopo%22%2C%22bounds%22%3A%22";
-                    strURL = "https://dashboard.waterdata.usgs.gov/app/nwd/en/?aoi=bbox-%5B";
-
-                    var pGeogExtent = webMercatorUtils.webMercatorToGeographic(pExtent);  //the map is in web mercator but display coordinates in geographic (lat, long)
-                    strURL += Math.round(pGeogExtent.xmin * 100) / 100 + ",";
-                    strURL += Math.round(pGeogExtent.ymin * 100) / 100 + ",";
-                    strURL += Math.round(pGeogExtent.xmax * 100) / 100 + ",";
-                    strURL += Math.round(pGeogExtent.ymax * 100) / 100;
-                    //strURL += '%22%2C%22insetMap%22%3Afalse%2C%22panel%22%3A%7B%22checkbox%22%3A%220%2C9%2C19%2C20%2C21%2C22%22%2C%22range%22%3A%220%3A1.0%2C1%3A1.0%2C2%3A1.0%2C3%3A1.0%2C4%3A1.0%2C5%3A1.0%2C6%3A1.0%2C7%3A0.8%2C8%3A0.3%2C9%3A0.5%2C10%3A0.5%2C11%3A0.5%2C12%3A0.5%2C13%3A0.5%2C14%3A0.5%2C15%3A0.5%2C16%3A1.0%2C17%3A1.0%2C18%3A1.0%2C19%3A1.0%22%2C%22select%22%3A%220%3A0%2C1%3A0%2C2%3A0%2C3%3A0%2C4%3A0%2C5%3A0%2C6%3A0%2C7%3A0%2C8%3A0%2C9%3A0%2C10%3A0%2C11%3A0%2C12%3A0%2C13%3A0%2C14%3A0%2C15%3A0%2C16%3A0%2C17%3A0%2C18%3A0%22%7D%7D';
-                }
-
-                if (strSelectedText == "National Water Prediction Service") {
-                    //https://water.noaa.gov/#@=-110.809092,45.7854252,5.1024202
-                    blnAddCoords = false;
-                    pSR_WKID = pExtent.spatialReference.wkid;
-                    strURL = "https://water.noaa.gov/#@=";
-
-                    var pGeogExtent = webMercatorUtils.webMercatorToGeographic(pExtent);  //the map is in web mercator but display coordinates in geographic (lat, long)
-
-                    strURL += (Math.round(pGeogExtent.center.x.toString() * 100) / 100).toString();//longitude
-                    strURL += "," + (Math.round(pGeogExtent.center.y.toString() * 100) / 100).toString();//latitude
-
-                    dblExtentWidth = pGeogExtent.xmax - pGeogExtent.xmin;
-
-                    if (dblExtentWidth > 3.750001) {
-                        strURL += ",4.75";
-                    }
-
-                    if ((dblExtentWidth > 3.500001) & (dblExtentWidth < 3.75)) {
-                        strURL += ",5.96";
-                    }
-
-                    if ((dblExtentWidth > 2.750001) & (dblExtentWidth < 3.5)) {
-                        strURL += ",7.87";
-                    }
-
-                    if ((dblExtentWidth > 2.30001) & (dblExtentWidth < 2.75)) {
-                        strURL += ",8.19";
-                    }
-
-                    if ((dblExtentWidth > 1.30001) & (dblExtentWidth < 2.3)) {
-                        strURL += ",8.5";
-                    }
-
-                    if ((dblExtentWidth > 0.75001) & (dblExtentWidth < 1.3)) {
-                        strURL += ",8.9";
-                    }
-
-                    if ((dblExtentWidth > 0.5001) & (dblExtentWidth < 0.75)) {
-                        strURL += ",9.25";
-                    }
-
-                    if ((dblExtentWidth > 0.25001) & (dblExtentWidth < 0.5)) {
-                        strURL += ",10.4";
-                    }
-
-                    if (dblExtentWidth < 0.25) {
-                        strURL += ",11";
-                    }
-
-                }
-
-                if (strSelectedText == "NRCS iMap-Basin Snow Water Equivalent") {
-                    //https://nwcc-apps.sc.egov.usda.gov/imap/#version=169&elements=&networks=!&states=!&basins=!&hucs=&minElevation=&maxElevation=&elementSelectType=any&activeOnly=true&activeForecastPointsOnly=false&hucLabels=false&hucIdLabels=false&hucParameterLabels=true&stationLabels=&overlays=&hucOverlays=&basinOpacity=75&basinNoDataOpacity=25&basemapOpacity=100&maskOpacity=0&mode=data&openSections=dataElement,parameter,date,basin,options,elements,location,networks&controlsOpen=true&popup=&popupMulti=&popupBasin=&base=esriNgwm&displayType=basin&basinType=6&dataElement=WTEQ&depth=-8&parameter=PCTMED&frequency=DAILY&duration=I&customDuration=&dayPart=E&monthPart=E&forecastPubDay=1&forecastExceedance=50&useMixedPast=true&seqColor=1&divColor=7&scaleType=D&scaleMin=&scaleMax=&referencePeriodType=POR&referenceBegin=1991&referenceEnd=2020&minimumYears=20&hucAssociations=true&relativeDate=-1&lat=44.961&lon=-110.220&zoom=7.0
-                    blnAddCoords = false;
-                    pSR_WKID = pExtent.spatialReference.wkid;
-                    strURL = "https://nwcc-apps.sc.egov.usda.gov/imap/#version=169&elements=&networks=!&states=!&basins=!&hucs=&minElevation=&maxElevation=&elementSelectType=any&activeOnly=true&activeForecastPointsOnly=false&hucLabels=false&hucIdLabels=false&hucParameterLabels=true&stationLabels=&overlays=&hucOverlays=&basinOpacity=75&basinNoDataOpacity=25&basemapOpacity=100&maskOpacity=0&mode=data&openSections=dataElement,parameter,date,basin,options,elements,location,networks&controlsOpen=true&popup=&popupMulti=&popupBasin=&base=esriNgwm&displayType=basin&basinType=6&dataElement=WTEQ&depth=-8&parameter=PCTMED&frequency=DAILY&duration=I&customDuration=&dayPart=E&monthPart=E&forecastPubDay=1&forecastExceedance=50&useMixedPast=true&seqColor=1&divColor=7&scaleType=D&scaleMin=&scaleMax=&referencePeriodType=POR&referenceBegin=1991&referenceEnd=2020&minimumYears=20&hucAssociations=true&relativeDate=-1";
-
-                    var pGeogExtent = webMercatorUtils.webMercatorToGeographic(pExtent);  //the map is in web mercator but display coordinates in geographic (lat, long)
-                    strURL += "&lat=" + (Math.round(pGeogExtent.center.y.toString() * 100) / 100).toString();
-                    strURL += "&lon=" + (Math.round(pGeogExtent.center.x.toString() * 100) / 100).toString();
-
-                    dblExtentWidth = pGeogExtent.xmax - pGeogExtent.xmin;
-
-                    if (dblExtentWidth > 3.750001) {
-                        strURL += "&zoom=6.0";
-                    }
-
-                    if ((dblExtentWidth > 2.750001) & (dblExtentWidth < 3.75)) {
-                        strURL += "&zoom=7.0";
-                    }
-
-                    if ((dblExtentWidth > 2.30001) & (dblExtentWidth < 2.75)) {
-                        strURL += "&zoom=9.2";
-                    }
-
-                    if ((dblExtentWidth > 1.30001) & (dblExtentWidth < 2.3)) {
-                        strURL += "&zoom=9.7";
-                    }
-
-                    if ((dblExtentWidth > 0.75001) & (dblExtentWidth < 1.3)) {
-                        strURL += "&zoom=10.2";
-                    }
-
-                    if ((dblExtentWidth > 0.5001) & (dblExtentWidth < 0.75)) {
-                        strURL += "&zoom=10.5";
-                    }
-
-                    if ((dblExtentWidth > 0.25001) & (dblExtentWidth < 0.5)) {
-                        strURL += "&zoom=11.8";
-                    }
-
-                    if (dblExtentWidth < 0.25) {
-                        strURL += "&zoom=12.8";
-                    }
-
-                }
-
-                if (strSelectedText == "Official MT FWP (closures, etc.)") {
-                    strURL = "https://experience.arcgis.com/experience/ba378e9a50ec4d53bbe92e406b647d3e";
-                    blnAddCoords = false;
-                }
-                if (strSelectedText == "GYE Aquatic Invasives") {
-                    blnAddCoords = false;
-                    pSR_WKID = pExtent.spatialReference.wkid;
-                    strURL = "https://gagecarto.github.io/aquaticInvasiveExplorer/index.html#bnds=";
-                    var pGeogExtent = webMercatorUtils.webMercatorToGeographic(pExtent);  //the map is in web mercator but display coordinates in geographic (lat, long)
-                    strURL += Math.round(pGeogExtent.xmin * 100) / 100 + ",";
-                    strURL += Math.round(pGeogExtent.ymin * 100) / 100 + ",";
-                    strURL += Math.round(pGeogExtent.xmax * 100) / 100 + ",";
-                    strURL += Math.round(pGeogExtent.ymax * 100) / 100;
-                }
-
-                if (strSelectedText == "CO DWR Surface Water Stations") {
-                    strURL = "https://data.colorado.gov/Water/DWR-Surface-Water-Stations-Map-Statewide-/8kgh-vbea";
-                    blnAddCoords = false;
-                }
-                
-
-                if (blnAddCoords) {
-                    pSR_WKID = pExtent.spatialReference.wkid;
-                    strURL += pExtent.xmin + ",";
-                    strURL += pExtent.ymin + ",";
-                    strURL += pExtent.xmax + ",";
-                    strURL += pExtent.ymax + ",";
-                    strURL += pSR_WKID.toString();
-                }
-
-                window.open(strURL);
-            });
-
+            
 
 
 		},
