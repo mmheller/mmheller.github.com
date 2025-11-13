@@ -3362,15 +3362,16 @@ define([
                             arrayJSONValues = jsonResult[0].ResultList;
                         } else if (arrayAlberta_Sens_Loc != null) {
                             arrayJSONValues = jsonResult;
-                        } else if (arrayUSACE_NWD_Sens_Loc[0] != null) {
-                            if (jsonResult["values"] != undefined) {
-                                if (jsonResult["values"].length > 0) {
+                        //} else if (arrayUSACE_NWD_Sens_Loc[0] != null) {
+                        } else if (arrayUSACE_NWD_Sens_Loc != null) {
+                            if (jsonResult[0]["values"] != undefined) {
+                                if (jsonResult[0]["values"].length > 0) {
                                     arrayJSONValues = jsonResult["values"];
                                 }
                             }
                         }
                         else {
-							arrayJSONValues = jsonResult.features;
+							arrayJSONValues = jsonResult[0].features;
 						}
                         app.pGage.ProcSectionsReceivedJSON(arrayJSONValues, arrayProc2, iCFSTarget1, iCFSTarget2, iCFSTarget3, iTMPTarget1,
                             iHtTarget1, iHtTarget2, iHtTarget3, iCFS_Rec_Low, iCFS_Rec_IdealMin, iCFS_Rec_IdealMax, iCFS_Rec_High,
