@@ -656,22 +656,25 @@ define([
                 ["Prairie Elk-Wolf", "Prairie Elk-Wolf", "Poplar"],
                 ["Poplar", "Poplar", "Poplar"],
 
-
-                ["Middle Milk", "Middle Milk", "Milk"],
+                ["Battle", "Battle", "Milk"], 
+                ["Beaver", "Beaver", "Milk"], 
+                ["Big Sandy", "Big Sandy", "Milk"], 
+                ["Frenchman", "Frenchman", "Milk"], 
+                ["Lodge", "Lodge", "Milk"], 
                 ["Lower Milk", "Lower Milk", "Milk"],
-
-
+                ["Middle Milk", "Middle Milk", "Milk"],
+                ["Rock", "Rock", "Milk"], 
+                ["Sage", "Sage", "Milk"],                 
+                ["Upper Milk", "Upper Milk", "Milk"], 
+                ["Wild Horse Lake", "Wild Horse Lake", "Milk"], 
+                
                 ["Lower Marais Des Cygnes", "Lower Marais Des Cygnes", "Lower Marais Des Cygnes"],
                 ["Neosho Headwaters", "Neosho Headwaters", "Lower Marais Des Cygnes"],
                 ["Upper Marais Des Cygnes", "Upper Marais Des Cygnes", "Lower Marais Des Cygnes"],
                 ["Upper Neosho", "Upper Neosho", "Lower Marais Des Cygnes"],
                 
-
-
-
                 ["Smith", "Smith", "Smith"],
                 
-
                 ["Lower San Juan-Four Corners", "Lower San Juan-Four Corners", "Southwest Colorado"],
                 ["Mancos", "Mancos", "Southwest Colorado"],
                 ["McElmo", "McElmo", "Southwest Colorado"],

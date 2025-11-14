@@ -577,7 +577,7 @@ define([
                                 app.bln_USACE_NWD_Src_NeedsProc = true;
                                 break;
 
-                            case "Canadian Water Office":  //change this to Alberta after edits
+                            case "AB EP":  //change this to Alberta after edits
                                 app.bln_Alberta_Src_NeedsProc = true;
                                 break;
 
@@ -1949,7 +1949,7 @@ define([
             for (var ii in arrayProc) {
                 if (arrayProc[ii][1] != null) {
                     strAgency = arrayProc[ii][(arrayProc[ii].length - 1)];  //the agency will be the last element in the array.  If loading all sections then array is long, if single click then array is short
-                    if (strAgency == "Canadian Water Office") {
+                    if (strAgency == "AB EP") {
                         arraySiteIDsAlberta.push(arrayProc[ii][1]);
                         arraySiteIDsAlbertaURLs.push(strURLGagePrefix + arrayProc[ii][1] + strURLGageSuffix);
                     }
@@ -2592,14 +2592,20 @@ define([
                     HtItem = "";
                     temperatureItem = "";
                 }
-                if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null) & (arrayUSACE_NWD_Sens_Loc == null)) {
+                if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null) &
+                    (arrayUSACE_NWD_Sens_Loc == null) & (arrayAlberta_Sens_Loc == null)) {
                     if (itemFound.length > 0) {
                         var item = itemFound[0];
                         strSiteName = item.sourceInfo.siteName;
                     }
                 } else if ((arrayUSACE_NWD_Sens_Loc != null)) {
                     strSiteName = arrayUSACE_NWD_Sens_Loc[0][0];
-                    console.log("getting site name");
+                } else if ((arrayDNRC_Sens_Loc != null)) {
+                    strSiteName = arrayDNRC_Sens_Loc[0][0];
+                } else if ((arrayCODWR_Sens_Loc != null)) {
+                    strSiteName = arrayCODWR_Sens_Loc[0][0];
+                } else if ((arrayAlberta_Sens_Loc != null)) {
+                    strSiteName = arrayAlberta_Sens_Loc[0][1];
                 }
 
                 var strNoDataLabel4ChartingHt = "";
@@ -2718,7 +2724,10 @@ define([
                     dblLatestHt = "No gage exists";
                 }
 
-                if (arrayDNRC_Sens_Loc != null) {
+                if ((arrayDNRC_Sens_Loc != null) |
+                    (arrayAlberta_Sens_Loc != null) |
+                    (arrayCODWR_Sens_Loc != null) |
+                    (arrayUSACE_NWD_Sens_Loc != null)) {
                     for (var iSL = 0; iSL < app.pGage.m_arrray_StationIDsTMP.length; iSL++) {  //remove placeholder sections if entered
                         if (app.pGage.m_arrray_StationIDsTMP[iSL] == "(No Data) " + strStreamName + "," + iSectionID) {
                             app.pGage.m_arrray_StationIDsTMP.splice(iSL, 1);
@@ -2739,49 +2748,71 @@ define([
                     }
                 }
 
-                if (arrayCODWR_Sens_Loc != null) {
-                    for (var iSL = 0; iSL < app.pGage.m_arrray_StationIDsTMP.length; iSL++) {  //remove placeholder sections if entered
-                        if (app.pGage.m_arrray_StationIDsTMP[iSL] == "(No Data) " + strStreamName + "," + iSectionID) {
-                            app.pGage.m_arrray_StationIDsTMP.splice(iSL, 1);
-                            break;
-                        }
-                    }
-                    for (var iSL2 = 0; iSL2 < app.pGage.m_arrray_StationIDsCFS.length; iSL2++) {  //remove placeholder sections if entered
-                        if (app.pGage.m_arrray_StationIDsCFS[iSL2] == "(No Data) " + strStreamName + "," + iSectionID) {
-                            app.pGage.m_arrray_StationIDsCFS.splice(iSL2, 1);
-                            break;
-                        }
-                    }
-                    for (var iSL2Ht = 0; iSL2Ht < app.pGage.m_arrray_StationIDsHt.length; iSL2Ht++) {  //remove placeholder sections if entered
-                        if (app.pGage.m_arrray_StationIDsHt[iSL2Ht] == "(No Data) " + strStreamName + "," + iSectionID) {
-                            app.pGage.m_arrray_StationIDsHt.splice(iSL2Ht, 1);
-                            break;
-                        }
-                    }
-                    console.log("breakpoint 1111111");
-                }
+                //if (arrayAlberta_Sens_Loc != null) {
+                //    for (var iSL = 0; iSL < app.pGage.m_arrray_StationIDsTMP.length; iSL++) {  //remove placeholder sections if entered
+                //        if (app.pGage.m_arrray_StationIDsTMP[iSL] == "(No Data) " + strStreamName + "," + iSectionID) {
+                //            app.pGage.m_arrray_StationIDsTMP.splice(iSL, 1);
+                //            break;
+                //        }
+                //    }
+                //    for (var iSL2 = 0; iSL2 < app.pGage.m_arrray_StationIDsCFS.length; iSL2++) {  //remove placeholder sections if entered
+                //        if (app.pGage.m_arrray_StationIDsCFS[iSL2] == "(No Data) " + strStreamName + "," + iSectionID) {
+                //            app.pGage.m_arrray_StationIDsCFS.splice(iSL2, 1);
+                //            break;
+                //        }
+                //    }
+                //    for (var iSL2Ht = 0; iSL2Ht < app.pGage.m_arrray_StationIDsHt.length; iSL2Ht++) {  //remove placeholder sections if entered
+                //        if (app.pGage.m_arrray_StationIDsHt[iSL2Ht] == "(No Data) " + strStreamName + "," + iSectionID) {
+                //            app.pGage.m_arrray_StationIDsHt.splice(iSL2Ht, 1);
+                //            break;
+                //        }
+                //    }
+                //}
 
-                if (arrayUSACE_NWD_Sens_Loc != null) {
-                    for (var iSL = 0; iSL < app.pGage.m_arrray_StationIDsTMP.length; iSL++) {  //remove placeholder sections if entered
-                        if (app.pGage.m_arrray_StationIDsTMP[iSL] == "(No Data) " + strStreamName + "," + iSectionID) {
-                            app.pGage.m_arrray_StationIDsTMP.splice(iSL, 1);
-                            break;
-                        }
-                    }
-                    for (var iSL2 = 0; iSL2 < app.pGage.m_arrray_StationIDsCFS.length; iSL2++) {  //remove placeholder sections if entered
-                        if (app.pGage.m_arrray_StationIDsCFS[iSL2] == "(No Data) " + strStreamName + "," + iSectionID) {
-                            app.pGage.m_arrray_StationIDsCFS.splice(iSL2, 1);
-                            break;
-                        }
-                    }
-                    for (var iSL2Ht = 0; iSL2Ht < app.pGage.m_arrray_StationIDsHt.length; iSL2Ht++) {  //remove placeholder sections if entered
-                        if (app.pGage.m_arrray_StationIDsHt[iSL2Ht] == "(No Data) " + strStreamName + "," + iSectionID) {
-                            app.pGage.m_arrray_StationIDsHt.splice(iSL2Ht, 1);
-                            break;
-                        }
-                    }
-                    //console.log("breakpoint 1111111");
-                }
+
+                //if (arrayCODWR_Sens_Loc != null) {
+                //    for (var iSL = 0; iSL < app.pGage.m_arrray_StationIDsTMP.length; iSL++) {  //remove placeholder sections if entered
+                //        if (app.pGage.m_arrray_StationIDsTMP[iSL] == "(No Data) " + strStreamName + "," + iSectionID) {
+                //            app.pGage.m_arrray_StationIDsTMP.splice(iSL, 1);
+                //            break;
+                //        }
+                //    }
+                //    for (var iSL2 = 0; iSL2 < app.pGage.m_arrray_StationIDsCFS.length; iSL2++) {  //remove placeholder sections if entered
+                //        if (app.pGage.m_arrray_StationIDsCFS[iSL2] == "(No Data) " + strStreamName + "," + iSectionID) {
+                //            app.pGage.m_arrray_StationIDsCFS.splice(iSL2, 1);
+                //            break;
+                //        }
+                //    }
+                //    for (var iSL2Ht = 0; iSL2Ht < app.pGage.m_arrray_StationIDsHt.length; iSL2Ht++) {  //remove placeholder sections if entered
+                //        if (app.pGage.m_arrray_StationIDsHt[iSL2Ht] == "(No Data) " + strStreamName + "," + iSectionID) {
+                //            app.pGage.m_arrray_StationIDsHt.splice(iSL2Ht, 1);
+                //            break;
+                //        }
+                //    }
+                //    console.log("breakpoint 1111111");
+                //}
+
+                //if (arrayUSACE_NWD_Sens_Loc != null) {
+                //    for (var iSL = 0; iSL < app.pGage.m_arrray_StationIDsTMP.length; iSL++) {  //remove placeholder sections if entered
+                //        if (app.pGage.m_arrray_StationIDsTMP[iSL] == "(No Data) " + strStreamName + "," + iSectionID) {
+                //            app.pGage.m_arrray_StationIDsTMP.splice(iSL, 1);
+                //            break;
+                //        }
+                //    }
+                //    for (var iSL2 = 0; iSL2 < app.pGage.m_arrray_StationIDsCFS.length; iSL2++) {  //remove placeholder sections if entered
+                //        if (app.pGage.m_arrray_StationIDsCFS[iSL2] == "(No Data) " + strStreamName + "," + iSectionID) {
+                //            app.pGage.m_arrray_StationIDsCFS.splice(iSL2, 1);
+                //            break;
+                //        }
+                //    }
+                //    for (var iSL2Ht = 0; iSL2Ht < app.pGage.m_arrray_StationIDsHt.length; iSL2Ht++) {  //remove placeholder sections if entered
+                //        if (app.pGage.m_arrray_StationIDsHt[iSL2Ht] == "(No Data) " + strStreamName + "," + iSectionID) {
+                //            app.pGage.m_arrray_StationIDsHt.splice(iSL2Ht, 1);
+                //            break;
+                //        }
+                //    }
+                //    //console.log("breakpoint 1111111");
+                //}
 
                 app.pGage.m_arrray_StationIDsTMP.push(strNoDataLabel4ChartingTMP + strStreamName + "," + iSectionID);  // using this array of station id's to pivot the table for charting
                 app.pGage.m_arrray_StationIDsCFS.push(strNoDataLabel4ChartingCFS + strStreamName + "," + iSectionID);  // using this array of station id's to pivot the table for charting
@@ -2809,15 +2840,10 @@ define([
                     var strOverallStatus = OverallStatusAndColor[0];
                     var strOverallSymbol = OverallStatusAndColor[1];
 
-                    if (arrayDNRC_Sens_Loc != null) {
-                        for (var iSL3 = 0; iSL3 < app.pGage.m_arrray_RiverSectionStatus.length; iSL3++) {  //remove placeholder sections if entered
-                            if ((app.pGage.m_arrray_RiverSectionStatus[iSL3][9] == strStreamName) & (app.pGage.m_arrray_RiverSectionStatus[iSL3][10] == iSectionID)) {
-                                app.pGage.m_arrray_RiverSectionStatus.splice(iSL3, 1);
-                                break;
-                            }
-                        }
-                    }
-                    if (arrayCODWR_Sens_Loc != null) {
+                    if ((arrayDNRC_Sens_Loc != null) |
+                        (arrayCODWR_Sens_Loc != null) |
+                        (arrayUSACE_NWD_Sens_Loc != null) |
+                        (arrayAlberta_Sens_Loc != null)) {
                         for (var iSL3 = 0; iSL3 < app.pGage.m_arrray_RiverSectionStatus.length; iSL3++) {  //remove placeholder sections if entered
                             if ((app.pGage.m_arrray_RiverSectionStatus[iSL3][9] == strStreamName) & (app.pGage.m_arrray_RiverSectionStatus[iSL3][10] == iSectionID)) {
                                 app.pGage.m_arrray_RiverSectionStatus.splice(iSL3, 1);
@@ -2826,14 +2852,33 @@ define([
                         }
                     }
 
-                    if (arrayUSACE_NWD_Sens_Loc != null) {
-                        for (var iSL3 = 0; iSL3 < app.pGage.m_arrray_RiverSectionStatus.length; iSL3++) {  //remove placeholder sections if entered
-                            if ((app.pGage.m_arrray_RiverSectionStatus[iSL3][9] == strStreamName) & (app.pGage.m_arrray_RiverSectionStatus[iSL3][10] == iSectionID)) {
-                                app.pGage.m_arrray_RiverSectionStatus.splice(iSL3, 1);
-                                break;
-                            }
-                        }
-                    }
+                    //if (arrayAlberta_Sens_Loc != null) {
+                    //    for (var iSL3 = 0; iSL3 < app.pGage.m_arrray_RiverSectionStatus.length; iSL3++) {  //remove placeholder sections if entered
+                    //        if ((app.pGage.m_arrray_RiverSectionStatus[iSL3][9] == strStreamName) & (app.pGage.m_arrray_RiverSectionStatus[iSL3][10] == iSectionID)) {
+                    //            app.pGage.m_arrray_RiverSectionStatus.splice(iSL3, 1);
+                    //            break;
+                    //        }
+                    //    }
+                    //}
+
+
+                    //if (arrayCODWR_Sens_Loc != null) {
+                    //    for (var iSL3 = 0; iSL3 < app.pGage.m_arrray_RiverSectionStatus.length; iSL3++) {  //remove placeholder sections if entered
+                    //        if ((app.pGage.m_arrray_RiverSectionStatus[iSL3][9] == strStreamName) & (app.pGage.m_arrray_RiverSectionStatus[iSL3][10] == iSectionID)) {
+                    //            app.pGage.m_arrray_RiverSectionStatus.splice(iSL3, 1);
+                    //            break;
+                    //        }
+                    //    }
+                    //}
+
+                    //if (arrayUSACE_NWD_Sens_Loc != null) {
+                    //    for (var iSL3 = 0; iSL3 < app.pGage.m_arrray_RiverSectionStatus.length; iSL3++) {  //remove placeholder sections if entered
+                    //        if ((app.pGage.m_arrray_RiverSectionStatus[iSL3][9] == strStreamName) & (app.pGage.m_arrray_RiverSectionStatus[iSL3][10] == iSectionID)) {
+                    //            app.pGage.m_arrray_RiverSectionStatus.splice(iSL3, 1);
+                    //            break;
+                    //        }
+                    //    }
+                    //}
 
 
                     if (((strSiteID == "12334550") |  //Turah      ///////////////////propogate symbology to other lines if meets special use case (i.e. Turah, and Big hole section 4)
@@ -3007,7 +3052,7 @@ define([
                 blnSingleSelect_CODWR = true;
                 arrayCODWR_Sens_Loc = app.pGage.m_arrayCODWR_Sens_Loc;
             }
-            if ((arrayProc[0].length == 4) & (arrayProc.length == 1) & (arrayProc[0][3] == "Canadian Water Office")) {
+            if ((arrayProc[0].length == 4) & (arrayProc.length == 1) & (arrayProc[0][3] == "AB EP")) {
                 blnSingleSelect_Alberta = true;
                 arrayAlberta_Sens_Loc = app.pGage.m_arrayAlberta_Sens_Loc;
             }
@@ -3152,7 +3197,7 @@ define([
                             arraySiteIDsCODWR.push(arrayProc[ii]);
                         } else if (strAgency == "USACE-NWD") {  //useful for initial delineation of USGS,CODWR and DNRC gages
                             arraySiteIDsUSACE_NWD.push(arrayProc[ii]);
-                        } else if (strAgency == "Canadian Water Office") {  //useful for initial delineation of USGS,CODWR and DNRC gages
+                        } else if (strAgency == "AB EP") {  //useful for initial delineation of USGS,CODWR and DNRC gages
                             arraySiteIDsAlberta.push(arrayProc[ii]);
                         } else if (strAgency == "MTDNRC") {  //useful for initial delineation of USGS,CODWR,USACE_NWD, and DNRC gages
 							arraySiteIDsDNRC.push(arrayProc[ii]);
