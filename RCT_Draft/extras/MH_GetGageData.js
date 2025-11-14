@@ -2332,6 +2332,7 @@ define([
                         var strSiteTempStatus = "OPEN";//OPEN, HOOT-OWL FISHING RESTRICTIONS CRITERIA, RIVER CLOSURE (CLOSED TO FISHING) CRITERIA
                         var strSiteHtStatus = "OPEN";
 
+                        // set the URL for the stream detatil section hyperlink when users selects a summary
                         if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null) & (arrayUSACE_NWD_Sens_Loc == null) & (arrayAlberta_Sens_Loc == null)) {
                             strHyperlinkURL = strURLGagePrefix + "&sites=" + strSiteID;        //siteID
                             strHyperlinkURL = returnURL4GSgage(strHyperlinkURL);
@@ -2592,7 +2593,7 @@ define([
                     HtItem = "";
                     temperatureItem = "";
                 }
-                if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null) &
+                if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null) &            //Site Name for Dispalay in the Summary and Seciton Details
                     (arrayUSACE_NWD_Sens_Loc == null) & (arrayAlberta_Sens_Loc == null)) {
                     if (itemFound.length > 0) {
                         var item = itemFound[0];
@@ -2601,7 +2602,7 @@ define([
                 } else if ((arrayUSACE_NWD_Sens_Loc != null)) {
                     strSiteName = arrayUSACE_NWD_Sens_Loc[0][0];
                 } else if ((arrayDNRC_Sens_Loc != null)) {
-                    strSiteName = arrayDNRC_Sens_Loc[0][0];
+                    strSiteName = arrayDNRC_Sens_Loc[0][1];
                 } else if ((arrayCODWR_Sens_Loc != null)) {
                     strSiteName = arrayCODWR_Sens_Loc[0][0];
                 } else if ((arrayAlberta_Sens_Loc != null)) {
