@@ -1081,7 +1081,8 @@ define([
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22/FeatureServer/";//PRODUCTION RCT Support FY22
 
 
-            app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Edits_Tyler_view/FeatureServer/"; //Eddie Dev Edit
+            //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Edits_Tyler_view/FeatureServer/"; //Eddie Dev Edit
+            app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Edits_Tyler_3_view/FeatureServer/";//Eddie Dev Edit
 
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22_multi/FeatureServer/";  //dev to test multi-gage per section
             //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
@@ -1277,6 +1278,7 @@ define([
             let strQueryDef3 = this.getQueryDefs1_4()[2]; //watersheds
             let strQueryDef4 = this.getQueryDefs1_4()[3]; //watershed mask
             let strQueryDef5 = this.getQueryDefs1_4()[4]; //Reservoir
+            let strQueryDef8 = this.getQueryDefs1_4()[7]; //stream sections with Opt Out of Summary
             
 
             let strlabelField3 = "SectionName";
@@ -1293,7 +1295,8 @@ define([
                 minScale: 1500000
             };
 
-            app.SectionQryStringGetGageData = strQueryDef2;
+            //app.SectionQryStringGetGageData = strQueryDef2;
+            app.SectionQryStringGetGageData = strQueryDef8;
             app.ReservoirQryStringGetGageData = strQueryDef5;
             pEPointsFeatureLayer.definitionExpression = strQueryDef1;
 
@@ -2805,6 +2808,7 @@ define([
             let strQueryDef5 = "";
             let strQueryDef6 = "";
             let strQueryDef7 = "";
+            let strQueryDef8 = "";
 
             arrayTmp4Query3 =[];
             if((app.Basin_ID == undefined) & (typeof app.H2O_ID == 'undefined')) {
@@ -2869,21 +2873,20 @@ define([
                     " OR (StreamName in (''))";
             }
 
-            //strQueryDef6 = "(Basin in ('Upper Clark Fork')) OR (Watershed in ('Blackfoot'))";                                                                 //Turah / Big Hole River Section 4' gage functionality
-
             if ((app.Basin_ID == "Upper Clark Fork") | (app.Basin_ID == "Blackfoot-Sun") | (app.H2O_ID == "Blackfoot")) {
                 strQueryDef7 = "(SectionName in ('nothing'))" +                                    //Turah gage propogate functionality
                     " OR (StreamName in ('Blackfoot River','Clearwater River','North Fork Blackfoot River','Nevada Creek','Monture Creek'))";
             }
-            //if (((app.Basin_ID == "Upper Clark Fork") | (app.Basin_ID == "Blackfoot-Sun")) & (app.H2O_ID == "Blackfoot")) {
-            //    strQueryDef7 = "(SectionName in ('nothing'))" +                                    //Turah gage propogate functionality
-            //        " OR (StreamName in ('Blackfoot River','Clearwater River','North Fork Blackfoot River','Nevada Creek'))";
-            //} else if (((app.Basin_ID == "Upper Clark Fork") | (app.Basin_ID == "Blackfoot-Sun")) & (!(app.H2O_ID == "Blackfoot"))) {
-            //    strQueryDef7 = "(SectionName in ('nothing'))" +                                    //Turah gage propogate functionality
-            //        " OR (StreamName in ('nothing'))";
-            //}
+
             
-            return [strQueryDef1, strQueryDef2, strQueryDef3, strQueryDef4, strQueryDef5, strQueryDef6, strQueryDef7];
+            if (strQueryDef2 != "1=1") {
+                strQueryDef8 += "(OptOut_Summary IS NULL) AND (" + strQueryDef2 + ")";
+            } else {
+                strQueryDef8 = strQueryDef2;
+            }
+
+
+            return [strQueryDef1, strQueryDef2, strQueryDef3, strQueryDef4, strQueryDef5, strQueryDef6, strQueryDef7, strQueryDef8];
         },
 
 
