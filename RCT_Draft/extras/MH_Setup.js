@@ -1085,7 +1085,7 @@ define([
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22/FeatureServer/";//PRODUCTION RCT Support FY22
 
 
-            app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_DRAFT_20251230/FeatureServer/"; //MMH Dev Edit
+            app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_DRAFT_20251230_view/FeatureServer/"; //MMH Dev Edit
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Edits_Tyler_3_view/FeatureServer/";//Eddie Dev Edit
 
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22_multi/FeatureServer/";  //dev to test multi-gage per section
