@@ -511,6 +511,9 @@ define([
                 
                 strStreamName = itemSection.attributes.StreamName;
                 strSectionID = itemSection.attributes.SectionID;
+
+
+
                 strSectionName_ = itemSection.attributes.SectionName;
                 strCFS_Prep4Conserv = itemSection.attributes.CFS_Prep4Conserv;
                 strCFS_Conserv = itemSection.attributes.CFS_Conserv;
@@ -549,10 +552,30 @@ define([
 
                 var blnGageFound = false;
                 dom.map(items[1].features, function (itemGage) { //loop through the gages that match the sections
+                    console.log(itemGage.attributes.Section_ID);
+
+                    if (itemSection.attributes.SectionID == "Milk River Section 1") {
+                        console.log("pause");
+                    }
+                    if (itemGage.attributes.Section_ID == "Milk River Section 1") {
+                        console.log("pause");
+                        console.log((itemGage.attributes.Watershed === itemSection.attributes.Watershed));
+                        console.log((itemGage.attributes.StreamName === itemSection.attributes.StreamName));
+                        console.log((itemGage.attributes.Section_ID === itemSection.attributes.SectionID));
+                    }
+
                     if ((itemGage.attributes.Watershed === itemSection.attributes.Watershed) &
                         (itemGage.attributes.StreamName === itemSection.attributes.StreamName) &
                         (itemGage.attributes.Section_ID === itemSection.attributes.SectionID) &
                         (itemGage.attributes.Symbology === "TRIGGER MEASURE LOCATION")) {
+
+
+                        if (itemSection.attributes.SectionID == "Milk River Section 1") {
+                            console.log("pause");
+                        }
+                        if (itemGage.attributes.Section_ID == "North Fork Milk River Section 1") {
+                            console.log("pause");
+                        }
 
                         console.log("Gage/Section Match: " + itemGage.attributes.StreamName + ":" + itemGage.attributes.Section_ID + ":" + itemGage.attributes.Agency);
 
@@ -2279,6 +2302,25 @@ define([
                 var dblLatestHt = "";
                 var strID = "";
 
+
+
+                if (strSiteID != "no site id specified") {
+                    // set the URL for the stream detatil section hyperlink when users selects a summary
+                    if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null) & (arrayUSACE_NWD_Sens_Loc == null) & (arrayAlberta_Sens_Loc == null)) {
+                        strHyperlinkURL = strURLGagePrefix + "&sites=" + strSiteID;        //siteID
+                        strHyperlinkURL = returnURL4GSgage(strHyperlinkURL);
+                    } else if (arrayCODWR_Sens_Loc != null) {
+                        strHyperlinkURL = "https://dwr.state.co.us/tools/Stations/" + strSiteID;
+                    } else if (arrayUSACE_NWD_Sens_Loc != null) {
+                        strHyperlinkURL = "https://www.nwd-wc.usace.army.mil/dd/common/projects/www/" + strSiteID.toLowerCase() + ".html";
+                    } else if (arrayAlberta_Sens_Loc != null) {
+                        strHyperlinkURL = "https://rivers.alberta.ca/DataService/WaterlevelOrientatedGraph?stationNumber=" + strSiteID.toLowerCase() + "&stationType=R&dataType=HG&prefix=weekfig&orientation=Landscape";  //https://rivers.alberta.ca/DataService/WaterlevelOrientatedGraph?stationNumber=05BJ004&stationType=R&dataType=HG&prefix=weekfig&orientation=Landscape
+                    } else {  // this captures the MT DNRC case's
+                        strHyperlinkURL = "https://gis.dnrc.mt.gov/apps/stage/gage-report/location/" + strSiteID;
+                    }
+                }
+
+
                 if ((itemFound.length > 0) | (itemFoundTemp.length > 0) | (itemFoundDischarge.length > 0) | (itemFoundHt.length > 0)) {  //set the some base variable values
                     iLateFlowPref4ConsvValue = itemSectionRefined[3];
                     iLateFlowConsvValue = itemSectionRefined[4];
@@ -2332,19 +2374,19 @@ define([
                         var strSiteTempStatus = "OPEN";//OPEN, HOOT-OWL FISHING RESTRICTIONS CRITERIA, RIVER CLOSURE (CLOSED TO FISHING) CRITERIA
                         var strSiteHtStatus = "OPEN";
 
-                        // set the URL for the stream detatil section hyperlink when users selects a summary
-                        if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null) & (arrayUSACE_NWD_Sens_Loc == null) & (arrayAlberta_Sens_Loc == null)) {
-                            strHyperlinkURL = strURLGagePrefix + "&sites=" + strSiteID;        //siteID
-                            strHyperlinkURL = returnURL4GSgage(strHyperlinkURL);
-                        } else if (arrayCODWR_Sens_Loc != null) {
-                            strHyperlinkURL = "https://dwr.state.co.us/tools/Stations/" + strSiteID;
-                        } else if (arrayUSACE_NWD_Sens_Loc != null) {
-                            strHyperlinkURL = "https://www.nwd-wc.usace.army.mil/dd/common/projects/www/" + strSiteID.toLowerCase() + ".html";
-                        } else if (arrayAlberta_Sens_Loc != null) {     
-                            strHyperlinkURL = "https://rivers.alberta.ca/DataService/WaterlevelOrientatedGraph?stationNumber=" + strSiteID.toLowerCase() + "&stationType=R&dataType=HG&prefix=weekfig&orientation=Landscape";  //https://rivers.alberta.ca/DataService/WaterlevelOrientatedGraph?stationNumber=05BJ004&stationType=R&dataType=HG&prefix=weekfig&orientation=Landscape
-                        } else {  // this captures the MT DNRC case's
-                            strHyperlinkURL = "https://gis.dnrc.mt.gov/apps/stage/gage-report/location/" + strSiteID;
-                        }
+                        //// set the URL for the stream detatil section hyperlink when users selects a summary
+                        //if ((arrayDNRC_Sens_Loc == null) & (arrayCODWR_Sens_Loc == null) & (arrayUSACE_NWD_Sens_Loc == null) & (arrayAlberta_Sens_Loc == null)) {
+                        //    strHyperlinkURL = strURLGagePrefix + "&sites=" + strSiteID;        //siteID
+                        //    strHyperlinkURL = returnURL4GSgage(strHyperlinkURL);
+                        //} else if (arrayCODWR_Sens_Loc != null) {
+                        //    strHyperlinkURL = "https://dwr.state.co.us/tools/Stations/" + strSiteID;
+                        //} else if (arrayUSACE_NWD_Sens_Loc != null) {
+                        //    strHyperlinkURL = "https://www.nwd-wc.usace.army.mil/dd/common/projects/www/" + strSiteID.toLowerCase() + ".html";
+                        //} else if (arrayAlberta_Sens_Loc != null) {     
+                        //    strHyperlinkURL = "https://rivers.alberta.ca/DataService/WaterlevelOrientatedGraph?stationNumber=" + strSiteID.toLowerCase() + "&stationType=R&dataType=HG&prefix=weekfig&orientation=Landscape";  //https://rivers.alberta.ca/DataService/WaterlevelOrientatedGraph?stationNumber=05BJ004&stationType=R&dataType=HG&prefix=weekfig&orientation=Landscape
+                        //} else {  // this captures the MT DNRC case's
+                        //    strHyperlinkURL = "https://gis.dnrc.mt.gov/apps/stage/gage-report/location/" + strSiteID;
+                        //}
                         blnRealValues = false;
                         var str3DayCFSTrendCFS = "images/blank.png";
                         var str3DayCFSTrendTMP = "images/blank.png";
