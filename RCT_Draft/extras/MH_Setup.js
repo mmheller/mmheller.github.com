@@ -644,7 +644,7 @@ define([
                 ["Upper Milk", "Upper Milk", "Crown of the Continent - NE"],
                 ["Upper Oldman River", "Upper Oldman River", "Crown of the Continent - NE"],
 
-                ["Elbow - Can", "Elbow", "Crown of the Continent - NW"],
+                ["Elbow", "Elbow", "Crown of the Continent - NW"],
                 ["Elk", "Elk", "Crown of the Continent - NW"],
                 ["Headwaters Kootenai River", "Headwaters Kootenai River", "Crown of the Continent - NW"],
                 ["Highwood", "Highwood", "Crown of the Continent - NW"],
@@ -944,7 +944,12 @@ define([
                 }
             };
             //////////////////////////////////////////////////////
-            
+
+            if ((app.Basin_ID == "Crown of the Continent - NE") | (app.Basin_ID == "Crown of the Continent - NW") |
+                (app.Basin_ID == "Crown of the Continent - SE") | (app.Basin_ID == "Crown of the Continent - SW")) {
+                $("#dropDownId").append("<li><a data-value='Alberta River Basins'>Alberta River Basins</a></li>")
+                $("#dropDownId").append("<li><a data-value='Canada Hydrometric'>Canada Hydrometric</a></li>")
+            }
 
             $("#dropDownId").append("<li><a data-value='American Whitewater Difficulty and Flow'>American Whitewater Difficulty and Flow</a></li>")
             $("#dropDownId").append("<li><a data-value='FEMA Flood Layer Hazard Viewer'>FEMA Flood Layer Hazard Viewer</a></li>")
@@ -970,6 +975,9 @@ define([
                 if (app.Basin_ID == "Upper Clark Fork") {
                     $("#dropDownId").append("<li><a data-value='MT DNRC Upper Clark Fork & Blackfoot Water Rights'>MT DNRC Upper Clark Fork & Blackfoot Water Rights</a></li>")
                 }
+
+
+
             }
             $("#dropDownId").append("<li><a data-value='National Water Prediction Service'>National Water Prediction Service</a></li>")
 
@@ -2540,7 +2548,14 @@ define([
                         blnAddCoords = true;
                     }
 
-
+                    if (strSelectedText == "Alberta River Basins") {
+                        strURL = "https://rivers.alberta.ca/";
+                        blnAddCoords = false;
+                    }
+                    if (strSelectedText == "Canada Hydrometric") {
+                        strURL = "https://wateroffice.ec.gc.ca/map/index_e.html?type=real_time&default_marker=data_availability";
+                        blnAddCoords = false;
+                    }
 
                     if (strSelectedText == "MT DNRC Fire Map") {
                         strURL = "https://mtdnrc.maps.arcgis.com/apps/webappviewer/index.html?id=6bea18851bec440d9260cb0d28f53281&extent=";
