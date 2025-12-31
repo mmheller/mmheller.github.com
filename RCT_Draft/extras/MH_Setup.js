@@ -639,7 +639,7 @@ define([
                 ["Little Bow", "Little Bow", "Crown of the Continent - NE"],
                 ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - NE"],
                 ["Oldman River-Willow Creek", "Oldman River-Willow Creek", "Crown of the Continent - NE"],
-                ["Pakowki Lake", "Pakowki Lake", "Crown of the Continent - NE"],
+                /*["Pakowki Lake", "Pakowki Lake", "Crown of the Continent - NE"],*/
                 ["St. Marys", "St. Marys", "Crown of the Continent - NE"],
                 ["Upper Milk", "Upper Milk", "Crown of the Continent - NE"],
                 ["Upper Oldman River", "Upper Oldman River", "Crown of the Continent - NE"],
