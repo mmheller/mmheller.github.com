@@ -2648,7 +2648,11 @@ define([
                 } else if ((arrayCODWR_Sens_Loc != null)) {
                     strSiteName = arrayCODWR_Sens_Loc[0][0];
                 } else if ((arrayAlberta_Sens_Loc != null)) {
-                    strSiteName = arrayAlberta_Sens_Loc[0][1];
+                    arrayAlberta_Sens_Loc.forEach(function (item, index) {
+                        if (item[0] == strSiteID) {
+                            strSiteName = item[1];
+                        }
+                    });
                 }
 
                 var strNoDataLabel4ChartingHt = "";
