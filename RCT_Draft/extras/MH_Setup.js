@@ -693,8 +693,10 @@ define([
                 ["Lodge", "Lodge", "Milk"],
                 ["Lower Milk", "Lower Milk", "Milk"],
                 ["Middle Milk", "Middle Milk", "Milk"],
+                ["Peoples", "Peoples", "Milk"],
                 ["Rock", "Rock", "Milk"],
                 ["Sage", "Sage", "Milk"],
+                ["St. Marys", "St. Marys", "Milk"],
                 ["Upper Milk", "Upper Milk", "Milk"],
                 ["Wild Horse Lake", "Wild Horse Lake", "Milk"],
 
@@ -713,27 +715,45 @@ define([
                 //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD005_table.json"; //Belly River near Mountain View
                 //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD003_table.json"; // Waterton River near Waterton Park - WSC | Table Data
                 //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD017_table.json"; //Mountain View Irrigation District Canal
-                //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_11AA001_table.json"; //North Milk River near International Boundary
-                //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AE924_table.json"; //St. Mary River above St. Mary Reservoir
-                //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AE002_table.json"; //Lee Creek at Cardston
                 //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD042_table.json"; //Yarrow Creek at Spread Eagle Road
-
                 //strTest777URL = "https://api.water.noaa.gov/nwps/v1/gauges/JRLK1/stageflow/observed"
 
+
+                //strTest777URL = "https://water.usace.army.mil/cda/reporting/providers/swt/timeseries?name=JOHN.Elev.Inst.1Hour.0.Ccp-Rev&begin=2026-01-21T17:56:44.577Z&end=2026-01-28T17:56:44.577Z";
+                ////strTest777URL = "https://gis.dnrc.mt.gov/arcgis/rest/services/WRD/WMB_StAGE/MapServer/3/query?outFields=*&returnGeometry=false&f=json&where=SensorLabel+in+%28%27discharge%27%2C%27water+temp%27%29+and+LocationID+%3D+%27a61e9c1d12b44ee2a7abb8e0020e25a0%27";
+
+                //works
+                //strTest777URL = "https://nwis.waterservices.usgs.gov/nwis/iv/?format=json&indent=on&siteStatus=all&startDT=2026-01-26&endDT=2026-01-29&parameterCd=00010,00060,00065&sites=06026500,06027600";
+
+                //does not work
+                //strTest777URL = "https://water.usace.army.mil/cda/reporting/providers/swt/timeseries?name=JOHN.Stor.Inst.1Hour.0.Ccp-Rev&begin=2026-01-22T16:44:35.267Z&end=2026-01-29T16:44:35.267Z";
+
+                //does not work
+                //strTest777URL = "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations[]=08NH064&parameters[]=46&parameters[]=47&start_date=2026-01-27%2000:00:00&end_date=2026-01-29%2023:59:59";
+
+                //works but need to figure out the json parsing
+                //strTest777URL = "https://api.water.noaa.gov/nwps/v1/gauges/JRLK1/stageflow"; ///https://water.noaa.gov/gauges/jrlk1 Neosho River at John Redmond Lake
+
+                //works but need to figure out the json parsing
+                //strTest777URL = "https://api.water.noaa.gov/nwps/v1/gauges/SPAQ8/stageflow"; ///hhttps://water.noaa.gov/gauges/SPAQ8 Lodge Creek at Spangler Ditch
+
+
                 //fetch(strTest777URL)
-                //    .then(response => response.json())
+                //    .then(response => {
+                //        if (!response.ok) {
+                //            throw new Error(`HTTP error! status: ${response.status}`);
+                //        }
+                //        return response.text(); // Get the response body as plain text
+                //    })
                 //    .then(data => {
-                //        //console.log(data[0][data]); // Process the JSON data
-                //        console.log(data[0]['data']); // Process the JSON data
+                //        console.log(data['observed']); // Process the JSON data
+                //        //console.log(data[0]['data']); // Process the JSON data
                 //        console.log(data[0]['data'][0][0] + " " + data[0]['data'][0][1] + " " + data[0]['data'][0][2]); // Process the JSON data
-                //        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); // Process the JSON data
-                //        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); // Process the JSON data
                 //        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); // Process the JSON data
                 //    })
                 //    .catch(error => {
-                //        console.error('Error fetching JSON:', error);
+                //        console.error("Fetch or parsing error:", error);
                 //    });
-    
 			}
 
             var arrayNavList = [];
