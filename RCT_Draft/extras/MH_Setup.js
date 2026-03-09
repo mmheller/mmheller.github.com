@@ -735,26 +735,30 @@ define([
                 //works but need to figure out the json parsing
                 //strTest777URL = "https://api.water.noaa.gov/nwps/v1/gauges/JRLK1/stageflow"; ///https://water.noaa.gov/gauges/jrlk1 Neosho River at John Redmond Lake
 
-                //works but need to figure out the json parsing
-                //strTest777URL = "https://api.water.noaa.gov/nwps/v1/gauges/SPAQ8/stageflow"; ///hhttps://water.noaa.gov/gauges/SPAQ8 Lodge Creek at Spangler Ditch
+                //NOAA works
+                strTest777URL = "https://api.water.noaa.gov/nwps/v1/gauges/SPAQ8/stageflow"; ///hhttps://water.noaa.gov/gauges/SPAQ8 Lodge Creek at Spangler Ditch
 
+                //BOR Hydromet does not work
+                strTest777URL = "https://www.usbr.gov/pn-bin/hdb/hdb.pl?svr=lchdb&sdi=1863&tstp=DY&t1=2018-05-26T00:00&t2=2018-06-25T00:00&table=R&mrid=0&format=json";
 
-                //fetch(strTest777URL)
-                //    .then(response => {
-                //        if (!response.ok) {
-                //            throw new Error(`HTTP error! status: ${response.status}`);
-                //        }
-                //        return response.text(); // Get the response body as plain text
-                //    })
-                //    .then(data => {
-                //        console.log(data['observed']); // Process the JSON data
-                //        //console.log(data[0]['data']); // Process the JSON data
-                //        console.log(data[0]['data'][0][0] + " " + data[0]['data'][0][1] + " " + data[0]['data'][0][2]); // Process the JSON data
-                //        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); // Process the JSON data
-                //    })
-                //    .catch(error => {
-                //        console.error("Fetch or parsing error:", error);
-                //    });
+                fetch(strTest777URL)
+                    .then(response => {
+                        if (!response.ok) {
+                            alert(response.status);
+                            throw new Error(`HTTP error! status: ${response.status}`);
+                        }
+                        return response.text(); // Get the response body as plain text
+                        alert(response.text());
+                    })
+                    .then(data => {
+                        console.log(data); // show the JSON data
+                        alert(data);
+                        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); // Process the JSON data
+                    })
+                    .catch(error => {
+                        alert("Fetch or parsing error:");
+                        console.error("Fetch or parsing error:", error);
+                    });
 			}
 
             var arrayNavList = [];
