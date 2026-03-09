@@ -548,7 +548,82 @@ define([
 				app.Basin_ID = "Upper Yellowstone Headwaters";
 			}
 			
-            app.arrayEntireList = [["Beaverhead/Centennial", "Beaverhead", "UMH"],          //array [watershed listed on website, watershed in layer, basin name in website]
+            app.arrayEntireList = [
+                //DEV edit******************************************
+                ["Belly", "Belly", "Crown of the Continent - NE"],
+                ["Little Bow", "Little Bow", "Crown of the Continent - NE"],
+                ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - NE"],
+                ["Oldman River-Willow Creek", "Oldman River-Willow Creek", "Crown of the Continent - NE"],
+                /*["Pakowki Lake", "Pakowki Lake", "Crown of the Continent - NE"],*/
+                ["St. Marys", "St. Marys", "Crown of the Continent - NE"],
+                ["Upper Milk", "Upper Milk", "Crown of the Continent - NE"],
+                ["Upper Oldman River", "Upper Oldman River", "Crown of the Continent - NE"],
+
+                ["Elbow", "Elbow", "Crown of the Continent - NW"],
+                ["Elk", "Elk", "Crown of the Continent - NW"],
+                ["Headwaters Kootenai River", "Headwaters Kootenai River", "Crown of the Continent - NW"],
+                ["Highwood", "Highwood", "Crown of the Continent - NW"],
+                ["Kananaskis", "Kananaskis", "Crown of the Continent - NW"],
+                ["Lower Kootenai", "Lower Kootenai", "Crown of the Continent - NW"],
+                ["Middle Kootenai", "Middle Kootenai", "Crown of the Continent - NW"],
+                ["Moyie", "Moyie", "Crown of the Continent - NW"],
+                ["North Fork Flathead", "North Fork Flathead", "Crown of the Continent - NW"],
+                ["Upper Kootenai River", "Upper Kootenai River", "Crown of the Continent - NW"],
+                ["Yaak", "Yaak", "Crown of the Continent"],
+
+                ["Bitterroot", "Bitterroot", "Crown of the Continent - SW"],
+                ["Fisher", "Fisher", "Crown of the Continent - SW"],
+                ["Middle Clark Fork", "Middle Clark Fork", "Crown of the Continent - SW"],
+                ["Lower Flathead", "Lower Flathead", "Crown of the Continent - SW"],
+                ["Mainstem Flathead", "Mainstem Flathead", "Crown of the Continent - SW"],
+                ["Middle Fork Flathead", "Middle Fork Flathead", "Crown of the Continent - SW"],
+                ["South Fork Flathead", "South Fork Flathead", "Crown of the Continent - SW"],
+                ["Stillwater", "Stillwater", "Crown of the Continent - SW"],
+                ["Swan", "Swan", "Crown of the Continent - SW"],
+                ["Upper Clark Fork", "Upper Clark Fork", "Crown of the Continent - SW"],
+
+                ["Cut Bank", "Cut Bank", "Crown of the Continent - SE"],
+                ["Marias", "Marias", "Crown of the Continent - SE"],
+                ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - SE"],
+                ["Smith", "Smith", "Crown of the Continent - SE"],
+
+                ["St. Marys", "St. Marys", "Crown of the Continent - SE"],
+                ["Sun", "Sun", "Crown of the Continent - SE"],
+                ["Teton", "Teton", "Crown of the Continent - SE"],
+                ["Two Medicine", "Two Medicine", "Crown of the Continent - SE"],
+                ["Upper Missouri", "Upper Missouri", "Crown of the Continent - SE"],
+                ["Upper Missouri-Dearborn", "Upper Missouri-Dearborn", "Crown of the Continent - SE"],
+
+                /*["Blackfoot", "Blackfoot", "Crown of the Continent"], */
+                /*["Flint-Rock", "Flint-Rock", "Crown of the Continent"], */
+
+                ["Upper Green", "Upper Green", "Upper Green"],
+                ["Upper Green-Slate", "Upper Green-Slate", "Upper Green"],
+                ["Big Sandy", "Big Sandy WY", "Upper Green"],
+
+                ["Battle", "Battle", "Milk"],
+                ["Beaver", "Beaver", "Milk"],
+                ["Big Sandy", "Big Sandy", "Milk"],
+                ["Frenchman", "Frenchman", "Milk"],
+                ["Lodge", "Lodge", "Milk"],
+                ["Lower Milk", "Lower Milk", "Milk"],
+                ["Middle Milk", "Middle Milk", "Milk"],
+                ["Milk Headwaters", "Milk Headwaters", "Milk"],
+                ["Peoples", "Peoples", "Milk"],
+                ["Rock", "Rock", "Milk"],
+                ["Sage", "Sage", "Milk"],
+                ["St. Marys", "St. Marys", "Milk"],
+                ["Upper Milk", "Upper Milk", "Milk"],
+                ["Wild Horse Lake", "Wild Horse Lake", "Milk"],
+
+                ["Lower Marais Des Cygnes", "Lower Marais Des Cygnes", "Lower Marais Des Cygnes"],
+                ["Neosho Headwaters", "Neosho Headwaters", "Lower Marais Des Cygnes"],
+                ["Upper Marais Des Cygnes", "Upper Marais Des Cygnes", "Lower Marais Des Cygnes"],
+                ["Upper Neosho", "Upper Neosho", "Lower Marais Des Cygnes"],
+
+
+                //Production....
+                ["Beaverhead/Centennial", "Beaverhead", "UMH"],          //array [watershed listed on website, watershed in layer, basin name in website]
 				["Big Hole", "Big Hole", "UMH"],
                 ["Boulder", "Boulder", "UMH"],
                 ["Broadwater", "Broadwater", "UMH"], 
@@ -631,80 +706,8 @@ define([
                 ["Rio Grande-Albuquerque", "Rio Grande-Albuquerque", "Upper Rio Grand - New Mexico"],
                 ["Rio Grande-Santa Fe", "Rio Grande-Santa Fe", "Upper Rio Grand - New Mexico"],
                 ["Rio Puerco", "Rio Puerco", "Upper Rio Grand - New Mexico"],
-                ["Upper Rio Grande", "Upper Rio Grande", "Upper Rio Grand - New Mexico"],
-
-
-                //DEV and Production edit******************************************
-                ["Belly", "Belly", "Crown of the Continent - NE"],
-                ["Little Bow", "Little Bow", "Crown of the Continent - NE"],
-                ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - NE"],
-                ["Oldman River-Willow Creek", "Oldman River-Willow Creek", "Crown of the Continent - NE"],
-                /*["Pakowki Lake", "Pakowki Lake", "Crown of the Continent - NE"],*/
-                ["St. Marys", "St. Marys", "Crown of the Continent - NE"],
-                ["Upper Milk", "Upper Milk", "Crown of the Continent - NE"],
-                ["Upper Oldman River", "Upper Oldman River", "Crown of the Continent - NE"],
-
-                ["Elbow", "Elbow", "Crown of the Continent - NW"],
-                ["Elk", "Elk", "Crown of the Continent - NW"],
-                ["Headwaters Kootenai River", "Headwaters Kootenai River", "Crown of the Continent - NW"],
-                ["Highwood", "Highwood", "Crown of the Continent - NW"],
-                ["Kananaskis", "Kananaskis", "Crown of the Continent - NW"],
-                ["Lower Kootenai", "Lower Kootenai", "Crown of the Continent - NW"],
-                ["Middle Kootenai", "Middle Kootenai", "Crown of the Continent - NW"],
-                ["Moyie", "Moyie", "Crown of the Continent - NW"],
-                ["North Fork Flathead", "North Fork Flathead", "Crown of the Continent - NW"],
-                ["Upper Kootenai River", "Upper Kootenai River", "Crown of the Continent - NW"],
-                ["Yaak", "Yaak", "Crown of the Continent"],
-
-                ["Bitterroot", "Bitterroot", "Crown of the Continent - SW"],
-                ["Fisher", "Fisher", "Crown of the Continent - SW"],
-                ["Middle Clark Fork", "Middle Clark Fork", "Crown of the Continent - SW"],
-                ["Lower Flathead", "Lower Flathead", "Crown of the Continent - SW"],
-                ["Mainstem Flathead", "Mainstem Flathead", "Crown of the Continent - SW"],
-                ["Middle Fork Flathead", "Middle Fork Flathead", "Crown of the Continent - SW"],
-                ["South Fork Flathead", "South Fork Flathead", "Crown of the Continent - SW"],
-                ["Stillwater", "Stillwater", "Crown of the Continent - SW"],
-                ["Swan", "Swan", "Crown of the Continent - SW"],
-                ["Upper Clark Fork", "Upper Clark Fork", "Crown of the Continent - SW"],
-
-                ["Cut Bank", "Cut Bank", "Crown of the Continent - SE"],
-                ["Marias", "Marias", "Crown of the Continent - SE"],
-                ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - SE"],
-                ["Smith", "Smith", "Crown of the Continent - SE"],
-
-                ["St. Marys", "St. Marys", "Crown of the Continent - SE"],
-                ["Sun", "Sun", "Crown of the Continent - SE"],
-                ["Teton", "Teton", "Crown of the Continent - SE"],
-                ["Two Medicine", "Two Medicine", "Crown of the Continent - SE"],
-                ["Upper Missouri", "Upper Missouri", "Crown of the Continent - SE"],
-                ["Upper Missouri-Dearborn", "Upper Missouri-Dearborn", "Crown of the Continent - SE"],
-
-                /*["Blackfoot", "Blackfoot", "Crown of the Continent"], */
-                /*["Flint-Rock", "Flint-Rock", "Crown of the Continent"], */
-
-                ["Upper Green", "Upper Green", "Upper Green"],
-                ["Upper Green-Slate", "Upper Green-Slate", "Upper Green"],
-                ["Big Sandy", "Big Sandy WY", "Upper Green"],
-
-                ["Battle", "Battle", "Milk"],
-                ["Beaver", "Beaver", "Milk"],
-                ["Big Sandy", "Big Sandy", "Milk"],
-                ["Frenchman", "Frenchman", "Milk"],
-                ["Lodge", "Lodge", "Milk"],
-                ["Lower Milk", "Lower Milk", "Milk"],
-                ["Middle Milk", "Middle Milk", "Milk"],
-                ["Milk Headwaters", "Milk Headwaters", "Milk"],
-                ["Peoples", "Peoples", "Milk"],
-                ["Rock", "Rock", "Milk"],
-                ["Sage", "Sage", "Milk"],
-                ["St. Marys", "St. Marys", "Milk"],
-                ["Upper Milk", "Upper Milk", "Milk"],
-                ["Wild Horse Lake", "Wild Horse Lake", "Milk"],
-
-                ["Lower Marais Des Cygnes", "Lower Marais Des Cygnes", "Lower Marais Des Cygnes"],
-                ["Neosho Headwaters", "Neosho Headwaters", "Lower Marais Des Cygnes"],
-                ["Upper Marais Des Cygnes", "Upper Marais Des Cygnes", "Lower Marais Des Cygnes"],
-                ["Upper Neosho", "Upper Neosho", "Lower Marais Des Cygnes"]
+                ["Upper Rio Grande", "Upper Rio Grande", "Upper Rio Grand - New Mexico"]
+                               
             ];
 
 			if ((app.H2O_ID == undefined) & (app.Basin_ID == undefined)) {
@@ -736,29 +739,29 @@ define([
                 //strTest777URL = "https://api.water.noaa.gov/nwps/v1/gauges/JRLK1/stageflow"; ///https://water.noaa.gov/gauges/jrlk1 Neosho River at John Redmond Lake
 
                 //NOAA works
-                strTest777URL = "https://api.water.noaa.gov/nwps/v1/gauges/SPAQ8/stageflow"; ///hhttps://water.noaa.gov/gauges/SPAQ8 Lodge Creek at Spangler Ditch
+                //strTest777URL = "https://api.water.noaa.gov/nwps/v1/gauges/SPAQ8/stageflow"; ///hhttps://water.noaa.gov/gauges/SPAQ8 Lodge Creek at Spangler Ditch
 
                 //BOR Hydromet does not work
-                strTest777URL = "https://www.usbr.gov/pn-bin/hdb/hdb.pl?svr=lchdb&sdi=1863&tstp=DY&t1=2018-05-26T00:00&t2=2018-06-25T00:00&table=R&mrid=0&format=json";
+                //strTest777URL = "https://www.usbr.gov/pn-bin/hdb/hdb.pl?svr=lchdb&sdi=1863&tstp=DY&t1=2018-05-26T00:00&t2=2018-06-25T00:00&table=R&mrid=0&format=json";
 
-                fetch(strTest777URL)
-                    .then(response => {
-                        if (!response.ok) {
-                            alert(response.status);
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        return response.text(); // Get the response body as plain text
-                        alert(response.text());
-                    })
-                    .then(data => {
-                        console.log(data); // show the JSON data
-                        alert(data);
-                        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); // Process the JSON data
-                    })
-                    .catch(error => {
-                        alert("Fetch or parsing error:");
-                        console.error("Fetch or parsing error:", error);
-                    });
+                //fetch(strTest777URL)
+                //    .then(response => {
+                //        if (!response.ok) {
+                //            alert(response.status);
+                //            throw new Error(`HTTP error! status: ${response.status}`);
+                //        }
+                //        return response.text(); // Get the response body as plain text
+                //        alert(response.text());
+                //    })
+                //    .then(data => {
+                //        console.log(data); // show the JSON data
+                //        alert(data);
+                //        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); // Process the JSON data
+                //    })
+                //    .catch(error => {
+                //        alert("Fetch or parsing error:");
+                //        console.error("Fetch or parsing error:", error);
+                //    });
 			}
 
             var arrayNavList = [];
