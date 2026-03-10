@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Fetch API Tester</title>
+	<style>
+		body {
+			font-family: sans-serif;
+			padding: 20px;
+		}
+
+		.container {
+			max-width: 800px;
+			margin: auto;
+		}
+
+		input[type="text"] {
+			width: 70%;
+			padding: 10px;
+		}
+
+		button {
+			padding: 10px 15px;
+			cursor: pointer;
+		}
+
+		pre {
+			background-color: #f4f4f4;
+			padding: 15px;
+			border: 1px solid #ddd;
+			white-space: pre-wrap;
+			word-wrap: break-word;
+		}
+
+		.status-success {
+			color: green;
+		}
+
+		.status-error {
+			color: red;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<h1>Fetch API Tester</h1>
+		<p>
+			Enter a URL to fetch its content (CORS policies may block requests to some sites, e.g., google.com).
+			<br />
+			Examples...
+			<br /><br />USACE NW<br />
+			https://water.usace.army.mil/cda/reporting/providers/swt/timeseries?name=JOHN.Elev.Inst.1Hour.0.Ccp-Rev&begin=2026-01-21T17:56:44.577Z&end=2026-01-28T17:56:44.577Z
+			<br /><br />Rivers Alberta<br />
+			https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD042_table.json
+			<br /><br />MT DNRC<br />
+			https://gis.dnrc.mt.gov/arcgis/rest/services/WRD/WMB_StAGE/MapServer/3/query?outFields=*&returnGeometry=false&f=json&where=SensorLabel+in+%28%27discharge%27%2C%27water+temp%27%29+and+LocationID+%3D+%27a61e9c1d12b44ee2a7abb8e0020e25a0%27
+			<br /><br />NOAA<br />
+			https://api.water.noaa.gov/nwps/v1/gauges/JRLK1/stageflow
+			<br /><br />BOR<br />
+			https://www.usbr.gov/pn-bin/hdb/hdb.pl?svr=lchdb&sdi=1863&tstp=DY&t1=2018-05-26T00:00&t2=2018-06-25T00:00&table=R&mrid=0&format=json
+			<br /><br />USGS<br />
+			https://nwis.waterservices.usgs.gov/nwis/iv/?format=json&indent=on&siteStatus=all&startDT=2026-01-26&endDT=2026-01-29&parameterCd=00010,00060,00065&sites=06026500,06027600
+		</p>
+		<div>
+			<input type="text" id="urlInput" placeholder="https://api.example.com/data" value="https://jsonplaceholder.typicode.com/posts/1">
+			<button onclick="fetchUrl()">Fetch</button>
+		</div>
+		<hr>
+		<h2>Status: <span id="statusCode"></span></h2>
+		<h2>Response Body:</h2>
+		<pre id="responseBody">Waiting for fetch request...</pre>
+	</div>
+
+	<script>
+        async function fetchUrl() {
+            const url = document.getElementById('urlInput').value;
+            const statusElement = document.getElementById('statusCode');
+            const bodyElement = document.getElementById('responseBody');
+
+            statusElement.textContent = 'Fetching...';
+            statusElement.className = '';
+            bodyElement.textContent = 'Loading...';
+
+            try {
+                // The fetch() method initiates the network request.
+                const response = await fetch(url);
+
+                // Check if the request was successful (status 200-299).
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+
+                // Get the response body as plain text.
+                const text = await response.text();
+
+                statusElement.textContent = `Success! (${response.status} ${response.statusText})`;
+                statusElement.className = 'status-success';
+                bodyElement.textContent = text; // Display the raw text/HTML.
+
+            } catch (error) {
+                // Catch network errors or errors thrown in the 'try' block.
+                statusElement.textContent = `Error!`;
+                statusElement.className = 'status-error';
+                bodyElement.textContent = `Fetch failed: ${error.message}.
+
+Possible reasons:
+*   Network error (e.g., URL is down, no internet).
+*   **Cross-Origin Resource Sharing (CORS)** policy. Browsers block cross-origin requests unless the target server allows them via specific headers.
+*   Badly-formed request URL.`;
+            }
+        }
+	</script>
+</body>
+</html>
