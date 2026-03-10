@@ -49,18 +49,18 @@
 			Enter a URL to fetch its content (CORS policies may block requests to some sites, e.g., google.com).
 			<br />
 			Examples...
-			<br /><br />USACE NW<br />
-			https://water.usace.army.mil/cda/reporting/providers/swt/timeseries?name=JOHN.Elev.Inst.1Hour.0.Ccp-Rev&begin=2026-01-21T17:56:44.577Z&end=2026-01-28T17:56:44.577Z
-			<br /><br />Rivers Alberta<br />
-			https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD042_table.json
-			<br /><br />MT DNRC<br />
-			https://gis.dnrc.mt.gov/arcgis/rest/services/WRD/WMB_StAGE/MapServer/3/query?outFields=*&returnGeometry=false&f=json&where=SensorLabel+in+%28%27discharge%27%2C%27water+temp%27%29+and+LocationID+%3D+%27a61e9c1d12b44ee2a7abb8e0020e25a0%27
-			<br /><br />NOAA<br />
-			https://api.water.noaa.gov/nwps/v1/gauges/JRLK1/stageflow
-			<br /><br />BOR<br />
-			https://www.usbr.gov/pn-bin/hdb/hdb.pl?svr=lchdb&sdi=1863&tstp=DY&t1=2018-05-26T00:00&t2=2018-06-25T00:00&table=R&mrid=0&format=json
-			<br /><br />USGS<br />
-			https://nwis.waterservices.usgs.gov/nwis/iv/?format=json&indent=on&siteStatus=all&startDT=2026-01-26&endDT=2026-01-29&parameterCd=00010,00060,00065&sites=06026500,06027600
+			<br />USACE NW<br />
+			<pre>https://water.usace.army.mil/cda/reporting/providers/swt/timeseries?name=JOHN.Elev.Inst.1Hour.0.Ccp-Rev&begin=2026-01-21T17:56:44.577Z&end=2026-01-28T17:56:44.577Z</pre>
+			<br />Rivers Alberta<br />
+			<pre>https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD042_table.json</pre>
+			<br />MT DNRC<br />
+			<pre>https://gis.dnrc.mt.gov/arcgis/rest/services/WRD/WMB_StAGE/MapServer/3/query?outFields=*&returnGeometry=false&f=json&where=SensorLabel+in+%28%27discharge%27%2C%27water+temp%27%29+and+LocationID+%3D+%27a61e9c1d12b44ee2a7abb8e0020e25a0%27</pre>
+			<br />NOAA<br />
+			<pre>https://api.water.noaa.gov/nwps/v1/gauges/JRLK1/stageflow</pre>
+			<br />BOR<br />
+			<pre>https://www.usbr.gov/pn-bin/hdb/hdb.pl?svr=lchdb&sdi=1863&tstp=DY&t1=2018-05-26T00:00&t2=2018-06-25T00:00&table=R&mrid=0&format=json</pre>
+			<br />USGS<br />
+			<pre>https://nwis.waterservices.usgs.gov/nwis/iv/?format=json&indent=on&siteStatus=all&startDT=2026-01-26&endDT=2026-01-29&amp;parameterCd=00010,00060,00065&sites=06026500,06027600</pre>
 		</p>
 		<div>
 			<input type="text" id="urlInput" placeholder="https://api.example.com/data" value="https://jsonplaceholder.typicode.com/posts/1">
