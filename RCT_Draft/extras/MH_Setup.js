@@ -550,76 +550,76 @@ define([
 			
             app.arrayEntireList = [
                 ////DEV edit******************************************
-                //["Belly", "Belly", "Crown of the Continent - NE"],
-                //["Little Bow", "Little Bow", "Crown of the Continent - NE"],
-                //["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - NE"],
-                //["Oldman River-Willow Creek", "Oldman River-Willow Creek", "Crown of the Continent - NE"],
-                ///*["Pakowki Lake", "Pakowki Lake", "Crown of the Continent - NE"],*/
-                //["St. Marys", "St. Marys", "Crown of the Continent - NE"],
-                //["Upper Milk", "Upper Milk", "Crown of the Continent - NE"],
-                //["Upper Oldman River", "Upper Oldman River", "Crown of the Continent - NE"],
+                ["Belly", "Belly", "Crown of the Continent - NE"],
+                ["Little Bow", "Little Bow", "Crown of the Continent - NE"],
+                ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - NE"],
+                ["Oldman River-Willow Creek", "Oldman River-Willow Creek", "Crown of the Continent - NE"],
+                /*["Pakowki Lake", "Pakowki Lake", "Crown of the Continent - NE"],*/
+                ["St. Marys", "St. Marys", "Crown of the Continent - NE"],
+                ["Upper Milk", "Upper Milk", "Crown of the Continent - NE"],
+                ["Upper Oldman River", "Upper Oldman River", "Crown of the Continent - NE"],
 
-                //["Elbow", "Elbow", "Crown of the Continent - NW"],
-                //["Elk", "Elk", "Crown of the Continent - NW"],
-                //["Headwaters Kootenai River", "Headwaters Kootenai River", "Crown of the Continent - NW"],
-                //["Highwood", "Highwood", "Crown of the Continent - NW"],
-                //["Kananaskis", "Kananaskis", "Crown of the Continent - NW"],
-                //["Lower Kootenai", "Lower Kootenai", "Crown of the Continent - NW"],
-                //["Middle Kootenai", "Middle Kootenai", "Crown of the Continent - NW"],
-                //["Moyie", "Moyie", "Crown of the Continent - NW"],
-                //["North Fork Flathead", "North Fork Flathead", "Crown of the Continent - NW"],
-                //["Upper Kootenai River", "Upper Kootenai River", "Crown of the Continent - NW"],
-                //["Yaak", "Yaak", "Crown of the Continent"],
+                ["Elbow", "Elbow", "Crown of the Continent - NW"],
+                ["Elk", "Elk", "Crown of the Continent - NW"],
+                ["Headwaters Kootenai River", "Headwaters Kootenai River", "Crown of the Continent - NW"],
+                ["Highwood", "Highwood", "Crown of the Continent - NW"],
+                ["Kananaskis", "Kananaskis", "Crown of the Continent - NW"],
+                ["Lower Kootenai", "Lower Kootenai", "Crown of the Continent - NW"],
+                ["Middle Kootenai", "Middle Kootenai", "Crown of the Continent - NW"],
+                ["Moyie", "Moyie", "Crown of the Continent - NW"],
+                ["North Fork Flathead", "North Fork Flathead", "Crown of the Continent - NW"],
+                ["Upper Kootenai River", "Upper Kootenai River", "Crown of the Continent - NW"],
+                ["Yaak", "Yaak", "Crown of the Continent"],
 
-                //["Bitterroot", "Bitterroot", "Crown of the Continent - SW"],
-                //["Fisher", "Fisher", "Crown of the Continent - SW"],
-                //["Middle Clark Fork", "Middle Clark Fork", "Crown of the Continent - SW"],
-                //["Lower Flathead", "Lower Flathead", "Crown of the Continent - SW"],
-                //["Mainstem Flathead", "Mainstem Flathead", "Crown of the Continent - SW"],
-                //["Middle Fork Flathead", "Middle Fork Flathead", "Crown of the Continent - SW"],
-                //["South Fork Flathead", "South Fork Flathead", "Crown of the Continent - SW"],
-                //["Stillwater", "Stillwater", "Crown of the Continent - SW"],
-                //["Swan", "Swan", "Crown of the Continent - SW"],
-                //["Upper Clark Fork", "Upper Clark Fork", "Crown of the Continent - SW"],
+                ["Bitterroot", "Bitterroot", "Crown of the Continent - SW"],
+                ["Fisher", "Fisher", "Crown of the Continent - SW"],
+                ["Middle Clark Fork", "Middle Clark Fork", "Crown of the Continent - SW"],
+                ["Lower Flathead", "Lower Flathead", "Crown of the Continent - SW"],
+                ["Mainstem Flathead", "Mainstem Flathead", "Crown of the Continent - SW"],
+                ["Middle Fork Flathead", "Middle Fork Flathead", "Crown of the Continent - SW"],
+                ["South Fork Flathead", "South Fork Flathead", "Crown of the Continent - SW"],
+                ["Stillwater", "Stillwater", "Crown of the Continent - SW"],
+                ["Swan", "Swan", "Crown of the Continent - SW"],
+                ["Upper Clark Fork", "Upper Clark Fork", "Crown of the Continent - SW"],
 
-                //["Cut Bank", "Cut Bank", "Crown of the Continent - SE"],
-                //["Marias", "Marias", "Crown of the Continent - SE"],
-                //["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - SE"],
-                //["Smith", "Smith", "Crown of the Continent - SE"],
+                ["Cut Bank", "Cut Bank", "Crown of the Continent - SE"],
+                ["Marias", "Marias", "Crown of the Continent - SE"],
+                ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - SE"],
+                ["Smith", "Smith", "Crown of the Continent - SE"],
 
-                //["St. Marys", "St. Marys", "Crown of the Continent - SE"],
-                //["Sun", "Sun", "Crown of the Continent - SE"],
-                //["Teton", "Teton", "Crown of the Continent - SE"],
-                //["Two Medicine", "Two Medicine", "Crown of the Continent - SE"],
-                //["Upper Missouri", "Upper Missouri", "Crown of the Continent - SE"],
-                //["Upper Missouri-Dearborn", "Upper Missouri-Dearborn", "Crown of the Continent - SE"],
+                ["St. Marys", "St. Marys", "Crown of the Continent - SE"],
+                ["Sun", "Sun", "Crown of the Continent - SE"],
+                ["Teton", "Teton", "Crown of the Continent - SE"],
+                ["Two Medicine", "Two Medicine", "Crown of the Continent - SE"],
+                ["Upper Missouri", "Upper Missouri", "Crown of the Continent - SE"],
+                ["Upper Missouri-Dearborn", "Upper Missouri-Dearborn", "Crown of the Continent - SE"],
 
-                ///*["Blackfoot", "Blackfoot", "Crown of the Continent"], */
-                ///*["Flint-Rock", "Flint-Rock", "Crown of the Continent"], */
+                /*["Blackfoot", "Blackfoot", "Crown of the Continent"], */
+                /*["Flint-Rock", "Flint-Rock", "Crown of the Continent"], */
 
-                //["Upper Green", "Upper Green", "Upper Green"],
-                //["Upper Green-Slate", "Upper Green-Slate", "Upper Green"],
-                //["Big Sandy", "Big Sandy WY", "Upper Green"],
+                ["Upper Green", "Upper Green", "Upper Green"],
+                ["Upper Green-Slate", "Upper Green-Slate", "Upper Green"],
+                ["Big Sandy", "Big Sandy WY", "Upper Green"],
 
-                //["Battle", "Battle", "Milk"],
-                //["Beaver", "Beaver", "Milk"],
-                //["Big Sandy", "Big Sandy", "Milk"],
-                //["Frenchman", "Frenchman", "Milk"],
-                //["Lodge", "Lodge", "Milk"],
-                //["Lower Milk", "Lower Milk", "Milk"],
-                //["Middle Milk", "Middle Milk", "Milk"],
-                //["Milk Headwaters", "Milk Headwaters", "Milk"],
-                //["Peoples", "Peoples", "Milk"],
-                //["Rock", "Rock", "Milk"],
-                //["Sage", "Sage", "Milk"],
-                //["St. Marys", "St. Marys", "Milk"],
-                //["Upper Milk", "Upper Milk", "Milk"],
-                //["Wild Horse Lake", "Wild Horse Lake", "Milk"],
+                ["Battle", "Battle", "Milk"],
+                ["Beaver", "Beaver", "Milk"],
+                ["Big Sandy", "Big Sandy", "Milk"],
+                ["Frenchman", "Frenchman", "Milk"],
+                ["Lodge", "Lodge", "Milk"],
+                ["Lower Milk", "Lower Milk", "Milk"],
+                ["Middle Milk", "Middle Milk", "Milk"],
+                ["Milk Headwaters", "Milk Headwaters", "Milk"],
+                ["Peoples", "Peoples", "Milk"],
+                ["Rock", "Rock", "Milk"],
+                ["Sage", "Sage", "Milk"],
+                ["St. Marys", "St. Marys", "Milk"],
+                ["Upper Milk", "Upper Milk", "Milk"],
+                ["Wild Horse Lake", "Wild Horse Lake", "Milk"],
 
-                //["Lower Marais Des Cygnes", "Lower Marais Des Cygnes", "Lower Marais Des Cygnes"],
-                //["Neosho Headwaters", "Neosho Headwaters", "Lower Marais Des Cygnes"],
-                //["Upper Marais Des Cygnes", "Upper Marais Des Cygnes", "Lower Marais Des Cygnes"],
-                //["Upper Neosho", "Upper Neosho", "Lower Marais Des Cygnes"],
+                ["Lower Marais Des Cygnes", "Lower Marais Des Cygnes", "Lower Marais Des Cygnes"],
+                ["Neosho Headwaters", "Neosho Headwaters", "Lower Marais Des Cygnes"],
+                ["Upper Marais Des Cygnes", "Upper Marais Des Cygnes", "Lower Marais Des Cygnes"],
+                ["Upper Neosho", "Upper Neosho", "Lower Marais Des Cygnes"],
 
 
                 //Production....
@@ -752,13 +752,13 @@ define([
 
             app.arrayNavListBasin = [
                 //DEV edit****************************************** and Production Edit
-                //["Crown of the Continent - NE", "Crown of the Continent - NE", "BC"],
-                //["Crown of the Continent - NW", "Crown of the Continent - NW", "AB"],
-                //["Crown of the Continent - SE", "Crown of the Continent - SE", "MT"],
-                //["Crown of the Continent - SW", "Crown of the Continent - SW", "MT"],
-                //["Eastern Kansas", "Lower Marais Des Cygnes", "KS"],
-                //["Milk", "Milk", "MT"],
-                //["Upper Green", "Upper Green", "WY"],
+                ["Crown of the Continent - NE", "Crown of the Continent - NE", "BC"],
+                ["Crown of the Continent - NW", "Crown of the Continent - NW", "AB"],
+                ["Crown of the Continent - SE", "Crown of the Continent - SE", "MT"],
+                ["Crown of the Continent - SW", "Crown of the Continent - SW", "MT"],
+                ["Eastern Kansas", "Lower Marais Des Cygnes", "KS"],
+                ["Milk", "Milk", "MT"],
+                ["Upper Green", "Upper Green", "WY"],
                                     ["Upper Missouri Headwaters", "UMH", "MT"],
                                     ["Upper Rio Grande - CO", "Upper Rio Grande", "CO"],
                                     ["Upper Rio Grande - NM", "Upper Rio Grand - New Mexico", "NM"],
@@ -1067,12 +1067,12 @@ define([
 
 
             app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
-			app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support/FeatureServer/";  //PRODUCTION "RCT Core Geospatial" Layers
+			//app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support/FeatureServer/";  //PRODUCTION "RCT Core Geospatial" Layers
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22/FeatureServer/";//PRODUCTION RCT Support FY22 OLD
 
 
-            //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_DRAFT_20251230_view/FeatureServer/"; //MMH Dev Edit
-            //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Edits_Tyler_3_view/FeatureServer/";//Eddie Dev Edit
+            app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_DRAFT_20251230_view/FeatureServer/"; //MMH Dev Edit
+            //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Edits_Tyler_3_view/FeatureServer/";//Eddie Dev Edit OLD
 
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22_multi/FeatureServer/";  //dev to test multi-gage per section
             //app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
