@@ -549,77 +549,77 @@ define([
 			}
 			
             app.arrayEntireList = [
-                //DEV edit******************************************
-                ["Belly", "Belly", "Crown of the Continent - NE"],
-                ["Little Bow", "Little Bow", "Crown of the Continent - NE"],
-                ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - NE"],
-                ["Oldman River-Willow Creek", "Oldman River-Willow Creek", "Crown of the Continent - NE"],
-                /*["Pakowki Lake", "Pakowki Lake", "Crown of the Continent - NE"],*/
-                ["St. Marys", "St. Marys", "Crown of the Continent - NE"],
-                ["Upper Milk", "Upper Milk", "Crown of the Continent - NE"],
-                ["Upper Oldman River", "Upper Oldman River", "Crown of the Continent - NE"],
+                ////DEV edit******************************************
+                //["Belly", "Belly", "Crown of the Continent - NE"],
+                //["Little Bow", "Little Bow", "Crown of the Continent - NE"],
+                //["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - NE"],
+                //["Oldman River-Willow Creek", "Oldman River-Willow Creek", "Crown of the Continent - NE"],
+                ///*["Pakowki Lake", "Pakowki Lake", "Crown of the Continent - NE"],*/
+                //["St. Marys", "St. Marys", "Crown of the Continent - NE"],
+                //["Upper Milk", "Upper Milk", "Crown of the Continent - NE"],
+                //["Upper Oldman River", "Upper Oldman River", "Crown of the Continent - NE"],
 
-                ["Elbow", "Elbow", "Crown of the Continent - NW"],
-                ["Elk", "Elk", "Crown of the Continent - NW"],
-                ["Headwaters Kootenai River", "Headwaters Kootenai River", "Crown of the Continent - NW"],
-                ["Highwood", "Highwood", "Crown of the Continent - NW"],
-                ["Kananaskis", "Kananaskis", "Crown of the Continent - NW"],
-                ["Lower Kootenai", "Lower Kootenai", "Crown of the Continent - NW"],
-                ["Middle Kootenai", "Middle Kootenai", "Crown of the Continent - NW"],
-                ["Moyie", "Moyie", "Crown of the Continent - NW"],
-                ["North Fork Flathead", "North Fork Flathead", "Crown of the Continent - NW"],
-                ["Upper Kootenai River", "Upper Kootenai River", "Crown of the Continent - NW"],
-                ["Yaak", "Yaak", "Crown of the Continent"],
+                //["Elbow", "Elbow", "Crown of the Continent - NW"],
+                //["Elk", "Elk", "Crown of the Continent - NW"],
+                //["Headwaters Kootenai River", "Headwaters Kootenai River", "Crown of the Continent - NW"],
+                //["Highwood", "Highwood", "Crown of the Continent - NW"],
+                //["Kananaskis", "Kananaskis", "Crown of the Continent - NW"],
+                //["Lower Kootenai", "Lower Kootenai", "Crown of the Continent - NW"],
+                //["Middle Kootenai", "Middle Kootenai", "Crown of the Continent - NW"],
+                //["Moyie", "Moyie", "Crown of the Continent - NW"],
+                //["North Fork Flathead", "North Fork Flathead", "Crown of the Continent - NW"],
+                //["Upper Kootenai River", "Upper Kootenai River", "Crown of the Continent - NW"],
+                //["Yaak", "Yaak", "Crown of the Continent"],
 
-                ["Bitterroot", "Bitterroot", "Crown of the Continent - SW"],
-                ["Fisher", "Fisher", "Crown of the Continent - SW"],
-                ["Middle Clark Fork", "Middle Clark Fork", "Crown of the Continent - SW"],
-                ["Lower Flathead", "Lower Flathead", "Crown of the Continent - SW"],
-                ["Mainstem Flathead", "Mainstem Flathead", "Crown of the Continent - SW"],
-                ["Middle Fork Flathead", "Middle Fork Flathead", "Crown of the Continent - SW"],
-                ["South Fork Flathead", "South Fork Flathead", "Crown of the Continent - SW"],
-                ["Stillwater", "Stillwater", "Crown of the Continent - SW"],
-                ["Swan", "Swan", "Crown of the Continent - SW"],
-                ["Upper Clark Fork", "Upper Clark Fork", "Crown of the Continent - SW"],
+                //["Bitterroot", "Bitterroot", "Crown of the Continent - SW"],
+                //["Fisher", "Fisher", "Crown of the Continent - SW"],
+                //["Middle Clark Fork", "Middle Clark Fork", "Crown of the Continent - SW"],
+                //["Lower Flathead", "Lower Flathead", "Crown of the Continent - SW"],
+                //["Mainstem Flathead", "Mainstem Flathead", "Crown of the Continent - SW"],
+                //["Middle Fork Flathead", "Middle Fork Flathead", "Crown of the Continent - SW"],
+                //["South Fork Flathead", "South Fork Flathead", "Crown of the Continent - SW"],
+                //["Stillwater", "Stillwater", "Crown of the Continent - SW"],
+                //["Swan", "Swan", "Crown of the Continent - SW"],
+                //["Upper Clark Fork", "Upper Clark Fork", "Crown of the Continent - SW"],
 
-                ["Cut Bank", "Cut Bank", "Crown of the Continent - SE"],
-                ["Marias", "Marias", "Crown of the Continent - SE"],
-                ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - SE"],
-                ["Smith", "Smith", "Crown of the Continent - SE"],
+                //["Cut Bank", "Cut Bank", "Crown of the Continent - SE"],
+                //["Marias", "Marias", "Crown of the Continent - SE"],
+                //["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - SE"],
+                //["Smith", "Smith", "Crown of the Continent - SE"],
 
-                ["St. Marys", "St. Marys", "Crown of the Continent - SE"],
-                ["Sun", "Sun", "Crown of the Continent - SE"],
-                ["Teton", "Teton", "Crown of the Continent - SE"],
-                ["Two Medicine", "Two Medicine", "Crown of the Continent - SE"],
-                ["Upper Missouri", "Upper Missouri", "Crown of the Continent - SE"],
-                ["Upper Missouri-Dearborn", "Upper Missouri-Dearborn", "Crown of the Continent - SE"],
+                //["St. Marys", "St. Marys", "Crown of the Continent - SE"],
+                //["Sun", "Sun", "Crown of the Continent - SE"],
+                //["Teton", "Teton", "Crown of the Continent - SE"],
+                //["Two Medicine", "Two Medicine", "Crown of the Continent - SE"],
+                //["Upper Missouri", "Upper Missouri", "Crown of the Continent - SE"],
+                //["Upper Missouri-Dearborn", "Upper Missouri-Dearborn", "Crown of the Continent - SE"],
 
-                /*["Blackfoot", "Blackfoot", "Crown of the Continent"], */
-                /*["Flint-Rock", "Flint-Rock", "Crown of the Continent"], */
+                ///*["Blackfoot", "Blackfoot", "Crown of the Continent"], */
+                ///*["Flint-Rock", "Flint-Rock", "Crown of the Continent"], */
 
-                ["Upper Green", "Upper Green", "Upper Green"],
-                ["Upper Green-Slate", "Upper Green-Slate", "Upper Green"],
-                ["Big Sandy", "Big Sandy WY", "Upper Green"],
+                //["Upper Green", "Upper Green", "Upper Green"],
+                //["Upper Green-Slate", "Upper Green-Slate", "Upper Green"],
+                //["Big Sandy", "Big Sandy WY", "Upper Green"],
 
-                ["Battle", "Battle", "Milk"],
-                ["Beaver", "Beaver", "Milk"],
-                ["Big Sandy", "Big Sandy", "Milk"],
-                ["Frenchman", "Frenchman", "Milk"],
-                ["Lodge", "Lodge", "Milk"],
-                ["Lower Milk", "Lower Milk", "Milk"],
-                ["Middle Milk", "Middle Milk", "Milk"],
-                ["Milk Headwaters", "Milk Headwaters", "Milk"],
-                ["Peoples", "Peoples", "Milk"],
-                ["Rock", "Rock", "Milk"],
-                ["Sage", "Sage", "Milk"],
-                ["St. Marys", "St. Marys", "Milk"],
-                ["Upper Milk", "Upper Milk", "Milk"],
-                ["Wild Horse Lake", "Wild Horse Lake", "Milk"],
+                //["Battle", "Battle", "Milk"],
+                //["Beaver", "Beaver", "Milk"],
+                //["Big Sandy", "Big Sandy", "Milk"],
+                //["Frenchman", "Frenchman", "Milk"],
+                //["Lodge", "Lodge", "Milk"],
+                //["Lower Milk", "Lower Milk", "Milk"],
+                //["Middle Milk", "Middle Milk", "Milk"],
+                //["Milk Headwaters", "Milk Headwaters", "Milk"],
+                //["Peoples", "Peoples", "Milk"],
+                //["Rock", "Rock", "Milk"],
+                //["Sage", "Sage", "Milk"],
+                //["St. Marys", "St. Marys", "Milk"],
+                //["Upper Milk", "Upper Milk", "Milk"],
+                //["Wild Horse Lake", "Wild Horse Lake", "Milk"],
 
-                ["Lower Marais Des Cygnes", "Lower Marais Des Cygnes", "Lower Marais Des Cygnes"],
-                ["Neosho Headwaters", "Neosho Headwaters", "Lower Marais Des Cygnes"],
-                ["Upper Marais Des Cygnes", "Upper Marais Des Cygnes", "Lower Marais Des Cygnes"],
-                ["Upper Neosho", "Upper Neosho", "Lower Marais Des Cygnes"],
+                //["Lower Marais Des Cygnes", "Lower Marais Des Cygnes", "Lower Marais Des Cygnes"],
+                //["Neosho Headwaters", "Neosho Headwaters", "Lower Marais Des Cygnes"],
+                //["Upper Marais Des Cygnes", "Upper Marais Des Cygnes", "Lower Marais Des Cygnes"],
+                //["Upper Neosho", "Upper Neosho", "Lower Marais Des Cygnes"],
 
 
                 //Production....
@@ -711,57 +711,7 @@ define([
             ];
 
 			if ((app.H2O_ID == undefined) & (app.Basin_ID == undefined)) {
-                //app.Basin_ID = "UMH";
                 app.Basin_ID = "all"
-
-
-                ///////////////////////////////Test
-                //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD005_table.json"; //Belly River near Mountain View
-                //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD003_table.json"; // Waterton River near Waterton Park - WSC | Table Data
-                //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD017_table.json"; //Mountain View Irrigation District Canal
-                //strTest777URL = "https://rivers.alberta.ca/apps/Basins/data/figures/river/abrivers/stationdata/R_HG_05AD042_table.json"; //Yarrow Creek at Spread Eagle Road
-                //strTest777URL = "https://api.water.noaa.gov/nwps/v1/gauges/JRLK1/stageflow/observed"
-
-
-                //strTest777URL = "https://water.usace.army.mil/cda/reporting/providers/swt/timeseries?name=JOHN.Elev.Inst.1Hour.0.Ccp-Rev&begin=2026-01-21T17:56:44.577Z&end=2026-01-28T17:56:44.577Z";
-                ////strTest777URL = "https://gis.dnrc.mt.gov/arcgis/rest/services/WRD/WMB_StAGE/MapServer/3/query?outFields=*&returnGeometry=false&f=json&where=SensorLabel+in+%28%27discharge%27%2C%27water+temp%27%29+and+LocationID+%3D+%27a61e9c1d12b44ee2a7abb8e0020e25a0%27";
-
-                //works
-                //strTest777URL = "https://nwis.waterservices.usgs.gov/nwis/iv/?format=json&indent=on&siteStatus=all&startDT=2026-01-26&endDT=2026-01-29&parameterCd=00010,00060,00065&sites=06026500,06027600";
-
-                //does not work
-                //strTest777URL = "https://water.usace.army.mil/cda/reporting/providers/swt/timeseries?name=JOHN.Stor.Inst.1Hour.0.Ccp-Rev&begin=2026-01-22T16:44:35.267Z&end=2026-01-29T16:44:35.267Z";
-
-                //does not work
-                //strTest777URL = "https://wateroffice.ec.gc.ca/services/real_time_data/csv/inline?stations[]=08NH064&parameters[]=46&parameters[]=47&start_date=2026-01-27%2000:00:00&end_date=2026-01-29%2023:59:59";
-
-                //works but need to figure out the json parsing
-                //strTest777URL = "https://api.water.noaa.gov/nwps/v1/gauges/JRLK1/stageflow"; ///https://water.noaa.gov/gauges/jrlk1 Neosho River at John Redmond Lake
-
-                //NOAA works
-                //strTest777URL = "https://api.water.noaa.gov/nwps/v1/gauges/SPAQ8/stageflow"; ///hhttps://water.noaa.gov/gauges/SPAQ8 Lodge Creek at Spangler Ditch
-
-                //BOR Hydromet does not work
-                //strTest777URL = "https://www.usbr.gov/pn-bin/hdb/hdb.pl?svr=lchdb&sdi=1863&tstp=DY&t1=2018-05-26T00:00&t2=2018-06-25T00:00&table=R&mrid=0&format=json";
-
-                //fetch(strTest777URL)
-                //    .then(response => {
-                //        if (!response.ok) {
-                //            alert(response.status);
-                //            throw new Error(`HTTP error! status: ${response.status}`);
-                //        }
-                //        return response.text(); // Get the response body as plain text
-                //        alert(response.text());
-                //    })
-                //    .then(data => {
-                //        console.log(data); // show the JSON data
-                //        alert(data);
-                //        console.log("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"); // Process the JSON data
-                //    })
-                //    .catch(error => {
-                //        alert("Fetch or parsing error:");
-                //        console.error("Fetch or parsing error:", error);
-                //    });
 			}
 
             var arrayNavList = [];
@@ -801,14 +751,14 @@ define([
 			}
 
             app.arrayNavListBasin = [
-                //Dev and Production Edit
-                ["Crown of the Continent - NE", "Crown of the Continent - NE", "BC"],
-                ["Crown of the Continent - NW", "Crown of the Continent - NW", "AB"],
-                ["Crown of the Continent - SE", "Crown of the Continent - SE", "MT"],
-                ["Crown of the Continent - SW", "Crown of the Continent - SW", "MT"],
-                ["Eastern Kansas", "Lower Marais Des Cygnes", "KS"],
-                ["Milk", "Milk", "MT"],
-                ["Upper Green", "Upper Green", "WY"],
+                //DEV edit****************************************** and Production Edit
+                //["Crown of the Continent - NE", "Crown of the Continent - NE", "BC"],
+                //["Crown of the Continent - NW", "Crown of the Continent - NW", "AB"],
+                //["Crown of the Continent - SE", "Crown of the Continent - SE", "MT"],
+                //["Crown of the Continent - SW", "Crown of the Continent - SW", "MT"],
+                //["Eastern Kansas", "Lower Marais Des Cygnes", "KS"],
+                //["Milk", "Milk", "MT"],
+                //["Upper Green", "Upper Green", "WY"],
                                     ["Upper Missouri Headwaters", "UMH", "MT"],
                                     ["Upper Rio Grande - CO", "Upper Rio Grande", "CO"],
                                     ["Upper Rio Grande - NM", "Upper Rio Grand - New Mexico", "NM"],
@@ -1117,11 +1067,11 @@ define([
 
 
             app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
-			//app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support/FeatureServer/";  //PRODUCTION "RCT Core Geospatial" Layers
-            //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22/FeatureServer/";//PRODUCTION RCT Support FY22
+			app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support/FeatureServer/";  //PRODUCTION "RCT Core Geospatial" Layers
+            //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22/FeatureServer/";//PRODUCTION RCT Support FY22 OLD
 
 
-            app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_DRAFT_20251230_view/FeatureServer/"; //MMH Dev Edit
+            //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_DRAFT_20251230_view/FeatureServer/"; //MMH Dev Edit
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Edits_Tyler_3_view/FeatureServer/";//Eddie Dev Edit
 
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22_multi/FeatureServer/";  //dev to test multi-gage per section
@@ -1456,43 +1406,45 @@ define([
             let vDarkGreyColor = new Color("#3F3F40");
             var vGreyColor = new Color("#666");              // create a text symbol to define the style of labels
 
-            let templateBLM = new PopupTemplate();
-            templateBLM.title = "<b>BLM Facility</b>";
-            templateBLM.content = "{FacilityName}<br><a href={BLMFacURL} target='_blank'>Link to BLM Facility</a>";
-            const BLM_labelClass = {// autocasts as new LabelClass()
-                symbol: {
-                    type: "text",  // autocasts as new TextSymbol()
-                    color: vDarkGreyColor,
-                    font: { family: "arial", size: 9}
-                },
-                labelPlacement: "above-center",
-                labelExpressionInfo: { expression: "$feature.FacilityName" }
-            };
-            let pBLMFeatureLayer = new FeatureLayer({
-                url: "https://gis.blm.gov/arcgis/rest/services/recreation/BLM_Natl_Recreation_Sites_Facilities/MapServer/0",
-                popupTemplate: templateBLM, opacity: 0.5,
-                id: "BLM",
-                visible: false, labelingInfo: [BLM_labelClass]
-            });
+            if (app.H2O_ID != "Lolo Creek") {
+                let templateBLM = new PopupTemplate();
+                templateBLM.title = "<b>BLM Facility</b>";
+                templateBLM.content = "{FacilityName}<br><a href={BLMFacURL} target='_blank'>Link to BLM Facility</a>";
+                var BLM_labelClass = {// autocasts as new LabelClass()
+                    symbol: {
+                        type: "text",  // autocasts as new TextSymbol()
+                        color: vDarkGreyColor,
+                        font: { family: "arial", size: 9 }
+                    },
+                    labelPlacement: "above-center",
+                    labelExpressionInfo: { expression: "$feature.FacilityName" }
+                };
+                var pBLMFeatureLayer = new FeatureLayer({
+                    url: "https://gis.blm.gov/arcgis/rest/services/recreation/BLM_Natl_Recreation_Sites_Facilities/MapServer/0",
+                    popupTemplate: templateBLM, opacity: 0.5,
+                    id: "BLM",
+                    visible: false, labelingInfo: [BLM_labelClass]
+                });
 
-            let templateBLM_Rec = new PopupTemplate();
-            templateBLM_Rec.title = "<b>BLM Rec. Site</b>";
-            templateBLM_Rec.content = "{RecAreaName}<br><a href={BLMRecURL} target='_blank'>Link to BLM Rec. Site</a>";
-            const BLM_Rec_labelClass = {// autocasts as new LabelClass()
-                symbol: {
-                    type: "text",  // autocasts as new TextSymbol()
-                    color: vDarkGreyColor,
-                    font: { family: "arial", size: 9 }
-                },
-                labelPlacement: "above-center",
-                labelExpressionInfo: { expression: "$feature.RecAreaName" }
-            };
-            let pBLM_RecFeatureLayer = new FeatureLayer({
-                url: "https://gis.blm.gov/arcgis/rest/services/recreation/BLM_Natl_Recreation_Sites_Facilities/MapServer/3",
-                popupTemplate: templateBLM_Rec, opacity: 0.5,
-                id:"BLMRec",
-                visible: false, labelingInfo: [BLM_Rec_labelClass]
-            });
+                let templateBLM_Rec = new PopupTemplate();
+                templateBLM_Rec.title = "<b>BLM Rec. Site</b>";
+                templateBLM_Rec.content = "{RecAreaName}<br><a href={BLMRecURL} target='_blank'>Link to BLM Rec. Site</a>";
+                const BLM_Rec_labelClass = {// autocasts as new LabelClass()
+                    symbol: {
+                        type: "text",  // autocasts as new TextSymbol()
+                        color: vDarkGreyColor,
+                        font: { family: "arial", size: 9 }
+                    },
+                    labelPlacement: "above-center",
+                    labelExpressionInfo: { expression: "$feature.RecAreaName" }
+                };
+                var pBLM_RecFeatureLayer = new FeatureLayer({
+                    url: "https://gis.blm.gov/arcgis/rest/services/recreation/BLM_Natl_Recreation_Sites_Facilities/MapServer/3",
+                    popupTemplate: templateBLM_Rec, opacity: 0.5,
+                    id: "BLMRec",
+                    visible: false, labelingInfo: [BLM_Rec_labelClass]
+                });
+            }
 
             if (!(app.blnPickArea)) {
                 if (app.StateArea.indexOf("CO") > -1) {
@@ -1515,35 +1467,18 @@ define([
                         visible: false, labelingInfo: [COFAC_labelClass]
                     });
                 }
+
+                if (app.Basin_ID == "Bitter Root") {
+                    var pBullTroutCHStreamsFeatureLayer = new FeatureLayer({
+                        url: "https://eplanning.blm.gov/arcgis/rest/services/Hosted/BLM_MT_MissoulaFO_RMP_DRAFT_FINAL/FeatureServer/26",
+                        autoGeneralize: true,
+                        id: "BullTroutCHStreams",
+                        outFields: ["name", "occupancy", "recoveryun"],
+                        visible: false
+                    });
+                }
                 
                 if (app.StateArea.indexOf("MT") > -1) {
-                    var templateFWPAISAccess = new PopupTemplate();
-                    templateFWPAISAccess.title = "Montana AIS Watercraft Access";
-                    templateFWPAISAccess.content = "{SITENAME}</br>{ACCESSTYPE}</br>{WATERBODY}</br>{STATUS}</b>";
-                    var pFWPAISAccessFeatureLayer = new FeatureLayer({
-                        url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/arcgis/rest/services/FISH_AIS_WATERCRAFT_ACCESS/FeatureServer/0",
-                        id:"FWPAISaccess", popupTemplate: templateFWPAISAccess, minScale: 5200000, visible: false
-                    });
-
-                    let templateFAS = new PopupTemplate();
-                    templateFAS.title = "MT FAS (Fishing Access Site)";
-                    templateFAS.content = "<b>{NAME}</b><br>{BOAT_FAC}<br><a href={WEB_PAGE} target='_blank'>Link to Fish Access Site</a>";
-                    const FAS_labelClass = {// autocasts as new LabelClass()
-                        symbol: {
-                            type: "text", color: vColor22,
-                            font: { family: "arial", size: 9, weight: "bold" }
-                        },
-                        labelPlacement: "above-center",
-                        labelExpressionInfo: { expression: "$feature.NAME" }
-                    };
-                    var pFASFeatureLayer = new FeatureLayer({
-                        url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/arcgis/rest/services/FWPLND_FAS_POINTS/FeatureServer/0",
-                        popupTemplate: templateFAS,
-                        id:"FWPFAS",
-                        opacity: 0.5,
-                        visible: false,
-                        labelingInfo: [FAS_labelClass]
-                    });
                     //////////////////////////
                     let sfsr_MTSP = {
                         type: "simple",  // autocasts as new SimpleRenderer()
@@ -1571,7 +1506,7 @@ define([
                     var pMTSPFeatureLayer = new FeatureLayer({
                         url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/ArcGIS/rest/services/FWPLND_STATEPARKS/FeatureServer/0",
                         renderer: sfsr_MTSP, "opacity": 0.9, autoGeneralize: true,
-                        id:"MTSP",
+                        id: "MTSP",
                         outFields: [strlabelField11], labelingInfo: [MTSP_labelClass],
                         popupTemplate: templateMTSP
                     });
@@ -1593,13 +1528,43 @@ define([
                         id: "MTMesoNet",
                         outFields: [strlabelFieldMtMeso11]
                         , labelingInfo: [MTMeso_labelClass]
-                        ,popupTemplate: templateMTMesoNet
+                        , popupTemplate: templateMTMesoNet
                     });
 
                     if (app.Basin_ID != "Poplar") {
                         pMTMesoNETFeatureLayer.visible = false;
                     }
 
+                    if (app.H2O_ID != "Lolo Creek") {
+                        var templateFWPAISAccess = new PopupTemplate();
+                        templateFWPAISAccess.title = "Montana AIS Watercraft Access";
+                        templateFWPAISAccess.content = "{SITENAME}</br>{ACCESSTYPE}</br>{WATERBODY}</br>{STATUS}</b>";
+                        var pFWPAISAccessFeatureLayer = new FeatureLayer({
+                            url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/arcgis/rest/services/FISH_AIS_WATERCRAFT_ACCESS/FeatureServer/0",
+                            id: "FWPAISaccess", popupTemplate: templateFWPAISAccess, minScale: 5200000, visible: false
+                        });
+
+                        let templateFAS = new PopupTemplate();
+                        templateFAS.title = "MT FAS (Fishing Access Site)";
+                        templateFAS.content = "<b>{NAME}</b><br>{BOAT_FAC}<br><a href={WEB_PAGE} target='_blank'>Link to Fish Access Site</a>";
+                        const FAS_labelClass = {// autocasts as new LabelClass()
+                            symbol: {
+                                type: "text", color: vColor22,
+                                font: { family: "arial", size: 9, weight: "bold" }
+                            },
+                            labelPlacement: "above-center",
+                            labelExpressionInfo: { expression: "$feature.NAME" }
+                        };
+                        var pFASFeatureLayer = new FeatureLayer({
+                            url: "https://services3.arcgis.com/Cdxz8r11hT0MGzg1/arcgis/rest/services/FWPLND_FAS_POINTS/FeatureServer/0",
+                            popupTemplate: templateFAS,
+                            id: "FWPFAS",
+                            opacity: 0.5,
+                            visible: false,
+                            labelingInfo: [FAS_labelClass]
+                        });
+
+                    }
                 }
             }
 
@@ -1998,32 +1963,36 @@ define([
             //});
 
 
-            let CSV_Renderer = {
-                type: "simple",  // autocasts as new SimpleRenderer()
-                symbol: {
-                    type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
-                    size: 15,
-                    color: [238, 69, 0, 0.5], //orangeRed
-                    outline: {  // autocasts as new SimpleLineSymbol()
-                        width: 0.5,
-                        color: "white"
+            if (app.H2O_ID != "Lolo Creek") {
+                let CSV_Renderer = {
+                    type: "simple",  // autocasts as new SimpleRenderer()
+                    symbol: {
+                        type: "simple-marker",  // autocasts as new SimpleMarkerSymbol()
+                        size: 15,
+                        color: [238, 69, 0, 0.5], //orangeRed
+                        outline: {  // autocasts as new SimpleLineSymbol()
+                            width: 0.5,
+                            color: "white"
+                        }
                     }
-                }
-            };
-            var pCSVTemplate = new PopupTemplate();
-            pCSVTemplate.title = "<b>Monitoring Sites</b>";
-            pCSVTemplate.content = "Station Name: {STATION_NAME}<br>Drainage Name: {Drainage_Name}<br><a href={URL} target='_blank'> Link monitoring data</a>";
+                };
 
-            let pMonitoringCSVLayer = new FeatureLayer({
-                url: "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Monitoring_Sites/FeatureServer/0",
-                visible: false,
-                renderer: CSV_Renderer,
-                id:"Montitoring",
-                popupTemplate: pCSVTemplate
-            });
+                var pCSVTemplate = new PopupTemplate();
+                pCSVTemplate.title = "<b>Monitoring Sites</b>";
+                pCSVTemplate.content = "Station Name: {STATION_NAME}<br>Drainage Name: {Drainage_Name}<br><a href={URL} target='_blank'> Link monitoring data</a>";
 
+                var pMonitoringCSVLayer = new FeatureLayer({
+                    url: "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Monitoring_Sites/FeatureServer/0",
+                    visible: false,
+                    renderer: CSV_Renderer,
+                    id: "Montitoring",
+                    popupTemplate: pCSVTemplate
+                });
+            }
             if (app.Basin_ID == "Flathead") {
-                pMonitoringCSVLayer.visible = "True";
+                if (app.H2O_ID != "Lolo Creek") {
+                    pMonitoringCSVLayer.visible = "True";
+                }
             }
 
             app.graphicsLayer = new GraphicsLayer();
@@ -2033,19 +2002,28 @@ define([
                 pWatershedsMaskFeatureLayer, pBasinsMaskFeatureLayer,
                 pWatershedsFeatureLayer, pBasinsFeatureLayer, pLakeResFeatureLayer, pNOAAUSDMFeatureLayer, pCartoFeatureLayer, pCartoFeatureLayerPoly,
                 pSectionsFeatureLayer, pSNOTELFeatureLayer, pNOAAFeatureLayer, pFWPFeatureLayer,
-                pBLMFeatureLayer, pBLM_RecFeatureLayer, pGageFeatureLayer, pEPointsFeatureLayer,
-                pMonitoringCSVLayer, app.graphicsLayer];
+                pGageFeatureLayer, pEPointsFeatureLayer,
+                app.graphicsLayer];
 
             if ((app.Basin_ID == "Upper Clark Fork") | (app.Basin_ID == "Blackfoot-Sun")) {
                 arrayLayer2add.push(pGageFeatureLayerHighlighted);
             }
-
+            if (app.H2O_ID != "Lolo Creek") {
+                arrayLayer2add.push(pBLMFeatureLayer);
+                arrayLayer2add.push(pBLM_RecFeatureLayer);
+                arrayLayer2add.push(pMonitoringCSVLayer);
+            }
             if (!(app.blnPickArea)) {
+                if (app.Basin_ID == "Bitter Root") {
+                    arrayLayer2add.push(pBullTroutCHStreamsFeatureLayer);
+                }
                 if (app.StateArea.indexOf("MT") > -1) {
-                    arrayLayer2add.push(pFWPAISAccessFeatureLayer);
-                    arrayLayer2add.push(pFASFeatureLayer);
                     arrayLayer2add.push(pMTMesoNETFeatureLayer);
                     arrayLayer2add.push(pMTSPFeatureLayer);
+                    if (app.H2O_ID != "Lolo Creek") {
+                        arrayLayer2add.push(pFWPAISAccessFeatureLayer);
+                        arrayLayer2add.push(pFASFeatureLayer);
+                    }
                 }
                 if (app.StateArea.indexOf("CO") > -1) {
                     arrayLayer2add.push(pCOFACFeatureLayer);
@@ -2091,7 +2069,9 @@ define([
             //|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
             let legendLayers = [];
-            legendLayers.push({ layer: pMonitoringCSVLayer, title: 'Monitoring Locations' });
+            if (app.H2O_ID != "Lolo Creek") {
+                legendLayers.push({ layer: pMonitoringCSVLayer, title: 'Monitoring Locations' });
+            }
             legendLayers.push({ layer: pSNOTELFeatureLayer, title: 'SNOTEL Sites' });
             legendLayers.push({ layer: pNOAAFeatureLayer, title: 'Weather Stations' });
 
@@ -2101,15 +2081,24 @@ define([
                 }
 
                 if (app.StateArea.indexOf("MT") > -1) {
-                    legendLayers.push({ layer: pFWPAISAccessFeatureLayer, title: 'MT AIS Watercraft Access' });
-                    legendLayers.push({ layer: pMTSPFeatureLayer, title: 'MT State Parks' });
-                    legendLayers.push({ layer: pFASFeatureLayer, title: 'FWP Fish Access Sites' });
                     legendLayers.push({ layer: pMTMesoNETFeatureLayer, title: 'MT Mesonet' });
-                    
+                    legendLayers.push({ layer: pMTSPFeatureLayer, title: 'MT State Parks' });
+                    if (app.H2O_ID != "Lolo Creek") {
+                        legendLayers.push({ layer: pFWPAISAccessFeatureLayer, title: 'MT AIS Watercraft Access' });
+                        legendLayers.push({ layer: pFASFeatureLayer, title: 'FWP Fish Access Sites' });
+                    }
                 }
+
+                if (app.Basin_ID == "Bitter Root") {
+                    legendLayers.push({ layer: pBullTroutCHStreamsFeatureLayer, title: 'Bull Trout Critical Habitat Streams' });
+                }
+
             }
-            legendLayers.push({ layer: pBLMFeatureLayer, title: 'BLM Access Sites' });
-            legendLayers.push({ layer: pBLM_RecFeatureLayer, title: 'BLM Recreation Boating Sites' });
+
+            if (app.H2O_ID != "Lolo Creek") {
+                legendLayers.push({ layer: pBLMFeatureLayer, title: 'BLM Access Sites' });
+                legendLayers.push({ layer: pBLM_RecFeatureLayer, title: 'BLM Recreation Boating Sites' });
+            }
             
             legendLayers.push({ layer: pEPointsFeatureLayer, title: 'Start/End Section Locations' });
             legendLayers.push({ layer: pGageFeatureLayer, title: 'Gages' });
@@ -2164,9 +2153,11 @@ define([
             });
 
             var cbxLayers = [];
-            cbxLayers.push({ layers: [pBLMFeatureLayer, pBLMFeatureLayer], title: 'BLM Access Sites' });
-            cbxLayers.push({ layers: [pBLM_RecFeatureLayer, pBLM_RecFeatureLayer], title: 'BLM Recreation Boating Sites' });
 
+            if (app.H2O_ID != "Lolo Creek") {
+                cbxLayers.push({ layers: [pBLMFeatureLayer, pBLMFeatureLayer], title: 'BLM Access Sites' });
+                cbxLayers.push({ layers: [pBLM_RecFeatureLayer, pBLM_RecFeatureLayer], title: 'BLM Recreation Boating Sites' });
+            }
 
             if ((app.Basin_ID == "Crown of the Continent - NE") | (app.Basin_ID == "Crown of the Continent - NW") |
                 (app.Basin_ID == "Crown of the Continent - SE") | (app.Basin_ID == "Crown of the Continent - SW") |
@@ -2177,20 +2168,31 @@ define([
             }
 
             if (!(app.blnPickArea)) {
+                if (app.Basin_ID == "Bitter Root") {
+                    cbxLayers.push({ layers: [pBullTroutCHStreamsFeatureLayer, pBullTroutCHStreamsFeatureLayer], title: 'Bull Trout Critical Habitat Streams' });
+                }
                 if (app.StateArea.indexOf("CO") > -1) {
                     cbxLayers.push({ layers: [pCOFACFeatureLayer, pCOFACFeatureLayer], title: 'CPW Facilities' });
                 }
                 if (app.StateArea.indexOf("MT") > -1) {
-                    cbxLayers.push({ layers: [pFASFeatureLayer, pFASFeatureLayer], title: 'MT FWP Fishing Access Sites' });
                     cbxLayers.push({ layers: [pMTSPFeatureLayer, pMTSPFeatureLayer], title: 'MT State Parks' });
-                    cbxLayers.push({ layers: [pFWPAISAccessFeatureLayer, pFWPAISAccessFeatureLayer], title: 'MT AIS Watercraft Access' });
                     cbxLayers.push({ layers: [pMTMesoNETFeatureLayer, pMTMesoNETFeatureLayer], title: 'MT Mesonet Stations' });
-                    
+                    if (app.H2O_ID != "Lolo Creek") {
+                        cbxLayers.push({ layers: [pFASFeatureLayer, pFASFeatureLayer], title: 'MT FWP Fishing Access Sites' });
+                        cbxLayers.push({ layers: [pFWPAISAccessFeatureLayer, pFWPAISAccessFeatureLayer], title: 'MT AIS Watercraft Access' });
+                    }
                 }
             }
+
+            if (app.H2O_ID != "Lolo Creek") {
+                cbxLayers.push({ layers: [pMonitoringCSVLayer, pMonitoringCSVLayer], title: 'Monitoring Locations' });
+            }
+
             cbxLayers.push({ layers: [pSNOTELFeatureLayer, pSNOTELFeatureLayer], title: 'SNOTEL Sites' });
             cbxLayers.push({ layers: [pNOAAFeatureLayer, pNOAAFeatureLayer], title: 'Weather Stations' });
-            cbxLayers.push({ layers: [pMonitoringCSVLayer, pMonitoringCSVLayer], title: 'Monitoring Locations' });
+
+
+
 
             cbxLayers.push({ layers: [pNOAAUSDMFeatureLayer, pNOAAUSDMFeatureLayer], title: 'U.S. Drought Monitor' });
             
