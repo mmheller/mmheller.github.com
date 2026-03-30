@@ -554,15 +554,15 @@ define([
                 dom.map(items[1].features, function (itemGage) { //loop through the gages that match the sections
                     console.log(itemGage.attributes.Section_ID);
 
-                    if (itemSection.attributes.SectionID == "Milk River Section 1") {
-                        console.log("pause");
-                    }
-                    if (itemGage.attributes.Section_ID == "Milk River Section 1") {
-                        console.log("pause");
-                        console.log((itemGage.attributes.Watershed === itemSection.attributes.Watershed));
-                        console.log((itemGage.attributes.StreamName === itemSection.attributes.StreamName));
-                        console.log((itemGage.attributes.Section_ID === itemSection.attributes.SectionID));
-                    }
+                    //if (itemSection.attributes.SectionID == "Lolo Creek Section 2") {
+                    //    console.log("pause");
+                    //}
+                    //if (itemGage.attributes.Section_ID == "Lolo Creek Section 2") {
+                    //    console.log("pause");
+                    //    console.log((itemGage.attributes.Watershed === itemSection.attributes.Watershed));
+                    //    console.log((itemGage.attributes.StreamName === itemSection.attributes.StreamName));
+                    //    console.log((itemGage.attributes.Section_ID === itemSection.attributes.SectionID));
+                    //}
 
                     if ((itemGage.attributes.Watershed === itemSection.attributes.Watershed) &
                         (itemGage.attributes.StreamName === itemSection.attributes.StreamName) &
@@ -570,12 +570,12 @@ define([
                         (itemGage.attributes.Symbology === "TRIGGER MEASURE LOCATION")) {
 
 
-                        if (itemSection.attributes.SectionID == "Milk River Section 1") {
-                            console.log("pause");
-                        }
-                        if (itemGage.attributes.Section_ID == "North Fork Milk River Section 1") {
-                            console.log("pause");
-                        }
+                        //if (itemSection.attributes.SectionID == "Lolo Creek Section 2") {
+                        //    console.log("pause");
+                        //}
+                        //if (itemGage.attributes.Section_ID == "Lolo Creek Section 2") {
+                        //    console.log("pause");
+                        //}
 
                         console.log("Gage/Section Match: " + itemGage.attributes.StreamName + ":" + itemGage.attributes.Section_ID + ":" + itemGage.attributes.Agency);
 
@@ -1315,9 +1315,6 @@ define([
                     };
                 }
              };
-
-
-
 
             app.pGage.m_arrray_RiverSectionStatus =
                 app.pGage.m_arrray_RiverSectionStatus.sort(function (a, b) { return a[9]+a[10] > b[9]+b[10] ? 1 : -1; }); //sorting by contcatonating stream name and sectionID
@@ -2644,7 +2641,14 @@ define([
                 } else if ((arrayUSACE_NWD_Sens_Loc != null)) {
                     strSiteName = arrayUSACE_NWD_Sens_Loc[0][0];
                 } else if ((arrayDNRC_Sens_Loc != null)) {
-                    strSiteName = arrayDNRC_Sens_Loc[0][1];
+                    //strSiteName = arrayDNRC_Sens_Loc[0][1];
+
+                    arrayDNRC_Sens_Loc.forEach(function (item, index) {
+                        if (item[0] == strSiteID) {
+                            strSiteName = item[1];
+                        }
+                    });
+
                 } else if ((arrayCODWR_Sens_Loc != null)) {
                     strSiteName = arrayCODWR_Sens_Loc[0][0];
                 } else if ((arrayAlberta_Sens_Loc != null)) {

@@ -1469,13 +1469,25 @@ define([
                 }
 
                 if (app.Basin_ID == "Bitter Root") {
+                    let pBullTroutSymbolRenderer = {
+                        type: "simple", // autocasts as new SimpleRenderer
+                        symbol: {
+                            type: "simple-line", // autocasts as new SimpleLineSymbol
+                            color: [0, 100, 0], // RGB color
+                            width: "5px",
+                            style: "dash" // options: dash, dot, dash-dot, etc.
+                        }
+                    };
+
                     var pBullTroutCHStreamsFeatureLayer = new FeatureLayer({
                         url: "https://eplanning.blm.gov/arcgis/rest/services/Hosted/BLM_MT_MissoulaFO_RMP_DRAFT_FINAL/FeatureServer/26",
                         autoGeneralize: true,
                         id: "BullTroutCHStreams",
                         outFields: ["name", "occupancy", "recoveryun"],
-                        visible: false
+                        visible: false,
+                        renderer: pBullTroutSymbolRenderer
                     });
+
                 }
                 
                 if (app.StateArea.indexOf("MT") > -1) {
