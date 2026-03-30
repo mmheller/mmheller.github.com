@@ -1786,14 +1786,14 @@ define([
             let sfsr_CartoPoly = {
                 type: "simple",  // autocasts as new SimpleRenderer()
                 symbol: {
-                    type: "simple-fill", color: [195, 2, 219, 0.1], style: "solid",
-                    outline: { color: [50, 50, 50], width: 1 }
+                    type: "simple-fill", color: [195, 2, 219, 0.08], style: "solid",
+                    outline: { color: [195, 2, 219], width: 4 }
                 },
             };
             let pCartoFeatureLayerPoly = new FeatureLayer({
                 url: app.strHFL_URL + app.idx11[6],
                 id:"CartoPoly",
-                "opacity": 0.9, renderer: sfsr_CartoPoly, autoGeneralize: true, visible: false
+                "opacity": 0.6, renderer: sfsr_CartoPoly, autoGeneralize: true, visible: false
             });
 
 
