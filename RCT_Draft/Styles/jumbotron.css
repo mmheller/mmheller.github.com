@@ -1,4 +1,62 @@
 ﻿/* Move down content because we have a fixed navbar that is 50px tall */
+
+/* Base Horizontal Layout */
+.menu-root, .menu-root ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+	.menu-root > li {
+		float: left;
+		position: relative;
+	}
+
+	.menu-root li a {
+		display: block;
+		padding: 10px 20px;
+		background-color: #2c3e50;
+		color: #fff;
+		text-decoration: none;
+	}
+
+		.menu-root li a:hover {
+			background-color: #34495e;
+		}
+
+	/* Vertical Dropdown Layout */
+	.menu-root ul {
+		position: absolute;
+		left: 0;
+		top: 100%;
+		display: none; /* Hide submenus initially */
+		min-width: 180px;
+		z-index: 999;
+	}
+
+		/* Fly-out Submenu Layout (3rd Level and deeper) */
+		.menu-root ul ul {
+			left: 100%;
+			top: 0;
+		}
+
+/* Visual Indicator for Submenus */
+.has-submenu > a::after {
+	content: " ▼";
+	font-size: 10px;
+}
+
+.menu-root ul .has-submenu > a::after {
+	content: " ▶";
+}
+
+
+
+
+
+
+
+
 body {
 	padding-top: 90px;
 	/*padding-top: 130px !important;*/

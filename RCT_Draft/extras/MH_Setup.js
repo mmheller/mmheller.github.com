@@ -1,9 +1,4 @@
 ﻿
-
-
-
-
-
 function getPageWidth() {
     var body = document.body,
         html = document.documentElement;
@@ -751,14 +746,14 @@ define([
 			}
 
             app.arrayNavListBasin = [
-                //DEV edit****************************************** and Production Edit
+                //DEV edit****************************************** and Production Edit START
                 ["Crown of the Continent - NE", "Crown of the Continent - NE", "BC"],
                 ["Crown of the Continent - NW", "Crown of the Continent - NW", "AB"],
                 ["Crown of the Continent - SE", "Crown of the Continent - SE", "MT"],
                 ["Crown of the Continent - SW", "Crown of the Continent - SW", "MT"],
                 ["Eastern Kansas", "Lower Marais Des Cygnes", "KS"],
                 ["Milk", "Milk", "MT"],
-                ["Upper Green", "Upper Green", "WY"],
+                ["Upper Green", "Upper Green", "WY"], //DEV edit****************************************** and Production Edit END
                                     ["Upper Missouri Headwaters", "UMH", "MT"],
                                     ["Upper Rio Grande - CO", "Upper Rio Grande", "CO"],
                                     ["Upper Rio Grande - NM", "Upper Rio Grand - New Mexico", "NM"],
@@ -790,17 +785,107 @@ define([
 				var newItem = document.createElement("option");
                 a.textContent = app.arrayNavListBasin[i][0];
 				a.setAttribute('role', "presentation");
-
                 a.setAttribute('href', strURLPrefixBasin + app.arrayNavListBasin[i][1] + strURLSuffix);
 				newItem.appendChild(a);
-				selBasin.add(newItem, i+1);
+
+                selBasin.add(newItem, i + 1);
 
                 if ((app.arrayNavListBasin[i][1] == app.Basin_ID) | (app.arrayNavListBasin[i][0] == app.Basin_ID)) {				//set the region/basin in the dropdown!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                     selBasin.options[i + 1].selected = true;
                     app.StateArea = app.arrayNavListBasin[i][2];
 				}
 			}
-            
+
+            app.arrayNavListBasin = [
+                //DEV edit****************************************** and Production Edit START
+                ["Crown of the Continent - NE", "Crown of the Continent - NE", "BC"],
+                ["Crown of the Continent - NW", "Crown of the Continent - NW", "AB"],
+                ["Crown of the Continent - SE", "Crown of the Continent - SE", "MT"],
+                ["Crown of the Continent - SW", "Crown of the Continent - SW", "MT"],
+                ["Eastern Kansas", "Lower Marais Des Cygnes", "KS"],
+                ["Milk", "Milk", "MT"],
+                ["Upper Green", "Upper Green", "WY"], //DEV edit****************************************** and Production Edit END
+                //["Upper Missouri Headwaters", "UMH", "MT"],
+                //["Upper Rio Grande - CO", "Upper Rio Grande", "CO"],
+                //["Upper Rio Grande - NM", "Upper Rio Grand - New Mexico", "NM"],
+                ["Upper Yellowstone Headwaters", "UY_Shields", "MT"],
+                ["Upper Clark Fork", "Upper Clark Fork", "MT"],
+                ["Smith", "Smith", "MT"],
+                ["Southwest Colorado", "Southwest Colorado", "CO"],
+                ["Poplar-Big Muddy", "Poplar", "MT"],
+                ["Musselshell", "Musselshell", "MT"],
+                ["Lower Clark Fork", "Lower Clark Fork", "MT"],
+                ["Flathead", "Flathead", "MT"],
+                ["Clarks Fork Yellowstone", "Clarks Fork Yellowstone", "MT"],
+                ["Boulder and East Boulder", "Boulder and East Boulder", "MT"],
+                ["Blackfoot-Sun", "Blackfoot-Sun", "MT"],
+                ["Bitterroot", "Bitter Root", "MT"],
+                ["Bighorn", "Bighorn", "MTWY"]
+                //,
+                //["All", "all"]
+            ];
+
+            // 1. Define your multi-level menu structure
+            const menuData = [
+                {
+                    title: "Select Region/Basin",
+                    link: "#",
+                    submenus: [
+                        { title: "Upper Missouri Headwaters", link: strURLPrefixBasin + "UMH", state: "MT" },
+                        {
+                            title: "Upper Rio Grande",
+                            link: "#",
+                            submenus: [
+                                { title: "Upper Rio Grande - CO", link: strURLPrefixBasin + "Upper Rio Grande", state: "CO" },
+                                { title: "Upper Rio Grande - NM", link: strURLPrefixBasin + "Upper Rio Grand - New Mexico", state: "NN" }
+                            ]
+                        },
+                        { title: "SEO Optimization", link: "#" }
+                    ]
+                },
+            ];
+
+
+            // 2. Recursive function to generate menus programmatically
+            function buildMenu(menuArray, container) {
+                menuArray.forEach(function (item) {
+                    // Create the main list item element
+                    let $li = $('<li>').append($('<a>', { href: item.link, text: item.title }));
+
+                    // Check if this item contains its own submenus
+                    if (item.submenus && item.submenus.length > 0) {
+                        $li.addClass('has-submenu');
+
+                        // Create the child nested <ul> element
+                        let $innerUl = $('<ul>');
+
+                        // Recursively call the builder to populate the nested list
+                        buildMenu(item.submenus, $innerUl);
+
+                        // Append the submenu to the list element
+                        $li.append($innerUl);
+                    }
+
+                    // Append the configured item to the root container
+                    container.append($li);
+                });
+            }
+
+
+            // Initialize builder targeting the main menu element
+            const $mainMenu = $('#main-menu');
+            buildMenu(menuData, $mainMenu);
+
+            // 3. jQuery Hover Interactions
+            // Targeting "li" to maintain hover context across child lists
+            $('.menu-root').on('mouseenter', 'li', function () {
+                // Find immediate child ul and display it safely
+                $(this).children('ul').stop(true, true).slideDown(200);
+            }).on('mouseleave', 'li', function () {
+                // Hide immediate child ul when cursor exits
+                $(this).children('ul').stop(true, true).slideUp(150);
+            });
+                        
             //////////////////////////////////////////////////////////////////////////////
             //////////////////////////////dates///////////////////////////////////////
             //////////////////////////////////////////////////////////////////////////////
@@ -1067,11 +1152,11 @@ define([
 
 
             app.idx11 = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"];  //PRODUCTION
-			//app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support/FeatureServer/";  //PRODUCTION "RCT Core Geospatial" Layers
+			app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support/FeatureServer/";  //PRODUCTION "RCT Core Geospatial" Layers
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22/FeatureServer/";//PRODUCTION RCT Support FY22 OLD
 
 
-            app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_DRAFT_20251230_view/FeatureServer/"; //MMH Dev Edit
+            //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_DRAFT_20251230_view/FeatureServer/"; //MMH Dev Edit
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Edits_Tyler_3_view/FeatureServer/";//Eddie Dev Edit OLD
 
             //app.strHFL_URL = "https://services.arcgis.com/QVENGdaPbd4LUkLV/arcgis/rest/services/RCT_Support_FY22_multi/FeatureServer/";  //dev to test multi-gage per section

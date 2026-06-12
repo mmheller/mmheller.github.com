@@ -228,6 +228,11 @@
 								<option value="0">Select Region/Basin:</option>
 							</select>
 						</div>
+
+						<nav class="navigation-bar">
+							<ul id="main-menu" class="menu-root"></ul>
+						</nav>
+
 						<ul id="navList" class="nav nav-pills pull-right" style="max-width:850px;  line-height: 0.8; float:right !important; clear: both;"></ul>
 
 					</form>
@@ -793,6 +798,16 @@
 				function (Map, MapView, MH_Setup, MH_GetGageData, MH_GetGageData_Reservoir, esriConfig, parser, MH_GetWarningData, MH_GetHistoricWarningData) {
 					parser.parse();
 					esriConfig.request.proxyUrl = "/proxy/";
+
+					window.dojoConfig = {
+						has: {
+							"esri-worker-inline": false
+						},
+						workers: {
+							path: "https://arcgis.com"
+						}
+					};
+
 
 					var lastRefresh = new Date(); // If the user just loaded the page you don't want to refresh either
 
