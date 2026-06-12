@@ -545,6 +545,33 @@ define([
 			
             app.arrayEntireList = [
                 ////DEV edit******************************************
+
+                ["Upper Green", "Upper Green", "Upper Green"],
+                ["Upper Green-Slate", "Upper Green-Slate", "Upper Green"],
+                ["Big Sandy", "Big Sandy WY", "Upper Green"],
+
+                ["Battle", "Battle", "Milk"],
+                ["Beaver", "Beaver", "Milk"],
+                ["Big Sandy", "Big Sandy", "Milk"],
+                ["Frenchman", "Frenchman", "Milk"],
+                ["Lodge", "Lodge", "Milk"],
+                ["Lower Milk", "Lower Milk", "Milk"],
+                ["Middle Milk", "Middle Milk", "Milk"],
+                ["Milk Headwaters", "Milk Headwaters", "Milk"],
+                ["Peoples", "Peoples", "Milk"],
+                ["Rock", "Rock", "Milk"],
+                ["Sage", "Sage", "Milk"],
+                ["St. Marys", "St. Marys", "Milk"],
+                ["Upper Milk", "Upper Milk", "Milk"],
+                ["Wild Horse Lake", "Wild Horse Lake", "Milk"],
+
+                ["Lower Marais Des Cygnes", "Lower Marais Des Cygnes", "Lower Marais Des Cygnes"],
+                ["Neosho Headwaters", "Neosho Headwaters", "Lower Marais Des Cygnes"],
+                ["Upper Marais Des Cygnes", "Upper Marais Des Cygnes", "Lower Marais Des Cygnes"],
+                ["Upper Neosho", "Upper Neosho", "Lower Marais Des Cygnes"],
+
+
+                //Production....
                 ["Belly", "Belly", "Crown of the Continent - NE"],
                 ["Little Bow", "Little Bow", "Crown of the Continent - NE"],
                 ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - NE"],
@@ -581,7 +608,6 @@ define([
                 ["Marias", "Marias", "Crown of the Continent - SE"],
                 ["Milk Headwaters", "Milk Headwaters", "Crown of the Continent - SE"],
                 ["Smith", "Smith", "Crown of the Continent - SE"],
-
                 ["St. Marys", "St. Marys", "Crown of the Continent - SE"],
                 ["Sun", "Sun", "Crown of the Continent - SE"],
                 ["Teton", "Teton", "Crown of the Continent - SE"],
@@ -589,35 +615,10 @@ define([
                 ["Upper Missouri", "Upper Missouri", "Crown of the Continent - SE"],
                 ["Upper Missouri-Dearborn", "Upper Missouri-Dearborn", "Crown of the Continent - SE"],
 
-                /*["Blackfoot", "Blackfoot", "Crown of the Continent"], */
-                /*["Flint-Rock", "Flint-Rock", "Crown of the Continent"], */
-
-                ["Upper Green", "Upper Green", "Upper Green"],
-                ["Upper Green-Slate", "Upper Green-Slate", "Upper Green"],
-                ["Big Sandy", "Big Sandy WY", "Upper Green"],
-
-                ["Battle", "Battle", "Milk"],
-                ["Beaver", "Beaver", "Milk"],
-                ["Big Sandy", "Big Sandy", "Milk"],
-                ["Frenchman", "Frenchman", "Milk"],
-                ["Lodge", "Lodge", "Milk"],
-                ["Lower Milk", "Lower Milk", "Milk"],
-                ["Middle Milk", "Middle Milk", "Milk"],
-                ["Milk Headwaters", "Milk Headwaters", "Milk"],
-                ["Peoples", "Peoples", "Milk"],
-                ["Rock", "Rock", "Milk"],
-                ["Sage", "Sage", "Milk"],
-                ["St. Marys", "St. Marys", "Milk"],
-                ["Upper Milk", "Upper Milk", "Milk"],
-                ["Wild Horse Lake", "Wild Horse Lake", "Milk"],
-
-                ["Lower Marais Des Cygnes", "Lower Marais Des Cygnes", "Lower Marais Des Cygnes"],
-                ["Neosho Headwaters", "Neosho Headwaters", "Lower Marais Des Cygnes"],
-                ["Upper Marais Des Cygnes", "Upper Marais Des Cygnes", "Lower Marais Des Cygnes"],
-                ["Upper Neosho", "Upper Neosho", "Lower Marais Des Cygnes"],
 
 
-                //Production....
+
+
                 ["Beaverhead/Centennial", "Beaverhead", "UMH"],          //array [watershed listed on website, watershed in layer, basin name in website]
 				["Big Hole", "Big Hole", "UMH"],
                 ["Boulder", "Boulder", "UMH"],
@@ -745,85 +746,62 @@ define([
 				}
 			}
 
-            app.arrayNavListBasin = [
-                //DEV edit****************************************** and Production Edit START
-                ["Crown of the Continent - NE", "Crown of the Continent - NE", "BC"],
-                ["Crown of the Continent - NW", "Crown of the Continent - NW", "AB"],
-                ["Crown of the Continent - SE", "Crown of the Continent - SE", "MT"],
-                ["Crown of the Continent - SW", "Crown of the Continent - SW", "MT"],
-                ["Eastern Kansas", "Lower Marais Des Cygnes", "KS"],
-                ["Milk", "Milk", "MT"],
-                ["Upper Green", "Upper Green", "WY"], //DEV edit****************************************** and Production Edit END
-                                    ["Upper Missouri Headwaters", "UMH", "MT"],
-                                    ["Upper Rio Grande - CO", "Upper Rio Grande", "CO"],
-                                    ["Upper Rio Grande - NM", "Upper Rio Grand - New Mexico", "NM"],
-                                    ["Upper Yellowstone Headwaters", "UY_Shields", "MT"],
-                                    ["Upper Clark Fork", "Upper Clark Fork", "MT"],
-                                    ["Smith", "Smith", "MT"],
-                                    ["Southwest Colorado", "Southwest Colorado", "CO"],
-                                    ["Poplar-Big Muddy", "Poplar", "MT"],
-                                    ["Musselshell", "Musselshell", "MT"],
-                                    ["Lower Clark Fork", "Lower Clark Fork", "MT"],
-                                    ["Flathead", "Flathead", "MT"],
-                                    ["Clarks Fork Yellowstone", "Clarks Fork Yellowstone", "MT"],
-                                    ["Boulder and East Boulder", "Boulder and East Boulder", "MT"],
-                                    ["Blackfoot-Sun", "Blackfoot-Sun", "MT"],
-                                    ["Bitterroot", "Bitter Root", "MT"],
-                                    ["Bighorn", "Bighorn", "MTWY"]
-                                    //,
-                                    //["All", "all"]
-			];
+   //         app.arrayNavListBasin = [
+   //             //DEV edit****************************************** and Production Edit START
+   //             ["Crown of the Continent - NE", "Crown of the Continent - NE", "BC"],
+   //             ["Crown of the Continent - NW", "Crown of the Continent - NW", "AB"],
+   //             ["Crown of the Continent - SE", "Crown of the Continent - SE", "MT"],
+   //             ["Crown of the Continent - SW", "Crown of the Continent - SW", "MT"],
+   //             ["Eastern Kansas", "Lower Marais Des Cygnes", "KS"],
+   //             ["Milk", "Milk", "MT"],
+   //             ["Upper Green", "Upper Green", "WY"], //DEV edit****************************************** and Production Edit END
+   //                                 ["Upper Missouri Headwaters", "UMH", "MT"],
+   //                                 ["Upper Rio Grande - CO", "Upper Rio Grande", "CO"],
+   //                                 ["Upper Rio Grande - NM", "Upper Rio Grand - New Mexico", "NM"],
+   //                                 ["Upper Yellowstone Headwaters", "UY_Shields", "MT"],
+   //                                 ["Upper Clark Fork", "Upper Clark Fork", "MT"],
+   //                                 ["Smith", "Smith", "MT"],
+   //                                 ["Southwest Colorado", "Southwest Colorado", "CO"],
+   //                                 ["Poplar-Big Muddy", "Poplar", "MT"],
+   //                                 ["Musselshell", "Musselshell", "MT"],
+   //                                 ["Lower Clark Fork", "Lower Clark Fork", "MT"],
+   //                                 ["Flathead", "Flathead", "MT"],
+   //                                 ["Clarks Fork Yellowstone", "Clarks Fork Yellowstone", "MT"],
+   //                                 ["Boulder and East Boulder", "Boulder and East Boulder", "MT"],
+   //                                 ["Blackfoot-Sun", "Blackfoot-Sun", "MT"],
+   //                                 ["Bitterroot", "Bitter Root", "MT"],
+   //                                 ["Bighorn", "Bighorn", "MTWY"]
+   //                                 //,
+   //                                 //["All", "all"]
+			//];
 
 			var strURLPrefix = "index.html?H2O_ID=";
-			var strURLPrefixBasin = "index.html?Basin_ID=";
+
 			var strURLSuffix = "";
 			document.addEventListener("click", closeAllSelect);
 
-			var selBasin = document.getElementById("sel_Basin");
-            for (var i = 0; i < app.arrayNavListBasin.length; i++) {
-				var a = document.createElement("a");
-				var newItem = document.createElement("option");
-                a.textContent = app.arrayNavListBasin[i][0];
-				a.setAttribute('role', "presentation");
-                a.setAttribute('href', strURLPrefixBasin + app.arrayNavListBasin[i][1] + strURLSuffix);
-				newItem.appendChild(a);
+			//var selBasin = document.getElementById("sel_Basin");
+   //         for (var i = 0; i < app.arrayNavListBasin.length; i++) {
+			//	var a = document.createElement("a");
+			//	var newItem = document.createElement("option");
+   //             a.textContent = app.arrayNavListBasin[i][0];
+			//	a.setAttribute('role', "presentation");
+   //             a.setAttribute('href', strURLPrefixBasin + app.arrayNavListBasin[i][1] + strURLSuffix);
+			//	newItem.appendChild(a);
 
-                selBasin.add(newItem, i + 1);
+   //             selBasin.add(newItem, i + 1);
 
-                if ((app.arrayNavListBasin[i][1] == app.Basin_ID) | (app.arrayNavListBasin[i][0] == app.Basin_ID)) {				//set the region/basin in the dropdown!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-                    selBasin.options[i + 1].selected = true;
-                    app.StateArea = app.arrayNavListBasin[i][2];
-				}
-			}
+   //             if ((app.arrayNavListBasin[i][1] == app.Basin_ID) | (app.arrayNavListBasin[i][0] == app.Basin_ID)) {				//set the region/basin in the dropdown!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+   //                 selBasin.options[i + 1].selected = true;
+   //                 app.StateArea = app.arrayNavListBasin[i][2];
+			//	}
+            //}
 
-            app.arrayNavListBasin = [
-                //DEV edit****************************************** and Production Edit START
-                ["Crown of the Continent - NE", "Crown of the Continent - NE", "BC"],
-                ["Crown of the Continent - NW", "Crown of the Continent - NW", "AB"],
-                ["Crown of the Continent - SE", "Crown of the Continent - SE", "MT"],
-                ["Crown of the Continent - SW", "Crown of the Continent - SW", "MT"],
-                ["Eastern Kansas", "Lower Marais Des Cygnes", "KS"],
-                ["Milk", "Milk", "MT"],
-                ["Upper Green", "Upper Green", "WY"], //DEV edit****************************************** and Production Edit END
-                //["Upper Missouri Headwaters", "UMH", "MT"],
-                //["Upper Rio Grande - CO", "Upper Rio Grande", "CO"],
-                //["Upper Rio Grande - NM", "Upper Rio Grand - New Mexico", "NM"],
-                ["Upper Yellowstone Headwaters", "UY_Shields", "MT"],
-                ["Upper Clark Fork", "Upper Clark Fork", "MT"],
-                ["Smith", "Smith", "MT"],
-                ["Southwest Colorado", "Southwest Colorado", "CO"],
-                ["Poplar-Big Muddy", "Poplar", "MT"],
-                ["Musselshell", "Musselshell", "MT"],
-                ["Lower Clark Fork", "Lower Clark Fork", "MT"],
-                ["Flathead", "Flathead", "MT"],
-                ["Clarks Fork Yellowstone", "Clarks Fork Yellowstone", "MT"],
-                ["Boulder and East Boulder", "Boulder and East Boulder", "MT"],
-                ["Blackfoot-Sun", "Blackfoot-Sun", "MT"],
-                ["Bitterroot", "Bitter Root", "MT"],
-                ["Bighorn", "Bighorn", "MTWY"]
-                //,
-                //["All", "all"]
-            ];
+            
+
+
+
+
 
             // 1. Define your multi-level menu structure
             const menuData = [
@@ -831,26 +809,64 @@ define([
                     title: "Select Region/Basin",
                     link: "#",
                     submenus: [
-                        { title: "Upper Missouri Headwaters", link: strURLPrefixBasin + "UMH", state: "MT" },
+                        {
+                            title: "RCT Dev' Areas",
+                            link: "#",
+                            submenus: [
+                                { title: "Eastern Kansas", link: "Lower Marais Des Cygnes", state: "KS" },
+                                { title: "Milk", link: "Milk", state: "MT" },
+                                { title: "Upper Green", link: "Upper Green", state: "WY" },
+                            ]
+                        },
+                        { title: "Upper Missouri Headwaters", link: "UMH", state: "MT" },
+                        { title: "Upper Yellowstone Headwaters", link: "UY_Shields", state: "MT" },
                         {
                             title: "Upper Rio Grande",
                             link: "#",
                             submenus: [
-                                { title: "Upper Rio Grande - CO", link: strURLPrefixBasin + "Upper Rio Grande", state: "CO" },
-                                { title: "Upper Rio Grande - NM", link: strURLPrefixBasin + "Upper Rio Grand - New Mexico", state: "NN" }
+                                { title: "Upper Rio Grande - CO", link: "Upper Rio Grande", state: "CO" },
+                                { title: "Upper Rio Grande - NM", link: "Upper Rio Grand - New Mexico", state: "NM" }
                             ]
                         },
-                        { title: "SEO Optimization", link: "#" }
+                        { title: "Upper Clark Fork", link: "Upper Clark Fork", state: "MT" },
+                        { title: "Smith", link: "Smith", state: "MT" },
+                        { title: "Southwest Colorado", link: "Southwest Colorado", state: "CO" },
+                        { title: "Poplar-Big Muddy", link: "Poplar", state: "MT" },
+                        { title: "Musselshell", link: "Musselshell", state: "MT" },
+                        { title: "Lower Clark Fork", link: "Lower Clark Fork", state: "MT" },
+                        { title: "Flathead", link: "Flathead", state: "MT" },
+                        {
+                            title: "Crown of the Continent",
+                            link: "#",
+                            submenus: [
+                                { title: "Crown of the Continent - NE", link: "Crown of the Continent - NE", state: "BC" },
+                                { title: "Crown of the Continent - NW", link: "Crown of the Continent - NW", state: "AB" },
+                                { title: "Crown of the Continent - SE", link: "Crown of the Continent - SE", state: "MT" },
+                                { title: "Crown of the Continent - SW", link: "Crown of the Continent - SW", state: "MT" }
+                            ]
+                        },
+                        { title: "Clarks Fork Yellowstone", link: "Clarks Fork Yellowstone", state: "MT" },
+                        { title: "Boulder and East Boulder", link: "Boulder and East Boulder", state: "MT" },
+                        { title: "Blackfoot-Sun", link: "Blackfoot-Sun", state: "MT" },
+                        { title: "Bitterroot", link: "Bitter Root", state: "MT" },
+                        { title: "Bighorn", link: "Bighorn", state: "MTWY" }
                     ]
                 },
             ];
 
+            app.StateArea = "";
 
             // 2. Recursive function to generate menus programmatically
             function buildMenu(menuArray, container) {
                 menuArray.forEach(function (item) {
+                    var strURLPrefixBasin = "index.html?Basin_ID=";
+                    if ((item.link == app.Basin_ID) | (item.title == app.Basin_ID)) {				//set the region/basin in the dropdown!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                        //selBasin.options[i + 1].selected = true;
+                        app.StateArea = item.state;
+                    }
+
                     // Create the main list item element
-                    let $li = $('<li>').append($('<a>', { href: item.link, text: item.title }));
+                    let $li = $('<li>').append($('<a>', { href: strURLPrefixBasin + item.link, text: item.title, state: item.state }));
 
                     // Check if this item contains its own submenus
                     if (item.submenus && item.submenus.length > 0) {
@@ -874,17 +890,120 @@ define([
 
             // Initialize builder targeting the main menu element
             const $mainMenu = $('#main-menu');
+
+
             buildMenu(menuData, $mainMenu);
 
-            // 3. jQuery Hover Interactions
-            // Targeting "li" to maintain hover context across child lists
-            $('.menu-root').on('mouseenter', 'li', function () {
-                // Find immediate child ul and display it safely
-                $(this).children('ul').stop(true, true).slideDown(200);
-            }).on('mouseleave', 'li', function () {
-                // Hide immediate child ul when cursor exits
-                $(this).children('ul').stop(true, true).slideUp(150);
+
+            //const listItems = document.querySelectorAll("#main-menu li");
+            //listItems[1].classList.add("is-selected");
+
+
+
+            //$('#main-menu').on('click', function () {
+            //    $('#menu-container').slideToggle();
+            //});
+
+            //$('#main-menu').on('click', 'li', function (event) {// Event Delegation for dynamically added sub-menu items
+            //    event.stopPropagation(); // Prevents the click from bubbling up to parent elements
+
+            //    let clickedText = $(this).text();
+            //    let strTemp = $(this)[0];
+            //    app.StateArea = "MT";
+            //    alert('You clicked on: ' + clickedText);
+            //});
+
+
+            //// 3. jQuery Hover Interactions
+            //// Targeting "li" to maintain hover context across child lists
+            //$('.menu-root').on('mouseenter', 'li', function () {
+            //    // Find immediate child ul and display it safely
+            //    $(this).children('ul').stop(true, true).slideDown(200);
+            //}).on('mouseleave', 'li', function () {
+            //    // Hide immediate child ul when cursor exits
+            //    $(this).children('ul').stop(true, true).slideUp(150);
+            //});
+
+
+
+            // 3. jQuery Click Interactions (replacing hover)
+
+            // Click interactions: toggle submenu OR navigate if none exists
+            $('.menu-root')
+                .on('click', 'li > a, li > .toggle', function (e) {
+                    const $trigger = $(this);
+                    const $li = $trigger.closest('li');
+                    const $submenu = $li.children('ul');
+
+                    // Detect modifier/middle clicks (should open in new tab, not toggle)
+                    const isMiddleClick = e.which === 2;          // middle mouse button
+                    const isModifier = e.ctrlKey || e.metaKey || e.shiftKey || e.altKey;
+
+                    // If no submenu, navigate normally
+                    if ($submenu.length === 0) {
+                        // For non-anchor toggles, manually navigate if a data-href exists
+                        if (!$trigger.is('a')) {
+                            const href = $trigger.data('href');
+                            if (href) window.location.href = href;
+                            // No href to navigate; do nothing
+                        } else {
+                            // Respect target attribute and modifiers
+                            const href = $trigger.attr('href');
+                            const target = ($trigger.attr('target') || '').toLowerCase();
+
+                            // If it's an anchor but href is a hash, just let it act like a normal hash
+                            if (!href || href === '#') return;
+
+                            // If user indicates new-tab behavior (target or modifiers/middle click), don't preventDefault
+                            if (target === '_blank' || isMiddleClick || isModifier) {
+                                // Let browser handle it—do not preventDefault
+                                return;
+                            }
+
+                            // Default single-tab navigation
+                            // Do not preventDefault—let browser navigate
+                            // (If you need to intercept for SPA routing, you can replace this with your router logic)
+                            return;
+                        }
+                        // Done (no submenu path)
+                    } else {
+                        // Has submenu: prevent navigation and toggle submenu
+                        e.preventDefault();
+                        e.stopPropagation();
+
+                        const isOpen = $submenu.is(':visible');
+
+                        if (isOpen) {
+                            $submenu.stop(true, true).slideUp(150);
+                            // Optional ARIA
+                            $trigger.attr('aria-expanded', 'false');
+                            $submenu.attr('aria-hidden', 'true');
+                        } else {
+                            $submenu.stop(true, true).slideDown(200);
+                            // Close sibling submenus at this level (accordion behavior)
+                            $li.siblings().children('ul:visible').stop(true, true).slideUp(150);
+
+                            // Optional ARIA
+                            $trigger.attr('aria-expanded', 'true');
+                            $submenu.attr('aria-hidden', 'false');
+                        }
+                    }
+                })
+                // Prevent clicks inside open submenus from bubbling up and closing them
+                .on('click', 'ul', function (e) {
+                    e.stopPropagation();
+                });
+
+            // Click outside to close all submenus
+            $(document).on('click', function (e) {
+                if ($(e.target).closest('.menu-root').length === 0) {
+                    $('.menu-root ul:visible').stop(true, true).slideUp(150);
+                    $('.menu-root [aria-expanded="true"]').attr('aria-expanded', 'false');
+                }
             });
+
+
+
                         
             //////////////////////////////////////////////////////////////////////////////
             //////////////////////////////dates///////////////////////////////////////
